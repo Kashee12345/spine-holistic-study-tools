@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exam Logic and Red Flags Lab</title>
+<meta name="description" content="Exam logic and red flags lab: a 2x2 diagnostic accuracy simulator with a population of animated dots and sliders for prevalence, sensitivity and specificity driving live predictive values; a practice trainer for sensitivity, specificity, PPV, NPV, prevalence and likelihood ratios from 2x2 counts; a sorting game for red flags, yellow flags and common findings and for which tissue each exam test loads; and clinic scenarios with fictional adults.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#842424;--accent-wash:#F6E3E0;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#2F6FA0;--act2:#2E8A86;--act3:#4B55B8;--act4:#B42A24;--act5:#A87A10;--act6:#7A5AA8;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A5E0C;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --bone:#F1E9D6;--bone-edge:#8C7A55;--disc:#3F7FC0;--nuc:#A9CDEE;--nerve:#D4A82A;--nerve-ink:#7A5E00;--muscle:#C0566E;--lig:#2E8A86;--symp:#D0661E;--para:#3E8E4A;--pain:#C8302A;--data:#4B55B8;--data-ink:#3B44A0;
+  --tp:#2F7F4F;--fp:#C8661E;--fn:#B4304A;--tn:#5E7183;--tp-ink:#25663F;--fp-ink:#9A4A12;--fn-ink:#94263C;--tn-ink:#46566A;
+  --rf:#B42A24;--yf:#C9A227;--bn:#2E8A86;--rf-ink:#8E1F1A;--yf-ink:#7A5E0C;--bn-ink:#1F6B66;
+  --sk1:#F1D2B6;--sk2:#DDAA82;--sk3:#B9814F;--sk4:#8A5A3A;--sk5:#5E3D28;--sk-edge:#6B4A35;--hair1:#2B211B;--hair2:#7A4B2A;--hair3:#C9C3BA;
+  --cl1:#3F6E9E;--cl2:#8A5A9E;--cl3:#3E8E6A;--cl4:#B5683A;--cl5:#5E7183;
+  --metal:#9AA6AF;--table:#C9B48E;--sky:#DCEBF5;--blood:#C0392B;--artery:#B8433A;--urine:#E3C04A;--heat:#C8452B;--cold:#2F7FC1;--dura:#E7D9A8;--csf:#D6ECF7;--fat:#E8C150;--organ:#C46A5A;--night:#2C3E66;--moon:#F2E6A8;--paperline:#D6DCE6;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#6FA8DC;--act2:#5CC4BE;--act3:#8E98F0;--act4:#F07A70;--act5:#E8C850;--act6:#B79AE6;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#4E4838;--bone-edge:#CDBE98;--disc:#6FB3EC;--nuc:#2A5A86;--nerve:#F2D04E;--nerve-ink:#F2D86A;--muscle:#E88AA0;--lig:#5CC4BE;--symp:#F29A5A;--para:#6CCB7C;--pain:#F07A70;--data:#8E98F0;--data-ink:#A9B0F4;
+  --tp:#6BC293;--fp:#F0A060;--fn:#F08AA0;--tn:#A9B7C2;--tp-ink:#8AD4A8;--fp-ink:#F5B880;--fn-ink:#F5A8B8;--tn-ink:#C3CED6;
+  --rf:#F07A70;--yf:#E8C850;--bn:#5CC4BE;--rf-ink:#F5A098;--yf-ink:#EDD470;--bn-ink:#86D6D0;
+  --sk1:#E3C2A6;--sk2:#C99A72;--sk3:#A9733F;--sk4:#7E5236;--sk5:#5A3A26;--sk-edge:#2A1C14;--hair1:#14100D;--hair2:#5A3820;--hair3:#A9A39A;
+  --cl1:#4F84B8;--cl2:#9C6CB0;--cl3:#4EA07A;--cl4:#C27A4A;--cl5:#6E8193;
+  --metal:#5E6B75;--table:#5A4E3A;--sky:#1C2C3A;--blood:#E0605A;--artery:#E07068;--urine:#C8A83A;--heat:#F07A5E;--cold:#5AA9E6;--dura:#6A6040;--csf:#1C3442;--fat:#C8A240;--organ:#A85A4A;--night:#1A2440;--moon:#E8DCA0;--paperline:#2C3A42;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#6FA8DC;--act2:#5CC4BE;--act3:#8E98F0;--act4:#F07A70;--act5:#E8C850;--act6:#B79AE6;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#4E4838;--bone-edge:#CDBE98;--disc:#6FB3EC;--nuc:#2A5A86;--nerve:#F2D04E;--nerve-ink:#F2D86A;--muscle:#E88AA0;--lig:#5CC4BE;--symp:#F29A5A;--para:#6CCB7C;--pain:#F07A70;--data:#8E98F0;--data-ink:#A9B0F4;
+  --tp:#6BC293;--fp:#F0A060;--fn:#F08AA0;--tn:#A9B7C2;--tp-ink:#8AD4A8;--fp-ink:#F5B880;--fn-ink:#F5A8B8;--tn-ink:#C3CED6;
+  --rf:#F07A70;--yf:#E8C850;--bn:#5CC4BE;--rf-ink:#F5A098;--yf-ink:#EDD470;--bn-ink:#86D6D0;
+  --sk1:#E3C2A6;--sk2:#C99A72;--sk3:#A9733F;--sk4:#7E5236;--sk5:#5A3A26;--sk-edge:#2A1C14;--hair1:#14100D;--hair2:#5A3820;--hair3:#A9A39A;
+  --cl1:#4F84B8;--cl2:#9C6CB0;--cl3:#4EA07A;--cl4:#C27A4A;--cl5:#6E8193;
+  --metal:#5E6B75;--table:#5A4E3A;--sky:#1C2C3A;--blood:#E0605A;--artery:#E07068;--urine:#C8A83A;--heat:#F07A5E;--cold:#5AA9E6;--dura:#6A6040;--csf:#1C3442;--fat:#C8A240;--organ:#A85A4A;--night:#1A2440;--moon:#E8DCA0;--paperline:#2C3A42;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.est-banner{display:flex;gap:10px;align-items:flex-start;background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:var(--r);padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.est-banner b{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;padding-top:2px}
+.seg5{display:grid;grid-template-columns:1fr;gap:6px}
+.seg5 .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:7px 9px}
+.seg5 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.seg5 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.chk{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;margin:8px 0}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.playrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.playrow input[type=range]{flex:1 1 160px;accent-color:var(--accent)}
+.bigtotal{font-family:var(--mono);font-size:22px;font-weight:700;margin:6px 0 2px}
+.rangeline{font-size:13.5px;color:var(--ink-soft)}
+.choices{display:grid;grid-template-columns:1fr;gap:7px;margin:8px 0}
+.ptab{border-collapse:collapse;margin:8px 0;font-size:14px}
+.ptab th,.ptab td{border:1px solid var(--rule);padding:4px 8px;text-align:left}
+.ptab th{background:var(--panel);font-weight:600}
+.scard svg{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--rf);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.seg5.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg5.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg5.seg4 .tbtn,.seg5.seg3 .tbtn{text-align:center;padding:7px 4px}
+.playrow output{font-family:var(--mono);font-weight:600;min-width:70px}
+.stage .playrow{padding:8px 4px 0}
+.seg5.seg3b{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg5.seg3b .tbtn{text-align:center;padding:7px 4px;font-size:13px}
+.bins.five{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.readouts td.big{font-weight:700;white-space:normal}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 7 &middot; Exam logic and red flags</div>
+    <h1>Exam Logic and Red Flags Lab</h1>
+    <p class="sub">Sort a population into a 2x2 table and watch predictive values move with prevalence, practise the accuracy calculations, sort warning signs and exam tests, and reason through clinic scenarios with fictional adults. Exam tests are described by the tissues they load, not as instructions. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; 2x2 Accuracy Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button" tabindex="-1">Part 2 &middot; Practice Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort It Out</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: 2x2 Accuracy Simulator</h2>
+    <p class="est-banner"><b>Teaching model</b><span>200 people are tested. Prevalence decides how many truly have the condition; sensitivity and specificity decide how their test results fall. Counts are rounded to whole people, so the percentages are rounded too. Preset test values are rounded figures from published studies, which vary widely.</span></p>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="2x2 accuracy simulator."></canvas></div>
+        <div class="playrow"><button class="btn" type="button" id="simPlay">Pause</button><button class="tbtn" type="button" id="simReplay">New sample</button></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend" id="simLegend"></div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">How the model works: of 200 people, prevalence × 200 have the condition (solid dots). Sensitivity × that number test positive (true positives); the rest are false negatives. Specificity × the people without the condition test negative (true negatives); the rest are false positives (rings in the positive row). PPV = TP ÷ (TP + FP), NPV = TN ÷ (TN + FN), LR+ = sensitivity ÷ (1 − specificity), LR− = (1 − sensitivity) ÷ specificity. The curves show PPV and NPV across prevalence for the current test.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <div class="ctl"><label for="slPrev">Prevalence <output id="oPrev" for="slPrev"></output></label><input type="range" id="slPrev" min="1" max="60" step="1"></div>
+        <div class="ctl"><label for="slSens">Sensitivity <output id="oSens" for="slSens"></output></label><input type="range" id="slSens" min="10" max="99" step="1"></div>
+        <div class="ctl"><label for="slSpec">Specificity <output id="oSpec" for="slSpec"></output></label><input type="range" id="slSpec" min="10" max="99" step="1"></div>
+        <h3 id="pt-h">Example tests (rounded)</h3>
+        <div class="seg5" id="simTests" role="group" aria-labelledby="pt-h"></div>
+        <h3 id="ps-h">Example settings</h3>
+        <div class="seg5 seg3b" id="simSets" role="group" aria-labelledby="ps-h"></div>
+        <div class="bar"><button class="tbtn" type="button" id="simReset">Reset</button></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc" hidden>
+    <h2 class="gk-sr">Part 2: Practice Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">The cells you need glow in the table. The worked solution builds line by line after a correct answer or when you ask for it. Answers within half a percentage point are accepted.</p>
+      </div>
+      <aside class="card side" aria-label="Practice trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div class="ansrow" id="calcAnsRow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a percent such as 66.7 (the % sign is optional), or a plain number for likelihood ratios. The streak counts answers right on the first check without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults and simplified findings. For learning only, not medical advice.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="helpbox" id="lifeHelp" hidden></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Exam-Walkthrough.html">Exam Logic and Red Flags Walkthrough</a>. Test accuracy values are rounded from published studies, which vary widely. Exam tests are described by the tissues they load, not as instructions for performing them.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "nuc", "nerve", "nerve-ink", "muscle", "lig", "symp", "para", "pain", "data", "data-ink", "tp", "fp", "fn", "tn", "tp-ink", "fp-ink", "fn-ink", "tn-ink", "rf", "yf", "bn", "rf-ink", "yf-ink", "bn-ink", "sk1", "sk2", "sk3", "sk4", "sk5", "sk-edge", "hair1", "hair2", "hair3", "cl1", "cl2", "cl3", "cl4", "cl5", "metal", "table", "sky", "blood", "artery", "urine", "heat", "cold", "dura", "csf", "fat", "organ", "night", "moon", "paperline"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= chemistry drawing kit (gases module) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+let SYS={};function sys(key,make){if(!SYS[key])SYS[key]=make();return SYS[key]}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u===d.u);if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* little level-of-view tags: macroscopic / particulate / symbolic */
+function pie(x,y,r,f,col,o){o=o||{};circ(x,y,r,hexA(C.sunk,.6),C["ink-soft"],1.5);if(f>0){ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,-Math.PI/2,-Math.PI/2+TAU*clamp(f,0,1));ctx.closePath();ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.2;ctx.stroke()}
+  if(o.lab)txt(x,y+r+14,o.lab,{size:12,weight:700,mono:true,align:"center",color:o.lc||C.ink})}
+/* ---------- simple drawn table ---------- */
+function ctable(x,y,cols,rows,o){o=o||{};const rh=o.rh||26;const fs=o.size||12.5;let tw=cols.reduce((a,c)=>a+c[1],0);
+  rr(x,y,tw,rh*(rows.length+1),5);ctx.fillStyle=hexA(C.paper,.95);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=hexA(C.sunk,.55);ctx.fillRect(x+1,y+1,tw-2,rh-1);
+  let cx=x;cols.forEach((c,i)=>{txt(cx+c[1]/2,y+rh/2,c[0],{size:fs-.5,weight:700,align:"center",mono:true,color:C["ink-soft"]});if(i)line(cx,y+3,cx,y+rh*(rows.length+1)-3,C["rule-soft"],1);cx+=c[1]});
+  rows.forEach((r,ri)=>{const yy=y+rh*(ri+1);const a=o.ra?o.ra[ri]:1;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+    if(o.hl&&o.hl[ri]){ctx.fillStyle=hexA(o.hl[ri],.18);ctx.fillRect(x+1,yy,tw-2,rh);ctx.strokeStyle=o.hl[ri];ctx.lineWidth=1.8;ctx.strokeRect(x+1.5,yy+.5,tw-3,rh-1)}
+    line(x+2,yy,x+tw-2,yy,C["rule-soft"],1);let c2=x;r.forEach((v,ci)=>{const hc=o.hc&&o.hc[ri+"_"+ci];txt(c2+cols[ci][1]/2,yy+rh/2,v,{size:fs,weight:hc?700:500,align:"center",mono:true,color:hc||C.ink});c2+=cols[ci][1]});ctx.restore()});
+  return {w:tw,h:rh*(rows.length+1),rowY:i=>y+rh*(i+1)+rh/2,colX:i=>{let s=x;for(let k=0;k<i;k++)s+=cols[k][1];return s+cols[i][1]/2}}}
+function wsteps(x,y,w,h,W_,t,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,W_.title||"Worked example",C["accent-ink"]);
+  const sz=o.size||12.5;let yy=y+36;if(W_.q){yy=wrapText(W_.q,x+12,yy,(o.qw||w-24),sz+4,{size:sz,weight:600})+sz+8}
+  const lx=o.lx!=null?x+o.lx:x+14;if(o.lx!=null)yy=y+(o.ly||40);
+  const per=o.step||1.6;let tt=.6;
+  (W_.lines||[]).forEach((L,i)=>{const p=clamp((t-tt)/per,0,1);
+    if(L.ch){const fs=o.cfs||14;const cy=yy+fs*.9;if(p>0){const cw=chainWidth(L.ch[0],L.ch[1],{size:fs});const sc=Math.min(1,(w-(lx-x)-16)/cw);ctx.save();ctx.translate(lx,cy);ctx.scale(sc,sc);chain(0,0,L.ch[0],L.ch[1],p,{size:fs});ctx.restore()}yy+=fs*2+24;tt+=per*1.6}
+    else if(L.gold){if(p>0)withA(p*2,()=>label(lx,yy,L.gold,{size:sz,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));yy+=sz+14;tt+=per*.6}
+    else{if(p>0)withA(p*2,()=>{ctx.font=`${L.b?700:600} ${sz+.5}px ${MONO}`;const tw=ctx.measureText(L.t).width;const mw=w-(lx-x)-16;const fs=tw>mw?(sz+.5)*mw/tw:sz+.5;txt(lx,yy,L.t,{size:fs,weight:L.b?700:600,mono:true,color:L.col||C.ink})});yy+=sz+10;tt+=per*.7}});
+  if(W_.ans){const a=seg(t,tt,tt+.6);if(a>0)withA(a,()=>{ctx.font=`700 ${sz+1.5}px ${MONO}`;const tw=ctx.measureText(W_.ans).width;rr(lx-4,yy-12,tw+14,26,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(lx+3,yy+1,W_.ans,{size:sz+1.5,weight:700,mono:true})});yy+=30;tt+=1}
+  if(W_.miss){const a=seg(t,tt+.4,tt+1);if(a>0)withA(a,()=>{const mh=o.missH||36;rr(lx-4,yy-10,w-(lx-x)-8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,lx+4,yy+4,w-(lx-x)-24,sz+3,{size:sz-1,color:C.ink})})}
+  return tt}
+/* rate meter (horizontal bar with value) */
+function meterBar(x,y,w,f,col,lab){rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w+8,y+7,lab,{size:12,weight:700,mono:true})}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sup(s){return String(s).split("").map(c=>SUP[c]||c).join("")}
+function sci(v,n){if(!isFinite(v))return "?";if(v===0)return "0";const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=3)return sig(v,n);let m=v/Math.pow(10,e);let ms=sig(m,n);if(Math.abs(+ms)>=10){m/=10;ms=sig(m,n);return ms+" × 10"+sup(e+1)}return ms+" × 10"+sup(e)}
+let SEEDC=1;function srnd(){SEEDC=(SEEDC*16807)%2147483647;return (SEEDC-1)/2147483646}
+function limb(x1,y1,x2,y2,w,col){ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["sk-edge"],.55);ctx.lineWidth=w+2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function limb2(x1,y1,a1,L1,a2,L2,w,c1,c2){const xk=x1+Math.sin(a1)*L1,yk=y1+Math.cos(a1)*L1;const xe=xk+Math.sin(a2)*L2,ye=yk+Math.cos(a2)*L2;limb(x1,y1,xk,yk,w,c1);limb(xk,yk,xe,ye,w*.9,c2||c1);return [xe,ye,xk,yk]}
+function person(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],b=o.build||1,cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];const ph=o.ph||0;const pose=o.pose||"stand";
+  const hr=s*.075;const yS=y-s*.80,yH=y-s*.47;const tw=s*.2*b,hw=s*.18*b;const lw=s*.075*Math.pow(b,.75)*(o.muscular?1.15:1),aw=s*.06*Math.pow(b,.75)*(o.muscular?1.3:1);
+  const lean=o.older?.06:0;ctx.save();ctx.translate(x,y);ctx.rotate(lean*(o.face||1)*.5);ctx.translate(-x,-y);
+  let leg=[0,0],kneeB=[0,0],uA=[-.1,.1],fA=[-.04,.04];
+  if(pose==="walk"){const a=Math.sin(ph)*.38;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.3,Math.max(0,Math.sin(ph))*.3];uA=[-a*.85-.05,a*.85+.05];fA=[uA[0]+.25,uA[1]+.25]}
+  if(pose==="run"){const a=Math.sin(ph)*.6;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.9+.25,Math.max(0,Math.sin(ph))*.9+.25];uA=[-a*.9,a*.9];fA=[uA[0]+1.5,uA[1]+1.5]}
+  if(pose==="wave"){uA=[-.1,2.5];fA=[-.04,2.9]}
+  if(pose==="lift"){const k=.5+.5*Math.sin(ph);uA=[-.08,.08];fA=[.3+1.9*k,.3+1.9*k]}
+  if(pose==="sit"){uA=[.3,.38];fA=[1.25,1.35]}
+  const legL=s*.235;const hipX=[x-hw*.28,x+hw*.28];
+  if(pose==="sit"){/* chair */if(!o.noChair){rr(x-s*.22,yH+s*.02,s*.42,s*.05,3);fillStroke(C.metal,hexA(C.ink,.4),1);line(x-s*.18,yH+s*.07,x-s*.18,y,C.metal,4);line(x+s*.17,yH+s*.07,x+s*.17,y,C.metal,4)}
+    [0,1].forEach(i=>{const hx_=hipX[i];limb(hx_,yH,hx_+s*.2,yH+s*.02,lw,pn);limb(hx_+s*.2,yH+s*.02,hx_+s*.21,y-s*.02,lw*.92,pn);rr(hx_+s*.19,y-s*.035,s*.08,s*.035,s*.015);fillStroke(C.ink,null)})}
+  else{[0,1].forEach(i=>{const e=limb2(hipX[i],yH,leg[i],legL,leg[i]-kneeB[i],legL,lw,pn);rr(e[0]-s*.02,e[1]-s*.02,s*.075,s*.035,s*.015);fillStroke(C.ink,null)})}
+  /* torso */
+  rr(x-tw/2,yS-s*.02,tw,yH-yS+s*.06,tw*.28);fillStroke(cl,hexA(C["sk-edge"],.55),1.4);
+  /* arms */
+  const shX=[x-tw/2+aw*.35,x+tw/2-aw*.35];const armL=s*.17;
+  [0,1].forEach(i=>{const e=limb2(shX[i],yS+aw*.3,uA[i]+(i?1:-1)*.06*(b-1),armL,fA[i]+(i?1:-1)*.06*(b-1),armL,aw,cl,sk);circ(e[0],e[1],aw*.55,sk,hexA(C["sk-edge"],.6),1)});
+  /* neck + head */
+  limb(x,yS-s*.01,x,yS-s*.05,s*.05,sk);
+  const hy=yS-s*.05-hr*.9;circ(x,hy,hr,sk,hexA(C["sk-edge"],.7),1.3);
+  const hc=o.older?C.hair3:C[o.hairc||"hair1"];const hh=o.hair==null?0:o.hair;
+  ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+.5,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=hc;ctx.fill();ctx.restore();
+  if(hh===1){rr(x-hr*1.05,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fillStyle=hc;ctx.fill();rr(x+hr*.6,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fill()}
+  if(hh===2)circ(x,hy-hr*1.05,hr*.42,hc);
+  if(hh===3){ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+1.5,Math.PI*.95,Math.PI*2.05);ctx.lineWidth=hr*.5;ctx.strokeStyle=hc;ctx.stroke();ctx.restore()}
+  const f=o.face||1;circ(x+hr*.35*f,hy-hr*.05,Math.max(1,hr*.11),C.ink);ctx.beginPath();ctx.arc(x+hr*.2*f,hy+hr*.3,hr*.28,.2*Math.PI,.8*Math.PI);ctx.strokeStyle=hexA(C.ink,.7);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.glasses){circ(x+hr*.35*f,hy-hr*.05,hr*.26,null,C.ink,1.2)}
+  ctx.restore();return {head:[x,hy],chest:[x,yS+s*.08],belly:[x,yH-s*.08],hr}}
+function bubble(x,y,w,h,text,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);if(o.tail){ctx.beginPath();ctx.moveTo(o.tail[0],o.tail[1]);ctx.lineTo(x+w*.3,y+h);ctx.lineTo(x+w*.3+16,y+h);ctx.closePath();fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);ctx.fillStyle=o.fill||C.paper;ctx.fillRect(x+w*.3+1,y+h-3,14,4)}
+  wrapText(text,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500,color:o.color||C.ink})}
+function card(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.18):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function vbar(x,y,w,h,f,col,lab,val){rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,4);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w/2,y+h+13,lab,{size:11.5,weight:700,align:"center"});if(val)txt(x+w/2,y+h*(1-ff)-10,val,{size:11.5,weight:700,align:"center",mono:true})}
+/* ================= spine and exam drawing kit ================= */
+let SC={};
+function levelTag(x,y,k){const m={person:["WHOLE PERSON",C.act1],tissue:["TISSUE",C.lig],signal:["SIGNAL",C.nerve],num:["NUMBERS",C.data],hist:["HISTORY",C.act1],flag:["SAFETY",C.rf],note:["RECORD",C.act6]}[k]||[k,C.accent];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+function tpt(px,py,ox,oy,a,dx,dy){/* rotate local point (px,py) offset by (dx,dy) around origin (ox,oy) */const X=px+dx,Y=py+dy;return [ox+X*Math.cos(a)-Y*Math.sin(a),oy+X*Math.sin(a)+Y*Math.cos(a)]}
+/* ---------- one vertebra, lateral view, anterior to the left; local origin = body centre ---------- */
+function vertLocal(s,o){o=o||{};const h=s*.6,cv=o.cerv;const bf=o.fill||C.bone,be=C["bone-edge"];
+  /* spinous process */
+  ctx.beginPath();if(cv){ctx.moveTo(s*.95,-h*.3);ctx.lineTo(s*1.3,-h*.05);ctx.lineTo(s*1.32,h*.12);ctx.lineTo(s*.95,h*.05)}else{ctx.moveTo(s*1.0,-h*.42);ctx.lineTo(s*1.45,-h*.05);ctx.lineTo(s*1.5,h*.22);ctx.lineTo(s*1.38,h*.32);ctx.lineTo(s*1.0,h*.12)}ctx.closePath();fillStroke(bf,be,1.4);
+  /* arch / lamina with articular processes */
+  ctx.beginPath();ctx.moveTo(s*.72,-h*.5);ctx.lineTo(s*.78,-h*.88);ctx.lineTo(s*.98,-h*.9);ctx.lineTo(s*1.04,-h*.5);ctx.lineTo(s*1.08,h*.2);ctx.lineTo(s*1.0,h*.62);ctx.lineTo(s*.84,h*.64);ctx.lineTo(s*.8,h*.18);ctx.closePath();fillStroke(bf,be,1.4);
+  /* pedicle */
+  rr(s*.46,-h*.46,s*.34,h*.4,4);fillStroke(bf,be,1.3);
+  /* body */
+  rr(-s/2,-h/2,s,h,s*.12);fillStroke(o.body||bf,be,1.6);
+  /* trabecular texture */
+  ctx.save();rr(-s/2,-h/2,s,h,s*.12);ctx.clip();ctx.strokeStyle=hexA(be,.22);ctx.lineWidth=1;for(let i=-4;i<=4;i++){ctx.beginPath();ctx.moveTo(-s/2+i*s*.14,-h/2);ctx.lineTo(-s/2+i*s*.14+s*.3,h/2);ctx.stroke()}ctx.restore();
+  /* endplates */
+  line(-s/2+4,-h/2+2,s/2-4,-h/2+2,hexA(be,.6),2);line(-s/2+4,h/2-2,s/2-4,h/2-2,hexA(be,.6),2);
+  if(o.lesion){glow(-s*.05,0,s*.32,C.pain,.35*o.lesion);ell(-s*.08,h*.02,s*.2*o.lesion,h*.25*o.lesion,0,hexA(C.pain,.45),C.pain,1.4)}
+  return h}
+function vertAt(x,y,s,rot,o){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);const h=vertLocal(s,o);ctx.restore();return h}
+/* ---------- motion segment: two vertebrae, disc, facet, foramen and nerve root ----------
+   o: rot (+ extension, - flexion, radians), load 0..1 (axial compression), narrow 0..1 (extra foramen narrowing),
+      bulge 0..1 (posterior disc bulge), cerv, root:true, tension 0..1 (root glow), T time */
+function motionSeg(x,y,s,o){o=o||{};const h=s*.6,d=s*.26*(1-.35*(o.load||0)),rot=o.rot||0;const px=x,py=y-h/2-d/2;
+  const U=(lx,ly)=>tpt(lx,ly,px,py,rot,0,-(d/2+h/2));const L=(lx,ly)=>[x+lx,y+ly];
+  /* disc */
+  const a=U(-s/2+3,h/2),b=U(s/2-3,h/2),c=L(s/2-3,-h/2),dd=L(-s/2+3,-h/2);const bl=o.bulge||0;
+  ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.quadraticCurveTo((b[0]+c[0])/2+s*(.08+.22*bl)+(rot<0?-rot*s*.5:0),(b[1]+c[1])/2,c[0],c[1]);ctx.lineTo(dd[0],dd[1]);ctx.quadraticCurveTo((a[0]+dd[0])/2-s*.08-(rot>0?rot*s*.4:0),(a[1]+dd[1])/2,a[0],a[1]);ctx.closePath();
+  ctx.fillStyle=mix(C.disc,C.panel,.25);ctx.fill();ctx.strokeStyle=mix(C.disc,C.ink,.3);ctx.lineWidth=1.4;ctx.stroke();
+  /* annulus rings */
+  ctx.save();ctx.clip();for(let k=1;k<4;k++){const m1=[lerp(a[0],dd[0],.5),lerp(a[1],dd[1],.5)],m2=[lerp(b[0],c[0],.5),lerp(b[1],c[1],.5)];ell((m1[0]+m2[0])/2,(m1[1]+m2[1])/2,s*(.5-k*.08),d*(.5-k*.08),rot/2,null,hexA(C.panel,.55),1.2)}ctx.restore();
+  /* nucleus shifts away from the closing side: flexion pushes it back, extension forward */
+  const shift=clamp(-rot*2.2,-1,1)*s*.13+bl*s*.12;const mc=[(a[0]+b[0]+c[0]+dd[0])/4+shift,(a[1]+b[1]+c[1]+dd[1])/4];
+  ell(mc[0],mc[1],s*.17*(1+.15*(o.load||0)),d*.3,rot/2,C.nuc,mix(C.disc,C.ink,.2),1.2);
+  /* foramen opening (space for the root) */
+  {const q1=U(s*.62,-h*.06),q2=L(s*.62,-h*.46);const gp=Math.max(4,(q2[1]-q1[1])*(1-.45*(o.narrow||0))-(o.bulge||0)*s*.06);ell((q1[0]+q2[0])/2+s*.02,(q1[1]+q2[1])/2,s*.15,gp/2+2,rot/2,hexA(C.ink,.22),hexA(C.ink,.35),1)}
+  /* lower vertebra and upper vertebra */
+  vertAt(x,y,s,0,{cerv:o.cerv,lesion:o.lesionL});
+  const uc=tpt(0,0,px,py,rot,0,-(d/2+h/2));vertAt(uc[0],uc[1],s,rot,{cerv:o.cerv,lesion:o.lesionU});
+  /* facet joint (upper inferior process on lower superior process) */
+  const fj=U(s*.92,h*.6),fl=L(s*.88,-h*.88);const fgap=Math.hypot(fj[0]-fl[0],fj[1]-fl[1]);const fComp=clamp(1-(fgap-s*.06)/(s*.22),0,1)+(o.facet||0);
+  ell((fj[0]+fl[0])/2,(fj[1]+fl[1])/2,s*.07,s*.12,rot/2,hexA(C.lig,.35+.3*clamp(fComp,0,1)),C.lig,1.6);
+  if(o.facet>0||fComp>.75)glow((fj[0]+fl[0])/2,(fj[1]+fl[1])/2,s*.25,C.pain,.45*clamp(Math.max(o.facet||0,fComp-.6),0,1));
+  /* foramen: between upper pedicle bottom and lower pedicle top */
+  const ft=U(s*.63,-h*.06),fb=L(s*.63,-h*.46);let gap=fb[1]-ft[1];gap*=1-.45*(o.narrow||0);gap-=bl*s*.06;const fcx=(ft[0]+fb[0])/2+bl*s*.03,fcy=(ft[1]+fb[1])/2;
+  const rootR=s*.11;const fit=gap/2;const squeeze=clamp((rootR-fit)/(rootR*.55),0,1);
+  if(o.root!==false){const rw=Math.max(rootR*.45,Math.min(rootR,fit));const glowA=Math.max(squeeze,o.tension||0);
+    if(glowA>0)glow(fcx,fcy,s*.42,C.pain,.55*glowA);
+    ell(fcx,fcy,rootR*(1+.25*squeeze),rw,0,mix(C.nerve,C.pain,squeeze*.7),mix(C.nerve,C.ink,.45),1.6);
+    if(o.T!=null&&glowA>.15){for(let i=0;i<3;i++){const p=P(o.T*1.4+i/3,1);circ(fcx+lerp(0,s*.7,p),fcy+lerp(0,s*.25,p),3,hexA(C.pain,1-p))}}}
+  return {gap,squeeze,fcx,fcy,facet:clamp(fComp,0,1),top:uc,disc:mc,fx:(fj[0]+fl[0])/2,fy:(fj[1]+fl[1])/2}}
+/* ---------- sagittal midline column: vertebral bodies, discs, canal with cord or cauda equina ---------- */
+function columnSag(x,y,s,n,o){o=o||{};const h=s*.55,d=s*.2;const top=y-(n*(h+d))/2;const res=[];
+  /* canal */
+  const cx0=x+s*.56,cw=s*.32;rr(cx0,top-6,cw,n*(h+d)+12,6);fillStroke(C.csf,hexA(C.dura,1),2);
+  for(let i=0;i<n;i++){const yy=top+i*(h+d)+h/2;const lab=o.labels?o.labels[i]:null;const wedge=o.wedge&&o.wedge[i]?o.wedge[i]:0;
+    ctx.beginPath();ctx.moveTo(x-s/2,yy-h/2+wedge*h*.45);ctx.lineTo(x+s/2,yy-h/2);ctx.lineTo(x+s/2,yy+h/2);ctx.lineTo(x-s/2,yy+h/2);ctx.closePath();fillStroke(o.lesion===i?mix(C.bone,C.pain,.25):C.bone,C["bone-edge"],1.5);
+    if(o.lesion===i){glow(x,yy,s*.4,C.pain,.35);ell(x-s*.05,yy,s*.18,h*.28,0,hexA(C.pain,.5),C.pain,1.4)}
+    if(wedge>.05){label(x-s*.95,yy,"wedge",{size:11,weight:700,border:C.bad})}
+    /* posterior elements */
+    ctx.beginPath();ctx.moveTo(x+s*.9,yy-h*.35);ctx.lineTo(x+s*1.35,yy-h*.05);ctx.lineTo(x+s*1.38,yy+h*.3);ctx.lineTo(x+s*.9,yy+h*.25);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.3);
+    if(lab)txt(x-s/2-8,yy,lab,{size:11.5,weight:700,mono:true,align:"right",color:C["ink-soft"]});
+    if(i<n-1){const dy=yy+h/2+d/2;const inf=o.infect===i?o.infectA||1:0;const hern=o.hern===i?o.hernA||1:0;
+      ctx.beginPath();ctx.moveTo(x-s/2+2,dy-d/2);ctx.lineTo(x+s/2-2,dy-d/2);ctx.quadraticCurveTo(x+s/2+s*.05+hern*s*.32,dy,x+s/2-2,dy+d/2);ctx.lineTo(x-s/2+2,dy+d/2);ctx.quadraticCurveTo(x-s/2-s*.05,dy,x-s/2+2,dy-d/2);ctx.closePath();
+      ctx.fillStyle=inf?mix(C.disc,C.pain,.5*inf):mix(C.disc,C.panel,.25);ctx.fill();ctx.strokeStyle=mix(C.disc,C.ink,.3);ctx.lineWidth=1.2;ctx.stroke();
+      ell(x+hern*s*.18,dy,s*.16,d*.28,0,C.nuc,null);
+      if(hern>0){ell(x+s*.5+hern*s*.12,dy,s*.12*hern,d*.75*hern,0,C.nuc,mix(C.disc,C.ink,.3),1.4)}
+      if(inf>0){glow(x,dy,s*.6,C.heat,.35*inf)}
+      res.push({dy,hern})}}
+  /* neural contents */
+  const strands=o.cauda?7:1;for(let k=0;k<strands;k++){const xx=cx0+cw*(k+1)/(strands+1);const col=C.nerve;
+    ctx.beginPath();for(let j=0;j<=40;j++){const yy=top+(n*(h+d))*j/40;let dx=0;res.forEach(r=>{if(r.hern>0){const f=gauss(yy,r.dy,h*.5)*r.hern;dx+=f*cw*.35*((k+1)/(strands+1))}});const X=xx+dx;j?ctx.lineTo(X,yy):ctx.moveTo(X,yy)}
+    ctx.strokeStyle=col;ctx.lineWidth=o.cauda?2.4:cw*.55;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt"}
+  return {top,h,d,cx0,cw,bottom:top+n*(h+d)}}
+/* ---------- nerve with travelling impulses ---------- */
+function nerveLine(path,col,lw,T,n,spd,o){o=o||{};poly(path,col||C.nerve,lw||3);if(T==null)return;for(let i=0;i<(n||3);i++){const p=P(T*(spd||.6)+i/(n||3),1);const q=along(path,p);glow(q[0],q[1],9,o.pc||C.pain,.8);circ(q[0],q[1],3,o.pc||C.pain)}}
+function tensionGlow(path,f,col){if(f<=0)return;ctx.save();ctx.globalAlpha*=clamp(f,0,1);poly(path,hexA(col||C.pain,.35),10);ctx.restore()}
+/* ---------- supine figure on a table, head to the left; hip at (x,y)
+   o: hip (deg of raised leg), knee (deg bend), ankle (0..1 dorsiflex), neck (0..1 flexion), other (deg raise of other leg), skin, cloth ---------- */
+function supine(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];
+  rr(x-s*.95,y+s*.09,s*1.95,s*.06,4);fillStroke(C.table,hexA(C.ink,.35),1.2);line(x-s*.85,y+s*.15,x-s*.85,y+s*.4,C.metal,4);line(x+s*.85,y+s*.15,x+s*.85,y+s*.4,C.metal,4);
+  const tw=s*.15;/* torso */rr(x-s*.62,y-tw/2,s*.66,tw,tw*.4);fillStroke(cl,hexA(C["sk-edge"],.5),1.3);
+  /* head with neck flexion */const nf=(o.neck||0)*.7;const nx=x-s*.62,ny=y;const hx=nx-Math.cos(nf)*s*.1,hy=ny-Math.sin(nf)*s*.1;limb(nx,ny,hx,hy,s*.045,sk);circ(hx-Math.cos(nf)*s*.03,hy-Math.sin(nf)*s*.03-s*.005,s*.06,sk,hexA(C["sk-edge"],.7),1.2);
+  ctx.beginPath();ctx.arc(hx-Math.cos(nf)*s*.03,hy-Math.sin(nf)*s*.03,s*.062,Math.PI*.6,Math.PI*1.45);ctx.lineWidth=s*.025;ctx.strokeStyle=C.hair1;ctx.stroke();
+  /* arm resting */limb(x-s*.5,y-s*.01,x-s*.2,y+s*.02,s*.04,cl);circ(x-s*.18,y+s*.02,s*.022,sk);
+  const L1=s*.42,L2=s*.4,lw=s*.07;
+  const legPts=(deg,knee,ank)=>{const a=deg*Math.PI/180;const kx=x+Math.cos(a)*L1,ky=y-Math.sin(a)*L1;const a2=a-(knee||0)*Math.PI/180;const ax=kx+Math.cos(a2)*L2,ay=ky-Math.sin(a2)*L2;const fa=a2+Math.PI/2-(ank||0)*.45;const fx=ax+Math.cos(fa)*s*.1,fy=ay-Math.sin(fa)*s*.1;return {k:[kx,ky],a:[ax,ay],f:[fx,fy],a1:a,a2}};
+  const other=legPts(o.other||0,0,0),lg=legPts(o.hip||0,o.knee||0,o.ankle||0);
+  [[other,.82],[lg,1]].forEach(([p,sh])=>{const col=sh<1?mix(pn,C.panel,.25):pn;limb(x,y,p.k[0],p.k[1],lw,col);limb(p.k[0],p.k[1],p.a[0],p.a[1],lw*.85,col);limb(p.a[0],p.a[1],p.f[0],p.f[1],s*.045,sk)});
+  /* sciatic nerve path along the back of the raised leg (lower side) */
+  const off=(p1,p2,d)=>{const ang=Math.atan2(p2[1]-p1[1],p2[0]-p1[0]);return [[p1[0]-Math.sin(ang)*d,p1[1]+Math.cos(ang)*d],[p2[0]-Math.sin(ang)*d,p2[1]+Math.cos(ang)*d]]};
+  const t1=off([x,y],lg.k,lw*.42),t2=off(lg.k,lg.a,lw*.36);const nerve=[[x-s*.2,y+s*.03],[x-s*.05,y+lw*.42],t1[1],t2[1],[lg.f[0],lg.f[1]]];
+  return {leg:lg,other,nerve,hip:[x,y],hamPath:[[x+s*.02,y+lw*.3],t1[1]]}}
+/* ---------- seated slump figure facing right; pelvis at (x,y)
+   st: thor 0..1, neck 0..1 (flexion), knee 0..1 (extension), ankle 0..1 ---------- */
+function seated(x,y,s,st,o){o=o||{};const sk=C["sk"+(o.skin||3)],cl=C[o.cloth||"cl3"],pn=C[o.pants||"cl5"];
+  rr(x-s*.25,y+s*.04,s*.62,s*.06,4);fillStroke(C.table,hexA(C.ink,.35),1.2);line(x-s*.18,y+s*.1,x-s*.18,y+s*.62,C.metal,4);line(x+s*.3,y+s*.1,x+s*.3,y+s*.62,C.metal,4);
+  const th=st.thor||0,nk=st.neck||0;const segs=6,Ls=s*.085;let ang=-Math.PI/2+.05,px=x,py=y;const spine=[[px,py]];
+  for(let i=0;i<segs;i++){ang+=th*.16+(i>3?.02:0);px+=Math.cos(ang)*Ls;py+=Math.sin(ang)*Ls;spine.push([px,py])}
+  /* torso band */ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=hexA(C["sk-edge"],.4);ctx.lineWidth=s*.17;ctx.beginPath();spine.forEach((p,i)=>i?ctx.lineTo(p[0]+s*.04,p[1]):ctx.moveTo(p[0]+s*.04,p[1]));ctx.stroke();ctx.strokeStyle=cl;ctx.lineWidth=s*.155;ctx.stroke();ctx.restore();
+  /* neck and head */const na=ang+nk*1.0+.15;const nx=px+Math.cos(na)*s*.07,ny=py+Math.sin(na)*s*.07;limb(px+s*.03,py,nx+s*.03,ny,s*.05,sk);const hx=nx+s*.03+Math.cos(na)*s*.065,hy=ny+Math.sin(na)*s*.065;circ(hx,hy,s*.068,sk,hexA(C["sk-edge"],.7),1.2);
+  ctx.beginPath();ctx.arc(hx,hy,s*.07,na+Math.PI*.55,na+Math.PI*1.4);ctx.lineWidth=s*.028;ctx.strokeStyle=C.hair2;ctx.stroke();circ(hx+Math.cos(na+1.3)*s*.035,hy+Math.sin(na+1.3)*s*.035,1.8,C.ink);
+  /* arms behind back (hands resting) */limb(spine[4][0]+s*.04,spine[4][1],spine[1][0]-s*.04,spine[1][1]+s*.02,s*.045,cl);
+  /* thigh and shank */const kx=x+s*.34,ky=y-s*.01;limb(x+s*.02,y-s*.01,kx,ky,s*.085,pn);const ka=Math.PI/2-(st.knee||0)*Math.PI/2*.95;const ax=kx+Math.cos(ka)*s*.34,ay=ky+Math.sin(ka)*s*.34;limb(kx,ky,ax,ay,s*.07,pn);
+  const fa=ka-Math.PI/2+(st.ankle||0)*.5;const fx=ax+Math.cos(fa)*s*.1,fy=ay+Math.sin(fa)*s*.1;limb(ax,ay,fx,fy,s*.045,sk);
+  /* neural path: brain stem down the back of the spine, under the thigh, behind the knee to the foot */
+  const back=spine.map(p=>[p[0]-s*.035,p[1]]).reverse();const nerve=[[hx-s*.02,hy+s*.02],[nx,ny]].concat(back).concat([[x+s*.05,y+s*.03],[kx,ky+s*.04],[ax-s*.01,ay],[fx,fy]]);
+  return {nerve,head:[hx,hy],knee:[kx,ky],ankle:[ax,ay],spine}}
+/* ---------- side view standing figure that can extend (lean back) and rotate; feet at (x,y), facing right ---------- */
+function standSide(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||4)],cl=C[o.cloth||"cl4"],pn=C[o.pants||"cl5"];const ext=o.ext||0,rot=o.rot||0;
+  const hip=[x,y-s*.47];limb(x-s*.02,y,hip[0],hip[1],s*.08,pn);limb(x+s*.03,y,hip[0]+s*.01,hip[1],s*.08,mix(pn,C.panel,.2));rr(x-s*.03,y-s*.03,s*.11,s*.035,4);fillStroke(C.ink,null);
+  const a=-Math.PI/2-ext*.45;const sh=[hip[0]+Math.cos(a)*s*.33,hip[1]+Math.sin(a)*s*.33];const mid=[hip[0]+Math.cos(a+.1)*s*.17-ext*s*.04,hip[1]+Math.sin(a+.1)*s*.17];
+  ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["sk-edge"],.4);ctx.lineWidth=s*.14;ctx.beginPath();ctx.moveTo(hip[0],hip[1]);ctx.quadraticCurveTo(mid[0],mid[1],sh[0],sh[1]);ctx.stroke();ctx.strokeStyle=cl;ctx.lineWidth=s*(.125-.02*Math.abs(rot));ctx.stroke();ctx.restore();
+  const hd=[sh[0]+Math.cos(a)*s*.11,sh[1]+Math.sin(a)*s*.11];limb(sh[0],sh[1],hd[0],hd[1],s*.05,sk);circ(hd[0]+s*.005,hd[1]-s*.02,s*.068,sk,hexA(C["sk-edge"],.7),1.2);circ(hd[0]+s*.035,hd[1]-s*.03,1.8,C.ink);
+  ctx.beginPath();ctx.arc(hd[0]+s*.005,hd[1]-s*.02,s*.07,Math.PI*.9,Math.PI*1.9);ctx.lineWidth=s*.03;ctx.strokeStyle=C.hair1;ctx.stroke();
+  /* arm: hand on the back of the hip */limb(sh[0],sh[1]+s*.02,hip[0]-s*.08,hip[1]-s*.06,s*.05,cl);circ(hip[0]-s*.08,hip[1]-s*.05,s*.025,sk);
+  if(Math.abs(rot)>.02){/* rotation arrow around the trunk */ctx.save();ctx.strokeStyle=C.lig;ctx.lineWidth=2.4;ctx.beginPath();ctx.ellipse(mid[0],mid[1]-s*.05,s*.16,s*.05,0,Math.PI*.1,Math.PI*.1+rot*Math.PI*1.6);ctx.stroke();ctx.restore()}
+  return {hip,sh,head:hd,low:[lerp(hip[0],sh[0],.2)-s*.05,lerp(hip[1],sh[1],.2)]}}
+/* ---------- posterior view head, neck and shoulders for cervical tests; base of neck at (x,y)
+   o: side (-1..1 side bend, + toward the right of the page), ext 0..1, load 0..1 ---------- */
+function neckBack(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],cl=C[o.cloth||"cl2"];const sb=(o.side||0)*.4,ex=o.ext||0;
+  ctx.beginPath();ctx.moveTo(x-s*.55,y+s*.5);ctx.quadraticCurveTo(x-s*.55,y+s*.05,x-s*.12,y);ctx.lineTo(x+s*.12,y);ctx.quadraticCurveTo(x+s*.55,y+s*.05,x+s*.55,y+s*.5);ctx.closePath();fillStroke(cl,hexA(C["sk-edge"],.5),1.4);
+  const nt=[x+Math.sin(sb)*s*.2,y-Math.cos(sb)*s*.2];limb(x,y+s*.02,nt[0],nt[1],s*.16,sk);
+  const hr=s*.2*(1-.06*ex);const hc=[nt[0]+Math.sin(sb)*s*.18,nt[1]-Math.cos(sb)*s*.18+ex*s*.03];ell(hc[0],hc[1],hr*.85,hr,sb,sk,hexA(C["sk-edge"],.7),1.3);
+  ctx.save();ctx.translate(hc[0],hc[1]);ctx.rotate(sb);ctx.beginPath();ctx.ellipse(0,-hr*.15,hr*.86,hr*.9,0,Math.PI,TAU);ctx.lineTo(hr*.86,hr*.25*(1-ex));ctx.quadraticCurveTo(0,hr*(.55-ex*.3),-hr*.86,hr*.25*(1-ex));ctx.closePath();ctx.fillStyle=C.hair1;ctx.fill();ctx.restore();
+  ell(hc[0]-Math.cos(sb)*hr*.86,hc[1]-Math.sin(sb)*hr*.86+s*.02,s*.03,s*.06,sb,sk,hexA(C["sk-edge"],.6),1);ell(hc[0]+Math.cos(sb)*hr*.86,hc[1]+Math.sin(sb)*hr*.86+s*.02,s*.03,s*.06,sb,sk,hexA(C["sk-edge"],.6),1);
+  if(o.load>0){const ay=hc[1]-hr-s*.05;arrow(hc[0],ay-s*.25*o.load-10,hc[0],ay,C.data,3)}
+  /* arms down */limb(x-s*.5,y+s*.12,x-s*.62,y+s*.55,s*.12,cl);limb(x+s*.5,y+s*.12,x+s*.62,y+s*.55,s*.12,cl);
+  return {head:hc,neck:nt,armR:[[x+s*.5,y+s*.12],[x+s*.62,y+s*.55],[x+s*.66,y+s*.95]],armL:[[x-s*.5,y+s*.12],[x-s*.62,y+s*.55],[x-s*.66,y+s*.95]]}}
+/* ---------- pelvis, front view; centre at (x,y) ---------- */
+function pelvisFront(x,y,s,o){o=o||{};const be=C["bone-edge"],bf=C.bone;
+  [-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(x+sd*s*.14,y-s*.22);ctx.bezierCurveTo(x+sd*s*.3,y-s*.55,x+sd*s*.78,y-s*.5,x+sd*s*.72,y-s*.12);ctx.quadraticCurveTo(x+sd*s*.66,y+s*.12,x+sd*s*.5,y+s*.2);ctx.quadraticCurveTo(x+sd*s*.36,y+s*.42,x+sd*s*.08,y+s*.46);ctx.lineTo(x+sd*s*.06,y+s*.36);ctx.quadraticCurveTo(x+sd*s*.3,y+s*.22,x+sd*s*.16,y+s*.04);ctx.closePath();fillStroke(bf,be,1.6);
+    /* hip socket */circ(x+sd*s*.5,y+s*.2,s*.09,mix(bf,C.ink,.08),be,1.3)});
+  /* sacrum */ctx.beginPath();ctx.moveTo(x-s*.16,y-s*.26);ctx.lineTo(x+s*.16,y-s*.26);ctx.lineTo(x+s*.05,y+s*.18);ctx.lineTo(x,y+s*.24);ctx.lineTo(x-s*.05,y+s*.18);ctx.closePath();fillStroke(mix(bf,C.ink,.05),be,1.5);
+  for(let i=0;i<4;i++){const yy=y-s*.18+i*s*.09;circ(x-s*.07+i*s*.01,yy,s*.018,hexA(be,.5));circ(x+s*.07-i*s*.01,yy,s*.018,hexA(be,.5))}
+  /* lumbar vertebra above */rr(x-s*.15,y-s*.44,s*.3,s*.14,6);fillStroke(bf,be,1.4);rr(x-s*.14,y-s*.3,s*.28,s*.035,3);fillStroke(mix(C.disc,C.panel,.25),C.disc,1);
+  /* SI joints (teal) */const siA=o.si||[0,0];[-1,1].forEach((sd,i)=>{const p1=[x+sd*s*.15,y-s*.24],p2=[x+sd*s*.07,y+s*.12];if(siA[i]>0)tensionGlow([p1,p2],siA[i],C.pain);line(p1[0],p1[1],p2[0],p2[1],C.lig,4)});
+  /* symphysis */rr(x-s*.03,y+s*.34,s*.06,s*.13,3);fillStroke(C.lig,null);
+  return {hipL:[x-s*.5,y+s*.2],hipR:[x+s*.5,y+s*.2],siL:[x-s*.11,y-s*.06],siR:[x+s*.11,y-s*.06],asisL:[x-s*.7,y-s*.15],asisR:[x+s*.7,y-s*.15],sacrum:[x,y]}}
+function femur(hx,hy,s,ang,col){const kx=hx+Math.sin(ang)*s,ky=hy+Math.cos(ang)*s;ctx.save();ctx.lineCap="round";ctx.strokeStyle=C["bone-edge"];ctx.lineWidth=s*.13;ctx.beginPath();ctx.moveTo(hx,hy);ctx.lineTo(kx,ky);ctx.stroke();ctx.strokeStyle=col||C.bone;ctx.lineWidth=s*.1;ctx.stroke();ctx.restore();circ(hx,hy,s*.11,col||C.bone,C["bone-edge"],1.4);return [kx,ky]}
+/* ---------- front body silhouette with dermatome / region highlights ---------- */
+function bodyFront(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],e=hexA(C["sk-edge"],.6);const hl=o.hl||{};const T=o.T||0;
+  const legL=[[x-s*.07,y-s*.02],[x-s*.1,y+s*.2],[x-s*.11,y+s*.42]],legR=[[x+s*.07,y-s*.02],[x+s*.1,y+s*.2],[x+s*.11,y+s*.42]];
+  const armL=[[x-s*.15,y-s*.38],[x-s*.22,y-s*.2],[x-s*.26,y-s*.02]],armR=[[x+s*.15,y-s*.38],[x+s*.22,y-s*.2],[x+s*.26,y-s*.02]];
+  const dl=(pts,w)=>{ctx.save();ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=e;ctx.lineWidth=w+2;poly2(pts);ctx.stroke();ctx.strokeStyle=sk;ctx.lineWidth=w;ctx.stroke();ctx.restore()};
+  dl(legL,s*.09);dl(legR,s*.09);dl(armL,s*.055);dl(armR,s*.055);
+  rr(x-s*.16,y-s*.42,s*.32,s*.44,s*.08);fillStroke(sk,e,1.3);rr(x-s*.15,y-s*.1,s*.3,s*.14,s*.05);fillStroke(C[o.cloth||"cl5"],e,1);
+  limb(x,y-s*.42,x,y-s*.47,s*.06,sk);circ(x,y-s*.53,s*.07,sk,e,1.3);ctx.beginPath();ctx.arc(x,y-s*.54,s*.072,Math.PI*1.05,Math.PI*1.95);ctx.lineWidth=s*.03;ctx.strokeStyle=C[o.hair||"hair1"];ctx.stroke();
+  [legL,legR].forEach(L=>{ell(L[2][0],L[2][1]+s*.02,s*.04,s*.022,0,sk,e,1)});
+  const strip=(pts,side,col,a,w)=>{if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const off=pts.map(p=>[p[0]+side*s*.022,p[1]]);ctx.lineCap="round";ctx.strokeStyle=hexA(col,.85);ctx.lineWidth=w||s*.035;poly2(off);ctx.stroke();ctx.restore()};
+  const pa=.65+.35*Math.sin(T*4);
+  if(hl.saddle){withA(hl.saddle*pa,()=>{glow(x,y+s*.05,s*.16,C.pain,.6);ctx.beginPath();ctx.ellipse(x,y+s*.03,s*.09,s*.055,0,0,TAU);ctx.fillStyle=hexA(C.pain,.9);ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.2;ctx.stroke();ell(x-s*.06,y+s*.09,s*.03,s*.06,.2,hexA(C.pain,.6));ell(x+s*.06,y+s*.09,s*.03,s*.06,-.2,hexA(C.pain,.6))})}
+  if(hl.L4){strip([legR[1],legR[2]],-1,C.pain,hl.L4*pa)}
+  if(hl.L5){strip([[legR[1][0],legR[1][1]+s*.05],legR[2],[legR[2][0]+s*.02,legR[2][1]+s*.025]],1,C.pain,hl.L5*pa)}
+  if(hl.S1){strip([[legR[1][0]+s*.02,legR[1][1]+s*.12],legR[2],[legR[2][0]+s*.05,legR[2][1]+s*.02]],1.6,C.pain,hl.S1*pa)}
+  if(hl.S1L){strip([[legL[1][0]-s*.02,legL[1][1]+s*.12],legL[2],[legL[2][0]-s*.05,legL[2][1]+s*.02]],-1.6,C.pain,hl.S1L*pa)}
+  if(hl.legR){strip([legR[0],legR[1],legR[2]],1,C.pain,hl.legR*pa)}
+  if(hl.legL){strip([legL[0],legL[1],legL[2]],-1,C.pain,hl.legL*pa)}
+  if(hl.C6){strip([armR[1],armR[2],[armR[2][0]+s*.01,armR[2][1]+s*.04]],1,C.pain,hl.C6*pa)}
+  if(hl.C7){strip([[armR[1][0],armR[1][1]+s*.04],armR[2],[armR[2][0],armR[2][1]+s*.05]],0,C.pain,hl.C7*pa)}
+  if(hl.back){withA(hl.back*pa,()=>{ell(x,y-s*.13,s*.11,s*.05,0,hexA(C.pain,.6))})}
+  if(hl.neck){withA(hl.neck*pa,()=>{ell(x,y-s*.44,s*.06,s*.03,0,hexA(C.pain,.6))})}
+  if(hl.buttR){withA(hl.buttR*pa,()=>{ell(x+s*.08,y-s*.01,s*.05,s*.04,0,hexA(C.pain,.6))})}
+  return {legL,legR,armL,armR}}
+function poly2(pts){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]))}
+/* ---------- icons ---------- */
+function thermo(x,y,h,f,col){rr(x-6,y-h,12,h,6);fillStroke(C.paper,C["ink-soft"],1.4);circ(x,y+6,10,col||C.heat,C["ink-soft"],1.4);rr(x-3,y-h*clamp(f,0,1)+4,6,h*clamp(f,0,1),3);ctx.fillStyle=col||C.heat;ctx.fill();for(let k=1;k<5;k++)line(x+6,y-h*k/5,x+10,y-h*k/5,C["ink-soft"],1)}
+function scaleIcon(x,y,w,val,o){o=o||{};rr(x-w/2,y-w*.15,w,w*.3,8);fillStroke(C.paper,C["ink-soft"],1.5);rr(x-w*.25,y-w*.08,w*.5,w*.12,4);fillStroke(C.sunk,null);txt(x,y-w*.02,val,{size:o.size||12,weight:700,mono:true,align:"center"})}
+function moonIcon(x,y,r){circ(x,y,r,C.moon,null);circ(x+r*.45,y-r*.3,r*.85,C.night,null)}
+function bladder(x,y,s,f,o){o=o||{};ctx.beginPath();ctx.moveTo(x,y-s*.5);ctx.bezierCurveTo(x+s*.6,y-s*.5,x+s*.55,y+s*.35,x+s*.12,y+s*.42);ctx.lineTo(x+s*.08,y+s*.62);ctx.lineTo(x-s*.08,y+s*.62);ctx.lineTo(x-s*.12,y+s*.42);ctx.bezierCurveTo(x-s*.55,y+s*.35,x-s*.6,y-s*.5,x,y-s*.5);ctx.closePath();fillStroke(hexA(C.organ,.25),C.organ,1.6);
+  ctx.save();ctx.clip();ctx.fillStyle=hexA(C.urine,.8);ctx.fillRect(x-s,y+s*.5-s*1.0*clamp(f,0,1),s*2,s*1.2);ctx.restore()}
+function pillBottle(x,y,s,lab){rr(x-s*.3,y-s*.5,s*.6,s*.9,4);fillStroke(hexA(C.fp,.3),C["ink-soft"],1.4);rr(x-s*.34,y-s*.66,s*.68,s*.2,3);fillStroke(C.paper,C["ink-soft"],1.4);rr(x-s*.24,y-s*.2,s*.48,s*.32,2);fillStroke(C.paper,null);if(lab)txt(x,y-s*.04,lab,{size:10.5,weight:700,align:"center"})}
+function clip(x,y,w,h){rr(x,y,w,h,6);fillStroke(C.paper,C["ink-soft"],1.5);rr(x+w*.35,y-8,w*.3,16,4);fillStroke(C.metal,C["ink-soft"],1.2)}
+function heartIcon(x,y,s,col){ctx.beginPath();ctx.moveTo(x,y+s*.35);ctx.bezierCurveTo(x-s*.9,y-s*.2,x-s*.35,y-s*.85,x,y-s*.3);ctx.bezierCurveTo(x+s*.35,y-s*.85,x+s*.9,y-s*.2,x,y+s*.35);fillStroke(col||C.blood,null)}
+function aorta(x,y,s,T,bulge){const b=bulge||0;const beat=.5+.5*Math.sin(T*6.5);ctx.beginPath();
+  const W=s*.11;const pts=[];for(let i=0;i<=30;i++){const yy=y-s*.5+s*i/30;const g=gauss(yy,y+s*.12,s*.11)*b*(1+.12*beat);pts.push([yy,W*(1+g*1.2)])}
+  ctx.moveTo(x-pts[0][1],pts[0][0]);pts.forEach(p=>ctx.lineTo(x-p[1],p[0]));for(let i=pts.length-1;i>=0;i--)ctx.lineTo(x+pts[i][1],pts[i][0]);ctx.closePath();fillStroke(hexA(C.artery,.75),mix(C.artery,C.ink,.3),1.6);
+  /* iliac branches */line(x-W*.6,y+s*.5,x-s*.2,y+s*.72,C.artery,W*1.1);line(x+W*.6,y+s*.5,x+s*.2,y+s*.72,C.artery,W*1.1);
+  for(let i=0;i<3;i++){const p=P(T*1.1+i/3,1);circ(x,y-s*.5+p*s,3.4,hexA(C.paper,.85))}
+  if(b>.2)pulseRing(x,y+s*.12,W*3,C.artery,P(T*1.05,1))}
+function brainIcon(x,y,s,col){ctx.beginPath();ctx.ellipse(x,y,s*.5,s*.38,0,0,TAU);fillStroke(hexA(col||C.organ,.35),col||C.organ,1.5);for(let i=-2;i<=2;i++){ctx.beginPath();ctx.arc(x+i*s*.17,y-s*.05,s*.12,Math.PI*.1,Math.PI*.95);ctx.strokeStyle=hexA(col||C.organ,.8);ctx.lineWidth=1.2;ctx.stroke()}}
+function speech(x,y,w,h,text,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);if(o.tail){ctx.beginPath();ctx.moveTo(o.tail[0],o.tail[1]);ctx.lineTo(x+w*(o.tx||.3),y+(o.up?0:h));ctx.lineTo(x+w*(o.tx||.3)+14,y+(o.up?0:h));ctx.closePath();fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);ctx.fillStyle=o.fill||C.paper;ctx.fillRect(x+w*(o.tx||.3)+1,y+(o.up?-1:h-3),12,4)}
+  return wrapText(text,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500,color:o.color||C.ink})}
+function flagIcon(x,y,s,col){line(x,y,x,y-s,C.ink,2);ctx.beginPath();ctx.moveTo(x,y-s);ctx.lineTo(x+s*.75,y-s*.8);ctx.lineTo(x,y-s*.55);ctx.closePath();fillStroke(col,hexA(C.ink,.5),1)}
+function angleArc(x,y,r,a0,a1,col,lab){ctx.beginPath();ctx.arc(x,y,r,-a1,-a0);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();if(lab){const m=(a0+a1)/2;label(x+Math.cos(m)*(r+18),y-Math.sin(m)*(r+18),lab,{size:12,weight:700,mono:true,border:col})}}
+function meterV(x,y,w,h,f,col,lab,o){o=o||{};rr(x,y,w,h,5);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,5);ctx.fillStyle=col;ctx.fill()}ctx.strokeStyle=C.rule;ctx.lineWidth=1;rr(x,y,w,h,5);ctx.stroke();if(lab)txt(x+w/2,y+h+13,lab,{size:o.size||11.5,weight:700,align:"center"})}
+/* ---------- dots, 2x2 tables, probability bars ---------- */
+/* population of n people: returns array of {d:diseased,pos:test positive} deterministically */
+function makePop(n,prev,sens,spec,seed){const out=[];const nd=Math.round(n*prev);const tp=Math.round(nd*sens),tn=Math.round((n-nd)*spec);
+  for(let i=0;i<n;i++){const d=i<nd;const pos=d?i<tp:(i-nd)>=tn;out.push({d,pos,r:rnd(i*7.13+(seed||0))})}
+  return out.sort((a,b)=>a.r-b.r)}
+function popCounts(pop){let tp=0,fp=0,fn=0,tn=0;pop.forEach(p=>{if(p.d&&p.pos)tp++;else if(!p.d&&p.pos)fp++;else if(p.d)fn++;else tn++});return {tp,fp,fn,tn}}
+function cellOf(p){return p.d?(p.pos?"tp":"fn"):(p.pos?"fp":"tn")}
+/* person dot: filled = has the condition, ring = does not; colour = cell when sorted */
+function pdot(x,y,r,p,col){if(p.d){circ(x,y,r,col,hexA(C.ink,.55),1.1)}else{circ(x,y,r,hexA(col,.18),col,2)}}
+function table2(x,y,w,h,c,o){o=o||{};const cw=w/2,ch=h/2;const hl=o.hl||{};const lab={tp:"true positive",fp:"false positive",fn:"false negative",tn:"true negative"};
+  txt(x+cw/2,y-14,o.colA||"has the condition",{size:12,weight:700,align:"center",color:C["ink-soft"]});txt(x+cw*1.5,y-14,o.colB||"does not",{size:12,weight:700,align:"center",color:C["ink-soft"]});
+  ctx.save();ctx.translate(x-12,y+ch/2);ctx.rotate(-Math.PI/2);txt(0,0,"test +",{size:12,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();ctx.save();ctx.translate(x-12,y+ch*1.5);ctx.rotate(-Math.PI/2);txt(0,0,"test −",{size:12,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();
+  [["tp",0,0],["fp",1,0],["fn",0,1],["tn",1,1]].forEach(([k,i,j])=>{const X=x+i*cw,Y=y+j*ch;rr(X+2,Y+2,cw-4,ch-4,6);ctx.fillStyle=hexA(C[k],hl[k]?.28:.1);ctx.fill();ctx.strokeStyle=C[k];ctx.lineWidth=hl[k]?3:1.4;ctx.stroke();
+    if(o.labels!==false)txt(X+10,Y+14,(o.short?k.toUpperCase():lab[k]),{size:11.5,weight:700,color:C[k+"-ink"]});if(c&&c[k]!=null&&o.nums!==false)txt(X+cw-10,Y+ch-16,String(c[k]),{size:o.nsize||18,weight:700,mono:true,align:"right",color:C[k+"-ink"]})});
+  return {cw,ch}}
+function probBar(x,y,w,p,col,lab,o){o=o||{};rr(x,y,w,16,8);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();if(p>0){rr(x,y,Math.max(16,w*clamp(p,0,1)),16,8);ctx.fillStyle=col;ctx.fill()}
+  if(lab)txt(x,y-11,lab,{size:12,weight:700});txt(x+w+8,y+8,Math.round(p*100)+"%",{size:12.5,weight:700,mono:true});if(o.mark!=null){const mx=x+w*o.mark;line(mx,y-4,mx,y+20,C.ink,2)}}
+function pct(v,dp){if(!isFinite(v))return "?";return (dp?(Math.round(v*1000)/10).toFixed(1):String(Math.round(v*100)))+"%"}
+/* timeline of weeks */
+function weekAxis(x,y,w,maxW,o){o=o||{};line(x,y,x+w,y,C["ink-soft"],2);for(let k=0;k<=maxW;k+=o.step||2){const X=x+w*k/maxW;line(X,y-5,X,y+5,C["ink-soft"],1.5);txt(X,y+16,String(k),{size:11,mono:true,align:"center",color:C["ink-soft"]})}txt(x+w,y+32,o.lab||"weeks",{size:11.5,weight:600,align:"right",color:C["ink-soft"]})}
+function mriFrame(x,y,w,h,fn){rr(x,y,w,h,6);ctx.fillStyle="#0B0F12";ctx.fill();ctx.save();rr(x+3,y+3,w-6,h-6,4);ctx.clip();fn();ctx.restore();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.5;rr(x,y,w,h,6);ctx.stroke()}
+/* ================= shared accuracy and layout helpers ================= */
+function meterH(x,y,w,f,col,lab,val){txt(x,y-10,lab,{size:12.5,weight:700});rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=col;ctx.fill()}if(val!=null)txt(x+w,y-10,val,{size:12,weight:700,mono:true,align:"right"})}
+const EX={tp:27,fp:14,fn:3,tn:56};
+function examplePeople(c){const a=[];["tp","fn","fp","tn"].forEach(k=>{for(let i=0;i<c[k];i++)a.push({k,d:k==="tp"||k==="fn",pos:k==="tp"||k==="fp"})});
+  return a.map((p,i)=>Object.assign(p,{r:rnd(i*3.7+1)})).sort((x,y)=>x.r-y.r)}
+const PEOPLE=examplePeople(EX);
+function cellSlots(x,y,cw,ch,n,sp){const cols=Math.max(1,Math.floor((cw-20)/sp));const out=[];for(let i=0;i<n;i++)out.push([x+14+(i%cols)*sp,y+30+Math.floor(i/cols)*sp]);return out}
+function tableDots(x,y,w,h,c,o){o=o||{};const g=table2(x,y,w,h,c,{nums:false,hl:o.hl});const sp=o.sp||17;const pos={tp:[x,y],fp:[x+g.cw,y],fn:[x,y+g.ch],tn:[x+g.cw,y+g.ch]};
+  ["tp","fp","fn","tn"].forEach(k=>{const sl=cellSlots(pos[k][0],pos[k][1],g.cw,g.ch,c[k],sp);const pa=o.hl&&o.hl[k]?.75+.25*Math.sin((o.T||0)*5):1;sl.forEach(s=>withA(pa,()=>pdot(s[0],s[1],5.5,{d:k==="tp"||k==="fn"},C[k])));
+    txt(pos[k][0]+g.cw-10,pos[k][1]+14,String(c[k]),{size:16,weight:700,mono:true,align:"right",color:C[k+"-ink"]})});return g}
+function fracWorked(x,y,w,h,lines,t,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+18,o.title||"Worked example",C["accent-ink"]);let yy=y+46;let tt=.5;
+  lines.forEach(L=>{const a=clamp((t-tt)/.6,0,1);if(L.gold){if(a>0)withA(a,()=>label(x+14,yy,L.gold,{size:13,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));yy+=32;tt+=1.1}
+    else if(L.t){if(a>0)withA(a,()=>txt(x+20,yy,L.t,{size:14,weight:600,mono:true}));yy+=28;tt+=1}
+    else if(L.res){if(a>0)withA(a,()=>{ctx.font=`700 15px ${MONO}`;const ww=ctx.measureText(L.res).width;rr(x+14,yy-14,ww+16,28,6);fillStroke(C["good-wash"],C.good,1.8);txt(x+22,yy,L.res,{size:15,weight:700,mono:true})});yy+=38;tt+=1.2}
+    else if(L.miss){if(a>0)withA(a,()=>{rr(x+10,yy-12,w-20,L.h||40,6);fillStroke(C["warn-wash"],C.warn,1.2);wrapText("Common mistake: "+L.miss,x+18,yy+2,w-36,15,{size:12})});yy+=(L.h||40)+10;tt+=1.4}
+    else if(L.tr){if(a>0)withA(a,()=>{rr(x+10,yy-12,w-20,L.h||40,6);fillStroke(C["gold-wash"],C.gold,1.2);wrapText("Now you try: "+L.tr,x+18,yy+2,w-36,15,{size:12,weight:600})});yy+=(L.h||40)+10;tt+=1.2}});return yy}
+function chipsRow(x,y,list,col,t,o){o=o||{};let cx=x,cy=y;ctx.font=`600 11.5px ${MONO}`;list.forEach((c,i)=>{const w=ctx.measureText(c).width+12;if(cx+w>(o.maxX||x+340)){cx=x;cy+=28}const a=clamp((t-(o.t0||1)-i*(o.dt||1.1))/.5,0,1);if(a>0){const X=cx,Y=cy;withA(a,()=>chipL(X,Y,c,col))}cx+=w+8});return cy}
+function redBanner(x,y,w,t){rr(x,y,w,30,6);fillStroke(C.rf,null);txt(x+w/2,y+15,t,{size:13,weight:700,align:"center",color:onFill()})}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-exam-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("nutr-sp-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: 2x2 accuracy simulator ================= */
+const NP=200;
+const TESTS=[["Straight leg raise","about 91% sensitive, 26% specific",91,26],["Crossed straight leg raise","about 29% sensitive, 88% specific",29,88],["Spurling","about 50% sensitive, 90% specific",50,90],["Slump","about 84% sensitive, 83% specific",84,83],["SI cluster, 3 of 5","about 91% sensitive, 78% specific",91,78]];
+const SETS=[["Screening",2],["Primary care",10],["Specialty clinic",40]];
+const SIM0={prev:30,sens:90,spec:80};
+const SIM=Object.assign({done:new Set(),play:true,anim:0,lastKey:"",pmin:100,pmax:0,ss:"",pos:null},SIM0);
+const SIM_CH=["Get the PPV to 90% or more while prevalence is 10% or less.","Find a setting where most positive results are false (PPV under 50%).","Show SnNOut: sensitivity 95% or more and NPV 99% or more.","Show SpPIn: specificity 95% or more and LR+ above 10.","Keep the same test and move prevalence from 5% or less to 50% or more. Watch the PPV climb."];
+const PU=[];for(let i=0;i<NP;i++)PU.push({ud:rnd(i*1.37+.5),ut:rnd(i*2.91+7.3),order:rnd(i*4.4+2)});
+const rankD=PU.map((p,i)=>i).sort((a,b)=>PU[a].ud-PU[b].ud),rankT=PU.map((p,i)=>i).sort((a,b)=>PU[a].ut-PU[b].ut);
+function simCounts(){const nd=Math.round(NP*SIM.prev/100);const tp=Math.round(nd*SIM.sens/100);const nn=NP-nd;const tn=Math.round(nn*SIM.spec/100);return {nd,tp,fn:nd-tp,tn,fp:nn-tn}}
+function simAssign(){const c=simCounts();const isD=new Array(NP).fill(false);rankD.slice(0,c.nd).forEach(i=>isD[i]=true);let kd=0,kn=0;const cell=new Array(NP);
+  rankT.forEach(i=>{if(isD[i]){cell[i]=kd<c.tp?"tp":"fn";kd++}else{cell[i]=kn<c.tn?"tn":"fp";kn++}});return {c,isD,cell}}
+const TBL={x:352,y:62,w:430,h:244};
+function simTargets(A){const cw=TBL.w/2,ch=TBL.h/2;const org={tp:[TBL.x,TBL.y],fp:[TBL.x+cw,TBL.y],fn:[TBL.x,TBL.y+ch],tn:[TBL.x+cw,TBL.y+ch]};const k={tp:0,fp:0,fn:0,tn:0};const sp=9,cols=Math.floor((cw-16)/sp);
+  const order=PU.map((p,i)=>i).sort((a,b)=>PU[a].order-PU[b].order);const out=new Array(NP);order.forEach(i=>{const c=A.cell[i];const n=k[c]++;out[i]=[org[c][0]+10+(n%cols)*sp,org[c][1]+30+Math.floor(n/cols)*sp]});return out}
+function gridPos(i){const j=PU.map((p,k)=>k).sort((a,b)=>PU[a].order-PU[b].order).indexOf(i);return [36+(j%14)*19,72+Math.floor(j/14)*16.5]}
+const GRID=PU.map((p,i)=>gridPos(i));
+function simStats(c){const ppv=c.tp+c.fp?c.tp/(c.tp+c.fp):NaN,npv=c.tn+c.fn?c.tn/(c.tn+c.fn):NaN;const se=SIM.sens/100,sp=SIM.spec/100;return {ppv,npv,lrp:se/(1-sp),lrn:(1-se)/sp}}
+function simUI(){segBtns($("#simTests"),TESTS.map((t,i)=>[i,`${t[0]}<small>${t[1]}</small>`]),()=>TESTS.findIndex(t=>t[2]===SIM.sens&&t[3]===SIM.spec),v=>{SIM.sens=TESTS[v][2];SIM.spec=TESTS[v][3];simSync();simChange()});
+  segBtns($("#simSets"),SETS.map((t,i)=>[i,`${t[0]}<small>${t[1]}%</small>`]),()=>SETS.findIndex(t=>t[1]===SIM.prev),v=>{SIM.prev=SETS[v][1];simSync();simChange()});simSync()}
+function simSync(){$("#slPrev").value=SIM.prev;$("#slSens").value=SIM.sens;$("#slSpec").value=SIM.spec;$("#oPrev").textContent=SIM.prev+"%";$("#oSens").textContent=SIM.sens+"%";$("#oSpec").textContent=SIM.spec+"%";
+  $("#simTests").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(TESTS[i][2]===SIM.sens&&TESTS[i][3]===SIM.spec)));$("#simSets").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(SETS[i][1]===SIM.prev)))}
+["slPrev","slSens","slSpec"].forEach(id=>{$("#"+id).addEventListener("input",e=>{const k={slPrev:"prev",slSens:"sens",slSpec:"spec"}[id];SIM[k]=+e.target.value;simSync();simChange()})});
+function simChange(){SIM.A=simAssign();SIM.T=simTargets(SIM.A);const ss=SIM.sens+"/"+SIM.spec;if(ss!==SIM.ss){SIM.ss=ss;SIM.pmin=SIM.prev;SIM.pmax=SIM.prev}SIM.pmin=Math.min(SIM.pmin,SIM.prev);SIM.pmax=Math.max(SIM.pmax,SIM.prev);simRead();simChecks();a11yKey=""}
+function simRead(){const c=SIM.A.c,s=simStats(c);const f=v=>isFinite(v)?(Math.round(v*1000)/10).toFixed(1)+"%":"no positives";
+  const rows=[["Prevalence",SIM.prev+"% ("+c.nd+" of 200 have it)"],["Sensitivity",SIM.sens+"%"],["Specificity",SIM.spec+"%"],["True positives",c.tp],["False positives",c.fp],["False negatives",c.fn],["True negatives",c.tn],["PPV (positive predictive value)",f(s.ppv)],["NPV (negative predictive value)",isFinite(s.npv)?f(s.npv):"no negatives"],["LR+",(Math.round(s.lrp*10)/10).toFixed(1)],["LR−",(Math.round(s.lrn*100)/100).toFixed(2)]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><td class="l">${r[0]}</td><td class="big">${r[1]}</td></tr>`).join("");
+  const st=$("#simStatus");const pos=c.tp+c.fp;st.className="status"+(s.ppv<.5?" warn":"");st.textContent=pos?`Of ${pos} positive results, ${c.tp} are true and ${c.fp} are false, so a positive result means about a ${Math.round(s.ppv*100)}% chance the person has the condition. Of ${c.tn+c.fn} negatives, ${c.fn} are missed cases.`:"No positive results at these settings."}
+function simChecks(){const c=SIM.A.c,s=simStats(c);const conds=[s.ppv>=.9&&SIM.prev<=10,s.ppv<.5,SIM.sens>=95&&s.npv>=.99,SIM.spec>=95&&s.lrp>10,SIM.pmin<=5&&SIM.pmax>=50];
+  conds.forEach((ok,i)=>{if(ok)SIM.done.add(i)});chalUI($("#simChal"),SIM_CH,SIM.done)}
+$("#simReset").onclick=()=>{Object.assign(SIM,SIM0);simSync();simChange();SIM.anim=0};
+$("#simPlay").onclick=()=>{SIM.play=!SIM.play;$("#simPlay").textContent=SIM.play?"Pause":"Play"};
+$("#simReplay").onclick=()=>{SIM.anim=0;SIM.pos=null};
+function simStep(dt){if(SIM.play){SIM.anim+=dt;if(SIM.anim>11)SIM.anim=0}
+  if(!SIM.pos)SIM.pos=GRID.map(g=>g.slice());const T=SIM.T;
+  for(let i=0;i<NP;i++){const d=.4+PU[i].order*2.6;const tg=SIM.anim<d?GRID[i]:T[i];const k=Math.min(1,dt*(SIM.anim<d+1?5:7));SIM.pos[i][0]+=(tg[0]-SIM.pos[i][0])*k;SIM.pos[i][1]+=(tg[1]-SIM.pos[i][1])*k}}
+function simDraw(now){use(S1);const T_=now/1000;const A=SIM.A,c=A.c,s=simStats(c);
+  panelBox(10,10,310,300);title(22,30,"200 people");circ(26,50,5,C.ink);txt(36,50,"has the condition",{size:11.5});circ(150,50,5,null,C["ink-soft"],1.8);txt(160,50,"does not",{size:11.5});
+  panelBox(330,10,460,300);const g=table2(TBL.x,TBL.y,TBL.w,TBL.h,c,{nums:false,labels:true,hl:{}});
+  ["tp","fp","fn","tn"].forEach((k,j)=>{const x=TBL.x+(j%2)*g.cw,y=TBL.y+Math.floor(j/2)*g.ch;txt(x+g.cw-10,y+14,String(c[k]),{size:15,weight:700,mono:true,align:"right",color:C[k+"-ink"]})});
+  if(!SIM.pos)SIM.pos=GRID.map(q=>q.slice());const settled=SIM.anim>3.6;
+  GRID.forEach(q=>circ(q[0],q[1],5,null,hexA(C["ink-soft"],.22),1));
+  for(let i=0;i<NP;i++){const cl=A.cell[i];const p=SIM.pos[i];const inT=p[0]>TBL.x-4;const col=inT?C[cl]:(A.isD[i]?C.ink:C["ink-soft"]);const r=inT?3.6:5.2;if(A.isD[i])circ(p[0],p[1],r,col,null);else circ(p[0],p[1],r-.6,hexA(col,.15),col,1.5)}
+  if(!settled){txt(165,292,"testing everyone",{size:12,weight:700,align:"center",color:C["ink-soft"]})}
+  else{withA(.6+.4*Math.sin(T_*3),()=>{ctx.save();ctx.setLineDash([6,4]);ctx.strokeStyle=C.data;ctx.lineWidth=2.5;rr(TBL.x-4,TBL.y-4,TBL.w+8,g.ch+8,8);ctx.stroke();ctx.restore()});txt(165,272,"all 200 sorted into the table",{size:12,weight:600,align:"center",color:C["ink-soft"]});txt(165,292,"PPV reads across the + row",{size:12,weight:700,align:"center",color:C["data-ink"]})}
+  /* bars */panelBox(10,320,310,140);title(22,340,"what a result means");
+  const pv=isFinite(s.ppv)?s.ppv:0,nv=isFinite(s.npv)?s.npv:0;meterH(24,374,230,pv,C.tp,"PPV: positive result is right");meterH(24,422,230,nv,C.tn,"NPV: negative result is right");
+  txt(268,381,isFinite(s.ppv)?Math.round(s.ppv*100)+"%":"",{size:14,weight:700,mono:true});txt(268,429,isFinite(s.npv)?Math.round(s.npv*100)+"%":"",{size:14,weight:700,mono:true});
+  panelBox(330,320,460,140);const se=SIM.sens/100,sp=SIM.spec/100;const gg=graph({x:390,y:342,w:300,h:90,x0:0,x1:.6,y0:0,y1:1,xt:[0,.2,.4,.6],xf:v=>Math.round(v*100)+"%",yt:[0,.5,1],yf:v=>Math.round(v*100)+"%",xl:"prevalence"});
+  const ppvF=p=>se*p/(se*p+(1-sp)*(1-p)),npvF=p=>sp*(1-p)/(sp*(1-p)+(1-se)*p);curve(gg,ppvF,.005,.6,C.tp,2.6);curve(gg,npvF,.005,.6,C.tn,2.2,[6,4]);
+  const pr=SIM.prev/100;gdot(gg,pr,ppvF(pr),C.tp,null,{r:6});gdot(gg,pr,npvF(pr),C.tn,null,{r:5});pulseRing(gg.X(pr),gg.Y(ppvF(pr)),16,C.tp,P(T_,1.6));
+  txt(700,350,"PPV",{size:12,weight:700,color:C["tp-ink"]});txt(700,370,"NPV dashed",{size:12,weight:700,color:C["tn-ink"]});txt(700,404,"LR+ "+(Math.round(s.lrp*10)/10).toFixed(1),{size:12,weight:700,mono:true});txt(700,424,"LR− "+(Math.round(s.lrn*100)/100).toFixed(2),{size:12,weight:700,mono:true})}
+function simA11y(){const c=SIM.A.c,s=simStats(c);const p=v=>isFinite(v)?Math.round(v*100)+" percent":"not defined";
+  const lab=`2x2 simulator: prevalence ${SIM.prev} percent, sensitivity ${SIM.sens} percent, specificity ${SIM.spec} percent. True positives ${c.tp}, false positives ${c.fp}, false negatives ${c.fn}, true negatives ${c.tn}. PPV ${p(s.ppv)}, NPV ${p(s.npv)}.`;
+  return [lab,`Two hundred dots start in a grid on the left, solid for people who have the condition and rings for people who do not. They fly into a 2x2 table on the right: green true positives top left (${c.tp}), orange false positives top right (${c.fp}), rose false negatives bottom left (${c.fn}) and grey true negatives bottom right (${c.tn}). Below, a PPV bar reads ${p(s.ppv)} and an NPV bar reads ${p(s.npv)}, and a graph shows the PPV curve rising and the dashed NPV curve falling as prevalence increases, with a marker at ${SIM.prev} percent.`]}
+/* ================= PART 2: practice trainer ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const f1=v=>(Math.round(v*10)/10).toFixed(1);
+const CTYPES=[["mix","All types, mixed"],["sens","Sensitivity from a 2x2 table"],["spec","Specificity from a 2x2 table"],["ppv","Positive predictive value (PPV)"],["npv","Negative predictive value (NPV)"],["prev","Prevalence from a 2x2 table"],["lrp","Likelihood ratio LR+ from a 2x2 table"]];
+const TESTN=["straight leg raise","slump test","Spurling test","crossed straight leg raise","SI provocation cluster","Kemp test","FABER","a new screening question"];
+const CONDN={"straight leg raise":"lumbar disc herniation with root irritation","slump test":"lumbar nerve root irritation","Spurling test":"cervical radiculopathy","crossed straight leg raise":"lumbar disc herniation","SI provocation cluster":"SI joint pain","Kemp test":"facet joint pain","FABER":"hip joint problems","a new screening question":"a serious spinal condition"};
+function randTable(){let c;do{c={tp:ri(8,95),fn:ri(2,40),fp:ri(3,70),tn:ri(20,260)}}while(c.tp+c.fn<12||c.fp+c.tn<25);return c}
+function tableHTML(c){return `<table class="ptab"><caption class="gk-sr">2x2 table of test results</caption><thead><tr><th scope="col"></th><th scope="col">Has the condition</th><th scope="col">Does not</th></tr></thead><tbody><tr><th scope="row">Test positive</th><td>${c.tp}</td><td>${c.fp}</td></tr><tr><th scope="row">Test negative</th><td>${c.fn}</td><td>${c.tn}</td></tr></tbody></table>`}
+const filt=(sl,ans,abs)=>sl.filter(s=>isFinite(s[0])&&Math.abs(s[0]-ans)>abs*2.2);
+const pc=v=>v*100;
+const GEN={
+ sens(){const c=randTable(),t=pick(TESTN);const ans=pc(c.tp/(c.tp+c.fn));
+  return {title:"Sensitivity",c,cells:{tp:1,fn:1},html:`Researchers checked the <b>${t}</b> against a reference standard for ${CONDN[t]}. What is its <b>sensitivity</b>?`+tableHTML(c),ans,unit:"%",dp:1,abs:.5,
+   lines:[{gold:"sensitivity = TP ÷ (TP + FN)"},{t:`= ${c.tp} ÷ (${c.tp} + ${c.fn})`},{t:`= ${c.tp} ÷ ${c.tp+c.fn}`},{res:`= ${f1(ans)}%`}],
+   slips:filt([[pc(c.tp/(c.tp+c.fp)),"That divides by everyone who tested positive (TP + FP), which gives the PPV. Sensitivity uses only people who have the condition: TP ÷ (TP + FN)."],[pc(c.fn/(c.tp+c.fn)),"That is the share that was missed (false negatives). Sensitivity is the share caught: TP ÷ (TP + FN)."],[pc(c.tp/(c.tp+c.fn+c.fp+c.tn)),"That divides by everyone tested. Use only the column of people who have the condition."],[pc(c.tn/(c.tn+c.fp)),"That is the specificity, from the other column."]],ans,.5),
+   hints:["Sensitivity looks only at people who truly have the condition: the left column.","Sensitivity = TP ÷ (TP + FN).",`${c.tp} ÷ (${c.tp} + ${c.fn}) = ? Then multiply by 100 for a percent.`]}},
+ spec(){const c=randTable(),t=pick(TESTN);const ans=pc(c.tn/(c.tn+c.fp));
+  return {title:"Specificity",c,cells:{fp:1,tn:1},html:`For the <b>${t}</b> (checking for ${CONDN[t]}), what is its <b>specificity</b>?`+tableHTML(c),ans,unit:"%",dp:1,abs:.5,
+   lines:[{gold:"specificity = TN ÷ (TN + FP)"},{t:`= ${c.tn} ÷ (${c.tn} + ${c.fp})`},{t:`= ${c.tn} ÷ ${c.tn+c.fp}`},{res:`= ${f1(ans)}%`}],
+   slips:filt([[pc(c.fp/(c.tn+c.fp)),"That is the false positive rate, FP ÷ (FP + TN), which equals 1 − specificity. Specificity is TN ÷ (TN + FP)."],[pc(c.tn/(c.tn+c.fn)),"That divides by everyone who tested negative, which gives the NPV. Specificity uses the column of people without the condition."],[pc(c.tp/(c.tp+c.fn)),"That is the sensitivity, from the other column."],[pc(c.tn/(c.tp+c.fn+c.fp+c.tn)),"That divides by everyone tested. Use only the column of people without the condition."]],ans,.5),
+   hints:["Specificity looks only at people who do not have the condition: the right column.","Specificity = TN ÷ (TN + FP).",`${c.tn} ÷ (${c.tn} + ${c.fp}) = ? Then multiply by 100.`]}},
+ ppv(){const c=randTable(),t=pick(TESTN);const ans=pc(c.tp/(c.tp+c.fp));
+  return {title:"Positive predictive value",c,cells:{tp:1,fp:1},html:`A patient has a <b>positive</b> ${t}. Using this study, what is the <b>PPV</b>, the chance that a person with a positive result has ${CONDN[t]}?`+tableHTML(c),ans,unit:"%",dp:1,abs:.5,
+   lines:[{gold:"PPV = TP ÷ (TP + FP)"},{t:`= ${c.tp} ÷ (${c.tp} + ${c.fp})`},{t:`= ${c.tp} ÷ ${c.tp+c.fp}`},{res:`= ${f1(ans)}%`}],
+   slips:filt([[pc(c.tp/(c.tp+c.fn)),"That is the sensitivity (down the left column). PPV reads across the positive row: TP ÷ (TP + FP)."],[pc(c.fp/(c.tp+c.fp)),"That is the share of positives that are false. PPV is the share that are true: TP ÷ (TP + FP)."],[pc(c.tp/(c.tp+c.fn+c.fp+c.tn)),"That divides by everyone tested. PPV only uses people with a positive result."],[pc(c.tn/(c.tn+c.fn)),"That is the NPV, from the negative row."]],ans,.5),
+   hints:["Start from the result: look only at the row of positive tests.","PPV = TP ÷ (TP + FP).",`${c.tp} ÷ (${c.tp} + ${c.fp}) = ? Then multiply by 100.`]}},
+ npv(){const c=randTable(),t=pick(TESTN);const ans=pc(c.tn/(c.tn+c.fn));
+  return {title:"Negative predictive value",c,cells:{fn:1,tn:1},html:`A patient has a <b>negative</b> ${t}. Using this study, what is the <b>NPV</b>, the chance that a person with a negative result does not have ${CONDN[t]}?`+tableHTML(c),ans,unit:"%",dp:1,abs:.5,
+   lines:[{gold:"NPV = TN ÷ (TN + FN)"},{t:`= ${c.tn} ÷ (${c.tn} + ${c.fn})`},{t:`= ${c.tn} ÷ ${c.tn+c.fn}`},{res:`= ${f1(ans)}%`}],
+   slips:filt([[pc(c.tn/(c.tn+c.fp)),"That is the specificity (down the right column). NPV reads across the negative row: TN ÷ (TN + FN)."],[pc(c.fn/(c.tn+c.fn)),"That is the share of negatives that are missed cases. NPV is the share that are correct: TN ÷ (TN + FN)."],[pc(c.tn/(c.tp+c.fn+c.fp+c.tn)),"That divides by everyone tested. NPV only uses people with a negative result."],[pc(c.tp/(c.tp+c.fp)),"That is the PPV, from the positive row."]],ans,.5),
+   hints:["Start from the result: look only at the row of negative tests.","NPV = TN ÷ (TN + FN).",`${c.tn} ÷ (${c.tn} + ${c.fn}) = ? Then multiply by 100.`]}},
+ prev(){const c=randTable(),t=pick(TESTN);const N=c.tp+c.fn+c.fp+c.tn;const ans=pc((c.tp+c.fn)/N);
+  return {title:"Prevalence",c,cells:{tp:1,fn:1},all:true,html:`In this study of the <b>${t}</b>, what was the <b>prevalence</b> of ${CONDN[t]} (the share of everyone tested who truly had it)?`+tableHTML(c),ans,unit:"%",dp:1,abs:.5,
+   lines:[{gold:"prevalence = (TP + FN) ÷ everyone"},{t:`= (${c.tp} + ${c.fn}) ÷ ${N}`},{t:`= ${c.tp+c.fn} ÷ ${N}`},{res:`= ${f1(ans)}%`}],
+   slips:filt([[pc((c.tp+c.fp)/N),"That is the share who tested positive. Prevalence counts who truly has the condition: TP + FN."],[pc(c.tp/N),"That leaves out the false negatives, who also have the condition. Use TP + FN."],[pc((c.tp+c.fn)/(c.fp+c.tn)),"That divides by people without the condition. Divide by everyone tested."]],ans,.5),
+   hints:["Prevalence is about the truth, not the test: who has the condition?","Everyone with the condition is in the left column: TP + FN. Everyone tested is the total of all four boxes.",`(${c.tp} + ${c.fn}) ÷ ${N} = ? Then multiply by 100.`]}},
+ lrp(){let c;do{c=randTable()}while(c.tp/(c.tp+c.fn)<=c.fp/(c.fp+c.tn)+.05);const t=pick(TESTN);const se=c.tp/(c.tp+c.fn),sp=c.tn/(c.tn+c.fp);const ans=se/(1-sp);const dp=ans<10?2:1;const ansR=+ans.toFixed(dp);
+  return {title:"Likelihood ratio LR+",c,cells:{tp:1,fn:1,fp:1,tn:1},html:`For the <b>${t}</b>, find <b>LR+</b> = sensitivity ÷ (1 − specificity). Work out sensitivity and specificity first (as decimals).`+tableHTML(c),ans,unit:"",dp,abs:Math.max(.06,ans*.025),
+   lines:[{gold:"LR+ = sensitivity ÷ (1 − specificity)"},{t:`sens = ${c.tp} ÷ ${c.tp+c.fn} = ${se.toFixed(3)}`},{t:`spec = ${c.tn} ÷ ${c.tn+c.fp} = ${sp.toFixed(3)}`},{t:`LR+ = ${se.toFixed(3)} ÷ ${(1-sp).toFixed(3)}`},{res:`= ${ans.toFixed(dp)}`}],
+   slips:filt([[se/sp,"That divides sensitivity by specificity. Divide by (1 − specificity) instead."],[(1-se)/sp,"That is LR−, (1 − sensitivity) ÷ specificity. The question asks for LR+."],[(1-sp)/se,"That is upside down. LR+ = sensitivity ÷ (1 − specificity)."],[se*100/(100-sp),"Keep both values as decimals (or both as percents) before dividing."]],ans,Math.max(.06,ans*.025)),
+   hints:["First find sensitivity = TP ÷ (TP + FN) and specificity = TN ÷ (TN + FP), as decimals.",`sensitivity = ${se.toFixed(3)}, specificity = ${sp.toFixed(3)}, so 1 − specificity = ${(1-sp).toFixed(3)}.`,`LR+ = ${se.toFixed(3)} ÷ ${(1-sp).toFixed(3)} = ?`],note:ans>=10?"An LR+ above 10 causes a large shift.":ans>=5?"An LR+ of 5 to 10 causes a moderate shift.":ans>=2?"An LR+ of 2 to 5 causes a small shift.":"An LR+ below 2 barely changes anything."}}
+};
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:+(store.get("best")||0),count:0,solT:0};
+function fmtA(p,v){return p.unit==="%"?f1(v)+"%":v.toFixed(p.dp)}
+function calcNew(){const keys=Object.keys(GEN);const k=TR.type==="mix"?pick(keys):TR.type;const q=GEN[k]();TR.p=q;q.kind=k;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}`;$("#calcUnit").textContent=q.unit;$("#calcAns").value="";$("#calcMsg").className="msg";$("#calcHintBox").hidden=true;
+  $("#calcCap").textContent=q.title+": the cells you need glow in the table.";a11yKey=""}
+function parseAns(s){s=String(s).trim().replace(/,/g,"").replace(/%\s*$/,"").replace(/−/g,"-").trim();if(!/^[+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};if(Math.abs(v-p.ans)<=p.abs)return {ok:true};
+  if(p.unit==="%"&&v<=1&&Math.abs(v*100-p.ans)<=p.abs)return {ok:true,frac:true};
+  const sl=p.slips.find(s=>Math.abs(v-s[0])<=p.abs||(p.unit==="%"&&v<=1&&Math.abs(v*100-s[0])<=p.abs));if(sl)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)<=(p.unit==="%"?3:Math.max(.3,p.ans*.08)))return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcCheck(){const p=TR.p;const j=judge(p,$("#calcAns").value);
+  if(j.kind==="empty"){calcMsg("info","Type a number in the answer box first (for example 66.7).");return}
+  if(j.ok){if(!TR.solved){TR.count++;if(TR.first&&!TR.sol){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;
+    calcMsg("good",`✓ Correct: ${fmtA(p,p.ans)}.`+(j.frac?" You wrote it as a proportion, which is fine; as a percent it is "+f1(p.ans)+"%.":"")+(p.note?" "+p.note:"")+" Watch the worked solution build below the table.");showSol(false)}
+  else{TR.first=false;TR.streak=0;let m="Not quite. ";if(j.kind==="slip")m+=j.msg;else if(j.kind==="close")m+="Very close. Check your rounding, and round only at the end.";else m+="Check the setup. "+p.hints[0];calcMsg("warn",m)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+$("#calcType").innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");$("#calcType").onchange=e=>{TR.type=e.target.value;calcNew()};
+$("#calcCheck").onclick=()=>calcCheck();$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+$("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;
+  b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+$("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${fmtA(TR.p,TR.p.ans)}. Watch each step, then try a new problem.`)};
+$("#calcNew").onclick=()=>{calcNew();$("#calcAns").focus()};
+function drawCalc(now){use(S3);const p=TR.p,c=p.c;const T_=now/1000;const tv=parseAns($("#calcAns").value);
+  panelBox(10,10,780,232);levelTag(22,26,"num");if(TR.solved){circ(764,30,13,C.good);checkMark(764,30,6,"#fff")}
+  const hl={};Object.keys(p.cells).forEach(k=>hl[k]=1);const g=table2(80,64,330,160,c,{hl,nsize:20});
+  if(p.all){ctx.save();ctx.setLineDash([6,4]);ctx.strokeStyle=hexA(C.data,.6+.4*Math.sin(T_*3));ctx.lineWidth=2.5;rr(74,58,342,172,8);ctx.stroke();ctx.restore();txt(420,236,"everyone: "+(c.tp+c.fn+c.fp+c.tn),{size:12,weight:700,mono:true,align:"right",color:C["data-ink"]})}
+  Object.keys(p.cells).forEach(k=>{const j=["tp","fp","fn","tn"].indexOf(k);const x=80+(j%2)*g.cw,y=64+Math.floor(j/2)*g.ch;withA(.35+.35*Math.sin(T_*4),()=>{rr(x+2,y+2,g.cw-4,g.ch-4,6);ctx.strokeStyle=C.data;ctx.lineWidth=3;ctx.stroke()})});
+  /* answer gauge */const isPct=p.unit==="%";const mx=isPct?100:Math.max(10,Math.ceil(p.ans*1.6/5)*5);const gx=450,gw=300,gy=120;title(gx,60,p.title);
+  rr(gx,gy,gw,18,9);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();for(let k=0;k<=4;k++){const v=mx*k/4;line(gx+gw*k/4,gy+20,gx+gw*k/4,gy+26,C["ink-soft"],1.2);txt(gx+gw*k/4,gy+38,isPct?Math.round(v)+"%":String(Math.round(v*10)/10),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  if(tv!=null){const v=isPct&&tv<=1?tv*100:tv;rr(gx,gy,Math.max(18,gw*clamp(v/mx,0,1)),18,9);ctx.fillStyle=hexA(C.data,.7);ctx.fill()}
+  label(gx+gw/2,gy-26,"your answer: "+(tv!=null?(isPct?f1(tv<=1&&p.ans>1.5?tv*100:tv)+"%":String(tv)):"?"),{size:13,weight:700,mono:true,border:C.data});
+  if(TR.solved||TR.sol){const X=gx+gw*clamp(p.ans/mx,0,1);ctx.beginPath();ctx.moveTo(X,gy-2);ctx.lineTo(X-7,gy-12);ctx.lineTo(X+7,gy-12);ctx.closePath();ctx.fillStyle=C.good;ctx.fill();txt(X,gy+56,"answer "+fmtA(p,p.ans),{size:12,weight:700,mono:true,align:"center",color:C.good})}
+  if(TR.sol){const tt=(now-TR.solT)/1000+.0001;fracWorked(10,250,780,212,p.lines,tt*1.3,{title:"Worked solution"})}
+  else{panelBox(10,250,780,212,{fill:hexA(C.paper,.96)});title(22,268,"Worked solution",C["accent-ink"]);wrapText("The worked solution builds here after a correct answer, or when you press Show worked solution. The formula is flagged in gold, then the numbers from the glowing cells go in.",24,300,740,18,{size:13,color:C["ink-soft"]})}}
+function calcA11y(){const p=TR.p,c=p.c;const v=$("#calcAns").value.trim();const lab=`Practice problem, ${p.title}. Table: true positives ${c.tp}, false positives ${c.fp}, false negatives ${c.fn}, true negatives ${c.tn}. Your answer ${v||"not entered"}.${TR.solved?" Correct.":""}`;
+  const names={tp:"true positives",fp:"false positives",fn:"false negatives",tn:"true negatives"};
+  return [lab,`The top shows the 2x2 table with ${Object.keys(p.cells).map(k=>names[k]).join(" and ")} outlined and glowing, and a bar gauge on the right that fills to the answer you type. ${TR.sol?"The bottom shows the worked solution line by line: the formula in a gold box, the numbers substituted, and the answer "+fmtA(p,p.ans)+" in a green box.":"The worked solution is hidden until you check a correct answer or ask for it."}`]}
+/* ================= PART 3: sorting game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  switch(k){
+  case "rf":return sv('<path d="M14 42 V6" stroke="var(--ink)" stroke-width="2.5"/><path d="M14 6 L44 12 L14 24 Z" fill="var(--rf)" stroke="var(--ink)" stroke-width="1"/>');
+  case "yf":return sv('<path d="M14 42 V6" stroke="var(--ink)" stroke-width="2.5"/><path d="M14 6 L44 12 L14 24 Z" fill="var(--yf)" stroke="var(--ink)" stroke-width="1"/>');
+  case "bn":return sv('<circle cx="28" cy="23" r="17" fill="var(--good-wash)" stroke="var(--good)" stroke-width="2.5"/><path d="M19 23 l6 6 l12 -13" stroke="var(--good)" stroke-width="3.5" fill="none"/>');
+  case "neural":return sv('<path d="M6 10 C20 10 22 24 30 30 S46 38 50 42" stroke="var(--nerve)" stroke-width="5" fill="none"/><path d="M6 10 C20 10 22 24 30 30 S46 38 50 42" stroke="var(--pain)" stroke-width="1.5" fill="none" stroke-dasharray="3 4"/>');
+  case "cfor":return sv('<rect x="6" y="4" width="26" height="14" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><rect x="6" y="28" width="26" height="14" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><rect x="8" y="19" width="22" height="8" rx="2" fill="var(--disc)"/><ellipse cx="40" cy="23" rx="7" ry="4" fill="var(--pain)" stroke="var(--ink)"/>');
+  case "facet":return sv('<rect x="4" y="4" width="22" height="14" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><rect x="4" y="28" width="22" height="14" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><ellipse cx="40" cy="23" rx="7" ry="10" fill="var(--lig)" stroke="var(--ink)"/><path d="M33 23 h14" stroke="var(--pain)" stroke-width="2.5"/>');
+  case "si":return sv('<path d="M6 8 C14 2 22 8 24 16 L22 36 C14 40 6 30 6 8 Z" fill="var(--bone)" stroke="var(--bone-edge)"/><path d="M50 8 C42 2 34 8 32 16 L34 36 C42 40 50 30 50 8 Z" fill="var(--bone)" stroke="var(--bone-edge)"/><path d="M24 14 L32 14 L30 36 L26 36 Z" fill="var(--bone)" stroke="var(--bone-edge)"/><path d="M24 14 L26 36 M32 14 L30 36" stroke="var(--lig)" stroke-width="3"/>');
+  case "cauda":return sv('<rect x="18" y="2" width="20" height="42" rx="8" fill="var(--csf)" stroke="var(--dura)" stroke-width="2"/><path d="M22 4 V42 M26 4 V42 M30 4 V42 M34 4 V42" stroke="var(--nerve)" stroke-width="2"/><ellipse cx="14" cy="24" rx="9" ry="6" fill="var(--disc)"/>');
+  case "infect":return sv('<rect x="22" y="4" width="10" height="28" rx="5" fill="var(--paper)" stroke="var(--ink)"/><circle cx="27" cy="38" r="7" fill="var(--heat)" stroke="var(--ink)"/><rect x="25" y="14" width="4" height="22" fill="var(--heat)"/>');
+  case "frac":return sv('<path d="M8 6 H48 V20 L8 30 Z" fill="var(--bone)" stroke="var(--bone-edge)" stroke-width="1.5"/><path d="M14 14 L24 20 L32 12 L42 18" stroke="var(--rf)" stroke-width="2.5" fill="none"/><rect x="8" y="34" width="40" height="10" rx="2" fill="var(--bone)" stroke="var(--bone-edge)"/>');
+  case "cancer":return sv('<rect x="8" y="6" width="40" height="34" rx="5" fill="var(--bone)" stroke="var(--bone-edge)" stroke-width="1.5"/><ellipse cx="26" cy="23" rx="11" ry="8" fill="var(--pain)" opacity=".75"/>');
+  case "vasc":return sv('<path d="M28 2 V44" stroke="var(--artery)" stroke-width="7"/><ellipse cx="28" cy="26" rx="12" ry="9" fill="var(--artery)"/><circle cx="28" cy="26" r="16" fill="none" stroke="var(--artery)" stroke-width="1.5" stroke-dasharray="3 3"/>');
+  case "out":return sv('<rect x="4" y="12" width="48" height="22" rx="4" fill="none" stroke="var(--data)" stroke-width="2"/><path d="M8 18 H48 M8 24 H48 M8 30 H48 M14 12 V34 M24 12 V34 M34 12 V34 M44 12 V34" stroke="var(--data)" stroke-width="1"/><text x="28" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="var(--ink)" font-family="IBM Plex Mono,monospace">SnNOut</text>');
+  case "in":return sv('<rect x="16" y="16" width="24" height="18" rx="3" fill="var(--data)"/><path d="M21 16 V10 a7 7 0 0 1 14 0 V16" stroke="var(--data)" stroke-width="3.5" fill="none"/><text x="28" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="var(--ink)" font-family="IBM Plex Mono,monospace">SpPIn</text>');
+  }return ""}
+const SROUNDS=[
+{name:"Red flag, yellow flag or common finding",goal:"Sort each finding: a red flag that needs medical evaluation, a yellow flag that raises the risk of slow recovery, or a common benign finding.",
+ bins:[["rf","Red flag: needs medical evaluation"],["yf","Yellow flag: psychosocial risk"],["bn","Common benign finding"]],
+ cards:[["New trouble starting to urinate along with back pain","rf","Bladder change with back pain can signal cauda equina syndrome."],["Numbness in the saddle area","rf","Saddle anesthesia is a cauda equina warning sign."],["Fever with new back pain","rf","Fever raises concern for spinal infection."],["New back pain in someone treated for cancer before","rf","A history of cancer is the strongest red flag for cancer."],["Weight loss without trying","rf","Unexplained weight loss is a cancer red flag."],["Back pain after a fall from a ladder at age 78","rf","Trauma in an older adult raises fracture concern."],["Pulsing mass in the belly, pain not changed by movement","rf","These suggest an abdominal aortic aneurysm."],
+  ["Believes that hurt always means harm","yf","A belief that pain equals damage is a yellow flag."],["Avoids all bending out of fear","yf","Fear avoidance is a yellow flag for slow recovery."],["Feels low and expects never to recover","yf","Low mood and low expectations are yellow flags."],["Very worried about losing a job","yf","Work worries are a psychosocial yellow flag."],["Waiting for someone else to fix the pain","yf","Passive coping is a yellow flag."],
+  ["Pain worse sitting, easier walking","bn","A typical mechanical pattern."],["Brief morning stiffness that eases in minutes","bn","Common and not a warning sign."],["Ache after a weekend of gardening","bn","A clear mechanical trigger is common."],["Tight hamstrings past 70 degrees in a leg raise","bn","Hamstring tightness at high angles is a common finding, not nerve root pain."]]},
+{name:"Exam test to the tissue it loads",goal:"Match each exam test to the tissue it mainly loads. Remember: these describe what is stressed, not how to do the test.",
+ bins:[["neural","Lumbar nerve roots and sciatic nerve (tension)"],["cfor","Neck nerve root in a narrowed foramen"],["facet","Lumbar facet joints and foramen (extension)"],["si","Hip or SI joint"]],
+ cards:[["Straight leg raise","neural","It pulls the L5 and S1 roots through their openings."],["Lasegue sign","neural","Another name for sciatic nerve tension tests."],["Slump test","neural","It tensions the nerve system from head to foot."],["Crossed straight leg raise","neural","Lifting the well leg tugs the nerve sac toward that side."],["Ankle bent up during a leg raise","neural","It adds nerve tension without stretching the hamstring."],
+  ["Spurling test","cfor","Extension, side bend and pressure narrow the neck foramen."],["Neck extension with side bend and downward pressure","cfor","This combination narrows the neck foramen on that side."],
+  ["Kemp test","facet","Extension with rotation presses the facets together."],["Standing extension with rotation and side bend","facet","This closes the back of the segment and narrows the foramen."],
+  ["FABER (figure four)","si","It loads the hip joint and stresses the SI joint."],["Thigh thrust","si","It pushes the ilium back against the sacrum."],["SI distraction","si","It gaps the front of the SI joint."],["Gaenslen twist","si","It twists the pelvis in opposite directions."],["SI compression","si","It squeezes the pelvis from the side."]]},
+{name:"Which red flag category?",goal:"Sort each warning sign into the serious condition it most suggests.",
+ bins:[["cauda","Cauda equina syndrome"],["infect","Infection"],["frac","Fracture"],["cancer","Cancer"],["vasc","Vascular"]],
+ cards:[["Saddle numbness","cauda","The sacral roots supply the saddle area."],["Unable to empty the bladder","cauda","Urinary retention is a common cauda equina sign."],["Sciatica in both legs with weakness","cauda","Bilateral root signs suggest the whole bundle is compressed."],
+  ["Fever and chills","infect","Systemic signs suggest infection."],["IV drug use","infect","Needles can carry bacteria into the blood and spine."],["Recent urinary tract infection","infect","Infection can spread through the blood to the spine."],
+  ["Major trauma","frac","High force can break vertebrae."],["Long term steroid use","frac","Steroids weaken bone."],["Osteoporosis","frac","Fragile bone can collapse with little force."],
+  ["Past history of cancer","cancer","The strongest single cancer red flag."],["Unexplained weight loss","cancer","A general warning sign for cancer."],["Night pain not eased by rest","cancer","Nonmechanical night pain raises concern."],
+  ["Pulsing mass in the abdomen","vasc","A sign of abdominal aortic aneurysm."],["Double vision and dizziness with new neck pain","vasc","Two of the 5 Ds for cervical artery problems."],["Sudden trouble speaking","vasc","Dysarthria is one of the 5 Ds."]]},
+{name:"SnNOut or SpPIn?",goal:"Decide whether each test or result is mainly useful to rule out when negative (high sensitivity) or to rule in when positive (high specificity).",
+ bins:[["out","Rule out when negative (SnNOut)"],["in","Rule in when positive (SpPIn)"]],
+ cards:[["Straight leg raise: about 91% sensitive, 26% specific","out","High sensitivity, so a negative result helps rule out."],["A negative straight leg raise in someone with leg pain","out","A negative result on a sensitive test lowers the probability a lot."],["A test that is 98% sensitive and 40% specific","out","Very sensitive tests are good at ruling out."],["SI cluster with fewer than 3 of 5 positive","out","The cluster is quite sensitive, so few positives make SI pain less likely."],
+  ["Crossed straight leg raise: about 29% sensitive, 88% specific","in","High specificity, so a positive result helps rule in."],["Spurling: about 50% sensitive, 90% specific","in","Specific, so a positive result is meaningful."],["A test that is 45% sensitive and 97% specific","in","Very specific tests are good at ruling in."],["A positive crossed straight leg raise","in","A positive result on a specific test raises the probability a lot."]]}];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+function checkList(x,y,items,T,o){o=o||{};items.forEach((it,i)=>{const yy=y+i*(o.gap||28);const a=clamp((P(T,o.per||12)*(o.per||12)-.5-i*.5)/.4,0,1);rr(x,yy-10,20,20,4);fillStroke(C.panel,it[1]?C.good:C.rf,1.6);if(a>0)withA(a,()=>{it[1]?checkMark(x+10,yy,6,C.good):crossMark(x+10,yy,5,C.rf)});txt(x+28,yy,it[0],{size:12.5,weight:600})})}
+const LIFE=[
+{name:"Routine mechanical low back pain",who:"Scenario 1 · a common visit",
+ story:"Dana is 38 and stocks shelves at a hardware store. Four days ago she felt a sharp pull in her low back while lifting a heavy box. The pain is worse after sitting and bending and eases when she walks. It does not spread below the buttock. She has no fever, no numbness, no bladder or bowel change, no history of cancer and no other injury. The straight leg raise is negative on both sides and her strength, reflexes and sensation are normal. She asks whether she should stay in bed until the pain is gone.",
+ cap:"Dana: mechanical low back pain with a negative red flag screen.",
+ desc:"On the left, a woman bends to lift a box, and a soft red glow pulses over her low back. In the middle, a red flag screen checklist fills with green check marks: no saddle numbness, no bladder or bowel change, no fever, no cancer history, no major trauma, straight leg raise negative and neuro screen normal. On the right, a recovery graph over six weeks shows pain falling steadily, labelled staying active, while a dot moves along it.",
+ draw(T){panelBox(10,10,250,450);levelTag(22,26,"person");const lift=.5+.5*Math.sin(T*1.6);person(130,400,250,{pose:"lift",ph:T*1.6,skin:2,cloth:"cl3",hair:2});rr(98,300-lift*60,64,44,4);fillStroke(C.table,mix(C.table,C.ink,.4),1.5);
+   withA(.5+.4*Math.sin(T*4),()=>glow(130,260,34,C.pain,.7));
+   panelBox(270,10,260,450);levelTag(282,26,"flag");title(282,48,"red flag screen");checkList(284,84,[["no saddle numbness",1],["no bladder or bowel change",1],["no fever",1],["no cancer history",1],["no major trauma",1],["straight leg raise negative",1],["neuro screen normal",1]],T,{gap:34,per:10});
+   panelBox(540,10,250,450);levelTag(552,26,"num");const g=graph({x:582,y:80,w:190,h:240,x0:0,x1:6,y0:0,y1:10,xt:[0,2,4,6],yt:[0,5,10],xl:"weeks",yl:"pain"});const f=w=>1.5+6.5*Math.exp(-w/1.6);const cur=P(T,8)*6;curve(g,f,0,cur,C.disc,3);gdot(g,cur,f(cur),C.disc,null,{r:6});label(g.X(3.4),g.Y(5.6),"staying active",{size:12,weight:700,border:C.disc});
+   wrapText("Most people improve over the first few weeks.",556,380,220,16,{size:12.5,weight:600,color:C["ink-soft"]})},
+ qs:[{q:"What is the most likely working diagnosis?",opts:[["Mechanical (nonspecific) low back pain",1,"Yes. A lifting trigger, pain that changes with position, no leg signs and a negative red flag screen fit mechanical low back pain."],["Cauda equina syndrome",0,"She has no saddle numbness, bladder or bowel change, or symptoms in both legs."],["Spinal infection",0,"She has no fever, recent infection or other infection clues."],["L5 radiculopathy",0,"Her pain does not spread below the buttock, the straight leg raise is negative and the neuro screen is normal."]]},
+  {q:"Does Dana need an MRI now?",opts:[["No. Without red flags or nerve deficits, guidelines advise against routine early imaging",1,"Yes. Early imaging without red flags does not improve recovery."],["Yes, everyone with back pain should have an MRI",0,"Routine imaging for back pain without red flags is not recommended."],["Yes, an X ray will show the strained muscle",0,"X rays do not show muscle strain."],["Only if she is curious about her disc shape",0,"Imaging is ordered to answer a clinical question, not out of curiosity, and harmless findings are common."]]},
+  {q:"She asks whether to stay in bed. Which reply fits the evidence best?",opts:[["Staying active within comfort usually helps more than bed rest; most people improve over the next few weeks, and certain warning signs mean she should seek care quickly",1,"Yes. Clear reassurance, staying active and safety netting are the core of good advice."],["Strict bed rest until the pain is completely gone",0,"Prolonged bed rest tends to slow recovery."],["Avoid all bending for three months",0,"Long avoidance feeds fear and stiffness; graded return to activity is preferred."],["Pain means damage, so stop anything that hurts",0,"Hurt does not always mean harm; this belief is a yellow flag."]]}]},
+{name:"Cauda equina warning signs",who:"Scenario 2 · an emergency",
+ story:"Robert is 52 and has had low back pain for a week after moving furniture. Since last night the pain runs down both legs. This morning he noticed numbness in the area that would touch a bicycle seat, and he has had trouble starting to urinate. He feels his left foot slapping the floor when he walks.",
+ cap:"Robert: saddle numbness, bladder change and symptoms in both legs.",
+ help:"<b>Safety note:</b> new saddle numbness, bladder or bowel change, or worsening leg weakness with back pain needs emergency medical care the same day.",
+ desc:"On the left, a side view of the lower spine shows a large blue disc herniation pressing back into the canal and bending the yellow bundle of nerve roots, which glow red. In the middle, a front body figure has a pulsing red saddle area and red strips down both legs. On the right, a red banner reads emergency, same day, above a clock and an ambulance, and a checklist marks saddle numbness, bladder change, both legs and foot weakness with red crosses.",
+ draw(T){panelBox(10,10,250,450);levelTag(22,26,"tissue");const col=columnSag(96,236,64,5,{cauda:true,hern:3,hernA:1,labels:["L1","L2","L3","L4","L5"]});const dy=col.top+3*(col.h+col.d)+col.h+col.d/2;glow(col.cx0+col.cw/2,dy,46,C.pain,.5+.2*Math.sin(T*4));
+   panelBox(270,10,250,450);levelTag(282,26,"person");bodyFront(395,250,270,{hl:{saddle:1,legL:.8,legR:.8},T,skin:3,cloth:"cl5"});
+   panelBox(530,10,260,450);redBanner(542,22,236,"emergency, same day");
+   circ(610,110,34,C.paper,C["ink-soft"],2);const a=T*.5;line(610,110,610+Math.cos(a)*24,110+Math.sin(a)*24,C.ink,2.5);line(610,110,610+Math.cos(a/12)*16,110+Math.sin(a/12)*16,C.ink,3);txt(610,160,"now",{size:12.5,weight:700,align:"center"});
+   const ax=720+Math.sin(T*2)*4;rr(ax-30,92,60,34,5);fillStroke(C.paper,C.rf,2);line(ax-12,100,ax-12,118,C.rf,4);line(ax-21,109,ax-3,109,C.rf,4);circ(ax-16,128,6,C.ink);circ(ax+16,128,6,C.ink);
+   checkList(548,206,[["saddle numbness",0],["trouble starting to urinate",0],["pain down both legs",0],["foot weakness",0]],T,{gap:40,per:8});
+   wrapText("Do not wait for the next visit.",548,404,230,16,{size:13,weight:700,color:C["rf-ink"]})},
+ qs:[{q:"Which finding is most concerning?",opts:[["Saddle numbness with new difficulty starting to urinate",1,"Yes. Together these are classic warning signs of cauda equina syndrome."],["The pain started after moving furniture",0,"A lifting trigger is common in ordinary back pain; it is not the worry here."],["The pain is worse when sitting",0,"Sitting intolerance is common in mechanical pain."],["He is 52 years old",0,"Age alone is not the key concern in this story."]]},
+  {q:"What should happen next?",opts:[["Emergency medical evaluation today, usually with urgent MRI and surgical assessment",1,"Yes. Delay can cause permanent bladder, bowel and leg problems."],["Spinal manipulation and a recheck in a week",0,"Manual therapy is not appropriate here, and waiting a week risks permanent harm."],["Home exercises and wait for it to settle",0,"These signs need emergency care, not a wait and see plan."],["An X ray scheduled for next month",0,"X rays do not show nerve compression, and a month is far too long."]]},
+  {q:"How should this be communicated and recorded?",opts:[["Explain calmly why he needs emergency care now, contact the receiving service, and record the saddle numbness, bladder change, leg findings and referral",1,"Yes. Clear, honest communication and a detailed note protect the patient."],["Do not mention the concern, to avoid worrying him",0,"He needs to understand why urgent care matters so he acts on it."],["Write only 'back pain' to keep the note short",0,"Key positive findings and the referral must be documented."],["Tell him to come back if it gets worse",0,"These signs already need emergency care today."]]}]},
+{name:"Fever and back pain",who:"Scenario 3 · a red flag for infection",
+ story:"Elena is 61 and has type 2 diabetes. Two weeks ago she was treated for a urinary tract infection. Now she has constant mid and low back pain that is worse at night and does not ease with rest or position. She feels hot and shivery, and her temperature today is 38.6 °C. There was no injury.",
+ cap:"Elena: fever, a recent infection and constant night pain.",
+ desc:"On the left, a thermometer rises past a dashed fever line to 38.6 degrees. In the middle, a side view of three vertebrae shows the disc between two of them glowing hot orange. On the right, a calendar marks a urinary infection two weeks ago, a moon shows night pain, and red chips appear: diabetes, fever, recent infection and constant pain not eased by rest. A banner reads same day medical evaluation.",
+ draw(T){panelBox(10,10,200,450);levelTag(22,26,"person");const f=.55+.25*(.5+.5*Math.sin(T*1.2));thermo(110,360,260,f);line(96,360-260*.7,124,360-260*.7,C.heat,2,[4,3]);label(110,64,"38.6 °C",{size:14,weight:700,mono:true,border:C.heat});
+   panelBox(220,10,260,450);levelTag(232,26,"tissue");columnSag(330,236,90,3,{infect:0,infectA:.6+.4*Math.sin(T*3)});label(350,410,"infection around a disc",{size:12,weight:700,border:C.heat});
+   panelBox(490,10,300,450);levelTag(502,26,"hist");rr(510,52,110,90,6);fillStroke(C.paper,C["ink-soft"],1.5);rr(510,52,110,22,6);fillStroke(C.accent,null);txt(565,63,"2 WEEKS AGO",{size:11,weight:700,align:"center",color:onFill(),mono:true});wrapText("urinary infection treated",520,92,92,15,{size:12,weight:600});
+   rr(640,52,130,90,6);ctx.fillStyle=C.night;ctx.fill();moonIcon(740,78,14);poly([[650,108],[700,106],[760,109]],"#F07A70",3);txt(650,128,"night pain",{size:11.5,weight:700,color:"#ffffff"});
+   chipsRow(506,186,["diabetes","fever","recent infection","constant pain not eased by rest"],C.rf,P(T,10)*10,{maxX:784,t0:.5,dt:.8});
+   redBanner(506,404,272,"same day medical evaluation")},
+ qs:[{q:"Which serious cause is most on the list?",opts:[["Spinal infection",1,"Yes. Fever, a recent infection, diabetes and constant night pain point toward infection."],["Mechanical strain",0,"There was no trigger, the pain is constant and there is a fever: not a mechanical pattern."],["Cauda equina syndrome",0,"She has no saddle numbness, bladder change or symptoms in both legs."],["Facet joint pain",0,"Facet pain is mechanical and would not explain fever."]]},
+  {q:"What is the best next step?",opts:[["Same day medical evaluation, which may include blood tests and imaging; no manual therapy for now",1,"Yes. Possible spinal infection needs prompt medical assessment."],["Spinal manipulation to ease the stiffness",0,"Manual therapy is not appropriate when infection is suspected."],["Rest and a recheck in two weeks",0,"Waiting risks the infection spreading."],["Reassure her that fever is unrelated to back pain",0,"Fever with back pain is a red flag."]]},
+  {q:"Which combination of findings raised concern the most?",opts:[["Fever, a recent infection, diabetes and constant pain not eased by rest",1,"Yes. These together raise the probability of infection."],["Her age alone",0,"Age by itself is not enough; the combination matters."],["Pain located in the back",0,"Back pain alone is very common."],["Morning stiffness",0,"Brief stiffness is common and not the concern here."]]}]},
+{name:"A request for an MRI",who:"Scenario 4 · talking about evidence",
+ story:"Sam is 29 and has had low back pain for three weeks after a long drive. It is slowly improving. There is no leg pain below the knee, no numbness, no bladder change, no fever and no history of cancer, and the exam is normal. Sam says: \"My friend had an MRI and they found a bulging disc. I want one too, so I know what is wrong.\"",
+ cap:"Sam: improving back pain, no red flags, asking for an MRI.",
+ desc:"On the left, Sam stands with a speech bubble that reads can I get an MRI. In the middle, a bar chart shows the percent of pain free people with a disc bulge on MRI by age, rising from about 30 percent at 20 to about 84 percent at 80, with the age 30 bar highlighted at about 40 percent. On the right, a decision box reads red flags or worsening nerve signs, and a green path labelled no leads to explain, stay active, reassess, while a red path labelled yes would lead to imaging.",
+ draw(T){panelBox(10,10,230,450);levelTag(22,26,"person");person(125,420,240,{skin:3,cloth:"cl4",hair:3});speech(28,56,190,48,"Can I get an MRI?",{tail:[125,190],tx:.5,size:13.5,weight:700});
+   panelBox(250,10,300,450);levelTag(262,26,"num");title(262,48,"disc bulge in people with no pain");const ages=[20,30,40,50,60,70,80],bul=[30,40,50,60,69,77,84];const g=graph({x:300,y:80,w:230,h:260,x0:0,x1:7,y0:0,y1:100,yt:[0,50,100],yf:v=>v+"%"});
+   ages.forEach((a,i)=>{const x=g.X(i+.5);const hl=i===1;rr(x-11,g.Y(bul[i]),22,g.Y(0)-g.Y(bul[i]),3);ctx.fillStyle=hl?C.disc:hexA(C.disc,.45);ctx.fill();txt(x,g.y+g.h+12,String(a),{size:11,mono:true,align:"center",color:C["ink-soft"]})});txt(g.x+g.w,g.y+g.h+28,"age",{size:11.5,align:"right",color:C["ink-soft"]});
+   label(g.X(1.5),g.Y(40)-22,"age 30: about 40%",{size:12,weight:700,border:C.disc});pulseRing(g.X(1.5),g.Y(40),20,C.disc,P(T,1.8));
+   panelBox(560,10,230,450);levelTag(572,26,"flag");rr(574,60,202,70,8);fillStroke(hexA(C.data,.12),C.data,1.8);wrapText("red flags or worsening nerve signs?",586,84,180,16,{size:12.5,weight:700});
+   const yes=[[600,130],[600,200]],no=[[740,130],[740,200]];poly(yes,C.rf,3);poly(no,C.good,3);label(624,166,"yes",{size:12,weight:700,border:C.rf});label(716,166,"no",{size:12,weight:700,border:C.good});
+   rr(572,206,72,70,6);fillStroke(C["bad-wash"],C.rf,1.4);wrapText("imaging",580,226,60,15,{size:12,weight:700});rr(654,206,124,160,6);fillStroke(C["good-wash"],C.good,1.6);wrapText("not now: explain, stay active, reassess",664,226,104,16,{size:12.5,weight:700});
+   const q=along(no,P(T,3));circ(q[0],q[1],6,C.good,C.panel,2)},
+ qs:[{q:"Which response fits the guidelines and respects Sam's concern?",opts:[["Acknowledge the worry, explain that early imaging without red flags does not improve recovery and often finds harmless changes, share the plan, and say what would change it",1,"Yes. Listening, explaining the evidence and agreeing on a plan builds trust."],["Order the MRI so Sam is satisfied",0,"Routine early imaging does not improve outcomes and can increase worry and further procedures."],["Tell Sam the request is silly",0,"Dismissing a concern damages trust. Explain the reasoning instead."],["Refuse to talk about imaging at all",0,"Sam deserves an explanation of why imaging is not needed now."]]},
+  {q:"In people around 30 with no back pain, about what share show a disc bulge on MRI?",opts:[["About 4 in 10",1,"Yes. A large review found about 40% at age 30, rising with age."],["Almost none",0,"Disc bulges are common even in people without pain."],["About 1 in 100",0,"That is far too low."],["Everyone",0,"Common, but not universal at age 30."]]},
+  {q:"Which new finding would make imaging appropriate?",opts:[["Leg weakness that is getting worse, or new saddle numbness",1,"Yes. Progressive deficits and red flags change the plan."],["Stiffness after another long drive",0,"That is a common mechanical pattern."],["Pain that keeps slowly improving",0,"Improvement is reassuring."],["Asking for the MRI again",0,"A repeated request is a cue to talk more, not a clinical reason to image."]]}]}];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  const hb=$("#lifeHelp");if(S.help){hb.hidden=false;hb.innerHTML=S.help}else hb.hidden=true;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()};
+function drawLife(now){use(S5);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+/* ---------------- stages ---------------- */
+
+const S1=makeStage("cvSim",800,470),S3=makeStage("cvCalc",800,470),S5=makeStage("cvLife",800,470);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},calc:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+(curTab==="sim"?(SIM.anim>3.6?"s":"m"):"");if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","calc","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S3,S5].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function legendHTML(l){return `<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`}
+$("#simLegend").innerHTML=[["tp","True positive","s"],["fp","False positive","s"],["fn","False negative","s"],["tn","True negative","s"],["ink","Solid dot: has the condition"],["data","PPV row outline (dashed)","s"]].map(legendHTML).join("");
+$("#simCap").textContent="Move the sliders and watch the 200 people sort themselves into the 2x2 table again.";
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim"){simStep(dt);simDraw(now)}else if(curTab==="calc")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__ex={tab:k=>showTab(k),sim:o=>{Object.assign(SIM,o);simSync();simChange()},simState:()=>({c:SIM.A.c,s:simStats(SIM.A.c),done:[...SIM.done]}),
+  calcTypes:()=>CTYPES.map(c=>c[0]).filter(c=>c!=="mix"),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,unit:TR.p.unit,dp:TR.p.dp,str:TR.p.unit==="%"?f1(TR.p.ans):TR.p.ans.toFixed(TR.p.dp)}),
+  gen:t=>{const q=GEN[t]();const good=q.unit==="%"?f1(q.ans):q.ans.toFixed(q.dp);const bad=q.unit==="%"?f1(q.ans+(q.ans>50?-7:7)):(q.ans*1.3+.5).toFixed(q.dp);
+    return {ans:q.ans,good,j1:judge(q,good),j1p:judge(q,good+(q.unit==="%"?"%":"")),j1f:q.unit==="%"?judge(q,String(q.ans/100)):{ok:true},j2:judge(q,bad),jslip:q.slips.length?judge(q,q.unit==="%"?f1(q.slips[0][0]):q.slips[0][0].toFixed(q.dp)):null,hints:q.hints.length,lines:q.lines.length,fin:isFinite(q.ans)&&q.ans>0,sum:q.c.tp+q.c.fn+q.c.fp+q.c.tn}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();simUI();simChange();calcNew();updCalcMeter();sLoad(0);lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

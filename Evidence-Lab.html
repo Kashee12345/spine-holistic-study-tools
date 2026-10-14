@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading the Evidence Lab</title>
+<meta name="description" content="Reading the evidence lab: a virtual trial builder with sample size, true effect, placebo response, natural recovery and dropout sliders, animated randomization, live outcome distributions, a mean difference with its confidence interval and a growing forest plot; a randomized ARR, RRR, NNT, NNH and percent improvement trainer; a matching game for study designs, bias and control groups; and real life scenarios on headlines, testimonials, forest plots and relative risk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7E2222;--accent-wash:#F6E3E0;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B8561A;--act2:#2F7FC1;--act3:#B07A10;--act4:#2E8A7A;--act5:#7B5CC9;--act6:#3E9B4F;--act7:#A04E8C;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#F1E8D2;--bone-edge:#8A7650;--disc:#3F7FC9;--nerve:#D9A90F;--muscle:#C8577A;--lig:#2E8A86;--symp:#E07A1F;--para:#3E9B4F;--pain:#D23B32;
+  --evid:#4C52B5;--evid-wash:#E4E5F6;--evid-ink:#3A3F9A;
+  --treat:#4C52B5;--ctrl:#C27A1A;--treat-ink:#3A3F9A;--ctrl-ink:#7A4A08;
+  --nat:#2E8A86;--rtm:#8A5CC0;--plac:#D08A1A;--coi:#7A8794;--spec:#4C52B5;--harm:#C8453F;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;
+  --news:#FFFFFF;--needle:#9AA6AF;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A6;--bone-edge:#EDE3C8;--disc:#6FB0EE;--nerve:#F2D45A;--muscle:#E88AA6;--lig:#5CC4BE;--symp:#F2A15A;--para:#6CCB7C;--pain:#F0706A;
+  --evid:#9198F0;--evid-wash:#22264A;--evid-ink:#B4B9F6;
+  --treat:#9198F0;--ctrl:#E8A64A;--treat-ink:#B4B9F6;--ctrl-ink:#F0BE70;
+  --nat:#5CC4BE;--rtm:#B18BE6;--plac:#F0B050;--coi:#A9B7C2;--spec:#9198F0;--harm:#E0605A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --news:#20292F;--needle:#7F8E98;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A6;--bone-edge:#EDE3C8;--disc:#6FB0EE;--nerve:#F2D45A;--muscle:#E88AA6;--lig:#5CC4BE;--symp:#F2A15A;--para:#6CCB7C;--pain:#F0706A;
+  --evid:#9198F0;--evid-wash:#22264A;--evid-ink:#B4B9F6;
+  --treat:#9198F0;--ctrl:#E8A64A;--treat-ink:#B4B9F6;--ctrl-ink:#F0BE70;
+  --nat:#5CC4BE;--rtm:#B18BE6;--plac:#F0B050;--coi:#A9B7C2;--spec:#9198F0;--harm:#E0605A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --news:#20292F;--needle:#7F8E98;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.seg2 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.seg2 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin:8px 0}
+.chk input{accent-color:var(--accent);width:18px;height:18px;flex:0 0 auto;margin-top:2px}
+.runbar{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}
+.runbar .btn,.runbar .tbtn{width:100%}
+.readouts td.l{font-family:var(--sans)}
+.resbig{font-family:var(--mono);font-size:20px;font-weight:700;margin:4px 0}
+.ctl output{white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 11 &middot; Reading the evidence</div>
+    <h1>Reading the Evidence Lab</h1>
+    <p class="sub">Build a virtual trial and watch participants get randomized, improve and drop out, then run it again and again to grow a forest plot; practise risk numbers with animated worked solutions; match designs and biases; and read real claims. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Trial Builder</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button" tabindex="-1">Part 2 &middot; Risk Number Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Design and Bias Match</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; Evidence in Real Life</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Trial Builder</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Trial simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--treat)"></i>Treatment arm</span><span><i style="background:var(--ctrl)"></i>Control arm</span><span><i style="background:var(--coi)"></i>Dropped out</span>
+          <span><i class="s" style="background:var(--accent)"></i>Pooled diamond</span><span><i class="ln" style="border-top-color:var(--good)"></i>True specific effect</span>
+        </div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Trial results</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">Simplified model for learning. Pain is on a 0 to 10 scale. Each person's improvement = natural recovery + random person to person variation (SD 1.6 points) + context and placebo response (both arms with a sham control, treatment arm only with a wait list) + the true specific effect (treatment arm only). Scores are kept between 0 and 10. Analysis compares completers only, with a 95% confidence interval from a normal approximation. The 1 point worthwhile line is a teaching choice. Up to 80 dots per arm are drawn.</p>
+      </div>
+      <aside class="card side" aria-label="Trial builder controls">
+        <div class="ctl"><label for="slN">Participants per arm <output id="oN" for="slN"></output></label><input type="range" id="slN" min="10" max="300" step="10" value="60"></div>
+        <div class="ctl"><label for="slE">True specific effect <output id="oE" for="slE"></output></label><input type="range" id="slE" min="0" max="3" step="0.1" value="0.8"></div>
+        <div class="ctl"><label for="slP">Placebo and context response <output id="oP" for="slP"></output></label><input type="range" id="slP" min="0" max="2.5" step="0.1" value="1"></div>
+        <div class="ctl"><label for="slR">Natural recovery <output id="oR" for="slR"></output></label><input type="range" id="slR" min="0" max="4" step="0.1" value="2"></div>
+        <div class="ctl"><label for="slD">Dropout <output id="oD" for="slD"></output></label><input type="range" id="slD" min="0" max="40" step="5" value="10"></div>
+        <h3 id="ctl-h">Control group</h3>
+        <div class="seg2" id="simCtl" role="group" aria-labelledby="ctl-h"></div>
+        <label class="chk"><input type="checkbox" id="simLinked"> <span>Dropouts in the treatment arm are the people doing worst (attrition bias)</span></label>
+        <div class="runbar">
+          <button class="btn" id="simRun" type="button">Run trial</button>
+          <button class="tbtn" id="simRun10" type="button">Run 10 repeats</button>
+          <button class="tbtn" id="simClear" type="button">Clear forest plot</button>
+          <button class="tbtn" id="simReset" type="button">Reset sliders</button>
+        </div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Try these</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc" hidden>
+    <h2 class="gk-sr">Part 2: Risk Number Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice problem picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Groups and numbers are randomly generated for practice. Icon arrays show 100 icons per group, so each icon is 1 percent. NNT and NNH answers are whole people; round an NNT up.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div id="calcNumWrap" class="ansrow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div id="calcChoices" class="mopts" role="group" aria-label="Answer choices" hidden></div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a number (no units needed). The hint ladder has three steps. The streak counts answers right on the first check without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Design and Bias Match</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: Evidence in Real Life</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults, made up headlines and a made up review for practice. Not medical advice.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Evidence-Walkthrough.html">Reading the Evidence Walkthrough</a>. All trials, people, headlines and reviews here are made up for teaching.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "nerve", "muscle", "lig", "symp", "para", "pain", "evid", "evid-wash", "evid-ink", "treat", "ctrl", "treat-ink", "ctrl-ink", "nat", "rtm", "plac", "coi", "spec", "harm", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "news", "needle"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= evidence drawing kit: base pieces =================
+*/
+let SC={};let SYS={};
+function levelTag(x,y,k){const m={person:["THE PERSON",C.act1],group:["THE GROUP",C.act2],data:["THE DATA",C.evid],sym:["THE MATH",C.accent],time:["OVER TIME",C.act4],study:["THE STUDY",C.act3]}[k];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+const SKINS=["skin1","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function person(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=o.col||C[SHIRTS[(o.shirt||0)%4]];const bw=(o.w||1);ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+  rr(x-s*.42*bw,y-s*1.2,s*.84*bw,s*1.25,s*.32);fillStroke(sh,hexA(C.ink,.4),1.2);
+  rr(x-s*.3*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.06*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x,y-s*1.55,s*.36,sk,hexA(C.ink,.4),1.2);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(x,y-s*1.6,s*.37,Math.PI*1.05,Math.PI*1.95);ctx.fillStyle=C.hair;ctx.fill()}
+  if(o.mood){circ(x-s*.12,y-s*1.56,1.6,C.ink);circ(x+s*.12,y-s*1.56,1.6,C.ink);ctx.beginPath();ctx.arc(x,y-s*1.48,s*.12,.2,Math.PI-.2);ctx.strokeStyle=C.ink;ctx.lineWidth=1.3;ctx.stroke()}
+  ctx.restore()}
+function bar(x,y,w,h,f,col,o){o=o||{};rr(x,y,w,h,Math.min(4,h/2));ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){rr(x,y,w*clamp(f,0,1),h,Math.min(4,h/2));ctx.fillStyle=col;ctx.fill()}if(o.over&&f>1){txt(x+w+4,y+h/2,"+",{size:12,weight:700,color:C.bad})}}
+function vbar(x,y,w,h,f,col){rr(x,y,w,h,3);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){const hh=h*clamp(f,0,1);rr(x,y+h-hh,w,hh,3);ctx.fillStyle=col;ctx.fill()}}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function tick(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+/* a speech bubble */
+function bubble(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.panel,o.stroke||C.rule,1.6);ctx.beginPath();const tx=o.tx==null?x+24:o.tx;ctx.moveTo(tx,y+h);ctx.lineTo(tx+10,y+h);ctx.lineTo(tx-4,y+h+14);ctx.closePath();ctx.fillStyle=o.fill||C.panel;ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.stroke();
+  rr(tx-1,y+h-3,13,5,0);ctx.fillStyle=o.fill||C.panel;ctx.fill();wrapText(t,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500})}
+/* headline card */
+function headline(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,6);fillStroke(C.paper,o.border||C.rule,1.6);rr(x,y,w,20,6);ctx.fillStyle=hexA(C.ink,.08);ctx.fill();txt(x+10,y+10,o.src||"NEWS FEED",{size:10.5,weight:700,mono:true,color:C["ink-soft"]});wrapText(t,x+10,y+36,w-20,o.lh||18,{size:o.size||14,weight:700})}
+/* count wrapped lines */
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+/* fit one line of text into a width (shrinks font) */
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+/* worked example panel: rows = [{c:[items,res]} | {l:"text"} | {ans:"text"}], animates over `per` seconds */
+function wk(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);
+  const sw=o.split||0;const sz=o.size||12.5;
+  if(sw){let ly=wrapText(W_.q,x+12,y+38,sw-22,sz+4,{size:sz,weight:600})+sz+8;(W_.given||[]).forEach((g,i)=>{const a=seg(t,.6+i*.4,1+i*.4);if(a>0)withA(a,()=>wrapText(g,x+14,ly,sw-26,sz+3,{size:sz-.5,mono:true,weight:500}));ly+=wrapCount(g,sw-26,sz-.5)*(sz+3)+6});line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2)}
+  const rx=x+sw+14,rw=w-sw-28;let cy=y+(o.cy||30);const fs=o.cfs||14;const t0=o.t0||1.2;const dt=o.dt||1.8;
+  W_.rows.forEach((r,i)=>{const p_=clamp((t-t0-i*dt)/(dt*.85),0,1);
+    if(r.c){cy+=fs+6;if(p_>0){const cw=chainWidth(r.c[0],r.c[1],{size:fs});const sc=Math.min(1,rw/cw);ctx.save();ctx.translate(rx,cy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],p_,{size:fs});ctx.restore()}cy+=fs+(o.rowGap||16)}
+    else if(r.l){cy+=12;if(p_>0)withA(p_,()=>fitTxt(rx,cy,r.l,rw,{size:o.lfs||13.5,weight:600,mono:true}));cy+=(o.lh||16)}
+    else if(r.ans){cy+=16;if(p_>0)withA(p_,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(rw,ctx.measureText(r.ans).width);rr(rx-4,cy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(rx+3,cy,r.ans,rw-6,{size:15,weight:700,mono:true})});cy+=18}});
+  if(W_.miss){const tm=t0+W_.rows.length*dt+.4;const a=seg(t,tm,tm+.6);if(a>0){const mw=o.missFull?w-24:rw+8;const mx=o.missFull?x+12:rx-4;const n=wrapCount("Common mistake: "+W_.miss,mw-16,sz-1);const mh=n*(sz+2)+10;
+    withA(a,()=>{rr(mx,y+h-mh-8,mw,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,mx+8,y+h-mh-8+5+(sz)/2+1,mw-16,sz+2,{size:sz-1})})}}
+  return t}
+/* ================= evidence drawing kit (shared by both pages) ================= */
+/* signed number with a true minus sign, never a hyphen */
+function sn(v,dp){dp=dp==null?1:dp;if(Math.abs(v)<Math.pow(10,-dp)/2)v=0;return (+v).toFixed(dp).replace("-","−")}
+function spl(v,dp){const s=sn(v,dp);return v>0&&Math.abs(v)>=Math.pow(10,-(dp==null?1:dp))/2?"+"+s:s}
+function rnorm(i){const u=Math.max(1e-6,rnd(i)),v=rnd(i+.37);return Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v)}
+function pdf(x,m,s){return Math.exp(-(x-m)*(x-m)/(2*s*s))}
+/* a 0 to 10 pain scale on a horizontal line */
+function painAxis(x,y,w,o){o=o||{};const X=v=>x+v/10*w;line(x,y,x+w,y,C["ink-soft"],1.6);
+  for(let v=0;v<=10;v++){line(X(v),y-4,X(v),y+4,C["ink-soft"],1.2);if(o.nums!==false&&(v%2===0||o.all))txt(X(v),y+14,String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  if(o.label)txt(x+w,y+(o.nums===false?14:28),o.label,{size:11,weight:600,align:"right",color:C["ink-soft"]});return X}
+/* small person icon for icon arrays */
+function mini(x,y,s,col,o){o=o||{};ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);circ(x,y-s*.62,s*.26,col,o.edge||null,1);rr(x-s*.32,y-s*.3,s*.64,s*.78,s*.24);ctx.fillStyle=col;ctx.fill();if(o.edge){ctx.strokeStyle=o.edge;ctx.lineWidth=1;ctx.stroke()}ctx.restore()}
+/* icon array: n people in cols columns; on(i) decides colour */
+function iconArray(x,y,cols,n,cell,on,colOn,colOff,o){o=o||{};for(let i=0;i<n;i++){const cx=x+(i%cols)*cell+cell/2,cy=y+Math.floor(i/cols)*cell+cell/2;const st=on(i);
+  const col=st===2?(o.col2||C.good):st?colOn:colOff;mini(cx,cy+cell*.08,cell*.78,col,{a:o.a,edge:st===2?C.ink:null});
+  if(st&&o.mark){/* small text mark so colour is not the only signal */ctx.save();ctx.font=`700 ${Math.round(cell*.34)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(st===2?"+":"x",cx,cy+cell*.2);ctx.restore()}}}
+/* normal curve inside a graph g (uses g.X, g.Y) scaled so peak = peakVal */
+function bellG(g,m,s,peakVal,col,o){o=o||{};const a=g.x0,b=g.x1;ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w,g.h+2);ctx.clip();ctx.beginPath();const N=120;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const Y=g.Y(peakVal*pdf(v,m,s));i?ctx.lineTo(g.X(v),Y):ctx.moveTo(g.X(v),Y)}
+  if(o.fill!==false){ctx.lineTo(g.X(b),g.Y(0));ctx.lineTo(g.X(a),g.Y(0));ctx.closePath();ctx.fillStyle=hexA(col,o.fa==null?.22:o.fa);ctx.fill();ctx.beginPath();for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const Y=g.Y(peakVal*pdf(v,m,s));i?ctx.lineTo(g.X(v),Y):ctx.moveTo(g.X(v),Y)}}
+  ctx.strokeStyle=col;ctx.lineWidth=o.lw||2.4;ctx.setLineDash(o.dash||[]);ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+/* forest plot. rows: [{n,md,lo,hi,w}], pooled {md,lo,hi}. g = {x,y,w,rowH,x0,x1}. p: 0..1 build progress */
+function forest(g,rows,pooled,p,o){o=o||{};const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w;const nr=rows.length;const top=g.y;const bot=top+(nr+1.4)*g.rowH;
+  line(X(0),top-6,X(0),bot,C["ink-soft"],1.6);
+  if(o.mcid!=null)line(X(o.mcid),top-6,X(o.mcid),bot,hexA(C.good,.8),1.4,[4,4]);
+  const ticks=o.ticks||[g.x0,(g.x0+g.x1)/2,0,g.x1].filter((v,i,a)=>a.indexOf(v)===i);
+  ticks.forEach(t=>{line(X(t),bot,X(t),bot+4,C["ink-soft"],1.2);txt(X(t),bot+14,sn(t,o.tdp==null?1:o.tdp),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});
+  line(X(g.x0),bot,X(g.x1),bot,C["ink-soft"],1.4);
+  if(o.left)txt(X(0)-6,bot+30,o.left,{size:11,weight:600,align:"right",color:C["treat-ink"]});
+  if(o.right)txt(X(0)+6,bot+30,o.right,{size:11,weight:600,align:"left",color:C["ctrl-ink"]});
+  const maxW=Math.max.apply(null,rows.map(r=>r.w||1));
+  rows.forEach((r,i)=>{const a=clamp(p*(nr+1.5)-i,0,1);if(a<=0)return;const y=top+i*g.rowH+g.rowH/2;withA(a,()=>{
+    if(o.names!==false)txt(g.x-10,y,r.n,{size:o.fsz||11.5,weight:600,align:"right"});
+    line(X(Math.max(g.x0,r.lo)),y,X(Math.min(g.x1,r.hi)),y,o.col||C.evid,2);
+    const s=4+9*Math.sqrt((r.w||1)/maxW);ctx.fillStyle=o.col||C.evid;ctx.fillRect(X(r.md)-s/2,y-s/2,s,s);
+    if(o.vals)txt(g.x+g.w+10,y,sn(r.md,1)+" ("+sn(r.lo,1)+" to "+sn(r.hi,1)+")",{size:10.5,mono:true,color:C["ink-soft"]})})});
+  if(pooled){const a=clamp(p*(nr+1.5)-nr-.3,0,1);if(a>0){const y=top+nr*g.rowH+g.rowH*.8;withA(a,()=>{
+    ctx.beginPath();ctx.moveTo(X(pooled.lo),y);ctx.lineTo(X(pooled.md),y-8);ctx.lineTo(X(pooled.hi),y);ctx.lineTo(X(pooled.md),y+8);ctx.closePath();ctx.fillStyle=o.pcol||C.accent;ctx.fill();
+    if(o.names!==false)txt(g.x-10,y,o.pname||"Pooled",{size:o.fsz||11.5,weight:700,align:"right"});
+    if(o.vals)txt(g.x+g.w+10,y,sn(pooled.md,1)+" ("+sn(pooled.lo,1)+" to "+sn(pooled.hi,1)+")",{size:10.5,mono:true,weight:700})})}}
+  return {X,bot}}
+/* inverse variance pooling of rows with 95% CI */
+function poolRows(rows){let sw=0,sm=0;rows.forEach(r=>{const se=(r.hi-r.lo)/3.92;const w=1/(se*se);r.w=w;sw+=w;sm+=w*r.md});const md=sm/sw,se=Math.sqrt(1/sw);return {md,lo:md-1.96*se,hi:md+1.96*se}}
+/* blindfold band over a person's eyes (person drawn with person()) */
+function blindfold(x,y,s,on){if(!on)return;rr(x-s*.4,y-s*1.66,s*.8,s*.16,s*.06);ctx.fillStyle=C.ink;ctx.fill();line(x+s*.36,y-s*1.6,x+s*.55,y-s*1.4,C.ink,2)}
+/* eye open marker */
+function eyes(x,y,s){circ(x-s*.12,y-s*1.58,1.8,C.ink);circ(x+s*.12,y-s*1.58,1.8,C.ink)}
+/* a vertebra pair with a blue disc, side view (bone ivory with outline) */
+function spineSeg(x,y,s,T){const wob=Math.sin(T*1.6)*.06;ctx.save();ctx.translate(x,y);
+  rr(-s*.5,-s*.62,s,s*.42,s*.08);fillStroke(C.bone,C["bone-edge"],1.6);ell(0,-s*.1+wob*s,s*.48,s*.1,0,hexA(C.disc,.85),C.disc,1.2);rr(-s*.5,s*.0+wob*s*.5,s,s*.42,s*.08);fillStroke(C.bone,C["bone-edge"],1.6);
+  rr(s*.5,-s*.55,s*.42,s*.18,s*.06);fillStroke(C.bone,C["bone-edge"],1.2);rr(s*.5,s*.08+wob*s*.5,s*.42,s*.18,s*.06);fillStroke(C.bone,C["bone-edge"],1.2);ctx.restore()}
+/* needle into skin layers. sham: blunt shaft slides up into the handle and the tip stays on the skin. p 0..1 */
+function needleScene(x,y,w,h,p,sham){rr(x,y,w,h,6);ctx.fillStyle=hexA(C.panel,.9);ctx.fill();const sy=y+h*.4;
+  ctx.fillStyle=hexA(C.skin1,.95);ctx.fillRect(x+4,sy,w-8,9);ctx.fillStyle=hexA(C.nerve,.18);ctx.fillRect(x+4,sy+9,w-8,16);ctx.fillStyle=hexA(C.muscle,.42);ctx.fillRect(x+4,sy+25,w-8,y+h-sy-29);
+  for(let i=0;i<5;i++)line(x+10,sy+33+i*9,x+w-10,sy+35+i*9,hexA(C.muscle,.7),1);
+  const cx=x+w/2;const D=h*.36;const move=sham?Math.min(p*D,24):p*D;const hb=sy-30+move;
+  rr(cx-6,hb-34,12,34,3);fillStroke(C.needle,C["ink-soft"],1.2);
+  if(!sham){line(cx,hb,cx,sy+p*D,C["ink-soft"],1.8);if(p*D>12)glow(cx,sy+p*D,12,C.nerve,.7)}
+  else{line(cx,hb,cx,sy,C["ink-soft"],1.8);ell(cx,sy+1,6,2.5,0,hexA(C.pain,.35),null);if(move>8){line(cx-3,hb-30,cx-3,hb-30+move*.9,hexA(C.ink,.5),1.2,[2,2])}}}
+/* small verdict chip that never relies on colour alone */
+function verdict(x,y,t,ok){const col=ok===true?C.good:ok===false?C.bad:C.warn;return label(x,y,(ok===true?"✓ ":ok===false?"✗ ":ok==="mid"?"! ":"? ")+t,{size:12,weight:700,border:col,bg:ok===true?C["good-wash"]:ok===false?C["bad-wash"]:C["warn-wash"]})}
+/* labelled stacked bar from bottom (x,y bottom, w width, scale px per point) parts: [[val,colKey,label]] up to progress p */
+function stackBar(x,y,w,sc,parts,p,o){o=o||{};let yy=y;const tot=parts.reduce((a,b)=>a+b[0],0);let acc=0;
+  parts.forEach((pt,i)=>{const f=clamp(p*parts.length-i,0,1);if(f<=0)return;const h=pt[0]*sc*f;rr(x,yy-h,w,h,2);ctx.fillStyle=hexA(C[pt[1]],.85);ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=1.5;ctx.stroke();
+    if(o.labels!==false&&f>.6&&pt[0]*sc>14)withA((f-.6)/.4,()=>txt(x+w+(o.lx||8),yy-h/2,pt[2]+" "+sn(pt[0],1),{size:11.5,weight:600,color:C.ink}));yy-=h;acc+=pt[0]*f});return {top:yy,acc}}
+/* sealed envelope */
+function envelope(x,y,w,h,open,txt_,col){rr(x,y,w,h,3);fillStroke(C.paper,C["ink-soft"],1.4);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w/2,y+h*(open?-.5:.55));ctx.lineTo(x+w,y);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();
+  if(open&&txt_){rr(x+w*.18,y-h*.5,w*.64,h*.8,3);fillStroke(C.panel,col||C.ink,1.6);txt(x+w/2,y-h*.1,txt_,{size:13,weight:700,mono:true,align:"center",color:col||C.ink})}}
+/* GRADE dots ●●●○ */
+function gradeDots(x,y,n,col,r){r=r||6;for(let i=0;i<4;i++)circ(x+i*(r*2+4),y,r,i<n?col:null,col,1.6)}
+/* worked example card. L = [{k:"q"|"eq"|"ans"|"miss"|"try"|"cancel", t:"text", parts:[[text,strike]]}] lines appear one by one over per seconds */
+function workCard(x,y,w,h,L,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+18,o.title||"Worked example",C["accent-ink"]);let yy=y+40;const dt=o.dt||1.1,t0=o.t0||.5;
+  L.forEach((ln,i)=>{const s0=t0+i*dt;const a=seg(t,s0,s0+.5);
+    if(ln.k==="miss"||ln.k==="try"){const col=ln.k==="miss"?C.warn:C.gold,wash=ln.k==="miss"?C["warn-wash"]:C["gold-wash"];const head=ln.k==="miss"?"Common mistake: ":"Now you try: ";const n=wrapCount(head+ln.t,w-40,12);const bh=n*16+12;
+      if(a>0)withA(a,()=>{rr(x+10,yy-6,w-20,bh,5);ctx.fillStyle=wash;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.3;ctx.stroke();wrapText(head+ln.t,x+18,yy+6,w-40,16,{size:12,color:C.ink})});yy+=bh+8}
+    else if(ln.k==="ans"){if(a>0)withA(a,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(w-36,ctx.measureText(ln.t).width);rr(x+12,yy-6,tw+16,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(x+20,yy+8,ln.t,w-44,{size:15,weight:700,mono:true})});yy+=36}
+    else if(ln.k==="eq"){if(a>0)withA(a,()=>fitTxt(x+14,yy+6,ln.t,w-28,{size:13.5,weight:700,mono:true}));yy+=24}
+    else if(ln.k==="cancel"){if(a>0)withA(a,()=>{ctx.font=`700 13.5px ${MONO}`;let px=x+14;const sa=seg(t,s0+.8,s0+1.3);ln.parts.forEach(pt=>{const pw=ctx.measureText(pt[0]).width;txt(px,yy+6,pt[0],{size:13.5,weight:700,mono:true,color:pt[1]?C["accent-ink"]:C.ink});if(pt[1]&&sa>0)line(px-1,yy+12,px-1+(pw+2)*sa,yy,C.bad,2.4);px+=pw})});yy+=24}
+    else{const n=wrapCount(ln.t,w-28,12.5,ln.k==="q"?600:500);if(a>0)withA(a,()=>wrapText(ln.t,x+14,yy+6,w-28,17,{size:12.5,weight:ln.k==="q"?600:500,color:ln.k==="note"?C["ink-soft"]:C.ink}));yy+=n*17+8}});
+  return t}
+/* horizontal stacked bar: parts [[val,colKey]] */
+function hbar(x,y,h,sc,parts,p){let xx=x;parts.forEach((pt,i)=>{const f=clamp(p*parts.length-i,0,1);if(f<=0)return;const w=pt[0]*sc*f;rr(xx,y,w,h,2);ctx.fillStyle=hexA(C[pt[1]],.85);ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=1.4;ctx.stroke();xx+=w});return xx}
+/* normal CDF (for overlap and p values) */
+function erf(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+.3275911*x);const y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return s*y}
+function Phi(z){return .5*(1+erf(z/Math.SQRT2))}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-evidence-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-evidence-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: virtual trial builder ================= */
+const SIMDEF={n:60,e:.8,p:1,r:2,d:10,ctl:"sham",linked:false};
+const SM={set:Object.assign({},SIMDEF),trial:null,runs:[],t0:-1,fast:false,key:"",chal:new Set(),msg:"",queue:0,deb:null,lastRes:null};
+function gaussR(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v)}
+function simKey(s){return [s.n,s.e,s.p,s.r,s.d,s.ctl,s.linked].join("|")}
+/* run one virtual trial with the current settings */
+function simTrial(s){const arms=[[],[]];
+  for(let a=0;a<2;a++)for(let j=0;j<s.n;j++){const base=clamp(6.5+1.2*gaussR(),3,10);const ctx_=(a===0||s.ctl==="sham")?s.p:0;const imp=s.r+1.6*gaussR()+ctx_+(a===0?s.e:0);
+    const fu=clamp(base-imp,0,10);arms[a].push({base,fu,imp:base-fu,drop:false,jy:Math.random(),order:Math.random()})}
+  const nd=Math.round(s.n*s.d/100);
+  arms.forEach((arm,a)=>{let idx=arm.map((p,i)=>i);if(a===0&&s.linked)idx.sort((x,y)=>arm[x].imp-arm[y].imp);else idx.sort((x,y)=>arm[x].order-arm[y].order);idx.slice(0,nd).forEach(i=>arm[i].drop=true)});
+  const st=arm=>{const k=arm.filter(p=>!p.drop);const m=k.reduce((q,p)=>q+p.imp,0)/k.length;const v=k.reduce((q,p)=>q+(p.imp-m)*(p.imp-m),0)/Math.max(1,k.length-1);return {m,sd:Math.sqrt(v),n:k.length}};
+  const T_=st(arms[0]),C_=st(arms[1]);const md=T_.m-C_.m,se=Math.sqrt(T_.sd*T_.sd/T_.n+C_.sd*C_.sd/C_.n);const z=md/se;const pv=2*(1-Phi(Math.abs(z)));
+  return {arms,T:T_,C:C_,md,se,lo:md-1.96*se,hi:md+1.96*se,p:pv,n:s.n,set:Object.assign({},s)}}
+function simExpected(s){return s.e+(s.ctl==="wait"?s.p:0)}
+function simRun(fast){const k=simKey(SM.set);if(k!==SM.key){if(SM.runs.length)SM.msg="Settings changed, so the forest plot started over.";SM.runs=[];SM.key=k}
+  const tr=simTrial(SM.set);SM.trial=tr;SM.runs.push(tr);if(SM.runs.length>40)SM.runs.shift();SM.t0=fast?-99:performance.now();SM.fast=!!fast;simChalCheck();simUI();a11yKey=""}
+function simPool(){if(SM.runs.length<2)return null;let sw=0,sm=0;SM.runs.forEach(r=>{const w=1/(r.se*r.se);sw+=w;sm+=w*r.md});const md=sm/sw,se=Math.sqrt(1/sw);return {md,lo:md-1.96*se,hi:md+1.96*se,k:SM.runs.length}}
+function f1(v){return sn(v,1)}
+function simVerdict(r){if(r.lo>1)return "likely worthwhile";if(r.lo>0)return r.hi<1?"real but small":"benefit, size uncertain";if(r.hi<1&&r.lo>-1)return "no clear or worthwhile effect";return "uncertain"}
+function simUI(){const s=SM.set;$("#oN").textContent=s.n;$("#oE").textContent=f1(s.e)+" points";$("#oP").textContent=f1(s.p)+" points";$("#oR").textContent=f1(s.r)+" points";$("#oD").textContent=s.d+"%";
+  const r=SM.trial;const pl=simPool();const rows=[];
+  if(r){rows.push(["Treatment arm average improvement",f1(r.T.m)+" points (n = "+r.T.n+")"],["Control arm average improvement",f1(r.C.m)+" points (n = "+r.C.n+")"],["Mean difference (95% CI)",f1(r.md)+" ("+f1(r.lo)+" to "+f1(r.hi)+")"],["P value",r.p<.001?"below 0.001":r.p.toFixed(3)],["Reading",simVerdict(r)],["Expected difference with these settings",f1(simExpected(s))+" points"])}
+  if(pl)rows.push(["Pooled over "+pl.k+" runs",f1(pl.md)+" ("+f1(pl.lo)+" to "+f1(pl.hi)+")"]);
+  $("#simRead tbody").innerHTML=rows.map(x=>`<tr><th scope="row">${x[0]}</th><td>${x[1]}</td></tr>`).join("");
+  const st=$("#simStatus");let cls="",t=SM.msg||"";SM.msg="";
+  if(!t&&r){if(s.ctl==="wait"&&s.p>0)t="Wait list control: the placebo and context response only happens in the treatment arm, so the difference overstates the specific effect.";else if(s.linked&&s.d>0)t="Attrition bias: the people doing worst left the treatment arm, so completers look better than the whole group.";else if(r.lo<=0&&r.hi>=0)t="The interval includes zero: this trial alone cannot rule out no effect.";else t="The interval excludes zero. Compare its ends with the 1 point worthwhile line.";
+    cls=(s.ctl==="wait"&&s.p>0)||(s.linked&&s.d>0)?"warn":""}
+  st.className="status"+(cls?" "+cls:"");st.textContent=t;
+  chalUI($("#simChal"),SIMCHAL.map(c=>c[0]),SM.chal);
+  $("#simCap").textContent=r?`Mean difference ${f1(r.md)} points, 95% CI ${f1(r.lo)} to ${f1(r.hi)}. ${SM.runs.length} run${SM.runs.length===1?"":"s"} in the forest plot.`:"Press Run trial."}
+const SIMCHAL=[["Run 10 repeats and watch the pooled diamond settle near the true effect",()=>SM.runs.length>=10&&!SM.set.linked&&SM.set.ctl==="sham"],
+  ["Set the true effect to 0 with a sham control: is the interval centred near zero?",()=>SM.set.e===0&&SM.set.ctl==="sham"],
+  ["Switch to a wait list control with placebo response above 1 point",()=>SM.set.ctl==="wait"&&SM.set.p>1],
+  ["Make a trial with 20 per arm, then one with 300 per arm, and compare interval widths",()=>SM.small&&SM.big],
+  ["Turn on linked dropout with dropout of 30% or more",()=>SM.set.linked&&SM.set.d>=30]];
+function simChalCheck(){if(SM.set.n<=20)SM.small=true;if(SM.set.n>=300)SM.big=true;SIMCHAL.forEach((c,i)=>{if(c[1]())SM.chal.add(i)})}
+function simInit(){const sl=[["slN","n",1],["slE","e",1],["slP","p",1],["slR","r",1],["slD","d",1]];
+  sl.forEach(z=>{const el=$("#"+z[0]);el.value=SM.set[z[1]];el.oninput=()=>{SM.set[z[1]]=+el.value;simUI();clearTimeout(SM.deb);SM.deb=setTimeout(()=>simRun(false),350)}});
+  segBtns($("#simCtl"),[["sham","Sham<small>matches context</small>"],["wait","Wait list<small>no context</small>"]],()=>SM.set.ctl,v=>{SM.set.ctl=v;simRun(false)});
+  $("#simLinked").checked=SM.set.linked;$("#simLinked").onchange=e=>{SM.set.linked=e.target.checked;simRun(false)};
+  $("#simRun").onclick=()=>simRun(false);
+  $("#simRun10").onclick=()=>{for(let i=0;i<9;i++)simRun(true);simRun(false)};
+  $("#simClear").onclick=()=>{SM.runs=SM.trial?[SM.trial]:[];SM.msg="Forest plot cleared. The latest run is kept.";simUI();a11yKey=""};
+  $("#simReset").onclick=()=>{SM.set=Object.assign({},SIMDEF);sl.forEach(z=>$("#"+z[0]).value=SM.set[z[1]]);$("#simLinked").checked=false;segBtns($("#simCtl"),[["sham","Sham<small>matches context</small>"],["wait","Wait list<small>no context</small>"]],()=>SM.set.ctl,v=>{SM.set.ctl=v;simRun(false)});simRun(false)};
+  simRun(false)}
+/* ---------- drawing ---------- */
+function drawSim(now){use(S1);const T=now/1000;const r=SM.trial;if(!r)return;const s=r.set;
+  const el=SM.t0<0?99:(now-SM.t0)/1000;
+  /* flow area */
+  panelBox(10,10,780,286);title(22,28,"Randomize, treat, measure",C.ink);
+  rr(22,46,96,236,8);ctx.fillStyle=hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();txt(70,62,"enrolled",{size:11.5,weight:700,align:"center"});
+  const wx=158,wy=166;circ(wx,wy,26,C.panel,C.ink,1.8);for(let k=0;k<6;k++){ctx.beginPath();ctx.moveTo(wx,wy);ctx.arc(wx,wy,24,T*2.4+k*TAU/6,T*2.4+(k+1)*TAU/6);ctx.closePath();ctx.fillStyle=hexA(k%2?C.treat:C.ctrl,.4);ctx.fill()}circ(wx,wy,5,C.ink);txt(wx,wy+40,"random",{size:11,weight:700,align:"center"});
+  const LX=v=>230+v/10*540;
+  [[0,40,"treatment arm","treat"],[1,166,"control arm"+(s.ctl==="sham"?" (sham)":" (wait list)"),"ctrl"]].forEach(l=>{rr(206,l[1],574,116,8);ctx.fillStyle=hexA(C[l[3]],.08);ctx.fill();ctx.strokeStyle=hexA(C[l[3]],.7);ctx.lineWidth=1.4;ctx.stroke();txt(216,l[1]+14,l[2],{size:11.5,weight:700,color:C[l[3]+"-ink"]});
+    line(LX(0),l[1]+96,LX(10),l[1]+96,C["ink-soft"],1.2);for(let v=0;v<=10;v+=2)txt(LX(v),l[1]+107,String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});
+  txt(778,28,"pain score: left is better",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  const show=Math.min(80,r.n);
+  for(let a=0;a<2;a++){const arm=r.arms[a];for(let j=0;j<show;j++){const pp=arm[j];const k=a*show+j;const i0=(k%(show*2))/(show*2);
+    const tIn=.2+i0*1.8;const q1=clamp((el-tIn)/.7,0,1);const q2=smooth(clamp((el-2.8-pp.order*.6)/1.4,0,1));
+    const ly=(a?166:40)+22+pp.jy*66;const px=36+(k%6)*14,py=80+Math.floor((k%96)/6)*12;
+    let x,y;if(q1<=0){x=px;y=py}else if(q1<.5){x=lerp(px,wx,ease(q1*2));y=lerp(py,wy,ease(q1*2))}else{x=lerp(wx,LX(pp.base),ease(q1*2-1));y=lerp(wy,ly,ease(q1*2-1))}
+    if(q1>=1){x=lerp(LX(pp.base),LX(pp.fu),q2);y=ly+Math.sin(T*1.6+j)*1.2}
+    let col=C[a?"ctrl":"treat"],al=1;if(pp.drop&&q2>.3){col=C.coi;al=lerp(1,.25,clamp((q2-.3)/.5,0,1));if(q2>.6){x=lerp(x,790,clamp((q2-.6)/.4,0,1)*.15)}}
+    withA(al,()=>circ(x,y,3.6,col,hexA(C.ink,.3),.8))}}
+  if(r.n>80)txt(216,150,"showing 80 of "+r.n+" per arm",{size:11,color:C["ink-soft"]});
+  /* distributions */
+  const dA=clamp((el-4.4)/1,0,1);
+  panelBox(10,304,480,190);title(22,322,"Improvement in each arm (points)",C.ink);
+  const g={x:44,y:340,w:430,h:118,x0:-4,x1:10};const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w;
+  line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.4);for(let v=-4;v<=10;v+=2)txt(X(v),g.y+g.h+12,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]});
+  const bw=1;const hist=a=>{const h={};r.arms[a].forEach(p=>{if(p.drop)return;const b=Math.floor(clamp(p.imp,-4,9.99)/bw);h[b]=(h[b]||0)+1});return h};const H=[hist(0),hist(1)];let mx=1;H.forEach(h=>Object.values(h).forEach(v=>mx=Math.max(mx,v)));
+  [1,0].forEach(a=>{const h=H[a];const col=C[a?"ctrl":"treat"];ctx.beginPath();let started=false;for(let b=-4;b<10;b++){const v=(h[b]||0)/mx*g.h*dA;const x0=X(b*bw),x1=X((b+1)*bw);const y=g.y+g.h-v;if(!started){ctx.moveTo(x0,g.y+g.h);started=true}ctx.lineTo(x0,y);ctx.lineTo(x1,y)}ctx.lineTo(X(10),g.y+g.h);ctx.fillStyle=hexA(col,.2);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke()});
+  if(dA>0)withA(dA,()=>{[[0,r.T.m],[1,r.C.m]].forEach(z=>{const col=C[z[0]?"ctrl":"treat"];line(X(z[1]),g.y,X(z[1]),g.y+g.h,col,2.4,[5,3]);label(X(z[1]),g.y+(z[0]?28:4),(z[0]?"control ":"treatment ")+f1(z[1]),{size:11,weight:700,mono:true,border:col})})});
+  /* result panel */
+  panelBox(498,304,292,190);title(510,322,"Difference between arms",C.ink);const rA=clamp((el-5.2)/.8,0,1);
+  const RX=v=>520+(v+1)/5*250;line(RX(0),346,RX(0),440,C["ink-soft"],1.6);line(RX(1),346,RX(1),440,hexA(C.good,.85),1.4,[4,4]);txt(RX(1)+4,350,"worthwhile 1",{size:10.5,weight:600,color:C.good});
+  [-1,0,1,2,3,4].forEach(v=>txt(RX(v),452,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  line(RX(s.e),360,RX(s.e),440,C.good,2.4);txt(RX(s.e),466,"true "+f1(s.e),{size:11,weight:700,align:"center",color:C.good});
+  if(rA>0)withA(rA,()=>{const y=400;line(RX(clamp(r.lo,-1,4)),y,RX(clamp(r.hi,-1,4)),y,C.evid,3);ctx.fillStyle=C.evid;ctx.fillRect(RX(clamp(r.md,-1,4))-6,y-6,12,12);
+    label(RX(clamp(r.md,-1,4)),y-22,"MD "+f1(r.md),{size:12,weight:700,mono:true,border:C.evid});txt(510,482,"95% CI "+f1(r.lo)+" to "+f1(r.hi)+(r.p<.001?", p below 0.001":", p "+r.p.toFixed(2)),{size:11.5,weight:600,mono:true})});
+  /* forest */
+  panelBox(10,502,780,148);title(22,520,"Forest plot of repeat runs (same settings)",C.ink);
+  const pl=simPool();const rows=SM.runs.slice(-6).map((q,i)=>({n:"Run "+(SM.runs.length-Math.min(6,SM.runs.length)+i+1),md:q.md,lo:q.lo,hi:q.hi,w:1/(q.se*q.se)}));
+  const FX=v=>230+(v+1)/5*380;line(FX(0),528,FX(0),632,C["ink-soft"],1.4);line(FX(s.e),528,FX(s.e),632,C.good,2,[5,4]);[-1,0,1,2,3,4].forEach(v=>txt(FX(v),642,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  const maxW=Math.max.apply(null,rows.map(z=>z.w).concat([1e-9]));
+  rows.forEach((q,i)=>{const y=536+i*13.5;txt(220,y,q.n,{size:11,weight:600,align:"right"});line(FX(clamp(q.lo,-1,4)),y,FX(clamp(q.hi,-1,4)),y,C.evid,1.8);const sz=4+5*Math.sqrt(q.w/maxW);ctx.fillStyle=C.evid;ctx.fillRect(FX(clamp(q.md,-1,4))-sz/2,y-sz/2,sz,sz);txt(626,y,f1(q.md)+" ("+f1(q.lo)+" to "+f1(q.hi)+")",{size:10.5,mono:true,color:C["ink-soft"]})});
+  if(pl){const y=536+Math.min(6,rows.length)*13.5+6;const pu=.85+.15*Math.sin(T*3);ctx.beginPath();ctx.moveTo(FX(pl.lo),y);ctx.lineTo(FX(pl.md),y-7*pu);ctx.lineTo(FX(pl.hi),y);ctx.lineTo(FX(pl.md),y+7*pu);ctx.closePath();ctx.fillStyle=C.accent;ctx.fill();txt(220,y,"Pooled, "+pl.k+" runs",{size:11,weight:700,align:"right"});txt(626,y,f1(pl.md)+" ("+f1(pl.lo)+" to "+f1(pl.hi)+")",{size:10.5,mono:true,weight:700})}
+  else txt(778,520,"Run more trials to pool them into a diamond.",{size:11.5,color:C["ink-soft"],align:"right"});
+}
+function simA11y(){const r=SM.trial;if(!r)return ["Trial simulator.","The trial simulator is getting ready."];const s=r.set;const pl=simPool();
+  const lab=`Trial simulator: ${s.n} per arm, mean difference ${f1(r.md)} points, 95% CI ${f1(r.lo)} to ${f1(r.hi)}.`;
+  return [lab,`Dots for ${s.n} people per arm pass through a spinning randomizer into an indigo treatment lane and an amber ${s.ctl==="sham"?"sham":"wait list"} control lane, then slide left along a 0 to 10 pain scale as scores improve; ${Math.round(s.n*s.d/100)} per arm fade to grey as dropouts. Below, two step histograms show improvement in each arm, with average lines at ${f1(r.T.m)} for treatment and ${f1(r.C.m)} for control. A result panel shows the mean difference of ${f1(r.md)} with its interval from ${f1(r.lo)} to ${f1(r.hi)}, a green line for the true specific effect of ${f1(s.e)} and a dashed worthwhile line at 1. The forest plot at the bottom shows ${SM.runs.length} run${SM.runs.length===1?"":"s"}${pl?", pooled into a brick red diamond at "+f1(pl.md):""}.`]}
+/* ================= PART 2: risk number trainer ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const NS=[100,200,50,80,120,150,250,300,400,60,40];
+function grpN(p){const ok=NS.filter(n=>(n*p)%100===0);return pick(ok)}
+const BADS=["had a flare up that led to missed work","still had severe pain at 3 months","had a new back pain episode within a year","needed daily pain medicine at 6 weeks"];
+const GOODS=["reported pain much better at 8 weeks","returned to full activity by 6 weeks","had at least a 30 percent drop in pain"];
+const HARMS=[["a new pain medicine","stomach upset"],["a muscle relaxing medicine","drowsiness"],["an intensive exercise program","soreness lasting more than a day"],["a new pain medicine","dizziness"]];
+const TXS=["an exercise program","a manual therapy program","a mindfulness course","a back education class","a new pain medicine"];
+const CTYPES=[["mix","All types, mixed"],["arr","Absolute risk reduction (ARR)"],["rrr","Relative risk reduction (RRR)"],["nnt","Number needed to treat (NNT)"],["nnh","Number needed to harm (NNH)"],["pct","Percent improvement"]];
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:0,count:0,solT:0,pick:null};
+function grpTxt(p,what){const n=grpN(p);return Math.random()<.5?`${n*p/100} of ${n} people ${what}`:`${p}% ${what}`}
+const GEN={
+ arr(){const cer=ri(12,60),eer=ri(Math.max(3,Math.round(cer*.4)),cer-2);const tx=pick(TXS),ev=pick(BADS);const ans=cer-eer;
+  return {title:"Absolute risk reduction",html:`In a trial of ${tx}, in the control group <b>${grpTxt(cer,ev)}</b>. In the treatment group <b>${grpTxt(eer,ev)}</b>. What is the absolute risk reduction, in percentage points?`,ans,unit:"percentage points",dp:0,tol:.11,
+   hints:["Turn each group into a percent: events divided by the group size, times 100.",`Control risk (CER) = ${cer}%. Treatment risk (EER) = ${eer}%.`,"ARR = CER − EER. Subtract, do not divide."],
+   rows:[{l:`CER = ${cer}%   EER = ${eer}%`},{l:"ARR = CER − EER"},{l:`ARR = ${cer}% − ${eer}%`},{ans:`ARR = ${ans} percentage points`}],miss:"dividing (that gives the relative risk) instead of subtracting.",
+   slips:[[(cer-eer)/cer*100,"That is the relative risk reduction. The ARR is the plain difference: CER minus EER."],[ans/100,"That is the ARR as a decimal. Give it in percentage points (multiply by 100)."],[eer/cer*100,"That is the relative risk as a percent. The ARR subtracts: CER minus EER."],[cer+eer,"That added the two risks. Subtract the treatment risk from the control risk."]],vis:{k:"risk",a:cer,b:eer,la:"control",lb:"treatment",ev:"event"}}},
+ rrr(){const cer=ri(15,60),eer=ri(Math.max(4,Math.round(cer*.35)),cer-3);const tx=pick(TXS),ev=pick(BADS);const ans=(cer-eer)/cer*100;
+  return {title:"Relative risk reduction",html:`With ${tx}, <b>${eer}%</b> of the treatment group ${ev}, compared with <b>${cer}%</b> of the control group. What is the relative risk reduction, as a percent?`,ans,unit:"%",dp:0,tol:.51,
+   hints:["RRR tells you how much of the control group's risk was removed, as a share of the control risk.",`ARR = ${cer} − ${eer} = ${cer-eer} percentage points.`,`RRR = ARR ÷ CER × 100 = ${cer-eer} ÷ ${cer} × 100. Or 1 − RR.`],
+   rows:[{l:`ARR = ${cer}% − ${eer}% = ${cer-eer} points`},{l:"RRR = ARR ÷ CER × 100"},{l:`RRR = ${cer-eer} ÷ ${cer} × 100`},{ans:`RRR = ${Math.round(ans)}%`},{l:`Check: RR = ${eer} ÷ ${cer} = ${(eer/cer).toFixed(2)}, and 1 − RR = ${(1-eer/cer).toFixed(2)}`}],miss:"dividing by the treatment risk instead of the control risk.",
+   slips:[[cer-eer,"That is the absolute risk reduction. For the RRR, divide the ARR by the control risk."],[(cer-eer)/eer*100,"Divide by the control risk (CER), not the treatment risk."],[eer/cer*100,"That is the relative risk as a percent. RRR = 100 minus that."],[(cer-eer)/cer,"Multiply by 100 to turn the fraction into a percent."]],vis:{k:"risk",a:cer,b:eer,la:"control",lb:"treatment",ev:"event",rrr:true}}},
+ nnt(){const good=Math.random()<.4;let a,b;if(good){a=ri(15,50);b=a+pick([4,5,6,7,8,10,12,15,20])}else{a=ri(12,55);b=a-pick([3,4,5,6,7,8,9,10,12,15,20]);if(b<2)b=2}
+  const d=Math.abs(a-b);const exact=100/d;const ans=Math.ceil(exact-1e-9);const tx=pick(TXS);const ev=good?pick(GOODS):pick(BADS);
+  const html=good?`With ${tx}, <b>${b}%</b> of the treatment group ${ev}, compared with <b>${a}%</b> of the control group. How many people need the treatment for one extra person to benefit (NNT)?`:`With ${tx}, <b>${b}%</b> of the treatment group ${ev}, compared with <b>${a}%</b> of the control group. What is the number needed to treat (NNT) to prevent one event?`;
+  return {title:"Number needed to treat",html,ans,unit:"people",dp:0,tol:.01,
+   hints:[good?"For a good outcome, find the absolute benefit increase: treatment rate minus control rate.":"First find the ARR: control risk minus treatment risk.",`The difference is ${d} percentage points = ${(d/100).toFixed(2)}.`,`NNT = 1 ÷ ${(d/100).toFixed(2)} = ${+exact.toFixed(2)}. Round an NNT up to a whole person.`],
+   rows:[{l:good?`Benefit increase = ${b}% − ${a}% = ${d} points`:`ARR = ${a}% − ${b}% = ${d} points`},{l:`As a decimal: ${(d/100).toFixed(2)}`},{l:`NNT = 1 ÷ ${(d/100).toFixed(2)} = ${+exact.toFixed(2)}`},{ans:`NNT = ${ans} people (rounded up)`}],miss:"using the relative risk reduction, or rounding down.",
+   slips:[[exact,Number.isInteger(+exact.toFixed(6))?"":"Right idea, but round an NNT up to the next whole person."],[Math.floor(exact),Math.floor(exact)!==ans?"Round an NNT up, not down, so you do not overstate the benefit.":""],[d,"That is the absolute difference in percentage points. NNT = 1 ÷ (that difference as a decimal)."],[100/(d/Math.max(a,b)*100),"That used the relative difference. NNT always uses the absolute difference."]],vis:{k:"risk",a,b,la:"control",lb:"treatment",ev:good?"benefit":"event",good,nnt:ans}}},
+ nnh(){const h=pick(HARMS);const ari=pick([2,4,5,10,20,25]);const c=ri(2,15);const t=c+ari;const ans=100/ari;
+  return {title:"Number needed to harm",html:`With ${h[0]}, <b>${t}%</b> of people had ${h[1]}, compared with <b>${c}%</b> on placebo. What is the number needed to harm (NNH)?`,ans,unit:"people",dp:0,tol:.01,
+   hints:["Find the absolute risk increase (ARI): treatment harm rate minus control harm rate.",`ARI = ${t}% − ${c}% = ${ari} percentage points = ${(ari/100).toFixed(2)}.`,`NNH = 1 ÷ ARI = 1 ÷ ${(ari/100).toFixed(2)}.`],
+   rows:[{l:`ARI = ${t}% − ${c}% = ${ari} points`},{l:`As a decimal: ${(ari/100).toFixed(2)}`},{l:`NNH = 1 ÷ ${(ari/100).toFixed(2)}`},{ans:`NNH = ${ans} people`},{l:"A larger NNH means the harm is less common."}],miss:"dividing 1 by the treatment harm rate alone, without subtracting the placebo rate.",
+   slips:[[100/t,"That used only the treatment harm rate. Subtract the placebo rate first."],[ari,"That is the ARI in percentage points. NNH = 1 ÷ (ARI as a decimal)."],[t/c,"That is a relative risk. NNH uses the absolute difference."]],vis:{k:"risk",a:c,b:t,la:"placebo",lb:"treatment",ev:"harm",harm:true,nnh:ans}}},
+ pct(){const a=ri(50,90)/10,b=ri(10,Math.round(a*10)-6)/10;const ans=(a-b)/a*100;const who=pick(["Maria's","Daniel's","Aisha's","Tom's","Lena's","the group's average"]);
+  return {title:"Percent improvement",html:`${who[0].toUpperCase()+who.slice(1)} pain went from <b>${a.toFixed(1)}</b> to <b>${b.toFixed(1)}</b> on a 0 to 10 scale. What is the percent improvement?`,ans,unit:"%",dp:0,tol:.51,
+   hints:["Percent improvement compares the change with the starting score.",`Change = ${a.toFixed(1)} − ${b.toFixed(1)} = ${(a-b).toFixed(1)} points.`,`Percent = change ÷ starting score × 100 = ${(a-b).toFixed(1)} ÷ ${a.toFixed(1)} × 100.`],
+   rows:[{l:`Change = ${a.toFixed(1)} − ${b.toFixed(1)} = ${(a-b).toFixed(1)} points`},{l:"Percent = change ÷ start × 100"},{l:`Percent = ${(a-b).toFixed(1)} ÷ ${a.toFixed(1)} × 100`},{ans:`Improvement = ${Math.round(ans)}%`},{l:ans>=30?"That meets a common 30 percent guide for a meaningful change.":"That is below a common 30 percent guide for a meaningful change."}],miss:"dividing by the ending score instead of the starting score.",
+   slips:[[a-b,"That is the change in points. Divide it by the starting score and multiply by 100."],[(a-b)/b*100,"Divide by the starting score, not the ending score."],[b/a*100,"That is the ending score as a percent of the start. The improvement is 100 minus that."],[(a-b)/a,"Multiply by 100 to turn the fraction into a percent."]],vis:{k:"pct",a,b}}}
+};
+const GKEYS=Object.keys(GEN);
+function genOne(k){let q=null;for(let i=0;i<40&&!q;i++){try{q=GEN[k]()}catch(e){console.error(e);q=null}if(q&&!(isFinite(q.ans)&&q.ans>0))q=null}q.kind=k;q.slips=(q.slips||[]).filter(s=>isFinite(s[0])&&s[1]);return q}
+function fmtAns(p,v){if(p.dp!=null)return v.toFixed(p.dp);return String(+v.toPrecision(4))}
+function normAns(s){return String(s).trim().replace(/,/g,"").replace(/[−–]/g,"-").replace(/\s*(percentage points?|points?|pts|people|persons?|%)\s*$/i,"").replace(/\s+/g,"")}
+function parseAns(s){s=normAns(s);if(!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};if(Math.abs(v-p.ans)<=p.tol)return {ok:true};
+  const sl=p.slips.find(s=>Math.abs(v-s[0])<=Math.max(Math.abs(s[0])*.012,p.dp!=null?Math.pow(10,-p.dp)*.6:0));if(sl&&Math.abs(sl[0]-p.ans)>p.tol)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)<=Math.abs(p.ans)*.06)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function ansTxt(p){return fmtAns(p,p.ans)+" "+p.unit}
+function calcNew(){const k=TR.type==="mix"?pick(GKEYS):TR.type;const q=genOne(k);TR.p=q;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.pick=null;
+  const rd=q.unit==="people"?"Give a whole number of people.":"Give a whole number.";
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}<span class="rd">${rd}</span>`;$("#calcUnit").textContent=q.unit;$("#calcAns").value="";
+  $("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=q.title+": the picture shows the two groups and your answer; the worked solution appears below it.";a11yKey=""}
+function calcCheck(){const p=TR.p;const j=judge(p,$("#calcAns").value);
+  if(j.kind==="empty"){calcMsg("info","Type a number in the answer box first.");return}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;calcMsg("good",`✓ Correct: ${ansTxt(p)}. Watch the worked solution build.`);showSol(false)}
+  else{TR.first=false;TR.streak=0;let msg="Not quite. ";if(j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Check your rounding.";else msg+="Check the setup. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+function calcInit(){const sel=$("#calcType");sel.innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");sel.onchange=()=>{TR.type=sel.value;calcNew()};
+  $("#calcCheck").onclick=calcCheck;$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+  $("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+  $("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${ansTxt(TR.p)}. Watch each step, then try a new problem.`)};$("#calcNew").onclick=calcNew;
+  TR.best=+(store.get("best")||0)}
+/* ---------- trainer drawing ---------- */
+function tvTyped(){const v=parseAns($("#calcAns").value);return v==null||!isFinite(v)?null:v}
+function tvs(v){return v==null?"?":String(+v.toFixed(2)).replace("-","−")}
+function drawCalc(now){use(S2);const T=now/1000;const p=TR.p;const vs=p.vis;const tv=tvTyped();const ok=TR.solved;
+  panelBox(10,10,780,262);
+  if(vs.k==="risk"){const cell=15;const cols=[C[vs.harm?"ctrl":"ctrl"],C.treat];
+    [[30,vs.la,vs.a,0],[210,vs.lb,vs.b,1]].forEach(g=>{txt(g[0],28,g[1]+": "+g[2]+"%",{size:12.5,weight:700,color:C[g[3]?"treat-ink":"ctrl-ink"]});
+      const evCol=vs.ev==="benefit"?C.good:vs.ev==="harm"?C.symp:C.harm;
+      for(let i=0;i<100;i++){const cx=g[0]+(i%10)*cell+cell/2,cy=44+Math.floor(i/10)*cell+cell/2;const on=i<g[2];mini(cx,cy+2,cell*.82,on?evCol:hexA(C.coi,.55));
+        if(on&&i>=Math.min(vs.a,vs.b)){ctx.strokeStyle=hexA(C.gold,.55+.45*Math.sin(T*4));ctx.lineWidth=1.8;rr(cx-cell/2+.5,cy-cell/2+.5,cell-1,cell-1,3);ctx.stroke()}}});
+    txt(30,212,vs.ev==="benefit"?"green = improved":vs.ev==="harm"?"orange = had the harm":"red = had the event",{size:11.5,weight:600,color:C["ink-soft"]});txt(30,230,"gold outline = the difference between groups",{size:11.5,weight:600,color:C["ink-soft"]});
+    /* bars */
+    const bx=420,by=46,bh=170;const Y=v=>by+bh-v/Math.max(60,vs.a,vs.b)*bh;line(bx,by+bh,bx+330,by+bh,C["ink-soft"],1.4);
+    [[vs.a,vs.la,0],[vs.b,vs.lb,1]].forEach((z,i)=>{const x=bx+30+i*120;rr(x,Y(z[0]),70,by+bh-Y(z[0]),3);ctx.fillStyle=hexA(i?C.treat:C.ctrl,.8);ctx.fill();label(x+35,Y(z[0])-12,z[0]+"%",{size:12.5,weight:700,mono:true});txt(x+35,by+bh+12,z[1],{size:11.5,weight:600,align:"center"})});
+    const y1=Y(vs.a),y2=Y(vs.b);line(bx+260,y1,bx+272,y1,C.ink,2);line(bx+272,y1,bx+272,y2,C.ink,2);line(bx+260,y2,bx+272,y2,C.ink,2);txt(bx+278,(y1+y2)/2,Math.abs(vs.a-vs.b)+" points",{size:11.5,weight:700});
+    label(400,252,"your answer: "+tvs(tv)+" "+p.unit,{size:13,weight:700,mono:true,border:ok?C.good:C.accent})}
+  else{const X=v=>60+v/10*680;line(60,150,740,150,C["ink-soft"],1.6);for(let v=0;v<=10;v++){line(X(v),144,X(v),156,C["ink-soft"],1.2);txt(X(v),168,String(v),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+    const q=smooth(P(T,4)*1.4);const cur=lerp(vs.a,vs.b,clamp(q,0,1));rr(X(vs.b),118,X(vs.a)-X(vs.b),14,4);ctx.fillStyle=hexA(C.good,.35);ctx.fill();
+    circ(X(vs.a),125,9,C.pain,C.ink,1.4);label(X(vs.a),96,"before "+vs.a.toFixed(1),{size:12,weight:700,mono:true,border:C.pain});circ(X(cur),125,7,C.good,C.ink,1.2);label(X(vs.b),196,"after "+vs.b.toFixed(1),{size:12,weight:700,mono:true,border:C.good});
+    txt(60,40,"pain on a 0 to 10 scale",{size:12.5,weight:700});label(400,240,"your answer: "+tvs(tv)+"%",{size:13,weight:700,mono:true,border:ok?C.good:C.accent})}
+  const WY=282,WX=10,WW=780;if(TR.sol){const el=(now-TR.solT)/1000;const per=Math.max(9,1.2+p.rows.length*1.6+4);wk(WX,WY,WW,308,{q:"",rows:p.rows,miss:p.miss},Math.min(el,per-.01),{per,cfs:14,dt:1.6,t0:.6,lfs:15,lh:22,cy:30,title:"Worked solution",missFull:true})}
+  else{panelBox(WX,WY,WW,308,{fill:hexA(C.paper,.96)});title(WX+12,WY+18,"Worked solution",C["accent-ink"]);wrapText("The worked solution builds here line by line after a correct answer, or when you press Show worked solution. A common mistake is flagged at the end.",WX+14,WY+50,WW-28,18,{size:13,color:C["ink-soft"]})}}
+function calcA11y(){const p=TR.p;const v=$("#calcAns").value.trim()||"not entered";const lab=`Practice problem, ${p.title}. Your answer ${v}.${TR.solved?" Correct.":""}`;const vs=p.vis;
+  const pic=vs.k==="risk"?`two icon arrays of 100 people, ${vs.la} with ${vs.a} marked and ${vs.lb} with ${vs.b} marked, the difference outlined in gold, and two bars of ${vs.a}% and ${vs.b}% with a bracket for the ${Math.abs(vs.a-vs.b)} point difference`:`a 0 to 10 pain line with a red marker at ${vs.a.toFixed(1)} before and a green marker at ${vs.b.toFixed(1)} after, the change shaded green`;
+  return [lab,`The picture shows ${pic}. ${TR.sol?"Below it, the worked solution builds line by line, ending with "+ansTxt(p)+" in a green box and a common mistake note.":"The worked solution is hidden until you check a correct answer or ask for it."}`]}
+/* ================= PART 3: matching game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  const P_=(x,y,c)=>`<circle cx="${x}" cy="${y-7}" r="4" fill="${c}"/><rect x="${x-5}" y="${y-2}" width="10" height="12" rx="4" fill="${c}"/>`;
+  const T_=(x,y,t,sz,c)=>`<text x="${x}" y="${y}" font-size="${sz||11}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" fill="${c||"var(--ink)"}">${t}</text>`;
+  const arrowR=(x1,x2,y,c)=>`<path d="M${x1} ${y}H${x2}" stroke="${c}" stroke-width="2.4"/><path d="M${x2} ${y-5}L${x2+7} ${y}L${x2} ${y+5}Z" fill="${c}"/>`;
+  const arrowL=(x1,x2,y,c)=>`<path d="M${x1} ${y}H${x2}" stroke="${c}" stroke-width="2.4"/><path d="M${x2} ${y-5}L${x2-7} ${y}L${x2} ${y+5}Z" fill="${c}"/>`;
+  switch(k){
+  case "report":return sv(P_(18,24,"var(--evid)")+'<rect x="28" y="8" width="20" height="28" rx="2" fill="var(--paper)" stroke="var(--ink-soft)"/><path d="M32 16H44M32 22H44M32 28H40" stroke="var(--ink-soft)" stroke-width="1.6"/>');
+  case "series":return sv(P_(10,26,"var(--evid)")+P_(23,26,"var(--evid)")+P_(36,26,"var(--evid)")+P_(49,26,"var(--evid)"));
+  case "cross":return sv('<rect x="6" y="10" width="44" height="28" rx="4" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 3"/>'+P_(18,28,"var(--coi)")+P_(30,28,"var(--pain)")+P_(42,28,"var(--coi)"));
+  case "cc":return sv(arrowL(48,14,23,"var(--evid)")+T_(40,14,"now",9)+T_(16,40,"past",9));
+  case "cohort":return sv(arrowR(8,42,23,"var(--evid)")+T_(16,14,"now",9)+T_(38,40,"later",9));
+  case "rct":return sv('<circle cx="12" cy="23" r="8" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M20 23L34 12M20 23L34 34" stroke="var(--ink-soft)" stroke-width="2"/><circle cx="42" cy="12" r="6" fill="var(--treat)"/><circle cx="42" cy="34" r="6" fill="var(--ctrl)"/>');
+  case "sr":return sv('<rect x="6" y="8" width="18" height="12" fill="var(--paper)" stroke="var(--evid)"/><rect x="10" y="22" width="18" height="12" fill="var(--paper)" stroke="var(--evid)"/><path d="M34 23L42 16L50 23L42 30Z" fill="var(--accent)"/>');
+  case "sel":return sv('<rect x="30" y="8" width="18" height="30" rx="2" fill="var(--evid-wash)" stroke="var(--treat)" stroke-width="2"/>'+P_(14,28,"var(--good)")+arrowR(20,24,26,"var(--ink-soft)"));
+  case "pub":return sv('<path d="M28 6L8 40H48Z" fill="none" stroke="var(--ink-soft)" stroke-dasharray="3 2"/><circle cx="24" cy="18" r="3" fill="var(--evid)"/><circle cx="18" cy="30" r="3" fill="var(--evid)"/><circle cx="38" cy="32" r="3.5" fill="none" stroke="var(--bad)" stroke-dasharray="2 2" stroke-width="1.6"/>');
+  case "fund":return sv('<circle cx="18" cy="23" r="12" fill="var(--gold)" stroke="var(--gold-ink)" stroke-width="2"/>'+T_(18,28,"$",14)+'<path d="M34 30L52 22" stroke="var(--ink)" stroke-width="2.4"/>');
+  case "attr":return sv('<rect x="36" y="8" width="14" height="30" rx="2" fill="var(--panel-2)" stroke="var(--ink)" stroke-width="2"/><circle cx="12" cy="23" r="5" fill="var(--good)"/><circle cx="28" cy="23" r="5" fill="var(--pain)"/>'+arrowR(18,21,23,"var(--ink-soft)"));
+  case "det":return sv('<path d="M6 23C14 10 42 10 50 23C42 36 14 36 6 23Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><circle cx="28" cy="23" r="6" fill="var(--ink)"/>');
+  case "wait":return sv('<circle cx="28" cy="23" r="15" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/><path d="M28 23V13M28 23L36 27" stroke="var(--ink)" stroke-width="2.2"/>');
+  case "usual":return sv('<rect x="16" y="6" width="24" height="34" rx="3" fill="var(--paper)" stroke="var(--muscle)" stroke-width="2"/><path d="M21 16H35M21 23H35M21 30H31" stroke="var(--ink-soft)" stroke-width="1.8"/>');
+  case "sham":return sv('<rect x="23" y="4" width="10" height="20" rx="2" fill="var(--needle)" stroke="var(--ink-soft)"/><path d="M28 24V32" stroke="var(--ink-soft)" stroke-width="1.8"/><rect x="6" y="32" width="44" height="8" fill="var(--skin1)"/>');
+  case "active":return sv('<rect x="6" y="16" width="16" height="12" rx="6" fill="var(--treat)"/><rect x="34" y="16" width="16" height="12" rx="6" fill="var(--para)"/>'+T_(28,27,"vs",10));
+  case "sigonly":case "both":case "unc":case "none":{const m={sigonly:[30,34],both:[36,48],unc:[8,50],none:[16,24]}[k];const mid=(m[0]+m[1])/2;
+    return sv('<path d="M14 6V40" stroke="var(--ink-soft)" stroke-width="1.6"/><path d="M34 6V40" stroke="var(--good)" stroke-width="1.6" stroke-dasharray="3 2"/>'+`<path d="M${m[0]} 23H${m[1]}" stroke="var(--evid)" stroke-width="3"/><circle cx="${mid}" cy="23" r="3.5" fill="var(--evid)"/>`)}
+  }
+  return sv("")}
+const SROUNDS=[
+{name:"Design to strength",goal:"Match each strength to the study design it best describes.",
+ bins:[["report","Case report or case series"],["cross","Cross sectional"],["cc","Case control"],["cohort","Cohort"],["rct","Randomized controlled trial"],["sr","Systematic review and meta analysis"]],
+ cards:[["Can flag a rare side effect in one patient quickly","report","Case reports can spot new or rare events."],["Describes a new pattern seen in a handful of patients","report","A case series shows a pattern in several patients."],
+  ["Estimates how common back pain is in a town right now","cross","Cross sectional studies measure prevalence at one moment."],["Quick, cheap snapshot of many people at once","cross","Cross sectional studies are fast snapshots."],
+  ["Efficient for studying a rare outcome","cc","Case control studies start from people who already have the outcome."],["Can look at many past exposures at once","cc","Case control studies look back at many possible exposures."],
+  ["Shows that the exposure came before the outcome","cohort","Cohort studies follow people forward, so the time order is clear."],["Can measure risk in exposed and unexposed groups","cohort","Following groups forward lets you calculate risk in each."],
+  ["Balances known and unknown factors between groups","rct","Randomization tends to balance everything, measured or not."],["Best single design to test whether a treatment works","rct","A well run RCT is the strongest single study for treatment effects."],
+  ["Pools all the studies on one question into one estimate","sr","A meta analysis combines results across studies."],["Uses a planned, repeatable search to avoid cherry picking","sr","Systematic reviews follow a written search and selection plan."]]},
+{name:"Design to weakness",goal:"Match each weakness to the study design it belongs to.",
+ bins:[["report","Case report or case series"],["cross","Cross sectional"],["cc","Case control"],["cohort","Cohort"],["rct","Randomized controlled trial"],["sr","Systematic review and meta analysis"]],
+ cards:[["No comparison group at all","report","Case reports and series describe patients with no control group."],
+  ["Cannot tell which came first, exposure or outcome","cross","A snapshot measures both at the same moment."],
+  ["People may remember past exposures inaccurately","cc","Looking back relies on memory or old records: recall bias."],["Choosing a fair control group is tricky","cc","Controls must be similar to cases apart from the outcome."],
+  ["Slow and expensive, and people are lost over time","cohort","Following people for years costs a lot and some drop out."],["Confounding can still explain the link","cohort","Without randomization, other factors may differ between groups."],
+  ["Volunteers may not be like everyday patients","rct","Strict entry rules can make trial patients differ from real practice."],["Expensive, and often too short to see long term effects","rct","Many trials follow people for only weeks or months."],
+  ["Only as good as the studies it includes","sr","Pooling weak or biased studies gives a precise but wrong answer."],["Can be skewed if negative studies were never published","sr","Publication bias can make the pooled result too favourable."]]},
+{name:"Bias to example",goal:"Match each example to the type of bias it shows.",
+ bins:[["sel","Selection bias"],["pub","Publication bias"],["fund","Funding bias"],["attr","Attrition bias"],["det","Detection bias (unblinded assessment)"]],
+ cards:[["Recruiters can see the next assignment and steer sicker patients to control","sel","Without allocation concealment, groups can start out different."],["Treatment group volunteers are fitter and younger than the control group","sel","The groups differed at the start: selection bias."],
+  ["Small trials that found no benefit sat in a drawer and were never printed","pub","Unpublished negative studies make the evidence look better."],["A funnel plot is missing the small studies on the no benefit side","pub","A lopsided funnel plot is a classic clue to publication bias."],
+  ["The company selling a device paid for every trial that praised it","fund","Sponsors who gain from a result can tilt design or reporting."],["Studies paid for by a maker report favourable results more often than independent ones","fund","This pattern is called funding or sponsorship bias."],
+  ["Many people who were not improving quit the treatment arm","attr","Unequal dropout linked to outcome is attrition bias."],["Only people who finished the program were analysed","attr","Dropping non completers instead of using intention to treat invites attrition bias."],
+  ["The clinician who gave the treatment also rated the patients' improvement","det","An unblinded assessor may rate the treated group more kindly."],["Assessors knew which patients got real manipulation","det","Knowing the group can sway how outcomes are measured."]]},
+{name:"Control group to question",goal:"Match each research question to the control group that answers it.",
+ bins:[["wait","No treatment or wait list"],["usual","Usual care"],["sham","Sham"],["active","Active comparator"]],
+ cards:[["Do people who get the treatment do better than people who wait?","wait","A wait list shows the total effect, including context."],["What is the whole package worth compared with nothing yet?","wait","Comparing with no treatment shows the full effect of getting care."],
+  ["Does adding this treatment to normal care help?","usual","A usual care control asks about added value in real practice."],["Is it worth adding to what patients already receive?","usual","Usual care comparisons answer real world questions."],
+  ["Does the needling itself matter, beyond the ritual?","sham","A sham matches context so the difference shows the specific effect."],["Is the thrust itself doing anything specific?","sham","Sham manipulation tries to match everything except the thrust."],
+  ["Is manipulation better than a supervised exercise program?","active","Comparing two real treatments needs an active comparator."],["Which of two recommended treatments works better?","active","Head to head trials use an active comparator."]]},
+{name:"Reading the interval",goal:"Each card describes a 95% confidence interval for pain reduction, with 1 point as the worthwhile line. Sort them.",
+ bins:[["sigonly","Statistically significant, not important"],["both","Significant and important"],["unc","Uncertain, need more data"],["none","Likely no worthwhile effect"]],
+ cards:[["0.2 to 0.5 points in a trial of 5,000 people","sigonly","Above zero, but entirely below the 1 point line."],["0.1 to 0.6 points, p below 0.01","sigonly","Significant, yet even the top end is too small to matter."],
+  ["1.3 to 2.4 points","both","The whole interval is above the worthwhile line."],["1.1 to 2.0 points in a large trial","both","Even the low end clears the 1 point line."],
+  ["0.6 below zero to 2.8 points in a trial of 30 people","unc","The interval runs from harm to a large benefit: too imprecise."],["0.4 below zero to 1.9 points","unc","It includes zero and the worthwhile line, so we cannot tell."],
+  ["0.3 below zero to 0.3 above zero in a large trial","none","Narrow and centred on zero: no worthwhile effect is likely."],["0.2 below zero to 0.4 points, many people","none","Even the top end is well under 1 point."]]}
+];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: evidence in real life ================= */
+function phoneFrame(x,y,w,h){rr(x,y,w,h,18);fillStroke(C.ink,C.ink,1);rr(x+8,y+22,w-16,h-44,6);ctx.fillStyle=C.news;ctx.fill();rr(x+w/2-18,y+9,36,5,2.5);ctx.fillStyle=C["ink-soft"];ctx.fill()}
+const LFOREST=[{n:"Trial 1, 90 people",md:-.9,lo:-1.9,hi:.1},{n:"Trial 2, 310 people",md:-.2,lo:-.7,hi:.3},{n:"Trial 3, 150 people",md:-.6,lo:-1.4,hi:.2},{n:"Trial 4, 600 people",md:.1,lo:-.3,hi:.5},{n:"Trial 5, 60 people",md:-1.2,lo:-2.6,hi:.2},{n:"Trial 6, 420 people",md:-.2,lo:-.7,hi:.3}];
+const LIFE=[
+{name:"A headline claiming a cure",who:"Scenario 1 · the news feed",
+ story:"Jordan, who has had low back pain for three weeks, sees a post: \"New spine treatment CURES back pain in 9 out of 10 patients!\" The article says 20 patients were treated at one clinic, and 18 felt better after four weeks. There was no comparison group, and the study was paid for by the company that sells the treatment.",
+ cap:"A phone shows the cure headline; beside it, 20 untreated people with new back pain mostly improve too.",
+ desc:"On the left, a phone screen shows a bold headline: new spine treatment cures back pain in 9 out of 10 patients, with a row of 18 green and 2 grey person icons under it and a small note: 20 patients, one clinic, no comparison group, paid for by the seller. On the right, a panel titled what usually happens with no treatment shows 20 grey icons for people with new low back pain; over a few seconds most of them turn green as a teal line on a small graph falls from about 6 to about 3 over four weeks. A question mark hovers between the two panels.",
+ draw(T){const t=P(T,10)*10;phoneFrame(30,20,300,460);ctx.fillStyle=C.accent;ctx.fillRect(38,42,284,26);txt(48,55,"HEALTH NEWS",{size:11.5,weight:700,mono:true,color:"#fff"});
+   wrapText("New spine treatment CURES back pain in 9 out of 10 patients!",50,96,262,22,{size:17,weight:700});
+   for(let i=0;i<20;i++){const cx=60+(i%10)*25,cy=196+Math.floor(i/10)*34;mini(cx,cy,22,i<18?C.good:C.coi);if(i<18)txt(cx,cy+5,"+",{size:10,weight:700,align:"center",color:inkOn(C.good)})}
+   txt(50,268,"18 of 20 felt better",{size:12.5,weight:700,color:C.good});
+   rr(46,290,268,112,6);fillStroke(C["warn-wash"],C.warn,1.4);["20 patients, one clinic","no comparison group","4 weeks of follow up","paid for by the seller"].forEach((s,i)=>txt(58,310+i*24,"• "+s,{size:12.5,weight:600}));
+   panelBox(400,20,386,460);title(414,42,"What usually happens with no treatment",C.ink);
+   const prog=seg(t,.5,6);for(let i=0;i<20;i++){const cx=430+(i%10)*34,cy=86+Math.floor(i/10)*40;const on=i/20<prog*.85;mini(cx,cy,28,on?C.good:C.coi);if(on)txt(cx,cy+6,"+",{size:11,weight:700,align:"center",color:inkOn(C.good)})}
+   const g=graph({x:450,y:200,w:300,h:180,x0:0,x1:4,y0:0,y1:10,xt:[0,1,2,3,4],yt:[0,5,10],xl:"weeks",yl:"average pain",ylx:30});
+   curve(g,w=>2.8+3.4*Math.exp(-w/1.4),0,4*prog,C.nat,3);
+   wrapText("Many people with new low back pain improve a lot within weeks on their own.",414,430,360,16,{size:12,weight:600,color:C["ink-soft"]});
+   label(365,250,"?",{size:20,weight:700,mono:true,border:C.accent})},
+ qs:[{q:"What is the biggest problem with this claim?",opts:[["There is no comparison group, and new back pain often improves on its own",1,"Yes. Without a control group, natural history alone could explain most of the 18 out of 20."],["Twenty patients is too many",0,"The number is small, not large. The bigger issue is the missing comparison group."],["The patients must be lying",0,"They can be honest. Feeling better after treatment does not show the treatment caused it."],["Four weeks is too long",0,"The follow up is short, but the main issue is no comparison group."]]},
+  {q:"Which study would best test whether the treatment itself works?",opts:[["A randomized trial comparing it with a well matched sham or with usual care, with blinded outcome assessors",1,"Right. Randomization, a fair control and blinded assessment separate the treatment from natural recovery and context."],["A bigger case series of 200 patients at the same clinic",0,"More patients without a comparison group still cannot separate the treatment from natural history."],["A survey of happy customers",0,"Surveys of customers are filtered toward people who liked the treatment."],["Asking the company to repeat its study",0,"Funding bias is a concern. Independent, controlled trials are better."]]},
+  {q:"Jordan asks you what to think. Which reply is most helpful?",opts:[["It is good that people felt better, but most new back pain improves anyway; this study cannot show the treatment caused it. Staying active usually helps, and you should see a clinician if you have red flags such as numbness in the groin or leg weakness.",1,"Yes. It is kind, honest about the evidence and mentions safety."],["That headline is a total scam and the clinic is lying.",0,"Mocking or accusing is not helpful and may not be true. Explain what the study can and cannot show."],["If 9 out of 10 improved, you should definitely try it.",0,"The 9 out of 10 tells us little without a comparison group."],["Never trust any health news.",0,"Some news reports good research. The skill is checking how the claim was tested."]]}]},
+{name:"A patient testimonial",who:"Scenario 2 · in the clinic",
+ story:"Sam, a 45 year old accountant, tells his clinician that a single session of a new technique a friend recommended made his neck pain \"vanish overnight\". He came in on the worst day of a flare up, rated 8 out of 10, and the next week he rated it 3. He also started using a heat pack and took two days off work. He wants to post a five star review so everyone tries it.",
+ cap:"Sam's pain line spiked on the day of the session, then fell; extra factors like heat, rest and expectation stack up beside it.",
+ desc:"On the left, Sam stands with a speech bubble that says it vanished overnight and a five star rating. In the middle, a line graph of his daily pain bounces around 4 to 5, spikes to 8 on the day of the session, marked with a red dot labelled session on the worst day, then drops back to 3 a week later. On the right, a stack of labelled blocks builds up beside the drop: natural ups and downs, regression to the mean, heat pack and rest, expectation and attention, and at the top a block with a question mark labelled the technique itself, maybe.",
+ draw(T){const t=P(T,12)*12;person(90,300,46,{skin:1,shirt:1,mood:true});bubble(30,40,190,62,"It vanished overnight! Five stars.",{size:13,tx:80,weight:700});for(let i=0;i<5;i++){const x=46+i*24,y=126;ctx.beginPath();for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,r=k%2?4.5:10;ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}ctx.closePath();ctx.fillStyle=C.gold;ctx.fill()}
+   txt(90,370,"Sam",{size:13,weight:700,align:"center"});
+   const g=graph({x:230,y:60,w:330,h:280,x0:0,x1:21,y0:0,y1:10,xt:[0,7,14,21],yt:[0,5,10],xl:"days",yl:"neck pain"});
+   const f=d=>d<10?4.6+.9*Math.sin(d*1.3)+(d>7?(d-7)*1.1:0):d<11?8:Math.max(3,8-(d-10)*1.4)+.3*Math.sin(d*2);const up=Math.min(21,P(T,12)*26);
+   ctx.beginPath();for(let d=0;d<=up;d+=.2){d?ctx.lineTo(g.X(d),g.Y(f(d))):ctx.moveTo(g.X(d),g.Y(f(d)))}ctx.strokeStyle=C.pain;ctx.lineWidth=2.6;ctx.stroke();
+   if(up>10){circ(g.X(10),g.Y(8),6,C.pain,C.panel,2);label(g.X(10),g.Y(8)-22,"session on the worst day: 8",{size:11.5,weight:700,border:C.pain})}
+   if(up>17){circ(g.X(17),g.Y(f(17)),6,C.good,C.panel,2);label(g.X(17),g.Y(f(17))+24,"one week later: 3",{size:11.5,weight:700,border:C.good})}
+   const parts=[["natural ups and downs","nat"],["regression to the mean","rtm"],["heat pack and rest","coi"],["expectation and attention","plac"],["the technique itself, maybe?","spec"]];
+   parts.forEach((p,i)=>{const a=seg(t,5+i*.9,5.6+i*.9);if(a<=0)return;withA(a,()=>{const y=400-i*62;rr(590,y-46,190,52,6);ctx.fillStyle=hexA(C[p[1]],.25);ctx.fill();ctx.strokeStyle=C[p[1]];ctx.lineWidth=2;ctx.stroke();wrapText(p[0],602,y-26,170,16,{size:12.5,weight:700})})});
+   txt(685,440,"possible reasons for the drop",{size:11.5,weight:600,align:"center",color:C["ink-soft"]})},
+ qs:[{q:"Which explanation fits the pattern best?",opts:[["Several things likely mixed together: he came in at his worst, flare ups settle, he rested and used heat, and expectation can ease pain",1,"Yes. Regression to the mean, natural history, co interventions and context all point the same way."],["The technique must have fixed his neck",0,"It may have helped, but the timing alone cannot show that. Many other factors changed too."],["He is imagining the improvement",0,"His improvement is real. The question is what caused it."],["Heat packs cure neck pain",0,"Heat may help comfort, but it is one of several possible factors, not a proven cure."]]},
+  {q:"How should the clinician respond to Sam?",opts:[["Be glad he feels better, and gently explain that one person's experience cannot show what caused the change",1,"Right. Respect his experience while being honest about what a single story can show."],["Tell him his review is dishonest",0,"He is honest about how he feels. The issue is cause, not honesty."],["Agree it is a miracle and tell other patients",0,"That oversells one anecdote and could mislead others."],["Ignore what he said",0,"Listening matters. Use it to talk about evidence kindly."]]},
+  {q:"What would turn Sam's kind of story into real evidence?",opts:[["Many people with similar neck pain randomly assigned to the technique or a fair comparison, with outcomes measured the same way",1,"Yes. A randomized comparison separates the technique from everything else that changes over time."],["More five star reviews",0,"Reviews are filtered stories without a comparison group."],["Sam trying it a second time",0,"One person trying again still cannot separate the technique from natural ups and downs."],["A longer testimonial with more detail",0,"Detail does not add a comparison group."]]}]},
+{name:"Reading a forest plot from a back pain review",who:"Scenario 3 · a made up review",
+ story:"Priya, a physical therapy student, reads a made up review of six trials comparing spinal manipulation with other recommended care (such as exercise) for chronic low back pain. The outcome is pain on a 0 to 10 scale at 3 months. Negative numbers favour manipulation. The review rates the certainty of evidence as moderate.",
+ cap:"Six trials and a pooled diamond close to zero: manipulation and other recommended care look similar.",
+ desc:"A forest plot builds row by row. Six trials are listed on the left with their sizes. Each has an indigo square and a horizontal line for its 95% confidence interval; most lines cross the vertical zero line. Trial 4 with 600 people has the biggest square. At the bottom a brick red diamond sits just left of zero, running from about minus 0.4 to just above zero, labelled pooled. A green dashed line at minus 1 marks a worthwhile difference. A small GRADE badge at the top right shows three of four circles filled, labelled moderate.",
+ draw(T){const pl=poolRows(LFOREST);panelBox(10,10,780,480);title(24,32,"Manipulation versus other recommended care: pain at 3 months",C.ink);
+   const fr=forest({x:230,y:70,w:360,rowH:50,x0:-3,x1:1.5},LFOREST,pl,clamp(P(T,12)*1.7,0,1),{vals:true,mcid:-1,left:"favours manipulation",right:"favours other care",ticks:[-3,-2,-1,0,1],tdp:0});
+   label(fr.X(-1),56,"worthwhile 1 point",{size:11,weight:700,border:C.good});
+   rr(636,20,146,34,6);fillStroke(C["evid-wash"],C.evid,1.6);gradeDots(650,37,3,C.evid,5.5);txt(708,37,"moderate",{size:11.5,weight:700})},
+ qs:[{q:"What does the pooled diamond tell Priya?",opts:[["On average, manipulation and other recommended care give similar pain relief; any difference is small",1,"Yes. The diamond sits near zero and well inside the worthwhile line, so the two options look similar."],["Manipulation is much better than other care",0,"The diamond is close to zero, not near the 1 point worthwhile line."],["Manipulation does not help anyone",0,"This compares two active treatments. Both groups can improve; the review says they are similar."],["The review proves exercise is useless",0,"Similar results mean both are reasonable options, not that either is useless."]]},
+  {q:"Which trial carries the most weight in the pooled result?",opts:[["Trial 4, with 600 people and the shortest line",1,"Right. Larger, more precise trials get bigger squares and more weight."],["Trial 5, because its effect is largest",0,"Weight depends on precision, not on how big the effect is. Trial 5 is small and imprecise."],["Trial 1, because it is listed first",0,"Order on the plot does not change weight."],["They all count equally",0,"Meta analyses usually weight studies by precision."]]},
+  {q:"A patient asks Priya whether manipulation is better than exercise for her chronic back pain. Which answer fits the evidence?",opts:[["Research suggests they work about equally well on average, with modest benefits, so her preferences, safety and cost can guide the choice",1,"Yes. This combines the evidence with patient values, which is evidence based practice."],["Manipulation is clearly superior",0,"The pooled result does not support a clear advantage."],["Neither has ever been studied",0,"This review includes six trials."],["She should avoid all treatment",0,"Both options are recommended in guidelines; staying active matters."]]}]},
+{name:"A flyer that halves your risk",who:"Scenario 4 · the waiting room",
+ story:"A waiting room flyer says: \"Our wellness program HALVES your risk of a back pain flare up!\" The small print shows that over one year, 4 out of 100 people in the program had a flare up, compared with 8 out of 100 who did not join. Elena, a nursing student, wants to explain the numbers to her aunt.",
+ cap:"Halving sounds big, but it is 8 versus 4 out of 100: 4 fewer people per 100.",
+ desc:"A flyer on a board shouts halves your risk in large letters. Below it, two icon arrays of 100 people appear: in the no program group 8 icons are red with an x, and in the program group 4 icons are red. The 4 icons that differ glow gold. A calculation panel on the right builds: relative risk 4 divided by 8 equals 0.5, relative risk reduction 50 percent, absolute risk reduction 8 minus 4 equals 4 percentage points, NNT 1 divided by 0.04 equals 25.",
+ draw(T){const t=P(T,12)*12;rr(20,16,360,96,8);fillStroke(C.paper,C.accent,2.4);txt(200,46,"Our wellness program",{size:15,weight:700,align:"center"});txt(200,80,"HALVES YOUR RISK!",{size:24,weight:700,align:"center",color:C["accent-ink"]});
+   const cell=16;[[24,"no program: 8 of 100",8],[204,"program: 4 of 100",4]].forEach((g,gi)=>{txt(g[0],134,g[1],{size:12,weight:700});
+     for(let i=0;i<100;i++){const cx=g[0]+(i%10)*cell+cell/2,cy=148+Math.floor(i/10)*cell+cell/2;const on=i<g[2];mini(cx,cy+2,cell*.82,on?C.harm:hexA(C.coi,.55));if(on)txt(cx,cy+5,"x",{size:9,weight:700,align:"center",color:inkOn(C.harm)});if(gi===1&&i>=4&&i<8&&t>2){ctx.strokeStyle=hexA(C.gold,.5+.5*Math.sin(T*4));ctx.lineWidth=2;rr(cx-cell/2+.5,cy-cell/2+.5,cell-1,cell-1,3);ctx.stroke()}}});
+   if(t>2)label(284,326,"4 fewer per 100",{size:12,weight:700,border:C.gold});
+   workCard(400,16,386,330,[{k:"eq",t:"RR = 4% ÷ 8% = 0.5"},{k:"eq",t:"RRR = 1 − 0.5 = 50%"},{k:"eq",t:"ARR = 8% − 4% = 4 points"},{k:"eq",t:"NNT = 1 ÷ 0.04 = 25"},{k:"ans",t:"25 people for 1 fewer flare up"},{k:"note",t:"Halving a small risk is still a small absolute change."}],t,{per:12,t0:2.5,dt:1.1,title:"The numbers behind the flyer"});
+   person(560,440,30,{skin:2,shirt:2,mood:true});person(640,440,30,{skin:3,shirt:3,mood:true});bubble(470,358,160,30,"4 fewer per 100",{size:12,tx:540});txt(600,488,"Elena and her aunt",{size:11.5,weight:600,align:"center"})},
+ qs:[{q:"What is the absolute risk reduction?",opts:[["4 percentage points",1,"Correct. 8% − 4% = 4 percentage points."],["50%",0,"That is the relative risk reduction, which is what the flyer uses."],["0.5",0,"That is the relative risk, 4 ÷ 8."],["12 percentage points",0,"That added the two risks. Subtract instead."]]},
+  {q:"What is the number needed to treat to prevent one flare up?",opts:[["25 people",1,"Right. NNT = 1 ÷ 0.04 = 25."],["2 people",0,"That used the RRR (1 ÷ 0.5). Always use the absolute difference."],["4 people",0,"4 is the ARR in percentage points. NNT = 1 ÷ 0.04."],["50 people",0,"That would need an ARR of 2 percentage points."]]},
+  {q:"How should Elena explain this to her aunt?",opts:[["Out of 100 people like her, about 4 fewer would have a flare up in a year if they joined; she can weigh that against cost, time and what she enjoys",1,"Yes. Absolute numbers with a time frame are easiest to understand and support a personal choice."],["The program cuts her risk in half, so she must join",0,"\"Half\" is true but sounds bigger than the absolute change, and the choice is hers."],["The flyer is lying",0,"The numbers are real. The flyer simply chose the more impressive way to present them."],["Relative numbers are always wrong",0,"Relative numbers are valid; they just need the absolute numbers beside them."]]}]}
+];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+function drawLife(now){use(S4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+function lifeInit(){$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()}}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,660),S2=makeStage("cvCalc",800,600),S4=makeStage("cvLife",800,500);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},calc:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","calc","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function frame(now){
+  try{if(curTab==="sim")drawSim(now);else if(curTab==="calc")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__ev={tab:k=>showTab(k),run:()=>simRun(true),set:o=>{Object.assign(SM.set,o);simRun(true)},trial:()=>{const r=SM.trial;return r&&{md:r.md,lo:r.lo,hi:r.hi,nT:r.T.n,nC:r.C.n,runs:SM.runs.length}},pool:()=>simPool(),chal:()=>[...SM.chal],
+  calcTypes:()=>CTYPES.map(c=>c[0]).filter(c=>c!=="mix"),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,fmt:fmtAns(TR.p,TR.p.ans),unit:TR.p.unit,kind:TR.p.kind}),
+  gen:t=>{const q=genOne(t);const good=fmtAns(q,q.ans);const bad=fmtAns(q,q.ans*1.5+1);return {ans:q.ans,good,j1:judge(q,good),j1u:judge(q,good+" "+q.unit),j2:judge(q,bad),j3:judge(q,"abc"),hints:q.hints.length,rows:q.rows.length,html:q.html}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();simInit();calcInit();calcNew();updCalcMeter();sLoad(0);lifeInit();lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

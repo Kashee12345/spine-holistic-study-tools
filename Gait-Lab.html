@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Posture and Gait Lab</title>
+<meta name="description" content="Posture and gait lab: an animated walker and runner simulator with speed, cadence and step length controls, a live ground reaction force curve, phase labels, a muscle activity strip and optional limp patterns; a randomized gait math and phase identification trainer with animated worked solutions; ordering and sorting games for gait phases, events, muscles and gait patterns; and clinic scenarios about fall risk, running and foot drop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7E2222;--accent-wash:#F6E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B8561A;--act2:#2F7FC1;--act3:#B07A10;--act4:#2E8A7A;--act5:#7B5CC9;--act6:#3E9B4F;--act7:#A04E8C;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --bone:#EFE6D0;--bone-edge:#8A7A58;--disc:#3B7DC4;--disc-ink:#1F5A94;--nucleus:#8FB8E6;--nerve:#D9A514;--nerve-ink:#7A5A00;--muscle:#C8506A;--muscle-ink:#9B2C45;--lig:#2E8A86;--lig-ink:#1E6663;
+  --symp:#E0761E;--para:#3E9B4F;--pain:#D03434;--pain-ink:#A82525;--evid:#4F5BC0;--evid-ink:#3A45A0;
+  --stance:#7A4E9A;--stance-ink:#5E3A7A;--swing:#B8860B;--swing-ink:#7A5A00;--dbl:#3F4A8F;--flight:#7F99A6;
+  --com:#D03434;--bos:#2E8A86;--grf:#4F5BC0;--legR:#9B2C2C;--legL:#7D8A93;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--hair2:#6B4A2E;--hair3:#9AA1A6;
+  --shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;--pants:#3E4A56;--pants2:#6B5A4A;--shoe:#2A2F33;--sole:#C9CED2;
+  --floor:#D2C8B6;--floor-line:#A69A84;--plate:#B9C3CA;--plate-edge:#7F8C95;--chair:#8A6A4A;--wall:#E6E9EC;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B8B2;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CDB2;--bone-edge:#F0E6CC;--disc:#6FA8E8;--disc-ink:#8CBCF0;--nucleus:#3A5E8A;--nerve:#F2D04A;--nerve-ink:#F2D04A;--muscle:#EE8AA0;--muscle-ink:#F4A2B4;--lig:#5CC4BE;--lig-ink:#7AD4CE;
+  --symp:#F5A050;--para:#6CCB7C;--pain:#F06A6A;--pain-ink:#F48A8A;--evid:#8F98F0;--evid-ink:#A8AFF4;
+  --stance:#B08ED8;--stance-ink:#C4A8E4;--swing:#E8BE5A;--swing-ink:#E8BE5A;--dbl:#8F98F0;--flight:#7F99A6;
+  --com:#F06A6A;--bos:#5CC4BE;--grf:#8F98F0;--legR:#F4A7A0;--legL:#7D8A93;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--hair2:#4A3420;--hair3:#8A9196;
+  --shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--pants:#4A5866;--pants2:#7A6A5A;--shoe:#0B0F12;--sole:#6E777D;
+  --floor:#3A342A;--floor-line:#6A604E;--plate:#3E4A52;--plate-edge:#7F8C95;--chair:#7A5A3A;--wall:#1A2228;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B8B2;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CDB2;--bone-edge:#F0E6CC;--disc:#6FA8E8;--disc-ink:#8CBCF0;--nucleus:#3A5E8A;--nerve:#F2D04A;--nerve-ink:#F2D04A;--muscle:#EE8AA0;--muscle-ink:#F4A2B4;--lig:#5CC4BE;--lig-ink:#7AD4CE;
+  --symp:#F5A050;--para:#6CCB7C;--pain:#F06A6A;--pain-ink:#F48A8A;--evid:#8F98F0;--evid-ink:#A8AFF4;
+  --stance:#B08ED8;--stance-ink:#C4A8E4;--swing:#E8BE5A;--swing-ink:#E8BE5A;--dbl:#8F98F0;--flight:#7F99A6;
+  --com:#F06A6A;--bos:#5CC4BE;--grf:#8F98F0;--legR:#F4A7A0;--legL:#7D8A93;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--hair2:#4A3420;--hair3:#8A9196;
+  --shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--pants:#4A5866;--pants2:#7A6A5A;--shoe:#0B0F12;--sole:#6E777D;
+  --floor:#3A342A;--floor-line:#6A604E;--plate:#3E4A52;--plate-edge:#7F8C95;--chair:#7A5A3A;--wall:#1A2228;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.ordwrap{margin:6px 0 10px}
+.ordwrap .item{border-left-color:var(--stance)}
+.ordwrap .item.sw{border-left-color:var(--swing)}
+.ordwrap .item .tag{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-left:6px}
+.ctl .hint{font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.lab-sel2{width:100%;padding:7px 8px;font-size:15px}
+.phasechip{display:inline-block;font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:99px;border:1.5px solid var(--stance);margin:2px 4px 2px 0}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 8 &middot; Posture, gait and movement</div>
+    <h1>Posture and Gait Lab</h1>
+    <p class="sub">Drive a walker and a runner and watch the floor forces, phases and muscles respond; practice gait math and phase spotting with animated worked solutions; put the phases in order and match patterns to causes; then reason through three clinic scenarios. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Gait Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button" tabindex="-1">Part 2 &middot; Gait Math Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Phases and Patterns</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Gait Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Gait simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--legR)"></i>Right leg (followed)</span><span><i class="s" style="background:var(--stance)"></i>Stance</span><span><i class="s" style="background:var(--swing)"></i>Swing</span>
+          <span><i class="ln" style="border-top-color:var(--grf)"></i>Right foot force</span><span><i class="ln" style="border-top-color:var(--legL)"></i>Left foot force</span><span><i class="s" style="background:var(--muscle)"></i>Muscle activity</span><span><i class="s" style="background:var(--dbl)"></i>Double support</span><span><i class="s" style="background:var(--flight)"></i>Flight</span>
+        </div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Gait readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">Simplified teaching model. Joint angles follow typical adult curves; the hip swing is scaled so the drawn stride matches the step length you set. Speed = cadence × step length. Vertical force is shaped from typical curves and scaled so that the average over a whole cycle equals one body weight, which is why shorter contact means taller peaks. Muscle timing is approximate. Limp patterns show the right leg affected and are drawn for walking only.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="mode-h">Mode</h3>
+        <div class="seg2" id="simMode" role="group" aria-labelledby="mode-h"></div>
+        <div class="ctl"><label for="simSpeed">Speed <output id="simSpeedO" for="simSpeed"></output></label><input type="range" id="simSpeed" min="0.5" max="2" step="0.05" value="1.3"><span class="hint">Sets a natural cadence and step length together.</span></div>
+        <div class="ctl"><label for="simCad">Cadence <output id="simCadO" for="simCad"></output></label><input type="range" id="simCad" min="70" max="140" step="1" value="112"></div>
+        <div class="ctl"><label for="simStep">Step length <output id="simStepO" for="simStep"></output></label><input type="range" id="simStep" min="0.35" max="0.95" step="0.01" value="0.7"></div>
+        <label class="lab-sel" for="simLimp">Gait pattern (right leg)</label>
+        <select id="simLimp" class="lab-sel2"><option value="none">Typical</option><option value="antalgic">Antalgic: painful right leg</option><option value="trend">Trendelenburg: weak right hip abductors</option><option value="steppage">Steppage: right foot drop</option></select>
+        <h3 id="slow-h">Playback</h3>
+        <div class="seg3" id="simSlow" role="group" aria-labelledby="slow-h"></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc" hidden>
+    <h2 class="gk-sr">Part 2: Gait Math Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice problem picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Problems are randomly generated with realistic adult values. The worked solution shows units cancelling (struck through in red) and builds line by line. Phase frames come from the same walking model as the simulator.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div id="calcNumWrap" class="ansrow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div id="calcChoices" class="mopts" role="group" aria-label="Answer choices" hidden></div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a number (units are optional). The hint ladder has three steps. The streak counts answers right on the first check without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Phases and Patterns</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small" id="sHow"></p>
+      <div class="ordwrap" id="sOrder" hidden><ol class="list" id="sList" aria-label="Phases in order"></ol></div>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="btn" id="sCheck" type="button" hidden>Check order</button>
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults and rounded teaching values. For learning only, not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Gait-Walkthrough.html">Posture and Gait Walkthrough</a>. Values are typical rounded adult values and vary between people.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "disc-ink", "nucleus", "nerve", "nerve-ink", "muscle", "muscle-ink", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "stance", "stance-ink", "swing", "swing-ink", "dbl", "flight", "com", "bos", "grf", "legR", "legL", "skin1", "skin2", "skin3", "skin4", "hair", "hair2", "hair3", "shirt1", "shirt2", "shirt3", "shirt4", "pants", "pants2", "shoe", "sole", "floor", "floor-line", "plate", "plate-edge", "chair", "wall"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= gait model (shared by both pages) =================
+   Sagittal joint angles are approximate textbook curves for an adult, in degrees:
+   hip flexion +, knee flexion +, ankle dorsiflexion +. Phase 0 = right initial contact. */
+const D2R=Math.PI/180;
+const KF={
+ walk:{hip:[[0,23],[.12,20],[.3,4],[.5,-14],[.6,-9],[.72,12],[.86,26],[.94,25]],
+       knee:[[0,3],[.14,17],[.38,6],[.5,28],[.6,44],[.72,62],[.86,28],[.96,3]],
+       ank:[[0,0],[.07,-6],[.25,4],[.42,10],[.52,0],[.62,-15],[.75,-3],[.87,1]],toe:.6,mean:5},
+ run:{hip:[[0,26],[.15,12],[.36,-10],[.5,0],[.7,32],[.85,40],[.95,32]],
+      knee:[[0,18],[.12,40],[.36,16],[.5,62],[.66,100],[.82,55],[.94,22]],
+      ank:[[0,4],[.12,18],[.36,-20],[.5,-10],[.7,2],[.88,8]],toe:.38,mean:12}};
+function kfI(K,p){p=((p%1)+1)%1;const n=K.length;let i=n-1;for(let j=0;j<n;j++){if(K[j][0]<=p)i=j}
+  const k0=K[(i-1+n)%n],k1=K[i],k2=K[(i+1)%n],k3=K[(i+2)%n];
+  let t1=k1[0],t2=k2[0];if(t2<=t1)t2+=1;let t0=k0[0];if(t0>=t1)t0-=1;let t3=k3[0];while(t3<=t2)t3+=1;
+  let pp=p;if(pp<t1)pp+=1;const h=t2-t1,u=(pp-t1)/h;
+  const m1=(k2[1]-k0[1])/(t2-t0)*h,m2=(k3[1]-k1[1])/(t3-t1)*h;const u2=u*u,u3=u2*u;
+  return (2*u3-3*u2+1)*k1[1]+(u3-2*u2+u)*m1+(-2*u3+3*u2)*k2[1]+(u3-u2)*m2}
+const SEGM={thigh:.44,shank:.43,ah:.075,heel:-.06,ball:.13,toe:.19,trunk:.5,neck:.09,head:.11,uarm:.3,farm:.28};
+function mod1(x){return ((x%1)+1)%1}
+function legFK(h,k,a){const th=h*D2R,ts=(h-k)*D2R;const knee=[SEGM.thigh*Math.sin(th),SEGM.thigh*Math.cos(th)];
+  const ank=[knee[0]+SEGM.shank*Math.sin(ts),knee[1]+SEGM.shank*Math.cos(ts)];const phi=-ts-a*D2R;const c=Math.cos(phi),s=Math.sin(phi);
+  const fp=(fx,fy)=>[ank[0]+c*fx-s*fy,ank[1]+s*fx+c*fy];
+  return {knee,ank,heel:fp(SEGM.heel,SEGM.ah),ball:fp(SEGM.ball,SEGM.ah),toe:fp(SEGM.toe,SEGM.ah-.012),top:fp(.12,-.01),back:fp(-.07,.01),phi}}
+function stanceWalk(v){return clamp(.655-.04*v,.56,.64)}
+function dutyRun(v){return clamp(.44-.03*v,.28,.4)}
+function swingBump(p,toe){if(p<toe)return 0;return Math.sin(Math.PI*(p-toe)/(1-toe))}
+/* angles for one leg at kinematic phase p */
+function legAngles(G,p,isR){const K=G.K;let h=K.mean+G.k*(kfI(K.hip,p)-K.mean),kn=kfI(K.knee,p),a=kfI(K.ank,p);
+  if(isR&&G.limp==="steppage"){const b=swingBump(p,K.toe);const sw=p>=K.toe?smooth((p-K.toe)/.08):0;
+    a=lerp(a,-20,sw);h+=16*b;kn+=24*b;if(p<.07){a=lerp(-14,a,smooth(p/.07))}}
+  if(isR&&G.limp==="antalgic"){kn+=5*(p<K.toe?1:0)}
+  return [h,kn,a]}
+function legPhase(G,u,leg){const L=G.legs[leg];const uu=mod1(u-L.off);const toe=G.K.toe;const p=uu<L.s?toe*uu/L.s:toe+(1-toe)*(uu-L.s)/(1-L.s);return {uu,p,st:uu<L.s,s:L.s}}
+function buildTable(G,k){G.k=k;const N=G.N;const X=new Float64Array(N+1),Y=new Float64Array(N),CT=[];let sum=0,cu=0;
+  const pose=u=>{const r={};["R","L"].forEach(l=>{const ph=legPhase(G,u,l);const an=legAngles(G,ph.p,l==="R");r[l]={ph,an,f:legFK(an[0],an[1],an[2])}});return r};
+  const low=f=>{let b=f.heel;[f.ball,f.toe].forEach(q=>{if(q[1]>b[1])b=q});return b};
+  const P0=[];for(let i=0;i<=N;i++)P0.push(pose(i/N));
+  for(let i=0;i<N;i++){const A=P0[i],B=P0[i+1];const legs=["R","L"].filter(l=>A[l].ph.st);CT.push(legs.length);
+    if(legs.length){let d=-1e9;legs.forEach(l=>{d=Math.max(d,low(A[l].f)[1])});Y[i]=-d;
+      const lg=legs.length===1?legs[0]:(A.R.ph.uu<A.L.ph.uu?"R":"L");const f=A[lg].f;let key="heel";[["ball",f.ball],["toe",f.toe]].forEach(q=>{if(q[1][1]>f[key][1])key=q[0]});
+      const dx=-(B[lg].f[key][0]-f[key][0]);X[i+1]=dx;sum+=dx;cu++}else{Y[i]=NaN;X[i+1]=NaN}}
+  const vb=cu?sum/cu:0;let tot=0;X[0]=0;for(let i=1;i<=N;i++){const d=isNaN(X[i])?vb:X[i];tot+=d;X[i]=tot}
+  /* smooth the hip height a little */
+  const Ys=new Float64Array(N);for(let i=0;i<N;i++){if(isNaN(Y[i])){Ys[i]=NaN;continue}let s=0,c=0;for(let j=-2;j<=2;j++){const v=Y[(i+j+N)%N];if(!isNaN(v)){s+=v;c++}}Ys[i]=s/c}
+  /* flight: ballistic arcs */
+  for(let i=0;i<N;i++){if(!isNaN(Ys[i])||!isNaN(Ys[(i-1+N)%N]))continue}
+  const runs=[];let i0=-1;for(let j=0;j<2*N;j++){const i=j%N;const fl=isNaN(Ys[i]);const pv=isNaN(Ys[(i-1+N)%N]);if(fl&&!pv&&j<N+1){i0=j}if(!fl&&pv&&i0>=0){runs.push([i0,j]);i0=-1}}
+  const Yf=Float64Array.from(Ys);runs.forEach(r=>{const a=r[0]-1,b=r[1];const ya=Ys[(a+N)%N],yb=Ys[b%N];const n=b-a;const tf=(n-1)/N*G.Tc;const h=9.81*tf*tf/8;
+    for(let j=a+1;j<b;j++){const f=(j-a)/n;Yf[j%N]=lerp(ya,yb,f)-4*h*f*(1-f)}});
+  G.X=X;G.Y=Yf;G.CT=CT;G.stride=tot;G.P0=P0;return tot}
+function makeGait(o){const run=o.mode==="run";const G={mode:o.mode,run,K:run?KF.run:KF.walk,N:o.N||300,limp:run?"none":(o.limp||"none"),cad:o.cad,step:o.step};
+  G.v=o.cad/60*o.step;G.Tc=120/o.cad;const s=run?dutyRun(G.v):stanceWalk(G.v);G.sBase=s;
+  G.legs={R:{off:0,s},L:{off:.5,s}};
+  if(G.limp==="antalgic"){const a=.08;G.legs.R.s=s-a;G.legs.L.off=.5-a*.75;G.legs.L.s=s+a*.75}
+  /* fit the hip excursion so the drawn stride matches 2 x step length */
+  const target=2*o.step;let lo=.3,hi=2.3;for(let it=0;it<16;it++){const m=(lo+hi)/2;if(buildTable(G,m)<target)lo=m;else hi=m}buildTable(G,(lo+hi)/2);
+  return G}
+function tabAt(G,arr,u){const N=G.N;const f=mod1(u)*N;const i=Math.floor(f),t=f-i;const a=arr[i%N],b=arr[(i+1)%N];return lerp(a,b,t)}
+function gaitPose(G,u){u=mod1(u);const N=G.N;const f=u*N;const i=Math.floor(f),t=f-i;const hx=lerp(G.X[i],G.X[i+1],t);const hy=tabAt(G,G.Y,u);
+  const legs={};["R","L"].forEach(l=>{const ph=legPhase(G,u,l);const an=legAngles(G,ph.p,l==="R");legs[l]={ph,an,f:legFK(an[0],an[1],an[2])}});
+  return {u,hx,hy,legs,contact:G.CT[Math.min(N-1,i)]}}
+/* phase names (walking), on the kinematic phase of a leg */
+const WPH=[["Initial contact","IC",0,.02,"stance"],["Loading response","LR",.02,.1,"stance"],["Midstance","MSt",.1,.3,"stance"],["Terminal stance","TSt",.3,.5,"stance"],["Preswing","PSw",.5,.6,"stance"],["Initial swing","ISw",.6,.73,"swing"],["Midswing","MSw",.73,.87,"swing"],["Terminal swing","TSw",.87,1,"swing"]];
+function wPhase(p){p=mod1(p);for(const w of WPH)if(p>=w[2]&&p<w[3])return w;return WPH[7]}
+function rPhaseName(p,toe){p=mod1(p);if(p<toe*.45)return "Stance: absorbing";if(p<toe)return "Stance: pushing off";if(p<toe+.12)return "Flight (float)";if(p<.94)return "Swing";return "Swing: reaching for contact"}
+/* vertical ground reaction force, in body weights */
+function grfShapeW(s,P,V){s=clamp(s,0,1);const pts=[[0,0],[.22,P],[.5,V],[.78,P],[1,0]];
+  if(s<.22){const t=s/.22;return P*Math.pow(Math.sin(Math.PI/2*t),.85)}if(s>.78){const t=(1-s)/.22;return P*Math.pow(Math.sin(Math.PI/2*t),.85)}
+  const a=s<.5?0:1;const t=(s-pts[1+a][0])/(pts[2+a][0]-pts[1+a][0]);return lerp(pts[1+a][1],pts[2+a][1],(1-Math.cos(Math.PI*t))/2)}
+function grfShapeR(s){s=clamp(s,0,1);return Math.pow(Math.sin(Math.PI*s),1.15)}
+function grfNorm(G){if(G._gn)return G._gn;const P=1+.22*(G.v-.8)/.8,V=.92-.25*(G.v-.8)/.8;G._P=clamp(P,.98,1.4);G._V=clamp(V,.5,.95);let tot=0;const N=400;
+  for(let i=0;i<N;i++){tot+=grfRaw(G,i/N,"R")+grfRaw(G,i/N,"L")}G._gn=1/(tot/N);return G._gn}
+function grfRaw(G,u,leg){const ph=legPhase(G,u,leg);if(!ph.st)return 0;const s=ph.uu/ph.s;
+  if(G.run)return grfShapeR(s);let P=G._P,V=G._V;if(leg==="R"&&G.limp==="antalgic"){P*=.84;V*=.92}
+  let f=grfShapeW(s,P,V);if(leg==="R"&&G.limp==="steppage")f+=.25*gauss(s,.05,.025);return f}
+function grfLeg(G,u,leg){const n=grfNorm(G);return grfRaw(G,u,leg)*n}
+function grfPeak(G){let m=0;for(let i=0;i<200;i++)m=Math.max(m,grfLeg(G,i/200,"R"));return m}
+/* muscle activity (approximate EMG timing), 0..1, on the kinematic phase of the right leg */
+function gw(p,m,s){return Math.max(gauss(p,m,s),gauss(p,m-1,s),gauss(p,m+1,s))}
+const EMG_W=[["Tibialis anterior",p=>Math.max(gw(p,.03,.04),.62*gw(p,.66,.05),.42*gw(p,.85,.08)),"Lifts the foot: controls foot lowering after heel strike, then clears the toes in swing"],
+  ["Quadriceps",p=>Math.max(gw(p,.08,.05),.35*gw(p,.95,.03)),"Absorbs the load as the knee bends a little after contact"],
+  ["Hamstrings",p=>Math.max(gw(p,.92,.05),.55*gw(p,.03,.04)),"Slows the swinging shank before contact"],
+  ["Gluteus maximus",p=>Math.max(gw(p,.04,.06),.45*gw(p,.97,.03)),"Steadies the hip and trunk as weight lands"],
+  ["Gluteus medius",p=>gw(p,.15,.08),"Holds the pelvis level in single leg support"],
+  ["Calf (soleus, gastrocnemius)",p=>gw(p,.4,.09),"Controls the shin over the foot, then pushes off"],
+  ["Hip flexors",p=>gw(p,.62,.06),"Pulls the thigh forward to start swing"]];
+const EMG_R=[["Tibialis anterior",p=>Math.max(gw(p,.02,.04),.7*gw(p,.62,.07),.6*gw(p,.92,.05))],["Quadriceps",p=>Math.max(gw(p,.1,.06),.5*gw(p,.95,.04))],["Hamstrings",p=>Math.max(gw(p,.86,.07),.4*gw(p,.05,.04))],
+  ["Gluteus maximus",p=>Math.max(gw(p,.06,.06),.6*gw(p,.94,.04))],["Gluteus medius",p=>gw(p,.12,.07)],["Calf (soleus, gastrocnemius)",p=>gw(p,.2,.08)],["Hip flexors",p=>gw(p,.5,.07)]];
+function emgAt(G,i,p){const L=G.run?EMG_R:EMG_W;let v=L[i][1](p);if(G.limp==="steppage"&&i===0)v*=.18;if(G.limp==="trend"&&i===4)v*=.25;return v}
+/* frontal plane pelvic drop (deg, + means the LEFT side is lower) and transverse rotation */
+function pelvisFront(G,u){const R=legPhase(G,u,"R"),L=legPhase(G,u,"L");let a=0;
+  if(R.st&&!L.st){const f=(L.uu-L.s)/(1-L.s);a=(G.limp==="trend"?13:5)*Math.sin(Math.PI*clamp(f,0,1))}
+  if(L.st&&!R.st){const f=(R.uu-R.s)/(1-R.s);a=-5*Math.sin(Math.PI*clamp(f,0,1))}
+  return a}
+function trunkLeanFront(G,u){if(G.limp!=="trend")return 0;const R=legPhase(G,u,"R"),L=legPhase(G,u,"L");if(!(R.st&&!L.st))return 0;const f=(L.uu-L.s)/(1-L.s);return 7*Math.sin(Math.PI*clamp(f,0,1))}
+function pelvisRot(G,u){return 4*Math.cos(TAU*u)}
+/* ================= figures: walker, runner, standing, sitting ================= */
+function limb(a,b,w1,w2,col,stroke,lw){const dx=b[0]-a[0],dy=b[1]-a[1];const L=Math.hypot(dx,dy)||1;const nx=-dy/L,ny=dx/L;
+  ctx.beginPath();ctx.moveTo(a[0]+nx*w1/2,a[1]+ny*w1/2);ctx.lineTo(b[0]+nx*w2/2,b[1]+ny*w2/2);ctx.lineTo(b[0]-nx*w2/2,b[1]-ny*w2/2);ctx.lineTo(a[0]-nx*w1/2,a[1]-ny*w1/2);ctx.closePath();
+  if(col){ctx.fillStyle=col;ctx.fill();circ(a[0],a[1],w1/2,col);circ(b[0],b[1],w2/2,col)}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.2;ctx.stroke()}}
+const SHOE=[[-.078,-.02],[-.08,.055],[-.065,.08],[.13,.08],[.19,.074],[.205,.052],[.16,.026],[.07,-.012],[.0,-.035],[-.04,-.04]];
+function footPts(ank,phi,pts){const c=Math.cos(phi),s=Math.sin(phi);return pts.map(q=>[ank[0]+c*q[0]-s*q[1],ank[1]+s*q[0]+c*q[1]])}
+function shoe(ank,phi,sc,col,o){o=o||{};const P_=footPts([0,0],phi,SHOE).map(q=>[ank[0]+q[0]*sc,ank[1]+q[1]*sc]);ctx.beginPath();P_.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();
+  if(o.hl){ctx.strokeStyle=o.hl;ctx.lineWidth=o.hlw||4;ctx.stroke()}ctx.fillStyle=col;ctx.fill();
+  const so=footPts([0,0],phi,[[-.072,.068],[.13,.068],[.19,.062]]).map(q=>[ank[0]+q[0]*sc,ank[1]+q[1]*sc]);poly(so,o.sole||C.sole,Math.max(1.5,sc*.012))}
+function skinC(i){return C["skin"+(i||1)]}
+/* full side view walker or runner. returns screen landmarks */
+function drawWalker(G,u,ox,gy,pxm,o){o=o||{};const Pz=gaitPose(G,u);const hip=[ox,gy+Pz.hy*pxm];const S=q=>[hip[0]+q[0]*pxm,hip[1]+q[1]*pxm];
+  const run=G.run;const lean=(run?7:3)*D2R+(o.lean||0)*D2R;const bob=0;
+  const sh=[hip[0]+Math.sin(lean)*SEGM.trunk*pxm,hip[1]-Math.cos(lean)*SEGM.trunk*pxm];
+  const fwd=(o.fhp||0);const nk=[sh[0]+(Math.sin(lean)*SEGM.neck+fwd*.5)*pxm,sh[1]-Math.cos(lean)*SEGM.neck*pxm];const hd=[nk[0]+(.03+fwd*.5)*pxm,nk[1]-SEGM.head*.85*pxm];
+  const skin=skinC(o.skin||1),shirt=C[o.shirt||"shirt1"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair"];
+  const farMix=c=>mix(c,C.ecf,.38);
+  const arm=(side,far)=>{const legD=G.legs[side==="R"?"L":"R"];const other=Pz.legs[side==="R"?"L":"R"];const hd_=other.an[0]-G.K.mean;const amp=run?1.1:.75;const sa=(hd_*amp)*D2R;const el=(run?82:16+6*Math.max(0,hd_/20))*D2R;
+    const e=[sh[0]+Math.sin(sa)*SEGM.uarm*pxm,sh[1]+Math.cos(sa)*SEGM.uarm*pxm];const fa=sa+el;const w=[e[0]+Math.sin(fa)*SEGM.farm*pxm,e[1]+Math.cos(fa)*SEGM.farm*pxm];
+    const sc=far?farMix(shirt):shirt,kc=far?farMix(skin):skin;limb(sh,e,.085*pxm,.07*pxm,sc);limb(e,w,.065*pxm,.05*pxm,kc);circ(w[0],w[1],.042*pxm,kc);return {e,w}};
+  const leg=(l,far)=>{const L=Pz.legs[l];const k=S(L.f.knee),a=S(L.f.ank);const pc=far?farMix(pants):pants;const hl=!far&&o.hl?o.hl:null;const hlR=o.hlL&&far?o.hlL:null;
+    if(hl||hlR){const c=hl||hlR;limb(hip,k,.15*pxm+5,.11*pxm+5,c);limb(k,a,.11*pxm+5,.075*pxm+5,c)}
+    limb(hip,k,.15*pxm,.11*pxm,pc);limb(k,a,.11*pxm,.075*pxm,o.shorts?(far?farMix(skin):skin):pc);if(o.shorts){limb(hip,lerpP(hip,k,.75),.15*pxm,.12*pxm,pc)}
+    shoe(a,L.f.phi,pxm,far?farMix(C.shoe):C.shoe,{hl:hl||hlR,hlw:5,sole:far?farMix(C.sole):C.sole});return {k,a,heel:S(L.f.heel),toe:S(L.f.toe),ball:S(L.f.ball)}};
+  const res={hip,sh,hd,pose:Pz};
+  res.armL=arm("L",true);res.L=leg("L",true);
+  /* torso */
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(lean);rr(-.115*pxm,-SEGM.trunk*pxm-.04*pxm,.23*pxm,SEGM.trunk*pxm+.1*pxm,.08*pxm);ctx.fillStyle=shirt;ctx.fill();
+  rr(-.12*pxm,-.04*pxm,.24*pxm,.13*pxm,.05*pxm);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  res.R=leg("R",false);
+  limb(sh,nk,.08*pxm,.075*pxm,skin);circ(hd[0],hd[1],SEGM.head*pxm,skin);
+  ctx.save();ctx.beginPath();ctx.arc(hd[0]-.012*pxm,hd[1]-.01*pxm,SEGM.head*pxm*1.04,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();ctx.restore();
+  circ(hd[0]+.07*pxm,hd[1]-.01*pxm,Math.max(1.2,.012*pxm),C.ink);
+  res.armR=arm("R",false);
+  res.com=[hip[0]+Math.sin(lean)*.1*pxm,hip[1]-.1*pxm];return res}
+function lerpP(a,b,t){return [lerp(a[0],b[0],t),lerp(a[1],b[1],t)]}
+/* ground with distance marks; off = world offset in px */
+function groundLine(x0,x1,gy,off,pxm,o){o=o||{};ctx.fillStyle=hexA(C.floor,.55);ctx.fillRect(x0,gy,x1-x0,o.depth||26);line(x0,gy,x1,gy,C["floor-line"],2);
+  const sp=(o.every||.5)*pxm;const st=-((off%sp)+sp)%sp;for(let x=x0+st;x<x1;x+=sp){const idx=Math.round((x-x0+off)/sp);line(x,gy,x,gy+(idx%2?6:11),C["floor-line"],1.5);
+    if(o.labels&&idx%2===0)txt(x,gy+19,(idx*(o.every||.5)).toFixed(0)+" m",{size:10,mono:true,align:"center",color:C["ink-soft"]})}}
+/* phase strip: shows stance and swing bars for both legs over one cycle with a cursor */
+function phaseStrip(G,x,y,w,u,o){o=o||{};const rows=[["R","Right"],["L","Left"]];const rh=o.rh||16;
+  rows.forEach((r,i)=>{const yy=y+i*(rh+6);txt(x-6,yy+rh/2,r[1],{size:11.5,weight:700,align:"right",color:C["ink-soft"]});rr(x,yy,w,rh,3);ctx.fillStyle=hexA(C.swing,.25);ctx.fill();
+    const L=G.legs[r[0]];const a=L.off,b=L.off+L.s;const seg_=(s0,s1)=>{const A=clamp(s0,0,1),B=clamp(s1,0,1);if(B>A){rr(x+A*w,yy,(B-A)*w,rh,3);ctx.fillStyle=hexA(C.stance,.75);ctx.fill()}};seg_(a,b);if(b>1)seg_(0,b-1);
+    if(o.labels!==false){const mid=mod1((a+Math.min(b,a+L.s)/1)/1);const sx=x+clamp((a+L.s/2)%1,0,1)*w;txt(sx,yy+rh/2+.5,"stance",{size:10.5,weight:700,align:"center",color:"#fff"})}});
+  if(!G.run&&o.dbl!==false){/* double support marks */for(let i=0;i<200;i++){const uu=i/200;const a=legPhase(G,uu,"R").st&&legPhase(G,uu,"L").st;if(a){ctx.fillStyle=hexA(C.dbl,.85);ctx.fillRect(x+uu*w,y+2*(rh+6),w/200+.6,6)}}
+    txt(x-6,y+2*(rh+6)+3,"Both",{size:11,weight:700,align:"right",color:C["ink-soft"]})}
+  if(G.run&&o.dbl!==false){for(let i=0;i<200;i++){const uu=i/200;const a=!legPhase(G,uu,"R").st&&!legPhase(G,uu,"L").st;if(a){ctx.fillStyle=hexA(C.flight,.95);ctx.fillRect(x+uu*w,y+2*(rh+6),w/200+.6,6)}}
+    txt(x-6,y+2*(rh+6)+3,"Flight",{size:11,weight:700,align:"right",color:C["ink-soft"]})}
+  const cx=x+mod1(u)*w;line(cx,y-6,cx,y+2*(rh+6)+12,C.ink,2);circ(cx,y-6,4,C.ink)}
+/* GRF plot over one cycle for the right foot, with total dashed */
+function grfPlot(G,x,y,w,h,u,o){o=o||{};const ymax=o.ymax||(G.run?3:1.5);const g=graph({x,y,w,h,x0:0,x1:100,y0:0,y1:ymax,xt:[0,20,40,60,80,100],yt:G.run?[0,1,2,3]:[0,.5,1,1.5],yf:v=>String(v),xf:v=>v+"%",xl:o.xl||"% of gait cycle",yl:"force (body weights)",ylx:28,title:o.title});
+  line(g.X(0),g.Y(1),g.X(100),g.Y(1),hexA(C.ink,.45),1.2,[5,4]);txt(g.X(100)-4,g.Y(1)-9,"body weight",{size:10.5,align:"right",color:C["ink-soft"],weight:600});
+  if(o.total!==false)curve(g,p=>grfLeg(G,p/100,"R")+grfLeg(G,p/100,"L"),0,100,hexA(C.ink,.5),1.6,[3,3]);
+  if(o.left)curve(g,p=>grfLeg(G,p/100,"L"),0,100,hexA(C.legL,.9),1.8);
+  const up=o.trace?mod1(u)*100:100;curve(g,p=>grfLeg(G,p/100,"R"),0,up,C.grf,3);
+  const v=grfLeg(G,u,"R");gdot(g,mod1(u)*100,v,C.grf,null,{r:5});return g}
+/* muscle activity strip over one cycle */
+function emgStrip(G,x,y,w,u,o){o=o||{};const L=G.run?EMG_R:EMG_W;const rh=o.rh||15,gap=o.gap||5;const pR=legPhase(G,u,"R").p;const lw=o.lw||150;
+  L.forEach((m,i)=>{const yy=y+i*(rh+gap);fitTxt(x,yy+rh/2,m[0],lw-8,{size:o.fs||11.5,weight:600,color:C.ink});const bx=x+lw,bw=w-lw;rr(bx,yy,bw,rh,3);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();
+    for(let k=0;k<120;k++){const uu=k/120;const p=legPhase(G,uu,"R").p;const a=emgAt(G,i,p);if(a<.06)continue;ctx.fillStyle=hexA(C.muscle,clamp(a,0,1)*.95);ctx.fillRect(bx+uu*bw,yy+rh*(1-a)*.5,bw/120+.5,rh*a)}
+    const now=emgAt(G,i,pR);if(now>.3)circ(bx-8,yy+rh/2,4+now*2,C.muscle)});
+  const cx=x+lw+mod1(u)*(w-lw);line(cx,y-4,cx,y+L.length*(rh+gap),C.ink,2)}
+/* top view footprints of a few strides */
+function footprint(x,y,s,col,right,a){withA(a==null?1:a,()=>{ell(x,y-(right?0:0),s*.55,s*.22,0,col);ell(x-s*.62,y,s*.24,s*.18,0,col)})}
+/* front view standing person. stance: "both" | "R" (standing on right) ; drop: pelvic drop deg (+ left side lower), lean: trunk lean deg (+ toward the figure's right = viewer left) */
+function frontPerson(x,gy,s,o){o=o||{};const skin=skinC(o.skin||2),shirt=C[o.shirt||"shirt2"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair"];
+  const legL=.9*s,pw=.17*s;const drop=(o.drop||0)*D2R,lean=(o.lean||0)*D2R;const sway=o.sway||0;
+  /* viewer left = person's right */
+  const stanceR=o.stance==="R";const fR=[x-pw*.9+(o.wide||0)*-s,gy-.035*s],fL=[x+pw*.9+(o.wide||0)*s+(o.stepL||0)*s,gy-.035*s];
+  const st=o.stance||"both";const cd=Math.cos(drop),sd=Math.sin(drop);let hipR,hipL,pc;
+  if(st==="R"){hipR=[fR[0]+.1*pw+sway*s,fR[1]-legL+.035*s];hipL=[hipR[0]+2*pw*cd,hipR[1]+2*pw*sd]}
+  else if(st==="L"){hipL=[fL[0]-.1*pw+sway*s,fL[1]-legL+.035*s];hipR=[hipL[0]-2*pw*cd,hipL[1]-2*pw*sd]}
+  else{const c=[x+sway*s,gy-legL];hipR=[c[0]-pw*cd,c[1]-pw*sd];hipL=[c[0]+pw*cd,c[1]+pw*sd]}
+  pc=[(hipR[0]+hipL[0])/2,(hipR[1]+hipL[1])/2];
+  const footC=C.shoe;const pantsC=pants;const lift=o.lift==null?1:o.lift;
+  const drawLeg=(h,f,lifted)=>{const ft=lifted?[lerp(f[0],h[0]+(f[0]-h[0])*.6,lift*.3),f[1]-lift*.2*s]:f;const kn=[lerp(h[0],ft[0],.5)+(lifted?.03*s*lift*(h===hipR?-1:1):0),lerp(h[1],ft[1],.5)-(lifted?.04*s*lift:0)];
+    if(o.hlLeg&&((o.hlLeg==="R"&&h===hipR)||(o.hlLeg==="L"&&h===hipL))){limb(h,kn,.15*s+5,.11*s+5,o.hlCol||C.legR);limb(kn,ft,.11*s+5,.08*s+5,o.hlCol||C.legR)}
+    limb(h,kn,.15*s,.11*s,pantsC);limb(kn,ft,.11*s,.08*s,pantsC);rr(ft[0]-.07*s,ft[1]-.015*s,.14*s,.05*s,.022*s);ctx.fillStyle=footC;ctx.fill();return {kn,ft}};
+  const R=drawLeg(hipR,fR,st==="L"),Lg=drawLeg(hipL,fL,st==="R");
+  /* pelvis band */
+  ctx.save();ctx.translate(pc[0],pc[1]);ctx.rotate(drop);rr(-pw*1.3,-.06*s,pw*2.6,.12*s,.05*s);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  /* trunk */
+  const tl=.5*s;const sc=[pc[0]-Math.sin(lean)*tl,pc[1]-Math.cos(lean)*tl];
+  ctx.save();ctx.translate(pc[0],pc[1]);ctx.rotate(-lean);ctx.beginPath();ctx.moveTo(-pw*1.1,-.02*s);ctx.lineTo(-pw*1.35,-tl+.05*s);ctx.quadraticCurveTo(-pw*1.3,-tl-.02*s,-pw*.9,-tl-.02*s);ctx.lineTo(pw*.9,-tl-.02*s);ctx.quadraticCurveTo(pw*1.3,-tl-.02*s,pw*1.35,-tl+.05*s);ctx.lineTo(pw*1.1,-.02*s);ctx.closePath();ctx.fillStyle=shirt;ctx.fill();ctx.restore();
+  const shR=[sc[0]-pw*1.3*Math.cos(lean),sc[1]-pw*1.3*Math.sin(lean)+.05*s],shL=[sc[0]+pw*1.3*Math.cos(lean),sc[1]+pw*1.3*Math.sin(lean)+.05*s];
+  [[shR,-1],[shL,1]].forEach(q=>{const e=[q[0][0]+q[1]*.05*s,q[0][1]+.28*s],w=[q[0][0]+q[1]*.07*s,q[0][1]+.54*s];limb(q[0],e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin)});
+  const hd=[sc[0]-Math.sin(lean)*.17*s,sc[1]-.17*s];limb(sc,[hd[0],hd[1]+.05*s],.08*s,.08*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0],hd[1]-.01*s,.115*s,Math.PI*1.02,Math.PI*1.98);ctx.closePath();ctx.fillStyle=hair;ctx.fill();
+  const com=[lerp(pc[0],sc[0],.12),lerp(pc[1],sc[1],.12)];return {pc,hipR,hipL,sc,hd,fR:R.ft,fL:Lg.ft,com,kneeL:Lg.kn,kneeR:R.kn}}
+/* side view standing person, facing right; returns landmarks. o.fhp = forward head (m), o.sway (m at 1 m height, + forward) */
+function sidePerson(x,gy,s,o){o=o||{};const skin=skinC(o.skin||3),shirt=C[o.shirt||"shirt3"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair2"];
+  const a=(o.sway||0);const ank=[x,gy-.08*s];const kn=[x+.035*s+a*.5*s,gy-.5*s];const hip=[x+.07*s+a*.95*s,gy-.95*s];
+  const sh=[x+.05*s+a*1.45*s,gy-1.45*s];const fhp=o.fhp||0;const ear=[x+.05*s+fhp*s+a*1.6*s,gy-1.62*s];const hd=[ear[0]+.02*s,ear[1]-.02*s];
+  const farMix=c=>mix(c,C.ecf,.38);
+  limb([hip[0]-.01*s,hip[1]],[kn[0]-.01*s,kn[1]],.15*s,.11*s,farMix(pants));limb([kn[0]-.01*s,kn[1]],[ank[0]-.01*s,ank[1]],.11*s,.075*s,farMix(pants));shoe([ank[0]-.01*s,ank[1]],0,s,farMix(C.shoe));
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(Math.atan2(sh[0]-hip[0],hip[1]-sh[1]));rr(-.12*s,-.54*s,.24*s,.62*s,.08*s);ctx.fillStyle=shirt;ctx.fill();rr(-.125*s,-.04*s,.25*s,.13*s,.05*s);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  limb(hip,kn,.15*s,.11*s,pants);limb(kn,ank,.11*s,.075*s,pants);shoe(ank,0,s,C.shoe);
+  limb(sh,[ear[0]-.02*s,ear[1]+.04*s],.08*s,.075*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0]-.015*s,hd[1]-.01*s,.115*s,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();circ(hd[0]+.07*s,hd[1]-.01*s,Math.max(1.2,.012*s),C.ink);
+  ell(ear[0],ear[1],.018*s,.03*s,0,mix(skin,"#000",.15));
+  const e=[sh[0]+.0*s,sh[1]+.28*s],w=[sh[0]+.03*s,sh[1]+.54*s];limb(sh,e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin);
+  return {ank,kn,hip,sh,ear,hd,com:[x+.05*s+a*.95*s,gy-1.0*s],foot:[[ank[0]-.08*s,gy],[ank[0]+.2*s,gy]]}}
+/* sitting person facing right on a stool or chair. slump 0..1 */
+function sitPerson(x,fy,s,o){o=o||{};const skin=skinC(o.skin||4),shirt=C[o.shirt||"shirt4"],pants=C[o.pants||"pants2"],hair=C[o.hair||"hair"];const sl=o.slump||0;
+  const seatY=fy-.46*s;const hip=[x,seatY-.06*s];const kn=[x+.44*s,seatY-.04*s];const ank=[kn[0]+.04*s,fy-.08*s];
+  /* chair */
+  if(o.chair!==false){rr(x-.2*s,seatY,.5*s,.05*s,3);ctx.fillStyle=C.chair;ctx.fill();line(x-.16*s,seatY+.05*s,x-.18*s,fy,C.chair,4);line(x+.26*s,seatY+.05*s,x+.27*s,fy,C.chair,4);if(o.back){line(x-.19*s,seatY,x-.24*s,seatY-.5*s,C.chair,5)}}
+  limb(hip,kn,.15*s,.12*s,pants);limb(kn,ank,.11*s,.075*s,pants);shoe(ank,0,s,C.shoe);
+  const ang=(-4+sl*28)*D2R;/* trunk flexion */const sh=[hip[0]+Math.sin(ang)*.5*s-.02*s,hip[1]-Math.cos(ang)*.5*s];
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(ang);ctx.beginPath();ctx.moveTo(-.12*s,.05*s);ctx.quadraticCurveTo(-.14*s-sl*.07*s,-.28*s,-.1*s,-.56*s);ctx.lineTo(.1*s,-.56*s);ctx.quadraticCurveTo(.12*s,-.28*s,.12*s,.05*s);ctx.closePath();ctx.fillStyle=shirt;ctx.fill();ctx.restore();
+  const fh=(o.fhp!=null?o.fhp:sl*.08);const ear=[sh[0]+.03*s+fh*s,sh[1]-.19*s+sl*.03*s];const hd=[ear[0]+.02*s,ear[1]-.02*s];
+  limb(sh,[ear[0]-.02*s,ear[1]+.04*s],.08*s,.075*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0]-.015*s,hd[1]-.01*s,.115*s,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();
+  const e=[sh[0]+.1*s,sh[1]+.24*s],w=[e[0]+.24*s,e[1]-.02*s];limb(sh,e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin);
+  return {hip,sh,hd,ear,seatY}}
+/* motion segment: two vertebral bodies with a disc; load 0..1 squashes the disc */
+function discSeg(x,y,w,load,o){o=o||{};const h=w*.42,dh=w*.3*(1-.55*clamp(load,0,1.4)/1.4);const by=y;
+  rr(x-w/2,by-h-dh/2,w,h,w*.08);fillStroke(C.bone,C["bone-edge"],1.6);rr(x-w/2,by+dh/2,w,h,w*.08);fillStroke(C.bone,C["bone-edge"],1.6);
+  const bul=w*.08*clamp(load,0,1.4);ctx.beginPath();ctx.moveTo(x-w/2+2,by-dh/2);ctx.quadraticCurveTo(x-w/2-bul,by,x-w/2+2,by+dh/2);ctx.lineTo(x+w/2-2,by+dh/2);ctx.quadraticCurveTo(x+w/2+bul,by,x+w/2-2,by-dh/2);ctx.closePath();fillStroke(hexA(C.disc,.75),C.disc,1.4);
+  ell(x,by,w*.2,dh*.32,0,mix(C.nucleus,C.pain,clamp(load-.6,0,1)*.4));return {top:by-h-dh/2,bot:by+dh/2+h}}
+function weightArrow(x,y,len,col,lab,o){o=o||{};arrow(x,y,x,y+len,col,o.lw||3);if(lab)label(x+(o.dx||0),y+len+(o.dy||14),lab,{size:o.size||12,weight:700,border:col,mono:o.mono})}
+/* ================= walkthrough helpers ================= */
+let SYS={},SC={};
+let GW=null,GR=null,GA=null,GT=null,GS=null;
+function gaits(){if(GW)return;GW=makeGait({mode:"walk",cad:112,step:.7});GR=makeGait({mode:"run",cad:170,step:1.1});GA=makeGait({mode:"walk",cad:104,step:.6,limp:"antalgic"});
+  GT=makeGait({mode:"walk",cad:104,step:.62,limp:"trend"});GS=makeGait({mode:"walk",cad:100,step:.6,limp:"steppage"})}
+/* walker on a scrolling floor; camera follows the average progress */
+function walkScene(G,T,slow,cx,gy,pxm,o){o=o||{};const per=G.Tc*slow;const tt=T/per+(o.u0||0);const cyc=Math.floor(tt);const u=tt-cyc;const Pz=gaitPose(G,u);
+  const world=cyc*G.stride+Pz.hx;const hipX=cx+(Pz.hx-u*G.stride)*pxm;
+  if(o.ground!==false)groundLine(o.x0==null?0:o.x0,o.x1==null?800:o.x1,gy,world*pxm,pxm,{every:o.every||.5,labels:o.labels,depth:o.depth});
+  const W2S=w=>hipX+(w-world)*pxm;
+  if(o.prints)o.prints(W2S,cyc,u);
+  const res=o.noDraw?null:drawWalker(G,u,hipX,gy,pxm,Object.assign({hl:C.legR},o.fig||{}));
+  return {u,cyc,res,world,hipX,W2S,pose:Pz}}
+/* heel strike world positions for a gait (relative to the cycle start hip) */
+function strikeX(G,leg){const off=G.legs[leg].off;const Pz=gaitPose(G,off);return Pz.hx+Pz.legs[leg].f.heel[0]}
+function evNote(x,y,w,t,o){o=o||{};const n=wrapCount(t,w-24,o.size||12.5,500);const h=n*(o.lh||17)+30;panelBox(x,y,w,h,{fill:hexA(C.panel,.95),stroke:C.evid,lw:1.8});
+  rr(x,y,6,h,3);ctx.fillStyle=C.evid;ctx.fill();title(x+14,y+13,o.title||"What the evidence says",C["evid-ink"]);wrapText(t,x+14,y+31,w-26,o.lh||17,{size:o.size||12.5});return h}
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+function tagBox(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12.5,weight:700,border:col,align:o.align,mono:o.mono,bg:o.bg})}
+/* glow over a body part */
+function mGlow(x,y,rx,ry,rot,a,col){if(a<=.04)return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);ell(x,y,rx,ry,rot,hexA(col||C.muscle,.85),col||C.muscle,1.5);ctx.restore()}
+function segPt(a,b,t,off){const dx=b[0]-a[0],dy=b[1]-a[1];const L=Math.hypot(dx,dy)||1;let nx=-dy/L,ny=dx/L;if(nx<0){nx=-nx;ny=-ny}return [a[0]+dx*t+nx*off,a[1]+dy*t+ny*off,Math.atan2(dy,dx)]}
+function muscleGlows(G,u,res,pxm,o){o=o||{};const p=legPhase(G,u,"R").p;const hip=res.hip,k=res.R.k,a=res.R.a;const s=pxm;
+  const at=(i,pt,rx,ry)=>mGlow(pt[0],pt[1],rx,ry,pt[2]||0,emgAt(G,i,p)*(o.gain||1),o.col);
+  at(0,segPt(k,a,.35,.045*s),.13*s,.03*s);at(1,segPt(hip,k,.5,.06*s),.15*s,.04*s);at(2,segPt(hip,k,.5,-.06*s),.15*s,.035*s);
+  at(3,[hip[0]-.08*s,hip[1]+.0*s,1.4],.07*s,.06*s);at(4,[hip[0]-.01*s,hip[1]-.07*s,0],.08*s,.035*s);at(5,segPt(k,a,.3,-.045*s),.13*s,.035*s);at(6,[hip[0]+.07*s,hip[1]-.03*s,.9],.06*s,.03*s)}
+/* simple lines-builder worked example: rows appear one after another */
+function workLines(x,y,w,rows,t,o){o=o||{};let yy=y;const dt=o.dt||1.6;rows.forEach((r,i)=>{const a=seg(t,(o.t0||.4)+i*dt,(o.t0||.4)+i*dt+.6);if(r.c){yy+=36;if(a>0){const cw=chainWidth(r.c[0],r.c[1],{size:o.fs||14});const sc=Math.min(1,w/cw);ctx.save();ctx.translate(x,yy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],clamp((t-(o.t0||.4)-i*dt)/(dt*.9),0,1),{size:o.fs||14});ctx.restore()}yy+=32}
+    else if(r.ans){yy+=30;if(a>0)withA(a,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(w,ctx.measureText(r.ans).width);rr(x-4,yy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(x+3,yy,r.ans,w-6,{size:15,weight:700,mono:true})});yy+=20}
+    else if(r.miss){yy+=14;if(a>0){const n=wrapCount("Common mistake: "+r.miss,w-16,12);const mh=n*16+12;withA(a,()=>{rr(x-4,yy-8,w+8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+r.miss,x+4,yy+2,w-12,16,{size:12})});yy+=mh+6}else yy+=40}
+    else{yy+=r.gap||22;if(a>0)withA(a,()=>fitTxt(x,yy,r.l,w,{size:r.size||13.5,weight:r.w||600,mono:r.mono,color:r.col}))}});return yy}
+function stopwatch(x,y,r,secs,run,col){circ(x,y,r,C.panel,C.ink,2.5);rr(x-4,y-r-8,8,8,2);ctx.fillStyle=C.ink;ctx.fill();for(let i=0;i<12;i++){const a=i/12*TAU;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.4)}
+  const a=secs/60*TAU-Math.PI/2;line(x,y,x+Math.cos(a)*r*.75,y+Math.sin(a)*r*.75,col||C.evid,2.5);circ(x,y,3,C.ink)}
+function ruler(x1,x2,y,lab,col,o){o=o||{};col=col||C["ink-soft"];line(x1,y,x2,y,col,1.6);line(x1,y-6,x1,y+6,col,1.6);line(x2,y-6,x2,y+6,col,1.6);if(lab)label((x1+x2)/2,y+(o.dy==null?-12:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col})}
+function topFoot(x,y,s,col,dir,a){withA(a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(dir||0);ell(s*.18,0,s*.42,s*.17,0,col);ell(-s*.36,0,s*.19,s*.14,0,col);ctx.restore()})}
+/* ================= drawing pieces shared by both pages ================= */
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,6);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke();rr(x,y,5,h,3);ctx.fillStyle=col;ctx.fill()}
+function clipRect(x,y,w,h,fn){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();fn();ctx.restore()}
+function headLever(px,py,dpx,o){o=o||{};const sc=o.sc||1;
+  /* torso */
+  ctx.beginPath();ctx.moveTo(px-120*sc,py+120*sc);ctx.quadraticCurveTo(px-110*sc,py-10*sc,px-30*sc,py-14*sc);ctx.lineTo(px+40*sc,py-8*sc);ctx.quadraticCurveTo(px+90*sc,py+10*sc,px+100*sc,py+120*sc);ctx.closePath();ctx.fillStyle=hexA(C.shirt1,.55);ctx.fill();
+  const top=[px+dpx*1.0,py-150*sc];const pts=[];for(let i=0;i<=7;i++){const f=i/7;pts.push([lerp(px,top[0],f)+Math.sin(f*Math.PI)*10*sc,lerp(py,top[1],f)])}
+  /* extensor muscle */
+  ctx.beginPath();ctx.moveTo(px-26*sc,py+8*sc);ctx.quadraticCurveTo(px-34*sc+dpx*.4,py-80*sc,top[0]-36*sc,top[1]-6*sc);ctx.lineTo(top[0]-26*sc,top[1]+10*sc);ctx.quadraticCurveTo(px-18*sc+dpx*.4,py-70*sc,px-14*sc,py+8*sc);ctx.closePath();ctx.fillStyle=hexA(C.muscle,o.mus==null?.6:o.mus);ctx.fill();ctx.strokeStyle=C.muscle;ctx.lineWidth=1.4;ctx.stroke();
+  for(let i=0;i<7;i++){const a=pts[i],b=pts[i+1];const m=[(a[0]+b[0])/2,(a[1]+b[1])/2];const ang=Math.atan2(b[1]-a[1],b[0]-a[0])+Math.PI/2;ctx.save();ctx.translate(m[0],m[1]);ctx.rotate(ang);rr(-12*sc,-8*sc,24*sc,16*sc,4*sc);fillStroke(C.bone,C["bone-edge"],1.4);ctx.restore();if(i<6){const q=b;ell(q[0],q[1],10*sc,3*sc,0,hexA(C.disc,.8))}}
+  /* head */
+  const hc=[top[0]+18*sc,top[1]-48*sc];circ(hc[0],hc[1],62*sc,skinC(o.skin||4),hexA(C.ink,.25),1.2);ctx.beginPath();ctx.arc(hc[0]-6*sc,hc[1]-6*sc,64*sc,Math.PI*.95,Math.PI*1.95);ctx.closePath();ctx.fillStyle=C.hair;ctx.fill();
+  circ(hc[0]+34*sc,hc[1]-6*sc,3.2*sc,C.ink);ctx.beginPath();ctx.moveTo(hc[0]+58*sc,hc[1]-2*sc);ctx.lineTo(hc[0]+70*sc,hc[1]+14*sc);ctx.lineTo(hc[0]+58*sc,hc[1]+18*sc);ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=2;ctx.stroke();
+  ell(hc[0]-14*sc,hc[1]+4*sc,8*sc,13*sc,0,mix(skinC(o.skin||4),"#000",.15));
+  const com=[px+dpx,hc[1]+4*sc];return {hc,com,top}}
+function swayFn(t){return .016*Math.sin(t*.9)+.006*Math.sin(t*2.3+1)+.003*Math.sin(t*5.1)}
+function printsFn(G,yR,yL,o){o=o||{};return (W2S,cyc,u)=>{const tt=cyc+u;const sR=strikeX(G,"R"),sL=strikeX(G,"L");
+  for(let n=cyc-3;n<=cyc+1;n++){[["R",sR,0,yR],["L",sL,G.legs.L.off,yL]].forEach(q=>{const when=n+q[2];if(when>tt)return;const x=W2S(n*G.stride+q[1]);if(x<-40||x>840)return;
+    topFoot(x+.1*o.pxm,q[3],.27*o.pxm,q[0]==="R"?hexA(C.legR,.85):hexA(C.legL,.85),0)})}
+  if(o.brackets){const n=tt-1>=0?Math.floor(tt)-1:0;const r0=W2S(n*G.stride+sR),l0=W2S(n*G.stride+sL),r1=W2S((n+1)*G.stride+sR);if(tt>=n+1){ruler(r0,l0,o.by,"step",C.evid,{dy:14});ruler(r0,r1,o.by+30,"stride (1 cycle)",C.evid,{dy:14})}}}}
+function thumbs(G,list,x,y,w,cur,o){o=o||{};const n=list.length;const cw=w/n;list.forEach((q,i)=>{const cx=x+cw*i+cw/2;const on=i===cur;rr(x+cw*i+4,y,cw-8,o.h||150,6);ctx.fillStyle=on?hexA(o.col,.16):hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=on?o.col:C.rule;ctx.lineWidth=on?2.5:1;ctx.stroke();
+  const gy=y+(o.h||150)-30;line(x+cw*i+12,gy,x+cw*(i+1)-12,gy,C["floor-line"],1.5);drawWalker(G,q[0],cx,gy,o.pxm||52,{hl:C.legR});fitTxt(cx,gy+16,q[1],cw-14,{size:11.5,weight:on?700:500,align:"center"})})}
+function treadmill(x0,x1,gy){rr(x0,gy-2,x1-x0,30,6);ctx.fillStyle=hexA(C.plate,.75);ctx.fill();ctx.strokeStyle=C["plate-edge"];ctx.lineWidth=1.5;ctx.stroke();circ(x0+14,gy+13,10,C.panel,C["plate-edge"],1.5);circ(x1-14,gy+13,10,C.panel,C["plate-edge"],1.5)}
+function forceArrows(G,W_,gy,sc,o){o=o||{};["L","R"].forEach(l=>{const F=grfLeg(G,W_.u,l);if(F<.02)return;const f=W_.res[l];const pts=[f.heel,f.ball,f.toe];let lo=pts[0];pts.forEach(q=>{if(q[1]>lo[1])lo=q});
+  const col=l==="R"?C.grf:hexA(C.legL,.85);withA(.88,()=>arrow(lo[0],gy,lo[0],gy-F*sc,col,l==="R"?4.5:3));if(l==="R"&&o.lab!==false)label(lo[0]+12,gy-F*sc-12,F.toFixed(2)+" BW",{size:11.5,weight:700,mono:true,border:C.grf,align:"left"})})}
+function comY(G,u){return -.9335-.0125*Math.cos(4*Math.PI*(u-.31))}
+function supportState(G,u){const r=legPhase(G,u,"R").st,l=legPhase(G,u,"L").st;return r&&l?["Double support",C.dbl]:r?["Single support: right",C.stance]:l?["Single support: left",C.stance]:["Flight: no foot down",C.flight]}
+function spring(x,y0,y1,w,col){const n=8;const pts=[[x,y0]];for(let i=1;i<n;i++){pts.push([x+(i%2?w:-w),lerp(y0,y1,i/n)])}pts.push([x,y1]);poly(pts,col,2.5)}
+function frontWalker(G,T,slow,x,gy,s,o){o=o||{};const u=mod1(T/(G.Tc*slow));const r=legPhase(G,u,"R"),lf=legPhase(G,u,"L");const st=r.st&&lf.st?"both":r.st?"R":"L";const sw=st==="R"?lf:r;
+  const lift=st==="both"?0:Math.sin(Math.PI*clamp((sw.uu-sw.s)/(1-sw.s),0,1));const drop=pelvisFront(G,u);const lean=trunkLeanFront(G,u);const sway=-.025*Math.sin(TAU*u);
+  ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(x-170,gy,340,28);line(x-170,gy,x+170,gy,C["floor-line"],2);
+  const Rf=frontPerson(x,gy,s,Object.assign({stance:st,drop,lean,sway,lift},o.fig||{}));return {Rf,u,st,drop,lean}}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("gait-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("gait-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,560),S2=makeStage("cvCalc",800,600),S4=makeStage("cvLife",800,500);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:()=>simA11y()},calc:{cv:"#cvCalc",f:()=>calcA11y()},sort:{cv:null,f:()=>sortA11y()},life:{cv:"#cvLife",f:()=>lifeA11y()}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ================= PART 1: gait simulator ================= */
+const SIM={mode:"walk",v:1.3,cad:112,step:.7,limp:"none",slow:1,G:null,tt:0,base:0,done:new Set(),last:""};
+const SRANGE={walk:{v:[.5,2,.05],cad:[70,140,1],step:[.35,.95,.01],v0:1.3},run:{v:[2,5.5,.05],cad:[140,200,1],step:[.7,1.9,.01],v0:3}};
+function natural(mode,v){if(mode==="walk"){const st=.7*Math.pow(v/1.3,.55);return [st,v*60/st]}const st=1.1*Math.pow(v/3,.75);return [st,v*60/st]}
+function simWorld(){const G=SIM.G;const cyc=Math.floor(SIM.tt),u=SIM.tt-cyc;return SIM.base+cyc*G.stride+tabAtX(G,u)}
+function tabAtX(G,u){const f=mod1(u)*G.N;const i=Math.floor(f);return lerp(G.X[i],G.X[i+1],f-i)}
+function simRebuild(){const old=SIM.G?simWorld():0;const R=SRANGE[SIM.mode];SIM.cad=clamp(SIM.cad,R.cad[0],R.cad[1]);SIM.step=clamp(SIM.step,R.step[0],R.step[1]);
+  SIM.G=makeGait({mode:SIM.mode,cad:SIM.cad,step:SIM.step,limp:SIM.mode==="run"?"none":SIM.limp});SIM.v=SIM.cad*SIM.step/60;
+  const nw=simWorld();SIM.base+=old-nw;simUI();a11yKey=""}
+function simSetSliders(){const R=SRANGE[SIM.mode];[["simSpeed","v"],["simCad","cad"],["simStep","step"]].forEach(q=>{const el=$("#"+q[0]);const r=R[q[1]];el.min=r[0];el.max=r[1];el.step=r[2];el.value=SIM[q[1]]})}
+function simUI(){const G=SIM.G;$("#simSpeedO").textContent=SIM.v.toFixed(2)+" m/s";$("#simCadO").textContent=Math.round(SIM.cad)+" steps/min";$("#simStepO").textContent=SIM.step.toFixed(2)+" m";
+  if(document.activeElement!==$("#simSpeed"))$("#simSpeed").value=SIM.v.toFixed(2);
+  $("#simLimp").disabled=SIM.mode==="run";
+  const dsl=Math.max(0,2*(G.legs.R.s-.5)),fl=Math.max(0,2*(.5-G.legs.R.s));const pk=grfPeak(G);
+  const rows=[["Speed",SIM.v.toFixed(2)+" m/s ("+(SIM.v*3.6).toFixed(1)+" km/h)"],["Cadence",Math.round(SIM.cad)+" steps/min"],["Step length",SIM.step.toFixed(2)+" m"],["Stride length",(2*SIM.step).toFixed(2)+" m"],
+    ["Cycle (stride) time",G.Tc.toFixed(2)+" s"],["Stance: right / left",Math.round(G.legs.R.s*100)+"% / "+Math.round(G.legs.L.s*100)+"%"],
+    [SIM.mode==="run"?"Flight (both phases)":"Double support (total)",SIM.mode==="run"?Math.round(fl*100)+"% of cycle":Math.round(simDbl(G)*100)+"% of cycle"],["Peak vertical force, right",pk.toFixed(2)+" body weights"]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("");
+  const st=$("#simStatus");let msg="",cls="status";
+  if(SIM.mode==="run"){msg=`Running: each foot is down about ${Math.round(G.legs.R.s*100)}% of the cycle, so there is no double support and ${Math.round(fl*100)}% of the cycle is flight. Peak force ${pk.toFixed(1)} body weights.`;cls+=" good"}
+  else if(SIM.limp==="antalgic"){msg="Antalgic pattern: the right stance is shorter and its force lower, giving an uneven short then long rhythm.";cls+=" warn"}
+  else if(SIM.limp==="trend"){msg="Trendelenburg pattern: watch the front view. During right single support the left side of the pelvis drops and the trunk leans right. Gluteus medius activity is shown weak.";cls+=" warn"}
+  else if(SIM.limp==="steppage"){msg="Steppage pattern: in swing the right toes hang down, so the hip and knee lift high. Tibialis anterior activity is shown weak.";cls+=" warn"}
+  else{msg=`Typical walking: about ${Math.round(G.legs.R.s*100)}% stance and ${Math.round(simDbl(G)*100)}% total double support. Faster walking shortens double support and makes the force humps taller.`;cls+=" good"}
+  st.className=cls;st.textContent=msg;simChal();$("#simCap").textContent=(SIM.mode==="run"?"Runner":"Walker")+" at "+SIM.v.toFixed(2)+" m/s: side view, front view, phase bars, floor force and muscle activity, all on one clock."}
+function simDbl(G){let n=0;for(let i=0;i<200;i++){const u=i/200;if(legPhase(G,u,"R").st&&legPhase(G,u,"L").st)n++}return n/200}
+const SCHAL=["Walk at about 1.4 m/s (between 1.35 and 1.45).","Walk fast enough that total double support drops below 16 percent.","Set cadence to 100 steps/min and step length to 0.60 m. Predict the speed first, then check.","Run with a peak force above 2.5 body weights.","Choose the steppage pattern and watch tibialis anterior in the muscle strip.","Choose the Trendelenburg pattern and watch the front view during right stance."];
+function simChal(){const G=SIM.G;const c=[SIM.mode==="walk"&&Math.abs(SIM.v-1.4)<=.05+1e-9,SIM.mode==="walk"&&simDbl(G)<.16,SIM.mode==="walk"&&Math.round(SIM.cad)===100&&Math.abs(SIM.step-.6)<.005,SIM.mode==="run"&&grfPeak(G)>2.5,SIM.mode==="walk"&&SIM.limp==="steppage",SIM.mode==="walk"&&SIM.limp==="trend"];
+  c.forEach((ok,i)=>{if(ok)SIM.done.add(i)});chalUI($("#simChal"),SCHAL,SIM.done)}
+function simInit(){segBtns($("#simMode"),[["walk","Walk"],["run","Run"]],()=>SIM.mode,m=>{if(m===SIM.mode)return;SIM.mode=m;const nat=natural(m,SRANGE[m].v0);SIM.step=nat[0];SIM.cad=nat[1];simRebuild();simSetSliders()});
+  segBtns($("#simSlow"),[[1,"Real speed"],[.5,"Half speed"],[.25,"Quarter speed"]],()=>SIM.slow,s=>{SIM.slow=s;a11yKey=""});
+  $("#simSpeed").addEventListener("input",e=>{const v=+e.target.value;const nat=natural(SIM.mode,v);SIM.step=nat[0];SIM.cad=nat[1];simRebuild();$("#simCad").value=SIM.cad;$("#simStep").value=SIM.step});
+  $("#simCad").addEventListener("input",e=>{SIM.cad=+e.target.value;simRebuild()});$("#simStep").addEventListener("input",e=>{SIM.step=+e.target.value;simRebuild()});
+  $("#simLimp").onchange=e=>{SIM.limp=e.target.value;simRebuild()};
+  simRebuild();simSetSliders()}
+function frontAt(G,u,x,gy,s,o){o=o||{};const r=legPhase(G,u,"R"),lf=legPhase(G,u,"L");const st=r.st&&lf.st?"both":r.st?"R":lf.st?"L":"none";const sw=st==="R"?lf:r;
+  const lift=st==="both"?0:st==="none"?.4:Math.sin(Math.PI*clamp((sw.uu-sw.s)/(1-sw.s),0,1));const drop=pelvisFront(G,u);const lean=trunkLeanFront(G,u);const sway=-.025*Math.sin(TAU*u);
+  ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(x-o.fw/2,gy,o.fw,16);line(x-o.fw/2,gy,x+o.fw/2,gy,C["floor-line"],2);
+  const Rf=frontPerson(x,gy-(st==="none"?.06*s:0),s,Object.assign({stance:st==="none"?"R":st,drop,lean,sway,lift},o.fig||{}));
+  if(G.limp==="trend"){const m=[Rf.hipR[0]-.12*s,Rf.hipR[1]-.12*s];ctx.save();ctx.setLineDash([3,3]);ell(m[0],m[1],.09*s,.13*s,-.3,hexA(C.muscle,.25),C.muscle,1.4);ctx.restore()}
+  const sl=(Rf.hipL[1]-Rf.hipR[1])/(Rf.hipL[0]-Rf.hipR[0]);line(Rf.hipR[0]-.15*s,Rf.hipR[1]-sl*.15*s,Rf.hipL[0]+.15*s,Rf.hipL[1]+sl*.15*s,C.accent,2.2);circ(Rf.com[0],Rf.com[1],5,C.com,C.panel,1.5);return {Rf,drop,st}}
+function drawSim(now){use(S1);const G=SIM.G;const dt=DT*SIM.slow;SIM.tt+=dt/G.Tc;const cyc=Math.floor(SIM.tt),u=SIM.tt-cyc;const world=SIM.base+cyc*G.stride+tabAtX(G,u);
+  const run=SIM.mode==="run";const pxm=run?118:138,gy=290,cx=245;const Pz=gaitPose(G,u);const hipX=cx+(Pz.hx-u*G.stride)*pxm;
+  panelBox(10,10,470,322);let res;clipRect(11,11,468,320,()=>{treadmill(16,474,gy);groundLine(30,460,gy,world*pxm,pxm,{every:.5,depth:24});
+    res=drawWalker(G,u,hipX,gy,pxm,{hl:C.legR,shorts:run,skin:run?3:2,shirt:run?"shirt2":"shirt1",hair:run?"hair2":"hair"});muscleGlows(G,u,res,pxm,{gain:.85});
+    if(SIM.limp==="antalgic"&&!run){const k=res.R.k;glow(k[0],k[1],30,C.pain,.5+.3*Math.sin(now/200));circ(k[0],k[1],6,C.pain)}
+    if(SIM.limp==="steppage"&&!run){const p=segPt(res.R.k,res.R.a,.38,.05*pxm);ctx.save();ctx.setLineDash([4,3]);ell(p[0],p[1],.13*pxm,.03*pxm,p[2],null,C.muscle,1.6);ctx.restore()}
+    forceArrows(G,{u,res},gy,run?52:95)});
+  const p=legPhase(G,u,"R").p;const nm=run?rPhaseName(p,G.K.toe):wPhase(p)[0];const stc=legPhase(G,u,"R").st;
+  label(20,30,"Right leg: "+nm,{size:13,weight:700,border:stc?C.stance:C.swing,align:"left"});
+  const ss=supportState(G,u);label(20,58,ss[0],{size:12,weight:700,border:ss[1],align:"left"});
+  panelBox(490,10,300,322);title(504,28,"Front view",C["ink-soft"]);const F=frontAt(G,u,640,214,92,{fw:280,fig:{skin:run?3:2,shirt:run?"shirt2":"shirt1",hair:run?"hair2":"hair"}});
+  label(640,48,"pelvic drop "+Math.abs(F.drop).toFixed(0)+"°"+(F.drop>1?", left side lower":F.drop<-1?", right side lower":""),{size:11.5,weight:700,mono:true,border:C.accent});
+  txt(506,222,"R",{size:12,weight:700,mono:true,color:C["ink-soft"]});txt(776,222,"L",{size:12,weight:700,mono:true,align:"right",color:C["ink-soft"]});
+  phaseStrip(G,548,256,228,u,{rh:13});
+  panelBox(10,342,470,208);grfPlot(G,66,384,394,124,u,{ymax:run?3.2:1.5,left:true,total:false,title:"Vertical ground reaction force",xl:"% of gait cycle (right heel to right heel)"});
+  panelBox(490,342,300,208);title(504,360,"Muscle activity, right leg",C["ink-soft"]);emgStrip(G,502,376,280,u,{rh:15,gap:5,lw:138,fs:10.5});
+  [0,50,100].forEach(v=>txt(640+142*v/100,526,v+"%",{size:10,mono:true,align:"center",color:C["ink-soft"]}));
+}
+function simA11y(){const G=SIM.G;const lb={none:"typical pattern",antalgic:"antalgic pattern",trend:"Trendelenburg pattern",steppage:"steppage pattern"}[SIM.mode==="run"?"none":SIM.limp];
+  const lab=`Gait simulator: ${SIM.mode==="run"?"running":"walking"} at ${SIM.v.toFixed(2)} metres per second, cadence ${Math.round(SIM.cad)} steps per minute, step length ${SIM.step.toFixed(2)} metres, ${lb}.`;
+  const d=`A ${SIM.mode==="run"?"runner":"walker"} moves in place on a treadmill seen from the side, with the right leg outlined in brick red and blue force arrows under each foot that is on the belt. Rose glows show working muscles on the right leg. At top right, a front view shows the pelvis as a line that tilts during single leg support, ${SIM.mode!=="run"&&SIM.limp==="trend"?"dropping about 13 degrees on the left during right stance":"by a few degrees"}, with purple stance bars and a cursor below it. At bottom left, the vertical force curve ${SIM.mode==="run"?"shows one tall peak near "+grfPeak(G).toFixed(1)+" body weights with flat zero stretches":"shows two humps near "+grfPeak(G).toFixed(1)+" body weights with a valley between"}, and at bottom right seven muscle rows light up in rose bands across the cycle.${SIM.mode!=="run"&&SIM.limp==="steppage"?" The tibialis anterior row is very faint, and the right toes hang down in swing while the knee lifts high.":""}${SIM.mode!=="run"&&SIM.limp==="antalgic"?" A red glow marks the painful right knee and the right stance bar is shorter than the left.":""}`;
+  return [lab,d]}
+/* ================= PART 2: gait math trainer ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const f2=v=>v.toFixed(2),f1=v=>v.toFixed(1);
+const CTYPES=[["mix","All types, mixed"],["speed","Speed from cadence and step length"],["cadence","Cadence from speed and step length"],["step","Step length from speed and cadence"],["timed","Speed from a timed walk"],["count","Cadence from a step count"],["stride","Speed from stride length"],["torque","Head torque (lever)"],["muscle","Neck muscle force (lever)"],["phase","Name the phase from a frame"]];
+const PH_INFO=[["Initial contact",.004,.012,"The right heel is just touching the floor, out in front of the body. The left foot is still down behind.","Right heel touching, knee nearly straight, left foot still down behind: initial contact (0 to 2 percent)."],
+  ["Loading response",.035,.085,"The right foot is lowering flat and the knee is slightly bent. The left foot is still touching the floor behind (double support).","Right foot flattening with a small knee bend while the left toes are still down: loading response (about 2 to 10 percent)."],
+  ["Midstance",.14,.26,"The right foot is flat and the body is passing over it. The left foot is in the air, swinging past.","Right foot flat with the body over it and the left leg swinging: midstance (about 10 to 30 percent)."],
+  ["Terminal stance",.34,.46,"The right heel is lifting and the body is ahead of the right foot. The left foot has not landed yet.","Right heel lifting with the body ahead, left foot still in the air: terminal stance (about 30 to 50 percent)."],
+  ["Preswing",.52,.585,"Only the right toes touch the floor and the knee is bending. The left foot has already landed in front.","Right toes pushing off with the knee bending, left foot already down in front: preswing (about 50 to 60 percent)."],
+  ["Initial swing",.625,.71,"The right foot has just left the floor behind the body and the knee is bending a lot.","Right foot just off the floor behind, knee bending sharply: initial swing (about 60 to 73 percent)."],
+  ["Midswing",.76,.85,"The right leg is passing under the body, next to the standing left leg, with the toes just clearing the floor.","Right leg passing the standing leg with small toe clearance: midswing (about 73 to 87 percent)."],
+  ["Terminal swing",.9,.975,"The right leg is reaching forward with the knee almost straight, about to touch down.","Right leg reaching forward, knee straightening before contact: terminal swing (about 87 to 100 percent)."]];
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:0,count:0,solT:0,pick:null};
+function walkVis(cad,step,unk,o){return Object.assign({k:"walk",cad,step,v:cad*step/60,unk},o||{})}
+const GEN={
+ speed(){const cad=ri(84,128),step=ri(48,82)/100;const mpm=cad*step,ans=mpm/60;
+  return {title:"Speed from cadence and step length",html:`A person walks with a cadence of <b>${cad} steps/min</b> and a step length of <b>${f2(step)} m</b>. What is their gait speed in m/s?`,ans,unit:"m/s",dp:2,tol:.0055,
+   hints:["Speed = cadence × step length. Steps per minute times metres per step gives metres per minute.",`${cad} × ${f2(step)} = ${f1(mpm)} m/min.`,"Divide by 60 to change metres per minute into metres per second."],
+   rows:[{l:"speed = cadence × step length"},{c:[[F(cad,["steps"],"1",["min"]),F(f2(step),["m"],"1",["step"]),F("1",["min"],"60",["s"])],[f2(ans),["m/s"]]]},{l:`${cad} × ${f2(step)} = ${f1(mpm)} m/min, then ÷ 60`,mono:true},{ans:`${f2(ans)} m/s`}],
+   miss:"forgetting to divide by 60 gives metres per minute, not metres per second.",slips:[[mpm,"That is metres per minute. Divide by 60 to get m/s."],[ans*2,"That doubled the speed. A step is one foot to the other foot, so no doubling is needed here."],[cad/step/60,"That divided by the step length. Multiply cadence by step length instead."]],vis:walkVis(cad,step,"v")}},
+ cadence(){const v=ri(60,160)/100,step=ri(50,80)/100;const sps=v/step,ans=sps*60;
+  return {title:"Cadence from speed and step length",html:`A person walks at <b>${f2(v)} m/s</b> with a step length of <b>${f2(step)} m</b>. What is their cadence in steps per minute?`,ans,unit:"steps/min",dp:0,tol:.51,
+   hints:["Rearrange speed = cadence × step length: cadence = speed ÷ step length.",`${f2(v)} ÷ ${f2(step)} = ${sps.toFixed(3)} steps per second.`,"Multiply steps per second by 60 to get steps per minute."],
+   rows:[{l:"cadence = speed ÷ step length"},{c:[[F(f2(v),["m"],"1",["s"]),F("1",["step"],f2(step),["m"]),F("60",["s"],"1",["min"])],[String(Math.round(ans)),["steps/min"]]]},{l:`${f2(v)} ÷ ${f2(step)} = ${sps.toFixed(3)} steps/s, × 60`,mono:true},{ans:`${Math.round(ans)} steps/min`}],
+   miss:"stopping at steps per second, or multiplying speed by step length instead of dividing.",slips:[[sps,"That is steps per second. Multiply by 60 for steps per minute."],[v*step*60,"That multiplied by the step length. Divide speed by step length instead."],[ans/2,"That is strides per minute. Cadence counts steps, so do not halve it."]],vis:walkVis(Math.round(ans),step,"cad")}},
+ step(){const cad=ri(85,125);let v=ri(60,160)/100;let ans=v*60/cad;if(ans<.42||ans>.95)return null;
+  return {title:"Step length from speed and cadence",html:`A person walks at <b>${f2(v)} m/s</b> with a cadence of <b>${cad} steps/min</b>. What is their step length in metres?`,ans,unit:"m",dp:2,tol:.0055,
+   hints:["Rearrange: step length = speed ÷ cadence. Put both in the same time unit first.",`${f2(v)} m/s × 60 = ${f1(v*60)} m/min.`,`${f1(v*60)} m/min ÷ ${cad} steps/min = metres per step.`],
+   rows:[{l:"step length = speed ÷ cadence"},{c:[[F(f2(v),["m"],"1",["s"]),F("60",["s"],"1",["min"]),F("1",["min"],cad,["steps"])],[f2(ans),["m"]]]},{l:`${f1(v*60)} m/min ÷ ${cad} = ${f2(ans)} m per step`,mono:true},{ans:`${f2(ans)} m`}],
+   miss:"dividing m/s by steps per minute without converting, which gives an answer 60 times too small.",slips:[[v/cad,"The time units do not match. Change m/s to m/min first (× 60)."],[ans*2,"That is a stride length (two steps). Step length is half of that."],[cad/(v*60),"That is steps per metre. Flip it: metres per step."]],vis:walkVis(cad,ans,"step")}},
+ timed(){const d=pick([10,10,10,6,4]);const t=ri(Math.ceil(d/1.7*10),Math.floor(d/.45*10))/10;const ans=d/t;
+  return {title:"Speed from a timed walk",html:`In a timed walk test, a person covers the middle <b>${d} m</b> of a walkway in <b>${f1(t)} s</b>. What is their gait speed in m/s?`,ans,unit:"m/s",dp:2,tol:.0055,
+   hints:["Gait speed = distance ÷ time.",`Distance is ${d} m and time is ${f1(t)} s.`,`${d} ÷ ${f1(t)} = ?`],
+   rows:[{l:"speed = distance ÷ time"},{c:[[F(d,["m"],f1(t),["s"])],[f2(ans),["m/s"]]]},{l:ans<.8?"below about 0.8 m/s: worth a closer look for fall risk in an older adult":"above about 0.8 m/s",size:12.5},{ans:`${f2(ans)} m/s`}],
+   miss:"dividing time by distance gives seconds per metre, not metres per second.",slips:[[t/d,"That is seconds per metre. Divide distance by time."],[d*t,"Speed divides distance by time; it does not multiply them."]],vis:{k:"timed",d,t,v:ans}}},
+ count(){const secs=pick([15,20,30]);const cad=ri(80,130);const steps=Math.round(cad*secs/60);const ans=steps/secs*60;
+  return {title:"Cadence from a step count",html:`You count <b>${steps} steps</b> in <b>${secs} s</b> while a person walks. What is their cadence in steps per minute?`,ans,unit:"steps/min",dp:0,tol:.51,
+   hints:["Cadence is steps per minute.",`${steps} steps ÷ ${secs} s = ${(steps/secs).toFixed(3)} steps per second.`,`Multiply by 60 s/min (or multiply the count by ${60/secs}).`],
+   rows:[{l:"cadence = steps ÷ time"},{c:[[F(steps,["steps"],secs,["s"]),F("60",["s"],"1",["min"])],[String(Math.round(ans)),["steps/min"]]]},{l:`${steps} × ${60/secs} = ${Math.round(ans)}`,mono:true},{ans:`${Math.round(ans)} steps/min`}],
+   miss:"forgetting to scale up to a full minute.",slips:[[steps/secs,"That is steps per second. Multiply by 60."],[steps,"That is the count, not a rate. Scale it to one minute."],[steps*secs,"Divide the steps by the time, then scale to a minute."]],vis:walkVis(Math.round(ans),.68,"cad",{secs,steps})}},
+ stride(){const sl=ri(96,166)/100,cad=ri(88,124);const ans=cad*(sl/2)/60;
+  return {title:"Speed from stride length",html:`A person's <b>stride length</b> is <b>${f2(sl)} m</b> and their cadence is <b>${cad} steps/min</b>. What is their speed in m/s?`,ans,unit:"m/s",dp:2,tol:.0055,
+   hints:["Cadence counts steps, but a stride is two steps.",`Step length = ${f2(sl)} ÷ 2 = ${(sl/2).toFixed(3)} m (or use strides per minute = ${cad} ÷ 2).`,"Speed = cadence × step length ÷ 60."],
+   rows:[{l:`step length = ${f2(sl)} ÷ 2 = ${(sl/2).toFixed(3)} m`,mono:true},{c:[[F(cad,["steps"],"1",["min"]),F((sl/2).toFixed(3),["m"],"1",["step"]),F("1",["min"],"60",["s"])],[f2(ans),["m/s"]]]},{ans:`${f2(ans)} m/s`}],
+   miss:"multiplying a step cadence by a stride length counts every step twice, doubling the speed.",slips:[[cad*sl/60,"That used stride length with a cadence in steps, so it doubled the speed. Halve the stride first."],[cad*sl/2,"That is metres per minute. Divide by 60."]],vis:walkVis(cad,sl/2,"v",{stride:true})}},
+ torque(){const W=ri(42,58),d=ri(10,80)/10;const ans=W*d/100;
+  return {title:"Head torque (lever)",html:`A head weighs <b>${W} N</b> and its center of mass sits <b>${f1(d)} cm</b> in front of the pivot at the base of the neck. What torque does it create, in N·m?`,ans,unit:"N·m",dp:2,tol:.0055,
+   hints:["Torque = force × moment arm, with the moment arm in metres.",`${f1(d)} cm = ${(d/100).toFixed(3)} m.`,`${W} × ${(d/100).toFixed(3)} = ?`],
+   rows:[{l:"torque = force × moment arm"},{c:[[F(W,["N"]),F(f1(d),["cm"]),F("1",["m"],"100",["cm"])],[f2(ans),["N","m"]]]},{ans:`${f2(ans)} N·m`}],
+   miss:"leaving the moment arm in centimetres makes the answer 100 times too big.",slips:[[W*d,"The moment arm must be in metres. Divide the centimetres by 100 first."],[W/d,"Torque multiplies force by distance."],[W*d/10,"1 m = 100 cm, so divide the centimetres by 100, not 10."]],vis:{k:"lever",W,d,unk:"tq"}}},
+ muscle(){const tq=ri(80,300)/100,arm=pick([4,5,6]);const ans=tq/(arm/100);
+  return {title:"Neck muscle force (lever)",html:`The head creates a torque of <b>${f2(tq)} N·m</b> at the neck. The neck extensor muscles act <b>${arm} cm</b> behind the pivot. What muscle force holds the head still, in N?`,ans,unit:"N",dp:1,tol:.055,
+   hints:["Balanced torques: muscle force × muscle moment arm = head torque.",`${arm} cm = ${(arm/100).toFixed(2)} m.`,`Muscle force = ${f2(tq)} ÷ ${(arm/100).toFixed(2)}.`],
+   rows:[{l:"muscle force = torque ÷ muscle moment arm"},{c:[[F(f2(tq),["N","m"],(arm/100).toFixed(2),["m"])],[f1(ans),["N"]]]},{ans:`${f1(ans)} N`}],
+   miss:"multiplying instead of dividing, or leaving the moment arm in centimetres.",slips:[[tq*arm/100,"That multiplied. To find force, divide the torque by the moment arm."],[tq/arm,"The moment arm must be in metres: "+arm+" cm = "+(arm/100).toFixed(2)+" m."]],vis:{k:"lever",tq,arm,unk:"F"}}},
+ phase(){const i=ri(0,7);const P_=PH_INFO[i];const u=P_[1]+Math.random()*(P_[2]-P_[1]);let others=shuffle([0,1,2,3,4,5,6,7].filter(k=>k!==i)).sort((a,b)=>Math.abs(a-i)-Math.abs(b-i)).slice(0,3);const opts=shuffle([i].concat(others));
+  const rf=legPhase(GW,u,"R").st,lf=legPhase(GW,u,"L").st;
+  return {title:"Name the phase from a frame",html:"The picture shows one frozen frame of a walker. The <b>right leg</b> is outlined in brick red. Which phase is the right leg in?",choices:opts.map(k=>PH_INFO[k][0]),ans:opts.indexOf(i),unit:"",
+   hints:["First decide: is the outlined right foot touching the floor (stance) or in the air (swing)?",`Now the left foot: it is ${lf?"on the floor":"in the air"}.${rf&&lf?" Both feet down means loading response or preswing.":""}`,P_[3]],
+   rows:[{l:"Right foot: "+(rf?"on the floor, so stance":"in the air, so swing")},{l:"Left foot: "+(lf?"on the floor":"in the air")},{l:P_[4],size:12.5},{ans:P_[0]}],
+   miss:"mixing up terminal stance and preswing: preswing starts only once the other foot has landed.",vis:{k:"phase",u,i}}}
+};
+const GKEYS=Object.keys(GEN);
+function genOne(k){let q=null;for(let i=0;i<60&&!q;i++){try{q=GEN[k]()}catch(e){console.error(e);q=null}if(q&&!q.choices&&!(isFinite(q.ans)&&q.ans>0))q=null}q.kind=k;return q}
+function fmtAns(p,v){if(p.choices)return p.choices[v];if(p.dp!=null)return v.toFixed(p.dp);return String(+v.toPrecision(4))}
+function normAns(s){return String(s).trim().replace(/,/g,"").replace(/[−–]/g,"-").replace(/\s*(m\/s|metres per second|meters per second|steps?\s*\/\s*min|steps per minute|n\s*·\s*m|n\s*\.\s*m|nm|n\s*m|newtons?|km\/h|cm|m|n|s)\s*$/i,"").replace(/\s+/g,"")}
+function parseAns(s){s=normAns(s);if(!/^[+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){if(p.choices){const v=+str;if(!(String(str).length)||!(v>=0))return {ok:false,kind:"empty"};return v===p.ans?{ok:true}:{ok:false,kind:"choice"}}
+  const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};if(Math.abs(v-p.ans)<=p.tol)return {ok:true};
+  const sl=(p.slips||[]).find(s=>isFinite(s[0])&&s[1]&&Math.abs(v-s[0])<=Math.max(Math.abs(s[0])*.012,p.dp!=null?Math.pow(10,-p.dp)*.6:0));if(sl&&Math.abs(sl[0]-p.ans)>p.tol)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)<=Math.abs(p.ans)*.06)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function ansTxt(p){return p.choices?p.choices[p.ans]:fmtAns(p,p.ans)+" "+p.unit}
+function calcNew(){const k=TR.type==="mix"?pick(GKEYS):TR.type;const q=genOne(k);TR.p=q;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.pick=null;
+  if(q.vis&&q.vis.k==="walk"){try{q.vis.G=makeGait({mode:"walk",cad:clamp(q.vis.cad,60,150),step:clamp(q.vis.step,.3,1)})}catch(e){q.vis.G=GW}}
+  const rd=q.choices?"Pick one answer.":q.dp===0?"Give a whole number.":"Give the answer to "+q.dp+" decimal place"+(q.dp>1?"s":"")+".";
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}<span class="rd">${rd}</span>`;$("#calcUnit").textContent=q.unit;$("#calcAns").value="";
+  $("#calcNumWrap").hidden=!!q.choices;const cb=$("#calcChoices");cb.hidden=!q.choices;cb.innerHTML="";
+  if(q.choices)q.choices.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=c;b.setAttribute("aria-pressed","false");b.onclick=()=>{TR.pick=i;cb.querySelectorAll(".opt").forEach((x,j)=>{x.setAttribute("aria-pressed",String(j===i));x.classList.remove("wrong","right")});calcCheck()};cb.appendChild(b)});
+  $("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=q.title+": the picture shows the problem and your answer; the worked solution builds below it.";a11yKey=""}
+function calcCheck(){const p=TR.p;const str=p.choices?(TR.pick==null?"":String(TR.pick)):$("#calcAns").value;const j=judge(p,str);
+  if(j.kind==="empty"){calcMsg("info",p.choices?"Pick one of the answers first.":"Type a number in the answer box first.");return}
+  if(p.choices){$("#calcChoices").querySelectorAll(".opt").forEach((x,i)=>{x.classList.toggle("right",j.ok&&i===TR.pick);x.classList.toggle("wrong",!j.ok&&i===TR.pick)})}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;calcMsg("good",`✓ Correct: ${ansTxt(p)}. Watch the worked solution build.`);showSol(false)}
+  else{TR.first=false;TR.streak=0;let msg="Not quite. ";if(j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Check your rounding.";else if(j.kind==="choice")msg+=p.hints[2];else msg+="Check the setup. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+function calcInit(){gaits();const sel=$("#calcType");sel.innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");sel.onchange=()=>{TR.type=sel.value;calcNew()};
+  $("#calcCheck").onclick=calcCheck;$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+  $("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+  $("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${ansTxt(TR.p)}. Watch each step, then try a new problem.`)};$("#calcNew").onclick=calcNew;
+  TR.best=+(store.get("best")||0)}
+/* ---------- trainer drawing ---------- */
+function tvTyped(){const v=parseAns($("#calcAns").value);return v==null||!isFinite(v)?null:v}
+function drawCalc(now){use(S2);const T=now/1000;const p=TR.p;const vs=p.vis;const tv=p.choices?null:tvTyped();const ok=TR.solved;const tvs=v=>v==null?"?":String(+(+v).toPrecision(4));
+  panelBox(10,10,780,262);if(ok){circ(766,32,13,C.good);checkMark(766,32,6,"#fff")}
+  if(vs.k==="walk"){const G=vs.G||GW;clipRect(11,11,778,200,()=>{walkScene(G,T,1.4,250,190,95,{x0:11,x1:789,depth:14,prints:printsFn(G,206,206,{pxm:95})})});
+    const vals=[["cadence",vs.unk==="cad"?(tvs(tv)+" steps/min"):(Math.round(vs.cad)+" steps/min")],[vs.stride?"stride length":"step length",vs.unk==="step"?(tvs(tv)+" m"):(vs.stride?f2(vs.step*2):f2(vs.step))+" m"],["speed",vs.unk==="v"?(tvs(tv)+" m/s"):(f2(vs.v)+" m/s")]];
+    if(vs.secs)vals[2]=["counted",vs.steps+" steps in "+vs.secs+" s"];
+    vals.forEach((q,i)=>{const unkRow=(vs.unk==="cad"&&i===0)||(vs.unk==="step"&&i===1)||(vs.unk==="v"&&i===2);label(560,46+i*36,q[0]+": "+q[1],{size:13.5,weight:700,mono:true,border:unkRow?(ok?C.good:C.accent):C.evid,align:"left"})});
+    txt(400,246,"speed = cadence × step length ÷ 60",{size:13,weight:700,mono:true,align:"center",color:C["ink-soft"]})}
+  else if(vs.k==="timed"){const gy=170,x0=120,span=520;const sx=m=>x0+m*(span/vs.d);ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(11,gy,778,20);line(11,gy,789,gy,C["floor-line"],2);
+    line(sx(0),gy-120,sx(0),gy+20,C.evid,3);line(sx(vs.d),gy-120,sx(vs.d),gy+20,C.evid,3);label(sx(0),gy-128,"start",{size:11.5,weight:700,border:C.evid});label(sx(vs.d),gy-128,"finish",{size:11.5,weight:700,border:C.evid});ruler(sx(0),sx(vs.d),gy+38,vs.d+" m",C.evid,{dy:16});
+    const per=4;const f=P(T,per+1.5)*(per+1.5);const fr=Math.min(1,f/per);const m=fr*vs.d;drawWalker(GW,mod1(T/GW.Tc),sx(m)-0,gy,52,{hl:C.legR});
+    stopwatch(720,80,30,fr*vs.t*6);txt(720,128,(fr*vs.t).toFixed(1)+" s",{size:16,weight:700,mono:true,align:"center"});label(400,252,"your answer: "+tvs(tv)+" m/s",{size:14,weight:700,mono:true,border:ok?C.good:C.accent})}
+  else if(vs.k==="lever"){const H=headLever(150,236,vs.d?vs.d*9:36,{sc:.62,mus:.6});circ(H.com[0],H.com[1],6,C.com,C.panel,2);arrow(H.com[0],H.com[1]+6,H.com[0],H.com[1]+60,C.com,3);
+    const lines_=vs.unk==="tq"?[["head weight",vs.W+" N"],["moment arm",f1(vs.d)+" cm"],["torque",tvs(tv)+" N·m"]]:[["head torque",f2(vs.tq)+" N·m"],["muscle moment arm",vs.arm+" cm"],["muscle force",tvs(tv)+" N"]];
+    lines_.forEach((q,i)=>label(330,60+i*40,q[0]+": "+q[1],{size:14,weight:700,mono:true,border:i===2?(ok?C.good:C.accent):C.evid,align:"left"}));txt(330,200,vs.unk==="tq"?"torque = force × moment arm (in metres)":"muscle force = torque ÷ moment arm (in metres)",{size:13,weight:600,color:C["ink-soft"]})}
+  else if(vs.k==="phase"){clipRect(11,11,778,260,()=>{line(11,232,789,232,C["floor-line"],2);ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(11,232,778,30);drawWalker(GW,vs.u,320,232,118,{hl:C.legR,skin:3,shirt:"shirt4"})});
+    label(560,50,"Which phase is the right leg in?",{size:14,weight:700,border:C.accent});
+    if(TR.pick!=null)label(560,90,"you picked: "+p.choices[TR.pick],{size:13,weight:700,border:ok?C.good:C.warn});
+    if(TR.sol){const bx=470,bw=300;WPH.forEach((w,i)=>{const x0=bx+bw*w[2],x1=bx+bw*w[3];rr(x0,150,x1-x0-1,20,2);ctx.fillStyle=w[4]==="stance"?hexA(C.stance,i===vs.i?.95:.4):hexA(C.swing,i===vs.i?.95:.4);ctx.fill()});
+      const cx=bx+bw*vs.u;line(cx,142,cx,178,C.ink,2.5);txt(bx,192,"0%",{size:10.5,mono:true,color:C["ink-soft"]});txt(bx+bw,192,"100%",{size:10.5,mono:true,align:"right",color:C["ink-soft"]});txt(bx+bw*.6,192,"60%",{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}}
+  const WY=282;panelBox(10,WY,780,308,{fill:hexA(C.paper,.96)});title(24,WY+18,"Worked solution",C["accent-ink"]);
+  if(TR.sol){const el=(now-TR.solT)/1000;const rows=p.rows.concat(p.miss?[{miss:p.miss}]:[]);workLines(28,WY+24,740,rows,el,{dt:1.5,fs:15})}
+  else wrapText("The worked solution builds here after a correct answer, or when you press Show worked solution. Units cancel with a red strike through, and a common mistake is flagged at the end.",28,WY+52,740,18,{size:13,color:C["ink-soft"]})}
+function calcA11y(){const p=TR.p;const v=p.choices?(TR.pick==null?"not chosen":p.choices[TR.pick]):($("#calcAns").value.trim()||"not entered");const lab=`Practice problem, ${p.title}. Your answer ${v}.${TR.solved?" Correct.":""}`;
+  const vk={walk:"a walker moves in place on a floor with footprints, and labels at the right show the cadence, step length and speed, with a question mark or your typed value for the unknown",timed:"a walkway with a start line and a finish line, a walker crossing between them and a stopwatch counting the seconds",lever:"a side view of a head on a curved stack of neck bones with a red weight arrow, and labels for the forces and distances",phase:"one frozen frame of a walker with the right leg outlined in brick red, standing on a floor line"}[p.vis.k];
+  return [lab,`The top of the picture shows ${vk}. The panel below is the worked solution, which ${TR.sol?"is building line by line with units cancelling in red":"appears after a correct answer or when you ask for it"}.`]}
+/* ================= PART 3: phases and patterns game ================= */
+const SROUNDS=[
+{name:"Put the phases in order",type:"order",goal:"Arrange the eight phases of one gait cycle, starting with initial contact of the right foot.",
+ items:[["Initial contact","stance"],["Loading response","stance"],["Midstance","stance"],["Terminal stance","stance"],["Preswing","stance"],["Initial swing","swing"],["Midswing","swing"],["Terminal swing","swing"]],
+ why:["The heel (or foot) first touches the floor.","The foot lowers flat and the knee bends a little while the other foot is still down.","The body passes over one flat foot.","The heel lifts and the body moves ahead of the foot.","The other foot has landed; the toes push off.","The toes leave the floor and the knee bends quickly.","The swinging leg passes the standing leg.","The knee straightens and the leg slows before contact."]},
+{name:"Phase to event",goal:"Match each event to the phase of the right leg when it happens.",
+ bins:[["IC","Initial contact"],["LR","Loading response"],["MSt","Midstance"],["TSt","Terminal stance"],["PSw","Preswing"],["ISw","Initial swing"],["MSw","Midswing"],["TSw","Terminal swing"]],
+ cards:[["The heel first touches the floor","IC","Initial contact: the first moment of stance, usually heel first."],["Tibialis anterior lowers the forefoot gently while the other foot is still down","LR","Loading response: weight comes on, the foot lowers and the knee bends a little."],
+  ["The body passes over a single flat foot","MSt","Midstance: one foot carries the body as it vaults over."],["The heel lifts while the other foot is still in the air","TSt","Terminal stance: heel rise before the other foot lands."],
+  ["The other foot has landed; the toes push off","PSw","Preswing: the second double support period, ending at toe off."],["The knee bends to about 60 degrees as the toes leave the floor","ISw","Initial swing: knee flexion shortens the leg so it clears."],
+  ["The swinging foot passes the standing foot with 1 to 2 cm clearance","MSw","Midswing: the legs pass each other."],["The hamstrings slow the leg as the knee straightens","TSw","Terminal swing: the leg decelerates before contact."]]},
+{name:"Pattern to likely cause",goal:"Sort each finding or cause into the gait pattern it most likely goes with.",
+ bins:[["ant","Antalgic gait"],["tre","Trendelenburg gait"],["ste","Steppage gait (foot drop)"]],
+ cards:[["A recent ankle sprain that hurts to stand on","ant","Antalgic: pain shortens stance on that side."],["Short stance on one side and an uneven rhythm","ant","Antalgic: the classic sign is less time on the sore leg."],["A painful, swollen knee","ant","Antalgic: a painful joint leads to a protective, shortened stance."],
+  ["Weak right gluteus medius","tre","Trendelenburg: weak hip abductors cannot hold the pelvis level."],["The pelvis drops on the swing side","tre","Trendelenburg sign: the opposite side drops in single leg stance."],["Injury to the superior gluteal nerve","tre","Trendelenburg: this nerve supplies gluteus medius and minimus."],["The trunk leans over the stance leg each step","tre","Compensated Trendelenburg: leaning shortens the hip's moment arm."],
+  ["A disc pressing on the L5 nerve root","ste","Steppage: L5 supplies the foot and toe lifters."],["Pressure on the common fibular nerve at the fibular head","ste","Steppage: this nerve leads to the deep fibular nerve and the dorsiflexors."],["The toes drag, so the hip and knee lift high","ste","Steppage: a high step clears the dropped toes."],["The foot slaps down after contact","ste","Steppage: weak tibialis anterior cannot lower the foot gently."]]},
+{name:"Muscle to its main burst",goal:"Sort each muscle by when it does its main work in walking. Some fit two boxes; either one counts.",
+ bins:[["con","Contact and loading (about 0 to 10%)"],["mid","Mid and late stance (about 10 to 60%)"],["sw","Swing (about 60 to 100%)"]],
+ cards:[["Tibialis anterior",["con","sw"],"Two bursts: it lowers the foot after contact and holds the toes up in swing."],["Quadriceps","con","It controls the small knee bend in loading response."],["Gluteus maximus","con","It steadies the hip as weight lands, from late swing into early stance."],
+  ["Hamstrings",["sw","con"],"They slow the swinging leg in terminal swing and help steady the hip at contact."],["Gluteus medius",["mid","con"],"It holds the pelvis level in single leg support, early and mid stance."],["Calf (soleus and gastrocnemius)","mid","It controls the shin over the foot, then pushes off in terminal stance."],["Hip flexors","sw","They pull the thigh forward around preswing and initial swing."]]}];
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;const T_=(x,y,t,sz,c)=>`<text x="${x}" y="${y}" font-size="${sz||11}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" fill="${c||"var(--ink)"}">${t}</text>`;
+  const leg=(h,k_,a,col)=>{const th=h*Math.PI/180,ts=(h-k_)*Math.PI/180;const hx=28,hy=6;const kx=hx+18*Math.sin(th),ky=hy+18*Math.cos(th);const ax=kx+17*Math.sin(ts),ay=ky+17*Math.cos(ts);const ph=-ts-a*Math.PI/180;const tx=ax+10*Math.cos(ph),ty=ay+10*Math.sin(ph);
+    return `<path d="M${hx} ${hy} L${kx.toFixed(1)} ${ky.toFixed(1)} L${ax.toFixed(1)} ${ay.toFixed(1)} L${tx.toFixed(1)} ${ty.toFixed(1)}" fill="none" stroke="${col||"var(--legR)"}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`};
+  const floor='<line x1="4" y1="43" x2="52" y2="43" stroke="var(--ink-soft)" stroke-width="1.5"/>';
+  switch(k){
+  case "IC":return sv(floor+leg(-12,10,-10,"var(--legL)")+leg(24,3,0));
+  case "LR":return sv(floor+leg(-14,24,-14,"var(--legL)")+leg(18,16,-4));
+  case "MSt":return sv(floor+leg(16,40,0,"var(--legL)")+leg(2,6,6));
+  case "TSt":return sv(floor+leg(26,20,0,"var(--legL)")+leg(-10,5,8));
+  case "PSw":return sv(floor+leg(22,4,0,"var(--legL)")+leg(-12,36,-15));
+  case "ISw":return sv(floor+leg(6,10,6,"var(--legL)")+leg(4,62,-6));
+  case "MSw":return sv(floor+leg(-4,6,8,"var(--legL)")+leg(22,32,0));
+  case "TSw":return sv(floor+leg(-12,14,6,"var(--legL)")+leg(28,6,0));
+  case "ant":return sv('<circle cx="28" cy="16" r="9" fill="var(--pain)" fill-opacity=".35" stroke="var(--pain)" stroke-width="2"/>'+'<rect x="8" y="34" width="12" height="6" rx="2" fill="var(--stance)"/><rect x="24" y="34" width="24" height="6" rx="2" fill="var(--stance)"/>');
+  case "tre":return sv('<line x1="10" y1="16" x2="46" y2="26" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><line x1="16" y1="18" x2="16" y2="42" stroke="var(--ink-soft)" stroke-width="3"/><ellipse cx="10" cy="14" rx="5" ry="8" fill="var(--muscle)" fill-opacity=".3" stroke="var(--muscle)" stroke-dasharray="2 2"/>'+T_(40,42,"drop",9));
+  case "ste":return sv(floor+leg(40,90,-30)+'<line x1="40" y1="12" x2="40" y2="2" stroke="var(--ink-soft)" stroke-width="1.5"/>');
+  case "con":return sv(floor+leg(24,3,0)+T_(46,14,"0%",9));
+  case "mid":return sv(floor+leg(-6,6,8)+T_(46,14,"30%",9));
+  case "sw":return sv(floor+leg(20,45,0)+T_(46,14,"80%",9));
+  }return sv("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{},order:[],ord:[],checks:0,solved:false,hints:0};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();SG.checks=0;SG.solved=false;SG.hints=0;const R=SROUNDS[i];const isO=R.type==="order";
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  $("#sHow").textContent=isO?"Drag a card up or down, or use its arrow buttons (Tab and Enter work too). Press Check order when you are ready.":"Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.";
+  $("#sOrder").hidden=!isO;$("#sPool").hidden=isO;$("#sBins").hidden=isO;$("#sCheck").hidden=!isO;
+  if(isO){let o;do{o=shuffle(R.items.map((c,k)=>k))}while(o.every((v,k)=>v===k));SG.ord=o;oRender()}
+  else{SG.order=shuffle(R.cards.map((c,k)=>k));const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});sRender()}
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sTimerUI();starUI();a11yKey=""}
+/* ---------- ordering ---------- */
+function oRender(mark){const R=SROUNDS[SG.r];const ol=$("#sList");ol.innerHTML="";SG.ord.forEach((k,pos)=>{const it=R.items[k];const li=document.createElement("li");li.className="item"+(it[1]==="swing"?" sw":"")+(mark?(k===pos?" right":" off"):"")+(SG.hint===k?" hinted":"")+(SG.dragK===k?" drag":"");li.dataset.k=k;
+    li.innerHTML=`<span class="pos">${pos+1}</span><span class="grip" aria-hidden="true">⋮⋮</span><span class="txt">${it[0]}<span class="tag">${it[1]}</span>${mark&&k===pos?'<span class="gk-sr"> (in the right place)</span>':""}</span><span class="mv"><button type="button" aria-label="Move ${it[0]} up">▲</button><button type="button" aria-label="Move ${it[0]} down">▼</button></span>`;
+    const [up,dn]=li.querySelectorAll(".mv button");up.onclick=()=>oMove(pos,-1);dn.onclick=()=>oMove(pos,1);up.disabled=pos===0;dn.disabled=pos===SG.ord.length-1;
+    li.addEventListener("pointerdown",e=>oDragStart(e,k));ol.appendChild(li)})}
+function oMove(pos,d){const np=pos+d;if(np<0||np>=SG.ord.length||SG.solved)return;const a=SG.ord;[a[pos],a[np]]=[a[np],a[pos]];SG.hint=null;oRender();const b=$("#sList").children[np].querySelectorAll(".mv button")[d<0?0:1];if(b&&!b.disabled)b.focus();else $("#sList").children[np].querySelector(".mv button:not(:disabled)").focus();a11yKey=""}
+let odrag=null;
+function oDragStart(e,k){if(e.button>0||e.target.closest(".mv")||SG.solved)return;odrag={k,id:e.pointerId,y:e.clientY,moved:false};window.addEventListener("pointermove",oDragMove);window.addEventListener("pointerup",oDragEnd);window.addEventListener("pointercancel",oDragEnd)}
+function oDragMove(e){if(!odrag||e.pointerId!==odrag.id)return;if(!odrag.moved&&Math.abs(e.clientY-odrag.y)<5)return;odrag.moved=true;SG.dragK=odrag.k;e.preventDefault();
+  const items=[...$("#sList").children];let tgt=items.length-1;for(let i=0;i<items.length;i++){const r=items[i].getBoundingClientRect();if(e.clientY<r.top+r.height/2){tgt=i;break}}
+  const cur=SG.ord.indexOf(odrag.k);if(tgt!==cur){SG.ord.splice(cur,1);SG.ord.splice(tgt,0,odrag.k);SG.hint=null;oRender()}else if(!$("#sList .item.drag"))oRender()}
+function oDragEnd(){window.removeEventListener("pointermove",oDragMove);window.removeEventListener("pointerup",oDragEnd);window.removeEventListener("pointercancel",oDragEnd);odrag=null;SG.dragK=null;oRender();a11yKey=""}
+function oCheck(){if(SG.solved)return;SG.checks++;const n=SG.ord.filter((k,p)=>k===p).length;oRender(true);
+  if(n===SG.ord.length){SG.solved=true;SG.mist=Math.max(0,SG.checks-1)+SG.hints;sFinish()}else{SG.mist++;sMsg("warn",`Not quite. ${n} of ${SG.ord.length} are in the right place (green). Amber cards need to move. Hint: stance comes first, and it has five parts.`)}a11yKey=""}
+/* ---------- sorting ---------- */
+function sRender(){const R=SROUNDS[SG.r];if(R.type==="order")return;const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML="<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML="<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});starUI()}
+function sDone(){const R=SROUNDS[SG.r];return R.type==="order"?SG.solved:Object.keys(SG.placed).length===R.cards.length}
+function starUI(){const d=sDone();$("#sStars").textContent=d?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",d?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";const R=SROUNDS[SG.r];
+  sMsg("good",(R.type==="order"?"All eight phases are in order. ":"")+`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();if(R.type!=="order")sRender();starUI()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sCheck").onclick=oCheck;
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];
+  if(R.type==="order"){if(SG.solved){sMsg("info","The order is already correct.");return}const pos=SG.ord.findIndex((k,p)=>k!==p);const k=pos;SG.hint=k;SG.hints++;sMsg("info",`Hint: position ${pos+1} should be "${R.items[k][0]}". ${R.why[k]} It glows gold in the list.`);oRender();return}
+  const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];if(R.type==="order"){SG.ord=R.items.map((c,k)=>k);SG.mist=Math.max(SG.mist,3);SG.solved=true;oRender(true);sMsg("info","Here is the correct order. Read each card: stance has five parts, swing has three.");sFinish();return}
+  R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(!sDone())$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];if(R.type==="order")return [null,`Round ${SG.r+1}, ${R.name}. The list currently reads: `+SG.ord.map((k,p)=>(p+1)+" "+R.items[k][0]).join(", ")+"."+(SG.solved?" The order is correct.":"")];
+  const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+let GL1=null,GL2=null;
+function lifeG(){gaits();if(!GL1){GL1=makeGait({mode:"walk",cad:96,step:.5});GL2=makeGait({mode:"run",cad:160,step:1.125})}}
+const LIFE=[
+{name:"Slowing gait in an older adult",who:"Scenario 1 · fall risk",
+ story:"Dorothy, 79, says her walking has slowed over the past year, and she fell once in her kitchen last spring. In clinic she walks the middle 10 m of a hallway in 12.5 s. Her steps are short and a little wide, she spends more time with both feet down, and now and then she touches the wall.",
+ cap:"A cautious walker crosses a timed 10 m stretch; the stopwatch reads 12.5 s and the speed gauge marker sits at 0.8 m/s.",
+ desc:"A walker with grey hair moves slowly from left to right along a hallway with a start line and a finish line 10 metres apart, with short steps. A stopwatch counts up to 12.5 seconds as she crosses. Below, a gait speed gauge runs from 0 to 1.6 metres per second with an amber zone below about 0.8; a black marker sits at 0.8. A bar on the right compares double support time, taller for her than for a typical adult.",
+ draw(T){lifeG();panelBox(10,10,780,480);const gy=200,x0=90,span=560;const sx=m=>x0+m/10*span;const per=12.5/1.6;const f=P(T,per+2)*(per+2);const fr=Math.min(1,f/per);
+   ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(11,gy,778,22);line(11,gy,789,gy,C["floor-line"],2);
+   [[0,"start"],[10,"finish"]].forEach(q=>{line(sx(q[0]),gy-150,sx(q[0]),gy+22,C.evid,3);label(sx(q[0]),gy-158,q[1],{size:12,weight:700,border:C.evid})});ruler(sx(0),sx(10),gy+40,"10 m",C.evid,{dy:16});
+   drawWalker(GL1,mod1(T/(GL1.Tc*1.6)),sx(fr*10),gy,62,{hl:C.legR,skin:4,shirt:"shirt2",hair:"hair3"});
+   stopwatch(730,96,30,fr*12.5*6);txt(730,144,(fr*12.5).toFixed(1)+" s",{size:16,weight:700,mono:true,align:"center"});
+   const bx=60,bw=520,by=330;const X=v=>bx+v/1.6*bw;rr(bx,by,bw,22,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(bx,by,X(.8)-bx,22,4);ctx.fillStyle=hexA(C.warn,.45);ctx.fill();rr(X(1),by,X(1.4)-X(1),22,0);ctx.fillStyle=hexA(C.good,.35);ctx.fill();
+   [0,.4,.8,1.2,1.6].forEach(v=>txt(X(v),by+36,v.toFixed(1),{size:11,mono:true,align:"center",color:C["ink-soft"]}));txt(bx,by-14,"gait speed (m/s): below about 0.8 prompts a closer look",{size:12,weight:700,color:C["warn-ink"]});
+   if(fr>=1){const mk=X(.8);ctx.beginPath();ctx.moveTo(mk,by-2);ctx.lineTo(mk-9,by-16);ctx.lineTo(mk+9,by-16);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();line(mk,by,mk,by+22,C.ink,3)}
+   title(640,300,"Double support",C["ink-soft"]);[[660,.2,"typical"],[730,.3,"Dorothy"]].forEach(q=>{rr(q[0]-20,440-q[1]*400,40,q[1]*400,4);ctx.fillStyle=q[2]==="Dorothy"?C.dbl:hexA(C.dbl,.45);ctx.fill();txt(q[0],452,q[2],{size:11.5,weight:700,align:"center"});txt(q[0],430-q[1]*400,Math.round(q[1]*100)+"%",{size:11.5,weight:700,mono:true,align:"center"})});
+   wrapText("Slow speed and more double support are cautious, protective changes. They are a reason to look further, not a diagnosis.",60,404,520,17,{size:12.5,color:C["ink-soft"]})},
+ qs:[{q:"What is Dorothy's gait speed?",opts:[["0.8 m/s",1,"Right. 10 m ÷ 12.5 s = 0.8 m/s."],["1.25 m/s",0,"That divided 12.5 by 10. Speed is distance ÷ time: 10 ÷ 12.5 = 0.8 m/s."],["125 m/s",0,"That multiplied distance and time. Divide instead: 10 ÷ 12.5 = 0.8 m/s."],["8 m/s",0,"Check the decimal: 10 ÷ 12.5 = 0.8, not 8."]]},
+  {q:"How is this result best described?",opts:[["A screening flag that calls for a fuller fall risk assessment",1,"Yes. Slow gait speed in older adults is linked with fall risk, but it does not say why. It prompts a closer look."],["A diagnosis of a specific balance disorder",0,"Gait speed is a screening measure. Many different causes can slow walking."],["Normal for her age, so nothing to look into",0,"Speeds near 0.8 m/s, together with a recent fall, are worth a closer look."],["Proof that she will fall again",0,"It raises the chance of a fall but does not predict any one person's future for certain."]]},
+  {q:"Which next step best fits the evidence?",opts:[["Arrange a full fall risk assessment; exercise that includes balance and strength training reduces falls in older adults",1,"Right. Fall risk has many causes (vision, medicines, strength, balance, home hazards), and balance and strength exercise has good evidence for preventing falls."],["Advise her to walk less so she does not fall",0,"Moving less usually leads to weaker muscles and worse balance, which raises fall risk."],["Focus only on correcting her posture",0,"There is no single correct posture, and posture alone is not the main driver of fall risk."],["Suggest a supplement that claims to improve balance",0,"No supplement replaces an assessment, and product claims are not a substitute for evidence based care."]]}]},
+{name:"A recreational runner's questions",who:"Scenario 2 · running",
+ story:"Marcus, 34, runs three times a week. On a treadmill at 3.0 m/s his cadence is 160 steps/min. He read online that runners land with ten times their body weight and that one perfect running form prevents injury. He asks what is true.",
+ cap:"A runner on an instrumented treadmill with a live force curve that peaks between 2 and 3 body weights and flight phases in grey.",
+ desc:"A runner in shorts runs in place on a grey treadmill, with a blue force arrow under the landing foot. On the right, a graph shows the vertical force for one foot: one tall rounded peak near 2.4 body weights, with grey bands marking two flight phases when neither foot is down, and a dashed line at 1 body weight. A small panel shows the step length calculation: 3.0 metres per second times 60, divided by 160 steps per minute, equals about 1.13 metres.",
+ draw(T){lifeG();panelBox(10,10,380,480);let W_;clipRect(11,11,378,478,()=>{treadmill(16,384,330);W_=walkScene(GL2,T,2.6,190,330,120,{x0:30,x1:370,depth:22,fig:{shorts:true,skin:1,shirt:"shirt3",hair:"hair"}});forceArrows(GL2,W_,330,55)});
+   label(200,400,"3.0 m/s × 60 ÷ 160 = 1.13 m per step",{size:12.5,weight:700,mono:true,border:C.evid});label(200,440,supportState(GL2,W_.u)[0],{size:12,weight:700,border:supportState(GL2,W_.u)[1]});
+   panelBox(400,10,390,480);const g=graph({x:450,y:70,w:310,h:300,x0:0,x1:100,y0:0,y1:3,xt:[0,25,50,75,100],yt:[0,1,2,3],xf:v=>v+"%",xl:"% of gait cycle",yl:"force (body weights)",ylx:28,title:"Vertical force, one foot"});
+   for(let i=0;i<100;i++){const uu=i/100;if(!legPhase(GL2,uu,"R").st&&!legPhase(GL2,uu,"L").st){ctx.fillStyle=hexA(C.flight,.28);ctx.fillRect(g.X(i),g.y,g.w/100+.6,g.h)}}
+   line(g.X(0),g.Y(1),g.X(100),g.Y(1),hexA(C.ink,.45),1.2,[5,4]);curve(g,p=>grfLeg(GL2,p/100,"R"),0,100,C.grf,3);gdot(g,mod1(W_.u)*100,grfLeg(GL2,W_.u,"R"),C.grf);
+   label(g.X(55),g.Y(2.7),"not 10 times body weight",{size:12,weight:700,border:C.warn});txt(595,430,"peak about "+grfPeak(GL2).toFixed(1)+" body weights",{size:13,weight:700,mono:true,align:"center"})},
+ qs:[{q:"What is Marcus's step length?",opts:[["About 1.13 m",1,"Right. Step length = speed ÷ cadence = 3.0 × 60 ÷ 160 = 1.125 m."],["About 0.019 m",0,"That divided 3.0 by 160 without changing seconds to minutes. Multiply the speed by 60 first."],["About 2.25 m",0,"That is a stride (two steps). Cadence counts steps, so the step length is 1.13 m."],["About 53 m",0,"That divided 160 by 3.0. Step length is speed divided by cadence."]]},
+  {q:"About how large is the peak vertical force in running like his?",opts:[["About 2 to 3 body weights",1,"Yes. Short contact and flight phases mean the force while a foot is down must be higher than in walking, typically 2 to 3 body weights."],["About 10 body weights",0,"Measured vertical forces in running are usually 2 to 3 body weights, not 10."],["Exactly 1 body weight, like standing",0,"1 body weight is the average over the whole stride, not the peak during contact."],["Lower than in walking, because of the flight phase",0,"Flight phases make the contact force higher, not lower, since the average must still be 1 body weight."]]},
+  {q:"What is a fair, evidence based answer about running form?",opts:[["No single ideal form has been shown for everyone; quick jumps in training load are commonly linked with injury, so gradual changes are sensible",1,"Right. Research does not support one perfect form, and building load gradually is a widely shared recommendation."],["Everyone must land on the forefoot to avoid injury",0,"Studies have not shown that one foot strike pattern prevents injury for everyone. Each pattern shifts load to different tissues."],["Form never matters at all",0,"Form can matter for individuals. The point is that no single form is proven best for everyone."],["Stop running, because forces above body weight damage joints",0,"Tissues adapt to load that is built up gradually, and regular running is linked with many health benefits."]]}]},
+{name:"Toes catching after back pain",who:"Scenario 3 · foot drop",
+ story:"Priya, 46, has had low back pain for two weeks, with pain spreading down the outside of her right leg to the top of her foot. Since yesterday she catches her right toes on the carpet and has started lifting her knee high to clear them. She reports no bladder or bowel changes and no numbness in the saddle area.",
+ cap:"A steppage gait on the right, with a side view of the low spine where a disc presses on the L5 root and the L5 skin area on the top of the foot glows.",
+ desc:"On the left, a walker lifts the right knee high in swing while the right toes point down, then the foot lands with a small slap mark. The front of the right shin is drawn pale with a dashed outline. On the right, ivory vertebrae labelled L4, L5 and S1 sit with blue discs between them; the disc between L4 and L5 bulges toward a yellow nerve root labelled L5, which flashes. A yellow nerve line runs to a simple leg outline, and a yellow glow lights the top of the foot and big toe.",
+ draw(T){lifeG();panelBox(10,10,430,480);let W_;clipRect(11,11,428,478,()=>{W_=walkScene(GS,T,3,220,380,150,{x0:11,x1:439,fig:{skin:3,shirt:"shirt4",hair:"hair"}});
+     const k=W_.res.R.k,a=W_.res.R.a;const pt=segPt(k,a,.38,.05*150);ctx.save();ctx.setLineDash([4,3]);ell(pt[0],pt[1],.13*150,.03*150,pt[2],hexA(C.muscle,.25),C.muscle,1.6);ctx.restore();
+     const p=legPhase(GS,W_.u,"R").p;if(p<.08){const f=W_.res.R;withA(1-p/.08,()=>{for(let i=0;i<5;i++){const an=-Math.PI*(.15+.17*i);line(f.toe[0]+Math.cos(an)*10,380+Math.sin(an)*10,f.toe[0]+Math.cos(an)*24,380+Math.sin(an)*24,C.warn,2.5)}})}});
+   label(130,36,"right foot drop: steppage gait",{size:12.5,weight:700,border:C.legR});
+   panelBox(450,10,340,480);const sx=540;["L4","L5","S1"].forEach((lv,i)=>{const y=70+i*80;rr(sx-40,y,80,48,8);fillStroke(C.bone,C["bone-edge"],1.6);txt(sx-52,y+24,lv,{size:12.5,weight:700,mono:true,align:"right"});
+     if(i<2){const dy=y+52;const bulge=i===0?12+3*Math.sin(T*3):0;ctx.beginPath();ctx.moveTo(sx-38,dy);ctx.lineTo(sx+38,dy);ctx.quadraticCurveTo(sx+46+bulge,dy+10,sx+38,dy+20);ctx.lineTo(sx-38,dy+20);ctx.closePath();fillStroke(hexA(C.disc,.8),C.disc,1.4)}});
+   const ry=134;const fl=.5+.5*Math.sin(T*6);ctx.beginPath();ctx.moveTo(sx+36,ry);ctx.quadraticCurveTo(sx+80,ry+10,sx+96,ry+50);ctx.strokeStyle=C.nerve;ctx.lineWidth=5;ctx.stroke();glow(sx+60,ry+6,22,C.pain,.3+.4*fl);
+   label(sx+104,ry-20,"L5 root",{size:12,weight:700,border:C.nerve,align:"left"});
+   const lx=700;limb([lx,250],[lx+6,340],34,24,hexA(C.pants,.25));limb([lx+6,340],[lx+2,430],24,18,hexA(C.pants,.25));rr(lx-10,428,62,16,6);ctx.fillStyle=hexA(C.shoe,.25);ctx.fill();
+   ctx.beginPath();ctx.moveTo(sx+96,ry+50);ctx.quadraticCurveTo(lx-30,250,lx-6,330);ctx.quadraticCurveTo(lx-14,346,lx+10,360);ctx.lineTo(lx+10,420);ctx.strokeStyle=C.nerve;ctx.lineWidth=3;ctx.stroke();
+   for(let i=0;i<3;i++){const q=along([[sx+96,ry+50],[lx-24,280],[lx-6,330],[lx+10,360],[lx+10,420]],P(T*.5+i/3,1));circ(q[0],q[1],4,C.nerve,C.ink,1)}
+   glow(lx+24,434,26,C.nerve,.55+.3*Math.sin(T*3));label(lx-16,466,"L5 skin area: top of foot",{size:11,weight:700,border:C.nerve,align:"right"});label(lx-26,372,"common fibular nerve",{size:11,weight:700,border:C.nerve,align:"right"});
+   wrapText("New or worsening weakness needs prompt medical evaluation.",466,300,150,16,{size:12,weight:600,color:C.ink})},
+ qs:[{q:"Which nerve root is most likely involved?",opts:[["L5",1,"Right. Weak foot and big toe lifting with pain or tingling on the top of the foot fits L5."],["S1",0,"S1 mainly powers pushing the foot down and the ankle reflex, with sensation on the sole and outer foot."],["L3",0,"L3 mainly supplies the front of the thigh and knee straightening, not foot lifting."],["C6",0,"C6 is a neck root that supplies the arm and thumb side of the hand."]]},
+  {q:"Besides an L5 root problem, which other site commonly causes foot drop?",opts:[["The common fibular nerve where it wraps around the fibular head below the knee",1,"Yes. Pressure there can weaken the dorsiflexors too. Clinicians compare strength, reflexes and skin areas to tell the two apart."],["The superior gluteal nerve",0,"That nerve supplies the hip abductors; a problem there gives a Trendelenburg pattern, not foot drop."],["The femoral nerve",0,"The femoral nerve mainly straightens the knee. It does not lift the foot."],["The radial nerve",0,"The radial nerve is in the arm."]]},
+  {q:"What is the most appropriate next step?",opts:[["Prompt medical evaluation, because new weakness needs assessment; bladder or bowel changes or saddle numbness would make it an emergency",1,"Right. Progressive or new weakness is a red flag that needs timely medical assessment, and cauda equina signs need emergency care."],["Wait a few months to see if it settles on its own",0,"New weakness should not simply be watched. It needs prompt evaluation."],["Only change her chair and sitting posture",0,"Posture changes do not address a new neurological deficit. She needs a medical assessment."],["Avoid telling her doctor, since back pain usually improves",0,"Most back pain does improve, but new weakness is a red flag that needs medical evaluation."]]}]}];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+function drawLife(now){use(S4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+function lifeInit(){$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","calc","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim")drawSim(now);else if(curTab==="calc")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__gl={tab:k=>showTab(k),simSet:o=>{if(o.mode&&o.mode!==SIM.mode){SIM.mode=o.mode;segBtns($("#simMode"),[["walk","Walk"],["run","Run"]],()=>SIM.mode,m=>{})}if(o.cad!=null)SIM.cad=o.cad;if(o.step!=null)SIM.step=o.step;if(o.limp!=null){SIM.limp=o.limp;$("#simLimp").value=o.limp}simRebuild();simSetSliders()},
+  simState:()=>({mode:SIM.mode,v:SIM.v,cad:SIM.cad,step:SIM.step,limp:SIM.limp,peak:grfPeak(SIM.G),stance:SIM.G.legs.R.s,done:[...SIM.done],tt:SIM.tt}),
+  calcTypes:()=>CTYPES.map(c=>c[0]).filter(c=>c!=="mix"),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,choices:TR.p.choices?TR.p.choices.length:0,fmt:TR.p.choices?String(TR.p.ans):fmtAns(TR.p,TR.p.ans),unit:TR.p.unit,kind:TR.p.kind}),
+  gen:t=>{const q=genOne(t);if(q.choices){return {choice:true,ans:q.ans,j1:judge(q,String(q.ans)),j2:judge(q,String((q.ans+1)%q.choices.length)),hints:q.hints.length,rows:q.rows.length,correctName:q.choices[q.ans],u:q.vis.u,phaseIdx:q.vis.i}}
+    const good=fmtAns(q,q.ans);const bad=fmtAns(q,q.ans*1.5+1);return {ans:q.ans,good,j1:judge(q,good),j1u:judge(q,good+" "+q.unit),j2:judge(q,bad),j3:judge(q,"abc"),hints:q.hints.length,rows:q.rows.length,html:q.html,unit:q.unit}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>{const R=SROUNDS[SG.r];return R.type==="order"?{placed:SG.solved?R.items.length:0,n:R.items.length,order:true}:{placed:Object.keys(SG.placed).length,n:R.cards.length}},
+  solDone:()=>{TR.solT=performance.now()-60000},lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();gaits();simInit();calcInit();calcNew();updCalcMeter();sLoad(0);lifeInit();lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

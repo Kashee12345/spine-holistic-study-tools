@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manipulation and Mobilization Walkthrough</title>
+<meta name="description" content="Step by step animated walkthrough of manipulation and mobilization mechanics at the tissue and research level: high velocity low amplitude thrust versus graded mobilization, the force time profile and rate of force, where force travels and research on specificity, joint gapping and cavitation, nervous system effects, placebo and contextual effects, effect sizes, guideline positions, instrument assisted and drop table methods, adverse events, cervical artery dissection research, contraindications, screening and informed consent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#8A2525;--accent-wash:#F6E3E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#9B2C2C;--act2:#2F7FC1;--act3:#2A8C86;--act4:#B07A10;--act5:#C24E6A;--act6:#4B4FB5;--act7:#B8561A;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF8;
+  --bone:#EFE6D2;--bone-edge:#7A6A4A;--bone-in:#E2D5B8;--disc:#3F7FC4;--disc-ink:#1D5C93;--nuc:#9CC3EC;--nerve:#D9A800;--nerve-ink:#6E5600;
+  --muscle:#C9566E;--muscle-ink:#9B2C45;--lig:#2A8C86;--lig-ink:#1C6762;--symp:#D9741F;--symp-ink:#8A4508;--para:#3E9B4F;--para-ink:#2A6B37;
+  --pain:#D23A2E;--pain-ink:#9E2A20;--evid:#4B4FB5;--evid-ink:#3A3E99;--force:#9B2C2C;--mob:#2A8C86;--gas:#B9D8F0;--fluid:#D7ECF7;--artery:#C8453F;--artery-in:#F2B8B0;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;--coat:#FFFFFF;
+  --table:#7B8C99;--table-top:#A9B8C3;--brain:#E9B8C0;--cord:#F2D98A;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1D1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5AA9E6;--act3:#5CC8BE;--act4:#E8BE5A;--act5:#EE8CA0;--act6:#9298F0;--act7:#F0985A;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A5;--bone-edge:#F2E9D3;--bone-in:#A89C80;--disc:#6FB0EC;--disc-ink:#8CC6F2;--nuc:#2F5C86;--nerve:#F2D04A;--nerve-ink:#F2D872;
+  --muscle:#EE8CA0;--muscle-ink:#F4A6B6;--lig:#5CC8BE;--lig-ink:#7AD6CC;--symp:#F29A50;--symp-ink:#F5B278;--para:#6CCB7C;--para-ink:#8AD898;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#9298F0;--evid-ink:#ADB2F4;--force:#F4A7A0;--mob:#5CC8BE;--gas:#3A5E7E;--fluid:#1F3A4A;--artery:#E0605A;--artery-in:#6A2C2A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--coat:#DDE4E8;
+  --table:#4A5A66;--table-top:#5E6E7A;--brain:#8A5A62;--cord:#9A8640;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1D1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5AA9E6;--act3:#5CC8BE;--act4:#E8BE5A;--act5:#EE8CA0;--act6:#9298F0;--act7:#F0985A;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A5;--bone-edge:#F2E9D3;--bone-in:#A89C80;--disc:#6FB0EC;--disc-ink:#8CC6F2;--nuc:#2F5C86;--nerve:#F2D04A;--nerve-ink:#F2D872;
+  --muscle:#EE8CA0;--muscle-ink:#F4A6B6;--lig:#5CC8BE;--lig-ink:#7AD6CC;--symp:#F29A50;--symp-ink:#F5B278;--para:#6CCB7C;--para-ink:#8AD898;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#9298F0;--evid-ink:#ADB2F4;--force:#F4A7A0;--mob:#5CC8BE;--gas:#3A5E7E;--fluid:#1F3A4A;--artery:#E0605A;--artery-in:#6A2C2A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--coat:#DDE4E8;
+  --table:#4A5A66;--table-top:#5E6E7A;--brain:#8A5A62;--cord:#9A8640;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+.body .practice{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:6px 10px;font-size:14.5px;color:var(--ink)}
+.body .practice b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 4 &middot; Manipulation and mobilization mechanics</div>
+    <h1>Manipulation and Mobilization Walkthrough</h1>
+    <p class="sub">Watch a thrust and a slow mobilization trace their force curves, a facet joint gap and pop, nerve sensors fire, pain signals get turned down a little, and trial results build up. This explains the tissues and the research, not how to perform any technique. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Use the left and right arrow keys to move between steps. Force values are illustrative, rounded from published laboratory studies. Practise next in the <a href="Manip-Lab.html">Manipulation and Mobilization Lab</a>.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "bone-in", "disc", "disc-ink", "nuc", "nerve", "nerve-ink", "muscle", "muscle-ink", "lig", "lig-ink", "symp", "symp-ink", "para", "para-ink", "pain", "pain-ink", "evid", "evid-ink", "force", "mob", "gas", "fluid", "artery", "artery-in", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "coat", "table", "table-top", "brain", "cord"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-(g.yly||16),g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= spine and manual therapy drawing kit ================= */
+let SC={};let SYS={};
+const SKINS=["skin1","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function levelTag(x,y,k){const m={person:["WHOLE PERSON",C.act1],tissue:["TISSUE",C.act3],signal:["SIGNAL",C.nerve],math:["THE MATH",C.accent],data:["THE DATA",C.evid],graph:["FORCE TIME GRAPH",C.force],hist:["HISTORICAL MODEL",C.act4],now:["CURRENT EVIDENCE",C.evid],safety:["SAFETY",C.pain],talk:["THE CONVERSATION",C.act2]}[k];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.18);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function tick(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function bar(x,y,w,h,f,col){rr(x,y,w,h,Math.min(4,h/2));ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){rr(x,y,w*clamp(f,0,1),h,Math.min(4,h/2));ctx.fillStyle=col;ctx.fill()}}
+function vbar(x,y,w,h,f,col){rr(x,y,w,h,3);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){const hh=h*clamp(f,0,1);rr(x,y+h-hh,w,hh,3);ctx.fillStyle=col;ctx.fill()}}
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+function bubble(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.panel,o.stroke||C.rule,1.6);ctx.beginPath();const tx=o.tx==null?x+24:o.tx;const up=!!o.up;
+  if(!up){ctx.moveTo(tx,y+h);ctx.lineTo(tx+12,y+h);ctx.lineTo(tx+(o.tdx==null?-6:o.tdx),y+h+14)}else{ctx.moveTo(tx,y);ctx.lineTo(tx+12,y);ctx.lineTo(tx+(o.tdx==null?-6:o.tdx),y-14)}ctx.closePath();ctx.fillStyle=o.fill||C.panel;ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.stroke();
+  rr(tx+1,up?y-1:y+h-3,11,5,0);ctx.fillStyle=o.fill||C.panel;ctx.fill();wrapText(t,x+10,y+(o.ty||16),w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500})}
+function spark(x,y,s,col,p){if(p<=0||p>=1)return;ctx.save();ctx.globalAlpha*=Math.sin(p*Math.PI);ctx.translate(x,y);ctx.beginPath();for(let i=0;i<10;i++){const a=i*TAU/10;const r=i%2?s*.42:s;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fillStyle=col||C.gold;ctx.fill();ctx.restore()}
+/* ---------- people ---------- */
+function person(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=o.col||C[SHIRTS[(o.shirt||0)%4]];const bw=(o.w||1);ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+  rr(x-s*.42*bw,y-s*1.2,s*.84*bw,s*1.25,s*.32);fillStroke(sh,hexA(C.ink,.4),1.2);
+  if(o.coat){ctx.beginPath();ctx.moveTo(x-s*.42*bw,y-s*.9);ctx.lineTo(x-s*.1,y-s*1.15);ctx.lineTo(x-s*.12,y+s*.05);ctx.lineTo(x-s*.42*bw,y+s*.05);ctx.closePath();fillStroke(C.coat,hexA(C.ink,.35),1);ctx.beginPath();ctx.moveTo(x+s*.42*bw,y-s*.9);ctx.lineTo(x+s*.1,y-s*1.15);ctx.lineTo(x+s*.12,y+s*.05);ctx.lineTo(x+s*.42*bw,y+s*.05);ctx.closePath();fillStroke(C.coat,hexA(C.ink,.35),1)}
+  rr(x-s*.3*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.06*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x,y-s*1.55,s*.36,sk,hexA(C.ink,.4),1.2);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(x,y-s*1.6,s*.37,Math.PI*1.05,Math.PI*1.95);ctx.fillStyle=o.hairCol||C.hair;ctx.fill();if(o.long){rr(x-s*.38,y-s*1.62,s*.14,s*.5,s*.06);ctx.fill();rr(x+s*.24,y-s*1.62,s*.14,s*.5,s*.06);ctx.fill()}}
+  if(o.mood!==false){const m=o.mood||"ok";circ(x-s*.12,y-s*1.56,1.7,C.ink);circ(x+s*.12,y-s*1.56,1.7,C.ink);ctx.beginPath();
+    if(m==="sad"||m==="pain"){ctx.arc(x,y-s*1.36,s*.11,Math.PI+.35,TAU-.35)}else if(m==="flat"){ctx.moveTo(x-s*.1,y-s*1.42);ctx.lineTo(x+s*.1,y-s*1.42)}else ctx.arc(x,y-s*1.48,s*.12,.25,Math.PI-.25);ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.stroke();
+    if(m==="pain"){line(x-s*.2,y-s*1.68,x-s*.06,y-s*1.64,C.ink,1.3);line(x+s*.2,y-s*1.68,x+s*.06,y-s*1.64,C.ink,1.3)}}
+  ctx.restore()}
+/* person sitting on a chair, side view facing right */
+function sitter(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=C[SHIRTS[(o.shirt||0)%4]];ctx.save();
+  rr(x-s*.5,y-s*.05,s*.9,s*.12,3);fillStroke(hexA(C["ink-soft"],.5),null);line(x-s*.45,y+s*.07,x-s*.45,y+s*.8,C["ink-soft"],3);line(x+s*.35,y+s*.07,x+s*.35,y+s*.8,C["ink-soft"],3);line(x-s*.5,y-s*.05,x-s*.55,y-s*.9,C["ink-soft"],3);
+  rr(x-s*.42,y-s*1.05,s*.62,s*1.05,s*.25);fillStroke(sh,hexA(C.ink,.4),1.2);rr(x-s*.1,y-s*.12,s*.72,s*.22,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.44,y-s*.05,s*.2,s*.8,s*.08);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x-s*.1,y-s*1.38,s*.33,sk,hexA(C.ink,.4),1.2);ctx.beginPath();ctx.arc(x-s*.12,y-s*1.43,s*.34,Math.PI*1.0,Math.PI*1.9);ctx.fillStyle=C.hair;ctx.fill();circ(x+s*.04,y-s*1.4,1.7,C.ink);
+  if(o.hand)rr(x+s*.0,y-s*.75,s*.5,s*.14,s*.07),fillStroke(sh,hexA(C.ink,.3),1);ctx.restore()}
+/* person lying face down on a treatment table, head to the left. returns spine line info */
+function proneOnTable(x,y,w,o){o=o||{};const sk=C[SKINS[(o.skin||1)%4]],sh=C[SHIRTS[(o.shirt||0)%4]];
+  rr(x,y,w,16,4);fillStroke(C["table-top"],hexA(C.ink,.35),1.2);line(x+20,y+16,x+20,y+70,C.table,6);line(x+w-20,y+16,x+w-20,y+70,C.table,6);
+  if(o.drop){const dp=o.drop;rr(x+w*.42,y+dp,w*.22,14,3);fillStroke(mix(C["table-top"],C.accent,.25),C.accent,1.4);}
+  const by=y-16;rr(x+70,by-18,w-150,34,16);fillStroke(sh,hexA(C.ink,.35),1.2);rr(x+w-95,by-12,90,24,11);fillStroke(mix(sh,C.ink,.35),null);circ(x+48,by-2,20,sk,hexA(C.ink,.35),1.2);ctx.beginPath();ctx.arc(x+44,by-6,20,Math.PI*.6,Math.PI*1.6);ctx.fillStyle=C.hair;ctx.fill();
+  return {x0:x+80,x1:x+w-90,y:by-10}}
+/* clinician figure standing, facing left, arms forward (no technique detail) */
+function clinician(x,y,s,o){o=o||{};person(x,y,s,{skin:o.skin==null?2:o.skin,shirt:o.shirt==null?3:o.shirt,coat:true,mood:o.mood||"ok",long:o.long})}
+/* ---------- vertebra and motion segment (local frame: anterior left, superior up) ---------- */
+function vertPath(s,part){ctx.beginPath();
+  if(part==="body"){rr(-s*.5,-s*.3,s,s*.6,s*.09);return}
+  if(part==="post"){ctx.moveTo(s*.46,-s*.2);ctx.lineTo(s*.66,-s*.24);ctx.lineTo(s*.66,-s*.56);ctx.quadraticCurveTo(s*.73,-s*.64,s*.8,-s*.56);ctx.lineTo(s*.8,-s*.26);ctx.lineTo(s*.96,-s*.2);
+    ctx.lineTo(s*1.48,-s*.06);ctx.quadraticCurveTo(s*1.58,s*.06,s*1.48,s*.18);ctx.lineTo(s*.98,s*.22);ctx.lineTo(s*.96,s*.56);ctx.quadraticCurveTo(s*.88,s*.64,s*.8,s*.56);ctx.lineTo(s*.8,s*.24);ctx.lineTo(s*.62,s*.12);ctx.lineTo(s*.46,s*.04);ctx.closePath();return}}
+function vertebra(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);const f=o.hl?mix(C.bone,C.accent,.25):C.bone,e=o.hl?C.accent:C["bone-edge"];
+  vertPath(s,"post");fillStroke(f,e,o.lw||1.6);vertPath(s,"body");fillStroke(f,e,o.lw||1.6);
+  if(s>30){for(let i=0;i<7;i++){circ(-s*.32+rnd(i+(o.seed||0))*s*.64,-s*.18+rnd(i*3+1+(o.seed||0))*s*.36,s*.035,hexA(C["bone-in"],.9))}}
+  if(o.label)txt(0,0,o.label,{size:Math.max(10.5,s*.2),weight:700,mono:true,align:"center",color:"#10161A"});ctx.restore()}
+function discShape(x,y,s,o){o=o||{};const h=s*.22;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);rr(-s*.48,-h/2,s*.96,h,h*.4);fillStroke(hexA(C.disc,.5),C.disc,1.4);ell((o.nx||0),0,s*.18,h*.32,0,C.nuc,null);ctx.restore()}
+/* a motion segment: upper and lower vertebra, disc and facet joint. o.gap = facet gap px, o.dx/dy move upper vertebra, o.rot rotates whole thing */
+function segment(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);const sp=s*.82;const g=o.gap||0;
+  vertebra(0,sp/2,s,{seed:3,hl:o.hlLow});discShape(0,0,s,{nx:o.nx,rot:(o.urot||0)/2});ctx.save();if(o.urot)ctx.rotate(o.urot);vertebra((o.dx||0),-sp/2+(o.dy||0),s,{seed:7,hl:o.hlUp});ctx.restore();
+  /* facet joint gap and capsule */
+  const jx=s*.8,jy=-s*.03;if(g>0){ctx.save();ctx.beginPath();ctx.rect(jx,jy-s*.2,g,s*.38);ctx.fillStyle=hexA(C.fluid,.95);ctx.fill();ctx.restore();
+    if(o.bub)circ(jx+g/2,jy,Math.min(g*.45,o.bub),C.gas,C.disc,1.2)}
+  ell(jx+g/2,jy,s*.12+g*.5,s*.24,0,null,o.capCol||hexA(C.lig,.9),2);
+  if(o.lig){line(s*1.5,-sp/2+s*.06,s*1.5,sp/2+s*.06,C.lig,3)}
+  ctx.restore()}
+/* a run of vertebrae lying prone (posterior up, head left). d[i] = downward (anterior) shift px for vertebra i */
+function proneSpine(x,y,n,s,d,o){o=o||{};const sp=s*.82;const pts=[];for(let i=0;i<n;i++){const cx=x+i*sp;const dy=(d&&d[i])||0;pts.push([cx,y+dy])}
+  for(let i=0;i<n-1;i++){const a=pts[i],b=pts[i+1];ctx.save();ctx.translate((a[0]+b[0])/2,(a[1]+b[1])/2);ctx.rotate(Math.atan2(b[1]-a[1],b[0]-a[0]));rr(-s*.11,-s*.48,s*.22,s*.96,s*.08);fillStroke(hexA(C.disc,.5),C.disc,1.2);ctx.restore()}
+  pts.forEach((p,i)=>vertebra(p[0],p[1],s,{rot:-Math.PI/2,seed:i*5,hl:o.hl===i,label:o.labels?o.labels[i]:null}));return pts}
+/* close-up of a facet joint: two cartilage-capped bone ends, fluid, capsule, optional gas bubble */
+function facetZoom(x,y,r,gap,bub,o){o=o||{};ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fillStyle=C.paper;ctx.fill();ctx.clip();
+  const g=gap;ctx.fillStyle=hexA(C.fluid,1);ctx.fillRect(x-r,y-g/2-6,2*r,g+12);
+  /* bones */ctx.beginPath();ctx.moveTo(x-r,y-r);ctx.lineTo(x+r,y-r);ctx.lineTo(x+r,y-g/2-14);ctx.quadraticCurveTo(x,y-g/2-2,x-r,y-g/2-14);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  ctx.beginPath();ctx.moveTo(x-r,y+r);ctx.lineTo(x+r,y+r);ctx.lineTo(x+r,y+g/2+14);ctx.quadraticCurveTo(x,y+g/2+2,x-r,y+g/2+14);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  /* cartilage */ctx.beginPath();ctx.moveTo(x-r,y-g/2-14);ctx.quadraticCurveTo(x,y-g/2-2,x+r,y-g/2-14);ctx.strokeStyle=hexA(C.disc,.7);ctx.lineWidth=5;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x-r,y+g/2+14);ctx.quadraticCurveTo(x,y+g/2+2,x+r,y+g/2+14);ctx.stroke();
+  /* capsule */ctx.strokeStyle=C.lig;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-r*.86,y-g/2-30);ctx.quadraticCurveTo(x-r*1.02,y,x-r*.86,y+g/2+30);ctx.stroke();ctx.beginPath();ctx.moveTo(x+r*.86,y-g/2-30);ctx.quadraticCurveTo(x+r*1.02,y,x+r*.86,y+g/2+30);ctx.stroke();
+  if(bub>0){glow(x,y,bub*1.6,C.disc,.25);circ(x,y,bub,C.gas,C.disc,1.6);circ(x-bub*.3,y-bub*.3,bub*.25,hexA("#ffffff",.6))}
+  ctx.restore();circ(x,y,r,null,C["ink-soft"],2.5)}
+/* muscle spindle icon */
+function spindle(x,y,len,act,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.beginPath();ctx.moveTo(-len/2,0);ctx.quadraticCurveTo(0,-len*.22,len/2,0);ctx.quadraticCurveTo(0,len*.22,-len/2,0);fillStroke(hexA(C.muscle,.35),C.muscle,1.6);
+  ctx.beginPath();for(let i=0;i<=24;i++){const t=i/24;const X=-len*.2+len*.4*t,Y=Math.sin(t*TAU*4)*len*.06;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.nerve;ctx.lineWidth=2;ctx.stroke();if(act>0)glow(0,0,len*.5,C.nerve,clamp(act,0,1)*.6);ctx.restore()}
+/* a nerve fibre with spikes running along it (path pts), rate = spikes per second */
+function fibre(pts,T,rate,col,o){o=o||{};poly(pts,hexA(col,.85),o.lw||2.5);if(rate<=0)return;const per=1/rate;const n=Math.ceil(1/(per*(o.speed||.9)))+1;
+  for(let k=0;k<n;k++){const p=((T/(o.travel||1.1))-k*per/(o.travel||1.1))%1;const pp=p<0?p+1:p;const q=along(pts,pp);circ(q[0],q[1],o.r||4,col,C.panel,1.2)}}
+/* spike train raster inside a box: times array (s, within window), now line */
+function spikeRow(x,y,w,h,times,win,col,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=C["rule"];ctx.lineWidth=1;ctx.stroke();times.forEach(t=>{const X=x+w*(t/win);if(X<x||X>x+w)return;line(X,y+4,X,y+h-4,col,2)})}
+/* treatment hand (a simple mitten) pointing down at (x,y) */
+function hand(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin==null?2:o.skin)%4]];ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);rr(-s*.35,-s*1.25,s*.7,s*.9,s*.3);fillStroke(sk,hexA(C.ink,.45),1.4);rr(-s*.3,-s*.5,s*.6,s*.5,s*.25);fillStroke(sk,hexA(C.ink,.45),1.4);rr(-s*.42,-s*1.9,s*.84,s*.7,s*.2);fillStroke(C.coat,hexA(C.ink,.35),1.2);ctx.restore()}
+/* force time curve models (time in ms, force in N) */
+function ftThrust(t,p){const ramp=p.ramp||350,hold=p.hold||350,dur=p.dur,res=p.res||Math.max(150,dur*1.6);const tA=ramp,tB=ramp+hold;
+  if(t<0)return 0;if(t<tA)return p.pre*smooth(t/tA);if(t<tB)return p.pre;if(t<tB+dur){const f=(t-tB)/dur;return p.pre+(p.peak-p.pre)*Math.pow(Math.sin(f*Math.PI/2),2)}
+  if(t<tB+dur+res)return p.peak*(1-smooth((t-tB-dur)/res));return 0}
+function ftMob(t,p){const ramp=p.ramp||350;const per=p.dur*2;if(t<0)return 0;if(t<ramp)return p.pre*smooth(t/ramp);const n=p.n||6;if(t>ramp+n*per)return p.pre*(1-smooth((t-ramp-n*per)/300));const f=(t-ramp)/per;return p.pre+(p.peak-p.pre)*(.5-.5*Math.cos(f*TAU))}
+function ftThrustEnd(p){return (p.ramp||350)+(p.hold||350)+p.dur+(p.res||Math.max(150,p.dur*1.6))}
+/* draw a force time graph with grid and optional markers */
+function ftGraph(x,y,w,h,o){o=o||{};const t1=o.t1||1600,f1=o.f1||600;const step=o.tstep||(t1<=2000?200:t1<=4000?500:1000);const xt=[];for(let v=0;v<=t1+1;v+=step)xt.push(v);const fs=o.fstep||(f1<=200?50:f1<=600?100:200);const yt=[];for(let v=0;v<=f1+1;v+=fs)yt.push(v);
+  return graph({x,y,w,h,x0:0,x1:t1,y0:0,y1:f1,xt,yt,xl:o.xl||"time (ms)",yl:o.yl||"force (N)",title:o.title,tcol:o.tcol,ylx:o.ylx||28})}
+/* phase bands under a thrust curve */
+function phaseBands(g,p,a){const ramp=p.ramp||350,hold=p.hold||350,res=p.res||Math.max(150,p.dur*1.6);const b=[[0,ramp+hold,"preload",C.lig],[ramp+hold,ramp+hold+p.dur,"thrust",C.force],[ramp+hold+p.dur,ramp+hold+p.dur+res,"resolution",C.evid]];
+  b.forEach((z,i)=>{const X0=g.X(z[0]),X1=g.X(z[1]);withA(a==null?1:a[i],()=>{ctx.fillStyle=hexA(z[3],.12);ctx.fillRect(X0,g.y,X1-X0,g.h);label((X0+X1)/2,g.y+14+i*0,z[2],{size:11.5,weight:700,border:z[3]})})})}
+/* tiny bell curve */
+function bell(x0,y0,w,h,mu,sd,col,o){o=o||{};ctx.beginPath();const N=80;for(let i=0;i<=N;i++){const v=o.v0+(o.v1-o.v0)*i/N;const X=x0+w*i/N,Y=y0-h*gauss(v,mu,sd);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.lineTo(x0+w,y0);ctx.lineTo(x0,y0);ctx.closePath();ctx.fillStyle=hexA(col,.22);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2.2;ctx.stroke()}
+/* simple brain and cord schematic */
+function brainShape(x,y,s){ctx.beginPath();ctx.ellipse(x,y,s,s*.7,0,0,TAU);fillStroke(hexA(C.brain,.75),mix(C.brain,C.ink,.45),1.6);for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(x-s*.6+i*s*.3,y-s*.1+(i%2)*s*.2,s*.22,Math.PI*.1,Math.PI*.9);ctx.strokeStyle=hexA(mix(C.brain,C.ink,.45),.7);ctx.lineWidth=1.3;ctx.stroke()}}
+function cordX(x,y,r,o){o=o||{};circ(x,y,r,hexA(C.cord,.55),mix(C.cord,C.ink,.4),1.6);ctx.beginPath();ctx.moveTo(x-r*.55,y-r*.7);ctx.quadraticCurveTo(x-r*.1,y-r*.1,x-r*.2,y+r*.4);ctx.quadraticCurveTo(x,y+r*.15,x+r*.2,y+r*.4);ctx.quadraticCurveTo(x+r*.1,y-r*.1,x+r*.55,y-r*.7);ctx.quadraticCurveTo(x,y-r*.25,x-r*.55,y-r*.7);ctx.closePath();fillStroke(hexA(mix(C.cord,C.ink,.25),.5),null)}
+/* neck with vertebral artery (front view simplified) */
+function neckArtery(x,y,h,o){o=o||{};for(let i=0;i<6;i++){const yy=y+i*h/6;rr(x-30,yy,60,h/6-6,5);fillStroke(C.bone,C["bone-edge"],1.4);ell(x-38,yy+h/12-3,9,7,0,C.bone,C["bone-edge"],1.3);ell(x+38,yy+h/12-3,9,7,0,C.bone,C["bone-edge"],1.3)}
+  [-1,1].forEach(sd=>{const pts=[];for(let i=0;i<=20;i++){const t=i/20;pts.push([x+sd*38+Math.sin(t*TAU*1.5)*2,y+h+20-t*(h+40)])}poly(pts,C.artery,6);poly(pts,hexA(C["artery-in"],.8),2.5)})}
+/* stacked dots for trial arms */
+function dotArm(x,y,cols,n,vals,col,o){o=o||{};for(let i=0;i<n;i++){const cx=x+(i%cols)*12,cy=y-Math.floor(i/cols)*12;circ(cx,cy,4.4,vals?mix(col,C.panel,vals[i]?0:.65):col,hexA(C.ink,.3),.8)}}
+/* bold title with underline */
+function hdr(x,y,t,col){txt(x,y,t,{size:14,weight:700});line(x,y+11,x+Math.min(260,t.length*7.2),y+11,col||C.accent,2)}
+/* evidence meter: 0..3 filled boxes */
+function evMeter(x,y,lvl,o){o=o||{};const labs=["unproven","limited","some","strong"];for(let i=0;i<3;i++){rr(x+i*20,y-7,16,14,3);fillStroke(i<lvl?C.evid:hexA(C.sunk,.9),C.evid,1.2)}if(o.text!==false)txt(x+66,y,labs[lvl],{size:11.5,weight:700,color:C["evid-ink"]})}
+/* worked solution panel (rows of chains / lines / answer) */
+function wk(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);
+  const sw=o.split||0;const sz=o.size||12.5;
+  if(sw){let ly=wrapText(W_.q,x+12,y+38,sw-22,sz+4,{size:sz,weight:600})+sz+8;(W_.given||[]).forEach((g,i)=>{const a=seg(t,.6+i*.4,1+i*.4);if(a>0)withA(a,()=>wrapText(g,x+14,ly,sw-26,sz+3,{size:sz-.5,mono:true,weight:500}));ly+=wrapCount(g,sw-26,sz-.5)*(sz+3)+6});line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2)}
+  const rx=x+sw+14,rw=w-sw-28;let cy=y+(o.cy||30);const fs=o.cfs||14;const t0=o.t0||1.2;const dt=o.dt||1.8;
+  W_.rows.forEach((r,i)=>{const p_=clamp((t-t0-i*dt)/(dt*.85),0,1);
+    if(r.c){cy+=fs+6;if(p_>0){const cw=chainWidth(r.c[0],r.c[1],{size:fs});const sc=Math.min(1,rw/cw);ctx.save();ctx.translate(rx,cy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],p_,{size:fs});ctx.restore()}cy+=fs+(o.rowGap||16)}
+    else if(r.l){cy+=12;if(p_>0)withA(p_,()=>fitTxt(rx,cy,r.l,rw,{size:o.lfs||13.5,weight:600,mono:true}));cy+=(o.lh||16)}
+    else if(r.ans){cy+=16;if(p_>0)withA(p_,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(rw,ctx.measureText(r.ans).width);rr(rx-4,cy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(rx+3,cy,r.ans,rw-6,{size:15,weight:700,mono:true})});cy+=18}});
+  if(W_.miss){const tm=t0+W_.rows.length*dt+.4;const a=seg(t,tm,tm+.6);if(a>0){const mw=o.missFull?w-24:rw+8;const mx=o.missFull?x+12:rx-4;const n=wrapCount("Common mistake: "+W_.miss,mw-16,sz-1);const mh=n*(sz+2)+10;
+    withA(a,()=>{rr(mx,y+h-mh-8,mw,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,mx+8,y+h-mh-8+5+(sz)/2+1,mw-16,sz+2,{size:sz-1})})}}
+  return t}
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Manipulation and mobilization",col:"act1"},
+            2:{name:"Part 2 · The force time profile",col:"act2"},
+            3:{name:"Part 3 · Where the force goes",col:"act3"},
+            4:{name:"Part 4 · Mechanical effects",col:"act4"},
+            5:{name:"Part 5 · Nervous system effects",col:"act5"},
+            6:{name:"Part 6 · Context and evidence",col:"act6"},
+            7:{name:"Part 7 · Safety",col:"act7"}};
+const NACT=7;
+const STEPS=[
+{act:0,scene:"map",
+ desc:"Three panels run across the top. On the left, the whole person: an adult lies face down on a treatment table while a clinician in a white coat stands beside them, and a red arrow above the low back pulses down. In the middle, the tissue: a side view of two ivory vertebrae with a blue disc between them, and the small facet joint at the back opens and closes with a teal capsule around it. On the right, the signal: a red force time curve draws itself from left to right while yellow nerve spikes march along a fibre underneath. Below, seven cards for the seven parts of this walkthrough light up one at a time with a coloured border.",
+ title:"The big picture: a quick push, tissues, and signals",
+ body:`<p><b>Spinal manipulation</b> and <b>mobilization</b> are hands on treatments used by chiropractors, physical therapists, osteopathic physicians and others, mostly for back and neck pain. This walkthrough looks at them as a scientist would: what force goes in, what happens in the tissues, what the nervous system does with it, and what the research says.</p>
+ <p>You will see each idea at three levels: the <b>whole person</b> on the table, the <b>tissue</b> (bone, disc, joint, muscle) and the <b>signal</b> (force curves and nerve impulses). The numbers shown are <b>illustrative</b>: typical sizes from lab studies, rounded for teaching.</p>
+ <p>This is not a guide to doing any technique. It explains what happens inside the body and how to talk honestly about benefits and risks. Nothing here is graded.</p>`,
+ analogy:"Think of a doctor studying a bicycle crash with sensors. They do not teach you how to ride. They measure the forces, look at what bent, and check which parts of the story the data really support.",
+ terms:[["Spinal manipulation","A quick, small thrust applied to a spinal joint, also called high velocity low amplitude thrust."],["Mobilization","Slower, repeated movements of a joint within its range, which the patient can stop at any time."],["Illustrative values","Typical, rounded numbers used to show a pattern, not exact measurements for any one person."]],
+ check:null,caption:"From the whole person to the joint to the nerve signal, the three levels used in every step.",
+ legend:[["bone","Bone (vertebra)","s"],["disc","Disc"],["lig","Joint capsule and ligament"],["force","Applied force","l"],["nerve","Nerve signal"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"defManip",
+ desc:"On the left, a small figure lies face down on a table with a clinician beside them, and a short red arrow above the low back flashes once each cycle. On the right, a large side view shows a motion segment: an upper and a lower ivory vertebra with a blue disc between. First the upper vertebra tilts slowly to the end of its easy range while a dashed grey arc marks that range. Then, in a quick flash, it moves a tiny bit farther: the facet joint at the back opens, a pale gas bubble appears in the gap, and a gold star labelled pop flashes. A small force trace along the bottom shows a flat preload, a sharp spike and a fall back to zero, labelled high velocity and low amplitude.",
+ title:"Manipulation: a high velocity low amplitude thrust",
+ body:`<p><b>Spinal manipulation</b> is usually described as a <b>high velocity low amplitude thrust</b> (often shortened to HVLA). The joint is first brought to the end of its comfortable passive range. Then a very quick, very small push is added.</p>
+ <ul><li><b>High velocity</b>: the thrust happens in a fraction of a second, often around 100 to 200 milliseconds.</li>
+ <li><b>Low amplitude</b>: the extra movement is small, only a few millimetres or degrees.</li></ul>
+ <p>Because it is so fast, a person cannot stop the thrust once it starts. That is one of the main differences from mobilization. A <b>cavitation</b> (the popping sound) often happens, but not always.</p>
+ <p>Here we focus on the mechanics and the evidence, not on how to perform it.</p>`,
+ analogy:"Like flicking a stuck drawer that is already pulled out as far as it easily goes: a small, sudden tap at the end, rather than a long slow pull.",
+ terms:[["High velocity low amplitude thrust","A fast thrust that adds a small movement at the end of a joint's passive range."],["Passive range","How far a joint moves when someone else moves it while your muscles relax."],["Cavitation","Formation of a gas cavity inside a joint, heard as a pop or crack."]],
+ check:{q:"What does \"low amplitude\" mean in high velocity low amplitude thrust?",opts:[
+  ["The extra movement added by the thrust is small",1,"Right. Amplitude is the size of the movement. The thrust adds only a small movement at the end of the range."],
+  ["The force used is always very low",0,"Amplitude describes distance moved, not force. Thrust forces in the low back can reach a few hundred newtons."],
+  ["The thrust is slow",0,"That is the opposite. High velocity means the thrust is fast, often well under half a second."],
+  ["The joint is moved through its whole range many times",0,"That describes some mobilization, not a thrust. A thrust is one quick, small movement."]]},
+ caption:"Slow positioning to the end of the easy range, then one quick, small thrust; the facet joint briefly gaps.",
+ legend:[["bone","Vertebra","s"],["disc","Disc"],["lig","Facet joint capsule"],["force","Thrust","l"],["gold","Pop (cavitation)"]]},
+
+{act:1,scene:"defMob",
+ desc:"The same side view of two vertebrae fills the right side. The upper vertebra rocks gently back and forth again and again, about once each second, inside a teal shaded zone that marks its comfortable range. Teal double arrows show the size of each rocking movement. On the left, a seated figure has a speech bubble that reads I can say stop at any time. A teal wave along the bottom traces the repeated smooth pushes, rising and falling like a slow tide, with the label slow, repeated, within range.",
+ title:"Mobilization: slow, repeated, graded movement",
+ body:`<p><b>Mobilization</b> moves a joint slowly and repeatedly, usually as a gentle rhythm called an <b>oscillation</b>. The movement stays within the joint's range, and it is slow enough that the patient can say stop and the clinician can stop at once.</p>
+ <p>Mobilization can be small or large in size, and it can be done near the start of the range or closer to the end. Clinicians call these choices <b>grades</b> (next step).</p>
+ <p>Research usually groups manipulation and mobilization together as <b>manual therapy</b>. In many studies the two give similar results for back and neck pain, though some studies find small differences.</p>`,
+ analogy:"Rocking a stuck car gently back and forth, over and over, instead of giving it one hard shove.",
+ terms:[["Oscillation","A repeated back and forth movement with a steady rhythm."],["Manual therapy","Hands on treatment of joints and soft tissues, including mobilization and manipulation."],["Within range","Movement that stays inside the distance the joint can comfortably move."]],
+ check:{q:"Which feature best separates mobilization from manipulation?",opts:[
+  ["Mobilization is slow enough that the patient can stop it",1,"Yes. Mobilization is slow and repeated; a thrust is too fast to stop once it starts."],
+  ["Mobilization never touches the spine",0,"Mobilization can be used on spinal joints as well as arm and leg joints."],
+  ["Mobilization always makes a popping sound",0,"A pop is more typical of a thrust, and even then it does not always happen."],
+  ["Mobilization uses more speed",0,"It is the other way round: manipulation is the high velocity one."]]},
+ caption:"Slow, rhythmic back and forth movement that stays inside the comfortable range.",
+ legend:[["bone","Vertebra","s"],["disc","Disc"],["mob","Mobilization movement","l"],["lig","Comfortable range zone","s"]]},
+
+{act:1,scene:"grades",
+ desc:"A wide horizontal bar shows a joint's range from left to right. On the left end, a label says start of range. A teal dashed line marks where tissue resistance is first felt, a darker line marks the limit of the available range, and at the far right a red zone marks the anatomical limit, where tissue could be injured. Five rows sit under the bar, one for each grade, I to V. In each row a dot moves back and forth: in grade I a small swing near the start, in grade II a large swing that stays before resistance, in grade III a large swing up into resistance, in grade IV a small swing right at the limit, and in grade V a single quick flick just past the limit but well short of the red zone. The row being explained glows.",
+ title:"Grades I to V: a way to describe size and position",
+ body:`<p>A common system (often called the <b>Maitland grades</b>) describes a movement by how big it is and where in the range it happens. As a concept:</p>
+ <ul><li><b>Grade I</b>: small movement near the start of the range.</li>
+ <li><b>Grade II</b>: large movement within the range, not reaching resistance.</li>
+ <li><b>Grade III</b>: large movement that reaches into the resistance.</li>
+ <li><b>Grade IV</b>: small movement at the limit of the range.</li>
+ <li><b>Grade V</b>: a small, quick thrust just past that limit. This is manipulation.</li></ul>
+ <p>Grades are a <b>shared language</b> for describing and recording care. They are not proof that one grade works better. Research comparing grades is limited and mixed.</p>`,
+ analogy:"Like describing a swing on a playground: tiny pushes near the bottom, big swings, big swings that reach the top, little nudges at the top, and one quick extra flick at the very top.",
+ terms:[["Grade","A label for the size and position of a joint movement within its range."],["Resistance","The point where tissues start to push back against movement."],["Anatomical limit","The point beyond which tissues could be damaged; a thrust stays short of it."]],
+ check:{q:"A large movement that goes up into the tissue resistance but is still slow and repeated is which grade?",opts:[
+  ["Grade III",1,"Right. Grade III is large in size and reaches into the resistance."],
+  ["Grade I",0,"Grade I is a small movement near the start of the range, before any resistance."],
+  ["Grade IV",0,"Grade IV happens at the limit too, but it is small in size, not large."],
+  ["Grade V",0,"Grade V is a quick thrust, not a slow repeated movement."]]},
+ caption:"Five grades, from small and early in the range (I) to a quick thrust just past the limit (V).",
+ legend:[["mob","Mobilization grades I to IV"],["force","Grade V thrust"],["lig","Resistance begins","dl"],["pain","Anatomical limit","s"]]},
+/* ---------- Part 2 ---------- */
+{act:2,scene:"ftRead",
+ desc:"A large force time graph fills most of the picture: time in milliseconds runs along the bottom from 0 to 1,600, and force in newtons runs up the side from 0 to 600. A red curve draws itself from left to right with a moving dot. It rises gently to about 100 newtons and stays flat there, a teal shaded band labelled preload. Then it shoots up steeply to a peak near 500 newtons, a red band labelled thrust, and then falls back to zero in an indigo band labelled resolution. A small inset at the top left shows a person lying face down with a hand resting on the back, and the hand presses a little as the preload builds. A live readout shows the force and time at the moving dot.",
+ title:"Reading a force time graph, and the preload",
+ body:`<p>Researchers measure manipulation with force sensors in the table or under the hands. The result is a <b>force time graph</b>: time across the bottom (in milliseconds, ms) and force up the side (in newtons, N). One newton is about the weight of a small apple.</p>
+ <p>A thrust has three phases:</p>
+ <ul><li><b>Preload</b>: a modest force is applied and held. It takes up slack in the skin and soft tissues and brings the joint to the end of its easy range.</li>
+ <li><b>Thrust</b>: force rises quickly to a <b>peak</b>.</li>
+ <li><b>Resolution</b>: force falls back to zero.</li></ul>
+ <p>In lab studies of the mid and low back, preloads of roughly 100 N and peaks of a few hundred newtons are typical, while neck techniques use much less force. These values are <b>illustrative</b> and vary a lot between clinicians and body regions.</p>`,
+ analogy:"Like pressing a doorbell: first your finger rests on the button and takes up the slack (preload), then a quick press (thrust), then you let go (resolution).",
+ terms:[["Newton (N)","The unit of force. About 10 N equals the weight of a 1 kilogram bag of sugar."],["Preload","The steady force applied and held before the thrust."],["Peak force","The highest force reached during the thrust."],["Resolution","The phase where force returns toward zero."]],
+ check:{q:"On a thrust graph, the force sits flat at about 100 N for a moment before shooting up. What is that flat part?",opts:[
+  ["The preload",1,"Yes. The preload is held before the quick rise of the thrust."],
+  ["The peak force",0,"The peak is the highest point, reached at the end of the quick rise."],
+  ["The resolution",0,"Resolution comes after the peak, when force falls back to zero."],
+  ["The cavitation",0,"Cavitation is a joint event, not a phase of the force curve, and it does not always happen."]]},
+ caption:"Preload, thrust and resolution traced on a force time graph (illustrative values).",
+ legend:[["force","Force curve","l"],["lig","Preload phase","s"],["accent","Thrust phase","s"],["evid","Resolution phase","s"]]},
+
+{act:2,scene:"ftRate",
+ desc:"On the left, a force time graph shows the thrust part of the curve enlarged. A shaded right triangle sits under the steep rise: its height, labelled change in force, runs from the 100 newton preload up to the 500 newton peak, and its base, labelled thrust duration, spans 150 milliseconds. On the right, a worked example builds line by line. First 500 N minus 100 N gives 400 N. Next 150 ms times 1 s over 1,000 ms gives 0.15 s, and the ms units are struck through in red as they cancel. Then 400 N divided by 0.15 s gives about 2,700 N per second, shown in a green box. Last, an amber box warns about the common mistake of using the peak instead of the change, or leaving time in milliseconds.",
+ title:"Rate of force: how fast the force climbs",
+ body:`<p>The <b>rate of force</b> tells you how quickly force rises during the thrust. It is the change in force divided by the time it took:</p>
+ <p class="tx">rate of force = (peak force − preload) ÷ thrust duration</p>
+ <p><b>Worked example.</b> Preload 100 N, peak 500 N, thrust duration 150 ms. Change in force = 500 − 100 = 400 N. Convert time: 150 ms = 0.15 s. Rate = 400 N ÷ 0.15 s ≈ 2,700 N per second (N/s).</p>
+ <p><b>Common mistake:</b> using the peak (500 N) instead of the change (400 N), or dividing by 150 instead of 0.15 and getting a number 1,000 times too small.</p>
+ <p class="practice"><b>Now you try:</b> preload 150 N, peak 450 N, thrust duration 120 ms. What is the rate of force? (Answer in the quick check.)</p>`,
+ analogy:"Like the speed of a car: distance divided by time. Here it is force gained divided by time, so a big climb in a short time means a steep, fast rise.",
+ terms:[["Rate of force","Change in force divided by the time taken, in newtons per second (N/s)."],["Thrust duration","Time from the start of the thrust to the peak force, often around 100 to 200 ms."],["Millisecond (ms)","One thousandth of a second. 1,000 ms = 1 s."]],
+ check:{q:"Now you try: preload 150 N, peak 450 N, thrust duration 120 ms. What is the rate of force?",opts:[
+  ["2,500 N/s",1,"Correct. 450 − 150 = 300 N. 120 ms = 0.12 s. 300 ÷ 0.12 = 2,500 N/s."],
+  ["3,750 N/s",0,"That used the peak (450 N ÷ 0.12 s). Subtract the preload first: 300 N ÷ 0.12 s = 2,500 N/s."],
+  ["2.5 N/s",0,"That divided by 120 ms without converting to seconds. 120 ms is 0.12 s, so the rate is 2,500 N/s."],
+  ["36,000 N/s",0,"That multiplied 300 by 120. Rate is a division: change in force ÷ time."]]},
+ caption:"Worked example: change in force divided by thrust duration in seconds.",
+ legend:[["force","Thrust curve","l"],["accent","Change in force","s"],["evid","Thrust duration","s"],["good","Answer","s"]]},
+
+{act:2,scene:"ftCompare",
+ desc:"One force time graph runs from 0 to 3,000 milliseconds. A red thrust curve and a teal mobilization curve draw themselves at the same time. The red curve sits at a flat preload, spikes sharply to about 500 newtons for a fraction of a second, then drops to zero. The teal curve rises and falls smoothly about every second, staying between about 50 and 150 newtons, like slow waves. Above the graph, two small motion segments move along with the curves: the red one gives one quick small jolt, while the teal one rocks gently in time with each wave. Labels give the rate of force for each: about 2,700 newtons per second for the thrust and about 250 for each mobilization push.",
+ title:"Thrust versus slow mobilization on the same graph",
+ body:`<p>Put a thrust and a mobilization on the same axes and the difference jumps out:</p>
+ <ul><li>The <b>thrust</b> is one short, tall spike. The rise takes a fraction of a second, so the rate of force is high (thousands of newtons per second).</li>
+ <li><b>Mobilization</b> is a series of gentle waves, often about one or two per second, with lower forces (often under a couple of hundred newtons). Each rise is slow, so the rate of force is low.</li></ul>
+ <p>Peak force alone does not tell the whole story. A slow push and a fast thrust can reach a similar peak but feel and act very differently, because tissues and nerve receptors respond to <b>how fast</b> force changes, not just how big it gets.</p>`,
+ analogy:"Ocean waves and a single slap on the water can both move water, but one is steady and rhythmic and the other is one quick hit.",
+ terms:[["Oscillation frequency","How many back and forth cycles happen each second, in hertz (Hz)."],["Spike","A brief, tall peak on a graph."],["Rate dependent","A response that changes with how fast something happens, not only how big it is."]],
+ check:{q:"A mobilization push rises from 50 N to 150 N over 500 ms. What is its rate of force?",opts:[
+  ["200 N/s",1,"Right. 150 − 50 = 100 N; 500 ms = 0.5 s; 100 ÷ 0.5 = 200 N/s, far lower than a typical thrust."],
+  ["300 N/s",0,"That used the peak (150 N ÷ 0.5 s). Subtract the starting force first: 100 N ÷ 0.5 s."],
+  ["0.2 N/s",0,"That divided by 500 without changing ms to seconds. 500 ms = 0.5 s."],
+  ["50,000 N/s",0,"That multiplied instead of dividing. Rate is change in force ÷ time."]]},
+ caption:"One fast spike (thrust) and a train of slow waves (mobilization) on the same time axis.",
+ legend:[["force","Thrust","l"],["mob","Mobilization","l"],["bone","Vertebra","s"]]},
+
+{act:2,scene:"ftSpeed",
+ desc:"Three rows stack down the left side, each with a small force graph: a thrust lasting 75 milliseconds, one lasting 150, and a slow push lasting 600. On the right of each row, a rose coloured muscle spindle sits in a strip of muscle, with a yellow nerve fibre leading away. When each push happens, yellow spikes run along the fibre, and a small graph on the far right traces the firing rate. The fastest thrust makes a tall, narrow peak of about 550 spikes per second, the middle one a medium peak of about 230, and the slow push only a low, broad hump of about 40. A label at the bottom reads pattern from animal studies, simplified.",
+ title:"Why speed matters to nerve receptors",
+ body:`<p>Muscles and joints are full of sensors called <b>mechanoreceptors</b>. One type, the <b>muscle spindle</b>, sits inside muscles and reports stretch. Spindles are especially sensitive to <b>how fast</b> a muscle is stretched.</p>
+ <p>Animal studies that recorded single nerve fibres found that thrusts lasting less than about 200 ms made spindles fire a strong burst, while slower pushes of the same size produced less firing. <b>Golgi tendon organs</b>, sensors in tendons that report tension, also responded.</p>
+ <p>This is one reason researchers think the speed of a thrust matters. But a strong sensor burst in an animal is not the same as pain relief in a person. Whether these signals explain clinical results is still being studied.</p>`,
+ analogy:"A motion sensor light reacts much more to someone running past than to someone creeping by slowly, even if both end up in the same spot.",
+ terms:[["Mechanoreceptor","A sensor that responds to pressure, stretch or movement."],["Muscle spindle","A stretch sensor inside a muscle that is very sensitive to the speed of stretch."],["Golgi tendon organ","A tension sensor where muscle joins tendon."]],
+ check:{q:"In the animal studies, which thrust produced the strongest spindle burst?",opts:[
+  ["The fastest one, lasting well under 200 ms",1,"Yes. Spindles respond strongly to quick stretch, so short thrust durations produced bigger bursts."],
+  ["The slowest one, lasting over half a second",0,"Slow pushes produced the fewest spikes. Spindles are most sensitive to fast stretch."],
+  ["All durations gave exactly the same burst",0,"The burst size changed with speed. That is the point of these studies."],
+  ["Only thrusts that made a pop",0,"The studies measured spindle firing from the force itself; a pop was not required."]]},
+ caption:"Faster thrusts make stretch sensors fire bigger bursts (pattern from animal studies, simplified).",
+ legend:[["force","Force pulse","l"],["muscle","Muscle and spindle"],["nerve","Nerve spikes"]]},
+
+/* ---------- Part 3 ---------- */
+{act:3,scene:"spread",
+ desc:"A row of seven ivory vertebrae lies flat across the picture as if the person were face down, head to the left, with blue discs between them and the spinous processes pointing up. A hand icon presses on the middle vertebra and a red arrow pushes down. When the thrust happens, the middle vertebra dips the most, its neighbours on each side dip a bit less, and the ones farther away move only a little, like a ripple. Under each vertebra, a red bar shows how far it moved, tallest in the middle and shorter toward each end. Labels read contact point and nearby segments move too.",
+ title:"Force spreads to nearby segments",
+ body:`<p>A thrust is aimed at one area, but the spine is a linked chain. The vertebrae are joined by discs, ligaments and muscles, so force applied to one vertebra moves its <b>neighbours</b> too.</p>
+ <p>Studies using sensors, pins in cadaver spines and motion imaging show that a thrust moves several segments at once. The contacted segment often moves the most, but the levels above and below also move, and the pattern varies with the person, the position and the technique.</p>
+ <p>So manipulation is better described as a <b>regional</b> input with a local focus, not as a precise movement of one joint only.</p>`,
+ analogy:"Push one carriage of a train and the carriages next to it move too, just a little less.",
+ terms:[["Motion segment","Two vertebrae plus the disc, joints and ligaments between them."],["Adjacent segment","The level just above or below the one being treated."],["Regional input","A force that affects an area of the spine, not one exact point."]],
+ check:{q:"A thrust is applied over one vertebra. What does research suggest happens?",opts:[
+  ["That segment and its neighbours move, usually the contacted one the most",1,"Right. The spine is linked, so force spreads to adjacent segments."],
+  ["Only the contacted vertebra moves; the rest stay still",0,"Discs and ligaments link the vertebrae, so neighbours move too."],
+  ["The force skips the nearby levels and only moves the neck",0,"Force mostly spreads locally, getting smaller with distance."],
+  ["Nothing moves; the force only affects the skin",0,"Imaging and sensor studies show vertebrae do move a small amount."]]},
+ caption:"Force applied at one vertebra spreads to its neighbours, getting smaller with distance.",
+ legend:[["bone","Vertebra","s"],["disc","Disc"],["force","Thrust and movement bar","s"]]},
+
+{act:3,scene:"specific",
+ desc:"A row of five lower back vertebrae, labelled L2, L3, L4, L5 and S1, lies across the top. A red target marker points at L4. Each cycle, a thrust is shown, and gold pop stars appear above whichever levels made a sound: sometimes at L4, often at L3 or L5, and sometimes at two levels at once. A tally chart below counts where the pops came from in three bars: at the target, one level away, and two or more away. Over time the target bar and the one level away bar grow to similar heights. A note reads pattern based on sound sensor studies, illustrative.",
+ title:"How precise is it? Research on specificity",
+ body:`<p>Clinicians often aim at one level. Researchers have tested how well that works by taping small sound sensors (<b>accelerometers</b>) along the spine and recording where each pop comes from.</p>
+ <p>These studies found that pops often came from a level <b>one or more segments away</b> from the target, and that <b>more than one pop</b> per thrust was common. Accuracy tended to be somewhat better in the mid back than in the low back.</p>
+ <p>Hand placement and palpation (feeling for a stiff level) also show only modest agreement between different examiners. Together, this suggests manipulation is less precise than its names might imply.</p>`,
+ analogy:"Like throwing a beanbag at one square on a hopscotch grid: you are close most of the time, but it often lands on the next square over.",
+ terms:[["Specificity","How well a treatment reaches only the intended target."],["Accelerometer","A small sensor that records vibration or sound waves through the skin."],["Palpation","Examining by touch, for example to find a tender or stiff level."]],
+ check:{q:"In sound sensor studies, where did the pops usually come from?",opts:[
+  ["Often from a level near the target, and sometimes from several levels",1,"Yes. Pops were often one or more levels away, and multiple pops were common."],
+  ["Always exactly from the target level",0,"The studies found pops often came from other levels."],
+  ["Only from the neck, no matter where the thrust was aimed",0,"Pops came from levels near the thrust, not from a distant region."],
+  ["They could not detect pops at all",0,"The sensors did detect pops; that is how location was measured."]]},
+ caption:"Aimed at L4, pops often come from L3, L5 or several levels (illustrative pattern from sound sensor studies).",
+ legend:[["bone","Vertebra","s"],["accent","Target level"],["gold","Pop location"],["evid","Tally","s"]]},
+
+{act:3,scene:"levelTrial",
+ desc:"Two side by side boxes show a clinical trial. The left box is labelled level chosen by examination and the right box is labelled level chosen at random. Coloured dots, one for each participant, drop into each box until both are full. Below each box, a bar for average pain shrinks over the weeks, from tall at the start to shorter at the follow up. The two bars shrink by nearly the same amount. An indigo bracket between them shows the difference between groups is small, labelled similar short term results.",
+ title:"Does hitting the exact level matter?",
+ body:`<p>If precision is limited, does it matter? Some randomized trials compared manipulation or mobilization at a level chosen by careful examination with treatment at a <b>randomly chosen</b> level or with a general technique.</p>
+ <p>In several of these trials, both groups improved by similar amounts in the short term. This suggests that, for many people with back pain, the exact level may matter less than once thought.</p>
+ <p>These were small to medium sized trials, and results can differ by region and patient group. It is fair to say <b>research suggests</b> precision is not the main driver of short term results, not that it never matters.</p>`,
+ analogy:"If tapping anywhere on a stiff jar lid helps loosen it about as well as tapping one exact spot, the tap itself may matter more than its exact location.",
+ terms:[["Randomized trial","A study where chance decides which treatment each participant gets."],["Short term","In these studies, usually days to a few weeks after treatment."],["Follow up","A later check on how participants are doing."]],
+ check:{q:"What is the fairest summary of the specificity trials?",opts:[
+  ["Research suggests the exact level may matter less than once thought for short term results",1,"Right. That statement matches the evidence without overclaiming."],
+  ["They prove level never matters for anyone",0,"Small trials cannot prove a universal rule. Use \"research suggests\"."],
+  ["They show random treatment is dangerous",0,"These trials looked at outcomes like pain, not at harm from random levels."],
+  ["They show only the exact level works",0,"Both groups improved similarly, so the trials do not support that."]]},
+ caption:"Chosen level and random level groups improve by similar amounts in the short term.",
+ legend:[["accent","Chosen level group"],["evid","Random level group"],["pain","Average pain","s"]]},
+/* ---------- Part 4 ---------- */
+{act:4,scene:"gapping",
+ desc:"Two imaging style panels sit side by side, each showing a top down slice through a low back vertebra with its two small facet joints at the back. The left panel is labelled positioning only and the right is labelled after manipulation. In each, callipers measure the width of the facet joint space. On the left the joint space widens only a little. On the right it widens more, and the gap fills with pale fluid. A bar chart in the middle compares the average gap in the two groups, with the manipulation bar taller. A note says measured on imaging; size of change is small, a fraction of a millimetre to about a millimetre.",
+ title:"Joint gapping: the joint surfaces briefly separate",
+ body:`<p>Each vertebra has two small <b>facet joints</b> at the back, where it meets the vertebra below. They are <b>synovial joints</b>: smooth cartilage surfaces, slippery fluid, and a capsule around them.</p>
+ <p>Imaging studies have measured the space between facet joint surfaces before and after side lying low back manipulation. On average the joints <b>gapped</b> (separated) more after manipulation than after the same positioning without a thrust. The changes were small and brief.</p>
+ <p>Gapping is a measured <b>mechanical effect</b>. Why it would relieve pain is less clear. One idea is that gapping briefly stretches the capsule and its sensors, which feeds into the nervous system effects in Part 5.</p>`,
+ analogy:"Pulling apart two wet glass slides: for a moment the gap widens and fluid rushes in, then they settle back together.",
+ terms:[["Facet joint","A small synovial joint at the back of each pair of vertebrae, also called a zygapophyseal joint."],["Gapping","Separation of the two joint surfaces."],["Synovial joint","A joint with cartilage, lubricating fluid and a surrounding capsule."]],
+ check:{q:"What did imaging studies show about facet joint gapping?",opts:[
+  ["Joints gapped more after a thrust than after positioning alone, by a small amount",1,"Right. The effect is real but small and brief."],
+  ["Joints stayed permanently wider after a thrust",0,"The change was brief; joints return to normal resting width."],
+  ["Gapping only happens in the neck",0,"The best known imaging studies looked at the low back."],
+  ["No movement can be seen in the joint at all",0,"Imaging did detect small changes in joint space."]]},
+ caption:"Measured on imaging: facet joints gap a little more after a thrust than after positioning alone.",
+ legend:[["bone","Bone","s"],["fluid","Joint fluid","s"],["evid","Average gap measured","s"],["lig","Capsule"]]},
+
+{act:4,scene:"cavitation",
+ desc:"A round magnifying lens shows a close up of a facet joint: an ivory bone end above, another below, each capped with blue cartilage, a pale fluid layer between them and teal capsule walls at the sides. As the surfaces start to separate, a pressure gauge on the right shows its needle falling. When it drops past a marked line, a pale gas bubble suddenly appears in the fluid and a sound wave burst labelled pop flashes beside the lens. The bubble then lingers and slowly shrinks. A timer reads about 20 minutes before the same joint can usually pop again.",
+ title:"Cavitation: what the pop really is",
+ body:`<p>When the surfaces of a synovial joint are pulled apart quickly, the pressure in the fluid falls. At a certain point a <b>gas cavity</b> suddenly forms. This is <b>cavitation</b>, and it makes the familiar pop. Real time imaging of knuckle cracking showed a cavity forming at the moment of the sound.</p>
+ <p>After a pop, the same joint usually cannot pop again for roughly 20 minutes. This <b>refractory period</b> is thought to be the time it takes for gas to dissolve back into the fluid.</p>
+ <p>The pop is <b>not</b> a sign that a bone went back into place, and it does not appear to be needed for benefit. Studies comparing people who did and did not have a pop found similar short term outcomes.</p>`,
+ analogy:"Like opening a can of soda: the pressure drops and gas suddenly comes out of solution with a sound. Nothing broke and nothing moved back into a slot.",
+ terms:[["Cavitation","Sudden formation of a gas cavity in joint fluid when pressure falls."],["Refractory period","The rest time before the same joint can pop again, roughly 20 minutes."],["Audible release","Another name for the popping sound during a thrust."]],
+ check:{q:"Which statement about the pop is best supported by research?",opts:[
+  ["It is gas forming in the joint fluid, and it does not appear to be needed for benefit",1,"Yes. Cavitation is a fluid event, and outcomes are similar with or without it."],
+  ["It is a bone snapping back into its correct place",0,"Imaging shows a gas cavity forming. It is not a sign of a bone being put back."],
+  ["No pop means the treatment failed",0,"Studies found similar short term outcomes whether or not a pop happened."],
+  ["The pop is cartilage cracking",0,"Cartilage is not damaged. The sound comes from gas forming in the fluid."]]},
+ caption:"Pressure in the joint fluid falls, a gas cavity forms, and you hear a pop.",
+ legend:[["bone","Bone","s"],["disc","Cartilage","s"],["fluid","Joint fluid","s"],["gas","Gas cavity"],["lig","Capsule"]]},
+
+{act:4,scene:"alignment",
+ desc:"The picture is split into two labelled panels. The left panel is labelled historical model and is drawn as a sketch with dashed lines: a column of vertebrae with one shifted out of line, a yellow nerve beside it with a dashed outline, and an arrow showing how early writers described pushing the bone back into line. The right panel is labelled current evidence and shows two solid side by side spine images marked before and after. A dashed line runs through the back of each vertebra, and the lines in the before and after images match. A label says no lasting change in position seen on imaging. A small indigo box lists effects thought to be short term and mostly neural.",
+ title:"Putting a bone back in place? A historical model",
+ body:`<p>Early chiropractic, founded by <b>D.D. Palmer</b> in 1895 and developed by his son <b>B.J. Palmer</b>, taught that a vertebra slightly out of place (a <b>subluxation</b>) could press on nerves and interfere with the body's <b>Innate Intelligence</b>, its inborn ability to heal. In this model, the adjustment moved the bone back into place. Many people found this explanation meaningful, and it shaped the profession.</p>
+ <p>This is a <b>historical model</b>. Current research does not support it as physiology: imaging before and after manipulation generally does not show lasting changes in vertebral position, and examiners do not agree well on which vertebra is "out".</p>
+ <p>Today, many chiropractors and researchers describe the effects of manipulation as mostly <b>short term</b> and <b>neurophysiological</b>, plus contextual effects. The word subluxation is still used by some, with different meanings, and debate continues within the profession.</p>`,
+ analogy:"Old maps sometimes show sea monsters at the edges. They tell you how people made sense of the world then. A modern map keeps the coastline the explorers found, but replaces the monsters with what newer measurements show.",
+ terms:[["Subluxation (historical)","In early chiropractic, a slightly misplaced vertebra thought to interfere with nerve flow."],["Innate Intelligence","D.D. Palmer's term for the body's inborn ability to organize and heal itself."],["Historical model","An explanation from the past, taught in its own terms and compared with current evidence."]],
+ check:{q:"What does current imaging research show about vertebral position after manipulation?",opts:[
+  ["It generally does not show lasting changes in vertebral position",1,"Right. That is why most current explanations focus on short term nervous system and contextual effects."],
+  ["Each thrust moves a vertebra permanently back into line",0,"That is the historical model. Imaging does not generally show lasting position changes."],
+  ["Vertebrae are always out of place in people with back pain",0,"Small differences in alignment are common in people with and without pain."],
+  ["Imaging cannot see vertebrae at all",0,"Imaging shows vertebrae clearly. It just does not show lasting shifts after treatment."]]},
+ caption:"Historical model (left, sketched) beside what imaging shows today (right).",
+ legend:[["act4","Historical model","dl"],["evid","Current evidence","s"],["bone","Vertebra","s"],["nerve","Nerve"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"mechano",
+ desc:"A side view of a motion segment sits on the left with a rose coloured strip of back muscle behind it. Three kinds of sensors are marked: rose spindles in the muscle, small teal dots in the joint capsule, and a yellow knot where muscle meets tendon for the Golgi tendon organ. When a red force arrow presses, all the sensors glow, and yellow spikes race along nerve fibres to a round spinal cord cross section on the right. Next to the cord, three spike rows, one per sensor type, fill with dense bursts during the thrust and go quiet afterward.",
+ title:"A burst of sensor input",
+ body:`<p>A thrust or a mobilization stretches and squeezes many tissues at once: muscle, tendon, joint capsule, ligament and skin. Each has its own <b>mechanoreceptors</b>, so the first and most certain effect is a <b>burst of sensory input</b> into the spinal cord.</p>
+ <ul><li><b>Muscle spindles</b> report stretch and its speed.</li>
+ <li><b>Golgi tendon organs</b> report tension.</li>
+ <li><b>Joint capsule receptors</b> report joint position, movement and pressure.</li></ul>
+ <p>This input is real and measurable. The question researchers study is what the spinal cord and brain do with it. That is the next three steps.</p>`,
+ analogy:"Like a crowd of reporters all phoning the newsroom at once after a surprise event. The news desk (spinal cord and brain) decides what to do with the flood of calls.",
+ terms:[["Sensory input","Signals sent from sensors in the body to the spinal cord and brain."],["Joint capsule receptors","Sensors in the joint capsule that report movement, position and pressure."],["Afferent fibre","A nerve fibre carrying signals toward the spinal cord."]],
+ check:{q:"Which effect of a thrust is the most certain?",opts:[
+  ["A burst of signals from mechanoreceptors into the spinal cord",1,"Yes. Sensor activation during the thrust is directly measured."],
+  ["A permanent change in posture",0,"Research does not show lasting posture changes after manipulation."],
+  ["A cure for the underlying condition",0,"Effects on pain are modest and usually short term, not a cure."],
+  ["A rise in blood sugar",0,"There is no good evidence for that. The direct effect is sensory input."]]},
+ caption:"Spindles, tendon organs and capsule sensors all fire during the thrust.",
+ legend:[["muscle","Muscle spindle"],["nerve","Nerve spikes"],["lig","Capsule receptors"],["cord","Spinal cord","s"]]},
+
+{act:5,scene:"reflex",
+ desc:"The top half shows a recording of electrical activity from a back muscle (an EMG trace) as a wiggly rose line running left to right over about two minutes. A red marker labelled thrust sits near the start. Right after it, the trace shows a short tall burst, labelled reflex response. After that, the wiggles become smaller than before for a short stretch, labelled quieter for a short time, then gradually return to their earlier size. The bottom half shows a yellow bar for the H reflex size, which dips after the thrust and climbs back to baseline within about a minute.",
+ title:"Spinal reflexes and short term changes in muscle tone",
+ body:`<p>When the sensor burst reaches the spinal cord, it can trigger <b>reflexes</b>: automatic responses that do not need the brain. Recordings of electrical activity in back muscles (<b>EMG</b>) often show a brief burst just after a thrust.</p>
+ <p>After that, some studies find that muscle activity and the <b>H reflex</b> (a lab test of how easily the spinal motor neurons fire) are reduced for a short time, often seconds to a few minutes. This fits the idea that manipulation can briefly lower muscle tone or guarding.</p>
+ <p>These changes are <b>short lived</b> and vary between studies and people. Whether they explain longer lasting pain relief is not yet clear.</p>`,
+ analogy:"Like a startle followed by a deep breath out: a quick jump, then a brief calm, then back to normal.",
+ terms:[["Reflex","An automatic response routed through the spinal cord."],["EMG","Electromyography, a recording of electrical activity in muscle."],["H reflex","A lab measure of how easily spinal motor neurons can be triggered."],["Muscle tone","The resting tension in a muscle."]],
+ check:{q:"How long do the reflex and muscle tone changes usually last in studies?",opts:[
+  ["Seconds to a few minutes",1,"Right. These are short lived changes."],
+  ["Several years",0,"No study shows reflex changes lasting that long."],
+  ["Exactly 24 hours in everyone",0,"Durations vary, and they are usually far shorter than a day."],
+  ["They never happen",0,"Brief reflex bursts and short term changes are commonly measured."]]},
+ caption:"A quick reflex burst, then briefly quieter muscle activity before it returns to baseline.",
+ legend:[["muscle","Muscle activity (EMG)","l"],["force","Thrust","l"],["nerve","H reflex size","s"]]},
+
+{act:5,scene:"hypo",
+ desc:"On the left, a spinal cord dorsal horn is drawn as a grey box. A thin red pain fibre enters from the body and connects to a projection neuron that sends red signals up toward the brain. A thicker yellow fibre for touch and pressure also enters and excites a small green inhibitory cell. When the yellow fibre fires during the thrust, the green cell lights up and the red signals going up become fewer and dimmer, like a gate closing. On the right, a pressure pain threshold gauge shows a needle that rises a little after treatment and then slowly drifts back down over time, labelled small short term rise.",
+ title:"Hypoalgesia: pain turned down a little, for a while",
+ body:`<p><b>Hypoalgesia</b> means reduced sensitivity to pain. In lab studies, people's <b>pressure pain threshold</b> (how much pressure it takes before it hurts) often rises a little right after manipulation or mobilization. The change is <b>small and short term</b>, and similar changes occur with other manual therapies and with exercise.</p>
+ <p>One proposed explanation is the <b>gate control</b> idea: input from large touch and pressure fibres activates <b>inhibitory interneurons</b> in the spinal cord, which quiet the pain signals being passed up to the brain.</p>
+ <p>This is a <b>proposed mechanism</b> supported by lab research. It does not mean the cause of the pain has been fixed.</p>`,
+ analogy:"Rubbing a bumped elbow. The rubbing sends touch signals that partly close the gate on the pain signals, so it hurts a bit less for a while.",
+ terms:[["Hypoalgesia","Reduced sensitivity to pain."],["Pressure pain threshold","The least pressure that a person feels as painful."],["Gate control","The idea that touch input in the spinal cord can reduce the pain signals sent to the brain."],["Inhibitory interneuron","A small spinal cord cell that quiets other neurons."]],
+ check:{q:"What do lab studies show about pressure pain threshold after manipulation?",opts:[
+  ["It often rises a little for a short time, similar to other manual therapy",1,"Yes. The effect is small, short term and not unique to manipulation."],
+  ["It doubles and stays high for months",0,"Changes are small and fade within a short time."],
+  ["It only changes after a pop",0,"Threshold changes are not tied to hearing a pop."],
+  ["Pain sensitivity always gets worse",0,"Most studies find a small decrease in pain sensitivity, not an increase."]]},
+ caption:"Touch and pressure input partly closes the spinal pain gate; pain threshold rises a little, briefly.",
+ legend:[["pain","Pain signal"],["nerve","Touch and pressure fibre"],["para","Inhibitory interneuron"],["evid","Pain threshold gauge","s"]]},
+
+{act:5,scene:"descend",
+ desc:"A brain sits at the top with two small labelled centres in the brainstem below it: PAG and RVM. A spinal cord runs down the middle of the picture. A red pain signal climbs up the cord from the lower back toward the brain as a stream of red dots. When the thrust input arrives, a green descending pathway lights up from the PAG and RVM down to the cord, and green dots flow downward. Where they meet the pain pathway, the red dots shrink and fade. A dial labelled pain volume turns down partway. A tag reads proposed mechanism, mostly lab evidence.",
+ title:"Descending modulation: the brain's own volume control",
+ body:`<p>The brain does not just receive pain signals. It can also turn them up or down. Centres in the brainstem, such as the <b>periaqueductal gray (PAG)</b> and the <b>rostral ventromedial medulla (RVM)</b>, send signals down the spinal cord that can reduce or increase pain transmission. This is called <b>descending modulation</b>.</p>
+ <p>Some researchers propose that manual therapy, by providing strong sensory input and a reassuring experience, may engage this system. Studies of short term changes in pain sensitivity, and of pain measured at sites away from the treated area, are consistent with this idea.</p>
+ <p>This remains a <b>proposed mechanism</b>. Expectation, stress, sleep and mood feed into the same system, which is one reason context matters so much (next part).</p>`,
+ analogy:"A sound engineer at a mixing desk can turn a channel down even while the singer keeps singing at the same volume.",
+ terms:[["Descending modulation","Signals from the brain that turn pain transmission in the spinal cord up or down."],["PAG","Periaqueductal gray, a midbrain area involved in pain control."],["RVM","Rostral ventromedial medulla, a brainstem area that relays pain control signals to the cord."]],
+ check:{q:"How should descending modulation be described when explaining manipulation?",opts:[
+  ["As a proposed mechanism with mostly lab based support",1,"Right. It is plausible and studied, but not proven to explain clinical results."],
+  ["As the proven reason manipulation cures back pain",0,"It is not proven, and manipulation is not a cure; effects are modest."],
+  ["As a historical model with no research",0,"It is a modern, actively researched idea, not a historical one."],
+  ["As something only drugs can activate",0,"Many things, including expectation and exercise, influence this system."]]},
+ caption:"Brainstem centres send signals down the cord that can turn pain signals down (proposed mechanism).",
+ legend:[["pain","Rising pain signal"],["good","Descending control"],["brain","Brain","s"],["cord","Spinal cord","s"]]},
+/* ---------- Part 6 ---------- */
+{act:6,scene:"context",
+ desc:"On the left, a clinic scene shows a patient sitting and a clinician facing them. Four icons light up one at a time around them with labels: a thought bubble for expectation, a hand for touch, two linked speech bubbles for the therapeutic alliance, and a calm room for the setting. On the right, a graph shows average pain over six weeks for two groups in a trial: real treatment in brick red and a sham treatment in indigo. Both lines fall over the weeks. The real treatment line ends a little lower, and a small bracket labels the gap as the specific effect, while most of the drop is shared by both groups.",
+ title:"Placebo and contextual effects",
+ body:`<p>Every treatment comes with a <b>context</b>: what the person expects, being touched and listened to, the clinician's confidence and warmth, and the setting. These <b>contextual effects</b> can change how much pain people feel and report. They are real effects in the nervous system, not imagined.</p>
+ <ul><li><b>Expectation</b>: in some studies, people who expected manipulation to help improved more.</li>
+ <li><b>Touch</b>: hands on contact itself can be calming and reduce pain.</li>
+ <li><b>Therapeutic alliance</b>: a trusting, collaborative relationship is linked to better outcomes in many kinds of care.</li></ul>
+ <p>To separate these from the effect of the thrust itself, trials use <b>sham</b> procedures that look and feel similar. In sham controlled trials, the sham group often improves too, and the extra benefit of real manipulation is usually small. Natural recovery over time also explains part of the improvement in both groups.</p>`,
+ analogy:"A meal tastes better in a warm restaurant with friendly staff. The food matters, but so does everything around it.",
+ terms:[["Contextual effects","Changes in symptoms caused by expectation, the relationship, touch and the setting."],["Sham","A fake procedure designed to look and feel like the real one."],["Therapeutic alliance","The trust and teamwork between patient and clinician."],["Natural recovery","Improvement that would happen over time anyway."]],
+ check:{q:"In a sham controlled trial, both groups improve and the real treatment group improves a little more. What is that small extra difference?",opts:[
+  ["The estimated specific effect of the real treatment",1,"Right. The shared improvement reflects context and natural recovery; the gap estimates the specific effect."],
+  ["Proof that context does nothing",0,"The sham group improved too, which shows context and time matter a lot."],
+  ["The placebo effect",0,"The placebo and contextual part is shared by both groups. The gap is what is left over."],
+  ["A measurement error that should be ignored",0,"The difference between groups is exactly what the trial is designed to measure."]]},
+ caption:"Expectation, touch, alliance and setting shape outcomes; both real and sham groups improve.",
+ legend:[["accent","Real treatment"],["evid","Sham treatment"],["act2","Contextual factors","s"]]},
+
+{act:6,scene:"effsize",
+ desc:"Two bell shaped curves sit on a pain scale from 0 to 10. An indigo curve for the comparison group is centred at 5, and a brick red curve for the manipulation group slides left until it is centred at 4. Most of the two curves still overlap. A ruler between the centres shows the 1 point difference, and a second ruler shows the spread, labelled standard deviation 2.5. On the right, a worked example builds: 1.0 point divided by 2.5 points equals 0.4, and the points units are struck through. An effect size scale underneath marks 0.2 small, 0.5 moderate and 0.8 large, with a marker landing at 0.4 between small and moderate.",
+ title:"Effect size: how big is the difference?",
+ body:`<p>Trials report how much better one group did. A common way to compare across studies is the <b>standardized mean difference</b> (an <b>effect size</b>): the difference between group averages divided by the <b>standard deviation</b> (how spread out the scores are).</p>
+ <p class="tx">effect size = (difference in averages) ÷ (standard deviation)</p>
+ <p><b>Worked example.</b> Average pain on a 0 to 10 scale is 4.0 with manipulation and 5.0 with a comparison treatment; the standard deviation is 2.5 points. Effect size = 1.0 ÷ 2.5 = 0.4. The points units cancel, so the answer has no units. A rough guide: about 0.2 is small, 0.5 moderate, 0.8 large.</p>
+ <p><b>Common mistake:</b> dividing by an average instead of by the standard deviation, or calling 0.4 a 40 percent improvement. It is neither.</p>
+ <p class="practice"><b>Now you try:</b> a difference of 1.5 points with a standard deviation of 3 points. What is the effect size? (Answer in the quick check.)</p>`,
+ analogy:"A 2 centimetre height difference matters a lot among newborn babies, whose heights vary little, but not much among adults, whose heights vary a lot. Effect size scales the difference by the usual spread.",
+ terms:[["Standardized mean difference","Difference in group averages divided by the standard deviation; an effect size with no units."],["Standard deviation","A measure of how spread out the scores are around the average."],["Small to moderate","Effect sizes between roughly 0.2 and 0.5."]],
+ check:{q:"Now you try: difference 1.5 points, standard deviation 3 points. What is the effect size?",opts:[
+  ["0.5, a moderate effect",1,"Correct. 1.5 ÷ 3 = 0.5, which is about moderate on the rough guide."],
+  ["2.0, a very large effect",0,"That divided 3 by 1.5. Put the difference on top: 1.5 ÷ 3 = 0.5."],
+  ["4.5",0,"That multiplied the numbers. Effect size divides the difference by the standard deviation."],
+  ["50 percent better",0,"An effect size of 0.5 is not a percentage improvement. It is the difference measured in standard deviations."]]},
+ caption:"Worked example: a 1 point difference divided by a 2.5 point spread gives an effect size of 0.4.",
+ legend:[["accent","Manipulation group"],["evid","Comparison group"],["good","Answer","s"]]},
+
+{act:6,scene:"guide",
+ desc:"A large guideline card fills the left side with a menu of nonpharmacologic options for low back pain: exercise, heat, massage, acupuncture, yoga or tai chi, mindfulness, cognitive behavioural therapy, multidisciplinary rehabilitation and spinal manipulation. The options light up one after another, and spinal manipulation is highlighted as one item among the others, not above them. On the right, a bar chart shows effect sizes for several options, all with bars of similar small to moderate height and thin lines for uncertainty. A small note below reads neck pain: manual therapy is often listed together with exercise.",
+ title:"What guidelines say about back and neck pain",
+ body:`<p>Major clinical guidelines for <b>low back pain</b> list spinal manipulation as <b>one of several nonpharmacologic options</b>, alongside exercise, heat, massage, acupuncture, yoga, tai chi, mindfulness and psychological therapies. Some guidelines recommend it mainly as part of a package that includes exercise.</p>
+ <p>Systematic reviews generally find that manipulation gives <b>small to moderate</b> short term improvements in pain and function, about 1 point on a 0 to 10 pain scale in many reviews, which is <b>similar to other recommended care</b>. It is not clearly better or worse than those options.</p>
+ <p>For <b>neck pain</b>, guidelines often include manipulation or mobilization combined with exercise. For conditions such as asthma, high blood pressure or ear infections, evidence does <b>not</b> support manipulation.</p>`,
+ analogy:"Like a menu with several good dishes of similar nutrition. People can pick based on preference, cost and access, because none is far better than the others.",
+ terms:[["Clinical guideline","Recommendations made by expert panels after reviewing the research."],["Nonpharmacologic","A treatment that does not use medicine."],["Systematic review","A study that collects and combines all good quality trials on a question."]],
+ check:{q:"Which statement best matches major low back pain guidelines?",opts:[
+  ["Spinal manipulation is one of several nonpharmacologic options with small to moderate effects",1,"Yes. That is the mainstream, modest summary."],
+  ["Spinal manipulation is the single best treatment for everyone",0,"Guidelines list it as one option, with effects similar to other recommended care."],
+  ["Spinal manipulation should never be considered",0,"Guidelines do include it as an option for low back pain."],
+  ["Spinal manipulation is recommended for asthma and ear infections",0,"Evidence does not support manipulation for those conditions."]]},
+ caption:"Spinal manipulation listed as one option among several, with similar small to moderate effects.",
+ legend:[["accent","Spinal manipulation"],["evid","Other recommended options","s"],["ink-soft","Uncertainty range","l"]]},
+
+{act:6,scene:"instrument",
+ desc:"Three rows compare force time curves on the same time scale. The top row, labelled manual thrust, shows a preload then a peak lasting about 150 milliseconds. The middle row, labelled instrument assisted, shows a generic hand held spring device beside a very narrow, short spike lasting only a few milliseconds and lower in height. The bottom row, labelled drop table, shows a table with a section that drops a short distance, and its curve rises then is cut short when the section drops. Each row has a small indigo evidence meter: the manual thrust shows some evidence, and the other two show limited evidence.",
+ title:"Instrument assisted and drop table methods",
+ body:`<p>Some techniques change how the force is delivered:</p>
+ <ul><li><b>Instrument assisted</b> methods use a hand held, spring loaded device that delivers a very fast, low force impulse, lasting only a few milliseconds, to a small area.</li>
+ <li><b>Drop table</b> methods use a table with sections that can drop a short distance as the thrust is given. The drop shortens the thrust and can reduce the force needed.</li></ul>
+ <p>Supporters value these methods because they are often gentler and easier to control. Research on them is <b>limited</b>: there are fewer and smaller trials, and they have not been shown to be clearly better or worse than manual methods. The same safety screening applies.</p>`,
+ analogy:"Like the difference between knocking on a door with your knuckles, a quick tap with a small hammer, and a knock where the door gives way slightly as you hit it. Each changes the shape of the force.",
+ terms:[["Instrument assisted","Using a hand held device to deliver a quick, low force impulse."],["Drop table","A table with sections that drop a short distance during a thrust."],["Impulse","A brief push; its size depends on both force and how long it lasts."]],
+ check:{q:"How does an instrument assisted impulse usually compare with a manual thrust on a force time graph?",opts:[
+  ["It is much shorter, often a few milliseconds, and lower in force",1,"Right. The impulse is very brief and usually lower in force."],
+  ["It lasts several seconds",0,"That describes a slow push. Instrument impulses are very brief."],
+  ["It is identical to a manual thrust",0,"The shape differs: much shorter and usually lower force."],
+  ["It has been proven far better than all other methods",0,"Evidence is limited and does not show clear superiority."]]},
+ caption:"Three ways to shape a force: manual thrust, a brief instrument impulse, and a drop table.",
+ legend:[["force","Manual thrust","l"],["act2","Instrument impulse","l"],["act3","Drop table","l"],["evid","Evidence meter","s"]]},
+
+/* ---------- Part 7 ---------- */
+{act:7,scene:"soreness",
+ desc:"On the left, a grid of 100 small figures represents 100 patients. About half of them light up in amber, one row at a time, labelled at least one mild reaction. Small icons pop up beside the grid for the most common reactions: local soreness, stiffness, headache and tiredness. On the right, a timeline from 0 to 72 hours shows a soreness curve that rises in the first few hours, peaks within the first day and fades back to zero by about 24 to 48 hours. A clock icon moves along the timeline.",
+ title:"Common, mild, short lived side effects",
+ body:`<p>The most common side effects after manipulation are <b>mild and short lived</b>: local soreness or aching, stiffness, headache and tiredness. In surveys of patients, roughly half report at least one such reaction.</p>
+ <p>These reactions usually begin within a few hours, are mild to moderate, and fade within about <b>24 to 48 hours</b>. Similar reactions happen after exercise and other manual therapy.</p>
+ <p>Patients should hear about them <b>before</b> treatment as part of informed consent, and should know which symptoms are not expected and need a call or urgent care (the next steps).</p>`,
+ analogy:"Like the muscle ache after the first day of a new workout. Annoying, common, and gone in a day or two.",
+ terms:[["Adverse event","Any unwanted effect after a treatment, from mild to serious."],["Mild reaction","A temporary, minor effect such as soreness or tiredness."],["Short lived","Lasting a short time, here usually under 48 hours."]],
+ check:{q:"A patient feels sore and a bit stiff the day after a first treatment. What does research suggest?",opts:[
+  ["This is a common, mild reaction that usually fades within 24 to 48 hours",1,"Yes. Mild soreness is the most common reaction and typically settles quickly."],
+  ["It means a vertebra slipped back out of place",0,"That is not supported. Soreness is a normal tissue response."],
+  ["It is a rare serious event needing emergency care",0,"Mild soreness is common. Emergency signs are different (sudden severe headache, neurological changes)."],
+  ["It proves the treatment was done wrong",0,"Mild soreness happens often even with appropriate care."]]},
+ caption:"About half of patients notice a mild reaction, which usually fades within one to two days.",
+ legend:[["warn","Mild reaction"],["ink-soft","No reaction"],["muscle","Soreness over time","l"]]},
+
+{act:7,scene:"rare",
+ desc:"Two large boxes of tiny dots, each standing for 100,000 people, sit side by side. In the left box, labelled group A, one dot is red. In the right box, labelled group B, two dots are red. A headline banner above reads risk doubles. Then a worked example builds below: 2 per 100,000 divided by 1 per 100,000 equals a relative risk of 2, and 2 per 100,000 minus 1 per 100,000 equals an absolute difference of 1 per 100,000. A tag reads made up numbers for practice. The red dots pulse so you can see how few they are.",
+ title:"Rare serious events, and how to read risk numbers",
+ body:`<p>Serious adverse events after manipulation are <b>rare</b>. The ones discussed most are <b>cervical artery dissection</b> and stroke after neck treatment, <b>cauda equina syndrome</b> after low back treatment, and <b>fractures</b> in weakened bone. Exact rates are uncertain because the events are so rare.</p>
+ <p>Rare risks are easy to misread. A <b>relative risk</b> compares two groups as a ratio. An <b>absolute risk difference</b> tells you how many more people per group are affected.</p>
+ <p><b>Worked example (made up numbers).</b> Group A: 1 event per 100,000. Group B: 2 per 100,000. Relative risk = 2 ÷ 1 = 2, which sounds like "risk doubles". Absolute difference = 2 − 1 = 1 extra event per 100,000 people.</p>
+ <p><b>Common mistake:</b> hearing "double" and assuming the risk is large. Always ask for the absolute numbers too.</p>
+ <p class="practice"><b>Now you try:</b> 3 per 100,000 versus 1 per 100,000. What are the relative risk and the absolute difference? (Answer in the quick check.)</p>`,
+ analogy:"Two raffle tickets instead of one doubles your chance, but if a million tickets were sold, your chance is still tiny.",
+ terms:[["Relative risk","The risk in one group divided by the risk in another."],["Absolute risk difference","The risk in one group minus the risk in another."],["Cauda equina syndrome","Compression of the bundle of nerve roots at the bottom of the spinal canal; a medical emergency."]],
+ check:{q:"Now you try: 3 per 100,000 versus 1 per 100,000. What are the relative risk and absolute difference?",opts:[
+  ["Relative risk 3; absolute difference 2 per 100,000",1,"Correct. 3 ÷ 1 = 3, and 3 − 1 = 2 extra events per 100,000."],
+  ["Relative risk 2; absolute difference 3 per 100,000",0,"Those are swapped. Divide for relative risk (3 ÷ 1) and subtract for the absolute difference (3 − 1)."],
+  ["Relative risk 300 percent; absolute difference 300 percent",0,"The absolute difference is a count per 100,000, not a percentage. It is 2 per 100,000."],
+  ["Relative risk 3; absolute difference 3 percent",0,"3 percent would be 3,000 per 100,000. The difference here is only 2 per 100,000."]]},
+ caption:"Relative risk 2 but only 1 extra event per 100,000 people (made up numbers for practice).",
+ legend:[["pain","Event"],["ink-soft","No event"],["good","Answer","s"]]},
+
+{act:7,scene:"dissection",
+ desc:"On the left, a front view of the neck shows the stacked neck vertebrae with a red vertebral artery running up through small openings on each side. On one artery, a small tear in the inner wall opens, and a dark clot begins to form, with labels: early dissection, may cause neck pain and headache. On the right, a case crossover timeline shows each stroke case as a row with a short highlighted window just before the stroke and longer control windows earlier. Small icons mark visits: brick red for chiropractor visits and indigo for primary care doctor visits. Both kinds of visits cluster in the window just before the stroke, and two bars below show similar increases for both. A note reads people with an early dissection may seek care for neck pain.",
+ title:"Cervical artery dissection: why it is hard to study",
+ body:`<p>A <b>cervical artery dissection</b> is a tear in the inner wall of an artery in the neck, such as the <b>vertebral artery</b>. Blood can collect in the wall and form a clot that may cause a stroke. Dissections can happen spontaneously or after minor neck movements, and their <b>early symptoms are often neck pain and headache</b>.</p>
+ <p>That creates a puzzle. A person with an early, undiagnosed dissection may seek care for that neck pain. If a stroke follows, was the treatment the cause, or was the dissection already happening?</p>
+ <p>Because events are rare, researchers use designs such as the <b>case crossover study</b>: each person with a stroke serves as their own comparison, looking at visits in the days just before the stroke versus earlier periods. A large study of this kind found that visits to <b>both chiropractors and primary care doctors</b> were more common just before these strokes, suggesting people were seeking care for early symptoms. The debate continues, so <b>screening matters</b>.</p>`,
+ analogy:"If many people visit a pharmacy just before being diagnosed with the flu, the pharmacy did not cause the flu. They went because they already felt sick.",
+ terms:[["Cervical artery dissection","A tear in the wall of a neck artery that can lead to a clot and stroke."],["Case crossover study","A design where each case is compared with themselves at an earlier time."],["Vertebral artery","An artery that runs up through openings in the neck vertebrae to supply the back of the brain."]],
+ check:{q:"Why is the link between neck manipulation and dissection hard to study?",opts:[
+  ["Events are rare, and an early dissection can itself cause the neck pain that leads people to seek care",1,"Right. Rarity and this reversed timing make cause and effect hard to separate."],
+  ["Dissections never cause any symptoms",0,"Early dissection often causes neck pain and headache, which is part of the puzzle."],
+  ["The link has been fully proven in large randomized trials",0,"Trials large enough for such rare events have not been done; the question is still debated."],
+  ["Only chiropractors see patients with neck pain",0,"Primary care doctors and others do too, which is why the case crossover comparison helps."]]},
+ caption:"An early tear can cause neck pain before a stroke; case crossover studies compare visit timing.",
+ legend:[["artery","Vertebral artery"],["accent","Chiropractor visits"],["evid","Primary care visits"],["bone","Neck vertebra","s"]]},
+
+{act:7,scene:"contra",
+ desc:"A side view of the spine runs down the centre. Five problem areas light up one at a time, each with an icon and a label: a crack line through a vertebra for fracture, a vertebra full of large holes for severe osteoporosis, a red glow and a thermometer for infection, a dark irregular spot in a vertebra for cancer, and a squeezed bundle of nerve roots at the bottom with a saddle shaped area highlighted for cauda equina syndrome. As each one lights up, a red stamp reads do not manipulate, refer for medical care.",
+ title:"Contraindications: when manipulation should not be used",
+ body:`<p>A <b>contraindication</b> is a reason not to use a treatment because the risk of harm is too high. For spinal manipulation, the main ones are conditions where bone, nerves or blood vessels are already damaged or weakened:</p>
+ <ul><li><b>Fracture</b> or recent major trauma.</li>
+ <li><b>Severe osteoporosis</b> (very thin, fragile bone).</li>
+ <li><b>Infection</b> of the spine, often with fever and back pain.</li>
+ <li><b>Cancer</b> in or near the spine, especially with a history of cancer or unexplained weight loss.</li>
+ <li><b>Cauda equina syndrome</b>: saddle numbness, new bladder or bowel problems, or progressing leg weakness.</li></ul>
+ <p>Some conditions are <b>relative</b> contraindications, where extra caution or a gentler approach is used. Many red flags call for <b>prompt medical referral</b>, not hands on treatment.</p>`,
+ analogy:"You would not lean on a fence post that is already cracked. First you find out what is wrong with it.",
+ terms:[["Contraindication","A reason a treatment should not be used because of the risk of harm."],["Relative contraindication","A situation that calls for extra caution or a changed approach."],["Red flag","A sign or symptom that may point to serious disease and needs medical attention."]],
+ check:{q:"A patient with back pain also has a fever and recently had an infection. What fits best?",opts:[
+  ["Possible spinal infection: do not manipulate, refer promptly for medical care",1,"Yes. Fever with back pain is a red flag for infection."],
+  ["Manipulate firmly to clear the infection",0,"Manipulation does not treat infection and could cause harm."],
+  ["This is typical mild soreness",0,"Fever is not part of common mild back pain. It needs medical assessment."],
+  ["Wait six months and see",0,"Possible infection needs prompt, not delayed, medical care."]]},
+ caption:"Fracture, severe osteoporosis, infection, cancer and cauda equina: no manipulation, refer.",
+ legend:[["pain","Red flag area"],["bone","Vertebra","s"],["nerve","Nerve roots"]]},
+
+{act:7,scene:"consent",
+ desc:"A patient and a clinician sit facing each other in a quiet room, with speech bubbles taking turns above them. On the right, a checklist builds one line at a time with green ticks: what the treatment involves, expected benefits and their size, common mild side effects, rare serious risks, other options including no treatment, time for questions, and the right to say no or stop. Below the checklist, a screening strip lights up questions about new or unusual headache, dizziness, double vision, trouble speaking or swallowing, and numbness, each with a small icon.",
+ title:"Screening and informed consent",
+ body:`<p><b>Screening</b> means taking a careful history and examination before any treatment, to spot red flags and contraindications. For neck treatment, clinicians ask about a <b>new, sudden or unusual headache</b> and signs that could point to a problem with blood flow to the brain, such as dizziness, double vision, trouble speaking or swallowing, or numbness.</p>
+ <p><b>Informed consent</b> is a conversation, not just a signature. The patient should understand:</p>
+ <ul><li>what the treatment involves and what benefit to expect (often modest);</li>
+ <li>common mild side effects and rare serious risks;</li>
+ <li>other reasonable options, including no treatment;</li>
+ <li>that they can ask questions, say no, or stop at any time.</li></ul>
+ <p>Using plain words and checking understanding (asking the person to explain it back) are good practice.</p>`,
+ analogy:"Like a pilot's preflight check plus a clear briefing to passengers: check for problems first, then make sure everyone knows the plan and can ask questions.",
+ terms:[["Screening","Questions and tests used to spot problems before treatment."],["Informed consent","A patient's voluntary agreement after understanding benefits, risks and alternatives."],["Teach back","Asking a person to explain information back in their own words to check understanding."]],
+ check:{q:"Which is part of a good informed consent conversation?",opts:[
+  ["Explaining realistic benefits, common and rare risks, and other options, then inviting questions",1,"Right. Consent needs understanding of benefits, risks and alternatives, and a free choice."],
+  ["Telling the patient there are no risks at all",0,"That is not accurate. Mild reactions are common and serious events are rare but possible."],
+  ["Having the patient sign a form without discussion",0,"A signature alone is not informed consent. Understanding is the point."],
+  ["Saying the treatment will definitely cure the problem",0,"Effects are usually modest. Overpromising undermines consent."]]},
+ caption:"Screen for red flags, then explain benefits, risks and options and invite questions.",
+ legend:[["good","Consent checklist","s"],["pain","Screening question"],["act2","Conversation","s"]]},
+
+/* ---------- finish ---------- */
+{act:0,scene:"finish",
+ desc:"Seven recap cards fill the picture in two rows, one for each part of this walkthrough, each with a small drawing: a tilting motion segment, a force time spike, a row of vertebrae with a ripple, a gas bubble in a joint, a nerve spike train, a pair of trial curves, and a safety shield with a checklist. Each card gets a green tick in turn, and a banner at the bottom reads next: practise in the lab.",
+ title:"Recap: mechanics, signals and honest evidence",
+ body:`<p>You have followed a thrust from the hands to the tissues to the nervous system, and checked each claim against the research.</p>
+ <ol><li><b>Manipulation</b> is a high velocity low amplitude thrust; <b>mobilization</b> is slower and repeated, graded I to IV, with grade V being a thrust.</li>
+ <li>A thrust has a <b>preload</b>, a fast <b>thrust</b> (often 100 to 200 ms) and a <b>resolution</b>. Rate of force = change in force ÷ time.</li>
+ <li>Force <b>spreads</b> to nearby segments; precision is limited, and the exact level may matter less than once thought.</li>
+ <li>Measured mechanical effects: brief <b>gapping</b> and <b>cavitation</b>. The pop is gas, not a bone going back in place.</li>
+ <li>Nervous system effects: a <b>sensor burst</b>, brief reflex and tone changes, small short term <b>hypoalgesia</b>, and proposed descending modulation.</li>
+ <li><b>Context</b> matters; guidelines list manipulation as one option among several with <b>small to moderate</b> effects.</li>
+ <li>Mild soreness is common; serious events are <b>rare</b>; screening, contraindications and real <b>informed consent</b> protect patients.</li></ol>
+ <p>Next, try the <a href="Manip-Lab.html">Manipulation and Mobilization Lab</a>: a force time simulator, a graph reading trainer, sorting games and clinic scenarios.</p>`,
+ analogy:"You now have the whole map: what goes in (force), what happens (tissues and signals), how big the benefit is (evidence), and how to keep people safe.",
+ terms:[["Thrust phases","Preload, thrust and resolution."],["Evidence status","Whether an idea is well measured, a proposed mechanism, or a historical model."],["Informed consent","Understanding benefits, risks and alternatives before agreeing."]],
+ check:null,caption:"Seven ideas, from force curves to consent.",
+ legend:[["good","Done"],["accent","Key idea","s"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function resetScene(){SYS={};SC={}}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;resetScene();render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0;resetScene()};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= scenes: start, part 1 and part 2 ================= */
+const TP={pre:100,peak:500,dur:150,ramp:350,hold:350,res:240};
+/* ---------- map ---------- */
+function sceneMap(T){
+  panelBox(14,14,250,288);levelTag(26,30,"person");
+  const p=P(T,3.2);const th=gauss(p,.55,.05);
+  proneOnTable(26,214,200,{shirt:1,skin:2});clinician(240,206,34,{skin:0,shirt:2});
+  arrow(150,140-14*th,150,172+6*th,hexA(C.force,.4+.6*th),3);label(150,124,"thrust",{size:11.5,weight:700,border:C.force,a:.4+.6*th});
+  txt(139,268,"person on a treatment table",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  panelBox(275,14,250,288);levelTag(287,30,"tissue");
+  const g=8*th;segment(355,160,78,{dx:g,gap:g,bub:g>3?5:0,urot:-.04*th});
+  lead(355+78*.8+g/2,160-3,470,74,"facet joint",{size:11.5});lead(355,160,300,250,"disc",{size:11.5,lc:C.disc});
+  panelBox(536,14,250,288);levelTag(548,30,"signal");
+  const gr=ftGraph(586,62,184,130,{t1:1600,f1:600,tstep:400,fstep:200});const tc=clamp(P(T,3.2)*1.15,0,1)*1600;curve(gr,t=>ftThrust(t,TP),0,tc,C.force,2.4);gdot(gr,tc,ftThrust(tc,TP),C.force);
+  const fr=gauss(p,.55,.06)*40+3;fibre([[556,262],[770,262]],T,fr,C.nerve,{travel:.8});txt(556,284,"nerve spikes",{size:11.5,weight:600,color:C["ink-soft"]});
+  const parts=[["Manipulation and mobilization","thrust or slow oscillation"],["The force time profile","preload, thrust, resolution"],["Where the force goes","nearby levels move too"],["Mechanical effects","gapping and the pop"],["Nervous system effects","sensors, reflexes, pain"],["Context and evidence","placebo, effect size, guidelines"],["Safety","side effects, consent"]];
+  const k=Math.floor(P(T,14)*7);
+  parts.forEach((pp,i)=>{const row=i<4?0:1;const x=row?111+(i-4)*194:14+i*194,y=314+row*80;const col=C["act"+(i+1)];cardBox(x,y,186,70,col,i===k);badge(x+20,y+22,i+1,col,12);wrapText(pp[0],x+40,y+22,140,15,{size:12.5,weight:700});txt(x+12,y+54,pp[1],{size:11.5,color:C["ink-soft"]})});
+}
+/* ---------- manipulation defined ---------- */
+function sceneDefManip(T){
+  const per=6,t=P(T,per)*per;
+  const pos=smooth(seg(t,.3,2.4))*(1-smooth(seg(t,3.9,5.4)));const th=t>=3&&t<3.15?Math.sin((t-3)/.15*Math.PI/2):t>=3.15&&t<3.5?1-smooth((t-3.15)/.35):0;
+  const gap=11*th+2*pos;const bub=t>3.08&&t<5.5?7*(1-seg(t,4.5,5.5)):0;
+  panelBox(14,14,240,452);levelTag(26,30,"person");proneOnTable(20,236,188,{shirt:0,skin:3});clinician(226,232,30,{skin:1,shirt:1});
+  hand(150,206,14,{skin:1});arrow(150,160,150,180+8*th,hexA(C.force,.25+.75*th),2.5);
+  label(134,300,t<2.4?"slow positioning":t<3?"preload held":t<3.6?"quick thrust":"back to rest",{size:13,weight:700,border:t>=3&&t<3.6?C.force:C.rule});
+  wrapText("The joint is brought to the end of its easy range, then one small, quick thrust is added.",26,340,215,18,{size:12.5,color:C["ink-soft"]});
+  panelBox(266,14,520,452);levelTag(278,30,"tissue");
+  const cx=440,cy=196,s=118;
+  /* joint position bar */const rx0=440,rx1=740,ry=56;rr(rx0,ry,rx1-rx0,12,4);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();const ex=rx0+(rx1-rx0)*.78;ctx.fillStyle=hexA(C.lig,.25);ctx.fillRect(rx0,ry,ex-rx0,12);line(ex,ry-6,ex,ry+18,C["ink"],2);
+  txt(rx0,ry-12,"joint position",{size:11.5,weight:700,color:C["ink-soft"]});txt(ex,ry+30,"end of easy range",{size:11.5,weight:700,align:"center"});circ(rx0+(ex-rx0)*pos+28*th,ry+6,8,th>.1?C.force:C.mob,C.panel,2);
+  segment(cx,cy,s,{dx:gap*.9,gap:gap,bub:bub,urot:-.1*pos-.035*th});
+  
+  lead(cx+s*.8+gap/2,cy-4,cx+206,cy+44,"facet joint gaps",{size:12.5,lc:C.lig});
+  if(t>3.05&&t<4){spark(cx+s*.8+gap/2,cy-30,16,C.gold,seg(t,3.05,4));label(cx+s*.8+48,cy-52,"pop",{size:13,weight:700,border:C.gold,a:1-seg(t,3.6,4)})}
+  lead(cx-s*.2,cy+s*.42,284,cy+130,"lower vertebra",{size:12,align:"left"});lead(cx-s*.2,cy-s*.4,284,cy-110,"upper vertebra",{size:12,align:"left"});
+  /* force trace */
+  const g=ftGraph(320,372,430,70,{t1:1800,f1:600,tstep:300,fstep:300});const tt=t<3?t/3*700:t<4?700+(t-3)*600:1300+(t-4)*250;curve(g,v=>ftThrust(v,TP),0,Math.min(1800,tt),C.force,2.4);
+  label(g.X(850)+70,g.Y(470),"high velocity: about 150 ms",{size:11.5,weight:700,border:C.force,align:"left"});
+  label(cx+176,cy+96,"low amplitude: small extra movement",{size:12,weight:700,border:C.accent,a:.4+.6*(th>0?1:pos)});
+}
+/* ---------- mobilization defined ---------- */
+function sceneDefMob(T){
+  const osc=Math.sin(T*TAU/1.2);const amp=.5+.5*osc;
+  panelBox(14,14,240,452);levelTag(26,30,"person");sitter(110,300,64,{skin:3,shirt:3});
+  bubble(30,70,206,58,"I can say stop at any time.",{tx:84,size:13.5,weight:600,ty:28});
+  wrapText("Slow and rhythmic. The clinician can stop at once if the patient asks.",26,400,215,18,{size:12.5,color:C["ink-soft"]});
+  panelBox(266,14,520,452);levelTag(278,30,"tissue");
+  const cx=440,cy=196,s=118;
+  ctx.save();ctx.translate(cx,cy);ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,150,-Math.PI/2+.02,-Math.PI/2-.16,true);ctx.closePath();ctx.fillStyle=hexA(C.lig,.14);ctx.fill();ctx.restore();
+  txt(cx+26,cy-138,"comfortable range",{size:11.5,weight:700,color:C["lig-ink"],align:"left"});
+  segment(cx,cy,s,{dx:2*amp,gap:2*amp,urot:-.12*amp});
+  const ax=cx-30,ay=cy-150;carrow(ax+40,ay+8,ax,ay-14,ax-40,ay+12,C.mob,2.5);carrow(ax-40,ay+12,ax,ay-12,ax+40,ay+8,C.mob,2.5);
+  label(cx+230,cy-40,"slow, repeated, within range",{size:12.5,weight:700,border:C.mob});
+  label(cx+230,cy-8,"about 1 cycle per second",{size:12,weight:600,border:C.rule});
+  const g=ftGraph(320,372,430,70,{t1:4000,f1:300,tstep:1000,fstep:150});const sh=(T*1000)%1200;
+  curve(g,v=>{const f=(v+sh)/1200;return 60+90*(.5-.5*Math.cos(f*TAU))},0,4000,C.mob,2.4);
+}
+/* ---------- grades ---------- */
+function sceneGrades(T){
+  panelBox(14,14,772,452);
+  const x0=150,R1=400,L=610,A=690,x1=740;const X=v=>v;
+  rr(x0,56,x1-x0,22,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();ctx.fillStyle=hexA(C.pain,.35);ctx.fillRect(A,56,x1-A,22);
+  txt(x0,44,"start of range",{size:11.5,weight:700,color:C["ink-soft"]});txt(R1,44,"resistance begins",{size:11.5,weight:700,color:C["lig-ink"],align:"center"});txt(L,44,"limit of range",{size:11.5,weight:700,align:"center"});txt(x1,96,"anatomical limit",{size:11.5,weight:700,color:C["pain-ink"],align:"right"});
+  line(R1,56,R1,450,C.lig,1.6,[5,4]);line(L,56,L,450,C["ink-soft"],2);ctx.fillStyle=hexA(C.pain,.08);ctx.fillRect(A,100,x1-A,350);
+  const rows=[["Grade I","small, near the start",170,25,1.1],["Grade II","large, before resistance",265,110,1.6],["Grade III","large, into resistance",490,120,1.6],["Grade IV","small, at the limit",590,20,.9],["Grade V","quick thrust past the limit",0,0,0]];
+  const k=Math.floor(P(T,15)*5);
+  rows.forEach((r,i)=>{const y=134+i*66;const on=i===k;cardBox(22,y-29,120,58,i<4?C.mob:C.force,on);txt(32,y-14,r[0],{size:13.5,weight:700});wrapText(r[1],32,y+4,108,12.5,{size:11,color:C["ink-soft"]});
+    line(x0,y,x1,y,hexA(C["ink-soft"],.4),1.4);
+    if(i<4){const xc=r[2],a=r[3];const sp=r[4];ctx.fillStyle=hexA(C.mob,on?.28:.14);ctx.fillRect(xc-a,y-9,2*a,18);const xx=xc+a*Math.sin(T*TAU/sp+i);circ(xx,y,on?9:7,C.mob,C.panel,2);
+      line(xc-a,y-12,xc-a,y+12,C.mob,1.6);line(xc+a,y-12,xc+a,y+12,C.mob,1.6)}
+    else{const ph=P(T,2.6);const f=ph<.08?Math.sin(ph/.08*Math.PI):0;const xx=L+32*f;circ(L,y,6,hexA(C.force,.35));circ(xx,y,on?9:7,C.force,C.panel,2);if(f>.2)spark(xx+16,y-14,9,C.gold,ph/.08);label(L+70,y-22,"small, fast",{size:11.5,weight:700,border:C.force})}});
+  label(400,452,"Grades describe size and position, they do not rank effectiveness.",{size:12.5,weight:700,border:C.accent});
+}
+/* ---------- reading a force time graph ---------- */
+function sceneFtRead(T){
+  panelBox(14,14,772,452);levelTag(26,30,"graph");
+  const g=ftGraph(96,74,640,320,{t1:1600,f1:600});const per=7,t=P(T,per)*per;const tc=clamp(t/4.5,0,1)*1600;
+  phaseBands(g,TP,[seg(tc,100,400),seg(tc,720,800),seg(tc,880,980)]);
+  curve(g,v=>ftThrust(v,TP),0,tc,C.force,3);const f=ftThrust(tc,TP);pulseRing(g.X(tc),g.Y(f),16,C.force,P(T,1.2));gdot(g,tc,f,C.force,Math.round(f)+" N at "+Math.round(tc)+" ms",{guides:true,dx:tc>1200?-70:70,dy:-18});
+  if(tc>860)withA(seg(tc,860,960),()=>{line(g.X(850),g.Y(500),g.X(1050),g.Y(560),C.force,1.2);label(g.X(1060),g.Y(560),"peak about 500 N",{size:12.5,weight:700,border:C.force,align:"left"})});
+  withA(seg(tc,300,500),()=>label(g.X(350),g.Y(170),"preload about 100 N",{size:12.5,weight:700,border:C.lig}));
+  /* inset */const ix=552,iy=196;panelBox(ix,iy,176,108,{fill:hexA(C.paper,.97)});
+  const pr=clamp(f/500,0,1);ctx.save();ctx.beginPath();ctx.rect(ix+1,iy+1,174,106);ctx.clip();proneOnTable(ix+10,iy+78,156,{shirt:2,skin:0});hand(ix+96,iy+52+pr*5,10,{skin:3});ctx.restore();
+  txt(ix+10,iy+14,"hand rests, then presses",{size:11,weight:700,color:C["ink-soft"]});
+}
+/* ---------- rate of force worked example ---------- */
+function sceneFtRate(T){
+  panelBox(14,14,380,452);levelTag(26,30,"graph");
+  const g=graph({x:72,y:66,w:300,h:300,x0:600,x1:1100,y0:0,y1:600,xt:[600,700,800,900,1000,1100],yt:[0,100,200,300,400,500,600],xl:"time (ms)",yl:"force (N)",ylx:28});
+  const per=16,t=P(T,per)*per;const a=seg(t,.5,2);
+  ctx.save();ctx.globalAlpha*=a;ctx.beginPath();ctx.moveTo(g.X(700),g.Y(100));ctx.lineTo(g.X(850),g.Y(100));ctx.lineTo(g.X(850),g.Y(500));ctx.closePath();ctx.fillStyle=hexA(C.accent,.14);ctx.fill();ctx.restore();
+  curve(g,v=>ftThrust(v,TP),600,1100,C.force,3);
+  withA(seg(t,1.5,2.5),()=>{arrow(g.X(866),g.Y(100),g.X(866),g.Y(500),C.accent,2);arrow(g.X(866),g.Y(500),g.X(866),g.Y(100),C.accent,2);label(g.X(880),g.Y(300),"400 N",{size:12.5,weight:700,border:C.accent,align:"left"});
+    line(g.X(700),g.Y(60),g.X(850),g.Y(60),C.evid,2.4);line(g.X(700),g.Y(40),g.X(700),g.Y(80),C.evid,2);line(g.X(850),g.Y(40),g.X(850),g.Y(80),C.evid,2);label(g.X(775),g.Y(30)+14,"150 ms",{size:12.5,weight:700,border:C.evid})});
+  pulseRing(g.X(850),g.Y(500),18,C.force,P(T,1.3));gdot(g,850,500,C.force,"peak 500 N",{dy:-18});gdot(g,700,100,C.lig,"preload 100 N",{dy:-20,dx:-10});
+  wk(404,14,382,452,{rows:[{l:"change in force = 500 N − 100 N"},{ans:"= 400 N"},{c:[[F(150,"ms"),F(1,"s",1000,"ms")],["0.15",["s"]]]},{c:[[F(400,"N",0.15,"s")],["≈ 2,700",["N/s"]]]},{ans:"rate ≈ 2,700 N per second"}],miss:"using the peak (500 N) instead of the change (400 N), or dividing by 150 ms without converting to seconds."},T,{per,cfs:15,dt:2,t0:2.6,cy:40,rowGap:20,title:"Worked example"});
+}
+/* ---------- thrust versus mobilization ---------- */
+const MP={pre:50,peak:150,dur:400,ramp:350,n:3};
+function sceneFtCompare(T){
+  panelBox(14,14,772,452);
+  const per=7,t=P(T,per)*per;const tc=clamp(t/5,0,1)*3000;
+  const fT=ftThrust(tc,TP),fM=ftMob(tc,MP);
+  /* mini segments */
+  const thr=clamp((fT-TP.pre)/(TP.peak-TP.pre),0,1);segment(210,92,52,{dx:6*thr,gap:6*thr,urot:-.05*thr});label(330,60,"thrust",{size:12.5,weight:700,border:C.force});
+  const mo=clamp((fM-MP.pre)/(MP.peak-MP.pre),0,1);segment(520,92,52,{dx:1.5*mo,gap:1.5*mo,urot:-.09*mo});label(640,60,"mobilization",{size:12.5,weight:700,border:C.mob});
+  const g=ftGraph(80,186,680,236,{t1:3000,f1:600,tstep:500,fstep:200});
+  curve(g,v=>ftMob(v,MP),0,tc,C.mob,3);curve(g,v=>ftThrust(v,TP),0,tc,C.force,3);pulseRing(g.X(tc),g.Y(fT),16,C.force,P(T,1.2));pulseRing(g.X(tc),g.Y(fM),16,C.mob,P(T+.6,1.2));gdot(g,tc,fT,C.force);gdot(g,tc,fM,C.mob);
+  withA(seg(tc,900,1100),()=>label(g.X(1000)+10,g.Y(520),"thrust: about 2,700 N/s",{size:12.5,weight:700,border:C.force,align:"left"}));
+  withA(seg(tc,1500,1800),()=>label(g.X(1900),g.Y(260),"each mobilization push: about 250 N/s",{size:12.5,weight:700,border:C.mob}));
+  txt(80,450,"Illustrative values. Mobilization: 50 to 150 N, rise 400 ms. Thrust: preload 100 N, peak 500 N, 150 ms.",{size:11.5,color:C["ink-soft"]});
+}
+/* ---------- speed and receptors ---------- */
+const SPD=[75,150,600];
+function spikeTimes(dur){const p={pre:100,peak:400,dur,ramp:350,hold:350,res:300};const out=[];let ph=.3,prev=ftThrust(0,p);for(let t=1;t<=1600;t+=1){const f=ftThrust(t,p);const d=Math.max(0,f-prev);prev=f;const r=6+50*Math.pow(d,1.3)+.005*f;ph+=r/1000;if(ph>=1){ph-=1;out.push(t)}}return out}
+let SPK=null;
+function sceneFtSpeed(T){
+  if(!SPK)SPK=SPD.map(spikeTimes);
+  panelBox(14,14,772,452);const per=5,t=P(T,per)*per;const tc=clamp(t/3.6,0,1)*1600;
+  SPD.forEach((d,i)=>{const y=24+i*140;const p={pre:100,peak:400,dur:d,ramp:350,hold:350,res:300};
+    const g=graph({x:70,y:y+16,w:240,h:84,x0:0,x1:1600,y0:0,y1:450,xt:[0,800,1600],yt:[0,400],xl:"ms",yl:"N",ylx:20});curve(g,v=>ftThrust(v,p),0,tc,C.force,2.4);
+    label(200,y+10,d<200?"thrust "+d+" ms":"slow push "+d+" ms",{size:12,weight:700,border:C.force});
+    /* muscle and spindle */rr(340,y+30,130,50,24);fillStroke(hexA(C.muscle,.25),C.muscle,1.4);const now=SPK[i].filter(s=>s<=tc&&s>tc-60).length;spindle(405,y+55,70,now/4,{});
+    fibre([[440,y+55],[560,y+55]],T+i*.3,2.5,C.nerve,{r:3});const recent=SPK[i].filter(s=>s<=tc);
+    if(now>0)for(let k=0;k<Math.min(now,6);k++){const q=((tc-recent[recent.length-1-k])/60);circ(440+120*q,y+55,4,C.nerve,C.panel,1)}
+    const rg=graph({x:600,y:y+20,w:170,h:70,x0:0,x1:1600,y0:0,y1:600,xt:[0,800,1600],yt:[0,300,600],grid:false});const rate=v=>{const a=ftThrust(v,p),b=ftThrust(v+1,p);return 6+50*Math.pow(Math.max(0,b-a),1.3)+.005*a};
+    ctx.save();ctx.beginPath();ctx.rect(rg.x,rg.y-2,rg.w,rg.h+4);ctx.clip();plotFn(rate,0,1600,rg.x,rg.y,rg.w,rg.h,0,600,C["nerve-ink"],2.2,null,tc);ctx.restore();txt(600,y+10,"firing rate (spikes per second)",{size:10.5,weight:700,color:C["ink-soft"]});
+    const peak=Math.round(6+50*Math.pow(300*Math.PI/(2*d),1.3));txt(560,y+118,"peak about "+peak+" per second",{size:11.5,weight:600,color:C["ink-soft"]})});
+  label(400,454,"Pattern from animal studies, simplified",{size:12,weight:700,border:C.evid});
+}
+/* ================= scenes: parts 3, 4 and 5 (first half) ================= */
+/* ---------- force spreads ---------- */
+function sceneSpread(T){
+  panelBox(14,14,772,452);levelTag(26,30,"tissue");
+  const per=4,t=P(T,per)*per;const th=t<1.2?0:t<1.4?Math.sin((t-1.2)/.2*Math.PI/2):1-smooth((t-1.4)/1.2);
+  const fac=[.2,.42,.72,1,.72,.42,.2];const A=16;const d=fac.map(f=>f*A*th);
+  const x0=196,y0=236,s=84,sp=s*.82;
+  txt(110,236,"head",{size:12,weight:700,color:C["ink-soft"],align:"center"});txt(700,236,"feet",{size:12,weight:700,color:C["ink-soft"],align:"center"});
+  arrow(130,250,100,250,C["ink-soft"],1.6);arrow(670,250,730,250,C["ink-soft"],1.6);
+  const pts=proneSpine(x0,y0,7,s,d,{hl:3});
+  const hx_=x0+3*sp;glow(hx_,y0-s*1.55,26+8*Math.sin(T*4),C.force,.35);hand(hx_,y0-s*1.55-6+d[3]*.6,16,{skin:2});arrow(hx_+40,y0-200,hx_+12,y0-150+d[3],hexA(C.force,.3+.7*clamp(th*2,0,1)),3);
+  lead(hx_,y0-s*1.55,hx_+150,y0-190,"contact point",{size:12.5,lc:C.force});
+  /* movement bars */
+  const by=360;txt(40,by-30,"movement (exaggerated)",{size:12,weight:700,color:C["ink-soft"]});line(150,by+70,650,by+70,C["ink-soft"],1.4);
+  pts.forEach((p,i)=>{const H=fac[i]*70;rr(p[0]-14,by+70-H,28,H,3);ctx.strokeStyle=hexA(C.force,.6);ctx.lineWidth=1.2;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);const h=H*Math.max(th,.15);rr(p[0]-14,by+70-h,28,h,3);ctx.fillStyle=hexA(C.force,.25+.6*fac[i]);ctx.fill()});
+  label(650,by+20,"nearby segments move too",{size:12.5,weight:700,border:C.force,a:.3+.7*clamp(th*3,0,1)});
+}
+/* ---------- specificity ---------- */
+function popsFor(c){const out=[];const n=rnd(c*7.1+2)>.62?2:1;for(let k=0;k<n;k++){const r=rnd(c*13.3+k*5.7+1);let off=r<.42?0:r<.82?(rnd(c*3.1+k)>.5?1:-1):(rnd(c*2.3+k)>.5?2:-2);if(k===1&&out.indexOf(off)>=0)off=off===0?1:0;out.push(off)}return out}
+function sceneSpecific(T){
+  panelBox(14,14,772,452);levelTag(26,30,"data");
+  const per=2.2,c=Math.floor(T/per)%24,t=P(T,per)*per;
+  const x0=250,y0=236,s=90,sp=s*.82;const labs=["L2","L3","L4","L5","S1"];
+  const th=t>.4&&t<.7?Math.sin((t-.4)/.3*Math.PI):0;const d=[0,0,0,0,0].map((_,i)=>[.3,.7,1,.7,.3][i]*8*th);
+  const pts=proneSpine(x0,y0,5,s,d,{hl:2,labels:labs});
+  const tx=x0+2*sp;arrow(tx,44+4*Math.sin(T*4),tx,y0-s*1.55-12+4*Math.sin(T*4),C.accent,3);label(tx+66,52,"target L4",{size:12.5,weight:700,border:C.accent});
+  const pops=popsFor(c);if(t>.55)pops.forEach((o,k)=>{const i=2+o;const p=pts[i];spark(p[0],y0-s*1.55-30-k*16,14,C.gold,seg(t,.55,1.9));});
+  if(t>.55)label(620,120,"pop at "+pops.map(o=>labs[2+o]).join(" and "),{size:12.5,weight:700,border:C.gold});
+  /* tally */
+  const cnt=[0,0,0];for(let k=0;k<=c;k++){const pp=popsFor(k);pp.forEach(o=>{cnt[Math.abs(o)>=2?2:Math.abs(o)]++})}
+  if(t<.55){const pp=popsFor(c);pp.forEach(o=>{cnt[Math.abs(o)>=2?2:Math.abs(o)]--})}
+  const bx=170,bw=150,by=430;const mx=Math.max(12,...cnt);
+  [["at the target",C.accent],["one level away",C.evid],["two or more away",C["ink-soft"]]].forEach((b,i)=>{const x=bx+i*(bw+30);const h=Math.max(0,cnt[i])/mx*110;rr(x,by-h,bw,h,4);ctx.fillStyle=hexA(b[1],.55);ctx.fill();ctx.strokeStyle=b[1];ctx.lineWidth=1.4;ctx.stroke();
+    txt(x+bw/2,by+14,b[0],{size:12,weight:700,align:"center"});txt(x+bw/2,by-h-10,String(Math.max(0,cnt[i])),{size:12.5,weight:700,mono:true,align:"center"})});
+  txt(26,300,"pops counted",{size:12,weight:700,color:C["ink-soft"]});txt(26,318,"over "+(c+1)+" thrusts",{size:12,color:C["ink-soft"]});
+  label(690,60,"illustrative pattern",{size:11.5,weight:700,border:C.evid});
+}
+/* ---------- level trial ---------- */
+function sceneLevelTrial(T){
+  panelBox(14,14,772,452);levelTag(26,30,"data");
+  const per=11,t=P(T,per)*per;const nd=Math.floor(clamp(t/3,0,1)*60);
+  [["level chosen by examination",C.accent,60],["level chosen at random",C.evid,440]].forEach((g,j)=>{const x=g[2];panelBox(x,48,300,190);txt(x+150,66,g[0],{size:13,weight:700,align:"center"});
+    for(let i=0;i<nd;i++){const cx=x+30+(i%15)*17,cy=214-Math.floor(i/15)*28;circ(cx,cy,6+.8*Math.sin(T*3+i*.7),g[1],C.panel,1.2)}
+    txt(x+150,92,nd+" participants",{size:11.5,weight:600,align:"center",color:C["ink-soft"]})});
+  /* pain bars */
+  const f=smooth(seg(t,3.5,7.5));const by=420,sc=17;txt(40,262,"average pain, 0 to 10",{size:12,weight:700,color:C["ink-soft"]});
+  [[6.0,3.6,C.accent,140],[6.0,3.8,C.evid,520]].forEach(b=>{const x=b[3];const v1=lerp(b[0],b[1],f);
+    rr(x,by-b[0]*sc,50,b[0]*sc,3);ctx.fillStyle=hexA(C.pain,.25);ctx.fill();txt(x+25,by+14,"start",{size:11.5,align:"center"});txt(x+25,by-b[0]*sc-10,b[0].toFixed(1),{size:12,weight:700,mono:true,align:"center"});
+    rr(x+80,by-v1*sc,50,v1*sc,3);ctx.fillStyle=hexA(C.pain,.7);ctx.fill();txt(x+105,by+14,"follow up",{size:11.5,align:"center"});txt(x+105,by-v1*sc-10,v1.toFixed(1),{size:12,weight:700,mono:true,align:"center"});
+    line(x-6,by,x+140,by,C["ink-soft"],1.4)});
+  if(f>.9)withA(seg(t,7.5,8.2),()=>{line(310,330,490,330,C.evid,2);line(310,322,310,338,C.evid,2);line(490,322,490,338,C.evid,2);label(400,310,"similar short term results",{size:12.5,weight:700,border:C.evid});txt(400,352,"difference about 0.2 points",{size:12,weight:600,align:"center"})});
+  txt(400,454,"Illustrative numbers summarising the pattern of several small trials.",{size:11.5,align:"center",color:C["ink-soft"]});
+}
+/* ---------- gapping ---------- */
+function axialVert(cx,cy,s,gap){/* posterior up */
+  ell(cx,cy+s*.42,s*.55,s*.4,0,C.bone,C["bone-edge"],1.6);
+  ctx.beginPath();ctx.moveTo(cx-s*.3,cy+s*.1);ctx.lineTo(cx-s*.42,cy-s*.18);ctx.lineTo(cx-s*.1,cy-s*.42);ctx.lineTo(cx,cy-s*.95);ctx.lineTo(cx+s*.1,cy-s*.42);ctx.lineTo(cx+s*.42,cy-s*.18);ctx.lineTo(cx+s*.3,cy+s*.1);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  ell(cx,cy-s*.08,s*.2,s*.16,0,hexA(C.cord,.6),mix(C.cord,C.ink,.4),1.3);
+  [-1,1].forEach(sd=>{const fx=cx+sd*s*.5,fy=cy-s*.28;ctx.fillStyle=hexA(C.fluid,1);ctx.save();ctx.translate(fx,fy);ctx.rotate(sd*.5);rr(-3,-s*.14,gap+6,s*.28,3);ctx.fill();
+    rr(-s*.16,-s*.14,s*.16,s*.28,4);fillStroke(C.bone,C["bone-edge"],1.4);rr(gap,-s*.14,s*.16,s*.28,4);fillStroke(mix(C.bone,C["bone-in"],.4),C["bone-edge"],1.4);ctx.restore()});}
+function sceneGapping(T){
+  panelBox(14,14,772,452);levelTag(26,30,"tissue");
+  const per=6,t=P(T,per)*per;const f=smooth(seg(t,.8,2))*(1-smooth(seg(t,4,5.5)));
+  const gL=3+2*f,gR=3+8*f;
+  [["positioning only",170,gL],["after manipulation",630,gR]].forEach(p=>{const x=p[1];rr(x-150,50,300,330,10);fillStroke(hexA(C.ink,.06),C.rule,1.2);txt(x,68,p[0],{size:13,weight:700,align:"center"});
+    const S=140,Y=232;axialVert(x,Y,S,p[2]);const fx=x+.5*S,fy=Y-.28*S;line(fx-4,fy-40,fx+p[2]+10,fy-40,C.evid,2);line(fx-4,fy-48,fx-4,fy-32,C.evid,2);line(fx+p[2]+10,fy-48,fx+p[2]+10,fy-32,C.evid,2);lead(fx+p[2]/2,fy+18,x+90,Y+100,"joint space",{size:11.5,lc:C.evid})});
+  const sc=P(T,3);[170,630].forEach(x=>{const yy=60+sc*310;line(x-146,yy,x+146,yy,hexA(C.evid,.45),2)});txt(400,96,"average gap",{size:12,weight:700,align:"center"});const by=300;[[gL,"positioning",352],[gR,"manipulation",448]].forEach(b=>{const h=b[0]*14;rr(b[2]-20,by-h,40,h,3);ctx.fillStyle=hexA(C.evid,.6);ctx.fill();txt(b[2],by+12,b[1],{size:10.5,weight:600,align:"center"})});line(318,by,482,by,C["ink-soft"],1.4);
+  txt(400,400,"Slice drawn from above, back of the body at the top. Gaps exaggerated.",{size:12,align:"center",color:C["ink-soft"]});
+  label(400,432,"Measured change is small: a fraction of a millimetre to about a millimetre.",{size:12.5,weight:700,border:C.evid});
+}
+/* ---------- cavitation ---------- */
+function gauge(x,y,r,v,o){o=o||{};ctx.beginPath();ctx.arc(x,y,r,Math.PI,TAU);fillStroke(C.paper,C["ink-soft"],2);const th=o.th||.45;const a0=Math.PI+th*Math.PI;ctx.beginPath();ctx.arc(x,y,r-8,Math.PI,a0);ctx.strokeStyle=hexA(C.gas,1);ctx.lineWidth=8;ctx.stroke();
+  const a=Math.PI+clamp(v,0,1)*Math.PI;line(x,y,x+Math.cos(a)*(r-12),y+Math.sin(a)*(r-12),C.ink,3);circ(x,y,5,C.ink);txt(x-r,y+14,"low",{size:11,color:C["ink-soft"]});txt(x+r,y+14,"high",{size:11,align:"right",color:C["ink-soft"]});
+  line(x+Math.cos(a0)*(r-16),y+Math.sin(a0)*(r-16),x+Math.cos(a0)*(r+4),y+Math.sin(a0)*(r+4),C.bad,2.5);}
+function sceneCavitation(T){
+  panelBox(14,14,772,452);levelTag(26,30,"tissue");
+  const per=9,t=P(T,per)*per;const open=smooth(seg(t,.5,2.3));const pop=t>=2.3;const bub=pop?26*smooth(seg(t,2.3,2.45))*(1-.6*seg(t,3,8)):0;
+  const gap=8+20*open-(pop?6*seg(t,3,8):0);const pr=pop?.62:1-.62*open;
+  facetZoom(290,240,180,gap,bub);txt(290,440,"close up of a facet joint",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  lead(290,240-gap/2-50,130,70,"bone with cartilage",{size:12});lead(290-60,240,120,300,"joint fluid",{size:12,lc:C.disc});if(bub>0)lead(290+bub,240,470,160,"gas cavity",{size:12.5,lc:C.disc});
+  gauge(640,170,80,pr);txt(640,200,"fluid pressure",{size:12,weight:700,align:"center"});txt(640,218,"red line: cavity forms",{size:11,align:"center",color:C["ink-soft"]});
+  /* sound burst */
+  const wx=520,wy=300,ww=240;rr(wx,wy-40,ww,80,6);fillStroke(hexA(C.panel,.85),C.rule,1.2);ctx.beginPath();for(let i=0;i<=ww;i++){const tt=i/ww;const env=pop?Math.exp(-Math.pow((tt-.35)/.06,2))*seg(t,2.3,2.4):0;const y=wy+Math.sin(i*1.3)*30*env+Math.sin(i*.37)*1.5;i?ctx.lineTo(wx+i,y):ctx.moveTo(wx,y)}ctx.strokeStyle=C.ink;ctx.lineWidth=1.6;ctx.stroke();
+  txt(wx+8,wy-28,"sound",{size:11,weight:700,color:C["ink-soft"]});if(pop)label(wx+ww*.35,wy-52,"pop",{size:13,weight:700,border:C.gold,a:1-seg(t,3.2,4)});
+  if(pop)withA(seg(t,3.4,4),()=>{circ(560,400,18,C.panel,C.ink,2);const a=-Math.PI/2+seg(t,3.4,8.8)*TAU;line(560,400,560+Math.cos(a)*13,400+Math.sin(a)*13,C.ink,2);txt(586,394,"about 20 minutes before this",{size:12,weight:600});txt(586,410,"joint can usually pop again",{size:12,weight:600})});
+}
+/* ---------- historical model vs current evidence ---------- */
+function xrayCol(x,y,s){rr(x-70,y-170,140,330,6);ctx.fillStyle=isDark()?"#0A0F12":"#1B2328";ctx.fill();for(let i=0;i<4;i++){const yy=y-120+i*s*.82;ctx.save();ctx.globalAlpha*=.85;vertebra(x-14,yy,s,{seed:i});ctx.restore()}}
+function sceneAlignment(T){
+  panelBox(14,14,380,452,{stroke:C.act4,lw:2});levelTag(26,30,"hist");
+  ctx.save();ctx.setLineDash([5,4]);ctx.globalAlpha*=.85;const sx=150,sy=110,s=58;
+  for(let i=0;i<5;i++){const off=i===2?16:0;vertebra(sx+off,sy+i*s*.82,s,{seed:i})}ctx.restore();
+  ctx.save();ctx.setLineDash([4,4]);poly([[sx+s*1.75,sy-20],[sx+s*1.75,sy+s*.82*2-12],[sx+s*1.55+16,sy+s*.82*2+6],[sx+s*1.75,sy+s*.82*2+24],[sx+s*1.75,sy+s*.82*4+40]],C.nerve,3,[4,4]);ctx.restore();
+  const pa=.4+.6*(.5+.5*Math.sin(T*1.6));withA(pa,()=>{carrow(sx+s*2.6,sy+s*.82*2-30,sx+s*2.2,sy+s*.82*2-40,sx+s*1.75+6,sy+s*.82*2-6,C.act4,2.5)});
+  label(sx+s*.6,sy+s*.82*2,"vertebra out of place?",{size:11.5,weight:700,border:C.act4,align:"right"});
+  wrapText("As described in early chiropractic writing: a misplaced bone presses on a nerve, and the adjustment pushes it back.",28,420,350,16,{size:12,color:C.ink});
+  panelBox(406,14,380,452,{stroke:C.evid,lw:2});levelTag(418,30,"now");
+  xrayCol(510,214,56);xrayCol(680,214,56);
+  const lx=[510,680].map(x=>x-14+56*.5);lx.forEach(x=>line(x,60,x,370,C.gold,2,[5,4]));
+  const sc=P(T,4);const scy=50+sc*320;line(440,scy,750,scy,hexA(C.evid,.7),2);
+  label(510,64,"before",{size:12.5,weight:700,border:C.evid});label(680,64,"after",{size:12.5,weight:700,border:C.evid});label(595,394,"no lasting change in position seen",{size:12.5,weight:700,border:C.evid});
+  wrapText("Effects are thought to be mostly short term and neural, plus context.",420,428,350,16,{size:12,weight:600,color:C["evid-ink"]});
+}
+/* ---------- mechanoreceptors ---------- */
+function burstTimes(seed,base,burst,per,t0,t1){const out=[];let ph=rnd(seed);for(let t=0;t<per;t+=.005){const r=base+(t>t0&&t<t1?burst:0);ph+=r*.005*(.7+.6*rnd(seed+t*97));if(ph>=1){ph-=1;out.push(t)}}return out}
+let MECH=null;
+function sceneMechano(T){
+  const per=4;if(!MECH)MECH=[burstTimes(1,6,140,per,1.5,1.75),burstTimes(2,3,70,per,1.55,1.85),burstTimes(3,4,100,per,1.5,1.8)];
+  const t=P(T,per)*per;const th=gauss(t,1.62,.1);
+  panelBox(14,14,772,452);levelTag(26,30,"tissue");
+  /* muscle strip */rr(340,60,120,330,40);fillStroke(hexA(C.muscle,.28),C.muscle,1.5);for(let i=0;i<6;i++)line(352+i*18,80,352+i*18,370,hexA(C.muscle,.35),1);
+  const cx=200,cy=226,s=118;segment(cx,cy,s,{dx:3*th,gap:3*th,urot:-.03*th});
+  arrow(cx+s*1.55+90,cy-s*.48,cx+s*1.55+8,cy-s*.42,hexA(C.force,.35+.65*th),3);label(cx+s*1.55+70,cy-s*.48-24,"force",{size:12,weight:700,border:C.force});
+  const sp=[[400,120],[400,210],[400,300]];sp.forEach((p,i)=>spindle(p[0],p[1],56,th,{rot:Math.PI/2}));
+  circ(400,72,9,C.nerve,mix(C.nerve,C.ink,.4),1.5);lead(400,72,470,52,"tendon organ",{size:11.5});lead(400,210,470,236,"spindles",{size:11.5,lc:C.muscle});
+  const capx=cx+s*.8,capy=cy-4;[[-12,-22],[14,-14],[-14,18],[12,24]].forEach(o=>circ(capx+o[0],capy+o[1],4.5,C.lig,C.panel,1.2));if(th>.2)glow(capx,capy,40,C.lig,th*.5);lead(capx,capy+28,250,420,"capsule receptors",{size:11.5,lc:C.lig});
+  /* cord and fibres */cordX(650,110,52);txt(650,178,"spinal cord",{size:12,weight:700,align:"center"});
+  const rt=(arr)=>arr.filter(s=>s<=t&&s>t-.04).length;
+  fibre([[400,120],[520,110],[598,110]],T,0,C.nerve);fibre([[400,72],[520,92],[600,100]],T,0,C.nerve);fibre([[capx,capy],[480,150],[600,124]],T,0,C.nerve);
+  const paths=[[[400,120],[520,110],[598,110]],[[400,72],[520,92],[600,100]],[[capx,capy],[480,150],[600,124]]];
+  MECH.forEach((arr,i)=>{arr.filter(s=>s<=t&&s>t-.35).forEach(s=>{const q=along(paths[i],(t-s)/.35);circ(q[0],q[1],3.6,C.nerve,C.panel,1)})});
+  const names=["spindles","tendon organs","capsule receptors"];MECH.forEach((arr,i)=>{const y=236+i*62;txt(560,y,names[i],{size:12,weight:700});spikeRow(560,y+10,220,36,arr.filter(s=>s<=t),per,C["nerve-ink"])});
+  txt(560,430,"4 second window; burst at the thrust",{size:11.5,color:C["ink-soft"]});
+}
+/* ---------- reflexes and EMG ---------- */
+function emgAmp(s){if(s<10)return 18;if(s<11.2)return 18+60*Math.sin((s-10)/1.2*Math.PI);if(s<40)return 9;if(s<70)return lerp(9,18,smooth((s-40)/30));return 18}
+function sceneReflex(T){
+  panelBox(14,14,772,452);levelTag(26,30,"signal");
+  const per=10,t=P(T,per)*per;const cur=clamp(t/8.5,0,1)*120;
+  const x0=70,x1=760,yc=150;const X=s=>x0+(x1-x0)*s/120;
+  txt(x0,58,"back muscle activity (EMG)",{size:12.5,weight:700});rr(x0,70,x1-x0,160,4);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  ctx.beginPath();const N=690;for(let i=0;i<=N;i++){const s=i/N*120;if(s>cur)break;const a=emgAmp(s);const y=yc+a*(Math.sin(i*2.7)*.6+Math.sin(i*1.13+1)*.4)*(.6+.4*rnd(i));i?ctx.lineTo(X(s),y):ctx.moveTo(X(s),y)}ctx.strokeStyle=C.muscle;ctx.lineWidth=1.4;ctx.stroke();
+  line(X(10),70,X(10),230,C.force,2);label(X(10),84,"thrust",{size:11.5,weight:700,border:C.force});
+  [0,30,60,90,120].forEach(s=>txt(X(s),244,s+" s",{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  if(cur>12)label(X(18),104,"reflex burst",{size:12,weight:700,border:C.muscle,align:"left"});if(cur>30)label(X(26),210,"quieter for a short time",{size:12,weight:700,border:C.muscle});if(cur>80)label(X(95),104,"back to baseline",{size:12,weight:600,border:C.rule});
+  /* H reflex */
+  txt(x0,286,"H reflex size",{size:12.5,weight:700});const pts=[[0,1],[5,.72],[20,.84],[45,.95],[90,1]];const cb=x0+20;
+  pts.forEach((p,i)=>{const x=cb+i*130;const show=cur>=10+p[0]||p[0]===0;const h=110*(show?p[1]:0);rr(x,420-h,50,h,3);ctx.fillStyle=hexA(C.nerve,.75);ctx.fill();txt(x+25,436,i?p[0]+" s after":"before",{size:11,align:"center",color:C["ink-soft"]});if(show)txt(x+25,410-h,Math.round(p[1]*100)+"%",{size:11.5,weight:700,mono:true,align:"center"})});
+  withA(.5+.5*Math.sin(T*4),()=>{circ(x1-10,58,6,C.bad);txt(x1-22,58,"recording",{size:11,weight:700,align:"right",color:C["ink-soft"]})});txt(x1,300,"Illustrative pattern; studies vary.",{size:11.5,align:"right",color:C["ink-soft"]});
+}
+/* ================= scenes: part 5 (second half) and part 6 ================= */
+/* ---------- gate control and pain threshold ---------- */
+function inhibEnd(x1,y1,x2,y2,col){line(x1,y1,x2,y2,col,2.6);const a=Math.atan2(y2-y1,x2-x1)+Math.PI/2;line(x2-Math.cos(a)*9,y2-Math.sin(a)*9,x2+Math.cos(a)*9,y2+Math.sin(a)*9,col,3.5)}
+function sceneHypo(T){
+  panelBox(14,14,420,452);levelTag(26,30,"signal");
+  const per=7,t=P(T,per)*per;const touch=smooth(seg(t,1.8,2.3))*(1-smooth(seg(t,4.6,5.2)));
+  rr(60,70,350,330,14);fillStroke(hexA(C.cord,.22),mix(C.cord,C.ink,.35),1.5);txt(76,90,"spinal cord: dorsal horn",{size:12,weight:700});
+  const Px=320,Py=250,Ix=220,Iy=180;
+  /* pain fibre */poly([[20,330],[150,330],[Px-16,Py+10]],C.pain,2.2);for(let k=0;k<5;k++){const q=along([[20,330],[150,330],[Px-16,Py+10]],P(T*.8+k/5,1));circ(q[0],q[1],3.6,C.pain,C.panel,1)}
+  txt(28,348,"pain fibre (thin)",{size:11.5,weight:700,color:C["pain-ink"]});
+  /* touch fibre */poly([[20,150],[130,150],[Ix-14,Iy]],C.nerve,5);if(touch>.05)for(let k=0;k<6;k++){const q=along([[20,150],[130,150],[Ix-14,Iy]],P(T*1.6+k/6,1));circ(q[0],q[1],4.4,C.nerve,C.panel,1)}
+  txt(28,132,"touch and pressure fibre (thick)",{size:11.5,weight:700,color:C["nerve-ink"]});
+  /* interneuron */if(touch>0)glow(Ix,Iy,40,C.para,touch*.6);circ(Ix,Iy,17,mix(C.para,C.panel,.3-.3*touch),C.para,2);txt(Ix,Iy,"I",{size:13,weight:700,align:"center",color:C.ink});
+  label(Ix,Iy-34,"inhibitory interneuron",{size:11.5,weight:700,border:C.para});inhibEnd(Ix+14,Iy+10,Px-14,Py-12,C.para);
+  /* projection neuron */circ(Px,Py,20,hexA(C.pain,.3),C.pain,2);txt(Px,Py,"P",{size:13,weight:700,align:"center"});line(Px,Py-20,Px,40,C.pain,2.4);
+  const outRate=1-.65*touch;for(let k=0;k<6;k++){const pp=P(T*.9+k/6,1);if(rnd(k+Math.floor(T*.9+k/6)*11)>outRate)continue;const y=Py-24-pp*190;circ(Px,y,4.2*(1-.4*touch),C.pain,C.panel,1)}
+  label(Px+46,56,"to brain",{size:11.5,weight:700,border:C.pain});label(Px,Py+38,"signal sent up",{size:11.5,weight:600,border:C.rule});
+  label(235,430,touch>.5?"gate partly closed: fewer pain signals up":"gate open: pain signals pass",{size:12.5,weight:700,border:touch>.5?C.para:C.pain});
+  /* pain threshold graph */
+  panelBox(446,14,340,452);levelTag(458,30,"data");
+  const g=graph({x:510,y:104,w:250,h:220,x0:0,x1:60,y0:90,y1:120,xt:[0,15,30,45,60],yt:[90,100,110,120],xl:"minutes after",yl:"pain threshold (%)",ylx:40,yf:v=>v+"%"});
+  const ppt=m=>m<1?100+10*m:100+10*Math.exp(-(m-1)/14);const cur=clamp(t/6,0,1)*60;curve(g,ppt,0,cur,C.evid,3);gdot(g,cur,ppt(cur),C.evid);line(g.X(0),g.Y(100),g.X(60),g.Y(100),C["ink-soft"],1.2,[4,4]);
+  label(640,140,"small short term rise",{size:12.5,weight:700,border:C.evid});wrapText("Pressure needed before it hurts, compared with before treatment. Illustrative; similar changes follow other manual therapy and exercise.",462,370,310,16,{size:12,color:C["ink-soft"]});
+}
+/* ---------- descending modulation ---------- */
+function sceneDescend(T){
+  panelBox(14,14,772,452);levelTag(26,30,"signal");
+  const per=8,t=P(T,per)*per;const on=smooth(seg(t,2,2.8))*(1-smooth(seg(t,6.4,7.4)));
+  brainShape(330,82,82);rr(300,148,60,22,6);fillStroke(hexA(C.good,.2+.5*on),C.good,1.6);txt(330,159,"PAG",{size:12,weight:700,align:"center",mono:true});
+  rr(300,182,60,22,6);fillStroke(hexA(C.good,.2+.5*on),C.good,1.6);txt(330,193,"RVM",{size:12,weight:700,align:"center",mono:true});
+  rr(312,206,36,240,16);fillStroke(hexA(C.cord,.5),mix(C.cord,C.ink,.4),1.5);txt(256,420,"spinal cord",{size:12,weight:700,align:"right"});
+  /* input from low back */poly([[120,400],[220,400],[318,380]],C.nerve,3);for(let k=0;k<4;k++){const q=along([[120,400],[220,400],[318,380]],P(T+k/4,1));circ(q[0],q[1],3.6,C.nerve,C.panel,1)}
+  label(150,380,"sensory input from treatment",{size:11.5,weight:700,border:C.nerve});
+  poly([[80,350],[220,350],[318,372]],C.pain,2.2);label(110,330,"pain fibre",{size:11.5,weight:700,border:C.pain});
+  /* rising pain signal */const PP=[[322,372],[322,214],[296,210],[262,130]];poly(PP,hexA(C.pain,.7),2);for(let k=0;k<7;k++){const pp=P(T*.5+k/7,1);const q=along(PP,pp);const r=4.6*(1-.55*on*(q[1]<360?1:0));circ(q[0],q[1],r,hexA(C.pain,1-.5*on*(q[1]<360?1:0)),C.panel,1)}
+  /* descending */line(340,206,340,370,hexA(C.good,.25+.75*on),3);if(on>.05)for(let k=0;k<6;k++){const pp=P(T*.6+k/6,1);circ(340,206+pp*164,3.8,C.good,C.panel,1)}
+  inhibEnd(340,360,326,374,hexA(C.good,.3+.7*on));label(420,300,"descending control",{size:12,weight:700,border:C.good,a:.3+.7*on,align:"left"});
+  /* volume dial */const dx=620,dy=210;circ(dx,dy,70,C.paper,C["ink-soft"],2.5);for(let i=0;i<=10;i++){const a=Math.PI*.75+i/10*Math.PI*1.5;line(dx+Math.cos(a)*58,dy+Math.sin(a)*58,dx+Math.cos(a)*66,dy+Math.sin(a)*66,C["ink-soft"],1.6)}
+  const lvl=.8-.35*on;const a=Math.PI*.75+lvl*Math.PI*1.5;line(dx,dy,dx+Math.cos(a)*52,dy+Math.sin(a)*52,C.pain,4);circ(dx,dy,8,C.pain);txt(dx,dy+92,"pain volume",{size:13,weight:700,align:"center"});
+  ["expectation","mood","sleep","stress"].forEach((w,i)=>{label(150+(i%2)*0,60+i*28,w,{size:11.5,weight:600,border:C.brain});arrow(196,60+i*28,250,82,hexA(C["ink-soft"],.6),1.4)});
+  label(620,420,"proposed mechanism, mostly lab evidence",{size:12,weight:700,border:C.evid});
+}
+/* ---------- context ---------- */
+function sceneContext(T){
+  panelBox(14,14,380,452);levelTag(26,30,"person");
+  const k=Math.floor(P(T,12)*4);sitter(120,330,62,{skin:0,shirt:1});ctx.save();ctx.translate(560,0);ctx.scale(-1,1);sitter(290,330,62,{skin:2,shirt:3});ctx.restore();
+  const icons=[["expectation",90,84],["touch",290,84],["alliance",90,170],["setting",290,170]];
+  icons.forEach((ic,i)=>{const on=i===k;const x=ic[1],y=ic[2];if(on)glow(x,y,70,C.act2,.25+.15*Math.sin(T*4));cardBox(x-52,y-34,104,64,C.act2,on);
+    if(i===0){circ(x,y-8,13,C.panel,C.act2,1.6);circ(x-14,y+10,4,C.panel,C.act2,1.4);circ(x-20,y+18,2.5,C.panel,C.act2,1.2);txt(x,y-8,"?",{size:13,weight:700,align:"center"})}
+    if(i===1)hand(x,y+6,10,{skin:1});
+    if(i===2){rr(x-30,y-22,30,18,6);fillStroke(C.panel,C.act2,1.4);rr(x,y-12,30,18,6);fillStroke(C.panel,C.act2,1.4);line(x-6,y-4,x+6,y-4,C.act2,2)}
+    if(i===3){rr(x-24,y-22,48,30,3);fillStroke(hexA(C.lig,.15),C.act2,1.4);circ(x+12,y-10,5,C.gold);line(x-16,y+4,x-16,y-10,C.para,3);circ(x-16,y-12,6,C.para)}
+    txt(x,y+22,ic[0],{size:11.5,weight:700,align:"center"})});
+  panelBox(406,14,380,452);levelTag(418,30,"data");
+  const g=graph({x:460,y:70,w:300,h:270,x0:0,x1:6,y0:0,y1:8,xt:[0,1,2,3,4,5,6],yt:[0,2,4,6,8],xl:"weeks",yl:"average pain (0 to 10)",ylx:40});
+  const per=10,t=P(T,per)*per;const cur=clamp(t/6,0,1)*6;const real=w=>6-2.6*(1-Math.exp(-w/1.6)),sham=w=>6-2.1*(1-Math.exp(-w/1.6));
+  ctx.save();ctx.beginPath();for(let i=0;i<=40;i++){const w=i/40*cur;const X=g.X(w),Y=g.Y(sham(w));i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.lineTo(g.X(cur),g.Y(6));ctx.lineTo(g.X(0),g.Y(6));ctx.closePath();ctx.fillStyle=hexA(C.evid,.12);ctx.fill();ctx.restore();
+  curve(g,sham,0,cur,C.evid,3);curve(g,real,0,cur,C.accent,3);
+  if(cur>5.5){const X=g.X(6)+8;line(X,g.Y(real(6)),X,g.Y(sham(6)),C.ink,2);label(X-8,g.Y(4.6)-22,"specific effect",{size:11.5,weight:700,border:C.accent,align:"right"})}
+  label(g.X(1.6),g.Y(5.4)-6,"shared improvement",{size:11.5,weight:700,border:C.evid,a:seg(cur,1,2)});
+  label(560,384,"real treatment",{size:12,weight:700,border:C.accent});label(700,384,"sham",{size:12,weight:700,border:C.evid});
+  txt(596,420,"Illustrative trial pattern",{size:11.5,align:"center",color:C["ink-soft"]});
+}
+/* ---------- effect size worked example ---------- */
+function sceneEffsize(T){
+  panelBox(14,14,430,452);levelTag(26,30,"data");
+  const per=16,t=P(T,per)*per;const mv=smooth(seg(t,.5,2.5));const muM=5-mv;
+  const x0=40,w=380,base=270,h=170;const X=v=>x0+w*v/10;
+  bell(x0,base,w,h,5,2.5,C.evid,{v0:0,v1:10});bell(x0,base,w,h,muM,2.5,C.accent,{v0:0,v1:10});
+  line(x0,base,x0+w,base,C["ink-soft"],1.6);for(let v=0;v<=10;v++)txt(X(v),base+14,String(v),{size:11,mono:true,align:"center",color:C["ink-soft"]});txt(x0+w,base+32,"pain score",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  line(X(5),base-h-6,X(5),base,C.evid,1.4,[4,3]);line(X(muM),base-h-6,X(muM),base,C.accent,1.4,[4,3]);
+  if(mv>.9){arrow(X(5),base-h-18,X(4),base-h-18,C.ink,1.8);label(X(4.5),base-h-34,"1 point",{size:12,weight:700,border:C.ink})}
+  withA(seg(t,2.5,3.2),()=>{const yy=base-h*gauss(7.5,5,2.5);line(X(5),yy,X(7.5),yy,C.evid,2);label(X(7.6),yy-16,"SD 2.5",{size:12,weight:700,border:C.evid,align:"left"})});
+  label(X(2.4),70,"manipulation",{size:12,weight:700,border:C.accent});label(X(7.6),70,"comparison",{size:12,weight:700,border:C.evid});
+  /* scale */const sx=60,sw=340,sy=380;rr(sx,sy,sw,14,4);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();[[.2,"small"],[.5,"moderate"],[.8,"large"]].forEach(m=>{const x=sx+sw*m[0];line(x,sy-6,x,sy+20,C["ink-soft"],1.6);txt(x,sy+32,m[0]+" "+m[1],{size:11.5,weight:600,align:"center"})});
+  txt(sx,sy-16,"effect size scale (rough guide)",{size:12,weight:700});const es=seg(t,9,10.5)*.4;if(es>0){const x=sx+sw*es;pulseRing(x,sy+7,18,C.good,P(T,1.2));circ(x,sy+7,9,C.good,C.panel,2);label(x,sy+60,"0.4",{size:12.5,weight:700,mono:true,border:C.good})}
+  wk(456,14,330,452,{rows:[{l:"difference = 5.0 − 4.0"},{ans:"= 1.0 point"},{c:[[F("1.0","points","2.5","points")],["0.4",[]]]},{ans:"effect size 0.4"},{l:"between small and moderate"}],miss:"dividing by an average instead of the standard deviation, or calling 0.4 a 40 percent improvement."},T,{per,cfs:15,dt:1.8,t0:3.4,cy:40,rowGap:20});
+}
+/* ---------- guidelines ---------- */
+function sceneGuide(T){
+  panelBox(14,14,400,452);levelTag(26,30,"now");
+  txt(30,58,"Low back pain: nonpharmacologic options",{size:13.5,weight:700});
+  const opts=["Exercise","Superficial heat","Massage","Acupuncture","Yoga or tai chi","Mindfulness","Cognitive behavioural therapy","Multidisciplinary rehabilitation","Spinal manipulation"];
+  const k=Math.floor(P(T,13.5)*9);
+  opts.forEach((o,i)=>{const col=i%2,row=Math.floor(i/2);const x=30+col*188,y=78+row*62;const isM=i===8;if(i===k)glow(x+88,y+25,80,isM?C.accent:C.evid,.18+.1*Math.sin(T*4));const w=i===8?176:176;cardBox(x,y,w,50,isM?C.accent:C.evid,i===k);if(isM){ctx.setLineDash([]);ctx.strokeStyle=C.accent;ctx.lineWidth=2;rr(x,y,w,50,8);ctx.stroke()}wrapText(o,x+12,y+18,w-20,15,{size:12.5,weight:isM?700:600})});
+  wrapText("Neck pain: manual therapy is often listed together with exercise.",30,420,370,16,{size:12.5,weight:600,color:C["ink-soft"]});
+  panelBox(426,14,360,452);levelTag(438,30,"data");txt(446,58,"Typical short term effect (pattern)",{size:13,weight:700});
+  const items=[["exercise",.38],["spinal manipulation",.36],["massage",.33],["acupuncture",.35],["yoga",.4],["psychological therapy",.32]];
+  const bx=600,bw=160;const Xs=v=>bx+bw*v/.8;rr(Xs(.2),84,Xs(.5)-Xs(.2),items.length*46,0);ctx.fillStyle=hexA(C.good,.1);ctx.fill();txt(Xs(.35),78,"small to moderate",{size:11.5,weight:700,align:"center",color:C.good});
+  items.forEach((it,i)=>{const y=106+i*46;const grow=smooth(seg(P(T,9)*9,.2+i*.3,1+i*.3));txt(590,y,it[0],{size:12,weight:it[0]==="spinal manipulation"?700:500,align:"right"});rr(bx,y-9,(Xs(it[1])-bx)*grow,18,3);ctx.fillStyle=it[0]==="spinal manipulation"?C.accent:hexA(C.evid,.7);ctx.fill();line(Xs(it[1]-.13),y,Xs(it[1]+.13),y,C["ink-soft"],1.6);line(Xs(it[1]-.13),y-6,Xs(it[1]-.13),y+6,C["ink-soft"],1.6);line(Xs(it[1]+.13),y-6,Xs(it[1]+.13),y+6,C["ink-soft"],1.6)});
+  [0,.2,.5,.8].forEach(v=>txt(Xs(v),390,String(v),{size:11,mono:true,align:"center",color:C["ink-soft"]}));txt(bx+bw,408,"effect size",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  wrapText("Bars show the overall pattern from reviews, not exact results. Lines show uncertainty.",446,430,330,15,{size:11.5,color:C["ink-soft"]});
+}
+/* ---------- instrument and drop table ---------- */
+function sceneInstrument(T){
+  panelBox(14,14,772,452);
+  const cur=P(T,3)*600;
+  const rows=[["manual thrust",C.force,v=>ftThrust(v,{pre:100,peak:400,dur:150,ramp:80,hold:120,res:200}),2],["instrument assisted",C.act2,v=>20+150*gauss(v,300,2.2),1],["drop table",C.act3,v=>v<150?80*smooth(v/150):v<230?80+170*Math.sin((v-150)/80*Math.PI/2):v<270?250*(1-smooth((v-230)/40)):0,1]];
+  rows.forEach((r,i)=>{const y=24+i*146;panelBox(24,y,752,134,{fill:hexA(C.panel,.6)});txt(40,y+18,r[0],{size:13.5,weight:700});
+    /* icon */const ix=110,iy=y+80;
+    if(i===0){hand(ix,iy+14,24,{skin:2})}
+    if(i===1){rr(ix-14,iy-46,28,60,6);fillStroke(C.metal||C["ink-soft"],C.ink,1.4);ctx.beginPath();for(let k=0;k<=30;k++){const yy=iy-40+k*1.6;const xx=ix+Math.sin(k*1.2)*8;k?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}ctx.strokeStyle=C.panel;ctx.lineWidth=1.6;ctx.stroke();line(ix,iy+14,ix,iy+30,C.ink,3);const fl=cur>296&&cur<310;if(fl)spark(ix,iy+34,10,C.gold,.5);txt(ix,iy+46,"spring device",{size:10.5,align:"center",color:C["ink-soft"]})}
+    if(i===2){const drop=cur>230?Math.min(10,(cur-230)/4):0;rr(ix-60,iy+10,40,10,2);fillStroke(C["table-top"],C.ink,1);rr(ix-18,iy+10+drop,36,10,2);fillStroke(mix(C["table-top"],C.act3,.4),C.act3,1.4);rr(ix+20,iy+10,40,10,2);fillStroke(C["table-top"],C.ink,1);txt(ix,iy+46,"section drops",{size:10.5,align:"center",color:C["ink-soft"]})}
+    /* graph */const gx=220,gy=y+26,gw=400,gh=90;rr(gx,gy,gw,gh,3);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);line(gx,gy,gx,gy+gh,C["ink-soft"],1.4);
+    [0,200,400,600].forEach(v=>txt(gx+gw*v/600,gy+gh+10,v+" ms",{size:10,mono:true,align:"center",color:C["ink-soft"]}));txt(gx-4,gy+4,"N",{size:10.5,align:"right",color:C["ink-soft"]});
+    plotFn(r[2],0,600,gx,gy,gw,gh,0,450,r[1],2.4,null,cur);
+    if(i===1)label(gx+gw*.5+40,gy+30,"a few ms",{size:11.5,weight:700,border:r[1],align:"left"});if(i===0)label(gx+gw*.6,gy+20,"about 150 ms",{size:11.5,weight:700,border:r[1],align:"left"});if(i===2)label(gx+gw*.5+20,gy+30,"cut short by the drop",{size:11.5,weight:700,border:r[1],align:"left"});
+    txt(650,y+56,"evidence",{size:11.5,weight:700,color:C["ink-soft"]});evMeter(650,y+76,r[3])});
+}
+/* ================= scenes: part 7 and finish ================= */
+function mini(x,y,s,col){circ(x,y-s*.9,s*.32,col);rr(x-s*.32,y-s*.55,s*.64,s*.7,s*.22);ctx.fillStyle=col;ctx.fill()}
+/* ---------- common mild reactions ---------- */
+let SORE=null;
+function sceneSoreness(T){
+  if(!SORE){const idx=[...Array(100).keys()].sort((a,b)=>rnd(a*3.3+1)-rnd(b*3.3+1));SORE=new Set(idx.slice(0,50))}
+  panelBox(14,14,380,452);levelTag(26,30,"data");
+  const per=10,t=P(T,per)*per;const rows=Math.floor(clamp(t/4,0,1)*10);
+  for(let i=0;i<100;i++){const r=Math.floor(i/10),c=i%10;const x=50+c*32,y=96+r*30;const lit=SORE.has(i)&&r<rows;mini(x,y,18,lit?C.warn:hexA(C["ink-soft"],.45))}
+  label(200,62,"100 patients: about half notice a mild reaction",{size:12,weight:700,border:C.warn});
+  const kinds=["local soreness","stiffness","headache","tiredness"];kinds.forEach((k,i)=>{withA(seg(t,4+i*.4,4.4+i*.4),()=>label(70+i%2*180,410+Math.floor(i/2)*28,k,{size:12,weight:700,border:C.warn,align:"left"}))});
+  panelBox(406,14,380,452);levelTag(418,30,"person");
+  const g=graph({x:460,y:90,w:300,h:220,x0:0,x1:72,y0:0,y1:1,xt:[0,12,24,36,48,60,72],yt:[0,.5,1],xl:"hours after treatment",yl:"soreness",ylx:40,yf:v=>v===0?"none":v===1?"most":""});
+  const sore=h=>h<6?h/6:Math.exp(-(h-6)/11);const cur=clamp((t-.5)/8,0,1)*72;curve(g,sore,0,cur,C.muscle,3);
+  ctx.fillStyle=hexA(C.good,.1);ctx.fillRect(g.X(24),g.y,g.X(48)-g.X(24),g.h);txt(g.X(36),g.y+12,"usually gone by here",{size:11.5,weight:700,align:"center",color:C.good});
+  const cx=g.X(cur),cy=g.y+g.h+44;circ(cx,cy,12,C.panel,C.ink,1.8);const a=-Math.PI/2+T*2;line(cx,cy,cx+Math.cos(a)*8,cy+Math.sin(a)*8,C.ink,1.8);
+  wrapText("Starts within hours, fades within 24 to 48 hours. Mention it before treatment.",420,410,350,16,{size:12.5,weight:600})}
+/* ---------- relative vs absolute risk ---------- */
+function sceneRare(T){
+  panelBox(14,14,772,452);levelTag(26,30,"math");
+  const per=16,t=P(T,per)*per;
+  [["group A: 1 per 100,000",1,40],["group B: 2 per 100,000",2,410]].forEach(b=>{const x=b[2];rr(x,60,350,150,6);fillStroke(hexA(C.panel,.9),C.rule,1.2);txt(x+175,74,b[0],{size:12.5,weight:700,align:"center"});
+    ctx.fillStyle=hexA(C["ink-soft"],.45);for(let i=0;i<70;i++)for(let j=0;j<22;j++)ctx.fillRect(x+12+i*4.7,88+j*5.3,2,2);
+    for(let k=0;k<b[1];k++){const px=x+80+k*170,py=150-k*20;const pu=.5+.5*Math.sin(T*4+k);glow(px,py,22,C.pain,.4*pu+.2);circ(px,py,5,C.pain,C.panel,1.2)}});
+  txt(400,226,"each box stands for 100,000 people; each red dot is one event",{size:11.5,align:"center",color:C["ink-soft"]});
+  withA(seg(t,.6,1.2),()=>{rr(260,18,280,32,6);fillStroke(C.paper,C.bad,2);txt(400,34,"Headline: risk doubles",{size:14,weight:700,align:"center",color:C.bad})});
+  wk(40,246,720,214,{rows:[{l:"relative risk = (2 per 100,000) ÷ (1 per 100,000)"},{ans:"relative risk = 2"},{l:"absolute difference = 2 per 100,000 − 1 per 100,000"},{ans:"1 extra event per 100,000 people"}],miss:"hearing \"double\" and assuming the risk is large. Always ask for the absolute numbers."},T,{per,cfs:14,dt:2,t0:2,cy:24,rowGap:10,lh:10});
+  label(690,236,"made up numbers for practice",{size:11.5,weight:700,border:C.gold});
+}
+/* ---------- dissection and case crossover ---------- */
+function sceneDissection(T){
+  panelBox(14,14,330,452);levelTag(26,30,"tissue");
+  const per=8,t=P(T,per)*per;neckArtery(170,80,270);
+  const ty=210,txx=208;const tear=smooth(seg(t,.8,2));const clot=smooth(seg(t,2,4.5));
+  if(tear>0){ctx.save();ctx.globalAlpha*=tear;poly([[txx-4,ty-12],[txx+8,ty-2],[txx-2,ty+10]],C.ink,2);ctx.restore()}
+  glow(txx,ty+10,26+6*Math.sin(T*4),C.pain,.3);if(clot>0)ell(txx+1,ty+20,5*clot,14*clot,0,mix(C.artery,"#000",.45),null);
+  lead(txx+6,ty,300,150,"small tear",{size:12,lc:C.artery,align:"right"});withA(clot,()=>lead(txx+3,ty+26,300,300,"clot forming",{size:12,lc:C.artery,align:"right"}));
+  label(170,400,"early dissection: neck pain, headache",{size:12,weight:700,border:C.pain,a:.3+.7*clot});txt(170,428,"vertebral arteries run up through the neck vertebrae",{size:11,align:"center",color:C["ink-soft"]});
+  panelBox(356,14,430,452);levelTag(368,30,"data");txt(372,58,"Case crossover: each stroke case is its own comparison",{size:12.5,weight:700});
+  const x0=380,x1=740,hz=[690,740],cw=[[400,450],[480,530],[560,610]];
+  for(let r=0;r<6;r++){const y=88+r*34;line(x0,y,x1,y,hexA(C["ink-soft"],.6),1.4);cw.forEach(w=>{ctx.fillStyle=hexA(C["ink-soft"],.12);ctx.fillRect(w[0],y-11,w[1]-w[0],22)});ctx.fillStyle=hexA(C.pain,.16);ctx.fillRect(hz[0],y-11,hz[1]-hz[0],22);
+    txt(x1+12,y,"stroke",{size:10.5,weight:700,color:C["pain-ink"]});const show=seg(t,1+r*.4,1.4+r*.4);
+    withA(show,()=>{[[hz[0]+12,0],[hz[0]+34,1]].forEach((v,j)=>{if(rnd(r*5+j)<.75)circ(v[0],y,5,j?C.evid:C.accent,C.panel,1.2)});cw.forEach((w,k)=>{if(rnd(r*7+k*3+1)<.18)circ(w[0]+18,y,5,C.accent,C.panel,1.2);if(rnd(r*9+k*2+2)<.2)circ(w[0]+34,y,5,C.evid,C.panel,1.2)})})}
+  txt(hz[0]+25,302,"just before",{size:10.5,weight:700,align:"center",color:C["pain-ink"]});txt(505,302,"earlier control windows",{size:10.5,weight:700,align:"center",color:C["ink-soft"]});
+  const bf=smooth(seg(t,4,5.5));[["chiropractor visits",C.accent,.95],["primary care visits",C.evid,.9]].forEach((b,i)=>{const y=330+i*34;txt(372,y,b[0],{size:12,weight:600});bar(520,y-8,200*bf*b[2],16,1,b[1]);});
+  txt(520,394,"more common just before the stroke, for both",{size:11.5,weight:600,color:C["ink-soft"]});
+  wrapText("Suggests people with an early dissection may seek care for neck pain. Debate continues. Illustrative.",372,424,400,15,{size:11.5,weight:600})}
+/* ---------- contraindications ---------- */
+function sceneContra(T){
+  panelBox(14,14,772,452);levelTag(26,30,"safety");
+  const k=Math.floor(P(T,12.5)*5);const s=50;const x=170;
+  for(let i=0;i<7;i++){const y=60+i*s*.82;vertebra(x,y,s,{seed:i*2,hl:false})}
+  /* sacrum */ctx.beginPath();ctx.moveTo(x-26,60+7*s*.82-10);ctx.lineTo(x+40,60+7*s*.82-10);ctx.lineTo(x+20,60+7*s*.82+40);ctx.lineTo(x-6,60+7*s*.82+40);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  /* cauda equina */for(let j=0;j<6;j++)poly([[x+48+j*2,60+4*s*.82],[x+48+j*3,60+6.5*s*.82],[x+40+j*5,60+7*s*.82+30]],C.nerve,1.6);
+  const spots=[[x,60+1*s*.82],[x,60+2*s*.82],[x,60+3*s*.82],[x,60+4*s*.82],[x+56,60+6.4*s*.82]];
+  const on=spots[k];glow(on[0],on[1],48,C.pain,.55+.25*Math.sin(T*5));
+  /* icons on the bones */
+  poly([[x-20,spots[0][1]-14],[x-4,spots[0][1]-2],[x-14,spots[0][1]+4],[x+6,spots[0][1]+14]],"#2A2420",2);
+  for(let j=0;j<8;j++)circ(x-18+rnd(j)*36,spots[1][1]-10+rnd(j+9)*20,2.6+rnd(j+3)*2.4,hexA(C.panel,.95),C["bone-edge"],.8);
+  glow(x,spots[2][1],24,C.pain,.35);ell(x+6,spots[3][1]+2,9,7,.5,"rgba(42,36,32,.8)",null);
+  const items=[["Fracture","after a fall or major trauma"],["Severe osteoporosis","very thin, fragile bone"],["Infection","fever with back pain"],["Cancer","history of cancer, weight loss, night pain"],["Cauda equina syndrome","saddle numbness, bladder or bowel change, leg weakness"]];
+  items.forEach((it,i)=>{const y=48+i*82;cardBox(330,y,300,72,C.pain,i===k);txt(346,y+18,it[0],{size:14,weight:700});wrapText(it[1],346,y+40,276,15,{size:12,color:C["ink-soft"]});if(i===k)line(on[0]+40,on[1],330,y+36,hexA(C.pain,.8),1.6,[4,3])});
+  ctx.save();ctx.translate(706,250);ctx.rotate(-.1);const sa=.65+.35*Math.sin(T*3);ctx.globalAlpha*=sa;rr(-74,-42,148,84,8);ctx.strokeStyle=C.bad;ctx.lineWidth=3;ctx.stroke();txt(0,-14,"do not manipulate",{size:12,weight:700,align:"center",color:C.bad});txt(0,8,"refer for",{size:12.5,weight:700,align:"center",color:C.bad});txt(0,26,"medical care",{size:12.5,weight:700,align:"center",color:C.bad});ctx.restore();
+  // thermometer for infection
+  if(k===2){rr(250,spots[2][1]-30,10,46,5);fillStroke(C.paper,C.ink,1.2);circ(255,spots[2][1]+20,8,C.pain,C.ink,1.2);rr(252,spots[2][1]-10,4,26,2);ctx.fillStyle=C.pain;ctx.fill()}
+}
+/* ---------- screening and consent ---------- */
+function sceneConsent(T){
+  panelBox(14,14,440,452);levelTag(26,30,"talk");
+  const per=14,t=P(T,per)*per;
+  sitter(110,300,64,{skin:1,shirt:2});ctx.save();ctx.translate(560,0);ctx.scale(-1,1);sitter(240,300,64,{skin:3,shirt:3});ctx.restore();
+  const lines=[["clin","Here is what this involves, and what it may help with."],["pat","Are there risks?"],["clin","Soreness is common. Serious problems are rare."],["clin","You can also choose other options, or none."],["pat","Can I stop if I want to?"],["clin","Yes, at any time. What questions do you have?"]];
+  const k=Math.floor(t/2.2)%lines.length;const L=lines[k];
+  if(L[0]==="clin")bubble(200,60,240,72,L[1],{tx:300,size:13,weight:600,ty:22});else bubble(30,80,200,60,L[1],{tx:80,size:13,weight:600,ty:22});
+  panelBox(466,14,320,452);levelTag(478,30,"safety");txt(482,58,"Informed consent checklist",{size:13.5,weight:700});
+  const ck=["what the treatment involves","expected benefit and its size","common mild side effects","rare serious risks","other options, including none","time for questions","the right to say no or stop"];
+  const n=Math.floor(clamp(t/9,0,1)*ck.length+.001);
+  ck.forEach((c,i)=>{const y=86+i*30;rr(482,y-10,20,20,4);fillStroke(i<n?C["good-wash"]:C.panel,i<n?C.good:C.rule,1.4);if(i<n)tick(492,y,6,C.good);txt(510,y,c,{size:12.5,weight:i<n?600:500,color:i<n?C.ink:C["ink-soft"]})});
+  txt(482,310,"Screening questions before neck care",{size:12.5,weight:700});
+  const sq=["new or unusual headache","dizziness","double vision","trouble speaking or swallowing","numbness"];const kk=Math.floor(P(T,7.5)*5);
+  sq.forEach((q,i)=>{const y=336+i*25;if(i===kk)glow(492,y,18+4*Math.sin(T*5),C.pain,.35);circ(492,y,8,i===kk?C.pain:hexA(C.pain,.25),C.pain,1.4);txt(492,y,"?",{size:11,weight:700,align:"center",color:i===kk?onFill():C.ink});txt(508,y,q,{size:12,weight:i===kk?700:500})});
+}
+/* ---------- finish ---------- */
+function sceneFinish(T){
+  panelBox(14,14,772,452);
+  const names=["Thrust or mobilization","Force time profile","Force spreads","Gapping and the pop","Sensors and pain signals","Context and evidence","Safety and consent"];
+  const k=Math.floor(P(T,10.5)*8);
+  names.forEach((n,i)=>{const row=i<4?0:1;const x=row?117+(i-4)*190:26+i*190,y=30+row*190;const done=i<k;cardBox(x,y,178,170,C["act"+(i+1)],done);txt(x+89,y+152,n,{size:12.5,weight:700,align:"center"});
+    const cx=x+89,cy=y+70;
+    if(i===0)segment(cx-30,cy,46,{urot:-.08*Math.sin(T*3)});
+    if(i===1){const g={x:x+20,y:y+24,w:138,h:90,x0:0,x1:1600,y0:0,y1:600};g.X=v=>g.x+g.w*v/1600;g.Y=v=>g.y+g.h-g.h*v/600;line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.2);curve(g,v=>ftThrust(v,TP),0,1600,C.force,2.4)}
+    if(i===2)proneSpine(cx-50,cy+24,4,34,[0,3,6,3].map(v=>v*(.5+.5*Math.sin(T*3))));
+    if(i===3)facetZoom(cx,cy,44,10,8+3*Math.sin(T*2));
+    if(i===4){spikeRow(x+16,cy-12,146,30,[...Array(18).keys()].map(j=>((j*.9+T*3)%16)),16,C["nerve-ink"])}
+    if(i===5){bell(x+20,cy+30,138,60,5,1.6,C.evid,{v0:0,v1:10});bell(x+20,cy+30,138,60,4,1.6,C.accent,{v0:0,v1:10})}
+    if(i===6){ctx.beginPath();ctx.moveTo(cx,cy-40);ctx.lineTo(cx+34,cy-26);ctx.lineTo(cx+30,cy+14);ctx.quadraticCurveTo(cx,cy+40,cx,cy+44);ctx.quadraticCurveTo(cx,cy+40,cx-30,cy+14);ctx.lineTo(cx-34,cy-26);ctx.closePath();fillStroke(hexA(C.good,.2),C.good,2);tick(cx,cy,12,C.good)}
+    if(done){circ(x+160,y+18,12,C.good);tick(x+160,y+18,6,onFill())}});
+  label(400,446,"Next: practise in the lab",{size:14,weight:700,border:C.accent});
+}
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now(),DT=0;
+const SCENES={map:sceneMap,defManip:sceneDefManip,defMob:sceneDefMob,grades:sceneGrades,ftRead:sceneFtRead,ftRate:sceneFtRate,ftCompare:sceneFtCompare,ftSpeed:sceneFtSpeed,spread:sceneSpread,specific:sceneSpecific,levelTrial:sceneLevelTrial,gapping:sceneGapping,cavitation:sceneCavitation,alignment:sceneAlignment,mechano:sceneMechano,reflex:sceneReflex,hypo:sceneHypo,descend:sceneDescend,context:sceneContext,effsize:sceneEffsize,guide:sceneGuide,instrument:sceneInstrument,soreness:sceneSoreness,rare:sceneRare,dissection:sceneDissection,contra:sceneContra,consent:sceneConsent,finish:sceneFinish};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneMap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=paused?0:dt*speed;T+=DT;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;DT=0;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

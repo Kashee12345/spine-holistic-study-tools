@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spinal Biomechanics Lab</title>
+<meta name="description" content="Spinal biomechanics lab: a lifting and posture simulator with load mass, load distance, trunk angle, back posture and bracing driving a live torque, muscle force and estimated disc compression readout and a load displacement curve; a practice trainer for weight, torque, moment arm, bending angle and muscle force problems in newtons and newton metres; a sorting game for planes, axes and regional motion; and clinic scenarios about a warehouse worker's lifting, a desk worker's sitting and back pain red flags.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#8A2424;--accent-wash:#F6E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#9B2C2C;--act2:#2E8A7A;--act3:#5468C8;--act4:#B8861A;--act5:#2F7FC1;--act6:#A04E8C;--act7:#C0566A;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A5E0C;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --bone:#F1E8D2;--bone-edge:#7E6C4A;--bone-dark:#D9CBA8;--cort:#E2D4B0;
+  --disc:#2F7FC1;--disc-wash:#CFE3F4;--nucleus:#7FB6E6;--annulus:#4E8FC9;--disc-ink:#1F5F96;
+  --nerve:#D4A82A;--nerve-ink:#7A5E0C;
+  --muscle:#C0566A;--muscle-dark:#8E3448;--muscle-ink:#8E2F45;
+  --lig:#2E8A7A;--lig-ink:#1F6B5E;
+  --symp:#C8661E;--para:#3E8E4A;--pain:#C0392B;--pain-ink:#A02A1E;--evid:#5468C8;--evid-ink:#3B4DA8;
+  --force:#9B2C2C;--force-ink:#8A2424;--arm:#5468C8;--arm-ink:#3B4DA8;--torque:#B8861A;--torque-ink:#7A5600;
+  --comp:#2F7FC1;--shear:#C8661E;--tens:#2E8A7A;--shear-ink:#9A4A12;--comp-ink:#1F5F96;--tens-ink:#1F6B5E;
+  --pl-sag:#C0566A;--pl-front:#2F7FC1;--pl-trans:#3E8E4A;--pl-sag-ink:#8E2F45;--pl-front-ink:#1F5F96;--pl-trans-ink:#2C6B36;
+  --cerv:#7B5CC9;--thor:#2E8A7A;--lumb:#C8661E;--cerv-ink:#5E43A8;--thor-ink:#1F6B5E;--lumb-ink:#9A4A12;
+  --sk1:#F1D2B6;--sk2:#DDAA82;--sk3:#B9814F;--sk4:#8A5A3A;--sk5:#5E3D28;--sk-edge:#6B4A35;--hair1:#2B211B;--hair2:#7A4B2A;--hair3:#C9C3BA;
+  --cl1:#3F6E9E;--cl2:#8A5A9E;--cl3:#3E8E6A;--cl4:#B5683A;--cl5:#5E7183;
+  --box:#C9A27A;--box-edge:#7A5A3A;--floor:#C9CFD4;--chair:#6E7C86;--desk:#B8A07E;--metal:#9AA6AF;--screen:#2C3E50;--shelf:#8A9AA6;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F8BDB7;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5CC4B0;--act3:#94A6F2;--act4:#E8BE58;--act5:#5AA9E6;--act6:#D186C0;--act7:#E68A9C;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D9CFB6;--bone-edge:#F2E8D0;--bone-dark:#A89C7E;--cort:#BFB394;
+  --disc:#5AA9E6;--disc-wash:#1A3448;--nucleus:#4F8FC6;--annulus:#6FB3EC;--disc-ink:#8CC4F0;
+  --nerve:#E8C65A;--nerve-ink:#E8C65A;
+  --muscle:#E07A8C;--muscle-dark:#A84E60;--muscle-ink:#F0A0B0;
+  --lig:#5CC4B0;--lig-ink:#7ED8C6;
+  --symp:#F09A55;--para:#6CC57A;--pain:#F07A6E;--pain-ink:#F49A90;--evid:#94A6F2;--evid-ink:#B4C2F8;
+  --force:#F4A7A0;--force-ink:#F8BDB7;--arm:#94A6F2;--arm-ink:#B4C2F8;--torque:#E8BE58;--torque-ink:#F0CE7A;
+  --comp:#5AA9E6;--shear:#F09A55;--tens:#5CC4B0;--shear-ink:#F6B07A;--comp-ink:#8CC4F0;--tens-ink:#7ED8C6;
+  --pl-sag:#E07A8C;--pl-front:#5AA9E6;--pl-trans:#6CC57A;--pl-sag-ink:#F0A0B0;--pl-front-ink:#8CC4F0;--pl-trans-ink:#8ED89A;
+  --cerv:#A98BEF;--thor:#5CC4B0;--lumb:#F09A55;--cerv-ink:#C4ADF6;--thor-ink:#7ED8C6;--lumb-ink:#F6B07A;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --box:#A8835C;--box-edge:#E0C49E;--floor:#2A343B;--chair:#5E6B75;--desk:#6E5E46;--metal:#5E6B75;--screen:#0A1420;--shelf:#4A5862;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F8BDB7;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5CC4B0;--act3:#94A6F2;--act4:#E8BE58;--act5:#5AA9E6;--act6:#D186C0;--act7:#E68A9C;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D9CFB6;--bone-edge:#F2E8D0;--bone-dark:#A89C7E;--cort:#BFB394;
+  --disc:#5AA9E6;--disc-wash:#1A3448;--nucleus:#4F8FC6;--annulus:#6FB3EC;--disc-ink:#8CC4F0;
+  --nerve:#E8C65A;--nerve-ink:#E8C65A;
+  --muscle:#E07A8C;--muscle-dark:#A84E60;--muscle-ink:#F0A0B0;
+  --lig:#5CC4B0;--lig-ink:#7ED8C6;
+  --symp:#F09A55;--para:#6CC57A;--pain:#F07A6E;--pain-ink:#F49A90;--evid:#94A6F2;--evid-ink:#B4C2F8;
+  --force:#F4A7A0;--force-ink:#F8BDB7;--arm:#94A6F2;--arm-ink:#B4C2F8;--torque:#E8BE58;--torque-ink:#F0CE7A;
+  --comp:#5AA9E6;--shear:#F09A55;--tens:#5CC4B0;--shear-ink:#F6B07A;--comp-ink:#8CC4F0;--tens-ink:#7ED8C6;
+  --pl-sag:#E07A8C;--pl-front:#5AA9E6;--pl-trans:#6CC57A;--pl-sag-ink:#F0A0B0;--pl-front-ink:#8CC4F0;--pl-trans-ink:#8ED89A;
+  --cerv:#A98BEF;--thor:#5CC4B0;--lumb:#F09A55;--cerv-ink:#C4ADF6;--thor-ink:#7ED8C6;--lumb-ink:#F6B07A;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --box:#A8835C;--box-edge:#E0C49E;--floor:#2A343B;--chair:#5E6B75;--desk:#6E5E46;--metal:#5E6B75;--screen:#0A1420;--shelf:#4A5862;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.est-banner{display:flex;gap:10px;align-items:flex-start;background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:var(--r);padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.est-banner b{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;padding-top:2px}
+.seg5{display:grid;grid-template-columns:1fr;gap:6px}
+.seg5 .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:7px 9px}
+.seg5 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.seg5 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.chk{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;margin:8px 0}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.playrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.playrow input[type=range]{flex:1 1 160px;accent-color:var(--accent)}
+.bigtotal{font-family:var(--mono);font-size:22px;font-weight:700;margin:6px 0 2px}
+.rangeline{font-size:13.5px;color:var(--ink-soft)}
+.choices{display:grid;grid-template-columns:1fr;gap:7px;margin:8px 0}
+.ptab{border-collapse:collapse;margin:8px 0;font-size:14px}
+.ptab th,.ptab td{border:1px solid var(--rule);padding:4px 8px;text-align:left}
+.ptab th{background:var(--panel);font-weight:600}
+.scard svg{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--fib);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.seg5.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg5.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg5.seg4 .tbtn,.seg5.seg3 .tbtn{text-align:center;padding:7px 4px}
+.playrow output{font-family:var(--mono);font-weight:600;min-width:70px}
+.stage .playrow{padding:8px 4px 0}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--evid);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.seg5.seg2{grid-template-columns:1fr 1fr}
+.redflag{background:var(--bad-wash);border-left:4px solid var(--bad);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+</style>
+<script src="holistic-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 2 &middot; Spinal biomechanics</div>
+    <h1>Spinal Biomechanics Lab</h1>
+    <p class="sub">Run a lifting and posture simulator with live torque and disc compression, practise torque and moment arm problems in newtons and newton metres, sort motions by plane, axis and region, and reason through workplace and safety scenarios. Values are rounded teaching estimates. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Lifting Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button" tabindex="-1">Part 2 &middot; Torque Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort the Motion</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Lifting Simulator</h2>
+    <p class="est-banner"><b>Teaching model</b><span>A simplified two dimensional model of the low back (the L5 S1 level) for a 75 kg adult. It estimates torque, back muscle force and disc compression from the load, its distance and the trunk angle. Real spines share load among many muscles and tissues, so treat every number as a rough estimate.</span></p>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Lifting simulator."></canvas></div>
+        <div class="playrow"><button class="btn" type="button" id="simLift">Play a lift</button><button class="tbtn" type="button" id="simPause">Pause motion</button></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend" id="simLegend"></div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">How the model works: weight = mass × 9.81 N per kg. Torque about the low back = load weight × load distance + upper body weight (about 58 percent of body weight) × 0.25 m × sin(trunk angle). Back muscle force = torque ÷ 0.05 m, the erector spinae moment arm. Compression ≈ muscle force + (load + upper body weight) × cos(trunk angle) + extra from bracing; shear ≈ (load + upper body weight) × sin(trunk angle). The load displacement curve is a lab style curve for one lumbar segment: the dot shows how far into its range the segment is bent, which depends on trunk angle and whether the back is rounded. Guideline lines (3,400 N compression) come from workplace lifting guidance and are design limits, not injury thresholds.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <div class="ctl"><label for="slMass">Load mass <output id="oMass" for="slMass"></output></label><input type="range" id="slMass" min="0" max="30" step="1"></div>
+        <div class="ctl"><label for="slDist">Load distance from low back <output id="oDist" for="slDist"></output></label><input type="range" id="slDist" min="0.15" max="0.7" step="0.05"></div>
+        <div class="ctl"><label for="slAng">Trunk angle <output id="oAng" for="slAng"></output></label><input type="range" id="slAng" min="0" max="90" step="5"></div>
+        <h3 id="bk-h">Low back shape</h3>
+        <div class="seg5 seg2" id="simBack" role="group" aria-labelledby="bk-h"></div>
+        <h3 id="br-h">Bracing</h3>
+        <div class="seg5 seg4" id="simBrace" role="group" aria-labelledby="br-h"></div>
+        <div class="bar"><button class="tbtn" type="button" id="simReset">Reset</button><button class="tbtn" type="button" id="simClose">Try it close</button></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc" hidden>
+    <h2 class="gk-sr">Part 2: Torque Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">The picture updates with the answer you type. The worked solution builds step by step; units that cancel are struck out in red. Use g = 9.81 N per kg and give torque in newton metres, written N m.</p>
+      </div>
+      <aside class="card side" aria-label="Practice trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div class="ansrow" id="calcAnsRow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div class="choices" id="calcChoices" role="group" aria-label="Answer choices" hidden></div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a number (commas are fine). Answers within normal rounding are accepted. The streak counts answers right on the first check without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort the Motion</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults and rounded teaching values. Not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="helpbox" id="lifeHelp" hidden></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Biomech-Walkthrough.html">Spinal Biomechanics Walkthrough</a>. All values are rounded estimates from simplified models and published studies, which vary between people and methods.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "bone-dark", "cort", "disc", "disc-wash", "nucleus", "annulus", "disc-ink", "nerve", "nerve-ink", "muscle", "muscle-dark", "muscle-ink", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "force", "force-ink", "arm", "arm-ink", "torque", "torque-ink", "comp", "shear", "tens", "shear-ink", "comp-ink", "tens-ink", "pl-sag", "pl-front", "pl-trans", "pl-sag-ink", "pl-front-ink", "pl-trans-ink", "cerv", "thor", "lumb", "cerv-ink", "thor-ink", "lumb-ink", "sk1", "sk2", "sk3", "sk4", "sk5", "sk-edge", "hair1", "hair2", "hair3", "cl1", "cl2", "cl3", "cl4", "cl5", "box", "box-edge", "floor", "chair", "desk", "metal", "screen", "shelf"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= chemistry drawing kit (gases module) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+let SYS={};function sys(key,make){if(!SYS[key])SYS[key]=make();return SYS[key]}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u===d.u);if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* little level-of-view tags: macroscopic / particulate / symbolic */
+function pie(x,y,r,f,col,o){o=o||{};circ(x,y,r,hexA(C.sunk,.6),C["ink-soft"],1.5);if(f>0){ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,-Math.PI/2,-Math.PI/2+TAU*clamp(f,0,1));ctx.closePath();ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.2;ctx.stroke()}
+  if(o.lab)txt(x,y+r+14,o.lab,{size:12,weight:700,mono:true,align:"center",color:o.lc||C.ink})}
+/* ---------- simple drawn table ---------- */
+function ctable(x,y,cols,rows,o){o=o||{};const rh=o.rh||26;const fs=o.size||12.5;let tw=cols.reduce((a,c)=>a+c[1],0);
+  rr(x,y,tw,rh*(rows.length+1),5);ctx.fillStyle=hexA(C.paper,.95);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=hexA(C.sunk,.55);ctx.fillRect(x+1,y+1,tw-2,rh-1);
+  let cx=x;cols.forEach((c,i)=>{txt(cx+c[1]/2,y+rh/2,c[0],{size:fs-.5,weight:700,align:"center",mono:true,color:C["ink-soft"]});if(i)line(cx,y+3,cx,y+rh*(rows.length+1)-3,C["rule-soft"],1);cx+=c[1]});
+  rows.forEach((r,ri)=>{const yy=y+rh*(ri+1);const a=o.ra?o.ra[ri]:1;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+    if(o.hl&&o.hl[ri]){ctx.fillStyle=hexA(o.hl[ri],.18);ctx.fillRect(x+1,yy,tw-2,rh);ctx.strokeStyle=o.hl[ri];ctx.lineWidth=1.8;ctx.strokeRect(x+1.5,yy+.5,tw-3,rh-1)}
+    line(x+2,yy,x+tw-2,yy,C["rule-soft"],1);let c2=x;r.forEach((v,ci)=>{const hc=o.hc&&o.hc[ri+"_"+ci];txt(c2+cols[ci][1]/2,yy+rh/2,v,{size:fs,weight:hc?700:500,align:"center",mono:true,color:hc||C.ink});c2+=cols[ci][1]});ctx.restore()});
+  return {w:tw,h:rh*(rows.length+1),rowY:i=>y+rh*(i+1)+rh/2,colX:i=>{let s=x;for(let k=0;k<i;k++)s+=cols[k][1];return s+cols[i][1]/2}}}
+function wsteps(x,y,w,h,W_,t,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,W_.title||"Worked example",C["accent-ink"]);
+  const sz=o.size||12.5;let yy=y+36;if(W_.q){yy=wrapText(W_.q,x+12,yy,(o.qw||w-24),sz+4,{size:sz,weight:600})+sz+8}
+  const lx=o.lx!=null?x+o.lx:x+14;if(o.lx!=null)yy=y+(o.ly||40);
+  const per=o.step||1.6;let tt=.6;
+  (W_.lines||[]).forEach((L,i)=>{const p=clamp((t-tt)/per,0,1);
+    if(L.ch){const fs=o.cfs||14;const cy=yy+fs*.9;if(p>0){const cw=chainWidth(L.ch[0],L.ch[1],{size:fs});const sc=Math.min(1,(w-(lx-x)-16)/cw);ctx.save();ctx.translate(lx,cy);ctx.scale(sc,sc);chain(0,0,L.ch[0],L.ch[1],p,{size:fs});ctx.restore()}yy+=fs*2+24;tt+=per*1.6}
+    else if(L.gold){if(p>0)withA(p*2,()=>label(lx,yy,L.gold,{size:sz,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));yy+=sz+14;tt+=per*.6}
+    else{if(p>0)withA(p*2,()=>{ctx.font=`${L.b?700:600} ${sz+.5}px ${MONO}`;const tw=ctx.measureText(L.t).width;const mw=w-(lx-x)-16;const fs=tw>mw?(sz+.5)*mw/tw:sz+.5;txt(lx,yy,L.t,{size:fs,weight:L.b?700:600,mono:true,color:L.col||C.ink})});yy+=sz+10;tt+=per*.7}});
+  if(W_.ans){const a=seg(t,tt,tt+.6);if(a>0)withA(a,()=>{ctx.font=`700 ${sz+1.5}px ${MONO}`;const tw=ctx.measureText(W_.ans).width;rr(lx-4,yy-12,tw+14,26,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(lx+3,yy+1,W_.ans,{size:sz+1.5,weight:700,mono:true})});yy+=30;tt+=1}
+  if(W_.miss){const a=seg(t,tt+.4,tt+1);if(a>0)withA(a,()=>{const mh=o.missH||36;rr(lx-4,yy-10,w-(lx-x)-8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,lx+4,yy+4,w-(lx-x)-24,sz+3,{size:sz-1,color:C.ink})})}
+  return tt}
+/* rate meter (horizontal bar with value) */
+function meterBar(x,y,w,f,col,lab){rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w+8,y+7,lab,{size:12,weight:700,mono:true})}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sup(s){return String(s).split("").map(c=>SUP[c]||c).join("")}
+function sci(v,n){if(!isFinite(v))return "?";if(v===0)return "0";const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=3)return sig(v,n);let m=v/Math.pow(10,e);let ms=sig(m,n);if(Math.abs(+ms)>=10){m/=10;ms=sig(m,n);return ms+" × 10"+sup(e+1)}return ms+" × 10"+sup(e)}
+let SEEDC=1;function srnd(){SEEDC=(SEEDC*16807)%2147483647;return (SEEDC-1)/2147483646}
+/* ---------- people: diverse, neutral figures ----------
+   o: {skin:1-5, build:0.85-1.6, cloth:"cl1", pants:"cl5", hair:0 short,1 long,2 bun,3 cropped, older:bool, pose:"stand"|"walk"|"run"|"sit"|"lift"|"wave", ph:phase, muscular:bool, face:dir} */
+function limb(x1,y1,x2,y2,w,col){ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["sk-edge"],.55);ctx.lineWidth=w+2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function limb2(x1,y1,a1,L1,a2,L2,w,c1,c2){const xk=x1+Math.sin(a1)*L1,yk=y1+Math.cos(a1)*L1;const xe=xk+Math.sin(a2)*L2,ye=yk+Math.cos(a2)*L2;limb(x1,y1,xk,yk,w,c1);limb(xk,yk,xe,ye,w*.9,c2||c1);return [xe,ye,xk,yk]}
+function person(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],b=o.build||1,cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];const ph=o.ph||0;const pose=o.pose||"stand";
+  const hr=s*.075;const yS=y-s*.80,yH=y-s*.47;const tw=s*.2*b,hw=s*.18*b;const lw=s*.075*Math.pow(b,.75)*(o.muscular?1.15:1),aw=s*.06*Math.pow(b,.75)*(o.muscular?1.3:1);
+  const lean=o.older?.06:0;ctx.save();ctx.translate(x,y);ctx.rotate(lean*(o.face||1)*.5);ctx.translate(-x,-y);
+  let leg=[0,0],kneeB=[0,0],uA=[-.1,.1],fA=[-.04,.04];
+  if(pose==="walk"){const a=Math.sin(ph)*.38;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.3,Math.max(0,Math.sin(ph))*.3];uA=[-a*.85-.05,a*.85+.05];fA=[uA[0]+.25,uA[1]+.25]}
+  if(pose==="run"){const a=Math.sin(ph)*.6;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.9+.25,Math.max(0,Math.sin(ph))*.9+.25];uA=[-a*.9,a*.9];fA=[uA[0]+1.5,uA[1]+1.5]}
+  if(pose==="wave"){uA=[-.1,2.5];fA=[-.04,2.9]}
+  if(pose==="lift"){const k=.5+.5*Math.sin(ph);uA=[-.08,.08];fA=[.3+1.9*k,.3+1.9*k]}
+  if(pose==="sit"){uA=[.3,.38];fA=[1.25,1.35]}
+  const legL=s*.235;const hipX=[x-hw*.28,x+hw*.28];
+  if(pose==="sit"){/* chair */if(!o.noChair){rr(x-s*.22,yH+s*.02,s*.42,s*.05,3);fillStroke(C.metal,hexA(C.ink,.4),1);line(x-s*.18,yH+s*.07,x-s*.18,y,C.metal,4);line(x+s*.17,yH+s*.07,x+s*.17,y,C.metal,4)}
+    [0,1].forEach(i=>{const hx_=hipX[i];limb(hx_,yH,hx_+s*.2,yH+s*.02,lw,pn);limb(hx_+s*.2,yH+s*.02,hx_+s*.21,y-s*.02,lw*.92,pn);rr(hx_+s*.19,y-s*.035,s*.08,s*.035,s*.015);fillStroke(C.ink,null)})}
+  else{[0,1].forEach(i=>{const e=limb2(hipX[i],yH,leg[i],legL,leg[i]-kneeB[i],legL,lw,pn);rr(e[0]-s*.02,e[1]-s*.02,s*.075,s*.035,s*.015);fillStroke(C.ink,null)})}
+  /* torso */
+  rr(x-tw/2,yS-s*.02,tw,yH-yS+s*.06,tw*.28);fillStroke(cl,hexA(C["sk-edge"],.55),1.4);
+  /* arms */
+  const shX=[x-tw/2+aw*.35,x+tw/2-aw*.35];const armL=s*.17;
+  [0,1].forEach(i=>{const e=limb2(shX[i],yS+aw*.3,uA[i]+(i?1:-1)*.06*(b-1),armL,fA[i]+(i?1:-1)*.06*(b-1),armL,aw,cl,sk);circ(e[0],e[1],aw*.55,sk,hexA(C["sk-edge"],.6),1)});
+  /* neck + head */
+  limb(x,yS-s*.01,x,yS-s*.05,s*.05,sk);
+  const hy=yS-s*.05-hr*.9;circ(x,hy,hr,sk,hexA(C["sk-edge"],.7),1.3);
+  const hc=o.older?C.hair3:C[o.hairc||"hair1"];const hh=o.hair==null?0:o.hair;
+  ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+.5,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=hc;ctx.fill();ctx.restore();
+  if(hh===1){rr(x-hr*1.05,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fillStyle=hc;ctx.fill();rr(x+hr*.6,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fill()}
+  if(hh===2)circ(x,hy-hr*1.05,hr*.42,hc);
+  if(hh===3){ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+1.5,Math.PI*.95,Math.PI*2.05);ctx.lineWidth=hr*.5;ctx.strokeStyle=hc;ctx.stroke();ctx.restore()}
+  const f=o.face||1;circ(x+hr*.35*f,hy-hr*.05,Math.max(1,hr*.11),C.ink);ctx.beginPath();ctx.arc(x+hr*.2*f,hy+hr*.3,hr*.28,.2*Math.PI,.8*Math.PI);ctx.strokeStyle=hexA(C.ink,.7);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.glasses){circ(x+hr*.35*f,hy-hr*.05,hr*.26,null,C.ink,1.2)}
+  ctx.restore();return {head:[x,hy],chest:[x,yS+s*.08],belly:[x,yH-s*.08],hr}}
+function card(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.18):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function vbar(x,y,w,h,f,col,lab,val){rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,4);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w/2,y+h+13,lab,{size:11.5,weight:700,align:"center"});if(val)txt(x+w/2,y+h*(1-ff)-10,val,{size:11.5,weight:700,align:"center",mono:true})}
+function bigNum(x,y,t,o){o=o||{};txt(x,y,t,{size:o.size||22,weight:700,mono:true,align:o.align||"center",color:o.color||C.ink})}
+/* ================= spinal biomechanics drawing kit (shared by both pages) ================= */
+let SC={};const DEG=Math.PI/180;
+function levelTag(x,y,k){const m={body:["WHOLE PERSON",C.act1],tissue:["TISSUE",C.lig],cell:["CELLS AND SIGNALS",C.nerve],sym:["NUMBERS",C.act4],data:["EVIDENCE",C.evid]}[k]||[k,C.accent];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+function minus(v,dp){const s=fmtNum(Math.abs(v),dp==null?1:dp);return (v<0?"−":"")+s}
+function fmtK(v){return Math.round(v).toLocaleString("en-US")}
+/* ---------- vertebra, side view, local coordinates (anterior = +x, up = minus y) ---------- */
+const VPARTS={lam:[[-.68,-.24],[-1.04,-.27],[-1.12,.12],[-.8,.04]],sp:[[-1.0,-.24],[-1.5,-.14],[-1.66,-.05],[-1.69,.17],[-1.56,.3],[-1.06,.22]],
+  iap:[[-.9,.04],[-.9,.6],[-.97,.72],[-1.09,.67],[-1.13,.08]],sap:[[-.6,-.28],[-.63,-.62],[-.73,-.73],[-.86,-.65],[-.86,-.32],[-.78,-.2]],ped:[[-.74,-.3],[-.46,-.3],[-.46,-.04],[-.74,-.04]]};
+function polyPath(pts,s){ctx.beginPath();pts.forEach((p,i)=>{const X=p[0]*s,Y=p[1]*s;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.closePath()}
+function vSideLocal(s,o){o=o||{};const fill=o.fill||C.bone,edge=o.edge||C["bone-edge"];
+  if(!o.bodyOnly){ell(-.62*s,-.15*s,.13*s,.09*s,0,C["bone-dark"],edge,1.1);
+    ["lam","sp","iap","sap","ped"].forEach(k=>{polyPath(VPARTS[k],s);fillStroke(k==="ped"?mix(fill,C["bone-dark"],.3):fill,edge,1.4)});
+    for(let i=0;i<5;i++){const t=i/4;line((-1.12+t*.5)*s,(-.05+t*.02)*s,(-1.5+t*.2)*s,(.04)*s,hexA(C["bone-dark"],.0),1)}
+    if(o.facet){ctx.save();ctx.lineCap="round";line(-.86*s,-.62*s,-.86*s,-.34*s,o.facet,3.4);line(-.9*s,.32*s,-.9*s,.6*s,o.facet,3.4);ctx.restore()}}
+  const w=.5*s,h=.36*s,c=.05*s;ctx.beginPath();ctx.moveTo(-w,-h);ctx.quadraticCurveTo(0,-h+c*.4,w,-h);ctx.quadraticCurveTo(w-c,0,w,h);ctx.quadraticCurveTo(0,h-c*.4,-w,h);ctx.quadraticCurveTo(-w+c*.6,0,-w,-h);ctx.closePath();
+  fillStroke(o.bodyFill||fill,edge,1.7);ctx.save();ctx.clip();for(let i=0;i<34;i++){const x=(rnd(i*3+1)-.5)*.92*s,y=(rnd(i*3+2)-.5)*.62*s;ell(x,y,1.2+rnd(i)*2.2,1+rnd(i+5)*1.4,rnd(i+9)*3,null,hexA(C["bone-dark"],.75),1)}ctx.restore();
+  line(-w+2,-h+1.5,w-2,-h+1.5,C.cort,2.4);line(-w+2,h-1.5,w-2,h-1.5,C.cort,2.4);
+  if(o.lab)txt(0,0,o.lab,{size:Math.max(11,s*.15),weight:700,align:"center",color:"#3A3020"})}
+/* motion segment, side view. cx,cy = disc centre. a = rotation of the upper vertebra (flexion positive, radians).
+   o: tx,ty translation of upper (in units of s), comp (0..1 squeeze), lig (draw ligaments), facet colour, nerve, pivX,pivY */
+function segSide(cx,cy,s,a,o){o=o||{};const comp=o.comp||0;const dh=comp*.12;
+  const piv=[cx+(o.pivX==null?-.12:o.pivX)*s,cy+(o.pivY==null?.08:o.pivY)*s];const up0=[cx,cy-(.525-dh/2)*s],lo=[cx,cy+(.525-dh/2)*s];const tx=(o.tx||0)*s,ty=(o.ty||0)*s;
+  const ca=Math.cos(a),sa=Math.sin(a);
+  const U=p=>{const x=up0[0]+p[0]*s-piv[0],y=up0[1]+p[1]*s-piv[1];return [piv[0]+x*ca-y*sa+tx,piv[1]+x*sa+y*ca+ty]};
+  const U0=p=>[up0[0]+p[0]*s,up0[1]+p[1]*s];const L=p=>[lo[0]+p[0]*s,lo[1]+p[1]*s];
+  const len=(A,B)=>Math.hypot(A[0]-B[0],A[1]-B[1]);
+  const ligs=[["isl",[-1.3,.26],[-1.28,-.18]],["ssl",[-1.62,.24],[-1.64,-.06]],["all",[.5,.3],[.5,-.3]],["pll",[-.48,.3],[-.48,-.3]]];
+  const strain={};ligs.forEach(l=>{const l0=len(U0(l[1]),L(l[2])),l1=len(U(l[1]),L(l[2]));strain[l[0]]=(l1-l0)/l0});
+  ctx.save();ctx.translate(lo[0],lo[1]);vSideLocal(s,Object.assign({},o,{lab:o.labLo,fill:o.fill||mix(C.bone,C["bone-dark"],.3)}));ctx.restore();
+  /* nerve root in foramen */
+  if(o.nerve){const f=o.nerve;const nx=cx-.68*s,ny=cy+.02*s;const sq=o.squeeze||0;ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["nerve-ink"],.6);ctx.lineWidth=s*.13*(1-.35*sq)+2;ctx.beginPath();ctx.moveTo(cx-.75*s,cy-.25*s);ctx.quadraticCurveTo(nx,ny,cx-.6*s,cy+.35*s);ctx.stroke();ctx.strokeStyle=C.nerve;ctx.lineWidth=s*.13*(1-.35*sq);ctx.stroke();ctx.restore()}
+  ctx.save();ctx.translate(piv[0]+tx,piv[1]+ty);ctx.rotate(a);ctx.translate(up0[0]-piv[0],up0[1]-piv[1]);vSideLocal(s,Object.assign({},o,{lab:o.labUp}));ctx.restore();
+  /* disc */
+  const a1=L([-.5,-.36]),a2=L([.5,-.36]),b1=U([-.5,.36]),b2=U([.5,.36]);
+  const hF=len(a2,b2)/s,hB=len(a1,b1)/s,h0=.33-dh;
+  const bulF=clamp((h0-hF)*1.6+comp*.05,-.04,.14)*s,bulB=clamp((h0-hB)*1.6+comp*.05,-.04,.14)*s;
+  const dpath=()=>{ctx.beginPath();ctx.moveTo(a1[0],a1[1]);ctx.lineTo(a2[0],a2[1]);ctx.quadraticCurveTo((a2[0]+b2[0])/2+bulF+.03*s,(a2[1]+b2[1])/2,b2[0],b2[1]);ctx.lineTo(b1[0],b1[1]);ctx.quadraticCurveTo((a1[0]+b1[0])/2-bulB-.03*s,(a1[1]+b1[1])/2,a1[0],a1[1]);ctx.closePath()};
+  dpath();fillStroke(mix(C.annulus,C.panel,.35),C["disc-ink"],1.6);
+  ctx.save();dpath();ctx.clip();for(let i=1;i<6;i++){const f=i/6;const p1=[lerp(a1[0],b1[0],.5)-bulB*.7+(i*.03*s),lerp(a1[1],b1[1],.5)];ctx.beginPath();ctx.moveTo(lerp(a1[0],a2[0],f*.5),a1[1]);ctx.lineTo(lerp(b1[0],b2[0],f*.5),lerp(b1[1],b2[1],f*.5));ctx.strokeStyle=hexA(C["disc-ink"],.25);ctx.lineWidth=1;ctx.stroke();ctx.beginPath();ctx.moveTo(lerp(a2[0],a1[0],f*.5),a2[1]);ctx.lineTo(lerp(b2[0],b1[0],f*.5),lerp(b2[1],b1[1],f*.5));ctx.stroke()}ctx.restore();
+  const mx=(a1[0]+a2[0]+b1[0]+b2[0])/4,my=(a1[1]+a2[1]+b1[1]+b2[1])/4;const ns=-a*.9*s+(o.nucShift||0)*s;const hh=Math.min(hF,hB)*.5+.05;
+  const nuc=[mx+ns*Math.cos(a/2),my+ns*Math.sin(a/2)];
+  ell(nuc[0],nuc[1],.2*s*(1+comp*.15),Math.max(.04,hh*.42)*s,a/2,C.nucleus,C.disc,1.5);if(o.press){glow(nuc[0],nuc[1],.3*s,C.disc,.35*o.press)}
+  /* ligaments */
+  if(o.lig){ligs.forEach(l=>{const A=U(l[1]),B=L(l[2]);const st=strain[l[0]];const on=st>.02;ctx.save();ctx.lineCap="round";
+      if(st<-.02){ctx.setLineDash([3,3])}line(A[0],A[1],B[0],B[1],on?mix(C.lig,C.pain,clamp((st-.15)*2.5,0,.8)):hexA(C.lig,.8),on?3+st*14:2.4);ctx.restore()})}
+  /* facet capsule */
+  if(o.capsule===true&&!o.bodyOnly){const fA=U([-.92,.5]),fB=L([-.84,-.48]);const fm=[(fA[0]+fB[0])/2-2,(fA[1]+fB[1])/2];const fl=len(fA,fB);ell(fm[0],fm[1],.1*s,Math.max(.12*s,fl*.75),Math.atan2(fB[0]-fA[0],fA[1]-fB[1]),null,hexA(C.lig,.85),1.6)}
+  const facetGap=(U([-.9,.45])[1]-L([-.86,-.45])[1])/s;
+  return {U,L,piv,nuc,strain,facetGap,discF:hF,discB:hB,up0,lo,mid:[mx,my]}}
+/* vertebra seen from above (anterior = up). o: facet ("cerv","thor","lumb" or angle), rot (radians) */
+function vTop(x,y,s,rot,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);const fill=o.fill||C.bone,edge=C["bone-edge"];
+  const reg=o.reg||"lumb";
+  /* transverse processes */
+  const tpL=reg==="cerv"?.7:reg==="thor"?1.0:1.05;[-1,1].forEach(d=>{ctx.beginPath();ctx.moveTo(d*.3*s,.15*s);ctx.lineTo(d*tpL*s,(reg==="thor"?.38:.12)*s);ctx.lineTo(d*tpL*s,(reg==="thor"?.52:.26)*s);ctx.lineTo(d*.32*s,.35*s);ctx.closePath();fillStroke(fill,edge,1.4)});
+  /* arch: pedicles, laminae, spinous */
+  ctx.beginPath();ctx.moveTo(-.34*s,.02*s);ctx.lineTo(-.46*s,.5*s);ctx.lineTo(-.14*s,.78*s);ctx.lineTo(-.06*s,(reg==="cerv"?1.05:1.25)*s);ctx.lineTo(.06*s,(reg==="cerv"?1.05:1.25)*s);ctx.lineTo(.14*s,.78*s);ctx.lineTo(.46*s,.5*s);ctx.lineTo(.34*s,.02*s);ctx.closePath();fillStroke(fill,edge,1.5);
+  if(reg==="cerv"){[-1,1].forEach(d=>{circ(d*.11*s,1.05*s,.07*s,fill,edge,1.2)})}
+  /* canal */
+  ctx.beginPath();if(reg==="cerv"){ctx.ellipse(0,.42*s,.3*s,.2*s,0,0,TAU)}else{ctx.moveTo(-.26*s,.16*s);ctx.quadraticCurveTo(0,.12*s,.26*s,.16*s);ctx.quadraticCurveTo(.2*s,.5*s,0,.6*s);ctx.quadraticCurveTo(-.2*s,.5*s,-.26*s,.16*s)}ctx.closePath();fillStroke(o.canal||C.ecf,edge,1.3);
+  if(o.cord){circ(0,.36*s,.13*s,C.nerve,C["nerve-ink"],1.2)}
+  /* body */
+  ctx.beginPath();ctx.ellipse(0,-.28*s,.56*s,.4*s,0,0,TAU);fillStroke(fill,edge,1.7);ell(0,-.28*s,.38*s,.25*s,0,o.discTop?C.nucleus:hexA(C["bone-dark"],.5),null);
+  /* facets */
+  const fa=o.facetAng!=null?o.facetAng:(reg==="lumb"?1.25:reg==="thor"?.15:.1);
+  [-1,1].forEach(d=>{const fx=d*.44*s,fy=.52*s;ctx.save();ctx.translate(fx,fy);ctx.rotate(d*fa);rr(-.14*s,-.045*s,.28*s,.09*s,.04*s);fillStroke(o.facetCol||mix(C.lig,C.panel,.3),C["lig-ink"],1.4);ctx.restore()});
+  ctx.restore()}
+/* vertebra seen from behind (posterior view). bend = tilt (rad), spin = coupled rotation shown as spinous shift (rad) */
+function vBack(x,y,s,bend,spin,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(bend||0);const fill=o.fill||C.bone,edge=C["bone-edge"];
+  rr(-.5*s,-.34*s,s,.68*s,.08*s);fillStroke(o.bodyFill||mix(fill,C.panel,.25),edge,1.6);
+  const sh=Math.sin(spin||0)*.5*s;
+  [-1,1].forEach(d=>{ctx.beginPath();ctx.moveTo(d*.3*s+sh*.4,-.1*s);ctx.lineTo(d*(o.reg==="cerv"?.72:.95)*s+sh*.25,-.18*s);ctx.lineTo(d*(o.reg==="cerv"?.72:.95)*s+sh*.25,0);ctx.lineTo(d*.3*s+sh*.4,.06*s);ctx.closePath();fillStroke(fill,edge,1.3)});
+  [-1,1].forEach(d=>{rr(d*.34*s-.1*s+sh*.4,-.5*s,.2*s,.22*s,.05*s);fillStroke(fill,edge,1.2);rr(d*.3*s-.1*s+sh*.4,.26*s,.2*s,.22*s,.05*s);fillStroke(fill,edge,1.2)});
+  ctx.beginPath();ctx.moveTo(-.34*s+sh*.5,-.25*s);ctx.lineTo(.34*s+sh*.5,-.25*s);ctx.lineTo(.18*s+sh,.25*s);ctx.lineTo(-.18*s+sh,.25*s);ctx.closePath();fillStroke(fill,edge,1.4);
+  ctx.beginPath();ctx.moveTo(-.11*s+sh,-.05*s);ctx.quadraticCurveTo(sh*1.1,.7*s,.11*s+sh,-.05*s);ctx.closePath();fillStroke(o.spCol||C["bone-dark"],edge,1.4);
+  ctx.restore();return {sp:[x+Math.cos(bend||0)*sh,y+Math.sin(bend||0)*sh]}}
+/* frontal disc wedge between two posterior view vertebrae */
+function backSeg(x,y,s,bend,spin,o){o=o||{};const lo=[x,y+.5*s];
+  const piv=[x,y+.18*s];const up=[piv[0]+Math.sin(bend)*(.68*s)+(o.sx||0),piv[1]-Math.cos(bend)*(.68*s)];
+  const l1=[x-.5*s,y+.16*s],l2=[x+.5*s,y+.16*s];const ca=Math.cos(bend),sa=Math.sin(bend);const P=(dx,dy)=>[up[0]+dx*ca-dy*sa,up[1]+dx*sa+dy*ca];const u1=P(-.5*s,.34*s),u2=P(.5*s,.34*s);
+  ctx.beginPath();ctx.moveTo(l1[0],l1[1]);ctx.lineTo(l2[0],l2[1]);ctx.lineTo(u2[0],u2[1]);ctx.lineTo(u1[0],u1[1]);ctx.closePath();fillStroke(mix(C.annulus,C.panel,.35),C["disc-ink"],1.5);
+  const nm=[(l1[0]+l2[0]+u1[0]+u2[0])/4-bend*.6*s,(l1[1]+l2[1]+u1[1]+u2[1])/4];ell(nm[0],nm[1],.18*s,.06*s,bend/2,C.nucleus,C.disc,1.3);
+  vBack(lo[0],lo[1],s,0,0,Object.assign({},o,{fill:mix(C.bone,C["bone-dark"],.3)}));
+  const r=vBack(up[0],up[1],s,bend,spin,o);return {up,sp:r.sp,l1,l2,u1,u2,nuc:nm}}
+/* ---------- people ---------- */
+/* side view figure facing right. ox,oy = floor under the ankle, sc = px per metre.
+   o: trunk (deg, 0 upright, 90 horizontal), knee (deg bend), sit, hand [x,y] metres target relative to ankle, load (kg), act (0..1 muscle), spine (bool), skin, cloth */
+function figSide(ox,oy,sc,o){o=o||{};const th=(o.trunk||0)*Math.PI/180,kn=(o.knee||0)*Math.PI/180;const sk=C["sk"+(o.skin||3)],cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];
+  const M=p=>[ox+p[0]*sc,oy-p[1]*sc];let A=[0,.08],K,H;
+  if(o.sit){H=[-.04,.5];K=[.4,.5];A=[.42,.07]}else{const al=kn*.45;K=[A[0]+.45*Math.sin(al),A[1]+.45*Math.cos(al)];const ga=kn*.6;H=[K[0]-.45*Math.sin(ga),K[1]+.45*Math.cos(ga)]}
+  const Lp=[H[0]-.04,H[1]+.09];const u=[Math.sin(th),Math.cos(th)],pf=[Math.cos(th),-Math.sin(th)];
+  const at=(d,q)=>[Lp[0]+d*u[0]+(q||0)*pf[0],Lp[1]+d*u[1]+(q||0)*pf[1]];
+  const S=at(.47,-.01),head=at(.66,.04),com=at(.25,.02);
+  if(o.sit&&!o.noChair){const c=C.chair;rr(M([-.2,.5])[0],M([-.2,.5])[1],.5*sc,.05*sc,3);fillStroke(c,hexA(C.ink,.4),1);line(M([-.15,.5])[0],M([-.15,.5])[1],M([-.15,0])[0],M([-.15,0])[1],c,4);line(M([.25,.5])[0],M([.25,.5])[1],M([.25,0])[0],M([.25,0])[1],c,4);if(o.backrest)line(M([-.2,.5])[0],M([-.2,.5])[1],M([-.24,.95])[0],M([-.24,.95])[1],c,5)}
+  /* legs (far leg slightly darker) */
+  const legW=.12*sc;[1,0].forEach(i=>{const off=i?.03:0;const col=i?mix(pn,"#000",.15):pn;const h=M([H[0]+off,H[1]]),k=M([K[0]+off,K[1]]),a=M([A[0]+off,A[1]]);limb(h[0],h[1],k[0],k[1],legW,col);limb(k[0],k[1],a[0],a[1],legW*.85,col);rr(a[0]-.03*sc,a[1]-.01*sc,.24*sc,.07*sc,.03*sc);fillStroke(C.ink,null)});
+  /* torso polygon */
+  const tb=[at(0,-.11),at(.5,-.1),at(.52,.1),at(.08,.14),at(-.02,.12),at(-.04,-.1)].map(M);ctx.beginPath();tb.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();fillStroke(cl,hexA(C["sk-edge"],.6),1.4);
+  /* erector muscle band */
+  if(o.act!=null){const m1=M(at(.02,-.085)),m2=M(at(.42,-.075));ctx.save();ctx.lineCap="round";ctx.strokeStyle=C.muscle;ctx.lineWidth=.05*sc;ctx.beginPath();ctx.moveTo(m1[0],m1[1]);ctx.lineTo(m2[0],m2[1]);ctx.stroke();ctx.restore();if(o.act>0){withA(clamp(o.act,0,1),()=>{ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C.muscle,.5);ctx.lineWidth=.1*sc;ctx.beginPath();ctx.moveTo(m1[0],m1[1]);ctx.lineTo(m2[0],m2[1]);ctx.stroke();ctx.restore()});
+      const n=6;for(let i=0;i<n;i++){const f=(i+.5)/n;const q=[lerp(m1[0],m2[0],f),lerp(m1[1],m2[1],f)];circ(q[0],q[1],1.5+2.5*clamp(o.act,0,1)*(.6+.4*Math.sin((o.T||0)*9+i)),C["muscle-dark"])}}}
+  /* spine */
+  if(o.spine){const pts=[];for(let i=0;i<=12;i++){const d=i/12*.5;const curve=-.06+.025*Math.sin(i/12*TAU*1.0+.6);pts.push(M(at(d,curve)))}poly(pts,C["bone-edge"],3);pts.forEach((p,i)=>{if(i%2===0)circ(p[0],p[1],3,C.bone,C["bone-edge"],1)})}
+  /* neck and head */
+  const nk=M(at(.53,0)),hd=M(head);limb(nk[0],nk[1],hd[0]-.02*sc,hd[1]+.04*sc,.07*sc,sk);circ(hd[0],hd[1],.1*sc,sk,hexA(C["sk-edge"],.7),1.3);
+  ctx.save();ctx.beginPath();ctx.arc(hd[0],hd[1],.1*sc+.5,Math.PI*.85-th,Math.PI*1.75-th);ctx.closePath();ctx.fillStyle=C[o.hairc||"hair1"];ctx.fill();ctx.restore();
+  const eye=[hd[0]+.055*sc*Math.cos(th*.6),hd[1]+.055*sc*Math.sin(th*.6)-.01*sc];circ(eye[0],eye[1],Math.max(1.2,.012*sc),C.ink);
+  /* arm */
+  const sh=M(S);let hand;if(o.hand){const tgt=[o.hand[0],o.hand[1]];const dx=tgt[0]-S[0],dy=tgt[1]-S[1];let D=Math.hypot(dx,dy);const Dm=.6;const k=D>Dm?Dm/D:1;hand=[S[0]+dx*k,S[1]+dy*k];D=Math.min(D,Dm);
+      const l1=.31,l2=.31;const cosE=clamp((l1*l1+D*D-l2*l2)/(2*l1*D),-1,1);const base=Math.atan2(hand[1]-S[1],hand[0]-S[0]);const ang=base+Math.acos(cosE)*-1;const el=[S[0]+l1*Math.cos(ang),S[1]+l1*Math.sin(ang)];
+      const e=M(el),hh=M(hand);limb(sh[0],sh[1],e[0],e[1],.075*sc,cl);limb(e[0],e[1],hh[0],hh[1],.06*sc,sk);circ(hh[0],hh[1],.04*sc,sk,hexA(C["sk-edge"],.6),1)}
+  else{const e=M([S[0]+.02,S[1]-.3]),hh=M([S[0]+.08,S[1]-.58]);hand=[S[0]+.08,S[1]-.58];if(o.sit){const e2=M([S[0]+.12,S[1]-.28]);const h2=M([S[0]+.4,S[1]-.3]);limb(sh[0],sh[1],e2[0],e2[1],.075*sc,cl);limb(e2[0],e2[1],h2[0],h2[1],.06*sc,sk);hand=[S[0]+.4,S[1]-.3]}else{limb(sh[0],sh[1],e[0],e[1],.075*sc,cl);limb(e[0],e[1],hh[0],hh[1],.06*sc,sk)}}
+  const lp=M(Lp);if(o.mark!==false){circ(lp[0],lp[1],5,C.accent,C.panel,2)}
+  return {M,Lm:Lp,L:lp,Sm:S,S:sh,com:M(com),comM:com,hand:M(hand),handM:hand,head:hd,u,pf}}
+/* load box drawn centred under a hand point (px) */
+function boxLoad(x,y,w,h,lab){rr(x-w/2,y-h*.15,w,h,3);fillStroke(C.box,C["box-edge"],1.6);line(x-w/2+3,y-h*.15+h*.3,x+w/2-3,y-h*.15+h*.3,hexA(C["box-edge"],.6),1.2);if(lab)txt(x,y+h*.5,lab,{size:12,weight:700,align:"center",mono:true,color:"#10161A"})}
+/* simple front view figure; bend = lateral bend (rad, positive to viewer's right), turn = axial rotation (rad) */
+function figFront(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],cl=C[o.cloth||"cl2"],pn=C[o.pants||"cl5"];const bend=o.bend||0,turn=o.turn||0;
+  const hipY=y-s*.47,waist=[x,y-s*.55];[-1,1].forEach(d=>{limb(x+d*s*.05,hipY,x+d*s*.06,y-s*.02,s*.07,pn);rr(x+d*s*.06-s*.035,y-s*.035,s*.07,s*.03,s*.012);fillStroke(C.ink,null)});
+  rr(x-s*.1,hipY-s*.06,s*.2,s*.1,s*.03);fillStroke(pn,hexA(C["sk-edge"],.5),1.2);
+  ctx.save();ctx.translate(waist[0],waist[1]);ctx.rotate(bend);const k=Math.cos(turn)*.75+.25;const tw=s*.22*k;
+  [-1,1].forEach(d=>{const sx=d*tw*.5;const near=d*Math.sin(turn)>0;limb(sx,-s*.24,sx+d*s*.03,-s*.02,s*.05,cl);limb(sx+d*s*.03,-s*.02,sx+d*s*.035,s*.12,s*.045,sk);if(near)circ(sx+d*s*.035,s*.12,s*.025,sk)});
+  rr(-tw/2,-s*.27,tw,s*.3,s*.04);fillStroke(cl,hexA(C["sk-edge"],.55),1.4);
+  line(Math.sin(turn)*tw*.4,-s*.25,Math.sin(turn)*tw*.4,0,hexA(C.ink,.35),1.5);
+  limb(0,-s*.27,0,-s*.31,s*.045,sk);const hy=-s*.36;circ(0,hy,s*.065,sk,hexA(C["sk-edge"],.7),1.2);ctx.save();ctx.beginPath();ctx.arc(0,hy,s*.066,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=C[o.hairc||"hair1"];ctx.fill();ctx.restore();
+  const fx=Math.sin(turn)*s*.04;circ(fx-s*.02,hy,1.6,C.ink);circ(fx+s*.02,hy,1.6,C.ink);
+  ctx.restore();return {waist,top:[waist[0]+Math.sin(bend)*s*.36,waist[1]-Math.cos(bend)*s*.36]}}
+/* top view of shoulders and head; rot = axial rotation */
+function figTop(x,y,s,rot,o){o=o||{};const sk=C["sk"+(o.skin||2)],cl=C[o.cloth||"cl2"];ell(x,y+2,s*.36,s*.13,0,null,hexA(C.ink,.35),1.3);ctx.save();ctx.setLineDash([4,3]);ell(x,y,s*.3,s*.12,0,null,C["ink-soft"],1.4);ctx.restore();
+  ctx.save();ctx.translate(x,y);ctx.rotate(rot);ell(0,0,s*.42,s*.15,0,cl,hexA(C["sk-edge"],.6),1.5);circ(-s*.4,0,s*.06,sk);circ(s*.4,0,s*.06,sk);circ(0,-s*.02,s*.12,C[o.hairc||"hair1"],hexA(C["sk-edge"],.6),1.2);ctx.beginPath();ctx.moveTo(-s*.035,-s*.13);ctx.lineTo(0,-s*.2);ctx.lineTo(s*.035,-s*.13);ctx.closePath();fillStroke(sk,hexA(C["sk-edge"],.6),1);ctx.restore()}
+/* lying figure: draws figSide rotated so the body is horizontal */
+function figLying(x,y,sc,o){ctx.save();ctx.translate(x,y);ctx.rotate(o&&o.side?-Math.PI/2:-Math.PI/2);ctx.translate(-x,-y);const r=figSide(x,y,sc,Object.assign({mark:false},o||{}));ctx.restore();return r}
+/* ---------- force, moment arm and torque marks ---------- */
+function fArrow(x,y,dx,dy,col,lab,o){o=o||{};arrow(x,y,x+dx,y+dy,col,o.lw||3);if(lab)label(x+dx+(o.lx||0),y+dy+(o.ly||(dy>0?14:-14)),lab,{size:o.size||12,weight:700,mono:true,border:col,align:o.align})}
+function dimLine(x1,y1,x2,y2,lab,col,o){o=o||{};const off=o.off||0;const a=Math.atan2(y2-y1,x2-x1),nx=-Math.sin(a)*off,ny=Math.cos(a)*off;const A=[x1+nx,y1+ny],B=[x2+nx,y2+ny];
+  line(x1,y1,A[0],A[1],hexA(col,.6),1,[2,2]);line(x2,y2,B[0],B[1],hexA(col,.6),1,[2,2]);line(A[0],A[1],B[0],B[1],col,2);
+  [[A,a+Math.PI],[B,a]].forEach(e=>{const p=e[0],an=e[1];ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(p[0]-8*Math.cos(an-.4),p[1]-8*Math.sin(an-.4));ctx.lineTo(p[0]-8*Math.cos(an+.4),p[1]-8*Math.sin(an+.4));ctx.closePath();ctx.fillStyle=col;ctx.fill()});
+  if(lab)label((A[0]+B[0])/2+(o.lx||0),(A[1]+B[1])/2+(o.ly==null?-12:o.ly),lab,{size:o.size||12,weight:700,mono:true,border:col})}
+function torqueArc(x,y,r,a0,a1,col,lab,o){o=o||{};ctx.beginPath();ctx.arc(x,y,r,a0,a1,a1<a0);ctx.strokeStyle=col;ctx.lineWidth=o.lw||3;ctx.stroke();const e=[x+r*Math.cos(a1),y+r*Math.sin(a1)];const tan=a1+(a1>a0?Math.PI/2:-Math.PI/2);
+  ctx.beginPath();ctx.moveTo(e[0]+9*Math.cos(tan),e[1]+9*Math.sin(tan));ctx.lineTo(e[0]-6*Math.cos(tan)+6*Math.cos(a1),e[1]-6*Math.sin(tan)+6*Math.sin(a1));ctx.lineTo(e[0]-6*Math.cos(tan)-6*Math.cos(a1),e[1]-6*Math.sin(tan)-6*Math.sin(a1));ctx.closePath();ctx.fillStyle=col;ctx.fill();
+  if(lab)label(x+(o.lx||0),y+(o.ly||-r-14),lab,{size:o.size||12,weight:700,mono:true,border:col})}
+function hbar(x,y,w,f,col,lab,val,o){o=o||{};const h=o.h||16;rr(x,y,w,h,h/2);ctx.fillStyle=hexA(C.sunk,.75);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y,Math.max(h,w*ff),h,h/2);ctx.fillStyle=col;ctx.fill()}
+  if(lab)txt(x-8,y+h/2,lab,{size:o.ls||12,weight:600,align:"right"});if(val)txt(x+Math.max(h,w*ff)+8,y+h/2,val,{size:o.vs||12,weight:700,mono:true})}
+function vcol(x,y,w,h,f,col,lab,val,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,4);ctx.fillStyle=col;ctx.fill();if(o.hatch){ctx.save();rr(x,y+h*(1-ff),w,h*ff,4);ctx.clip();for(let d=-h;d<w+h;d+=7)line(x+d,y+h,x+d+h,y,hexA(C.ink,.25),1.2);ctx.restore()}}
+  if(lab)wrapText(lab,x+w/2,y+h+13,o.lw||w+26,13,{size:o.ls||11.5,weight:600,align:"center"});if(val)txt(x+w/2,y+h*(1-ff)-10,val,{size:o.vs||12,weight:700,align:"center",mono:true})}
+/* ---------- load displacement curve model ---------- */
+const LD0={nz:1.5,k0:.3,k2:.226};
+function ldM(phi,p){p=p||LD0;const a=Math.abs(phi);return Math.sign(phi)*(p.k0*a+p.k2*Math.pow(Math.max(0,a-p.nz),2))}
+function ldPhi(M,p){p=p||LD0;let lo=0,hi=40;const m=Math.abs(M);for(let i=0;i<50;i++){const mid=(lo+hi)/2;if(ldM(mid,p)<m)lo=mid;else hi=mid}return Math.sign(M)*(lo+hi)/2}
+function ldGraph(x,y,w,h,o){o=o||{};const g=graph({x,y,w,h,x0:-12,x1:12,y0:-10,y1:10,xt:[-10,-5,0,5,10],yt:[-10,-5,0,5,10],xf:v=>minus(v,0),yf:v=>minus(v,0),xl:o.xl||"rotation (degrees)",yl:o.yl||"moment (N m)",grid:true});return g}
+function ldShade(g,p,col,a){const nzA=ldPhi(ldM(p.nz,p),p);ctx.fillStyle=hexA(col||C.disc,a||.18);ctx.fillRect(g.X(-p.nz),g.y,g.X(p.nz)-g.X(-p.nz),g.h);}
+/* ---------- misc ---------- */
+function ballBowl(x,y,w,nz,T,o){o=o||{};const steep=o.steep||1;const f=v=>{const a=Math.abs(v);return a<nz?0:Math.pow((a-nz)/(w/2-nz),1.6)*80*steep};ctx.beginPath();for(let i=0;i<=60;i++){const v=-w/2+w*i/60;const yy=y-f(v);i?ctx.lineTo(x+v,yy):ctx.moveTo(x+v,yy)}ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=3;ctx.stroke();
+  const amp=o.amp==null?nz+18:o.amp;const bx=Math.sin(T*(o.spd||2))*amp;circ(x+bx,y-f(bx)-11,11,C.accent,C.panel,2);ctx.fillStyle=hexA(C.disc,.18);ctx.fillRect(x-nz,y-90,nz*2,90);return bx}
+function mast(x,y,h,stiff,T,o){o=o||{};const sway=Math.sin(T*2.2)*(1-clamp(stiff,0,1)*.85)*(o.amp||0.18);const top=[x+Math.sin(sway)*h,y-Math.cos(sway)*h];
+  const pts=[];for(let i=0;i<=10;i++){const f=i/10;const bendA=sway*f*f;pts.push([x+Math.sin(bendA)*h*f,y-h*f*(1-.02*Math.abs(sway))])}
+  poly(pts,C["bone-edge"],7);pts.forEach((p,i)=>{if(i>0)rr(p[0]-9,p[1]-5,18,10,3),fillStroke(C.bone,C["bone-edge"],1.2)});
+  [-1,1].forEach(d=>{for(let j=1;j<=3;j++){const p=pts[j*3];const b=[x+d*(70+j*14),y];const t=clamp(stiff,0,1);ctx.save();ctx.lineCap="round";line(b[0],b[1],p[0],p[1],t>.05?mix(C.muscle,C["muscle-dark"],t):hexA(C.muscle,.45),1.5+t*4.5,t>.05?null:[4,4]);ctx.restore()}});
+  return {top,sway}}
+function personSmall(x,y,s,o){return person(x,y,s,o)}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-biomech-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-biomech-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: lifting and posture simulator ================= */
+const BODYM=75,UBW=.58*BODYM*9.81,MARM=.05,GLIM=3400;
+const BRACE=[[0,"None",0],[1,"Light",250],[2,"Moderate",600],[3,"Hard",1200]];
+const SIM0={mass:15,dist:.45,ang:45,back:"neutral",brace:0};
+const SIM=Object.assign({done:new Set(),lift:null,paused:false,prevDist:null,prevMass:null,R:null},SIM0);
+const SIM_CH=["Lift at least 20 kg with the trunk at 45 degrees or more and keep compression under 3,400 N.","Find a setting where estimated compression passes 6,000 N.","Keep the same load but move it from 0.6 m or more to 0.3 m or less. Compare the torque.","With no load at all, bend to 90 degrees and read the torque from your own upper body.","Round the back near full bend so the segment dot reaches the far elastic zone (6 degrees or more)."];
+/* geometry matching figSide (metres, ankle at origin) */
+function figGeom(trunk,knee){const kn=knee*DEG,th=trunk*DEG;const al=kn*.45;const K=[.45*Math.sin(al),.08+.45*Math.cos(al)];const ga=kn*.6;const H=[K[0]-.45*Math.sin(ga),K[1]+.45*Math.cos(ga)];const Lp=[H[0]-.04,H[1]+.09];
+  const u=[Math.sin(th),Math.cos(th)],pf=[Math.cos(th),-Math.sin(th)];const S=[Lp[0]+.47*u[0]-.01*pf[0],Lp[1]+.47*u[1]-.01*pf[1]];return {Lp,S,u}}
+function simCalc(angOverride){const s=SIM;const ang=angOverride==null?s.ang:angOverride;const knee=s.back==="neutral"?ang*.55:ang*.12;const g=figGeom(ang,knee);
+  const reachMax=g.S[0]-g.Lp[0]+.58;const dist=Math.max(.05,Math.min(s.dist,reachMax));const dx=g.Lp[0]+dist-g.S[0];let hy=g.S[1]-Math.sqrt(Math.max(0,.58*.58-dx*dx));const floor=hy<.14;if(floor)hy=.14;
+  const Wl=s.mass*9.81,tqL=Wl*dist,tqU=UBW*.25*Math.sin(ang*DEG),tq=tqL+tqU,Fm=tq/MARM,brN=BRACE[s.brace][2];
+  const comp=Fm+(Wl+UBW)*Math.cos(ang*DEG)+brN,shear=(Wl+UBW)*Math.sin(ang*DEG);
+  const ldp={nz:1.5*(1-.22*s.brace),k0:.3*(1+.9*s.brace),k2:.226*(1+.15*s.brace)};
+  const phi=s.back==="round"?8.6*Math.min(1,ang/70):3.2*ang/90;
+  return {ang,knee,dist,clamped:dist<s.dist-.001,hand:[g.Lp[0]+dist,hy],floor,Wl,tqL,tqU,tq,Fm,comp,shear,brN,ldp,phi,Mp:ldM(phi,ldp)}}
+function simChange(){const s=SIM;const R=simCalc();s.R=R;
+  if(s.mass>=20&&s.ang>=45&&R.comp<GLIM)s.done.add(0);if(R.comp>6000)s.done.add(1);
+  if(s.prevDist!=null&&s.prevDist>=.6&&s.dist<=.3&&s.prevMass===s.mass&&s.mass>0)s.done.add(2);if(s.dist>=.6)s.prevDist=s.dist,s.prevMass=s.mass;else if(s.prevDist!=null&&s.prevMass!==s.mass)s.prevDist=null;
+  if(s.mass===0&&s.ang===90)s.done.add(3);if(s.back==="round"&&R.phi>=6)s.done.add(4);
+  simOut();simRead();chalUI($("#simChal"),SIM_CH,s.done);a11yKey=""}
+function simOut(){const s=SIM;$("#oMass").textContent=s.mass+" kg";$("#oDist").textContent=s.dist.toFixed(2)+" m";$("#oAng").textContent=s.ang+" degrees";
+  const R=s.R;const st=$("#simStatus");let cls="good",msg;
+  if(R.comp>=GLIM*1.8){cls="bad";msg=`Estimated compression about ${fmtK(R.comp)} N, far above the 3,400 N design guideline. Bring the load closer, bend less or lighten it.`}
+  else if(R.comp>=GLIM){cls="warn";msg=`Estimated compression about ${fmtK(R.comp)} N, above the 3,400 N design guideline used for workplace lifting.`}
+  else msg=`Estimated compression about ${fmtK(R.comp)} N, under the 3,400 N design guideline.`;
+  if(R.clamped)msg+=" The arms cannot reach that far at this angle, so the farthest reachable distance is used.";
+  st.className="status "+cls;st.textContent=msg}
+function simRead(){const R=SIM.R;const rows=[["Load weight",fmtNum(R.Wl,1)+" N"],["Load distance used",R.dist.toFixed(2)+" m"],["Torque from load",fmtNum(R.tqL,1)+" N m"],["Torque from upper body",fmtNum(R.tqU,1)+" N m"],["Total torque",fmtNum(R.tq,1)+" N m"],["Back muscle force",fmtK(R.Fm)+" N"],["Estimated compression",fmtK(R.comp)+" N"],["Estimated shear",fmtK(R.shear)+" N"],["Segment bend",R.phi.toFixed(1)+" degrees, "+(Math.abs(R.phi)<=R.ldp.nz?"neutral zone":"elastic zone")]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}
+function simUI(){$("#slMass").value=SIM.mass;$("#slDist").value=SIM.dist;$("#slAng").value=SIM.ang;
+  segBtns($("#simBack"),[["neutral","Neutral curve<small>knees bend more</small>"],["round","Rounded<small>stoop, back bends</small>"]],()=>SIM.back,v=>{SIM.back=v;simChange()});
+  segBtns($("#simBrace"),BRACE.map(b=>[b[0],b[1]]),()=>SIM.brace,v=>{SIM.brace=v;simChange()})}
+$("#slMass").oninput=e=>{SIM.mass=+e.target.value;simChange()};$("#slDist").oninput=e=>{SIM.dist=Math.round(+e.target.value*100)/100;simChange()};$("#slAng").oninput=e=>{SIM.ang=+e.target.value;simChange()};
+$("#simReset").onclick=()=>{Object.assign(SIM,SIM0);SIM.prevDist=null;simUI();simChange()};
+$("#simClose").onclick=()=>{SIM.dist=.2;$("#slDist").value=.2;simChange()};
+$("#simLift").onclick=()=>{SIM.lift=performance.now()};
+$("#simPause").onclick=()=>{SIM.paused=!SIM.paused;$("#simPause").textContent=SIM.paused?"Play motion":"Pause motion"};
+let simClock=0,simLastNow=null;
+function simDraw(now){use(S1);const s=SIM;if(simLastNow==null)simLastNow=now;const dt=Math.min(.05,Math.max(0,(now-simLastNow)/1000));simLastNow=now;if(!s.paused)simClock+=dt;const T=simClock;
+  let ang=s.ang;let liftP=null;if(s.lift!=null){liftP=(now-s.lift)/1000/4.5;if(liftP>=1){s.lift=null;liftP=null}else{ang=liftP<.15?lerp(s.ang,80,smooth(liftP/.15)):80*(1-smooth(seg(liftP,.15,.95)))}}
+  const breathe=Math.sin(T*1.6)*1.2;const R=simCalc(ang);
+  /* figure panel */
+  panelBox(10,10,392,450);levelTag(22,26,"body");line(20,440,396,440,C["ink-soft"],2);
+  const sc=200,ox=110,oy=440;const act=clamp(R.Fm/6000,0,1);
+  const f=figSide(ox,oy,sc,{trunk:ang+breathe*.3,knee:R.knee,skin:3,cloth:"cl1",act:.15+.85*act,T,hand:R.hand,hairc:"hair1"});
+  if(s.mass>0){const bw=30+s.mass*1.6,bh=24+s.mass*1.1;boxLoad(f.hand[0]+bw*.25,f.hand[1]+2,bw,bh,s.mass+" kg")}
+  const L=f.L;const lx=L[0]+R.dist*sc;
+  dimLine(L[0],L[1]+24,lx,L[1]+24,"",C.arm,{});label((L[0]+lx)/2,L[1]+42,R.dist.toFixed(2)+" m",{size:11.5,weight:700,mono:true,border:C.arm});
+  if(R.tqU>1){const c=f.com;line(c[0],c[1],c[0],c[1]+40,C.force,2.5);circ(c[0],c[1],4,C.force)}
+  torqueArc(L[0],L[1],26+R.tq*.12,-Math.PI*.5,-Math.PI*.5+Math.min(1.5,.2+R.tq/160),C.torque,"",{lw:2+R.tq/60});
+  const cu=[-f.u[0],f.u[1]];const cl=20+R.comp/120;arrow(L[0]-f.u[0]*(cl+10),L[1]+f.u[1]*(cl+10),L[0]-f.u[0]*8,L[1]+f.u[1]*8,C.comp,2+R.comp/1500);
+  label(206,56,"torque "+fmtNum(R.tq,0)+" N m",{size:14,weight:700,mono:true,border:C.torque});
+  if(liftP!=null)label(206,86,"playing a lift",{size:12,weight:700,border:C.accent});
+  if(R.floor)label(206,86,"box resting low",{size:12,weight:700,border:C.warn});
+  /* bars */
+  panelBox(410,10,380,214);levelTag(422,26,"sym");
+  const bx=520,bw=200;const rows=[["torque",R.tq,320,C.torque,fmtNum(R.tq,0)+" N m"],["muscle",R.Fm,7000,C.muscle,fmtK(R.Fm)+" N"],["compression",R.comp,7000,C.comp,fmtK(R.comp)+" N"],["shear",R.shear,7000,C.shear,fmtK(R.shear)+" N"]];
+  rows.forEach((r,i)=>{const y=52+i*40;hbar(bx,y,bw,r[1]/r[2],r[3],r[0],"",{h:16,ls:12.5});txt(bx+bw+8,y+8,r[4],{size:12,weight:700,mono:true});if(i===2){const gx=bx+bw*GLIM/7000;line(gx,y-6,gx,y+22,C.bad,2,[3,2]);txt(gx,y+30,"3,400 N guide",{size:10.5,weight:700,align:"center",color:C.bad})}});
+  /* load displacement */
+  panelBox(410,232,380,228);levelTag(422,248,"tissue");
+  const g=graph({x:466,y:268,w:300,h:150,x0:-10,x1:10,y0:-10,y1:10,xt:[-10,-5,0,5,10],yt:[-10,0,10],xf:v=>minus(v,0),yf:v=>minus(v,0),xl:"segment bend (degrees)",yl:"moment (N m)"});
+  ldShade(g,R.ldp,C.disc,.22);curve(g,v=>ldM(v,R.ldp),-Math.min(9.6,ldPhi(10,R.ldp)),Math.min(9.6,ldPhi(10,R.ldp)),C.evid,2.6);
+  if(s.brace)curve(g,v=>ldM(v,LD0),-8,8,hexA(C["ink-soft"],.45),1.4,[4,3]);
+  const ph=R.phi+Math.sin(T*1.6)*.15;gdot(g,ph,ldM(ph,R.ldp),C.pain,null,{r:6,guides:true});
+  txt(g.X(0),g.y+10,"NZ",{size:11,weight:700,align:"center",color:C["disc-ink"]});
+  txt(g.x+g.w,g.y-14,Math.abs(R.phi)<=R.ldp.nz?"in the neutral zone":R.phi>6?"near end range":"in the elastic zone",{size:12,weight:700,align:"right",color:R.phi>6?C["warn-ink"]:C.ink});
+}
+function simA11y(){const R=SIM.R;const s=SIM;const lab=`Lifting simulator: ${s.mass} kg at ${R.dist.toFixed(2)} m, trunk ${s.ang} degrees, ${s.back==="round"?"rounded back":"neutral back"}, bracing ${BRACE[s.brace][1].toLowerCase()}. Torque ${Math.round(R.tq)} N m, compression about ${fmtK(R.comp)} N.`;
+  return [lab,`A person seen from the side bends ${s.ang} degrees${s.mass?` holding a ${s.mass} kg box ${R.dist.toFixed(2)} metres in front of the red low back dot`:" with empty hands"}. A gold curved arrow at the low back shows torque, a blue arrow presses along the spine for compression, and the rose back muscle band glows brighter as muscle force rises. On the right, bars show torque ${Math.round(R.tq)} N m, muscle force ${fmtK(R.Fm)} N and compression ${fmtK(R.comp)} N against a dashed 3,400 N guideline. Below, a load displacement curve shows a red dot at ${R.phi.toFixed(1)} degrees, ${Math.abs(R.phi)<=R.ldp.nz?"inside the blue neutral zone":"out in the elastic zone"}.`]}
+/* ================= PART 2: torque trainer ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const f1=v=>{const r=(Math.round(v*10)/10).toFixed(1);const p=r.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");return p.join(".")};
+const f0=v=>Math.round(v).toLocaleString("en-US");
+const f2=v=>(Math.round(v*100)/100).toFixed(2);const f3=v=>(Math.round(v*1000)/1000).toFixed(3);
+const fmtD=(v,dp)=>dp===0?f0(v):dp===1?f1(v):dp===2?f2(v):f3(v);
+const G=9.81;
+const CTYPES=[["mix","All types, mixed"],["weight","Weight from mass"],["torque","Torque from force and distance"],["force","Force or moment arm from torque"],["bend","Torque when bending forward"],["muscle","Back muscle force"],["compare","Close versus far"]];
+const WHO=["Ana","Ben","Chen","Dara","Eli","Farah","Gus","Hana","Ivan","Jade","Kofi","Lina","Marco","Nia","Omar","Priya","Quinn","Rosa","Sam","Tariq"];
+const THINGS=["box of books","bag of soil","toolbox","laundry basket","crate of bottles","bag of rice","case of paper","storage bin","water jug","sack of flour"];
+const SINS={10:.174,15:.259,20:.342,25:.423,30:.5,35:.574,40:.643,45:.707,50:.766,55:.819,60:.866,65:.906,70:.940,75:.966,80:.985,90:1};
+const filt=(sl,ans)=>sl.filter(s=>isFinite(s[0])&&s[0]>0&&Math.abs(s[0]-ans)/Math.abs(ans)>.03);
+const GEN={
+ weight(){const m=ri(2,40)+pick([0,0,.5]);const ans=m*G;const th=pick(THINGS);
+  return {title:"Weight from mass",html:`A ${th} has a mass of <b>${m} kg</b>. What is its weight in newtons? Use g = 9.81 N per kg (1 decimal place).`,ans,unit:"N",dp:1,tol:.003,
+   lines:[{gold:"weight (N) = mass (kg) × 9.81 N per kg"},{ch:[[F(m,["kg"]),F("9.81",["N"],"1",["kg"])],[f1(ans),["N"]]]}],
+   slips:filt([[m,"That is the mass number. Weight is a force: multiply by 9.81 N per kg."],[m*10,"That uses the rough 10 N per kg rule. Use 9.81 here for an exact answer."],[m/G,"That divides by 9.81. Multiply instead."],[m*9.8,"Close, but use 9.81 rather than 9.8."]],ans),
+   hints:["Weight is the force of gravity on a mass.","weight = mass × 9.81 N per kg; the kg cancels.",`${m} × 9.81 = ?`],note:"A rough check: 1 kg weighs about 10 N.",vis:{k:"weight",m,ans}}},
+ torque(){const Fv=pick([ri(20,400),ri(50,300),Math.round(ri(2,30)*G*10)/10]);const cm=Math.random()<.5;const d=cm?ri(10,70):ri(10,70)/100;const dm=cm?d/100:d;const ans=Fv*dm;
+  return {title:"Torque from force and distance",html:`A force of <b>${fmtD(Fv,Fv%1?1:0)} N</b> acts <b>${cm?d+" cm":dm.toFixed(2)+" m"}</b> from the pivot, at a right angle. What is the torque in N m (1 decimal place)?`,ans,unit:"N m",dp:1,tol:.004,
+   lines:cm?[{gold:"torque (N m) = force (N) × moment arm (m)"},{ch:[[F(d,["cm"]),F(1,["m"],100,["cm"])],[dm.toFixed(2),["m"]]]},{ch:[[F(fmtD(Fv,Fv%1?1:0),["N"]),F(dm.toFixed(2),["m"])],[f1(ans),["N m"]]]}]:[{gold:"torque (N m) = force (N) × moment arm (m)"},{ch:[[F(fmtD(Fv,Fv%1?1:0),["N"]),F(dm.toFixed(2),["m"])],[f1(ans),["N m"]]]}],
+   slips:filt([[cm?Fv*d:-1,"That uses centimetres. Convert to metres first (divide by 100)."],[Fv/dm,"That divides. Torque multiplies force by distance."],[Fv+(cm?d:dm),"That adds. Multiply force by distance."],[Fv*dm*G,"That multiplies by 9.81 again. The force is already in newtons."]],ans),
+   hints:["Torque = force × perpendicular distance.",cm?"Change centimetres to metres first: divide by 100.":"The distance is already in metres.",`${fmtD(Fv,Fv%1?1:0)} × ${dm.toFixed(2)} = ?`],note:"Double the distance and the torque doubles.",vis:{k:"lever",F:Fv,d:dm,ask:"torque",ans}}},
+ force(){const findF=Math.random()<.55;const d=ri(5,60)/100;const Fv=ri(40,600);const tq=Math.round(Fv*d*10)/10;
+  if(findF){const ans=tq/d;return {title:"Force from torque",html:`A torque of <b>${f1(tq)} N m</b> is made by a force acting <b>${d.toFixed(2)} m</b> from the pivot. What is the force in newtons (1 decimal place)?`,ans,unit:"N",dp:1,tol:.004,
+    lines:[{gold:"force = torque ÷ moment arm"},{ch:[[F(f1(tq),["N m"],d.toFixed(2),["m"])],[f1(ans),["N"]]]},{t:"check: "+f1(ans)+" N × "+d.toFixed(2)+" m = "+f1(tq)+" N m"}],
+    slips:filt([[tq*d,"That multiplies. To find the force, divide the torque by the distance."],[d/tq,"That divides the wrong way round: torque ÷ distance."],[tq/(d*100),"That uses the distance in centimetres. Keep metres."]],ans),
+    hints:["Rearrange torque = force × distance.","force = torque ÷ distance.",`${f1(tq)} ÷ ${d.toFixed(2)} = ?`],note:"A short moment arm needs a large force for the same torque.",vis:{k:"lever",F:ans,d,ask:"force",tq,ans}}}
+  const ans=tq/Fv;return {title:"Moment arm from torque",html:`A force of <b>${Fv} N</b> creates <b>${f1(tq)} N m</b> of torque. How far from the pivot does it act, in metres (3 decimal places)?`,ans,unit:"m",dp:3,tol:.004,
+   lines:[{gold:"moment arm = torque ÷ force"},{ch:[[F(f1(tq),["N m"],Fv,["N"])],[f3(ans),["m"]]]}],
+   slips:filt([[tq*Fv,"That multiplies. Divide the torque by the force."],[Fv/tq,"That divides the wrong way round: torque ÷ force."],[ans*100,"That is in centimetres. The question asks for metres."]],ans),
+   hints:["Rearrange torque = force × distance.","distance = torque ÷ force.",`${f1(tq)} ÷ ${Fv} = ?`],note:"",vis:{k:"lever",F:Fv,d:ans,ask:"arm",tq,ans}}},
+ bend(){const W=pick([350,380,400,420,450,480,500]);const r=pick([.2,.22,.25,.28,.3]);const th=pick([10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,90]);const sn=SINS[th];const dm=r*sn;const ans=W*dm;const who=pick(WHO);
+  return {title:"Torque when bending forward",html:`${who}'s upper body weighs <b>${W} N</b>, with its centre of mass <b>${r.toFixed(2)} m</b> up the trunk from the low back. ${who} bends forward <b>${th} degrees</b> (sin ${th} = ${sn.toFixed(3)}). What torque does the upper body make about the low back, in N m (1 decimal place)?`,ans,unit:"N m",dp:1,tol:.006,
+   lines:[{gold:"horizontal distance = distance along trunk × sin θ"},{ch:[[F(r.toFixed(2),["m"]),F(sn.toFixed(3),[])],[f3(dm),["m"]]]},{ch:[[F(W,["N"]),F(f3(dm),["m"])],[f1(ans),["N m"]]]}],
+   slips:filt([[W*r,"That uses the full distance along the trunk. Only the horizontal part counts: multiply by sin θ."],[W*r*Math.cos(th*DEG),"That uses cos θ. The horizontal distance uses sin θ when the angle is measured from upright."],[W*r*th,"That multiplies by the angle in degrees. Use the sine of the angle."],[W*sn,"That leaves out the 0."+String(r.toFixed(2)).slice(2)+" m distance."]],ans),
+   hints:["Gravity pulls straight down, so only the horizontal distance matters.",`horizontal distance = ${r.toFixed(2)} × ${sn.toFixed(3)} = ${f3(dm)} m.`,`${W} × ${f3(dm)} = ?`],note:"At 90 degrees the horizontal distance equals the full distance along the trunk.",vis:{k:"bend",W,r,th,dm,ans}}},
+ muscle(){const arm=pick([.05,.05,.05,.06]);if(Math.random()<.45){const tq=ri(30,220);const ans=tq/arm;
+   return {title:"Back muscle force from torque",html:`The total torque about the low back is <b>${tq} N m</b>. The back muscles act <b>${arm.toFixed(2)} m</b> behind the joint. What muscle force balances it, in newtons?`,ans,unit:"N",dp:0,tol:.004,
+    lines:[{gold:"muscle force = torque ÷ muscle moment arm"},{ch:[[F(tq,["N m"],arm.toFixed(2),["m"])],[f0(ans),["N"]]]}],
+    slips:filt([[tq*arm,"That multiplies by the muscle arm. Divide the torque by the arm to find the force."],[tq,"That is the torque, not the force. Divide by the muscle's moment arm."],[tq/(arm*100),"That uses the arm in centimetres. Keep metres."]],ans),
+    hints:["The muscle torque must equal the load torque.","muscle force × muscle arm = total torque, so force = torque ÷ arm.",`${tq} ÷ ${arm.toFixed(2)} = ?`],note:"The short muscle lever is why back muscle forces are so large.",vis:{k:"see",tq,arm,ans,m:null}}}
+  const m=ri(5,25),d=ri(20,60)/100;const W=m*G,tq=W*d;const ans=tq/arm;const th=pick(THINGS);
+  return {title:"Back muscle force for a held load",html:`A <b>${m} kg</b> ${th} is held <b>${d.toFixed(2)} m</b> in front of the low back. Ignoring the body's own weight, what back muscle force balances it if the muscles act <b>${arm.toFixed(2)} m</b> behind the joint? (g = 9.81 N per kg; nearest newton.)`,ans,unit:"N",dp:0,tol:.006,
+   lines:[{ch:[[F(m,["kg"]),F("9.81",["N"],"1",["kg"])],[f1(W),["N"]]]},{ch:[[F(f1(W),["N"]),F(d.toFixed(2),["m"])],[f1(tq),["N m"]]]},{ch:[[F(f1(tq),["N m"],arm.toFixed(2),["m"])],[f0(ans),["N"]]]}],
+   slips:filt([[m*d/arm,"That skips converting the mass to weight. Multiply kg by 9.81 first."],[tq,"That is the torque. Divide it by the muscle arm to get the force."],[tq*arm,"That multiplies by the muscle arm. Divide instead."],[W,"That is just the load's weight."]],ans),
+   hints:["Step 1: weight = mass × 9.81.","Step 2: torque = weight × distance. Step 3: force = torque ÷ muscle arm.",`${m} × 9.81 × ${d.toFixed(2)} ÷ ${arm.toFixed(2)} = ?`],note:"",vis:{k:"see",tq,arm,ans,m,d}}},
+ compare(){const m=ri(5,25);const W=m*G;let d1=ri(15,35)/100,d2=ri(45,70)/100;const ratio=Math.random()<.4;const th=pick(THINGS);
+  if(ratio){const ans=d2/d1;return {title:"Close versus far: ratio",html:`A <b>${m} kg</b> ${th} is held first at <b>${d1.toFixed(2)} m</b> and then at <b>${d2.toFixed(2)} m</b> from the low back. How many times larger is the torque from the box when it is held far? (2 decimal places)`,ans,unit:"times",dp:2,tol:.006,
+    lines:[{gold:"same weight, so torque ratio = distance ratio"},{t:`far ÷ close = ${d2.toFixed(2)} ÷ ${d1.toFixed(2)}`},{t:`= ${f2(ans)} times`,b:true}],
+    slips:filt([[d1/d2,"That divides the wrong way round. Far ÷ close gives how many times larger."],[d2-d1,"That is the difference in distance, not the ratio."],[(d2/d1)*(d2/d1),"Torque grows in direct proportion to distance, not with its square."]],ans),
+    hints:["Torque = weight × distance, and the weight stays the same.","So the torque ratio equals the distance ratio.",`${d2.toFixed(2)} ÷ ${d1.toFixed(2)} = ?`],note:"",vis:{k:"compare",W,d1,d2,ans,m}}}
+  const ans=W*(d2-d1);return {title:"Close versus far: extra torque",html:`A <b>${m} kg</b> ${th} is moved from <b>${d1.toFixed(2)} m</b> to <b>${d2.toFixed(2)} m</b> in front of the low back. How much extra torque does that add, in N m (1 decimal place)?`,ans,unit:"N m",dp:1,tol:.006,
+   lines:[{ch:[[F(m,["kg"]),F("9.81",["N"],"1",["kg"])],[f1(W),["N"]]]},{t:`close: ${f1(W)} × ${d1.toFixed(2)} = ${f1(W*d1)} N m`},{t:`far: ${f1(W)} × ${d2.toFixed(2)} = ${f1(W*d2)} N m`},{t:`extra = ${f1(W*d2)} − ${f1(W*d1)} = ${f1(ans)} N m`,b:true}],
+   slips:filt([[W*d2,"That is the whole far torque. Subtract the close torque to find the extra."],[m*(d2-d1),"That uses kilograms. Convert the mass to weight in newtons first."],[W*(d2+d1),"That adds the distances. Use the change in distance."]],ans),
+   hints:["Find the weight in newtons first.","extra torque = weight × (far distance − close distance).",`${f1(W)} × (${d2.toFixed(2)} − ${d1.toFixed(2)}) = ?`],note:"",vis:{k:"compare",W,d1,d2,ans,m}}}
+};
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:+(store.get("best")||0),count:0,solT:0,typed:null};
+function calcNew(){const keys=Object.keys(GEN);const k=TR.type==="mix"?pick(keys):TR.type;const q=GEN[k]();
+  TR.p=q;TR.p.kind=k;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.typed=null;
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}`;
+  $("#calcUnit").textContent=q.unit;$("#calcAns").value="";$("#calcAnsRow").hidden=!!q.choices;const cb=$("#calcChoices");cb.hidden=!q.choices;cb.innerHTML="";
+  if(q.choices)q.choices.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=c[0];b.onclick=()=>{TR.typed=i;cb.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));calcCheck(String(i),b)};cb.appendChild(b)});
+  $("#calcCheck").hidden=!!q.choices;$("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=q.title+": the picture shows the setup and your answer.";a11yKey=""}
+function parseAns(s){s=String(s).trim().replace(/,/g,"").replace(/−/g,"-").replace(/\s*(n\s*·?\s*m|nm|newton\s*metres?|newtons?|n|m|metres?|kg|times|×|x)\s*$/i,"");if(!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){if(p.choices){const i=+str;return i===p.ans?{ok:true}:{ok:false,kind:"choice",msg:p.choices[i]?p.choices[i][1]:""}}
+  const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};const tolA=Math.max(p.tol*Math.abs(p.ans),.6*Math.pow(10,-p.dp));
+  if(Math.abs(v-p.ans)<=tolA)return {ok:true};
+  const sl=p.slips.find(s=>isFinite(s[0])&&s[0]!==0&&Math.abs(v-s[0])<=Math.max(.015*Math.abs(s[0]),.6*Math.pow(10,-p.dp)));if(sl)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)/Math.abs(p.ans)<=.05)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function ansStr(p){return p.choices?p.choices[p.ans][0]:fmtD(p.ans,p.dp)+" "+p.unit}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcCheck(strIn,btn){const p=TR.p;const str=strIn!=null?strIn:$("#calcAns").value;const j=judge(p,str);
+  if(j.kind==="empty"){calcMsg("info","Type a number in the answer box first (for example 47.2 or 3,056).");return}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;if(btn)btn.classList.add("right");
+    let t=p.choices?"✓ Correct. "+p.choices[p.ans][1]:`✓ Correct: ${ansStr(p)}.`;if(p.note)t+=" "+p.note;
+    calcMsg("good",t+" Watch the worked solution build below the picture.");showSol(false)}
+  else{TR.first=false;TR.streak=0;if(btn)btn.classList.add("wrong");let msg="Not quite. ";if(j.kind==="choice"||j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Keep extra digits in the middle steps and round only at the end.";else msg+="Check the setup. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+$("#calcType").innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");$("#calcType").onchange=e=>{TR.type=e.target.value;calcNew()};
+$("#calcCheck").onclick=()=>calcCheck();$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+$("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;
+  b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+$("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${ansStr(TR.p)}. Watch each step, then try a new problem.`)};
+$("#calcNew").onclick=()=>{calcNew();const f=TR.p.choices?$("#calcChoices .opt"):$("#calcAns");if(f)f.focus()};
+/* ---------- trainer picture ---------- */
+function yourAns(x,y,tv,unit,dp,col){label(x,y,"your answer: "+(tv!=null?fmtD(tv,dp)+" "+unit:"?"),{size:13,weight:700,mono:true,border:col||C.accent})}
+function drawCalc(now){use(S3);const p=TR.p;const T=now/1000;const vs=p.vis;const tv0=parseAns($("#calcAns").value);const tv=tv0!=null&&isFinite(tv0)?tv0:null;
+  panelBox(10,10,780,232);if(TR.solved){circ(764,30,13,C.good);checkMark(764,30,6,"#fff")}
+  const known=TR.solved||TR.sol;
+  if(vs.k==="weight"){levelTag(22,26,"sym");line(100,40,260,40,C["ink-soft"],4);line(180,40,180,60,C["ink-soft"],2);rr(160,60,40,60,6);fillStroke(C.paper,C["ink-soft"],1.5);const nd=clamp((tv||0)/400,0,1);rr(172,70,16,4+nd*40,2);ctx.fillStyle=C.force;ctx.fill();
+    line(180,120,180,130,C["ink-soft"],2);const bh=26+vs.m*.5;boxLoad(180,134,60+vs.m,bh,vs.m+" kg");const al=14+(known?vs.ans:(tv||0))*.1;arrow(180,138+bh,180,138+bh+Math.min(232-138-bh,al),C.force,3.5);
+    label(300,120,"mass "+vs.m+" kg",{size:13,weight:700,mono:true,border:C.box});label(300,150,"g = 9.81 N per kg",{size:13,weight:700,mono:true,border:C.gold,bg:C["gold-wash"]});
+    yourAns(600,110,tv,p.unit,p.dp,C.force);txt(600,150,vs.m+" × 9.81 = ?",{size:13,weight:700,mono:true,align:"center"})}
+  else if(vs.k==="lever"){levelTag(22,26,"sym");const px=Math.min(800,560/Math.max(.3,vs.d)*.9);const bx=80,by=130;const L=Math.min(560,Math.max(.62,vs.d+.1)*px);
+    rr(bx-8,by-7,L+16,14,5);fillStroke(C.metal,hexA(C.ink,.45),1.3);circ(bx,by,12,C.panel,C.ink,2.5);circ(bx,by,4,C.ink);txt(bx,by+30,"pivot",{size:12,weight:700,align:"center"});
+    const fx=bx+vs.d*px;arrow(fx,by-90,fx,by-10,C.force,4);label(fx,by-104,vs.ask==="force"?(known?f1(vs.F)+" N":"force ?"):fmtD(vs.F,vs.F%1?1:0)+" N",{size:12.5,weight:700,mono:true,border:C.force});
+    dimLine(bx,by+50,fx,by+50,vs.ask==="arm"?(known?f3(vs.d)+" m":"distance ?"):vs.d.toFixed(2)+" m",C.arm,{ly:16});
+    const tq=vs.ask==="torque"?(known?vs.ans:(tv||0)):vs.tq;torqueArc(bx,by,26+Math.min(60,tq*.15),-Math.PI*.5,-Math.PI*.5+Math.min(1.5,.2+tq/120),C.torque,"",{lw:2.5+Math.min(6,tq/40)});
+    label(bx+40,by-60,vs.ask==="torque"?"torque ?":"torque "+f1(vs.tq)+" N m",{size:12.5,weight:700,mono:true,border:C.torque,align:"left"});
+    yourAns(640,200,tv,p.unit,p.dp,vs.ask==="arm"?C.arm:vs.ask==="force"?C.force:C.torque)}
+  else if(vs.k==="bend"){levelTag(22,26,"body");line(30,226,330,226,C["ink-soft"],2);const f=figSide(120,226,110,{trunk:vs.th,skin:2+(vs.W%3),cloth:"cl2",act:.3,T});
+    const c=[f.L[0]+vs.r*110*Math.sin(vs.th*DEG)*(1/.25)*.25*(.25/.25),0];const com=f.M([f.Lm[0]+vs.r*f.u[0],f.Lm[1]+vs.r*f.u[1]]);circ(com[0],com[1],5,C.force,C.panel,2);arrow(com[0],com[1],com[0],com[1]+50,C.force,3);
+    line(f.L[0],f.L[1],com[0],com[1],hexA(C.ink,.6),1.5,[3,3]);dimLine(f.L[0],f.L[1]+18,com[0],f.L[1]+18,"",C.arm,{});
+    label(420,60,"upper body "+vs.W+" N",{size:12.5,weight:700,mono:true,border:C.force});label(420,92,vs.r.toFixed(2)+" m along the trunk",{size:12.5,weight:700,mono:true,border:C.ink});label(420,124,"angle "+vs.th+" degrees",{size:12.5,weight:700,mono:true,border:C.ink});
+    label(420,156,"horizontal "+(known?f3(vs.dm)+" m":"?"),{size:12.5,weight:700,mono:true,border:C.arm});yourAns(640,206,tv,p.unit,p.dp,C.torque)}
+  else if(vs.k==="see"){levelTag(22,26,"sym");const pv=[230,140],px=340;const imb=known?0:clamp(1-(tv||0)/vs.ans,-.5,1);const tilt=imb*.12;
+    ctx.beginPath();ctx.moveTo(pv[0],pv[1]);ctx.lineTo(pv[0]-14,pv[1]+26);ctx.lineTo(pv[0]+14,pv[1]+26);ctx.closePath();fillStroke(C.accent,C.panel,1.5);
+    ctx.save();ctx.translate(pv[0],pv[1]);ctx.rotate(tilt);rr(-.1*px,-5,.75*px,10,4);fillStroke(C.metal,hexA(C.ink,.45),1.3);const ld=vs.d||.4;arrow(ld*px,-70,ld*px,-6,C.force,3.2);arrow(-vs.arm*px,-4,-vs.arm*px,30+Math.min(60,(tv||0)/60),C.muscle,4);ctx.restore();
+    label(pv[0]+ld*px,pv[1]-84,vs.m?vs.m+" kg at "+ld.toFixed(2)+" m":"total torque "+vs.tq+" N m",{size:12,weight:700,mono:true,border:C.force});
+    label(pv[0]-110,pv[1]+76,"muscle arm "+vs.arm.toFixed(2)+" m",{size:12,weight:700,mono:true,border:C.muscle});
+    txt(pv[0]+150,pv[1]+60,Math.abs(imb)<.02?"balanced":"not balanced yet",{size:12.5,weight:700,color:Math.abs(imb)<.02?C.good:C["warn-ink"]});yourAns(640,200,tv,p.unit,p.dp,C.muscle)}
+  else if(vs.k==="compare"){levelTag(22,26,"body");const L0=[-.04,1.07];[[vs.d1,"close",130],[vs.d2,"far",400]].forEach((c,i)=>{line(c[2]-90,226,c[2]+170,226,C["ink-soft"],2);const f=figSide(c[2],226,100,{trunk:10,skin:i?5:1,cloth:i?"cl4":"cl3",act:i?.8:.3,T,hand:[L0[0]+c[0],1.0]});boxLoad(f.hand[0]+10,f.hand[1]+2,30,22,"");label(c[2]+60,36,c[1]+" "+c[0].toFixed(2)+" m",{size:12,weight:700,mono:true,border:C.arm});
+      hbar(c[2]+90,70,80,c[0]/.75,C.torque,"","",{h:12})});yourAns(660,200,tv,p.unit,p.dp,C.torque);txt(660,120,vs.m+" kg = "+f1(vs.W)+" N",{size:12.5,weight:700,mono:true,align:"center"})}
+  if(TR.sol){const tt=(now-TR.solT)/1000+.0001;wsteps(10,250,780,212,{title:"Worked solution",lines:p.lines,ans:"Answer: "+ansStr(p)},tt,{step:.9,cfs:13.5,size:12.5})}
+  else{panelBox(10,250,780,212,{fill:hexA(C.paper,.96)});title(22,268,"Worked solution",C["accent-ink"]);wrapText("The worked solution builds here after a correct answer, or when you press Show worked solution. Units that cancel are struck out in red, and key rules are flagged in gold.",24,300,740,18,{size:13,color:C["ink-soft"]})}}
+function calcA11y(){const p=TR.p;const v=$("#calcAns").value.trim();const lab=`Practice problem, ${p.title}. Your answer ${v||"not entered"}.${TR.solved?" Correct.":""}`;
+  const vk={weight:"a box hanging from a spring scale with a red weight arrow pointing down",lever:"a bar pinned at a pivot with a red force arrow pressing down, a blue dimension line for the moment arm and a gold curved torque arrow",bend:"a person bending forward with a red weight arrow at the upper body's centre of mass and a blue line for the horizontal distance",see:"a seesaw with the low back as the pivot, the load pressing down in front and a short rose muscle arm pulling down behind",compare:"two people holding the same box, one close and one far, with gold torque bars"}[p.vis.k];
+  return [lab,`The top shows ${vk}. ${TR.sol?"The bottom shows the worked solution line by line, with units struck through in red as they cancel, ending with the answer "+ansStr(p)+" in a green box.":"The worked solution is hidden until you check a correct answer or ask for it."}`]}
+/* ================= PART 3: sorting game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  switch(k){
+  case "sag":return sv('<path d="M18 6 L38 0 L38 40 L18 46 Z" fill="var(--pl-sag)" opacity=".55" stroke="var(--pl-sag)" stroke-width="2"/><circle cx="28" cy="16" r="5" fill="var(--sk3)"/><path d="M28 21 V36" stroke="var(--ink)" stroke-width="3"/>');
+  case "front":return sv('<rect x="8" y="4" width="40" height="38" fill="var(--pl-front)" opacity=".5" stroke="var(--pl-front)" stroke-width="2"/><circle cx="28" cy="14" r="5" fill="var(--sk3)"/><path d="M28 19 V34 M20 24 H36" stroke="var(--ink)" stroke-width="3"/>');
+  case "trans":return sv('<path d="M4 30 L18 20 L52 20 L38 30 Z" fill="var(--pl-trans)" opacity=".6" stroke="var(--pl-trans)" stroke-width="2"/><circle cx="28" cy="10" r="5" fill="var(--sk3)"/><path d="M28 15 V40" stroke="var(--ink)" stroke-width="3"/>');
+  case "ml":return sv('<path d="M6 23 H50" stroke="var(--pl-sag)" stroke-width="4"/><circle cx="6" cy="23" r="4" fill="var(--pl-sag)"/><circle cx="50" cy="23" r="4" fill="var(--pl-sag)"/><path d="M28 8 a15 15 0 1 1 -1 0" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-dasharray="3 3"/>');
+  case "ap":return sv('<circle cx="28" cy="23" r="16" fill="none" stroke="var(--pl-front)" stroke-width="2.5"/><circle cx="28" cy="23" r="5" fill="var(--pl-front)"/><path d="M14 6 L42 40" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="3 3"/>');
+  case "vert":return sv('<path d="M28 42 V6" stroke="var(--pl-trans)" stroke-width="4"/><path d="M20 12 L28 2 L36 12 Z" fill="var(--pl-trans)"/><ellipse cx="28" cy="28" rx="18" ry="6" fill="none" stroke="var(--ink)" stroke-width="1.6"/>');
+  case "cerv":case "thor":case "lumb":{const on={cerv:[0,1],thor:[2,3],lumb:[4,5]}[k];let s="";for(let i=0;i<6;i++){const hl=on.indexOf(i)>=0;s+=`<rect x="${18+(i>3?-2:0)}" y="${2+i*7}" width="${18+i*1.6}" height="5.5" rx="1.5" fill="${hl?"var(--"+k+")":"var(--bone)"}" stroke="var(--bone-edge)" stroke-width="1"/>`}return sv(s)}
+  case "comp":return sv('<rect x="16" y="14" width="24" height="18" fill="var(--comp)" opacity=".5" stroke="var(--comp)" stroke-width="2"/><path d="M28 2 V12 M28 44 V34" stroke="var(--comp)" stroke-width="3"/><path d="M23 8 L28 13 L33 8 M23 38 L28 33 L33 38" fill="none" stroke="var(--comp)" stroke-width="3"/>');
+  case "shear":return sv('<path d="M14 32 L22 14 L46 14 L38 32 Z" fill="var(--shear)" opacity=".5" stroke="var(--shear)" stroke-width="2"/><path d="M22 8 H44 M40 4 L44 8 L40 12" fill="none" stroke="var(--shear)" stroke-width="2.5"/><path d="M34 38 H12 M16 34 L12 38 L16 42" fill="none" stroke="var(--shear)" stroke-width="2.5"/>');
+  case "tens":return sv('<rect x="20" y="12" width="16" height="22" fill="var(--tens)" opacity=".5" stroke="var(--tens)" stroke-width="2"/><path d="M28 12 V2 M28 34 V44 M23 6 L28 1 L33 6 M23 40 L28 45 L33 40" fill="none" stroke="var(--tens)" stroke-width="2.5"/>');
+  }return ""}
+const SROUNDS=[
+{name:"Motion to plane",goal:"Sort each movement into the plane it happens in.",bins:[["sag","Sagittal plane"],["front","Frontal plane"],["trans","Transverse plane"]],cards:[
+ ["Nodding the head yes","sag","Nodding is flexion and extension of the neck: sagittal plane."],
+ ["Bending forward to touch the toes","sag","Trunk flexion happens in the sagittal plane."],
+ ["Arching backward","sag","Extension is in the sagittal plane, like flexion."],
+ ["Doing a curl up exercise","sag","Curling the trunk forward is flexion: sagittal plane."],
+ ["Tilting an ear toward the shoulder","front","Side bending of the neck happens in the frontal plane."],
+ ["Leaning sideways to pick up a bag beside you","front","Trunk lateral bending is in the frontal plane."],
+ ["Shaking the head no","trans","Turning the head is axial rotation: transverse plane."],
+ ["Twisting the trunk to look behind","trans","Twisting is rotation in the transverse plane."],
+ ["Turning to check a blind spot while driving","trans","Rotation of the neck and trunk: transverse plane."]]},
+{name:"Motion to axis",goal:"Sort each movement by the axis it spins around.",bins:[["ml","Mediolateral axis"],["ap","Anteroposterior axis"],["vert","Vertical axis"]],cards:[
+ ["Bending the trunk forward","ml","Flexion spins around a side to side, mediolateral axis."],
+ ["Looking up at the sky","ml","Neck extension spins around a mediolateral axis."],
+ ["A forward somersault","ml","A somersault turns around a side to side axis."],
+ ["Side bending the neck","ap","Lateral bending spins around a front to back, anteroposterior axis."],
+ ["A cartwheel","ap","A cartwheel turns around a front to back axis."],
+ ["Leaning the trunk to the left","ap","Lateral bending: anteroposterior axis."],
+ ["Turning the head to the right","vert","Axial rotation spins around a vertical axis."],
+ ["A spin on ice skates","vert","Spinning in place turns around a vertical axis."],
+ ["Twisting the trunk during a golf swing","vert","Trunk rotation spins around a vertical axis."]]},
+{name:"Region to motion",goal:"Sort each fact into the region of the spine it describes.",bins:[["cerv","Cervical"],["thor","Thoracic"],["lumb","Lumbar"]],cards:[
+ ["Facets tilted about 45 degrees, like roof tiles","cerv","Cervical facets slant like roof tiles, allowing motion in all directions."],
+ ["One level gives about 40 degrees of rotation to each side","cerv","The C1 C2 joint provides about half of neck rotation."],
+ ["Side bending reliably couples with same side rotation","cerv","Same side coupling is consistent in the lower cervical spine."],
+ ["Facets near the frontal plane; rotation is allowed","thor","Thoracic facets lie near the frontal plane, so rotation glides easily."],
+ ["Ribs attach and limit flexion and side bending","thor","The rib cage stiffens the thoracic spine."],
+ ["About 8 degrees of rotation per level in the upper and middle levels","thor","Upper and middle thoracic levels rotate more than lumbar levels."],
+ ["Facets near the sagittal plane block rotation","lumb","Upright, sideways facing lumbar facets act as walls against twisting."],
+ ["Only about 2 degrees of rotation per level","lumb","Lumbar facets limit rotation to a few degrees per level."],
+ ["Largest discs and about 15 degrees of flexion plus extension per level","lumb","Big lumbar discs allow lots of flexion and extension."]]},
+{name:"Load type",goal:"Sort each situation by the main kind of load on the named tissue.",bins:[["comp","Compression"],["shear","Shear"],["tens","Tension"]],cards:[
+ ["A vertebral body carrying the weight above it","comp","Weight from above squeezes the body: compression."],
+ ["The disc while holding a heavy box","comp","Muscle force and weight squeeze the disc: compression."],
+ ["An endplate under a heavy lift","comp","Endplates carry the nucleus pressure from compression."],
+ ["L5 tending to slide forward on the sloped sacrum","shear","A slope turns part of the weight into a sliding load: shear."],
+ ["Facets blocking a forward slide","shear","The facets resist forward shear at the low back."],
+ ["Interspinous ligament in full forward bending","tens","Flexion stretches the posterior ligaments: tension."],
+ ["Annulus fibres around a pressurized nucleus","tens","Nucleus pressure stretches the fibres like barrel hoops: tension."],
+ ["Posterior ligaments after an hour of slumped sitting","tens","Sustained stretch keeps them in tension and they creep."]]}
+];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+function shelf(x,y,w,h){for(let i=0;i<3;i++){rr(x,y+i*h/3,w,6,2);fillStroke(C.shelf,hexA(C.ink,.4),1)}line(x+4,y,x+4,y+h,C.shelf,5);line(x+w-4,y,x+w-4,y+h,C.shelf,5)}
+function pallet(x,y,w){rr(x,y,w,12,2);fillStroke(C.desk,hexA(C.ink,.4),1.2);for(let i=0;i<4;i++)rr(x+6+i*(w-24)/3,y+12,12,10,1),fillStroke(C.desk,hexA(C.ink,.4),1)}
+const LIFE=[
+{name:"A warehouse worker's lifting",who:"Scenario 1 · workplace lifting",
+ story:"Marcus is 38 and works in a warehouse. All shift he lifts 18 kg boxes from pallets on the floor onto shelves. To reach the boxes at the back of each pallet he leans over the near boxes, so he holds them about 0.6 m in front of his low back. His back aches by the end of the week, but he has no leg symptoms, fever or other worrying signs. He asks what would make the biggest difference.",
+ cap:"Marcus reaching far versus sliding the box close: same box, very different torque.",
+ desc:"A warehouse worker is drawn from the side beside a pallet and a shelf. The picture alternates between two ways of lifting the same 18 kilogram box. In the first, he leans over the near boxes and holds the box far out, 0.6 metres from the red low back dot, and a gold torque readout shows about 106 newton metres while his rose back muscle band glows brightly. In the second, he slides the box to the edge first and lifts it close, 0.25 metres away, and the readout drops to about 44 newton metres. A raised pallet at waist height appears as a third option at the right.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"body");line(20,430,780,430,C["ink-soft"],2);
+   const far=P(T,8)<.5;const d=far?.6:.25;const L0=[-.04,1.07];const ang=far?55:30;
+   pallet(220,408,170);for(let i=0;i<3;i++)boxLoad(240+i*50,396-0,42,30,"");shelf(560,150,160,270);for(let i=0;i<3;i++)boxLoad(590+i*46,232,38,28,"");
+   const f=figSide(130,430,200,{trunk:ang,knee:far?10:45,skin:5,cloth:"cl3",act:far?.95:.45,T,hand:[L0[0]+d,far?.7:.62],hairc:"hair1"});boxLoad(f.hand[0]+16,f.hand[1]+4,44,32,"18 kg");
+   const tq=176.6*d;dimLine(f.L[0],f.L[1]+22,f.L[0]+d*200,f.L[1]+22,"",C.arm,{});label(f.L[0]+d*100,f.L[1]+40,d.toFixed(2)+" m",{size:12,weight:700,mono:true,border:C.arm});
+   label(400,50,far?"reaching over the near boxes":"box slid close first",{size:14,weight:700,border:far?C.warn:C.good});
+   label(400,84,"box torque "+Math.round(tq)+" N m",{size:14,weight:700,mono:true,border:C.torque});hbar(300,108,200,tq/120,C.torque,"","",{h:14});
+   rr(730,260,50,120,4);fillStroke(hexA(C.good,.2),C.good,1.5);txt(755,250,"raised",{size:11.5,weight:700,align:"center"});txt(755,236,"pallet",{size:11.5,weight:700,align:"center"});boxLoad(755,240+30,34,24,"")},
+ qs:[{q:"Using 9.81 N per kg, about how much torque does the 18 kg box create about Marcus's low back at 0.6 m compared with 0.25 m?",opts:[["About 106 N m far versus 44 N m close",1,"Weight = 18 × 9.81 = 176.6 N. Far: 176.6 × 0.6 ≈ 106 N m. Close: 176.6 × 0.25 ≈ 44 N m."],["About 11 N m far versus 4.5 N m close",0,"That uses kilograms instead of newtons. Multiply by 9.81 first."],["The same at both distances, because the box weighs the same",0,"Torque depends on distance as well as weight."],["About 10,600 N m far",0,"That uses 60 cm instead of 0.6 m."]]},
+  {q:"Which change would most reduce the load on Marcus's low back for each lift?",opts:[["Raise pallets toward waist height and slide each box close before lifting, using team lifts or aids for awkward loads",1,"This cuts both the trunk angle and the load distance, the two biggest drivers of torque in the model."],["Lift faster to get it over with",0,"Fast, jerky lifts add acceleration forces and usually raise peak load."],["Keep reaching but brace as hard as possible every lift",0,"Bracing adds stiffness but also compression; it does not shorten the lever arm."],["Twist to place the box while it is still far from the body",0,"Twisting with a load far out stretches half the annulus layers and keeps torque high."]]},
+  {q:"Marcus asks whether learning one perfect lifting technique will stop all back pain. What is the most honest answer?",opts:[["Training in technique alone has not been shown to prevent back pain; reducing the load and distance, plus staying active and strong, are better supported",1,"That matches research: workplace changes and general activity matter more than any single technique."],["Yes, perfect technique prevents all back pain",0,"Studies of lifting technique training alone have not shown that."],["Technique does not matter at all, so lift any way",0,"Distance and trunk angle clearly change spinal load, even if technique training alone does not prevent pain."],["Only rest until the pain is completely gone",0,"For common back pain, staying active generally helps recovery more than strict rest."]]}]},
+{name:"A desk worker's prolonged sitting",who:"Scenario 2 · desk work",
+ story:"Dana is 29 and works at a computer about 8 hours a day, often slumped forward for long stretches. Her low back feels stiff when she first stands up, then loosens after a short walk. She has read that sitting crushes the discs and worries she needs a perfect posture all day. She has no leg symptoms or other worrying signs.",
+ cap:"Dana at her desk: creep builds during long slumped sitting and eases with movement.",
+ desc:"A desk worker sits slumped at a computer while a clock runs. A teal creep bar labelled posterior ligament creep slowly fills. Then she stands, walks a few steps and sits back down in a different position, and the creep bar drains slowly. On the right, two small disc pressure bars compare relaxed sitting in older and newer studies, about 140 and about 90 when standing is 100, with a note that slumped sitting is higher in both.",
+ draw(T){panelBox(10,10,520,450);levelTag(22,26,"body");const t=P(T,14)*14;const sit=t<8||t>12;const cr=t<8?smooth(t/8)*.85:t<12?.85*Math.exp(-(t-8)/2.5):.85*Math.exp(-4/2.5)+smooth((t-12)/2)*.05;
+   rr(260,240,170,12,3);fillStroke(C.desk,hexA(C.ink,.4),1.2);line(280,252,280,420,C.desk,5);line(410,252,410,420,C.desk,5);rr(320,180,66,48,4);fillStroke(C.screen,hexA(C.ink,.5),1.4);line(353,228,353,240,C.metal,4);line(20,420,520,420,C["ink-soft"],2);
+   if(sit)figSide(170,420,170,{sit:true,trunk:t<8?26:4,skin:2,cloth:"cl2",act:.1,T,backrest:true,hairc:"hair2"});else figSide(110+(t-8)*20,420,170,{trunk:2,knee:14*Math.abs(Math.sin(t*3)),skin:2,cloth:"cl2",act:.3,T,hairc:"hair2"});
+   label(270,48,t<8?"slumped sitting":t<12?"short walk":"sitting, new position",{size:13.5,weight:700,border:t<8?C.warn:C.good});
+   hbar(140,80,240,cr,C.lig,"creep","",{h:14});
+   panelBox(540,10,250,450);levelTag(552,26,"data");txt(665,60,"relative disc pressure",{size:12.5,weight:700,align:"center"});txt(665,78,"(standing = 100)",{size:11.5,align:"center",color:C["ink-soft"]});
+   [["standing",100,100],["relaxed sitting",140,92],["slumped sitting",185,166]].forEach((r,i)=>{const x=566+i*76;const h1=r[1]/200*240,h2=r[2]/200*240;rr(x,370-h1,24,h1,3);ctx.fillStyle=C.disc;ctx.fill();rr(x+28,370-h2,24,h2,3);ctx.fillStyle=C.evid;ctx.fill();txt(x+12,362-h1,String(r[1]),{size:11,weight:700,mono:true,align:"center"});txt(x+40,362-h2,String(r[2]),{size:11,weight:700,mono:true,align:"center"});wrapText(r[0],x+26,388,72,13,{size:11.5,weight:600,align:"center"})});
+   rr(560,424,12,10,2);ctx.fillStyle=C.disc;ctx.fill();txt(578,429,"older",{size:11.5});rr(640,424,12,10,2);ctx.fillStyle=C.evid;ctx.fill();txt(658,429,"newer",{size:11.5})},
+ qs:[{q:"Dana asks whether sitting always puts much more pressure on the discs than standing. What does the evidence say?",opts:[["Older studies said yes, but a newer study found relaxed sitting close to standing; slumped sitting was higher in both, and values are approximate",1,"That is an honest summary of the classic and later measurements."],["Sitting crushes the discs and causes permanent damage",0,"Sitting loads the discs, but normal sitting is not shown to crush or permanently damage them."],["Sitting has no effect on disc pressure",0,"Posture does change disc pressure, especially slumping forward."],["Lying down raises disc pressure the most",0,"Lying down gives the lowest values in both sets of studies."]]},
+  {q:"Why might Dana's back feel stiff when she first stands after a long slump, then loosen after walking?",opts:[["Long flexion lets posterior ligaments creep and dulls muscle reflexes for a while; movement helps them recover",1,"Creep and recovery are time dependent viscoelastic effects."],["Her vertebrae have shifted out of place",0,"Stiffness after sitting is explained by tissue creep and recovery, not bones moving out of place."],["Her discs lost all their water",0,"Discs lose a little water during the day but refill; they do not empty."],["Sitting has torn her ligaments",0,"Creep from normal sitting is not a tear and recovers with time and movement."]]},
+  {q:"Which plan is best supported for Dana?",opts:[["Change position often, take short movement breaks, and keep up regular exercise she enjoys",1,"No single posture is proven best; movement, variety and exercise are low risk and well supported for general back health."],["Sit perfectly upright and brace hard all day",0,"Constant hard bracing adds compression and fatigue, and no one posture is proven best."],["Stop sitting completely",0,"That is not practical or necessary; regular position changes are enough for most people."],["Rest in bed until the stiffness is gone",0,"Bed rest is not recommended for common back stiffness or pain."]]}]},
+{name:"Back pain with warning signs",who:"Scenario 3 · safety and referral",
+ story:"Victor is 52. Two days ago he lifted a heavy planter and felt low back pain. He came in asking about lifting mechanics, but while talking he mentions numbness around his groin and inner thighs since this morning, and trouble starting to pass urine. His left leg also feels weaker on stairs.",
+ cap:"Biomechanics questions can wait: these symptoms need urgent medical assessment.",
+ help:"<b>Red flags that need prompt medical referral</b> include: numbness in the saddle area, new bladder or bowel changes, or progressive leg weakness (possible cauda equina syndrome, an emergency); fever with back pain; unexplained weight loss or a history of cancer; and major trauma. Most back pain is not serious, but these signs should never wait.",
+ desc:"A person stands holding the low back next to a large plant pot. Three red warning icons light up around the figure one at a time: a shaded saddle area across the groin and inner thighs, a bladder symbol, and a leg with a downward weakness arrow. A red banner across the top reads urgent medical assessment today, and a lifting diagram in the corner is greyed out with a pause symbol, showing that mechanics advice waits.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"body");line(20,430,780,430,C["ink-soft"],2);
+   ctx.beginPath();ctx.moveTo(470,430);ctx.lineTo(456,350);ctx.lineTo(560,350);ctx.lineTo(546,430);ctx.closePath();fillStroke(C.box,C["box-edge"],1.5);for(let i=0;i<5;i++){ctx.beginPath();ctx.ellipse(508+(i-2)*16,320-Math.abs(i-2)*10,10,30,(i-2)*.3,0,TAU);fillStroke(C.para,hexA(C.ink,.35),1)}
+   const f=figSide(250,430,200,{trunk:6,skin:4,cloth:"cl4",act:.2,T,hairc:"hair3"});
+   rr(140,40,520,36,8);fillStroke(C["bad-wash"],C.bad,2);txt(400,58,"urgent medical assessment today",{size:15,weight:700,align:"center",color:C.bad});
+   const k=Math.floor(P(T,6)*3);const pts=[[f.L[0]+20,f.L[1]+30,"saddle numbness"],[f.L[0]+40,f.L[1]-10,"bladder changes"],[f.L[0]+30,f.L[1]+180,"leg weakness"]];
+   pts.forEach((p,i)=>{const on=i===k;withA(on?1:.45,()=>{glow(p[0],p[1],on?34:20,C.pain,.6);circ(p[0],p[1],8,C.pain,C.panel,2);lead(p[0],p[1],620,140+i*60,p[2],{size:12.5,border:C.pain,align:"left"})})});
+   withA(.4,()=>{rr(640,330,130,80,6);fillStroke(C.panel,C.rule,1.2);txt(705,346,"lifting tips",{size:11.5,weight:700,align:"center"});rr(690,360,10,30,2);ctx.fillStyle=C["ink-soft"];ctx.fill();rr(708,360,10,30,2);ctx.fill();txt(705,402,"can wait",{size:11.5,weight:700,align:"center"})})},
+ qs:[{q:"What is the priority for Victor?",opts:[["Urgent same day medical assessment, because saddle numbness, bladder changes and leg weakness can signal cauda equina syndrome",1,"These are emergency red flags; prompt referral protects nerve function."],["Teach him lifting mechanics and review in two weeks",0,"Mechanics advice can wait. These signs need urgent medical assessment."],["Recommend rest and see if the numbness fades",0,"Waiting risks lasting nerve damage. These signs need same day assessment."],["Give a home exercise program and recheck next month",0,"Exercise is not the priority when red flags are present."]]},
+  {q:"Which finding, on its own, is NOT one of the red flags listed for back pain?",opts:[["Low back ache after a busy weekend of gardening that eases with gentle movement",1,"Common mechanical back pain without other signs is not a red flag."],["Fever with back pain",0,"Fever with back pain can signal infection and needs prompt medical review."],["Unexplained weight loss or a history of cancer",0,"These raise concern for serious causes and need referral."],["Progressive leg weakness",0,"Worsening weakness needs prompt medical assessment."]]},
+  {q:"How should the practitioner talk with Victor about this?",opts:[["Calmly explain that these symptoms need checking today, why that matters, and help arrange urgent care",1,"Clear, calm, specific communication with practical help is best for safety."],["Avoid mentioning it to prevent worry",0,"Patients need to know why urgent care matters so they act on it."],["Tell him it is definitely a serious disc injury",0,"A diagnosis needs medical assessment; the message is urgency, not a guess."],["Say biomechanics explains everything, so there is nothing to worry about",0,"These neurological signs need medical evaluation, whatever the mechanics."]]}]}
+];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  const hb=$("#lifeHelp");if(S.help){hb.hidden=false;hb.className="redflag";hb.innerHTML=S.help}else hb.hidden=true;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;SYS={};lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;SYS={};lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;SYS={};lifeUI()};
+function drawLife(now){use(S5);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,470),S3=makeStage("cvCalc",800,470),S5=makeStage("cvLife",800,470);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},calc:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","calc","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S3,S5].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function legendHTML(l){return `<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`}
+$("#simLegend").innerHTML=[["accent","Low back pivot (L5 S1)"],["torque","Torque","s"],["muscle","Back muscle","s"],["comp","Compression","s"],["shear","Shear","s"],["arm","Load distance","s"],["disc","Neutral zone","s"],["pain","Segment now"]].map(legendHTML).join("");
+$("#simCap").textContent="Set the load, its distance, the trunk angle, back shape and bracing, then read torque, muscle force and compression.";
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim")simDraw(now);else if(curTab==="calc")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__bl={tab:k=>showTab(k),sim:o=>{Object.assign(SIM,o);simUI();simChange()},simR:()=>Object.assign({},SIM.R),simDone:()=>[...SIM.done],
+  calcTypes:()=>CTYPES.map(c=>c[0]).filter(c=>c!=="mix"),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,dp:TR.p.dp,unit:TR.p.unit,kind:TR.p.kind,str:fmtD(TR.p.ans,TR.p.dp)}),
+  gen:t=>{const q=GEN[t]();const good=fmtD(q.ans,q.dp).replace(/,/g,""),goodC=fmtD(q.ans,q.dp);const bad=fmtD(q.ans*1.25,q.dp);return {ans:q.ans,dp:q.dp,unit:q.unit,good,j1:judge(q,good),j1c:judge(q,goodC),j1u:judge(q,goodC+" "+q.unit),j2:judge(q,bad),j3:judge(q,fmtD(q.ans*.8,q.dp)),jslip:q.slips.length?judge(q,fmtD(q.slips[0][0],q.dp)):null,html:q.html,lines:q.lines.length,hints:q.hints.length}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;SYS={};lifeUI()},lifeN:()=>LIFE.length};
+readColors();simUI();simChange();calcNew();updCalcMeter();sLoad(0);lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

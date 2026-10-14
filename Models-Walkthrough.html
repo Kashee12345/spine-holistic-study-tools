@@ -1,0 +1,1396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chiropractic Models Walkthrough</title>
+<meta name="description" content="Animated walkthrough of chiropractic models through history: the 1800s American health landscape, magnetic healing and osteopathy, D.D. Palmer and the 1895 Lillard story, the Palmer School, B.J. Palmer and the neurocalometer, Innate and Universal Intelligence, the original subluxation idea and how later models changed it, straights and mixers, prosecutions and the Morikubo case, state licensure from 1913 to 1974, Medicare and accreditation, Wilk v. AMA, the 1975 NINCDS conference, evidence based practice and what research supports today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7F2222;--accent-wash:#F6E3E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#7B5CC9;--act2:#B8561A;--act3:#2F7FC1;--act4:#2E8A7A;--act5:#B07A10;--act6:#9B2C2C;--act7:#A04E8C;--act8:#4B4FBF;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#F3EBD8;--bone-2:#E2D5B6;--bone-edge:#7E6A45;--bone-ink:#5E4E30;
+  --disc:#3F7FC8;--disc-ink:#1D5C93;--nucleus:#A9CDF2;--endplate:#8FB0D0;
+  --nerve:#E0AE10;--nerve-ink:#7A5C00;--cord:#F2D36A;
+  --muscle:#C8506E;--muscle-ink:#9B2C4A;--muscle-2:#E8A3B4;
+  --lig:#1E8C83;--lig-ink:#156B64;
+  --symp:#D9731A;--para:#3E9B4F;--pain:#C8302C;--pain-ink:#A12623;--evid:#4B4FBF;--evid-ink:#3A3D9E;
+  --artery:#B8333A;--csf:#CDE7F2;--dura:#8C7FB0;--fat:#F2E2A8;--skin:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;
+  --rc:#7B5CC9;--rt:#B8561A;--rl:#2F7FC1;--rs:#A04E8C;--rx:#5E7183;
+  --rc-ink:#5B3FA8;--rt-ink:#8A3C0E;--rl-ink:#1D5C93;--rs-ink:#7E3369;--rx-ink:#45576A;
+  --film:#1A1F24;--film-ink:#E8EEF1;
+  --phil:#7B4FB8;--phil-ink:#5B3A92;--edu:#2F6FB0;--edu-ink:#1D528A;--law:#1E7F72;--law-ink:#14615A;--model:#7B4FB8;
+  --land:#E9E1CC;--land-edge:#A89A7A;--sea:#D3E4EF;--parch:#F6EDD6;--parch-edge:#B49A6A;--wood:#8A5A34;--metal:#9AA6AF;--canada:#DCE3D3;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#A98BEF;--act2:#F0985A;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#E8BE5A;--act6:#F4A7A0;--act7:#D186C0;--act8:#9A9EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CCAE;--bone-2:#AFA285;--bone-edge:#2A2418;--bone-ink:#E6DCC2;
+  --disc:#5E9EE6;--disc-ink:#8CC6F2;--nucleus:#2D5E95;--endplate:#7FA3C8;
+  --nerve:#F2CF4A;--nerve-ink:#F2D468;--cord:#C9A93A;
+  --muscle:#E07A95;--muscle-ink:#F4A6B8;--muscle-2:#8A3E52;
+  --lig:#4FC2B4;--lig-ink:#7AD6CB;
+  --symp:#F5A05A;--para:#6CCB7C;--pain:#F07A70;--pain-ink:#F49A92;--evid:#9A9EF2;--evid-ink:#B4B7F6;
+  --artery:#E8686E;--csf:#1F3E4E;--dura:#A99FCC;--fat:#6A5E34;--skin:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --rc:#A98BEF;--rt:#F0985A;--rl:#5AA9E6;--rs:#D186C0;--rx:#A9B7C2;
+  --rc-ink:#BFA6F4;--rt-ink:#F5B07A;--rl-ink:#8CC6F2;--rs-ink:#DFA0D0;--rx-ink:#B5C5D3;
+  --film:#05080A;--film-ink:#E8EEF1;
+  --phil:#B696F0;--phil-ink:#C9B0F5;--edu:#6FB0EC;--edu-ink:#8CC6F2;--law:#5CC7B8;--law-ink:#7AD6CB;--model:#B696F0;
+  --land:#2C3328;--land-edge:#6E7A62;--sea:#14303E;--parch:#2E2A20;--parch-edge:#8A7650;--wood:#B07A4A;--metal:#7F8C95;--canada:#26302A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#A98BEF;--act2:#F0985A;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#E8BE5A;--act6:#F4A7A0;--act7:#D186C0;--act8:#9A9EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CCAE;--bone-2:#AFA285;--bone-edge:#2A2418;--bone-ink:#E6DCC2;
+  --disc:#5E9EE6;--disc-ink:#8CC6F2;--nucleus:#2D5E95;--endplate:#7FA3C8;
+  --nerve:#F2CF4A;--nerve-ink:#F2D468;--cord:#C9A93A;
+  --muscle:#E07A95;--muscle-ink:#F4A6B8;--muscle-2:#8A3E52;
+  --lig:#4FC2B4;--lig-ink:#7AD6CB;
+  --symp:#F5A05A;--para:#6CCB7C;--pain:#F07A70;--pain-ink:#F49A92;--evid:#9A9EF2;--evid-ink:#B4B7F6;
+  --artery:#E8686E;--csf:#1F3E4E;--dura:#A99FCC;--fat:#6A5E34;--skin:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --rc:#A98BEF;--rt:#F0985A;--rl:#5AA9E6;--rs:#D186C0;--rx:#A9B7C2;
+  --rc-ink:#BFA6F4;--rt-ink:#F5B07A;--rl-ink:#8CC6F2;--rs-ink:#DFA0D0;--rx-ink:#B5C5D3;
+  --film:#05080A;--film-ink:#E8EEF1;
+  --phil:#B696F0;--phil-ink:#C9B0F5;--edu:#6FB0EC;--edu-ink:#8CC6F2;--law:#5CC7B8;--law-ink:#7AD6CB;--model:#B696F0;
+  --land:#2C3328;--land-edge:#6E7A62;--sea:#14303E;--parch:#2E2A20;--parch-edge:#8A7650;--wood:#B07A4A;--metal:#7F8C95;--canada:#26302A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+.body .practice{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:6px 10px;font-size:14.5px;color:var(--ink)}
+.body .practice b{color:var(--ink)}
+.tag-model{color:var(--phil-ink);font-weight:700}.tag-evid{color:var(--evid-ink);font-weight:700}
+.body .tagline{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid var(--rule);border-radius:99px;padding:2px 9px;display:inline-block;margin:0 0 8px}
+.body .tagline.m{border-color:var(--phil);color:var(--phil-ink)}.body .tagline.e{border-color:var(--evid);color:var(--evid-ink)}.body .tagline.h{border-color:var(--law);color:var(--law-ink)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 9 &middot; Chiropractic models through history</div>
+    <h1>Chiropractic Models Walkthrough</h1>
+    <p class="sub">Watch timelines build, maps fill in and ideas flow from one thinker to the next, then see each historical model set beside what current evidence shows. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Use the left and right arrow keys to move between steps. Dates follow mainstream histories of the profession; where a story rests on one person's account, the page says so. Practise next in the <a href="Models-Lab.html">Chiropractic Models Lab</a>.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-2", "bone-edge", "bone-ink", "disc", "disc-ink", "nucleus", "endplate", "nerve", "nerve-ink", "cord", "muscle", "muscle-ink", "muscle-2", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "artery", "csf", "dura", "fat", "skin", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "rc", "rt", "rl", "rs", "rx", "rc-ink", "rt-ink", "rl-ink", "rs-ink", "rx-ink", "film", "film-ink", "phil", "phil-ink", "edu", "edu-ink", "law", "law-ink", "model", "land", "land-edge", "sea", "parch", "parch-edge", "wood", "metal", "canada"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= history drawing kit (both pages) ================= */
+const TAGS={model:["HISTORICAL MODEL","phil"],prop:["PROPOSED MODEL","phil"],phil:["PHILOSOPHICAL MODEL","phil"],evid:["CURRENT EVIDENCE","evid"],told:["AS TOLD BY D.D. PALMER","gold"],
+  law:["LAW AND PROFESSION","law"],edu:["EDUCATION","edu"],res:["RESEARCH","evid"],era:["THE 1800s","act2"],anat:["WHAT ANATOMY SHOWS","evid"],map:["SCHEMATIC MAP","act3"],claim:["WHAT WAS CLAIMED","phil"]};
+function tagPill(x,y,k,o){o=o||{};const m=TAGS[k];const col=C[m[1]];ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);ctx.font=`700 11px ${MONO}`;const w=ctx.measureText(m[0]).width+14;const x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+  rr(x0,y-9,w,18,9);ctx.fillStyle=mix(C.panel,col,.16);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x0+7,y+.5);ctx.restore();return w}
+const LAYERS={phil:["Philosophy and models","phil"],edu:["Education","edu"],law:["Law and recognition","law"],res:["Research","evid"]};
+/* ---------- year axis ---------- */
+function yAxis(x,y,w,y0,y1,ticks,o){o=o||{};const X=v=>x+(v-y0)/(y1-y0)*w;line(x,y,x+w,y,C["ink-soft"],2);
+  (ticks||[]).forEach(t=>{line(X(t),y-5,X(t),y+5,C["ink-soft"],1.6);txt(X(t),y+(o.below===false?-14:16),String(t),{size:o.size||12,align:"center",mono:true,color:C["ink-soft"],weight:600})});return X}
+/* growing axis with a moving "now" cursor */
+function cursor(x,y1,y2,col,lab){line(x,y1,x,y2,col,2,[5,4]);if(lab)label(x,y1-10,lab,{size:12,weight:700,mono:true,border:col})}
+function pin(x,y,col,r,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);r=r||7;circ(x,y,r,col,C.panel,2);circ(x,y,r*.38,C.panel);ctx.restore()}
+/* event card that drops into place: p 0..1 */
+function evCard(x,y,w,h,yr,t,col,p,o){o=o||{};if(p<=0)return;const e=smooth(p);ctx.save();ctx.globalAlpha*=clamp(p*1.6,0,1);const yy=y-(1-e)*40;
+  rr(x,yy,w,h,7);ctx.fillStyle=o.on?mix(C.panel,col,.2):hexA(C.panel,.96);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=o.on?2.6:1.6;ctx.stroke();
+  rr(x,yy,6,h,3);ctx.fillStyle=col;ctx.fill();
+  if(yr!=null&&yr!==""){ctx.font=`700 12.5px ${MONO}`;ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(String(yr),x+12,yy+13)}
+  wrapText(t,x+12,yy+(yr!=null&&yr!==""?31:15),w-18,o.lh||15,{size:o.size||12.5,weight:o.w||500,color:C.ink});ctx.restore()}
+function tlink(x1,y1,x2,y2,col,p){if(p<=0)return;ctx.save();ctx.globalAlpha*=clamp(p,0,1);line(x1,y1,x1+(x2-x1)*smooth(p),y1+(y2-y1)*smooth(p),col,1.4,[3,3]);ctx.restore()}
+/* ---------- people (generic, simplified) ---------- */
+const SKINS=["skin","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function person(x,y,s,o){o=o||{};const sk=C[o.skin||"skin"],sh=o.shirtCol||C[o.shirt||"shirt1"];const lean=o.lean||0;ctx.save();ctx.translate(x,y);ctx.rotate(lean);
+  /* legs */ if(o.sit){rr(-s*.32,-s*.05,s*.64,s*.16,s*.06);ctx.fillStyle=mix(sh,"#000",.35);ctx.fill();rr(-s*.3,s*.08,s*.14,s*.45,s*.05);ctx.fill();rr(s*.16,s*.08,s*.14,s*.45,s*.05);ctx.fill()}
+  else{rr(-s*.24,0,s*.2,s*.62,s*.07);ctx.fillStyle=mix(sh,"#000",.35);ctx.fill();rr(s*.04,0,s*.2,s*.62,s*.07);ctx.fill()}
+  /* body */ ctx.beginPath();ctx.moveTo(-s*.34,s*.02);ctx.quadraticCurveTo(-s*.38,-s*.52,-s*.14,-s*.6);ctx.lineTo(s*.14,-s*.6);ctx.quadraticCurveTo(s*.38,-s*.52,s*.34,s*.02);ctx.closePath();fillStroke(sh,hexA(C.ink,.35),1.2);
+  if(o.coat){ctx.beginPath();ctx.moveTo(0,-s*.6);ctx.lineTo(-s*.1,-s*.1);ctx.lineTo(0,s*.02);ctx.lineTo(s*.1,-s*.1);ctx.closePath();ctx.fillStyle=C.paper;ctx.fill()}
+  /* arms */ const ar=o.arm||0;ctx.save();ctx.translate(s*.3,-s*.5);ctx.rotate(-.25-ar);rr(-s*.06,0,s*.13,s*.46,s*.06);ctx.fillStyle=sh;ctx.fill();circ(0,s*.48,s*.07,sk);ctx.restore();
+  ctx.save();ctx.translate(-s*.3,-s*.5);ctx.rotate(.25+(o.arm2||0));rr(-s*.07,0,s*.13,s*.46,s*.06);ctx.fillStyle=sh;ctx.fill();circ(0,s*.48,s*.07,sk);ctx.restore();
+  /* head */ circ(0,-s*.82,s*.2,sk,hexA(C.ink,.35),1);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(0,-s*.84,s*.21,Math.PI*1.02,Math.PI*1.98);ctx.quadraticCurveTo(0,-s*.94,-s*.2,-s*.86);ctx.closePath();ctx.fillStyle=o.hairCol||C.hair;ctx.fill()}
+  if(o.beard){ctx.beginPath();ctx.moveTo(-s*.15,-s*.78);ctx.quadraticCurveTo(0,-s*.35,s*.15,-s*.78);ctx.quadraticCurveTo(0,-s*.66,-s*.15,-s*.78);ctx.fillStyle=o.beardCol||"#B9B4AA";ctx.fill()}
+  if(o.hat){rr(-s*.28,-s*1.02,s*.56,s*.06,2);ctx.fillStyle=C.ink;ctx.fill();rr(-s*.17,-s*1.3,s*.34,s*.3,3);ctx.fill()}
+  if(o.cap){ctx.beginPath();ctx.arc(0,-s*.92,s*.2,Math.PI,0);ctx.fillStyle=o.capCol||C.ink;ctx.fill()}
+  ctx.restore()}
+function speech(x,y,w,h,t,o){o=o||{};if(o.a!=null&&o.a<=0)return;ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);rr(x,y,w,h,10);fillStroke(C.panel,o.col||C["ink-soft"],1.5);
+  ctx.beginPath();const tx=o.tx==null?x+20:o.tx;ctx.moveTo(tx,y+h);ctx.lineTo(tx+(o.tdx||-8),y+h+12);ctx.lineTo(tx+12,y+h);ctx.closePath();ctx.fillStyle=C.panel;ctx.fill();ctx.strokeStyle=o.col||C["ink-soft"];ctx.stroke();rr(x+1,y+h-3,w-2,3,1);ctx.fillStyle=C.panel;ctx.fill();
+  wrapText(t,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.w||500,color:C.ink});ctx.restore()}
+/* ---------- buildings, documents, objects ---------- */
+function building(x,y,w,h,o){o=o||{};const col=o.col||C.edu;ctx.beginPath();ctx.moveTo(x-8,y-h);ctx.lineTo(x+w/2,y-h-h*.32);ctx.lineTo(x+w+8,y-h);ctx.closePath();fillStroke(mix(C.panel,col,.35),col,1.6);
+  rr(x,y-h,w,h,2);fillStroke(mix(C.panel,col,.12),col,1.6);const n=Math.max(2,Math.round(w/26));for(let i=0;i<n;i++){const cx=x+(i+.5)*w/n;rr(cx-5,y-h+12,10,h*.32,2);ctx.fillStyle=o.lit&&o.lit>i/n?C.gold:hexA(col,.35);ctx.fill();if(i!==Math.floor(n/2)){rr(cx-5,y-h*.45,10,h*.25,2);ctx.fill()}}
+  rr(x+w/2-8,y-h*.36,16,h*.36,2);ctx.fillStyle=col;ctx.fill();line(x-10,y,x+w+10,y,C["ink-soft"],2)}
+function docPaper(x,y,w,h,o){o=o||{};ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);rr(-w/2,-h/2,w,h,4);fillStroke(C.parch,C["parch-edge"],1.5);
+  if(o.title)txt(0,-h/2+15,o.title,{size:o.ts||12,weight:700,align:"center",mono:true,color:C.ink});const n=o.lines==null?5:o.lines;for(let i=0;i<n;i++){const ly=-h/2+(o.title?32:14)+i*10;if(ly>h/2-8)break;line(-w/2+10,ly,w/2-10-(i%3)*10,ly,hexA(C.ink,.35),1.4)}
+  if(o.seal)circ(w/2-16,h/2-16,9,o.seal,null);ctx.restore()}
+function gavel(x,y,ang,s){s=s||1;ctx.save();ctx.translate(x,y);ctx.rotate(ang);rr(-4*s,0,8*s,46*s,3);ctx.fillStyle=C.wood;ctx.fill();rr(-22*s,-12*s,44*s,20*s,5);ctx.fillStyle=mix(C.wood,"#000",.15);ctx.fill();ctx.restore()}
+function scales(x,y,tilt,o){o=o||{};const s=o.s||1;line(x,y,x,y-90*s,C["ink-soft"],3);rr(x-26*s,y,52*s,8*s,3);ctx.fillStyle=C["ink-soft"];ctx.fill();
+  ctx.save();ctx.translate(x,y-86*s);ctx.rotate(tilt);line(-70*s,0,70*s,0,C["ink-soft"],3);ctx.restore();circ(x,y-88*s,5,C.gold);
+  [[-1,o.l],[1,o.r]].forEach(([d,lab])=>{const px=x+d*70*s*Math.cos(tilt),py=y-86*s+d*70*s*Math.sin(tilt);line(px,py,px-18*s,py+40*s,C["ink-soft"],1.2);line(px,py,px+18*s,py+40*s,C["ink-soft"],1.2);
+    ctx.beginPath();ctx.ellipse(px,py+40*s,26*s,7*s,0,0,Math.PI);fillStroke(mix(C.panel,C.gold,.4),C.gold,1.5);if(lab)label(px,py+62*s,lab,{size:12,weight:700,border:d<0?C.phil:C.law})})}
+function quill(x,y,a){ctx.save();ctx.translate(x,y);ctx.rotate(a||-.6);ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(10,-30,4,-60);ctx.quadraticCurveTo(-6,-30,0,0);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();line(0,0,3,-56,C["ink-soft"],1);ctx.restore()}
+function bottle(x,y,s,col,lab){rr(x-s*.35,y-s,s*.7,s,4);fillStroke(hexA(col,.25),col,1.6);rr(x-s*.14,y-s*1.3,s*.28,s*.3,2);fillStroke(C.panel,col,1.4);if(lab)txt(x,y-s*.45,lab,{size:10.5,weight:700,align:"center",mono:true,color:C.ink})}
+/* ---------- tile map of the 50 states (schematic) ---------- */
+const STATES=[["AK",0,0],["ME",0,10],["WI",1,5],["VT",1,9],["NH",1,10],["WA",2,0],["ID",2,1],["MT",2,2],["ND",2,3],["MN",2,4],["IL",2,5],["MI",2,6],["NY",2,8],["MA",2,9],
+ ["OR",3,0],["NV",3,1],["WY",3,2],["SD",3,3],["IA",3,4],["IN",3,5],["OH",3,6],["PA",3,7],["NJ",3,8],["CT",3,9],["RI",3,10],
+ ["CA",4,0],["UT",4,1],["CO",4,2],["NE",4,3],["MO",4,4],["KY",4,5],["WV",4,6],["VA",4,7],["MD",4,8],["DE",4,9],
+ ["AZ",5,1],["NM",5,2],["KS",5,3],["AR",5,4],["TN",5,5],["NC",5,6],["SC",5,7],["OK",6,3],["LA",6,4],["MS",6,5],["AL",6,6],["GA",6,7],["HI",7,0],["TX",7,3],["FL",7,8]];
+function tileMap(x,y,s,fill,o){o=o||{};const gap=s*.1;const pos={};STATES.forEach(st=>{const X=x+st[2]*s,Y=y+st[1]*s;pos[st[0]]=[X+s/2,Y+s/2];const f=fill?fill(st[0]):null;
+  rr(X+gap/2,Y+gap/2,s-gap,s-gap,3);ctx.fillStyle=f||C.land;ctx.fill();ctx.strokeStyle=C["land-edge"];ctx.lineWidth=1;ctx.stroke();
+  if(o.labels!==false)txt(X+s/2,Y+s/2+.5,st[0],{size:o.ls||Math.min(12,s*.36),weight:600,align:"center",mono:true,color:f&&o.inkOn?o.inkOn(st[0]):C.ink})});return pos}
+/* ---------- spine: lateral motion segment (anterior to the left unless flipped) ---------- */
+function vertebraL(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.rotate(o.rot||0);const b=C.bone,e=C["bone-edge"];
+  rr(-s*.62,-s*.25,s*.72,s*.5,s*.08);fillStroke(b,e,1.6);/* body */
+  line(-s*.58,-s*.25,s*.06,-s*.25,hexA(e,.5),3);line(-s*.58,s*.25,s*.06,s*.25,hexA(e,.5),3);/* endplates */
+  ctx.beginPath();ctx.moveTo(s*.08,-s*.24);ctx.lineTo(s*.36,-s*.22);ctx.lineTo(s*.36,-s*.04);ctx.lineTo(s*.08,-s*.02);ctx.closePath();fillStroke(b,e,1.4);/* pedicle */
+  ctx.beginPath();ctx.moveTo(s*.34,-s*.44);ctx.lineTo(s*.5,-s*.46);ctx.lineTo(s*.56,s*.36);ctx.lineTo(s*.4,s*.38);ctx.closePath();fillStroke(b,e,1.4);/* articular pillar with facets */
+  ctx.beginPath();ctx.moveTo(s*.5,-s*.16);ctx.lineTo(s*1.12,s*.02);ctx.lineTo(s*1.1,s*.2);ctx.lineTo(s*.52,s*.14);ctx.closePath();fillStroke(b,e,1.4);/* lamina and spinous process */
+  ctx.restore()}
+/* two vertebrae + disc + nerve root. o.shift (px, top bone slides), o.rot (rad), o.pinch 0..1, o.flip (anterior to the right) */
+function segment(x,y,s,o){o=o||{};const sh=o.shift||0,rot=o.rot||0,f=o.flip?-1:1;const gap=s*.2;const narrow=clamp(o.pinch||0,0,1);
+  const yT=y-gap/2-s*.25,yB=y+gap/2+s*.25;
+  ctx.save();ctx.translate(x,y);ctx.scale(f,1);ctx.beginPath();ctx.moveTo(-s*.6+sh*.5,-gap/2);ctx.lineTo(s*.06+sh*.5,-gap/2);ctx.quadraticCurveTo(s*.14,0,s*.06,gap/2);ctx.lineTo(-s*.6,gap/2);ctx.quadraticCurveTo(-s*.68,0,-s*.6+sh*.5,-gap/2);
+  fillStroke(hexA(C.disc,.55),C.disc,1.6);ell(-s*.24+sh*.3,0,s*.13,gap*.3,0,C.nucleus,null);ctx.restore();
+  vertebraL(x,yB,s,{flip:o.flip});vertebraL(x+sh*f,yT,s,{rot:rot*f,flip:o.flip});
+  /* foramen: between pedicles, behind the disc */
+  const fx=x+f*(s*.22+sh*.5),fy=y-s*.02;ell(fx,fy,s*.11*(1-narrow*.45),s*.15*(1-narrow*.5),0,hexA(C.ecf,.95),hexA(C["bone-edge"],.7),1.2);
+  const rc=narrow>.5?C.pain:C.nerve;circ(fx,fy,s*.06*(1-narrow*.35),rc,hexA(C.ink,.4),1);
+  if(narrow>.5){ctx.save();ctx.globalAlpha*=narrow;circ(fx,fy,s*.17,null,C.pain,2);ctx.restore()}
+  return {fx,fy,root:[[fx,fy],[fx-f*s*.25,fy+s*.32],[fx-f*s*.7,fy+s*.42]]}}
+/* yellow signal dots along a path, rate = dots per second relative */
+function signal(path,T,rate,n,col,r){n=n||6;for(let i=0;i<n;i++){const p=P(T*rate+i/n,1);const q=along(path,p);circ(q[0],q[1],r||4,col||C.nerve,hexA(C.ink,.3),1)}}
+/* ---------- idea flow ---------- */
+function node(x,y,w,h,t,sub,col,on,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);rr(x,y,w,h,9);ctx.fillStyle=on?mix(C.panel,col,.22):hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=on?2.6:1.6;ctx.stroke();
+  if(sub){txt(x+w/2,y+h/2-9,t,{size:13.5,weight:700,align:"center"});wrapText(sub,x+w/2,y+h/2+9,w-14,14,{size:11.5,align:"center",color:C["ink-soft"]})}else txt(x+w/2,y+h/2,t,{size:13.5,weight:700,align:"center"});ctx.restore()}
+function flow(x1,y1,x2,y2,col,T,p,n){if(p!=null&&p<=0)return;const e=p==null?1:smooth(p);const X2=x1+(x2-x1)*e,Y2=y1+(y2-y1)*e;arrow(x1,y1,X2,Y2,hexA(col,.85),2.2);
+  if(e>=1){n=n||3;for(let i=0;i<n;i++){const q=P(T*.6+i/n,1);circ(lerp(x1,x2,q),lerp(y1,y2,q),3.6,col)}}}
+/* ---------- split scene frame ---------- */
+function splitFrame(lt,rt,o){o=o||{};panelBox(12,12,382,456,{fill:hexA(mix(C.panel,C.phil,.06),.95),stroke:hexA(C.phil,.7)});panelBox(406,12,382,456,{fill:hexA(mix(C.panel,C.evid,.06),.95),stroke:hexA(C.evid,.7)});
+  tagPill(24,32,o.lk||"model");tagPill(418,32,o.rk||"evid");if(lt)txt(24,56,lt,{size:13.5,weight:700});if(rt)txt(418,56,rt,{size:13.5,weight:700})}
+/* ---------- trial arms (evidence) ---------- */
+function trialArms(x,y,w,T,o){o=o||{};const n=o.n||40;const fill=clamp(T/(o.dur||6),0,1);const k=Math.floor(n*fill);
+  [["Manipulation",C.evid,o.a||.62],["Other recommended care",C.act3,o.b||.58]].forEach((arm,j)=>{const yy=y+j*70;txt(x,yy,arm[0],{size:12.5,weight:700});
+    for(let i=0;i<n;i++){const cx=x+8+(i%20)*((w-16)/20),cy=yy+18+Math.floor(i/20)*14;const on=i<k;const better=rnd(i*7+j*31)<arm[2];circ(cx,cy,5,on?(better?arm[1]:C.panel):hexA(C.rule,.5),on?arm[1]:null,1.2)}})}
+function spectrumBar(x,y,w,lt,rt){const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,C.phil);g.addColorStop(1,C.evid);rr(x,y-6,w,12,6);ctx.fillStyle=g;ctx.fill();
+  txt(x,y+24,lt,{size:12.5,weight:700});txt(x+w,y+24,rt,{size:12.5,weight:700,align:"right"})}
+function bigYear(x,y,t,col,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);ctx.font=`700 30px ${MONO}`;ctx.fillStyle=col||C.ink;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,x,y);ctx.restore()}
+function ear(x,y,s){ctx.beginPath();ctx.ellipse(x,y,s*.6,s,0,0,TAU);fillStroke(C.skin,hexA(C.ink,.4),1.4);ctx.beginPath();ctx.ellipse(x+s*.05,y,s*.3,s*.6,0,0,TAU);ctx.strokeStyle=hexA(C.ink,.35);ctx.stroke()}
+function soundWaves(x,y,T,col,a){for(let i=0;i<3;i++){const p=P(T*.8+i/3,1);ctx.save();ctx.globalAlpha*=(1-p)*(a==null?1:a);ctx.beginPath();ctx.arc(x,y,10+p*40,-.6,.6);ctx.strokeStyle=col;ctx.lineWidth=2.4;ctx.stroke();ctx.restore()}}
+let SYS={},SC={};
+/* ================= shared event bank (both pages) =================
+   [id, year (for placement), shown date, lane, short label, title, detail, approx?] */
+const EV_RAW=[
+ ["mesmer",1775,"1770s","phil","Mesmer","Mesmer teaches animal magnetism","Franz Anton Mesmer taught that an invisible magnetic fluid flows through the body and that blocked flow causes illness. Healers passed their hands over patients to move it.",1],
+ ["comm",1784,"1784","res","Commission","A French commission tests animal magnetism","A royal commission in France tested Mesmer's claims, found no magnetic fluid and credited the effects to imagination and expectation. It was one of the first organized tests of a healing claim.",0],
+ ["heroic",1815,"early 1800s","phil","Heroic medicine","Heroic medicine at its height","Many doctors bled, purged and blistered patients to force the body back into balance. Harsh treatments pushed patients toward gentler rival systems.",1],
+ ["still",1874,"1874","edu","Osteopathy","A.T. Still announces osteopathy","Andrew Taylor Still, a Missouri doctor, founded osteopathy, a hands on system built on the idea that structure affects function.",0],
+ ["palmag",1886,"1880s","phil","Magnetic healer","D.D. Palmer works as a magnetic healer","Palmer practised magnetic healing in Davenport, Iowa, before he founded chiropractic.",1],
+ ["kirks",1892,"1892","edu","Kirksville","First osteopathic school opens","A.T. Still opened his first school in Kirksville, Missouri.",0],
+ ["lillard",1895,"1895","phil","First adjustment","Palmer's first adjustment, as he told it","In September 1895 Palmer adjusted Harvey Lillard, a janitor who had been nearly deaf for about 17 years. Palmer wrote that his hearing improved. The story rests mainly on Palmer's own account.",0],
+ ["name",1896,"1896","phil","The name","The name chiropractic","A patient, the Reverend Samuel Weed, suggested joining the Greek words cheir (hand) and praxis (practice): done by hand.",0],
+ ["school",1897,"1897","edu","Palmer School","The Palmer School begins","Palmer began teaching students in Davenport, the start of the first chiropractic school.",0],
+ ["jail",1906,"1906","law","Palmer jailed","D.D. Palmer jailed","Palmer was convicted in Iowa of practising medicine without a licence and spent time in jail, like many early chiropractors.",0],
+ ["bj",1906,"about 1906","edu","B.J. leads","B.J. Palmer takes over the school","D.D. Palmer's son B.J. took control of the Palmer School and led it for more than fifty years.",1],
+ ["morikubo",1907,"1907","law","Morikubo","The Morikubo trial","Shegataro Morikubo, charged in Wisconsin with practising osteopathy without a licence, was acquitted after his lawyer argued chiropractic was a separate system.",0],
+ ["book",1910,"1910","phil","Tone","Palmer's 1910 book and the tone model","Palmer's large 1910 book moved from bone pinching nerve to tone, the tension of nerves, and claimed that about 95 percent of disease came from displaced vertebrae.",0],
+ ["kansas",1913,"1913","law","Kansas","Kansas passes the first licensing law","Kansas became the first state to license chiropractors.",0],
+ ["ncm",1924,"1924","edu","Neurocalometer","B.J. Palmer introduces the neurocalometer","A heat reading instrument slid along the spine. B.J. taught that temperature differences marked subluxations. The device and its cost split the profession.",0],
+ ["premise",1927,"1927","phil","Major premise","The 33 principles and the major premise","R.W. Stephenson set out chiropractic philosophy as 33 principles, starting from the major premise that a Universal Intelligence is in all matter.",0],
+ ["bjdeath",1961,"1961","edu","B.J. dies","B.J. Palmer dies","B.J. Palmer died after leading the Palmer School for more than five decades.",0],
+ ["quack",1963,"1963","law","AMA committee","AMA forms its Committee on Quackery","The American Medical Association formed a committee that worked to contain chiropractic. It was disbanded in 1974.",0],
+ ["medicare",1972,"1972","law","Medicare","Medicare adds limited coverage","Congress added Medicare coverage for manual manipulation of the spine to correct a subluxation.",0],
+ ["cce",1974,"1974","edu","CCE","CCE recognized to accredit programs","The US Office of Education recognized the Council on Chiropractic Education as the accrediting agency for chiropractic programs.",0],
+ ["louisiana",1974,"1974","law","Louisiana","Louisiana: licensure in all 50 states","Louisiana became the last state to pass a chiropractic licensing law.",0],
+ ["nincds",1975,"1975","res","NINCDS","The NINCDS research conference","A US government institute brought chiropractors, osteopaths, medical doctors and scientists together and concluded that too little good research existed; it called for studies.",0],
+ ["wilkfile",1976,"1976","law","Wilk suit","Wilk v. AMA is filed","Chester Wilk and four other chiropractors sued the AMA and other groups under antitrust law.",0],
+ ["wilk",1987,"1987","law","Wilk ruling","The Wilk ruling","A federal judge ruled that the AMA had run an illegal boycott of chiropractors and ordered it to stop. The ruling did not decide whether chiropractic works.",0],
+ ["appeal",1990,"1990","law","Appeal","The Wilk ruling is upheld","An appeals court upheld the 1987 ruling.",0],
+ ["ahcpr",1994,"1994","res","Back guideline","A federal guideline lists manipulation","A US federal guideline on acute low back problems listed spinal manipulation as an option in the first weeks.",0],
+ ["acc",1996,"1996","phil","Definition","The colleges agree on a subluxation definition","The chiropractic colleges defined subluxation broadly as a complex of joint changes that compromise nerve integrity and may influence health.",0],
+ ["xray",2000,"2000","law","X ray rule","Medicare drops its X ray requirement","Medicare stopped requiring an X ray to show a subluxation before covering manipulation.",0],
+ ["guide17",2017,"2017","res","Guideline","A major guideline includes manipulation","A major physician guideline listed spinal manipulation among several nonpharmacologic choices for low back pain.",0]];
+const EVENTS=EV_RAW.map(r=>({id:r[0],y:r[1],yr:r[2],lane:r[3],short:r[4],title:r[5],detail:r[6],approx:!!r[7]}));
+const EVI={};EVENTS.forEach(e=>EVI[e.id]=e);
+const LANE_ORDER=["phil","edu","law","res"];
+/* piecewise year axis: 1770 to 1870 squeezed into the first 12 percent */
+function yearX(x,w,v){const a=w*.12;return v<1870?x+(v-1770)/100*a:x+a+(v-1870)/150*(w-a)}
+const TL_TICKS=[1770,1870,1900,1925,1950,1975,2000,2020];
+/* lay out labels in rows inside each lane: returns map id->{row,full} */
+function tlLayout(evs,x,w,rows,keyFont){const out={};ctx.font=keyFont;
+  LANE_ORDER.forEach(L=>{const list=evs.filter(e=>e.lane===L).sort((a,b)=>a.y-b.y);const ends=new Array(rows).fill(-1e9);
+    list.forEach(e=>{const X=yearX(x,w,e.y);const full=e.yr+" "+e.short,wf=ctx.measureText(full).width+12,wy=ctx.measureText(e.yr).width+12;let placed=false;
+      for(let r=0;r<rows&&!placed;r++){if(X-6>ends[r]+4&&X-6+wf<x+w+30){ends[r]=X-6+wf;out[e.id]={row:r,text:full};placed=true}}
+      for(let r=0;r<rows&&!placed;r++){if(X-6>ends[r]+4){ends[r]=X-6+wy;out[e.id]={row:r,text:e.yr};placed=true}}
+      if(!placed)out[e.id]={row:-1,text:""}})});return out}
+/* draw the layered timeline. o: {x,y,w,h,evs,prog:fn(e)->0..1,sel:id,T,cursor:year|null,lanes:set} */
+function tlDraw(o){const L=LANE_ORDER.filter(k=>!o.lanes||o.lanes.has(k));const n=Math.max(1,L.length);const lh=o.h/n;const font=`600 11.5px ${MONO}`;
+  const rows=Math.max(1,Math.floor((lh-34)/17));const lay=tlLayout(o.evs.filter(e=>L.indexOf(e.lane)>=0),o.x,o.w,rows,font);const hits=[];
+  L.forEach((k,i)=>{const col=C[LAYERS[k][1]];const by=o.y+i*lh;rr(o.x-8,by+2,o.w+16,lh-4,6);ctx.fillStyle=hexA(col,.08);ctx.fill();ctx.strokeStyle=hexA(col,.45);ctx.lineWidth=1;ctx.stroke();
+    txt(o.x-2,by+12,LAYERS[k][0].toUpperCase(),{size:10.5,weight:700,mono:true,color:C["ink-soft"]});line(o.x,by+lh-14,o.x+o.w,by+lh-14,hexA(col,.4),1.2,[2,4])});
+  /* axis */ const ay=o.y+o.h+8;line(o.x,ay,o.x+o.w,ay,C["ink-soft"],2);TL_TICKS.forEach(t=>{const X=yearX(o.x,o.w,t);line(X,ay-4,X,ay+4,C["ink-soft"],1.5);txt(X,ay+14,String(t),{size:11.5,align:"center",mono:true,color:C["ink-soft"],weight:600})});
+  const bx=yearX(o.x,o.w,1870);line(bx-4,ay-6,bx,ay+6,C["ink-soft"],1.5);line(bx,ay-6,bx+4,ay+6,C["ink-soft"],1.5);
+  if(o.cursor!=null){const X=yearX(o.x,o.w,clamp(o.cursor,1770,2020));line(X,o.y,X,ay,C.accent,2,[5,4]);label(X,o.y-8,String(Math.floor(o.cursor)),{size:12,weight:700,mono:true,border:C.accent})}
+  o.evs.forEach(e=>{const li=L.indexOf(e.lane);if(li<0)return;const p=o.prog?o.prog(e):1;if(p<=0)return;const col=C[LAYERS[e.lane][1]];const X=yearX(o.x,o.w,e.y);const by=o.y+li*lh;const py=by+lh-14;const ly=by+26+lay[e.id].row*17;const on=o.sel===e.id;const e2=smooth(p);
+    ctx.save();ctx.globalAlpha*=clamp(p*1.5,0,1);const dy=(1-e2)*-26;
+    if(lay[e.id].row>=0){line(X,py+dy,X,ly+7+dy,hexA(col,.7),1.1);ctx.font=font;const tw=ctx.measureText(lay[e.id].text).width;rr(X-6,ly-8+dy,tw+12,17,4);ctx.fillStyle=on?mix(C.panel,col,.3):C.panel;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=on?2.2:1.2;ctx.stroke();
+      ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(lay[e.id].text,X,ly+.5+dy)}
+    if(on){const pr=P(o.T||0,1.4);ctx.save();ctx.globalAlpha*=(1-pr);circ(X,py+dy,8+pr*14,null,col,2.5);ctx.restore()}
+    pin(X,py+dy,col,on?8:6);ctx.restore();hits.push({id:e.id,x:X,y:py,ly})});
+  return hits}
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · The 1800s health landscape",col:"act1"},
+            2:{name:"Part 2 · D.D. Palmer and the founding story",col:"act2"},
+            3:{name:"Part 3 · B.J. Palmer and growth",col:"act3"},
+            4:{name:"Part 4 · The philosophical model",col:"act4"},
+            5:{name:"Part 5 · How the subluxation model changed",col:"act5"},
+            6:{name:"Part 6 · Law and recognition",col:"act6"},
+            7:{name:"Part 7 · Research and the profession today",col:"act7"}};
+const NACT=7;
+const STEPS=[
+{act:0,scene:"map",
+ desc:"A long horizontal timeline runs across the middle of the picture from 1770 to 2020, with year labels below it. Above and below the line, four coloured lanes are labelled: violet for philosophy and models, blue for education, teal for law and recognition, and indigo for research. A dashed cursor sweeps from left to right, and as it passes each date a small card drops into its lane: 1874 osteopathy, 1895 first adjustment, 1897 the Palmer School, 1907 the Morikubo trial, 1913 the first state licence, 1927 the major premise, 1972 Medicare, 1974 the last state and accreditation, 1975 the research conference, 1987 the Wilk ruling and 1994 the first back pain guideline. Along the bottom, seven part cards light up one at a time.",
+ title:"The big picture: a profession and its models over time",
+ body:`<p>This module follows <b>chiropractic</b> from its start in 1895 to today. You will see four threads, or <b>layers</b>, woven together: the <b>philosophy and models</b> its founders used to explain health, the <b>schools</b> that taught it, the <b>laws and court cases</b> that shaped it, and the <b>research</b> that later tested it.</p>
+ <p>This is history and theory, so the pictures are timelines, maps and idea diagrams rather than body physiology. When a step shows an idea from the past, it is labelled <b>historical model</b>. When it shows what research says now, it is labelled <b>current evidence</b>. The two are often shown side by side.</p>
+ <p>Treat every model with respect. People built these ideas to make sense of what they saw, with the tools they had. Our job is to understand them in their own terms and then ask what the evidence supports. Nothing here is graded.</p>`,
+ analogy:"Think of a family photo album. Each photo shows how people dressed and thought at that time. You do not laugh at old photos; you read them to understand where the family came from and how it changed.",
+ terms:[["Model","A simplified explanation of how something works. Models can be useful even when they are later revised."],["Historical model","An explanation used in the past, taught here in its own terms."],["Current evidence","What well designed research shows today."]],
+ check:null,caption:"Four layers of history build along one timeline, from 1770 to today.",
+ legend:[["phil","Philosophy and models"],["edu","Education"],["law","Law and recognition"],["evid","Research"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"heroic",
+ desc:"On the left is a doctor's shelf from the early 1800s with a bowl, a lancet, a bottle labelled calomel and a jar of blistering plaster. A red droplet falls into the bowl over and over. In the middle, a gauge labelled harshness of treatment swings toward the high end. On the right, a timeline from 1800 to 1900 builds from left to right, and arrows split off from it toward three cards that drop in: homeopathy, botanical healing and water cure. A caption says many patients looked for gentler options.",
+ title:"Heroic medicine in the early 1800s",
+ body:`<p>In the early 1800s, many American doctors used what historians call <b>heroic medicine</b>: strong treatments meant to force the body back into balance. These included <b>bloodletting</b> (removing blood), <b>purging</b> with drugs such as <b>calomel</b>, a mercury compound, causing vomiting, and blistering the skin.</p>
+ <p>Doctors at the time had no germ theory and few tests. Their model said disease came from imbalance or overstimulation, so draining and purging seemed logical. Today we know these treatments often weakened patients, and mercury is toxic.</p>
+ <p>Many patients wanted gentler care. That opened the door to rival systems such as <b>homeopathy</b>, <b>botanical</b> (herbal) healing and the <b>water cure</b>. Chiropractic was born later in the century into this crowded and competitive world.</p>`,
+ analogy:"Imagine fixing a slow computer by hitting it harder. With no way to see inside, force can look like a reasonable fix, until better tools show what is really going on.",
+ terms:[["Heroic medicine","Harsh early 1800s treatments such as bloodletting and purging, used to force the body back into balance."],["Calomel","A mercury compound once used as a purge; mercury is now known to be toxic."],["Rival systems","Alternative healing approaches that competed with regular doctors, such as homeopathy and botanical healing."]],
+ check:{q:"Why did many patients in the 1800s look for alternatives to regular doctors?",opts:[
+  ["Regular treatments were often harsh, such as bloodletting and mercury purges",true,"Yes. Heroic treatments were unpleasant and often harmful, so gentler systems found eager patients."],
+  ["Regular doctors refused to treat anyone without insurance",false,"Health insurance as we know it did not exist yet. The push came from how harsh the treatments were."],
+  ["Germ theory had shown regular medicine was useless",false,"Germ theory came later in the century, and it actually strengthened regular medicine over time."],
+  ["The law required patients to try three systems",false,"No such law existed. Patients chose freely, and many chose gentler care."]]},
+ caption:"Harsh treatments of the early 1800s pushed many patients toward gentler rival systems.",
+ legend:[["pain","Bloodletting"],["act2","Harshness gauge"],["act1","Rival systems"]]},
+
+{act:1,scene:"market",
+ desc:"A schematic tile map of the United States fills most of the picture, one square per state. Coloured markers pop up across the map one after another, each with a small label: regular doctors in blue, homeopaths in violet, botanical healers in green, water cure in light blue, bonesetters in ivory and magnetic healers in gold. Markers keep appearing until the map is crowded. A panel on the right lists the six kinds of healers with their colours, and a note says there was little licensing, so patients chose among many.",
+ title:"A crowded marketplace of healers",
+ body:`<p>By the late 1800s, an American patient could choose from many kinds of healers. There were <b>regular doctors</b> (the group that would become mainstream medicine), <b>homeopaths</b>, <b>botanical</b> healers, water cure houses, <b>bonesetters</b> and <b>magnetic healers</b>.</p>
+ <p><b>Bonesetters</b> were folk practitioners, often from families who passed the skill down. They set broken bones and worked on sprains and stiff joints with their hands. Their hands on skill was popular, and it is one of the traditions people later compared with chiropractic.</p>
+ <p>For much of the century, licensing laws were weak or missing, so patients picked healers by reputation and word of mouth. Each group had its own model of what caused disease.</p>`,
+ analogy:"Picture a street market with many stalls, each selling a different remedy and each with its own story about why it works. With no inspector at the gate, shoppers pick by word of mouth.",
+ terms:[["Bonesetter","A folk healer who set fractures and treated joints by hand, usually trained within a family."],["Regular doctors","Physicians in the tradition that became mainstream medicine."],["Licensing","A legal rule that only people who meet set standards may practise."]],
+ check:{q:"What did bonesetters mainly do?",opts:[
+  ["Set broken bones and treat sprains and stiff joints by hand",true,"Yes. Bonesetters were hands on folk healers, often trained within their families."],
+  ["Prescribe mercury purges",false,"Purges with calomel were a regular medicine treatment, not a bonesetter's work."],
+  ["Use magnets to move a fluid through the body",false,"That describes magnetic healing, a different tradition."],
+  ["Run licensed medical schools",false,"Bonesetters usually learned from family members, not in schools."]]},
+ caption:"Many kinds of healers competed for patients, with little licensing.",
+ legend:[["act3","Regular doctors"],["phil","Homeopaths"],["para","Botanical healers"],["disc","Water cure"],["bone","Bonesetters","s"],["gold","Magnetic healers"]]},
+
+{act:1,scene:"magnet",
+ desc:"An idea flow diagram runs left to right. The first box says Mesmer, 1770s, animal magnetism. Golden dots stream from it along an arrow to a box marked 1784 commission, which shows a small set of scales and the words effects came from imagination. A second arrow leads to a box for American magnetic healers in the 1800s, and a third to D.D. Palmer, magnetic healer in Davenport, Iowa, in the 1880s. Under the diagram a figure sweeps a hand over a seated patient while faint gold wavy lines spread out, labelled historical model: a magnetic fluid.",
+ title:"Magnetic healing: Palmer's first career",
+ body:`<p><span class="tagline m">Historical model</span></p>
+ <p>In the 1770s, the German doctor <b>Franz Anton Mesmer</b> taught <b>animal magnetism</b>: the idea that an invisible magnetic fluid flows through the body, and that illness comes when it is blocked. Healers passed their hands over patients to move this fluid.</p>
+ <p>In 1784 a French royal commission tested the claims. It found no magnetic fluid and concluded that the effects came from the patients' <b>imagination</b> and expectations. Even so, magnetic healing stayed popular, and it spread to America in the 1800s.</p>
+ <p><b>D.D. Palmer</b>, the founder of chiropractic, worked as a <b>magnetic healer</b> in Davenport, Iowa, from the 1880s. His later ideas about an inner force running the body grew partly out of this world.</p>`,
+ analogy:"It is like an early weather theory that blamed storms on angry spirits. The careful test did not find the spirits, but it did find that people's beliefs shaped what they felt.",
+ terms:[["Animal magnetism","Mesmer's 1770s idea that an invisible magnetic fluid in the body affects health."],["1784 commission","A French panel that tested Mesmer's claims and credited the effects to imagination."],["Magnetic healer","A practitioner who passed the hands over patients to move a supposed magnetic force."]],
+ check:{q:"What did the 1784 commission conclude about animal magnetism?",opts:[
+  ["It found no magnetic fluid and credited the effects to imagination and expectation",true,"Yes. It was one of the earliest organized tests of a healing claim."],
+  ["It proved a magnetic fluid flows through the body",false,"The commission found no such fluid."],
+  ["It made magnetic healing illegal in America",false,"It was a French commission and did not make American law."],
+  ["It concluded that the spine controls magnetism",false,"The spine was not part of the commission's question. Chiropractic did not exist yet."]]},
+ caption:"Ideas flow from Mesmer's animal magnetism to American magnetic healers like D.D. Palmer.",
+ legend:[["gold","Magnetic healing idea"],["phil","Historical model"],["evid","Test of the claim"]]},
+
+{act:1,scene:"osteo",
+ desc:"A timeline from 1860 to 1900 builds across the top. A card drops in at 1874 saying A.T. Still announces osteopathy, then another at 1892 saying first osteopathic school, Kirksville, Missouri. Below, a schematic tile map shows Missouri glowing in blue with a pin, and Iowa next to it with a gold pin for Davenport. A dashed arrow with a question mark runs from Missouri to Iowa, labelled historians debate how much osteopathy influenced Palmer. On the right, a small spine drawing has hands beside it and the words body as a machine; structure affects function.",
+ title:"Osteopathy: A.T. Still and 1874",
+ body:`<p><b>Andrew Taylor Still</b> was a frontier doctor in Missouri. After losing three of his children to meningitis, he lost faith in the drugs of his day. In <b>1874</b> he announced a new system he called <b>osteopathy</b>.</p>
+ <p>Still taught that the body is like a machine that can heal itself if its <b>structure</b> is in good order. He used his hands to work on bones, muscles and joints, aiming to improve blood flow and nerve function. He opened his first school in Kirksville, Missouri, in <b>1892</b>.</p>
+ <p>Kirksville is not far from Davenport, Iowa, where Palmer worked. Historians still <b>debate</b> how much osteopathy influenced Palmer. Palmer insisted chiropractic was his own discovery. That claim of being separate would later matter in court.</p>`,
+ analogy:"Two inventors working on similar machines in nearby towns. Each says the idea was his own, and historians later sift the letters and dates to see who borrowed what.",
+ terms:[["Osteopathy","A system founded by A.T. Still in 1874 that focused on the body's structure and hands on treatment."],["A.T. Still","Andrew Taylor Still, the Missouri doctor who founded osteopathy."],["Structure and function","The idea that the body's build and its working are closely linked."]],
+ check:{q:"Which came first?",opts:[
+  ["Osteopathy (1874), about 21 years before Palmer's first adjustment (1895)",true,"Yes. 1895 minus 1874 is 21 years. Osteopathy was already established when chiropractic began."],
+  ["Chiropractic (1895), about 21 years before osteopathy",false,"Check the dates: Still announced osteopathy in 1874, before 1895."],
+  ["They began in the same year",false,"They began 21 years apart, 1874 and 1895."],
+  ["Osteopathy began in 1910",false,"1910 is the year of Palmer's big book. Osteopathy dates from 1874."]]},
+ caption:"Osteopathy began in Missouri in 1874, two decades before chiropractic.",
+ legend:[["edu","Osteopathy"],["gold","Palmer in Davenport"],["phil","Debated link"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"palmer",
+ desc:"A schematic map shows a pale band for Canada across the top and United States tiles below. A dotted path animates from Ontario in Canada down into Iowa, ending at a gold pin labelled Davenport, Iowa, on the Mississippi River, drawn as a wavy blue line. A figure with a long grey beard stands beside the map. Three small cards appear in turn: born 1845 in Ontario, Canada; several jobs, including teacher and beekeeper; magnetic healer in Davenport, 1880s. A badge says D.D. Palmer, 1845 to 1913.",
+ title:"Who was D.D. Palmer?",
+ body:`<p><b>Daniel David (D.D.) Palmer</b> was born in <b>1845</b> in Ontario, Canada, and moved to the United States as a young man. He worked several jobs, including schoolteacher and beekeeper, before becoming a <b>magnetic healer</b> in <b>Davenport, Iowa</b>, in the 1880s.</p>
+ <p>Palmer read widely about anatomy and the healing systems of his day. He was curious, strong willed and convinced that there must be one basic cause behind disease. He believed the nervous system was the key.</p>
+ <p>He died in <b>1913</b>. By then he had founded chiropractic, opened its first school and written a large book of his theories, published in <b>1910</b>.</p>`,
+ analogy:"Like a self taught tinkerer who reads every manual he can find and becomes certain he has found the one loose wire behind every breakdown.",
+ terms:[["D.D. Palmer","Daniel David Palmer (1845 to 1913), founder of chiropractic."],["Davenport, Iowa","The Mississippi River town where Palmer practised and founded his school."],["Single cause idea","Palmer's belief that most disease shared one basic cause in the nervous system."]],
+ check:{q:"What was D.D. Palmer's main work just before he founded chiropractic?",opts:[
+  ["Magnetic healer",true,"Yes. He practised magnetic healing in Davenport before his 1895 adjustment."],
+  ["Surgeon at a large hospital",false,"Palmer was not a surgeon. He was a self taught magnetic healer."],
+  ["Osteopathic school teacher",false,"He did not teach at an osteopathic school. He worked as a magnetic healer."],
+  ["Lawyer",false,"Lawyers became important later, in court cases. Palmer was a magnetic healer."]]},
+ caption:"Palmer travelled from Ontario to Davenport, Iowa, and worked as a magnetic healer.",
+ legend:[["gold","Davenport"],["disc","Mississippi River"],["canada","Canada","s"],["land","United States","s"]]},
+
+{act:2,scene:"lillard",
+ desc:"Three comic style panels sit side by side under a gold banner reading as told by D.D. Palmer, and the date September 1895. Panel one: a man named Harvey Lillard bends in a cramped space and a small star flashes on his upper back; a note says he felt something give in his back, and his hearing was poor afterward for about 17 years. Panel two: Palmer runs his hand along Lillard's spine, and one bump on the upper back is circled. Panel three: Palmer presses on that spot, and curved sound waves reach Lillard's ear; the caption says Palmer wrote that hearing improved. Each panel fades in after the one before.",
+ title:"September 1895: the Harvey Lillard story, as Palmer told it",
+ body:`<p><span class="tagline h">As told by D.D. Palmer</span></p>
+ <p>The founding story comes mainly from Palmer's own writing. In <b>September 1895</b>, a janitor in Palmer's building, <b>Harvey Lillard</b>, told Palmer he had been nearly deaf for about <b>17 years</b>. Lillard said that while working bent over in a cramped spot, he felt something give way in his back, and his hearing faded soon after.</p>
+ <p>Palmer wrote that he found a vertebra in the upper back that seemed out of place. He pushed on it to put it back, and he wrote that Lillard's hearing improved. Palmer called this the first <b>adjustment</b>.</p>
+ <p>Historians treat this as <b>Palmer's account</b>, not a checked medical record. No doctor tested Lillard's hearing before and after, and members of Lillard's family later told a different version of what happened.</p>`,
+ analogy:"Like a company's founding legend told by the founder. It tells you what he believed and wanted others to believe, but you would want outside records before treating every detail as fact.",
+ terms:[["Harvey Lillard","The janitor whose 1895 treatment Palmer described as the first chiropractic adjustment."],["Adjustment","Palmer's word for a hand thrust meant to move a vertebra back into place."],["Primary source","A first hand account from the time, which may still reflect the writer's point of view."]],
+ check:{q:"Why do historians treat the Lillard story with caution?",opts:[
+  ["It comes mainly from Palmer's own account, with no hearing tests before or after",true,"Yes. A founder's story is valuable, but without outside records the details cannot be checked."],
+  ["It happened in Canada, where records were lost",false,"It happened in Davenport, Iowa. The issue is that the main record is Palmer's own."],
+  ["Lillard was a doctor who disagreed",false,"Lillard was a janitor in the building, not a doctor."],
+  ["The date is unknown within 50 years",false,"The date, September 1895, is well established. The details of what happened are what is uncertain."]]},
+ caption:"Palmer's 1895 account of Harvey Lillard: a story told by the founder, not a checked record.",
+ legend:[["gold","Palmer's account"],["nerve","Area Palmer pressed"],["disc","Sound"]]},
+
+{act:2,scene:"hearing",
+ desc:"The picture is split in two. The left half, tagged historical model, shows a side view of a head and spine with a yellow line running from a vertebra in the upper back up to the ear; a vertebra shifts back into line and yellow dots then flow up to the ear. The right half, tagged what anatomy shows, shows a head with the inner ear and a yellow hearing nerve going straight into the brainstem inside the skull; a dashed line from the upper back stops at the neck with a cross mark, labelled spinal nerves from the upper back do not reach the inner ear. A note at the bottom says hearing loss can change over time for many reasons.",
+ title:"Model and evidence: could a back adjustment restore hearing?",
+ body:`<p><span class="tagline m">Historical model</span> Palmer reasoned that a displaced vertebra pressed on a nerve, the nerve could not carry its signal, and Lillard's hearing failed. Putting the bone back freed the nerve.</p>
+ <p><span class="tagline e">What anatomy shows</span> Hearing travels on the <b>vestibulocochlear nerve</b> (cranial nerve VIII). It runs from the inner ear straight into the <b>brainstem</b>, all inside the skull. Spinal nerves from the upper back do not reach the inner ear. So the pathway Palmer described does not match the anatomy.</p>
+ <p>That does not mean Lillard invented his story. Hearing can vary over time for many reasons, such as ear wax, infection or swelling. The lesson is to separate a <b>report</b> of what happened from the <b>explanation</b> given for it.</p>`,
+ analogy:"If your doorbell stops working and you jiggle the garage light, and the bell then rings, you might think they are wired together. Checking the wiring diagram shows whether they really are.",
+ terms:[["Cranial nerve VIII","The vestibulocochlear nerve, which carries hearing and balance from the inner ear to the brainstem."],["Brainstem","The lowest part of the brain, inside the skull, where cranial nerves connect."],["Report vs explanation","What someone says happened, kept apart from the reason given for it."]],
+ check:{q:"Which fact most weakens Palmer's explanation of Lillard's hearing?",opts:[
+  ["The hearing nerve runs from the inner ear to the brainstem inside the skull, not through the upper back",true,"Yes. The proposed pathway does not exist, so a different explanation is needed for any change in hearing."],
+  ["Lillard was a janitor",false,"His job does not affect whether the nerve pathway is real."],
+  ["The adjustment happened in Iowa",false,"Where it happened does not affect the anatomy."],
+  ["Palmer used his hands",false,"Using hands is not the issue. The issue is the nerve pathway the model needs."]]},
+ caption:"Left: Palmer's model of the nerve to the ear. Right: the real hearing pathway stays inside the skull.",
+ legend:[["phil","Historical model"],["evid","Current evidence"],["nerve","Nerve"],["bone","Bone","s"]]},
+
+{act:2,scene:"naming",
+ desc:"Two Greek word tiles, cheir meaning hand and praxis meaning practice or done, slide toward each other in the middle and join into the word chiropractic, with the year 1896 above. A small figure labelled a patient, Samuel Weed, has a speech bubble suggesting the name. Then a timeline along the bottom gains a card at 1897 and a school building rises beside it, its windows lighting up one by one, labelled the Palmer School, Davenport. Small student figures walk toward the door.",
+ title:"A name in 1896 and a school in 1897",
+ body:`<p>Palmer wanted a name for his method. A patient and friend, the Reverend <b>Samuel Weed</b>, suggested joining two Greek words: <b>cheir</b> (hand) and <b>praxis</b> (practice, or done). The result, <b>chiropractic</b>, means "done by hand". The name dates from <b>1896</b>.</p>
+ <p>In <b>1897</b> Palmer began teaching his method to students in Davenport. This became the <b>Palmer School</b>, the first chiropractic school. Early courses were short, and entry standards were low by today's standards, which was common for many health schools of the time.</p>
+ <p>A school meant the method could spread beyond one man. Graduates set up practices in other towns and states, and some started schools of their own.</p>`,
+ analogy:"Like a new recipe that gets a catchy name and then a cooking school. Once there is a school, the recipe travels to kitchens everywhere, and each new cook adds a little twist.",
+ terms:[["Chiropractic","From the Greek cheir (hand) and praxis (practice): done by hand."],["Palmer School","The first chiropractic school, started by D.D. Palmer in Davenport in 1897."],["Samuel Weed","The patient who suggested the name in 1896."]],
+ check:{q:"Put these in order: first adjustment, the name chiropractic, the first school.",opts:[
+  ["1895 first adjustment, 1896 the name, 1897 the school",true,"Yes. One year apart each: 1895, 1896, 1897."],
+  ["1896 the name, 1895 first adjustment, 1897 the school",false,"The adjustment came first, in 1895. The name followed in 1896."],
+  ["1897 the school, 1896 the name, 1895 first adjustment",false,"That is the reverse. The adjustment came first."],
+  ["All three in 1895",false,"They were spread over three years: 1895, 1896 and 1897."]]},
+ caption:"Two Greek words make chiropractic (1896), and the first school opens in 1897.",
+ legend:[["act2","Greek roots"],["edu","School"],["gold","Year"]]},
+/* ---------- Part 3 ---------- */
+{act:3,scene:"bj",
+ desc:"On the left, a school building grows taller in stages, with new wings added, and a badge above reads B.J. Palmer leads the school from about 1906. Small graduate figures walk out of its door and travel as coloured dots along curved paths onto a schematic tile map of the United States on the right, where pins appear in more and more states. A radio mast on the roof sends out wavy lines. Along the bottom a timeline shows 1882 B.J. born, about 1906 takes over, 1924 neurocalometer and 1961 death.",
+ title:"B.J. Palmer and the growth of the profession",
+ body:`<p>D.D. Palmer's son, <b>Bartlett Joshua (B.J.) Palmer</b> (1882 to 1961), took control of the Palmer School around <b>1906</b>, after a falling out with his father. B.J. led it for more than fifty years.</p>
+ <p>B.J. was a skilled promoter. He grew the school's enrollment, gave many public lectures, wrote many books and used the new medium of <b>radio</b> to spread the word. Graduates opened practices across the country.</p>
+ <p>B.J. also guarded what he saw as pure chiropractic. He was the leading voice for spinal adjustment alone, and he often clashed with chiropractors who wanted to add other methods. These fights shaped the profession for decades.</p>`,
+ analogy:"Like the child who takes over the family shop and turns it into a big brand with radio ads, while arguing with relatives about what the shop should sell.",
+ terms:[["B.J. Palmer","D.D. Palmer's son (1882 to 1961), who led the Palmer School and promoted chiropractic widely."],["Enrollment","The number of students in a school."],["Promotion","Spreading an idea through lectures, books, advertising and radio."]],
+ check:{q:"Which best describes B.J. Palmer's role?",opts:[
+  ["He led the Palmer School for decades and promoted chiropractic widely",true,"Yes. B.J. was the profession's best known promoter and its leading voice for adjustment alone."],
+  ["He founded osteopathy",false,"Osteopathy was founded by A.T. Still in 1874."],
+  ["He ruled in the Wilk case",false,"The Wilk ruling came in 1987, after B.J. died in 1961."],
+  ["He gave chiropractic its name in 1896",false,"The name was suggested by Samuel Weed in 1896."]]},
+ caption:"Under B.J. Palmer the school grew and graduates spread across the country.",
+ legend:[["edu","School"],["act3","Graduates"],["gold","New practices"]]},
+
+{act:3,scene:"ncm",
+ desc:"The picture is split. The left half, tagged what was claimed, shows a back view of a spine with a two pronged probe sliding slowly down it. A needle on a dial beside it swings left and right, and when it swings far, a spot on the spine is circled and labelled heat difference read as subluxation. The right half, tagged current evidence, shows the same probe with a list of things that change skin temperature: blood flow, room temperature, clothing, recent touch and muscle activity, each ticking on. A note says such readings have not been shown to reliably find subluxations. A small timeline marks 1924.",
+ title:"1924: the neurocalometer",
+ body:`<p><span class="tagline m">What was claimed</span> In <b>1924</b>, B.J. Palmer introduced the <b>neurocalometer</b>, a hand held instrument with two probes that slid along either side of the spine. It measured small <b>skin temperature</b> differences. B.J. taught that a difference meant pressure on a nerve, and so a <b>subluxation</b> to adjust.</p>
+ <p>The device was costly to lease, and B.J. made it central to his teaching. Many chiropractors objected to both the cost and the claims, and the dispute split the profession. Some leaders left to build rival groups and schools.</p>
+ <p><span class="tagline e">Current evidence</span> Skin temperature changes with blood flow, room temperature, clothing and many other things. Temperature reading instruments have not been shown to reliably detect a subluxation or predict who will benefit from care.</p>`,
+ analogy:"Like a smoke alarm that beeps whenever someone makes toast. It does detect something real, heat, but not the thing it claims to find.",
+ terms:[["Neurocalometer","A 1924 instrument that compared skin temperature on both sides of the spine."],["Skin temperature","Affected by blood flow, room conditions, clothing and more, so a difference has many possible causes."],["Validity","Whether a test actually measures what it claims to measure."]],
+ check:{q:"Why is a skin temperature difference a weak sign of a subluxation?",opts:[
+  ["Many things change skin temperature, and the readings have not been shown to reliably find subluxations",true,"Yes. A test is only useful if it measures the thing it claims to, and does so reliably."],
+  ["Skin temperature never changes",false,"It changes a lot, which is exactly why a difference is hard to interpret."],
+  ["The device was invented in 1874",false,"It was introduced in 1924. The date is not the problem; the validity is."],
+  ["Heat cannot be measured on skin",false,"Skin heat can be measured. The question is what the measurement means."]]},
+ caption:"Claimed: a heat difference marks a subluxation. Evidence: many things change skin temperature.",
+ legend:[["phil","Claimed use"],["evid","Current evidence"],["pain","Warm spot"]]},
+
+{act:3,scene:"straights",
+ desc:"A road from the left forks into two paths. On the upper path, labelled straights, a single card reads spinal adjustment for subluxation, and the vertebra icon on it glows violet. On the lower path, labelled mixers, cards drop in one after another: spinal adjustment, exercise advice, heat and other physical therapies, diet advice. Small figures walk along both paths. A banner across the top says a debate that began in the early 1900s. A balance at the right sways gently, showing both groups still exist.",
+ title:"Straights and mixers",
+ body:`<p>Early on, chiropractors split into two camps. <b>Straights</b>, led by B.J. Palmer, held that chiropractic should be only the finding and <b>adjusting of subluxations</b> by hand. Anything else, they said, was not chiropractic.</p>
+ <p><b>Mixers</b> added other methods to adjustment, such as exercise advice, heat and other physical therapies, and diet advice. Some early schools, founded within about ten years of the first one, taught this broader approach.</p>
+ <p>The debate is about <b>scope</b>: what chiropractors should do and how they should see their role. Groups on both sides still exist today, and many chiropractors sit somewhere in between.</p>`,
+ analogy:"Like two bakeries. One bakes only bread, the way the founder did, and says that is what a bakery is. The other bakes bread and also sells soups and salads, saying customers need more.",
+ terms:[["Straights","Chiropractors who limit practice to detecting and adjusting subluxations."],["Mixers","Chiropractors who combine adjustment with other methods such as exercise or physical therapies."],["Scope of practice","The range of services a profession offers or is legally allowed to offer."]],
+ check:{q:"A chiropractor uses spinal adjustment plus exercise advice and heat. Which camp does this fit historically?",opts:[
+  ["Mixer",true,"Yes. Adding other methods to adjustment is the mixer approach."],
+  ["Straight",false,"Straights limit practice to subluxation adjustment alone."],
+  ["Osteopath",false,"Osteopathy is a separate profession founded by A.T. Still."],
+  ["Magnetic healer",false,"Magnetic healing used hand passes to move a supposed fluid, not adjustment and exercise."]]},
+ caption:"Straights kept to adjustment alone; mixers added other methods.",
+ legend:[["phil","Straights"],["act3","Mixers"]]},
+
+/* ---------- Part 4 ---------- */
+{act:4,scene:"innate",
+ desc:"An idea flow diagram labelled philosophical model builds from the top. A wide glowing band at the top is labelled Universal Intelligence, the organizing force in all matter. Violet dots flow down from it into a figure's head, labelled Innate Intelligence, the share inside each living thing. From the brain, yellow dots flow down a spinal cord and out along nerves to the heart, lungs, stomach and muscles. Halfway down, a vertebra slides out of line and the dots below it slow and thin out; a label says in this model, interference blocks Innate's messages. Then the vertebra slides back and the flow returns.",
+ title:"Universal and Innate Intelligence",
+ body:`<p><span class="tagline m">Philosophical model</span></p>
+ <p>Palmer's philosophy said there is a <b>Universal Intelligence</b>, an organizing force present in all matter. In each living thing, a share of it works as <b>Innate Intelligence</b>, an inborn wisdom that runs and heals the body.</p>
+ <p>In this model, Innate sends its messages through the <b>nervous system</b>. A misplaced vertebra could <b>interfere</b> with that flow, and the body would then fall ill. The chiropractor's job was to remove the interference so Innate could do its work.</p>
+ <p>This is a <b>vitalistic</b> idea: it says life depends on a special force beyond chemistry and physics. Vitalism was common in the 1800s. Modern biology explains body regulation through nerves, hormones and cell signals, and does not need a life force. Science cannot test the existence of such a force, so it remains a philosophical belief.</p>`,
+ analogy:"Like a radio station broadcasting to every home. Innate is the station's signal in your home, and the spine is the antenna wire. Palmer's model said a kinked wire means static, and fixing the kink brings the music back.",
+ terms:[["Universal Intelligence","In Palmer's philosophy, the organizing force in all matter."],["Innate Intelligence","In Palmer's philosophy, the inborn share of that force that runs each living body."],["Vitalism","The belief that life depends on a special force beyond ordinary chemistry and physics."],["Interference","In the model, a blocked flow of Innate's messages through the nerves."]],
+ check:{q:"Which statement describes Innate Intelligence fairly?",opts:[
+  ["A philosophical idea of an inborn force that runs the body, which science cannot directly test",true,"Yes. It is taught here in its own terms as a philosophical model."],
+  ["A brain region seen on scans",false,"No scan shows Innate Intelligence. It is a philosophical concept, not an anatomical structure."],
+  ["A proven hormone that controls healing",false,"Hormones are real chemical signals, but Innate is not one of them."],
+  ["A type of nerve fibre",false,"Nerve fibres are real structures. Innate is a philosophical idea about what drives them."]]},
+ caption:"In Palmer's model, Innate's messages flow through the nerves unless a vertebra interferes.",
+ legend:[["phil","Universal and Innate (philosophical)"],["nerve","Nerve messages"],["bone","Vertebra","s"]]},
+
+{act:4,scene:"premise",
+ desc:"A chain of boxes builds downward like a staircase, labelled deductive model, 1927. The top box reads major premise: a Universal Intelligence is in all matter and gives it its properties and actions. Arrows lead down through boxes reading Innate runs the body through nerves, interference blocks its messages, and adjustment removes interference. A counter beside the chain counts up to 33 principles. On the right, a second column labelled how science tests ideas shows a loop: idea, prediction, test, result, revise, with a dot travelling around it. A note says the chain starts from a belief; the loop starts from a test.",
+ title:"The major premise and the 33 principles",
+ body:`<p><span class="tagline m">Philosophical model</span></p>
+ <p>In <b>1927</b>, R.W. Stephenson set out chiropractic philosophy as <b>33 principles</b>. Principle 1, the <b>major premise</b>, reads: "A Universal Intelligence is in all matter and continually gives to it all its properties and actions, thus maintaining it in existence."</p>
+ <p>The other principles follow from it step by step, like a geometry proof. This is <b>deductive</b> reasoning: start with a premise you accept as true, then reason down to conclusions, ending with the need to correct subluxations.</p>
+ <p>Science works the other way. It turns an idea into a <b>prediction</b>, tests it, and changes the idea if the results disagree. A deductive chain can be perfectly logical yet only as sound as its starting premise.</p>`,
+ analogy:"Like a long line of dominoes. If the first domino is set up right, the rest fall neatly. But the pattern only tells you about the real world if that first domino really stands where you think.",
+ terms:[["Major premise","Principle 1 of the 1927 list: a Universal Intelligence is in all matter."],["Deductive reasoning","Reasoning from a starting premise down to conclusions."],["Testable prediction","A statement about what should be observed, which a study can check."]],
+ check:{q:"What is the main difference between the major premise approach and a scientific approach?",opts:[
+  ["The premise is accepted first and reasoned from; science tests predictions and revises ideas",true,"Yes. Deduction can be tidy, but it depends on the starting premise, while science keeps checking against results."],
+  ["Science never uses logic",false,"Science uses logic constantly. The difference is that it tests its starting ideas."],
+  ["The 33 principles were proven in clinical trials",false,"They were set out as philosophy in 1927, not tested in trials."],
+  ["The major premise is about bones only",false,"The major premise is about a Universal Intelligence in all matter, a much broader claim."]]},
+ caption:"A chain reasoned from a premise, beside the test and revise loop of science.",
+ legend:[["phil","Deductive chain"],["evid","Science loop"]]},
+
+{act:4,scene:"sublux",
+ desc:"A large side view of two vertebrae with a blue disc between them fills the left of the picture. A yellow nerve root leaves through the opening between them, with yellow dots flowing along it toward a small heart, lung and stomach icon on the right. The upper vertebra slowly slides forward out of line, the opening narrows and turns red, and the dots on the nerve either bunch up quickly or thin out, alternating between a label too much and a label too little. A tag at the top says historical model, and a note says Palmer wrote that displaced vertebrae caused most disease.",
+ title:"The original subluxation: bone pressing on nerve",
+ body:`<p><span class="tagline m">Historical model</span></p>
+ <p>Palmer's first model was mechanical. A vertebra slips slightly out of place, a <b>subluxation</b>. The bone narrows the opening where a nerve leaves the spine, the <b>intervertebral foramen</b>, and presses on the nerve.</p>
+ <p>Pressure on the nerve, he said, caused <b>too much or too little</b> nerve energy to reach organs and tissues, and that caused disease. In his 1910 book he wrote that about 95 percent of all diseases came from displaced vertebrae.</p>
+ <p>Real nerve root compression does happen, for example from a disc herniation or bone spurs, and it causes pain, numbness or weakness in a limb. But research has not shown that small vertebral shifts squeeze nerves in a way that causes diseases of the organs.</p>`,
+ analogy:"Like a garden hose under a car tyre. Palmer's model said that if the tyre rolls onto the hose, the plants at the end get too little water, and lifting the tyre fixes the garden.",
+ terms:[["Subluxation (historical)","Palmer's term for a slightly displaced vertebra thought to press on a nerve."],["Intervertebral foramen","The opening between two vertebrae where a spinal nerve root exits."],["Too much or too little","Palmer's idea that nerve pressure made nerve energy flow abnormally, causing disease."]],
+ check:{q:"Which part of the original model is supported by modern anatomy?",opts:[
+  ["Nerve roots do exit through openings between vertebrae and can be compressed, for example by a disc herniation",true,"Yes. That piece is real. What lacks support is the claim that small shifts cause most diseases."],
+  ["95 percent of disease comes from displaced vertebrae",false,"That was Palmer's claim. Research does not support it."],
+  ["Nerve energy flows as too much or too little from bone pressure",false,"Nerve signals are electrical impulses; the too much or too little idea has not been shown."],
+  ["Every organ disease starts in the spine",false,"Organ diseases have many known causes, such as infections, genes and blood vessel disease."]]},
+ caption:"Historical model: a shifted vertebra narrows the nerve opening and changes nerve energy.",
+ legend:[["bone","Vertebra","s"],["disc","Disc"],["nerve","Nerve root"],["pain","Narrowed opening"],["phil","Historical model"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"tone",
+ desc:"A nerve is drawn as a yellow string stretched between two pegs, like a guitar string, tagged historical model, 1910. A tension dial beside it turns. When the dial is low, the string sags and vibrates slowly with a label too slack. When the dial is in the middle band, the string vibrates evenly with a green label normal tone. When the dial is high, the string pulls tight and vibrates fast with a red label too tight. A vertebra icon below tugs on the string to show where Palmer thought tension came from. A quote card reads Palmer: life is the expression of tone.",
+ title:"Palmer's tone: from pinching to tension",
+ body:`<p><span class="tagline m">Historical model</span></p>
+ <p>By his <b>1910</b> book, Palmer had changed his model. Instead of bone simply pinching a nerve, he spoke of <b>tone</b>: the normal degree of firmness or tension in nerves and tissues. He wrote that "life is the expression of tone."</p>
+ <p>In this version, displaced bones could <b>stretch or slacken</b> nerves, like a string tuned too tight or too loose. Too much tension meant too much function, and too little meant too little. Health was normal tone.</p>
+ <p>The change shows that the founder himself revised his model. Later chiropractic theorists kept revising, as you will see in the next steps.</p>`,
+ analogy:"Like tuning a guitar string. Too tight and the note is sharp, too loose and it is flat. Palmer pictured nerves the same way, with health as the right tuning.",
+ terms:[["Tone","In Palmer's 1910 model, the normal tension of nerves and tissues."],["Revision","Changing a model when its maker rethinks it or new information appears."],["Tension model","The idea that displaced bones stretch or slacken nerves rather than pinch them."]],
+ check:{q:"How did Palmer's 1910 tone model differ from his first model?",opts:[
+  ["It focused on nerve tension, too tight or too loose, instead of simple pinching",true,"Yes. Pinching became tension: still a historical model, but a revised one."],
+  ["It dropped the nervous system entirely",false,"The nerves stayed at the centre; what changed was how bones were thought to affect them."],
+  ["It replaced adjustment with surgery",false,"Palmer never moved to surgery. He kept adjustment."],
+  ["It was based on the 1975 research conference",false,"The tone model came in 1910, long before 1975."]]},
+ caption:"Historical model, 1910: nerves as strings, with health as the right tone.",
+ legend:[["nerve","Nerve as string"],["good","Normal tone"],["pain","Too tight"],["phil","Historical model"]]},
+
+{act:5,scene:"motion",
+ desc:"Two motion segments stand side by side, each with two ivory vertebrae and a blue disc. The left one, labelled normal motion, tilts forward and back smoothly, and a graph beneath traces a wide wave of angle over time. The right one, labelled restricted motion, proposed model, moves only a little and the graph traces a much smaller wave, with a label fixation or segmental dysfunction. A banner at the top shows a shift from a bone out of place to a joint that does not move well. Small notes say position is hard to measure; motion can be observed, but hand testing agreement between examiners is limited.",
+ title:"From position to motion: fixation and segmental dysfunction",
+ body:`<p><span class="tagline m">Proposed model</span></p>
+ <p>During the 1900s, many chiropractic writers moved away from the idea of a bone simply out of place. They focused instead on <b>motion</b>: a spinal joint that is stuck or moves poorly. Terms included <b>fixation</b> and <b>segmental dysfunction</b>.</p>
+ <p>This was closer to things that can be examined, such as range of motion, tenderness and muscle tension. Examiners used <b>motion palpation</b>, feeling how each segment moves as the person bends.</p>
+ <p><span class="tagline e">Current evidence</span> When different examiners palpate the same person, their findings often do not agree well. That makes it hard to show that a specific stuck segment is the cause of symptoms. Pain, movement and function can be measured, and those are what most trials now track.</p>`,
+ analogy:"Like a squeaky door. The older idea said the door was hung crooked. The newer idea said the hinge sticks. The question is whether two people testing the door agree on which hinge it is.",
+ terms:[["Fixation","A spinal joint thought to be stuck or moving too little."],["Segmental dysfunction","Abnormal motion or function at one spinal segment."],["Motion palpation","Feeling a segment's movement by hand as the person moves."],["Inter examiner agreement","How often two examiners reach the same finding on the same person."]],
+ check:{q:"Why does limited agreement between examiners matter for the fixation model?",opts:[
+  ["If examiners do not agree on which segment is stuck, it is hard to test whether that segment causes symptoms",true,"Yes. A finding has to be reliable before you can test what it predicts."],
+  ["It proves no joint can ever be stiff",false,"Joints can be stiff. The issue is reliably pinpointing one segment by hand."],
+  ["It means motion cannot be measured at all",false,"Motion can be measured, for example with imaging or devices; hand findings are what vary."],
+  ["It shows the tone model was correct",false,"Examiner agreement does not support the tone model; they are separate questions."]]},
+ caption:"Proposed model: from a bone out of place to a segment that moves too little.",
+ legend:[["bone","Vertebra","s"],["disc","Disc"],["evid","Motion graph"],["phil","Proposed model"]]},
+
+{act:5,scene:"vsc",
+ desc:"A wheel with five segments builds around a central label vertebral subluxation complex, proposed model. Each segment lights up in turn with a small icon: kinesiopathology with a moving joint, neuropathology with a yellow nerve, myopathology with a rose muscle, histopathology with a tissue patch, and biochemical changes with small molecules. Thin arrows circle between the segments to show they were said to affect one another. On the right, an evidence panel lists which pieces have been studied, with a note that the complex as a whole has not been shown to cause disease.",
+ title:"The vertebral subluxation complex",
+ body:`<p><span class="tagline m">Proposed model</span></p>
+ <p>In the late 1900s, chiropractic writers described the <b>vertebral subluxation complex</b>. It pictured a subluxation not as one displaced bone but as a cluster of linked changes, usually listed as five components:</p>
+ <ul><li><b>Kinesiopathology</b>: abnormal joint motion.</li><li><b>Neuropathology</b>: nerve irritation or altered nerve function.</li><li><b>Myopathology</b>: muscle changes such as spasm or weakness.</li><li><b>Histopathology</b>: tissue changes such as swelling or scarring.</li><li><b>Biochemical changes</b>: chemical changes such as inflammation.</li></ul>
+ <p><span class="tagline e">Current evidence</span> Each component names something real that can happen in injured tissue. But research has not shown that they cluster together as one lesion that can be reliably detected, or that the complex causes disease.</p>`,
+ analogy:"Like describing a traffic jam with five parts: stalled cars, honking, angry drivers, damaged road and fumes. Each part can be real, but you still need evidence that they come together as one problem with one cause.",
+ terms:[["Vertebral subluxation complex","A late 1900s model of subluxation as five linked changes in motion, nerve, muscle, tissue and chemistry."],["Kinesiopathology","Abnormal joint motion."],["Histopathology","Abnormal changes seen in tissue."]],
+ check:{q:"Which is one of the five components in the vertebral subluxation complex?",opts:[
+  ["Myopathology, meaning muscle changes",true,"Yes. The five are kinesiopathology, neuropathology, myopathology, histopathology and biochemical changes."],
+  ["Universal Intelligence",false,"Universal Intelligence is from Palmer's philosophy, not one of the five components."],
+  ["Neurocalometry",false,"That refers to the 1924 temperature device, not a component of the complex."],
+  ["Licensure",false,"Licensure is legal history, not part of the model."]]},
+ caption:"Proposed model: five linked components of the vertebral subluxation complex.",
+ legend:[["act5","Motion"],["nerve","Nerve"],["muscle","Muscle"],["lig","Tissue"],["evid","Chemistry"]]},
+
+{act:5,scene:"terms",
+ desc:"A word timeline runs across the picture. Words drop in above it in order: displaced vertebra and impinged nerve near 1895, tone near 1910, fixation and segmental dysfunction in the middle of the century, vertebral subluxation complex later, and joint dysfunction and manipulable lesion near the end. The early words glow violet and the later ones shift toward indigo. Beneath, a document card labelled 1996 colleges' consensus definition slides in. At the right, a box labelled what trials measure shows pain, function and range of motion bars.",
+ title:"New words: joint dysfunction and the manipulable lesion",
+ body:`<p>As the profession moved toward research and working with other health fields, many chiropractors began using terms that describe <b>findings</b> rather than causes. Examples are <b>joint dysfunction</b> and the <b>manipulable lesion</b>: a joint problem, such as pain with restricted motion, that is thought likely to respond to manipulation.</p>
+ <p>In <b>1996</b>, the chiropractic colleges agreed on a definition of subluxation as a complex of functional, structural or pathological joint changes that compromise nerve integrity and may influence organ function and general health. The words grew broader, but the debate about what the term means, and whether it is needed, continues.</p>
+ <p>Trials today usually measure what patients feel and do: <b>pain</b>, <b>function</b> and <b>disability</b>, rather than the presence of a subluxation.</p>`,
+ analogy:"Like the word atom. Early thinkers pictured tiny solid balls. As evidence grew, the word stayed but the picture changed, and some scientists wished for new words for the new picture.",
+ terms:[["Joint dysfunction","A joint that is painful or moves abnormally, described as a finding without assuming a cause."],["Manipulable lesion","A joint problem thought likely to respond to manipulation."],["Outcome measure","What a study counts, such as pain scores or ability to work."]],
+ check:{q:"What do most modern trials of spinal manipulation measure?",opts:[
+  ["Patient outcomes such as pain, function and disability",true,"Yes. These can be measured reliably and matter to patients."],
+  ["The amount of Innate Intelligence",false,"Innate is a philosophical concept and cannot be measured."],
+  ["Neurocalometer readings",false,"Temperature readings have not been shown to be valid outcomes."],
+  ["The number of displaced vertebrae on an X ray",false,"Small shifts on images have not been shown to track symptoms well, so trials use patient outcomes."]]},
+ caption:"The words changed over time, from displaced vertebra to joint dysfunction.",
+ legend:[["phil","Earlier models"],["evid","Later, research terms"],["law","1996 definition"]]},
+/* ---------- Part 6 ---------- */
+{act:6,scene:"courts",
+ desc:"A courtroom scene: a judge's bench at the top with a gavel that taps down, and a set of scales in the middle. A timeline along the bottom gains cards: 1906, D.D. Palmer jailed for practising medicine without a licence, and 1907, the Morikubo trial in Wisconsin. On the scales, the left pan is labelled charge: practising osteopathy without a licence and the right pan is labelled defence: chiropractic is a separate system. The scales slowly tip toward the defence, and a stamp reading acquitted appears. A note says the case pushed chiropractic to stress its own separate philosophy.",
+ title:"Prosecutions and the Morikubo case",
+ body:`<p><span class="tagline h">Law and profession</span></p>
+ <p>Early chiropractors had no licences of their own. Many were <b>prosecuted</b> for <b>practising medicine without a licence</b>, and some went to jail. In <b>1906</b>, D.D. Palmer himself was convicted in Iowa and spent time in jail.</p>
+ <p>In <b>1907</b>, <b>Shegataro Morikubo</b>, a Palmer graduate, was tried in La Crosse, Wisconsin, for practising <b>osteopathy</b> without a licence. His lawyer argued that chiropractic was a <b>separate system</b> with its own philosophy, so osteopathy laws did not apply. Morikubo was <b>acquitted</b>.</p>
+ <p>The case was a turning point. It encouraged the profession to stress what made it distinct, including its philosophy of Innate Intelligence and subluxation. Some historians argue this legal need helped keep the philosophy central for decades.</p>`,
+ analogy:"Like a new kind of food truck fined under restaurant rules. Its owner argues it is not a restaurant at all but something new, and wins. From then on, the owner keeps pointing out how different the truck is.",
+ terms:[["Practising medicine without a licence","The charge most often brought against early chiropractors."],["Morikubo case","The 1907 Wisconsin trial in which a chiropractor was acquitted by arguing chiropractic was separate from osteopathy."],["Acquitted","Found not guilty by a court."]],
+ check:{q:"What was the key argument in the 1907 Morikubo defence?",opts:[
+  ["Chiropractic was a separate system from osteopathy, so the osteopathy law did not apply",true,"Yes. That argument won the case and shaped how chiropractic described itself."],
+  ["Chiropractic had been proven effective in trials",false,"No clinical trials existed in 1907. The defence was about chiropractic being distinct."],
+  ["Morikubo was a licensed physician",false,"He was a chiropractor without a medical licence."],
+  ["Wisconsin had a chiropractic licensing law",false,"No state had one until Kansas in 1913."]]},
+ caption:"Early prosecutions, and the 1907 Morikubo acquittal that stressed chiropractic as separate.",
+ legend:[["law","Legal history"],["phil","Defence: separate philosophy"],["gold","Scales"]]},
+
+{act:6,scene:"license",
+ desc:"A schematic tile map of the United States, one square per state. First the Kansas tile fills teal with a label 1913, first state licensing law. Then other tiles fill one after another in a simplified order, and a counter at the right climbs toward 50. The Louisiana tile fills last with a label 1974, last state. A note says the order of the other states is simplified and not shown by year. A timeline bar below shows 1913 at the left and 1974 at the right, with 61 years between them.",
+ title:"State licensure: Kansas 1913 to Louisiana 1974",
+ body:`<p><span class="tagline h">Law and profession</span></p>
+ <p>Chiropractors pushed for their own <b>licensing laws</b>, with their own boards and exams. <b>Kansas</b> passed the first state chiropractic law in <b>1913</b>. Other states followed, one by one, over the next six decades.</p>
+ <p><b>Louisiana</b> was the last. When it passed its law in <b>1974</b>, chiropractic was licensed in all 50 states. That is 61 years from first to last (1974 minus 1913).</p>
+ <p>Licensing gave chiropractors legal standing, but each state set its own <b>scope of practice</b>. That is why what a chiropractor may do still differs from state to state.</p>`,
+ analogy:"Like a new sport being approved league by league. The first league says yes in one year, the last holds out for decades, and each league writes slightly different rules.",
+ terms:[["Licensure","Legal permission to practise, granted by a state board after set requirements are met."],["Kansas, 1913","The first state chiropractic licensing law."],["Louisiana, 1974","The last state, completing licensure in all 50 states."]],
+ check:{q:"How many years passed between the first and last state chiropractic laws?",opts:[
+  ["61 years (1974 minus 1913)",true,"Yes. 1974 minus 1913 equals 61."],
+  ["39 years",false,"Check the subtraction: 1974 minus 1913 is 61, not 39."],
+  ["74 years",false,"74 is just the last two digits of 1974. Subtract 1913 from 1974."],
+  ["13 years",false,"13 is from the first date. The span is 1974 minus 1913, which is 61."]]},
+ caption:"Kansas first (1913), Louisiana last (1974): licensure in all 50 states.",
+ legend:[["law","State with a licensing law","s"],["land","Not yet","s"],["gold","First and last"]]},
+
+{act:6,scene:"federal",
+ desc:"Three stamps press down one after another onto a long document, each leaving a coloured mark. The first, teal, reads 1972 Medicare coverage, with a note: spinal manipulation to correct a subluxation. The second, blue, reads 1974 accreditation agency recognized, CCE. The third, teal, reads 1974 all 50 states. A timeline under the document shows the three dates close together. On the right, a small chart shows the words in the Medicare rule highlighted: manual manipulation of the spine, subluxation.",
+ title:"Medicare in 1972 and accreditation in 1974",
+ body:`<p><span class="tagline h">Law and profession</span></p>
+ <p>In <b>1972</b>, Congress added limited <b>Medicare</b> coverage for chiropractic. It covered only <b>manual manipulation of the spine to correct a subluxation</b>. That legal wording kept the word subluxation in billing and records, whatever a chiropractor's own model. For many years Medicare also required an X ray showing the subluxation; that rule was dropped in 2000.</p>
+ <p>In <b>1974</b>, the US Office of Education recognized the <b>Council on Chiropractic Education (CCE)</b> as the accrediting agency for chiropractic programs. <b>Accreditation</b> means schools are checked against shared standards for teaching, faculty and clinical training.</p>
+ <p>These steps, together with licensure in all 50 states by 1974, made the early 1970s a turning point for recognition.</p>`,
+ analogy:"Like a new trade getting a seal from the national inspector and a line in the government's price list in the same few years. Suddenly it is part of the official system.",
+ terms:[["Medicare coverage (1972)","Limited federal coverage for spinal manipulation to correct a subluxation."],["CCE","The Council on Chiropractic Education, recognized in 1974 to accredit chiropractic programs."],["Accreditation","Review of a school against shared standards."]],
+ check:{q:"Why does the word subluxation still appear in many billing records?",opts:[
+  ["Medicare's 1972 coverage was written for manipulation to correct a subluxation",true,"Yes. The legal wording kept the term in use for billing, even as models changed."],
+  ["Research proved subluxations cause disease",false,"Research has not shown that. The term stayed partly because of the law's wording."],
+  ["The CCE requires every bill to name Innate Intelligence",false,"Accreditation deals with schools, not billing, and does not require that."],
+  ["Kansas law requires it nationwide",false,"A state law cannot set national billing rules."]]},
+ caption:"Medicare coverage in 1972 and recognition of the accrediting agency in 1974.",
+ legend:[["law","Law"],["edu","Education"],["gold","Year"]]},
+
+{act:6,scene:"wilk",
+ desc:"A timeline across the top builds cards: 1963 AMA Committee on Quackery formed, 1974 committee disbanded, 1976 Wilk and four other chiropractors file suit, 1987 judge rules the AMA ran an illegal boycott, 1990 ruling upheld on appeal. Below, two groups of figures, medical doctors on the left and chiropractors on the right, stand apart with a red barrier between them and crossed out arrows. When the 1987 card lands, a gavel strikes, the barrier lifts and dashed referral arrows begin to flow both ways. A note says the court ruled on the boycott, not on whether chiropractic works.",
+ title:"Wilk v. AMA: 1976 to 1987",
+ body:`<p><span class="tagline h">Law and profession</span></p>
+ <p>In <b>1963</b> the American Medical Association (AMA) formed a <b>Committee on Quackery</b> that worked to contain chiropractic. Its ethics rules told doctors not to associate professionally with chiropractors. The committee was disbanded in 1974.</p>
+ <p>In <b>1976</b>, chiropractor <b>Chester Wilk</b> and four colleagues sued the AMA and other groups under <b>antitrust</b> law, which forbids groups from joining together to shut out competitors. In <b>1987</b>, after a long legal fight, a federal judge ruled that the AMA had run an illegal <b>boycott</b> and ordered it to stop. An appeals court upheld the ruling in 1990.</p>
+ <p>The case was about <b>fair competition</b>. The judge did not decide whether chiropractic treatment works. That question belongs to research.</p>`,
+ analogy:"Like a court ruling that one sports league broke the rules by banning its players from ever playing with another league. The ruling is about fair play, not about which league plays better.",
+ terms:[["Antitrust law","Law that forbids groups from conspiring to restrain fair competition."],["Boycott","An organized refusal to deal with a group."],["Wilk v. AMA","The antitrust suit filed in 1976; the 1987 ruling found an illegal boycott by the AMA."]],
+ check:{q:"What did the 1987 Wilk ruling decide?",opts:[
+  ["That the AMA had conducted an illegal boycott of chiropractors",true,"Yes. It was an antitrust ruling about competition."],
+  ["That chiropractic cures all disease",false,"The court did not rule on treatment effectiveness at all."],
+  ["That chiropractic must be licensed in all states",false,"Licensure is a state matter, and it was complete by 1974."],
+  ["That Innate Intelligence exists",false,"Courts do not rule on philosophical beliefs, and this case was about a boycott."]]},
+ caption:"Wilk v. AMA: suit filed 1976, illegal boycott found in 1987, upheld in 1990.",
+ legend:[["law","Legal history"],["pain","Boycott barrier"],["act3","Medical doctors"],["act2","Chiropractors"]]},
+
+/* ---------- Part 7 ---------- */
+{act:7,scene:"nincds",
+ desc:"A long conference table seen from above, with figures labelled medical doctors, chiropractors, osteopaths and scientists seated around it, under a banner reading 1975 NINCDS conference, Bethesda. Speech bubbles appear and fade. A meter in the corner labelled quality research available shows a low bar. Then a card drops in reading conclusion: too little good research to judge; more studies needed. After it, a bar chart on the right labelled studies over time grows taller decade by decade, coloured indigo, with a note that the chart shows a trend, not exact numbers.",
+ title:"1975: the NINCDS research conference",
+ body:`<p><span class="tagline e">Research</span></p>
+ <p>In <b>February 1975</b>, a US government institute, the <b>National Institute of Neurological and Communicative Disorders and Stroke (NINCDS)</b>, held a conference on the research status of <b>spinal manipulative therapy</b>. It brought chiropractors, osteopaths, medical doctors and scientists to the same table.</p>
+ <p>Its main conclusion was simple: there was <b>too little good research</b> to say whether manipulation worked or how. It called for proper studies.</p>
+ <p>That call helped start decades of research. Chiropractic schools, universities and government funders began running studies and clinical trials, and the number of studies grew steadily.</p>`,
+ analogy:"Like a town meeting that finds nobody has ever measured the river. Instead of arguing about floods, they agree to build gauges first.",
+ terms:[["NINCDS conference","A 1975 US government conference on the research status of spinal manipulation."],["Spinal manipulative therapy","Hands on treatment that moves spinal joints, used by several professions."],["Research agenda","A plan for which questions to study first."]],
+ check:{q:"What did the 1975 NINCDS conference conclude?",opts:[
+  ["There was too little good research to judge, and more studies were needed",true,"Yes. It was a call for research, not a verdict for or against."],
+  ["Manipulation was proven to cure heart disease",false,"The conference made no such claim; it found too little research to judge."],
+  ["Chiropractic should be banned",false,"It made no legal ruling. It called for research."],
+  ["Subluxation had been measured in every patient",false,"No such finding was made. Measuring was part of what needed study."]]},
+ caption:"1975: different professions at one table, agreeing that more research was needed.",
+ legend:[["evid","Research"],["act3","Medical doctors"],["act2","Chiropractors"],["edu","Osteopaths"],["act4","Scientists"]]},
+
+{act:7,scene:"ebp",
+ desc:"Two rows of empty circles represent two trial arms, labelled manipulation and other recommended care. Circles fill with indigo or blue one by one as patients are added; filled solid means improved and outlined means not much change. Both arms end up with similar numbers of solid circles. On the right, an effect size bar grows slowly from zero and stops in a band labelled small to moderate, next to a second bar for other recommended care of similar length. Along the bottom, a timeline shows 1994 a federal back pain guideline lists manipulation as an option, and 2017 a major guideline lists it among nonpharmacologic choices.",
+ title:"Toward evidence based practice",
+ body:`<p><span class="tagline e">Current evidence</span></p>
+ <p><b>Evidence based practice</b> means combining the best research with clinical skill and the patient's values. Since the 1980s, many chiropractors have moved in this direction, and trials of spinal manipulation have grown in number and quality.</p>
+ <p>In <b>1994</b>, a US federal guideline on acute low back problems listed spinal manipulation as an option in the first weeks. In <b>2017</b>, a major physician guideline listed it among several <b>nonpharmacologic</b> (non drug) choices for low back pain, with exercise, heat and other approaches.</p>
+ <p>Across many trials, spinal manipulation for low back pain shows <b>small to moderate</b> benefits, similar to other recommended care such as exercise. It is one reasonable option, not a cure, and it works best as part of an active plan.</p>`,
+ analogy:"Like comparing two routes to work. After timing many trips, both routes save a little time compared with doing nothing, and neither is magic. You choose based on what fits your day.",
+ terms:[["Evidence based practice","Combining research evidence, clinical skill and patient values."],["Clinical guideline","Expert recommendations based on a review of the evidence."],["Effect size","How big a treatment's benefit is compared with a comparison group."]],
+ check:{q:"Which statement matches mainstream evidence on spinal manipulation for low back pain?",opts:[
+  ["It gives small to moderate benefits, similar to other recommended care",true,"Yes. Guidelines list it as one of several reasonable nonpharmacologic options."],
+  ["It cures low back pain in nearly everyone",false,"Effects are small to moderate on average, not a cure."],
+  ["It has no effect at all in any trial",false,"Trials show modest benefits, similar to other recommended care."],
+  ["It works much better than every other option",false,"Benefits are similar to other recommended care such as exercise."]]},
+ caption:"Trial dots fill both arms; the effect size lands in the small to moderate band.",
+ legend:[["evid","Manipulation arm"],["act3","Other recommended care"],["gold","Effect size"]]},
+
+{act:7,scene:"support",
+ desc:"The picture is split. The left side, tagged supported or reasonable, has a column of cards that drop in with green check marks: small to moderate benefit for low back pain; some benefit for neck pain, often with exercise; short term changes in pain sensitivity after manipulation; serious harms are rare, but screening matters. The right side, tagged not supported, has cards with crossed marks: subluxation as the cause of most disease; manipulation for asthma, high blood pressure or ear infections; reliable detection of subluxation by hand, heat or X ray; Innate Intelligence as a testable force. A note at the bottom says evidence is mixed for some headaches.",
+ title:"What research supports and does not support",
+ body:`<p><span class="tagline e">Current evidence</span></p>
+ <p><b>Reasonably supported:</b> spinal manipulation gives small to moderate short term benefit for <b>low back pain</b>, and some benefit for <b>neck pain</b>, often combined with exercise. Studies also show short term changes in <b>pain sensitivity</b> and muscle activity after manipulation, which may help explain these effects. Evidence for some kinds of headache is mixed.</p>
+ <p><b>Not supported:</b> that subluxations cause most disease; that manipulation treats conditions such as <b>asthma</b>, <b>high blood pressure</b> or <b>ear infections</b>; and that subluxations can be reliably detected by hand, temperature reading or X ray. Innate Intelligence is a philosophical idea that science cannot test.</p>
+ <p><b>Safety:</b> serious harms after manipulation are rare. The link between neck manipulation and a tear in a neck artery (cervical artery dissection) is debated, so screening matters, and red flags need prompt medical referral.</p>`,
+ analogy:"Like sorting a toolbox. Some tools are good for certain jobs, some were sold for jobs they cannot do, and you keep both lists so you pick the right tool.",
+ terms:[["Supported","Backed by consistent results from good quality studies."],["Not supported","Studied without showing benefit, or lacking evidence that the claim is true."],["Cervical artery dissection","A tear in a neck artery; its link to neck manipulation is debated."]],
+ check:{q:"Which claim does current research NOT support?",opts:[
+  ["Spinal manipulation treats asthma",true,"Correct choice. Trials do not show that manipulation treats asthma."],
+  ["Manipulation gives small to moderate benefit for low back pain",false,"That one is supported. Look for a claim that research does not back."],
+  ["Serious harms after manipulation are rare",false,"That one is the mainstream safety statement."],
+  ["Manipulation can change pain sensitivity for a short time",false,"Studies do show short term changes in pain sensitivity."]]},
+ caption:"Sorting claims: what research supports, and what it does not.",
+ legend:[["good","Supported"],["bad","Not supported"],["evid","Evidence"]]},
+
+{act:7,scene:"views",
+ desc:"A wide coloured bar runs across the picture, violet at the left end labelled traditional, subluxation centred and indigo at the right end labelled evidence based, musculoskeletal focus. Small figures of different skin tones slide in and settle along the bar, most of them clustering in the middle, some near each end. Above the left end, a card lists ideas often held there: subluxation, vitalism, wellness care. Above the right end, a card lists: back and neck pain, exercise and guidelines, working with other clinicians. A note reads views form a spectrum; surveys find most chiropractors fall somewhere between. The figures drift gently.",
+ title:"The range of views today",
+ body:`<p>Chiropractic today holds a <b>range of views</b>. At one end are <b>traditional</b> or <b>vertebralistic</b> chiropractors, who centre care on detecting and correcting subluxations and often keep the vitalistic philosophy, sometimes offering ongoing wellness care.</p>
+ <p>At the other end are <b>evidence based</b> chiropractors who see themselves mainly as <b>musculoskeletal</b> specialists, focused on back, neck and joint problems, using guidelines, exercise and teamwork with other clinicians.</p>
+ <p>Surveys suggest that most chiropractors fall <b>somewhere between</b>. The profession continues to debate its identity, much as the straights and mixers did a century ago. Knowing this history helps you understand these conversations fairly and respectfully.</p>`,
+ analogy:"Like a family that spans generations: grandparents who keep the old traditions, younger members who do things differently, and most people somewhere in the middle, all still part of the same family.",
+ terms:[["Vertebralistic","Centred on the vertebral subluxation as the focus of care."],["Musculoskeletal","Relating to muscles, bones, joints and connective tissue."],["Professional identity","How members of a profession see their main role."]],
+ check:{q:"Which statement fairly describes the profession today?",opts:[
+  ["Views range from traditional subluxation centred to evidence based musculoskeletal, with most in between",true,"Yes. The profession is a spectrum, and the debate is open."],
+  ["Every chiropractor follows the 1927 principles exactly",false,"Some keep the traditional philosophy, but many do not."],
+  ["The straights and mixers debate ended in 1913",false,"The debate never fully ended; it continues in new forms."],
+  ["All chiropractors reject manipulation",false,"Manipulation remains central for most chiropractors."]]},
+ caption:"A spectrum of views, from traditional to evidence based, with most in between.",
+ legend:[["phil","Traditional, subluxation centred"],["evid","Evidence based, musculoskeletal"]]},
+
+/* ---------- Finish ---------- */
+{act:0,scene:"finish",
+ desc:"The four layered timeline from the start returns, now fully built, with every event card in place across the philosophy, education, law and research lanes from 1770 to 2020. A gentle glow travels along it from left to right. At the bottom, a two column summary appears: on the left, under historical models, the words Innate Intelligence, bone on nerve, tone, fixation, subluxation complex; on the right, under current evidence, the words modest benefit for back and neck pain, no support for treating organ disease, subluxation hard to detect, harms rare but screening matters.",
+ title:"Recap: models, law and evidence",
+ body:`<p>You followed chiropractic from <b>heroic medicine</b> and <b>magnetic healing</b>, through D.D. Palmer's <b>1895</b> story and the <b>1897</b> school, to B.J. Palmer's growth years and the <b>straights and mixers</b> split.</p>
+ <p>You saw the <b>philosophical model</b> (Universal and Innate Intelligence, the 1927 major premise) and how the <b>subluxation</b> idea changed: bone on nerve, then tone, then fixation and segmental dysfunction, then the subluxation complex and joint dysfunction.</p>
+ <p>You traced the <b>law</b>: prosecutions, Morikubo in 1907, licensure from Kansas in 1913 to Louisiana in 1974, Medicare in 1972, accreditation in 1974 and Wilk v. AMA (1976 to 1987). And you saw <b>research</b> grow from the 1975 conference to today's guidelines. Try the lab next to explore the timeline and sort the ideas.</p>`,
+ analogy:"A profession's history is like a river with many streams. Philosophy, schools, courts and research all flow in, and the river today carries a little of each.",
+ terms:[["Historical model","Explanations from the past, understood in their own terms."],["Current evidence","What good studies show now."],["Legal history","The cases and laws that shaped the profession."]],
+ check:null,caption:"The full timeline, with historical models on one side and current evidence on the other.",
+ legend:[["phil","Philosophy and models"],["edu","Education"],["law","Law and recognition"],["evid","Research"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function resetScene(){SYS={};SC={}}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;resetScene();render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0;resetScene()};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= scenes: start, parts 1 and 2 ================= */
+const ap=(T,a,d)=>seg(T,a,a+(d||1));
+const MAP_IDS=["mesmer","still","lillard","school","morikubo","kansas","premise","medicare","louisiana","cce","nincds","wilk","ahcpr","guide17"];
+function sceneMap(T){const t=T%26;const cy=1765+clamp(t/18,0,1)*258;
+  tlDraw({x:70,y:36,w:690,h:300,evs:MAP_IDS.map(i=>EVI[i]),prog:e=>clamp((cy-e.y)/6,0,1),T,cursor:t<18.5?cy:null});
+  const parts=["1800s landscape","Founding story","B.J. and growth","Philosophy","Changing models","Law","Research today"];const k=Math.floor(T/2.2)%7;
+  parts.forEach((pp,i)=>{const x=14+i*111;const col=C["act"+(i+1)];rr(x,392,104,74,8);ctx.fillStyle=i===k?hexA(col,.2):hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=i===k?col:C.rule;ctx.lineWidth=i===k?2.4:1.2;ctx.stroke();
+    badge(x+18,412,i+1,col,11);wrapText(pp,x+8,438,92,15,{size:12.5,weight:700})})}
+/* ---------- heroic medicine ---------- */
+function sceneHeroic(T){const t=T%14;
+  panelBox(12,12,300,456);tagPill(24,32,"era");txt(24,58,"A doctor's shelf",{size:13.5,weight:700});
+  rr(30,250,262,10,2);ctx.fillStyle=C.wood;ctx.fill();
+  bottle(80,250,60,C.act8,"calomel");bottle(150,250,46,C.act5,"tonic");rr(196,206,60,44,6);fillStroke(hexA(C.gold,.3),C.gold,1.5);txt(226,228,"blister",{size:10.5,weight:700,align:"center",mono:true});
+  /* lancet and bowl */ ctx.beginPath();ctx.ellipse(160,390,70,22,0,0,Math.PI);fillStroke(mix(C.panel,C.metal,.5),C["ink-soft"],1.6);line(90,390,230,390,C["ink-soft"],1.6);
+  line(110,300,170,330,C["ink-soft"],3);line(170,330,186,336,C.metal,2);
+  for(let i=0;i<3;i++){const p=P(T*.7+i/3,1);circ(184,340+p*50,4.5*(1-p*.3),C.pain)}
+  ell(160,396,52,8,0,hexA(C.pain,.55),null);
+  label(160,430,"bloodletting and purging",{size:12.5,weight:700,border:C.pain});
+  /* gauge */ panelBox(322,12,180,456);txt(412,40,"Harshness",{size:13.5,weight:700,align:"center"});txt(412,58,"of treatment",{size:12.5,align:"center",color:C["ink-soft"]});
+  const gx=412,gy=200;for(let i=0;i<30;i++){const a=Math.PI+i/30*Math.PI;ctx.beginPath();ctx.arc(gx,gy,70,a,a+Math.PI/30+.01);ctx.strokeStyle=mix(C.good,C.pain,i/29);ctx.lineWidth=16;ctx.stroke()}
+  const ang=Math.PI+(.78+.1*Math.sin(T*2.2))*Math.PI;line(gx,gy,gx+Math.cos(ang)*62,gy+Math.sin(ang)*62,C.ink,3.5);circ(gx,gy,7,C.ink);
+  txt(338,220,"mild",{size:12,color:C["ink-soft"]});txt(488,220,"harsh",{size:12,align:"right",color:C["ink-soft"]});
+  wrapText("No germ theory and few tests. The model: disease is imbalance, so drain and purge.",345,280,140,17,{size:12.5,color:C.ink});
+  /* rivals */ panelBox(512,12,276,456);txt(526,40,"Patients look for gentler care",{size:13.5,weight:700});
+  const px=lerp(540,560,smooth(seg(t,0,2)));person(px,170,70,{skin:"skin3",shirt:"shirt2",lean:-.05});
+  const rv=[["Homeopathy","tiny doses of remedies"],["Botanical healing","herbs and plants"],["Water cure","baths and wraps"]];
+  rv.forEach((r,i)=>{const p=ap(t,1.5+i*1.6,1);evCard(600,90+i*92,176,72,"",r[0]+": "+r[1],C.act1,p,{size:12.5,w:600});if(p>0)flow(575,130,598,120+i*92,C.act1,T,p,2)});
+  wrapText("Rival systems competed with regular doctors through the century.",528,400,250,17,{size:12.5,color:C["ink-soft"]})}
+/* ---------- marketplace ---------- */
+const HEAL=[["R","Regular doctors","act3"],["H","Homeopaths","phil"],["B","Botanical healers","para"],["W","Water cure","disc"],["S","Bonesetters","bone"],["M","Magnetic healers","gold"]];
+function sceneMarket(T){const t=T%18;tagPill(20,26,"map");txt(142,26,"Healers across the country, late 1800s (illustrative)",{size:13,weight:700});
+  const pos=tileMap(30,48,48,null,{ls:11});const ids=STATES.map(s=>s[0]);
+  for(let i=0;i<40;i++){const at=i*.36;const p=ap(t,at,.5);if(p<=0)continue;const st=ids[Math.floor(rnd(i*3.7+1)*ids.length)];const q=pos[st];const h=HEAL[i%6];const cr=Math.floor(rnd(i*5.1)*4);const dx=cr%2?14:-14,dy=cr<2?-13:13;
+    const r=7.5*(p<1?1+(1-p)*.8:1);circ(q[0]+dx,q[1]+dy,r,C[h[2]],h[2]==="bone"?C["bone-edge"]:C.panel,1.6);ctx.save();ctx.globalAlpha*=p;txt(q[0]+dx,q[1]+dy+.5,h[0],{size:9.5,weight:700,mono:true,align:"center",color:inkOn(C[h[2]])});ctx.restore()}
+  panelBox(584,48,204,300);txt(598,70,"Who was who",{size:13.5,weight:700});
+  HEAL.forEach((h,i)=>{const y=100+i*38;circ(608,y,11,C[h[2]],h[2]==="bone"?C["bone-edge"]:null,1.5);txt(608,y+.5,h[0],{size:11,weight:700,mono:true,align:"center",color:inkOn(C[h[2]])});txt(628,y,h[1],{size:13,weight:600})});
+  panelBox(584,360,204,106);wrapText("Licensing laws were weak or missing for much of the century, so patients chose by reputation.",596,382,184,16,{size:12.5})}
+/* ---------- magnetic healing ---------- */
+function sceneMagnet(T){const t=T%16;tagPill(20,26,"model");
+  const N=[["Mesmer, 1770s","animal magnetism"],["1784 commission","effects from imagination"],["Magnetic healers","spread in 1800s America"],["D.D. Palmer","magnetic healer, 1880s"]];
+  N.forEach((n,i)=>{const x=16+i*196;node(x,52,176,72,n[0],n[1],i===1?C.evid:C.gold,Math.floor(t/3)%4===i,ap(t,i*1.2,.8));if(i<3)flow(x+176,88,x+196,88,i===0?C.evid:C.gold,T,ap(t,i*1.2+.6,.6),2)});
+  /* healer and patient */ panelBox(16,140,420,326);txt(30,162,"A magnetic healing session",{size:13.5,weight:700});
+  person(130,390,120,{skin:"skin4",shirt:"shirt3",beard:true,arm:.9+.25*Math.sin(T*2),coat:true});person(300,400,110,{skin:"skin2",shirt:"shirt4",sit:true});
+  rr(250,398,100,12,3);ctx.fillStyle=C.wood;ctx.fill();
+  for(let i=0;i<4;i++){const p=P(T*.5+i/4,1);ctx.save();ctx.globalAlpha*=(1-p)*.9;ctx.beginPath();for(let k=0;k<=20;k++){const X=200+p*90+k*2.2,Y=290+Math.sin(k*.7+T*3)*6+i*14-20;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.gold;ctx.lineWidth=2.2;ctx.stroke();ctx.restore()}
+  label(300,200,"model: an unseen magnetic fluid",{size:12.5,weight:700,border:C.phil});
+  /* blind test */ panelBox(448,140,340,326,{stroke:hexA(C.evid,.7)});tagPill(462,162,"evid");txt(462,186,"1784: what the commission found",{size:13,weight:700});
+  const bars=[["Told they were treated",.85],["Treated without knowing",.12]];bars.forEach((b,i)=>{const y=230+i*90;txt(462,y,b[0],{size:12.5,weight:600});rr(462,y+14,300,26,5);ctx.fillStyle=hexA(C.rule,.5);ctx.fill();
+    const f=b[1]*smooth(ap(t,2+i*1.5,2));rr(462,y+14,300*f,26,5);ctx.fillStyle=C.evid;ctx.fill();txt(462,y+56,i?"few reactions":"strong reactions",{size:12.5,weight:700,color:C.ink})});
+  wrapText("Patients reacted when they believed they were being treated, not when they were treated without knowing. No magnetic fluid was found.",462,410,316,16,{size:12.5,color:C.ink})}
+/* ---------- osteopathy ---------- */
+function gearDraw(x,y,r,teeth,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.beginPath();for(let i=0;i<teeth*2;i++){const a=i/(teeth*2)*TAU;const R=i%2?r:r*1.18;ctx.lineTo(Math.cos(a)*R,Math.sin(a)*R)}ctx.closePath();fillStroke(hexA(col,.3),col,1.6);circ(0,0,r*.35,C.panel,col,1.4);ctx.restore()}
+function sceneOsteo(T){const t=T%16;const X=yAxis(60,72,680,1860,1900,[1860,1870,1880,1890,1900]);
+  evCard(X(1874)-40,96,200,54,"1874","A.T. Still announces osteopathy",C.edu,ap(t,.5,1));evCard(X(1892)-90,96,190,54,"1892","First school, Kirksville",C.edu,ap(t,2,1));
+  pin(X(1874),72,C.edu,7,ap(t,.5));pin(X(1892),72,C.edu,7,ap(t,2));pin(X(1895),72,C.gold,7,ap(t,3.5));label(X(1895),48,"1895 Palmer",{size:12,weight:700,border:C.gold,a:ap(t,3.5)});
+  tagPill(24,176,"map");const pos=tileMap(24,196,28,s=>s==="MO"?hexA(C.edu,.6):s==="IA"?hexA(C.gold,.55):null,{ls:10});
+  const mo=pos.MO,ia=pos.IA;pin(mo[0],mo[1]+6,C.edu,6);pin(ia[0],ia[1]+6,C.gold,6);
+  label(mo[0]-40,446,"Kirksville, Missouri",{size:12,weight:700,border:C.edu});line(mo[0],mo[1]+8,mo[0]-30,436,C.edu,1.2);label(ia[0]+30,214,"Davenport, Iowa",{size:12,weight:700,border:C.gold,align:"left"});line(ia[0],ia[1]-6,ia[0]+30,220,C.gold,1.2);
+  if(t>5){const p=smooth(ap(t,5,1.5));ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=C.phil;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(mo[0]+12,mo[1]-6);ctx.quadraticCurveTo(mo[0]+60,mo[1]-30,lerp(mo[0]+12,ia[0]+14,p),lerp(mo[1]-6,ia[1]+4,p));ctx.stroke();ctx.restore();
+    label(250,446,"? influence debated",{size:12,weight:700,border:C.phil,a:p,align:"left"})}
+  panelBox(400,176,388,290);txt(414,198,"Still's model: the body as a machine",{size:13.5,weight:700});
+  for(let i=0;i<7;i++){const y=230+i*30;ell(480,y,30,11,0,C.bone,C["bone-edge"],1.4);if(i<6)ell(480,y+15,24,4,0,C.disc,null)}
+  gearDraw(580,280,34,10,T*.6,C.edu);gearDraw(636,320,24,8,-T*.85,C.act4);gearDraw(690,272,28,9,T*.72,C.edu);
+  wrapText("Structure and function are linked. Work on bones, muscles and joints by hand to help the body heal itself.",560,370,214,16,{size:12.5});
+}
+/* ---------- D.D. Palmer ---------- */
+function scenePalmer(T){const t=T%16;rr(40,24,400,90,8);ctx.fillStyle=C.canada;ctx.fill();ctx.strokeStyle=C["land-edge"];ctx.stroke();txt(60,44,"CANADA",{size:12,weight:700,mono:true,color:C["ink-soft"]});
+  const pos=tileMap(40,124,36,s=>s==="IA"?hexA(C.gold,.55):null,{ls:10.5});const on=[300,78];pin(on[0],on[1],C.act2,6);label(on[0],56,"Ontario",{size:12,weight:700,border:C.act2});
+  /* river */ ctx.beginPath();for(let i=0;i<=40;i++){const Y=124+i*7;const Xr=40+5*36+3+Math.sin(i*.6)*4;i?ctx.lineTo(Xr,Y):ctx.moveTo(Xr,Y)}ctx.strokeStyle=C.disc;ctx.lineWidth=3;ctx.stroke();
+  label(40+5*36+12,124+7.6*36,"Mississippi River",{size:11.5,weight:600,border:C.disc,align:"left"});
+  const ia=pos.IA;const pth=[[on[0],on[1]],[300,104],[262,150],[ia[0]+6,ia[1]-10],[ia[0]+10,ia[1]]];const p=smooth(ap(t,1,4));
+  ctx.save();ctx.setLineDash([3,5]);ctx.strokeStyle=C.act2;ctx.lineWidth=3;ctx.beginPath();for(let i=0;i<=30;i++){const q=along(pth,p*i/30);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke();ctx.restore();
+  const q=along(pth,p);circ(q[0],q[1],6,C.act2,C.panel,2);if(p>=1){pin(ia[0]+10,ia[1],C.gold,7);label(ia[0]-40,ia[1]+34,"Davenport, Iowa",{size:12.5,weight:700,border:C.gold})}
+  person(520,420,150,{skin:"skin4",shirt:"shirt1",beard:true,beardCol:"#C9C4BA",hairCol:"#8A8580",coat:true});
+  label(620,40,"D.D. Palmer, 1845 to 1913",{size:13,weight:700,border:C.act2});
+  const cards=[["1845","Born in Ontario, Canada"],["","Several jobs, including teacher and beekeeper"],["1880s","Magnetic healer in Davenport"]];
+  cards.forEach((c,i)=>evCard(604,72+i*86,184,72,c[0],c[1],C.act2,ap(t,1+i*2,1)))}
+/* ---------- Lillard storyboard ---------- */
+function backView(x,y,s,off,glow){rr(x-s*.42,y-s*.5,s*.84,s*1.0,s*.22);fillStroke(C.skin2,hexA(C.ink,.35),1.4);circ(x,y-s*.68,s*.2,C.skin2,hexA(C.ink,.35),1);ctx.beginPath();ctx.arc(x,y-s*.72,s*.2,Math.PI,0);ctx.fillStyle=C.hair;ctx.fill();
+  for(let i=0;i<10;i++){const yy=y-s*.42+i*s*.088;const dx=i===3?off:0;rr(x-s*.05+dx,yy,s*.1,s*.06,2);ctx.fillStyle=C.bone;ctx.fill();ctx.strokeStyle=C["bone-edge"];ctx.lineWidth=1;ctx.stroke();if(i===3&&glow>0){ctx.save();ctx.globalAlpha*=glow;circ(x+dx,yy+s*.03,s*.11,null,C.nerve,3);ctx.restore()}}
+  return [x,y-s*.42+3*s*.088+s*.03]}
+function sceneLillard(T){const t=T%15;tagPill(16,24,"told");txt(196,24,"September 1895, Davenport, Iowa",{size:13,weight:700});
+  const xs=[14,278,542];xs.forEach((x,i)=>{const a=ap(t,i*3.6,.8);if(a<=0){panelBox(x,44,244,424,{fill:hexA(C.panel,.4)});badge(x+122,250,i+1,C["ink-soft"],14);return}
+    ctx.save();ctx.globalAlpha*=a;panelBox(x,44,244,424,{fill:hexA(C.paper,.95),stroke:C.gold});badge(x+20,64,i+1,C.gold,12);ctx.restore()});
+  /* panel 1 */ withA(ap(t,0,.8),()=>{rr(30,168,210,18,3);ctx.fillStyle=C.wood;ctx.fill();txt(136,177,"low shelf",{size:11,weight:700,align:"center",mono:true,color:"#fff"});
+    const bend=.3+.06*Math.sin(T*2);person(110,300,110,{skin:"skin2",shirt:"shirt3",lean:bend,cap:true});const sp=P(T,1.6);if(sp<.5){ctx.save();ctx.globalAlpha*=1-sp*2;for(let k=0;k<6;k++){const an=k/6*TAU;line(140+Math.cos(an)*6,240+Math.sin(an)*6,140+Math.cos(an)*(14+sp*20),240+Math.sin(an)*(14+sp*20),C.nerve,2.5)}ctx.restore()}
+    wrapText("Harvey Lillard said he felt something give in his back while working bent over. His hearing then failed for about 17 years.",28,392,216,16,{size:12.5})});
+  /* panel 2 */ withA(ap(t,3.6,.8),()=>{const v=backView(410,250,180,7,P(T,1.2)<.6?1:.4);const hy=lerp(170,v[1],smooth(P(T*.5,1)));person(326,310,96,{skin:"skin4",shirt:"shirt1",beard:true,beardCol:"#C9C4BA",arm:1.1});
+    circ(400,hy,7,C.skin4,hexA(C.ink,.4),1.2);label(410,v[1]-40,"a bump that seemed out of place",{size:11.5,weight:700,border:C.nerve});
+    wrapText("Palmer wrote that he found a vertebra in the upper back that seemed out of place.",292,392,216,16,{size:12.5})});
+  /* panel 3 */ withA(ap(t,7.2,.8),()=>{const v=backView(700,250,180,7*(1-smooth(ap(t,8.4,1))),0);person(608,310,96,{skin:"skin4",shirt:"shirt1",beard:true,beardCol:"#C9C4BA",arm:1.25});
+    const push=P(T,1.4);circ(694+Math.sin(push*TAU)*2,v[1],7,C.skin4,hexA(C.ink,.4),1.2);soundWaves(740,128,T,C.disc,ap(t,9.4,1));
+    wrapText("Palmer wrote that Lillard's hearing improved. No hearing tests were recorded before or after.",556,392,216,16,{size:12.5})})}
+/* ---------- hearing: model vs anatomy ---------- */
+function headSide(x,y,s){ctx.beginPath();ctx.ellipse(x,y,s*.55,s*.5,0,0,TAU);fillStroke(hexA(C.skin,.35),hexA(C.ink,.45),1.6);ctx.beginPath();ctx.moveTo(x-s*.52,y+s*.05);ctx.lineTo(x-s*.66,y+s*.2);ctx.lineTo(x-s*.5,y+s*.26);ctx.strokeStyle=hexA(C.ink,.45);ctx.stroke();ear(x+s*.08,y+s*.02,s*.14)}
+function sceneHearing(T){const t=T%14;splitFrame("Palmer's reasoning","The real hearing pathway",{rk:"anat"});
+  /* left */ headSide(170,150,150);for(let i=0;i<7;i++){const yy=240+i*24;const off=(i===4)?14*(1-smooth(ap(t,4,1.2))):0;rr(176+off,yy,30,16,4);fillStroke(C.bone,C["bone-edge"],1.3)}
+  label(250,346,"upper back vertebra",{size:12,weight:700,border:C["bone-edge"],align:"left"});
+  const path=[[196,343],[230,300],[236,230],[196,160]];poly(path,hexA(C.nerve,.8),3,[6,4]);
+  if(t>5.2)signal(path,T,.5,5,C.nerve,4.5);else{crossMark(214,322,7,C.pain);label(120,322,"blocked?",{size:12,weight:700,border:C.pain})}
+  soundWaves(160,154,T,C.disc,t>6?1:.15);
+  wrapText("Bone presses a nerve, the signal to the ear fails. Move the bone back, the signal returns.",28,440,350,16,{size:12.5});
+  /* right */ ctx.beginPath();ctx.ellipse(590,200,140,118,0,0,TAU);fillStroke(hexA(C.skin,.25),hexA(C.ink,.45),1.6);
+  blobPath(580,170,84,2,T*.2,.05);fillStroke(hexA(C.muscle,.18),hexA(C.muscle,.6),1.4);txt(560,150,"brain",{size:12,weight:700,color:C["ink-soft"]});
+  rr(568,236,30,80,12);fillStroke(hexA(C.muscle,.25),hexA(C.muscle,.7),1.4);label(510,290,"brainstem",{size:12,weight:700,border:C.muscle});
+  /* cochlea */ ctx.beginPath();for(let i=0;i<60;i++){const a=i/60*TAU*2.2;const r=14-i*.2;const X=690+Math.cos(a)*r,Y=230+Math.sin(a)*r;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C["bone-edge"];ctx.lineWidth=3;ctx.stroke();
+  label(700,196,"inner ear",{size:12,weight:700,border:C["bone-edge"]});const np=[[684,236],[650,250],[600,262]];poly(np,C.nerve,5);signal(np,T,.9,4,C.nerve,4.5);
+  label(650,284,"cranial nerve VIII",{size:12,weight:700,border:C.nerve});soundWaves(760,232,T,C.disc,1);
+  for(let i=0;i<4;i++){rr(570,330+i*24,30,16,4);fillStroke(C.bone,C["bone-edge"],1.3)}
+  poly([[610,420],[630,380],[620,336]],hexA(C["ink-soft"],.8),2,[4,4]);crossMark(620,334,7,C.pain);
+  wrapText("Spinal nerves from the upper back do not reach the inner ear. Hearing stays inside the skull.",640,370,140,16,{size:12,color:C.ink});
+  txt(418,452,"Hearing can change for many reasons, such as wax or infection.",{size:12,color:C["ink-soft"]})}
+/* ---------- naming and school ---------- */
+function sceneNaming(T){const t=T%16;const m=smooth(ap(t,.5,2));
+  const lx=lerp(110,300,m),rx=lerp(690,470,m);const merged=t>2.8;
+  if(!merged){[[lx,"cheir","hand"],[rx,"praxis","practice, done"]].forEach(w=>{rr(w[0]-80,70,160,70,10);fillStroke(mix(C.panel,C.act2,.2),C.act2,2);txt(w[0],96,w[1],{size:24,weight:700,align:"center",mono:true});txt(w[0],124,w[2],{size:12.5,align:"center",color:C["ink-soft"]})})}
+  else{const g=smooth(ap(t,2.8,.8));rr(400-170*g,64,340*g,84,12);fillStroke(mix(C.panel,C.act2,.25),C.act2,2.4);withA(g,()=>{txt(400,96,"chiropractic",{size:28,weight:700,align:"center",mono:true});txt(400,128,"done by hand",{size:13,align:"center",color:C["ink-soft"]})})}
+  bigYear(400,36,"1896",C.act2,ap(t,2.8,.8));
+  person(120,330,96,{skin:"skin4",shirt:"shirt4",coat:true});speech(30,170,180,36,"suggests the name",{a:ap(t,1,1),tx:110});label(120,352,"Rev. Samuel Weed, a patient",{size:12,weight:700,border:C.act2});
+  const X=yAxis(250,430,300,1894,1900,[1894,1896,1898,1900]);[[1895,"first adjustment"],[1896,"name"],[1897,"school"]].forEach((e,i)=>{const a=ap(t,4+i*.8,.8);pin(X(e[0]),430,i===2?C.edu:C.act2,6,a);label(X(e[0]),400-i*24,e[0]+" "+e[1],{size:11.5,weight:700,border:i===2?C.edu:C.act2,a})});
+  const bh=lerp(20,130,smooth(ap(t,6,2.5)));building(600,400,150,bh,{col:C.edu,lit:ap(t,8,3)});label(675,250,"the Palmer School, 1897",{size:12.5,weight:700,border:C.edu,a:ap(t,7,1)});
+  for(let i=0;i<4;i++){const p=P(T*.12+i/4,1);person(lerp(560,672,p),400,34,{skin:SKINS[i],shirt:SHIRTS[(i+1)%4]})}}
+/* ================= scenes: parts 3, 4 and 5 ================= */
+/* ---------- B.J. Palmer and growth ---------- */
+function sceneBj(T){const t=T%20;label(178,372,"B.J. Palmer leads the school from about 1906",{size:12.5,weight:700,border:C.act3});
+  const stage=Math.min(3,Math.floor(t/3));const bh=90+stage*30;building(60,330,170,bh,{col:C.edu,lit:.3+stage*.25});if(stage>=1){building(16,330,40,60+stage*10,{col:C.edu,lit:.5})}if(stage>=2){building(234,330,46,70+stage*8,{col:C.edu,lit:.6})}
+  const top=330-bh-bh*.32;line(145,top,145,top-46,C["ink-soft"],2.5);line(130,top,145,top-46,C["ink-soft"],1.5);line(160,top,145,top-46,C["ink-soft"],1.5);
+  for(let i=0;i<3;i++){const p=P(T*.6+i/3,1);ctx.save();ctx.globalAlpha*=1-p;ctx.beginPath();ctx.arc(145,top-46,8+p*40,-1.2,-.2);ctx.strokeStyle=C.act3;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(145,top-46,8+p*40,Math.PI+.2,Math.PI+1.2);ctx.stroke();ctx.restore()}
+  label(210,top-50,"radio",{size:12,weight:700,border:C.act3,align:"left"});
+  const pos=tileMap(380,40,36,null,{ls:10.5});const ids=STATES.map(s=>s[0]).filter(s=>s!=="IA");const order=ids.map((s,i)=>[s,rnd(i*2.3+7)]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
+  const n=Math.floor(clamp((t-1)/14,0,1)*order.length);for(let i=0;i<n;i++){const q=pos[order[i]];pin(q[0]+10,q[1]-8,C.gold,4.5)}
+  pin(pos.IA[0],pos.IA[1],C.edu,7);
+  for(let i=0;i<6;i++){const p=P(T*.35+i/6,1);const dst=pos[order[(i*7+Math.floor(T*.35+i/6)*3)%order.length]];const x=lerp(150,dst[0],p),y=lerp(300,dst[1],p)-Math.sin(p*Math.PI)*90;circ(x,y,5,C.act3,C.panel,1.5)}
+  panelBox(380,350,408,40);txt(394,370,"Pins: practices opened by graduates (illustrative)",{size:12.5,weight:600});
+  const X=yAxis(40,430,740,1880,1965,[1880,1900,1920,1940,1960]);[[1882,"born"],[1906,"takes over"],[1924,"neurocalometer"],[1961,"dies"]].forEach((e,i)=>{pin(X(e[0]),430,C.act3,6);label(X(e[0]),406,(e[0]===1906?"about ":"")+e[0]+" "+e[1],{size:11.5,weight:700,border:C.act3})})}
+/* ---------- neurocalometer ---------- */
+function backSpine(x,y0,n,sp){for(let i=0;i<n;i++){const y=y0+i*sp;rr(x-14,y,28,sp*.62,4);fillStroke(C.bone,C["bone-edge"],1.3);line(x-26,y+sp*.3,x-14,y+sp*.3,C["bone-edge"],2);line(x+14,y+sp*.3,x+26,y+sp*.3,C["bone-edge"],2)}}
+function sceneNcm(T){splitFrame("The 1924 claim","What we know now",{lk:"claim"});const t=T%14;
+  rr(96,80,208,360,60);ctx.fillStyle=hexA(C.skin2,.35);ctx.fill();backSpine(200,96,14,24);
+  const py=lerp(100,420,P(T,9));const hot=[[200,196],[200,330]];const near=hot.map(h=>gauss(py,h[1],16)).reduce((a,b)=>Math.max(a,b),0);
+  rr(170,py-10,60,20,6);fillStroke(C.ink,C.ink,1);line(180,py,180,py+14,C.metal,3);line(220,py,220,py+14,C.metal,3);rr(226,py-6,40,12,4);ctx.fillStyle=C.ink;ctx.fill();
+  hot.forEach(h=>{const g=gauss(py,h[1],30);if(g>.2){glow(h[0],h[1]+8,30,C.pain,g*.5)}});
+  if(near>.5){circ(200,py+8,22,null,C.pain,2.5);label(250,py-28,"heat difference read as subluxation",{size:11.5,weight:700,border:C.phil,align:"left"})}
+  /* dial */ const dx=316,dy=380;panelBox(272,330,110,84);ctx.beginPath();ctx.arc(dx+10,dy+20,40,Math.PI,0);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+  const ang=Math.PI*1.5+(Math.sin(T*3.1)*.12+near*(Math.sin(T*9)>0?.9:-.9));line(dx+10,dy+20,dx+10+Math.cos(ang)*36,dy+20+Math.sin(ang)*36,C.pain,2.5);txt(dx+10,dy+32,"dial",{size:11,align:"center",color:C["ink-soft"],mono:true});
+  /* right */ rr(440,80,90,24,6);fillStroke(C.ink,C.ink,1);line(452,104,452,118,C.metal,3);line(518,104,518,118,C.metal,3);txt(548,92,"same probe, many causes",{size:12.5,weight:700});
+  const causes=["Blood flow in the skin","Room temperature","Clothing just removed","Recent touch or rubbing","Muscle activity nearby"];
+  causes.forEach((c,i)=>{const a=ap(t,1+i*1.1,.6);withA(a,()=>{rr(424,140+i*46,350,36,7);fillStroke(hexA(C.panel,.95),C.evid,1.4);checkMark(446,158+i*46,7,C.evid);txt(466,158+i*46,c,{size:13,weight:600})})});
+  withA(ap(t,7,1),()=>{panelBox(418,378,360,76,{stroke:C.evid});wrapText("Temperature readings have not been shown to reliably detect subluxations or predict who will benefit.",430,398,338,16,{size:12.5})})}
+/* ---------- straights and mixers ---------- */
+function sceneStraights(T){const t=T%16;label(400,24,"A debate that began in the early 1900s",{size:13,weight:700,border:C.act3});
+  const road=(pts,col)=>{poly(pts,hexA(C.sunk,.9),34);poly(pts,hexA(col,.55),3,[10,8])};
+  const up=[[20,260],[240,260],[420,150],[780,140]],dn=[[240,260],[420,370],[780,380]];road([[20,260],[240,260]],C["ink-soft"]);road(up.slice(1),C.phil);road(dn,C.act3);
+  label(500,104,"STRAIGHTS",{size:13,weight:700,mono:true,border:C.phil});label(500,426,"MIXERS",{size:13,weight:700,mono:true,border:C.act3});
+  evCard(560,60,210,56,"","Spinal adjustment for subluxation only",C.phil,ap(t,1,1),{w:600});
+  ["Spinal adjustment","Exercise advice","Heat and other physical therapies","Diet advice"].forEach((c,i)=>evCard(436+i*88,258,84,92,"",c,C.act3,ap(t,3+i*1.2,1),{size:12,w:600}));
+  for(let i=0;i<3;i++){const p=P(T*.08+i/3,1);const q=along(up,p);person(q[0],q[1]+12,36,{skin:SKINS[i],shirt:"shirt4"});const r=along([[20,260],...dn],P(T*.08+i/3+.15,1));person(r[0],r[1]+12,36,{skin:SKINS[(i+2)%4],shirt:"shirt1"})}
+  panelBox(20,330,200,120);wrapText("The question is scope: what should chiropractors do? Groups on both sides still exist, and many sit in between.",32,350,180,16,{size:12.5})}
+/* ---------- Universal and Innate ---------- */
+function organ(k,x,y,s){if(k==="heart"){ctx.beginPath();ctx.moveTo(x,y+s*.6);ctx.bezierCurveTo(x-s,y,x-s*.5,y-s*.7,x,y-s*.2);ctx.bezierCurveTo(x+s*.5,y-s*.7,x+s,y,x,y+s*.6);fillStroke(C.artery,hexA(C.ink,.4),1.2)}
+  else if(k==="lungs"){ell(x-s*.35,y,s*.3,s*.55,.1,hexA(C.muscle,.6),hexA(C.ink,.4),1.2);ell(x+s*.35,y,s*.3,s*.55,-.1,hexA(C.muscle,.6),hexA(C.ink,.4),1.2)}
+  else if(k==="stomach"){ctx.beginPath();ctx.ellipse(x,y,s*.6,s*.38,-.4,0,TAU);fillStroke(hexA(C.act2,.5),hexA(C.ink,.4),1.2)}
+  else {ell(x,y,s*.25,s*.6,0,C.muscle,hexA(C.ink,.4),1.2)}}
+function sceneInnate(T){const t=T%14;const g=ctx.createLinearGradient(0,20,0,80);g.addColorStop(0,hexA(C.phil,.45));g.addColorStop(1,hexA(C.phil,.05));rr(14,16,772,64,10);ctx.fillStyle=g;ctx.fill();
+  for(let i=0;i<20;i++){const x=30+((i*41+T*20)%740);circ(x,26+Math.sin(T+i)*5,2.5,hexA(C.phil,.7))}
+  label(400,42,"UNIVERSAL INTELLIGENCE",{size:14,weight:700,mono:true});txt(400,66,"the organizing force in all matter (philosophical model)",{size:12.5,align:"center"});
+  tagPill(20,104,"phil");
+  /* body */ const hx=300;circ(hx,150,40,hexA(C.skin,.4),hexA(C.ink,.4),1.6);rr(hx-70,196,140,240,40);fillStroke(hexA(C.skin,.2),hexA(C.ink,.35),1.4);
+  label(hx-150,150,"INNATE INTELLIGENCE",{size:12,weight:700,mono:true,border:C.phil});txt(hx-150,170,"the share inside each body",{size:12,align:"center",color:C["ink-soft"]});
+  for(let i=0;i<5;i++){const p=P(T*.4+i/5,1);circ(hx+(i-2)*8,lerp(82,140,p),4,C.phil)}
+  const off=t>4&&t<9?14*smooth(ap(t,4,.8))*(1-smooth(ap(t,8.2,.8))):0;const blocked=off>6;
+  line(hx,190,hx,420,C.cord,7);for(let i=0;i<9;i++){const y=204+i*24;const o=i===4?off:0;rr(hx-14+o,y,28,16,4);fillStroke(C.bone,C["bone-edge"],1.3)}
+  const tg=[["lungs",540,180],["heart",520,250],["stomach",540,320],["muscle",560,392]];
+  tg.forEach((o,i)=>{const sy=212+i*50;const path=[[hx,sy],[hx+80,sy],[o[1]-36,o[2]]];poly(path,hexA(C.nerve,.75),2.5);organ(o[0],o[1],o[2],34);
+    const below=sy>300;signal(path,T,below&&blocked?.12:.6,below&&blocked?1:4,C.nerve,4)});
+  signal([[hx,190],[hx,420]],T,.5,6,C.nerve,4);
+  if(blocked){circ(hx+off,312,22,null,C.pain,2.5);label(hx+120,300,"interference",{size:12,weight:700,border:C.pain})}
+  panelBox(630,104,158,120);wrapText(blocked?"In this model, interference blocks Innate's messages below it.":"In this model, Innate's messages flow freely through the nerves.",642,124,138,16,{size:12.5});
+  panelBox(630,236,158,80);wrapText("A belief about a life force. Science cannot test it.",642,256,138,16,{size:12,color:C["ink-soft"]})}
+/* ---------- major premise ---------- */
+function scenePremise(T){const t=T%18;tagPill(20,24,"phil");txt(196,24,"deductive model, 1927",{size:13,weight:700});
+  const B=["Major premise: a Universal Intelligence is in all matter and gives it its properties and actions","Innate Intelligence runs each body through the nerves","Interference with nerve flow causes illness","Adjustment removes interference","So: find and correct subluxations"];
+  B.forEach((b,i)=>{const a=ap(t,.4+i*1.5,.8);const x=24+i*22,y=48+i*80,w=370-i*18,h=i?56:72;if(a>0){withA(a,()=>{rr(x,y,w,h,9);fillStroke(mix(C.panel,C.phil,i?.1:.22),C.phil,i?1.5:2.4);wrapText(b,x+12,y+18,w-24,16,{size:12.5,weight:i?500:700})});
+    if(i<4)arrow(x+30,y+h+2,x+52,y+80-4,hexA(C.phil,.8),2)}});
+  const cnt=Math.min(33,Math.floor(seg(t,1,9)*33));panelBox(424,48,110,80);txt(479,74,String(cnt),{size:28,weight:700,mono:true,align:"center"});txt(479,106,"principles",{size:12,align:"center",color:C["ink-soft"]});
+  /* science loop */ panelBox(548,48,240,330,{stroke:C.evid});tagPill(560,68,"evid");txt(560,92,"How science tests ideas",{size:13,weight:700});
+  const L=["idea","prediction","test","result","revise"];const cx=666,cy=246,R=76;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,TAU);ctx.strokeStyle=hexA(C.evid,.5);ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+  const pa=P(T,10)*TAU-Math.PI/2;L.forEach((l,i)=>{const a=-Math.PI/2+i/5*TAU;const x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;const on=Math.floor(P(T,10)*5)===i;label(x,y,l,{size:12.5,weight:700,border:C.evid,bg:on?mix(C.panel,C.evid,.3):C.panel})});
+  circ(cx+Math.cos(pa)*R,cy+Math.sin(pa)*R,6,C.evid,C.panel,2);
+  panelBox(424,392,364,74);wrapText("The chain starts from a belief and reasons down. The loop starts from a test and can change the idea.",436,412,340,16,{size:12.5})}
+/* ---------- original subluxation ---------- */
+function sceneSublux(T){const t=T%16;tagPill(20,24,"model");txt(176,24,"D.D. Palmer's first model, 1895 onward",{size:13,weight:700});
+  const sh=22*smooth(ap(t,3,2))*(1-smooth(ap(t,13,2)));const pin_=sh/22;const sg=segment(250,220,170,{shift:sh,pinch:pin_,flip:true});
+  label(200,60,pin_>.5?"opening narrows on the nerve":"nerve root in its opening",{size:12.5,weight:700,border:pin_>.5?C.pain:C.nerve});line(sg.fx,sg.fy-12,205,70,C["ink-soft"],1.1);
+  label(120,372,"bone",{size:12,weight:700,border:C["bone-edge"]});label(330,372,"disc",{size:12,weight:700,border:C.disc});
+  poly(sg.root,pin_>.5?C.pain:C.nerve,6);const start=sg.root[2];const tgts=[["heart",620,150],["lungs",690,250],["stomach",620,350]];
+  tgts.forEach((o,i)=>{const path=[start,[500,start[1]+(i-1)*40],[o[1]-40,o[2]]];poly(path,hexA(C.nerve,.8),3);organ(o[0],o[1],o[2],40);
+    const mode=pin_<.5?0:(Math.floor(T/2)%2?1:2);signal(path,T,mode===1?1.2:mode===2?.18:.5,mode===1?9:mode===2?2:5,mode===0?C.nerve:C.pain,4)});
+  const mode=pin_<.5?0:(Math.floor(T/2)%2?1:2);label(560,440,mode===0?"normal flow (model)":mode===1?"too much (model)":"too little (model)",{size:13,weight:700,border:mode?C.pain:C.nerve});
+  panelBox(20,400,400,64);wrapText("Palmer, 1910: about 95 percent of all disease came from displaced vertebrae. Research does not support this.",32,420,380,16,{size:12.5})}
+/* ---------- tone ---------- */
+function sceneTone(T){const t=T%15;tagPill(20,24,"model");txt(176,24,"Palmer's revised model, 1910",{size:13,weight:700});
+  const ph=t<5?0:t<10?1:2;const ten=[.15,.5,.92][ph];const nm=["too slack","normal tone","too tight"][ph];const col=[C.warn,C.good,C.pain][ph];
+  const x1=80,x2=580,y=210;circ(x1,y,12,C.wood);circ(x2,y,12,C.wood);const amp=[34,16,6][ph],fr=[1.2,3,7][ph],sag=[40,6,0][ph];
+  ctx.beginPath();for(let i=0;i<=80;i++){const u=i/80;const X=lerp(x1,x2,u);const Y=y+Math.sin(u*Math.PI)*(sag+amp*Math.sin(T*fr*TAU*.5));i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.nerve;ctx.lineWidth=5;ctx.stroke();
+  label(330,y-70,"nerve as a string",{size:12.5,weight:700,border:C.nerve});label(330,y+92,nm,{size:14,weight:700,border:col});
+  /* dial */ const dx=690,dy=210;ctx.beginPath();ctx.arc(dx,dy,60,Math.PI*.75,Math.PI*2.25);ctx.strokeStyle=C.rule;ctx.lineWidth=14;ctx.stroke();
+  [[.75,1.25,C.warn],[1.25,1.75,C.good],[1.75,2.25,C.pain]].forEach(z=>{ctx.beginPath();ctx.arc(dx,dy,60,Math.PI*z[0],Math.PI*z[1]);ctx.strokeStyle=hexA(z[2],.7);ctx.lineWidth=14;ctx.stroke()});
+  const cur=Math.PI*(.75+ten*1.5)+Math.sin(T*2)*.04;line(dx,dy,dx+Math.cos(cur)*52,dy+Math.sin(cur)*52,C.ink,3.5);circ(dx,dy,7,C.ink);txt(dx,dy+40,"tension",{size:12,weight:700,align:"center"});
+  txt(dx-60,dy+80,"slack",{size:12,color:C["ink-soft"]});txt(dx+60,dy+80,"tight",{size:12,color:C["ink-soft"],align:"right"});
+  vertebraL(300,360,70,{rot:Math.sin(T*1.5)*.08});line(340,350,330,y+Math.sin(.5*Math.PI)*sag,hexA(C["bone-edge"],.8),1.5,[4,3]);label(420,380,"displaced bone pulls or slackens the nerve (model)",{size:12,weight:700,border:C.phil,align:"left"});
+  panelBox(20,420,440,46);txt(32,443,"Palmer, 1910: life is the expression of tone.",{size:13,weight:600})}
+/* ---------- motion ---------- */
+const MOT={hist:[[],[]],last:-1};
+function sceneMotion(T){tagPill(20,24,"prop");label(520,24,"From a bone out of place to a joint that does not move well",{size:12.5,weight:700,border:C.act5});
+  const a1=.13*Math.sin(T*1.6),a2=.03*Math.sin(T*1.6);segment(110,190,92,{rot:a1});segment(500,190,92,{rot:a2});
+  label(190,58,"normal motion",{size:13,weight:700,border:C.good});label(580,58,"restricted motion",{size:13,weight:700,border:C.act5});label(580,316,"fixation or segmental dysfunction",{size:12,weight:700,border:C.phil});
+  [[a1,40],[a2,430]].forEach((a,j)=>{const g={x:a[1]+20,y:340,w:300,h:80};rr(g.x,g.y,g.w,g.h,4);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();line(g.x,g.y+g.h/2,g.x+g.w,g.y+g.h/2,C.grid,1);
+    ctx.beginPath();for(let i=0;i<=120;i++){const tt=T-6+i/120*6;const v=(j?.03:.13)*Math.sin(tt*1.6);const X=g.x+i/120*g.w,Y=g.y+g.h/2-v/.15*36;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.evid;ctx.lineWidth=2.2;ctx.stroke();
+    txt(g.x,g.y-8,"segment angle over time",{size:11.5,weight:600,color:C["ink-soft"]})});
+  wrapText("Motion can be watched, but two examiners feeling the same spine often disagree on which segment is stuck.",40,446,720,16,{size:12.5,color:C.ink})}
+/* ---------- vertebral subluxation complex ---------- */
+function sceneVsc(T){const t=T%16;tagPill(20,24,"prop");const cx=250,cy=260,R1=86,R2=196;
+  const K=[["Kinesiopathology","joint motion","act5"],["Neuropathology","nerve","nerve"],["Myopathology","muscle","muscle"],["Histopathology","tissue","lig"],["Biochemical","chemistry","evid"]];
+  K.forEach((k,i)=>{const a0=-Math.PI/2+i/5*TAU,a1=a0+TAU/5;const on=ap(t,.5+i*1.2,.8);const hl=Math.floor(t/1.5)%5===i&&t>7;ctx.beginPath();ctx.arc(cx,cy,R2,a0+.02,a1-.02);ctx.arc(cx,cy,R1,a1-.02,a0+.02,true);ctx.closePath();
+    ctx.fillStyle=on>0?hexA(C[k[2]],hl?.55:.3*on+.05):hexA(C.rule,.25);ctx.fill();ctx.strokeStyle=on>0?C[k[2]]:C.rule;ctx.lineWidth=hl?3:1.5;ctx.stroke();
+    const am=(a0+a1)/2;const x=cx+Math.cos(am)*141,y=cy+Math.sin(am)*141;withA(on,()=>{txt(x,y-8,k[0],{size:12.5,weight:700,align:"center"});txt(x,y+10,k[1],{size:12,align:"center",color:C.ink})})});
+  circ(cx,cy,R1-6,C.panel,C.phil,2);wrapText("vertebral subluxation complex",cx,cy-14,130,16,{size:13,weight:700,align:"center"});
+  if(t>7){for(let i=0;i<5;i++){const a=-Math.PI/2+i/5*TAU+T*.4;circ(cx+Math.cos(a)*(R2+12),cy+Math.sin(a)*(R2+12),4,C.phil)}}
+  panelBox(480,56,308,400,{stroke:C.evid});tagPill(492,76,"evid");
+  const L=[["Each part names something real in injured tissue",1],["Shown to cluster as one lesion",0],["Reliably detected as one thing",0],["Shown to cause disease",0]];
+  L.forEach((l,i)=>{const a=ap(t,8+i*1.2,.8);withA(a,()=>{const y=118+i*80;rr(492,y,284,62,8);fillStroke(hexA(C.panel,.95),l[1]?C.good:C.bad,1.6);if(l[1])checkMark(514,y+31,8,C.good);else crossMark(514,y+31,7,C.bad);
+    wrapText((l[1]?"":"Not shown: ")+l[0],534,y+22,232,16,{size:12.5,weight:600})})})}
+/* ---------- changing terms ---------- */
+function sceneTerms(T){const t=T%18;const X=yAxis(60,300,700,1890,2000,[1900,1925,1950,1975,2000]);txt(760,326,"positions show rough eras",{size:11.5,color:C["ink-soft"],align:"right"});
+  const W=[[1895,"displaced vertebra",0],[1899,"pinched nerve",1],[1910,"tone",2],[1952,"fixation",0],[1968,"segmental dysfunction",1],[1983,"subluxation complex",2],[1990,"joint dysfunction",0],[1994,"manipulable lesion",3]];
+  W.forEach((w,i)=>{const a=ap(t,.5+i*1.1,.8);if(a<=0)return;const f=(w[0]-1890)/110;const col=mix(C.phil,C.evid,f);const y=270-w[2]*46-(1-smooth(a))*30;
+    withA(a,()=>{line(X(w[0]),300,X(w[0]),y+10,hexA(col,.6),1.2);label(X(w[0]),y,w[1],{size:13,weight:700,border:col})});pin(X(w[0]),300,col,5,a)});
+  const d=smooth(ap(t,10,1.4));withA(d,()=>{docPaper(60+(1-d)*-200,350,330,110,{title:"1996 colleges' consensus definition",lines:5,seal:C.law})});
+  panelBox(430,350,358,110,{stroke:C.evid});txt(444,370,"What trials measure now",{size:13,weight:700});
+  [["Pain",.7],["Function",.55],["Disability",.45]].forEach((b,i)=>{const y=394+i*22;txt(444,y,b[0],{size:12,weight:600});rr(540,y-7,230,14,4);ctx.fillStyle=hexA(C.rule,.5);ctx.fill();rr(540,y-7,230*b[1]*(.85+.15*Math.sin(T*1.5+i)),14,4);ctx.fillStyle=C.evid;ctx.fill()})}
+/* ================= scenes: parts 6 and 7, finish ================= */
+TAGS.sup=["SUPPORTED OR REASONABLE","good"];TAGS.nots=["NOT SUPPORTED","bad"];
+function stamp(x,y,t,col,p,rot){if(p<=0)return;const s=1+(1-smooth(p))*1.6;ctx.save();ctx.globalAlpha*=clamp(p*2,0,1);ctx.translate(x,y);ctx.rotate(rot||-.12);ctx.scale(s,s);ctx.font=`700 14px ${MONO}`;const w=ctx.measureText(t).width+20;
+  rr(-w/2,-16,w,32,5);ctx.strokeStyle=col;ctx.lineWidth=3;ctx.stroke();ctx.fillStyle=hexA(col,.12);ctx.fill();ctx.fillStyle=col;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,0,1);ctx.restore()}
+/* ---------- courts ---------- */
+function sceneCourts(T){const t=T%16;tagPill(20,24,"law");
+  rr(250,40,300,70,6);fillStroke(C.wood,mix(C.wood,"#000",.3),1.5);person(400,60,60,{skin:"skin3",shirtCol:C.ink});rr(250,70,300,40,6);fillStroke(C.wood,mix(C.wood,"#000",.3),1.5);txt(400,92,"COURT",{size:12,weight:700,mono:true,align:"center",color:"#fff"});
+  const tap=P(T,2.4);gavel(520,58,tap<.15?-.2:-.9,.8);
+  const tilt=.22*smooth(ap(t,3,3));scales(400,320,tilt,{s:1});
+  panelBox(24,140,230,96,{stroke:C.law});txt(36,160,"CHARGE",{size:12,weight:700,mono:true});wrapText("Practising osteopathy without a licence",36,182,206,16,{size:13,weight:600});
+  panelBox(546,140,230,96,{stroke:C.phil});txt(558,160,"DEFENCE",{size:12,weight:700,mono:true});wrapText("Chiropractic is a separate system with its own philosophy",558,182,206,16,{size:13,weight:600});
+  stamp(400,180,"ACQUITTED",C.good,ap(t,6.5,.6));
+  const X=yAxis(80,412,640,1904,1910,[1904,1905,1906,1907,1908,1909,1910],{size:11.5});
+  evCard(X(1906)-150,350,150,52,"1906","D.D. Palmer jailed",C.law,ap(t,.5,.8),{size:12});evCard(X(1907)+6,350,200,52,"1907","Morikubo trial, Wisconsin",C.law,ap(t,1.5,.8),{size:12});
+  pin(X(1906),412,C.law,6);pin(X(1907),412,C.law,6);
+  wrapText("The win pushed chiropractic to stress its own separate philosophy.",80,450,640,16,{size:12.5,color:C.ink})}
+/* ---------- licensure ---------- */
+function sceneLicense(T){const t=T%22;tagPill(20,22,"map");const ids=STATES.map(s=>s[0]).filter(s=>s!=="KS"&&s!=="LA");const order=ids.map((s,i)=>[s,rnd(i*4.1+3)]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
+  const at={KS:1};order.forEach((s,i)=>at[s]=2.5+i/order.length*11);at.LA=15;let cnt=0;
+  const pos=tileMap(24,42,46,s=>{const p=ap(t,at[s],.6);if(p>0)cnt++;return p>0?mix(C.land,C.law,.25+.55*p):null},{ls:11,inkOn:s=>ap(t,at[s],.6)>.5?inkOn(mix(C.land,C.law,.8)):C.ink});
+  if(t>1){label(pos.KS[0],pos.KS[1]-34,"Kansas 1913: first",{size:12.5,weight:700,border:C.gold});circ(pos.KS[0],pos.KS[1],26,null,C.gold,2.5)}
+  if(t>15){label(pos.LA[0]+20,pos.LA[1]+40,"Louisiana 1974: last",{size:12.5,weight:700,border:C.gold});circ(pos.LA[0],pos.LA[1],26,null,C.gold,2.5)}
+  panelBox(560,42,228,160);txt(674,96,String(cnt),{size:46,weight:700,mono:true,align:"center"});wrapText("states with a chiropractic licensing law",674,140,200,16,{size:12.5,align:"center"});
+  panelBox(560,214,228,130);wrapText("The order of the other states is simplified for the picture and is not shown by year.",572,236,206,16,{size:12.5,color:C["ink-soft"]});
+  const bx=40,bw=720;line(bx,440,bx+bw,440,C["ink-soft"],2);pin(bx,440,C.gold,7);pin(bx+bw,440,C.gold,7);txt(bx,462,"1913",{size:12.5,weight:700,mono:true,align:"center"});txt(bx+bw,462,"1974",{size:12.5,weight:700,mono:true,align:"center"});
+  const pr=clamp(t/15,0,1);rr(bx,434,bw*pr,12,6);ctx.fillStyle=hexA(C.law,.7);ctx.fill();label(400,420,"61 years from first to last",{size:12.5,weight:700,border:C.law})}
+/* ---------- federal recognition ---------- */
+function sceneFederal(T){const t=T%14;tagPill(20,24,"law");docPaper(40,50,520,250,{title:"Recognition in the early 1970s",lines:14});
+  stamp(150,190,"1972 MEDICARE",C.law,ap(t,1,.7),-.15);stamp(300,240,"1974 CCE",C.edu,ap(t,3,.7),.1);stamp(450,180,"1974 ALL 50 STATES",C.law,ap(t,5,.7),-.06);
+  const X=yAxis(80,360,440,1970,1976,[1970,1971,1972,1973,1974,1975,1976]);[[1972,"Medicare",C.law,1,330],[1974,"CCE recognized",C.edu,3,330],[1974,"Louisiana, the last state",C.law,5,302]].forEach((e,i)=>{const a=ap(t,e[3],.6);pin(X(e[0]),360,e[2],6,a);label(X(e[0]),e[4],e[1],{size:12,weight:700,border:e[2],a})});
+  panelBox(580,50,208,300,{stroke:C.law});txt(592,72,"The 1972 Medicare wording",{size:13,weight:700});
+  const words=["manual","manipulation","of the","spine","to correct","a subluxation"];const hi=Math.floor(T*1.2)%words.length;
+  words.forEach((w,i)=>{const y=110+i*36;const on=(i===0||i===1||i===3||i===5);rr(596,y-14,176,28,6);ctx.fillStyle=on&&hi===i?mix(C.panel,C.gold,.5):on?mix(C.panel,C.gold,.2):C.panel;ctx.fill();txt(684,y,w,{size:13.5,weight:on?700:500,align:"center"})});
+  wrapText("This wording kept the word subluxation in billing records.",48,440,700,16,{size:12.5})}
+/* ---------- Wilk v. AMA ---------- */
+function sceneWilk(T){const t=T%20;tagPill(20,22,"law");const X=yAxis(60,150,680,1960,1995,[1960,1970,1980,1990]);
+  const E=[[1963,"AMA Committee on Quackery formed"],[1974,"committee disbanded"],[1976,"Wilk and four others file suit"],[1987,"judge finds an illegal boycott"],[1990,"ruling upheld on appeal"]];
+  E.forEach((e,i)=>{const a=ap(t,.5+i*1.8,.8);const cx=40+i*148;evCard(cx,40,140,70,String(e[0]),e[1],C.law,a,{size:12});if(a>0){tlink(cx+70,110,X(e[0]),150,C.law,a);pin(X(e[0]),150,C.law,6,a)}});
+  const ruled=t>8.2;const lift=smooth(ap(t,8.4,1.4));
+  for(let i=0;i<3;i++){person(120+i*60,406,72,{skin:SKINS[i],shirtCol:C.act3,coat:true});person(560+i*60,406,72,{skin:SKINS[(i+2)%4],shirtCol:C.act2})}
+  label(180,230,"medical doctors",{size:12.5,weight:700,border:C.act3});label(600,230,"chiropractors",{size:12.5,weight:700,border:C.act2});
+  withA(1-lift,()=>{rr(388,250+lift*120,24,180,4);ctx.fillStyle=hexA(C.pain,.75);ctx.fill();label(400,240,"boycott",{size:12,weight:700,border:C.pain});arrow(300,300,370,300,hexA(C.act3,.7),2.2);crossMark(380,300,7,C.pain);arrow(500,330,430,330,hexA(C.act2,.7),2.2);crossMark(420,330,7,C.pain)});
+  if(ruled){gavel(470,190,P(T,1.6)<.15?-.2:-.9,.9);withA(lift,()=>{for(let k=0;k<2;k++){const y=300+k*30;line(290,y,510,y,hexA(k?C.act2:C.act3,.6),2,[5,4]);for(let i=0;i<3;i++){const p=P(T*.4+i/3,1);circ(k?lerp(510,290,p):lerp(290,510,p),y,4,k?C.act2:C.act3)}}
+    label(400,380,"referrals can flow both ways",{size:12,weight:700,border:C.good})})}
+  txt(400,464,"The court ruled on fair competition, not on whether chiropractic works.",{size:12.5,weight:600,align:"center"})}
+/* ---------- 1975 conference ---------- */
+function sceneNincds(T){const t=T%18;tagPill(20,22,"res");txt(116,22,"February 1975, Bethesda, Maryland",{size:13,weight:700});
+  rr(110,170,360,130,40);fillStroke(C.wood,mix(C.wood,"#000",.3),1.5);docPaper(240,205,60,44,{lines:3});docPaper(320,215,60,44,{lines:3,rot:.2});
+  const G=[["act3","medical doctors"],["act2","chiropractors"],["edu","osteopaths"],["act4","scientists"]];const seats=[];
+  for(let i=0;i<5;i++)seats.push([140+i*72,150,0]);for(let i=0;i<5;i++)seats.push([140+i*72,322,1]);seats.push([88,236,2]);seats.push([492,236,3]);
+  seats.forEach((s,i)=>{const g=G[i%4];circ(s[0],s[1],17,C[g[0]],C.panel,2);circ(s[0],s[1],9,C[SKINS[i%4]],null)});
+  G.forEach((g,i)=>{circ(530,170+i*30,8,C[g[0]]);txt(546,170+i*30,g[1],{size:12.5,weight:600})});
+  const b=Math.floor(T/1.6)%seats.length;const s=seats[b];speech(s[0]-30,s[1]-(s[2]===1?-24:58),70,30,"...",{tx:s[0],a:.9});
+  panelBox(530,60,250,70);txt(542,80,"quality research available",{size:12,weight:700});rr(542,96,226,16,5);ctx.fillStyle=hexA(C.rule,.5);ctx.fill();rr(542,96,226*.14,16,5);ctx.fillStyle=C.evid;ctx.fill();txt(580,104,"low",{size:12,weight:700});
+  evCard(40,386,440,72,"","Conclusion: too little good research to judge whether or how manipulation works. More studies are needed.",C.evid,ap(t,4,1),{w:600,size:13});
+  panelBox(530,300,250,166,{stroke:C.evid});txt(542,320,"Studies over time (trend only)",{size:12,weight:700});
+  ["1970s","1980s","1990s","2000s","2010s"].forEach((d,i)=>{const h=[10,28,52,84,110][i]*smooth(ap(t,6+i*.9,1));rr(552+i*46,448-h,32,h,3);ctx.fillStyle=C.evid;ctx.fill();txt(568+i*46,458,d,{size:10.5,align:"center",mono:true,color:C["ink-soft"]})})}
+/* ---------- evidence based practice ---------- */
+function sceneEbp(T){const t=T%16;tagPill(20,22,"evid");txt(176,22,"Many trials, combined",{size:13,weight:700});
+  trialArms(30,58,440,t,{dur:7,n:40,a:.6,b:.57});txt(30,206,"solid: improved, outlined: little change",{size:12,color:C["ink-soft"]});
+  panelBox(490,44,298,190,{stroke:C.evid});txt(502,64,"Effect size compared with no treatment",{size:12,weight:700});
+  const sx=x=>506+x*260;["none","small","moderate","large"].forEach((l,i)=>{const x=sx(i/3);line(x,90,x,200,C.grid,1);txt(x,214,l,{size:11.5,align:"center",color:C["ink-soft"]})});
+  rr(sx(1/3),84,sx(.62)-sx(1/3),112,4);ctx.fillStyle=hexA(C.gold,.18);ctx.fill();txt((sx(1/3)+sx(.62))/2,188,"small to moderate",{size:11.5,weight:700,align:"center"});
+  [["manipulation",.47,C.evid],["other recommended care",.44,C.act3]].forEach((b,i)=>{const w=(sx(b[1])-sx(0))*smooth(ap(t,7.5+i*.6,2.5));const y=112+i*44;txt(sx(0),y-10+18*0,b[0],{size:12,weight:600});rr(sx(0),y,w,20,4);ctx.fillStyle=b[2];ctx.fill()});
+  const X=yAxis(60,320,680,1990,2020,[1990,2000,2010,2020]);
+  evCard(X(1994)-60,346,280,80,"1994","A federal guideline on acute low back problems lists manipulation as an option",C.evid,ap(t,1,.8),{size:12});
+  evCard(X(2017)-250,346,270,80,"2017","A major guideline lists it among nonpharmacologic choices for low back pain",C.evid,ap(t,2.5,.8),{size:12});
+  pin(X(1994),320,C.evid,6);pin(X(2017),320,C.evid,6);txt(400,448,"One reasonable option among several, not a cure; best as part of an active plan.",{size:12.5,weight:600,align:"center"})}
+/* ---------- what research supports ---------- */
+function sceneSupport(T){const t=T%16;panelBox(12,12,382,456,{stroke:C.good});panelBox(406,12,382,456,{stroke:C.bad});tagPill(24,32,"sup");tagPill(418,32,"nots");
+  const L=["Small to moderate benefit for low back pain","Some benefit for neck pain, often with exercise","Short term changes in pain sensitivity","Serious harms are rare, but screening matters"];
+  const R=["Subluxation as the cause of most disease","Manipulation for asthma, high blood pressure or ear infections","Reliable detection of subluxation by hand, heat or X ray","Innate Intelligence as a testable force"];
+  L.forEach((l,i)=>{const a=ap(t,.5+i*1.4,.8);withA(a,()=>{const y=58+i*86-(1-smooth(a))*20;rr(26,y,354,70,8);fillStroke(hexA(C.panel,.96),C.good,1.6);circ(52,y+35,15,C["good-wash"],C.good,1.5);checkMark(52,y+35,7,C.good);wrapText(l,76,y+26,290,17,{size:13,weight:600})})});
+  R.forEach((l,i)=>{const a=ap(t,1.2+i*1.4,.8);withA(a,()=>{const y=58+i*86-(1-smooth(a))*20;rr(420,y,354,70,8);fillStroke(hexA(C.panel,.96),C.bad,1.6);circ(446,y+35,15,C["bad-wash"],C.bad,1.5);crossMark(446,y+35,6,C.bad);wrapText(l,470,y+26,290,17,{size:13,weight:600})})});
+  label(400,436,"Evidence is mixed for some kinds of headache.",{size:12.5,weight:700,border:C.evid})}
+/* ---------- range of views ---------- */
+function sceneViews(T){const t=T%16;spectrumBar(80,300,640,"Traditional, subluxation centred","Evidence based, musculoskeletal");
+  evCard(40,80,300,92,"","Ideas often held here: the subluxation as the focus, vitalism and Innate, ongoing wellness care",C.phil,ap(t,1,1),{w:600,size:13});
+  evCard(460,80,300,92,"","Ideas often held here: back and neck pain, exercise and guidelines, working with other clinicians",C.evid,ap(t,2,1),{w:600,size:13});
+  for(let i=0;i<22;i++){const u=rnd(i*3.3+2),v=rnd(i*7.7+5);const pos=clamp(.5+(u+v-1)*.55,.04,.96);const a=ap(t,3+i*.18,1);const x=lerp(i%2?820:-20,80+pos*640,smooth(a))+Math.sin(T*.8+i)*3;
+    person(x,280-(i%3)*0,30,{skin:SKINS[i%4],shirt:SHIRTS[(i+1)%4]})}
+  panelBox(160,360,480,70);wrapText("Views form a spectrum. Surveys suggest most chiropractors fall somewhere between the two ends.",176,382,450,17,{size:13,weight:600,align:"left"})}
+/* ---------- finish ---------- */
+function sceneFinish(T){const g=P(T,8);const gx=yearX(70,690,1770+g*250);ctx.save();const gr=ctx.createLinearGradient(gx-40,0,gx+40,0);gr.addColorStop(0,hexA(C.accent,0));gr.addColorStop(.5,hexA(C.accent,.18));gr.addColorStop(1,hexA(C.accent,0));ctx.fillStyle=gr;ctx.fillRect(gx-40,20,80,320);ctx.restore();
+  tlDraw({x:70,y:22,w:690,h:312,evs:EVENTS,prog:()=>1,T,cursor:null});
+  panelBox(14,370,382,96,{stroke:C.phil});tagPill(26,388,"model");wrapText("Innate Intelligence, bone on nerve, tone, fixation, subluxation complex",26,414,360,17,{size:13,weight:600});
+  panelBox(404,370,382,96,{stroke:C.evid});tagPill(416,388,"evid");wrapText("Modest benefit for back and neck pain; no support for treating organ disease; subluxation hard to detect; harms rare, screening matters",416,414,360,17,{size:13,weight:600})}
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now(),DT=0;
+const SCENES={map:sceneMap,heroic:sceneHeroic,market:sceneMarket,magnet:sceneMagnet,osteo:sceneOsteo,palmer:scenePalmer,lillard:sceneLillard,hearing:sceneHearing,naming:sceneNaming,bj:sceneBj,ncm:sceneNcm,straights:sceneStraights,innate:sceneInnate,premise:scenePremise,sublux:sceneSublux,tone:sceneTone,motion:sceneMotion,vsc:sceneVsc,terms:sceneTerms,courts:sceneCourts,license:sceneLicense,federal:sceneFederal,wilk:sceneWilk,nincds:sceneNincds,ebp:sceneEbp,support:sceneSupport,views:sceneViews,finish:sceneFinish};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneMap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=paused?0:dt*speed;T+=DT;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;DT=0;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

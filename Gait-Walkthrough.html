@@ -1,0 +1,1509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Posture and Gait Walkthrough</title>
+<meta name="description" content="Step by step animated walkthrough of posture, gait and movement: center of mass and base of support, the line of gravity, why no single posture prevents pain, forward head posture as a lever, the gait cycle and its phases, double support and flight, ground reaction forces in walking and running, cadence, step length and speed, muscle activity, pelvic rotation, antalgic, Trendelenburg and steppage gait, movement variability, sitting and standing load, and exercise for back pain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7E2222;--accent-wash:#F6E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B8561A;--act2:#2F7FC1;--act3:#B07A10;--act4:#2E8A7A;--act5:#7B5CC9;--act6:#3E9B4F;--act7:#A04E8C;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --bone:#EFE6D0;--bone-edge:#8A7A58;--disc:#3B7DC4;--disc-ink:#1F5A94;--nucleus:#8FB8E6;--nerve:#D9A514;--nerve-ink:#7A5A00;--muscle:#C8506A;--muscle-ink:#9B2C45;--lig:#2E8A86;--lig-ink:#1E6663;
+  --symp:#E0761E;--para:#3E9B4F;--pain:#D03434;--pain-ink:#A82525;--evid:#4F5BC0;--evid-ink:#3A45A0;
+  --stance:#7A4E9A;--stance-ink:#5E3A7A;--swing:#B8860B;--swing-ink:#7A5A00;--dbl:#3F4A8F;--flight:#7F99A6;
+  --com:#D03434;--bos:#2E8A86;--grf:#4F5BC0;--legR:#9B2C2C;--legL:#7D8A93;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--hair2:#6B4A2E;--hair3:#9AA1A6;
+  --shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;--pants:#3E4A56;--pants2:#6B5A4A;--shoe:#2A2F33;--sole:#C9CED2;
+  --floor:#D2C8B6;--floor-line:#A69A84;--plate:#B9C3CA;--plate-edge:#7F8C95;--chair:#8A6A4A;--wall:#E6E9EC;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B8B2;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CDB2;--bone-edge:#F0E6CC;--disc:#6FA8E8;--disc-ink:#8CBCF0;--nucleus:#3A5E8A;--nerve:#F2D04A;--nerve-ink:#F2D04A;--muscle:#EE8AA0;--muscle-ink:#F4A2B4;--lig:#5CC4BE;--lig-ink:#7AD4CE;
+  --symp:#F5A050;--para:#6CCB7C;--pain:#F06A6A;--pain-ink:#F48A8A;--evid:#8F98F0;--evid-ink:#A8AFF4;
+  --stance:#B08ED8;--stance-ink:#C4A8E4;--swing:#E8BE5A;--swing-ink:#E8BE5A;--dbl:#8F98F0;--flight:#7F99A6;
+  --com:#F06A6A;--bos:#5CC4BE;--grf:#8F98F0;--legR:#F4A7A0;--legL:#7D8A93;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--hair2:#4A3420;--hair3:#8A9196;
+  --shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--pants:#4A5866;--pants2:#7A6A5A;--shoe:#0B0F12;--sole:#6E777D;
+  --floor:#3A342A;--floor-line:#6A604E;--plate:#3E4A52;--plate-edge:#7F8C95;--chair:#7A5A3A;--wall:#1A2228;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B8B2;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CDB2;--bone-edge:#F0E6CC;--disc:#6FA8E8;--disc-ink:#8CBCF0;--nucleus:#3A5E8A;--nerve:#F2D04A;--nerve-ink:#F2D04A;--muscle:#EE8AA0;--muscle-ink:#F4A2B4;--lig:#5CC4BE;--lig-ink:#7AD4CE;
+  --symp:#F5A050;--para:#6CCB7C;--pain:#F06A6A;--pain-ink:#F48A8A;--evid:#8F98F0;--evid-ink:#A8AFF4;
+  --stance:#B08ED8;--stance-ink:#C4A8E4;--swing:#E8BE5A;--swing-ink:#E8BE5A;--dbl:#8F98F0;--flight:#7F99A6;
+  --com:#F06A6A;--bos:#5CC4BE;--grf:#8F98F0;--legR:#F4A7A0;--legL:#7D8A93;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--hair2:#4A3420;--hair3:#8A9196;
+  --shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--pants:#4A5866;--pants2:#7A6A5A;--shoe:#0B0F12;--sole:#6E777D;
+  --floor:#3A342A;--floor-line:#6A604E;--plate:#3E4A52;--plate-edge:#7F8C95;--chair:#7A5A3A;--wall:#1A2228;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+.body .practice{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:6px 10px;font-size:14.5px;color:var(--ink)}
+.body .practice b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 8 &middot; Posture, gait and movement</div>
+    <h1>Posture and Gait Walkthrough</h1>
+    <p class="sub">Watch balance shift over the feet, a head act on a lever, a walker move through every phase of the gait cycle, floor forces rise and fall, and muscles switch on and off. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Use the left and right arrow keys to move between steps. Joint angles, forces and timings are typical rounded values for adults and vary between people. Practice next in the <a href="Gait-Lab.html">Posture and Gait Lab</a>.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "disc-ink", "nucleus", "nerve", "nerve-ink", "muscle", "muscle-ink", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "stance", "stance-ink", "swing", "swing-ink", "dbl", "flight", "com", "bos", "grf", "legR", "legL", "skin1", "skin2", "skin3", "skin4", "hair", "hair2", "hair3", "shirt1", "shirt2", "shirt3", "shirt4", "pants", "pants2", "shoe", "sole", "floor", "floor-line", "plate", "plate-edge", "chair", "wall"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= gait model (shared by both pages) =================
+   Sagittal joint angles are approximate textbook curves for an adult, in degrees:
+   hip flexion +, knee flexion +, ankle dorsiflexion +. Phase 0 = right initial contact. */
+const D2R=Math.PI/180;
+const KF={
+ walk:{hip:[[0,23],[.12,20],[.3,4],[.5,-14],[.6,-9],[.72,12],[.86,26],[.94,25]],
+       knee:[[0,3],[.14,17],[.38,6],[.5,28],[.6,44],[.72,62],[.86,28],[.96,3]],
+       ank:[[0,0],[.07,-6],[.25,4],[.42,10],[.52,0],[.62,-15],[.75,-3],[.87,1]],toe:.6,mean:5},
+ run:{hip:[[0,26],[.15,12],[.36,-10],[.5,0],[.7,32],[.85,40],[.95,32]],
+      knee:[[0,18],[.12,40],[.36,16],[.5,62],[.66,100],[.82,55],[.94,22]],
+      ank:[[0,4],[.12,18],[.36,-20],[.5,-10],[.7,2],[.88,8]],toe:.38,mean:12}};
+function kfI(K,p){p=((p%1)+1)%1;const n=K.length;let i=n-1;for(let j=0;j<n;j++){if(K[j][0]<=p)i=j}
+  const k0=K[(i-1+n)%n],k1=K[i],k2=K[(i+1)%n],k3=K[(i+2)%n];
+  let t1=k1[0],t2=k2[0];if(t2<=t1)t2+=1;let t0=k0[0];if(t0>=t1)t0-=1;let t3=k3[0];while(t3<=t2)t3+=1;
+  let pp=p;if(pp<t1)pp+=1;const h=t2-t1,u=(pp-t1)/h;
+  const m1=(k2[1]-k0[1])/(t2-t0)*h,m2=(k3[1]-k1[1])/(t3-t1)*h;const u2=u*u,u3=u2*u;
+  return (2*u3-3*u2+1)*k1[1]+(u3-2*u2+u)*m1+(-2*u3+3*u2)*k2[1]+(u3-u2)*m2}
+const SEGM={thigh:.44,shank:.43,ah:.075,heel:-.06,ball:.13,toe:.19,trunk:.5,neck:.09,head:.11,uarm:.3,farm:.28};
+function mod1(x){return ((x%1)+1)%1}
+function legFK(h,k,a){const th=h*D2R,ts=(h-k)*D2R;const knee=[SEGM.thigh*Math.sin(th),SEGM.thigh*Math.cos(th)];
+  const ank=[knee[0]+SEGM.shank*Math.sin(ts),knee[1]+SEGM.shank*Math.cos(ts)];const phi=-ts-a*D2R;const c=Math.cos(phi),s=Math.sin(phi);
+  const fp=(fx,fy)=>[ank[0]+c*fx-s*fy,ank[1]+s*fx+c*fy];
+  return {knee,ank,heel:fp(SEGM.heel,SEGM.ah),ball:fp(SEGM.ball,SEGM.ah),toe:fp(SEGM.toe,SEGM.ah-.012),top:fp(.12,-.01),back:fp(-.07,.01),phi}}
+function stanceWalk(v){return clamp(.655-.04*v,.56,.64)}
+function dutyRun(v){return clamp(.44-.03*v,.28,.4)}
+function swingBump(p,toe){if(p<toe)return 0;return Math.sin(Math.PI*(p-toe)/(1-toe))}
+/* angles for one leg at kinematic phase p */
+function legAngles(G,p,isR){const K=G.K;let h=K.mean+G.k*(kfI(K.hip,p)-K.mean),kn=kfI(K.knee,p),a=kfI(K.ank,p);
+  if(isR&&G.limp==="steppage"){const b=swingBump(p,K.toe);const sw=p>=K.toe?smooth((p-K.toe)/.08):0;
+    a=lerp(a,-20,sw);h+=16*b;kn+=24*b;if(p<.07){a=lerp(-14,a,smooth(p/.07))}}
+  if(isR&&G.limp==="antalgic"){kn+=5*(p<K.toe?1:0)}
+  return [h,kn,a]}
+function legPhase(G,u,leg){const L=G.legs[leg];const uu=mod1(u-L.off);const toe=G.K.toe;const p=uu<L.s?toe*uu/L.s:toe+(1-toe)*(uu-L.s)/(1-L.s);return {uu,p,st:uu<L.s,s:L.s}}
+function buildTable(G,k){G.k=k;const N=G.N;const X=new Float64Array(N+1),Y=new Float64Array(N),CT=[];let sum=0,cu=0;
+  const pose=u=>{const r={};["R","L"].forEach(l=>{const ph=legPhase(G,u,l);const an=legAngles(G,ph.p,l==="R");r[l]={ph,an,f:legFK(an[0],an[1],an[2])}});return r};
+  const low=f=>{let b=f.heel;[f.ball,f.toe].forEach(q=>{if(q[1]>b[1])b=q});return b};
+  const P0=[];for(let i=0;i<=N;i++)P0.push(pose(i/N));
+  for(let i=0;i<N;i++){const A=P0[i],B=P0[i+1];const legs=["R","L"].filter(l=>A[l].ph.st);CT.push(legs.length);
+    if(legs.length){let d=-1e9;legs.forEach(l=>{d=Math.max(d,low(A[l].f)[1])});Y[i]=-d;
+      const lg=legs.length===1?legs[0]:(A.R.ph.uu<A.L.ph.uu?"R":"L");const f=A[lg].f;let key="heel";[["ball",f.ball],["toe",f.toe]].forEach(q=>{if(q[1][1]>f[key][1])key=q[0]});
+      const dx=-(B[lg].f[key][0]-f[key][0]);X[i+1]=dx;sum+=dx;cu++}else{Y[i]=NaN;X[i+1]=NaN}}
+  const vb=cu?sum/cu:0;let tot=0;X[0]=0;for(let i=1;i<=N;i++){const d=isNaN(X[i])?vb:X[i];tot+=d;X[i]=tot}
+  /* smooth the hip height a little */
+  const Ys=new Float64Array(N);for(let i=0;i<N;i++){if(isNaN(Y[i])){Ys[i]=NaN;continue}let s=0,c=0;for(let j=-2;j<=2;j++){const v=Y[(i+j+N)%N];if(!isNaN(v)){s+=v;c++}}Ys[i]=s/c}
+  /* flight: ballistic arcs */
+  for(let i=0;i<N;i++){if(!isNaN(Ys[i])||!isNaN(Ys[(i-1+N)%N]))continue}
+  const runs=[];let i0=-1;for(let j=0;j<2*N;j++){const i=j%N;const fl=isNaN(Ys[i]);const pv=isNaN(Ys[(i-1+N)%N]);if(fl&&!pv&&j<N+1){i0=j}if(!fl&&pv&&i0>=0){runs.push([i0,j]);i0=-1}}
+  const Yf=Float64Array.from(Ys);runs.forEach(r=>{const a=r[0]-1,b=r[1];const ya=Ys[(a+N)%N],yb=Ys[b%N];const n=b-a;const tf=(n-1)/N*G.Tc;const h=9.81*tf*tf/8;
+    for(let j=a+1;j<b;j++){const f=(j-a)/n;Yf[j%N]=lerp(ya,yb,f)-4*h*f*(1-f)}});
+  G.X=X;G.Y=Yf;G.CT=CT;G.stride=tot;G.P0=P0;return tot}
+function makeGait(o){const run=o.mode==="run";const G={mode:o.mode,run,K:run?KF.run:KF.walk,N:o.N||300,limp:run?"none":(o.limp||"none"),cad:o.cad,step:o.step};
+  G.v=o.cad/60*o.step;G.Tc=120/o.cad;const s=run?dutyRun(G.v):stanceWalk(G.v);G.sBase=s;
+  G.legs={R:{off:0,s},L:{off:.5,s}};
+  if(G.limp==="antalgic"){const a=.08;G.legs.R.s=s-a;G.legs.L.off=.5-a*.75;G.legs.L.s=s+a*.75}
+  /* fit the hip excursion so the drawn stride matches 2 x step length */
+  const target=2*o.step;let lo=.3,hi=2.3;for(let it=0;it<16;it++){const m=(lo+hi)/2;if(buildTable(G,m)<target)lo=m;else hi=m}buildTable(G,(lo+hi)/2);
+  return G}
+function tabAt(G,arr,u){const N=G.N;const f=mod1(u)*N;const i=Math.floor(f),t=f-i;const a=arr[i%N],b=arr[(i+1)%N];return lerp(a,b,t)}
+function gaitPose(G,u){u=mod1(u);const N=G.N;const f=u*N;const i=Math.floor(f),t=f-i;const hx=lerp(G.X[i],G.X[i+1],t);const hy=tabAt(G,G.Y,u);
+  const legs={};["R","L"].forEach(l=>{const ph=legPhase(G,u,l);const an=legAngles(G,ph.p,l==="R");legs[l]={ph,an,f:legFK(an[0],an[1],an[2])}});
+  return {u,hx,hy,legs,contact:G.CT[Math.min(N-1,i)]}}
+/* phase names (walking), on the kinematic phase of a leg */
+const WPH=[["Initial contact","IC",0,.02,"stance"],["Loading response","LR",.02,.1,"stance"],["Midstance","MSt",.1,.3,"stance"],["Terminal stance","TSt",.3,.5,"stance"],["Preswing","PSw",.5,.6,"stance"],["Initial swing","ISw",.6,.73,"swing"],["Midswing","MSw",.73,.87,"swing"],["Terminal swing","TSw",.87,1,"swing"]];
+function wPhase(p){p=mod1(p);for(const w of WPH)if(p>=w[2]&&p<w[3])return w;return WPH[7]}
+function rPhaseName(p,toe){p=mod1(p);if(p<toe*.45)return "Stance: absorbing";if(p<toe)return "Stance: pushing off";if(p<toe+.12)return "Flight (float)";if(p<.94)return "Swing";return "Swing: reaching for contact"}
+/* vertical ground reaction force, in body weights */
+function grfShapeW(s,P,V){s=clamp(s,0,1);const pts=[[0,0],[.22,P],[.5,V],[.78,P],[1,0]];
+  if(s<.22){const t=s/.22;return P*Math.pow(Math.sin(Math.PI/2*t),.85)}if(s>.78){const t=(1-s)/.22;return P*Math.pow(Math.sin(Math.PI/2*t),.85)}
+  const a=s<.5?0:1;const t=(s-pts[1+a][0])/(pts[2+a][0]-pts[1+a][0]);return lerp(pts[1+a][1],pts[2+a][1],(1-Math.cos(Math.PI*t))/2)}
+function grfShapeR(s){s=clamp(s,0,1);return Math.pow(Math.sin(Math.PI*s),1.15)}
+function grfNorm(G){if(G._gn)return G._gn;const P=1+.22*(G.v-.8)/.8,V=.92-.25*(G.v-.8)/.8;G._P=clamp(P,.98,1.4);G._V=clamp(V,.5,.95);let tot=0;const N=400;
+  for(let i=0;i<N;i++){tot+=grfRaw(G,i/N,"R")+grfRaw(G,i/N,"L")}G._gn=1/(tot/N);return G._gn}
+function grfRaw(G,u,leg){const ph=legPhase(G,u,leg);if(!ph.st)return 0;const s=ph.uu/ph.s;
+  if(G.run)return grfShapeR(s);let P=G._P,V=G._V;if(leg==="R"&&G.limp==="antalgic"){P*=.84;V*=.92}
+  let f=grfShapeW(s,P,V);if(leg==="R"&&G.limp==="steppage")f+=.25*gauss(s,.05,.025);return f}
+function grfLeg(G,u,leg){const n=grfNorm(G);return grfRaw(G,u,leg)*n}
+function grfPeak(G){let m=0;for(let i=0;i<200;i++)m=Math.max(m,grfLeg(G,i/200,"R"));return m}
+/* muscle activity (approximate EMG timing), 0..1, on the kinematic phase of the right leg */
+function gw(p,m,s){return Math.max(gauss(p,m,s),gauss(p,m-1,s),gauss(p,m+1,s))}
+const EMG_W=[["Tibialis anterior",p=>Math.max(gw(p,.03,.04),.62*gw(p,.66,.05),.42*gw(p,.85,.08)),"Lifts the foot: controls foot lowering after heel strike, then clears the toes in swing"],
+  ["Quadriceps",p=>Math.max(gw(p,.08,.05),.35*gw(p,.95,.03)),"Absorbs the load as the knee bends a little after contact"],
+  ["Hamstrings",p=>Math.max(gw(p,.92,.05),.55*gw(p,.03,.04)),"Slows the swinging shank before contact"],
+  ["Gluteus maximus",p=>Math.max(gw(p,.04,.06),.45*gw(p,.97,.03)),"Steadies the hip and trunk as weight lands"],
+  ["Gluteus medius",p=>gw(p,.15,.08),"Holds the pelvis level in single leg support"],
+  ["Calf (soleus, gastrocnemius)",p=>gw(p,.4,.09),"Controls the shin over the foot, then pushes off"],
+  ["Hip flexors",p=>gw(p,.62,.06),"Pulls the thigh forward to start swing"]];
+const EMG_R=[["Tibialis anterior",p=>Math.max(gw(p,.02,.04),.7*gw(p,.62,.07),.6*gw(p,.92,.05))],["Quadriceps",p=>Math.max(gw(p,.1,.06),.5*gw(p,.95,.04))],["Hamstrings",p=>Math.max(gw(p,.86,.07),.4*gw(p,.05,.04))],
+  ["Gluteus maximus",p=>Math.max(gw(p,.06,.06),.6*gw(p,.94,.04))],["Gluteus medius",p=>gw(p,.12,.07)],["Calf (soleus, gastrocnemius)",p=>gw(p,.2,.08)],["Hip flexors",p=>gw(p,.5,.07)]];
+function emgAt(G,i,p){const L=G.run?EMG_R:EMG_W;let v=L[i][1](p);if(G.limp==="steppage"&&i===0)v*=.18;if(G.limp==="trend"&&i===4)v*=.25;return v}
+/* frontal plane pelvic drop (deg, + means the LEFT side is lower) and transverse rotation */
+function pelvisFront(G,u){const R=legPhase(G,u,"R"),L=legPhase(G,u,"L");let a=0;
+  if(R.st&&!L.st){const f=(L.uu-L.s)/(1-L.s);a=(G.limp==="trend"?13:5)*Math.sin(Math.PI*clamp(f,0,1))}
+  if(L.st&&!R.st){const f=(R.uu-R.s)/(1-R.s);a=-5*Math.sin(Math.PI*clamp(f,0,1))}
+  return a}
+function trunkLeanFront(G,u){if(G.limp!=="trend")return 0;const R=legPhase(G,u,"R"),L=legPhase(G,u,"L");if(!(R.st&&!L.st))return 0;const f=(L.uu-L.s)/(1-L.s);return 7*Math.sin(Math.PI*clamp(f,0,1))}
+function pelvisRot(G,u){return 4*Math.cos(TAU*u)}
+/* ================= figures: walker, runner, standing, sitting ================= */
+function limb(a,b,w1,w2,col,stroke,lw){const dx=b[0]-a[0],dy=b[1]-a[1];const L=Math.hypot(dx,dy)||1;const nx=-dy/L,ny=dx/L;
+  ctx.beginPath();ctx.moveTo(a[0]+nx*w1/2,a[1]+ny*w1/2);ctx.lineTo(b[0]+nx*w2/2,b[1]+ny*w2/2);ctx.lineTo(b[0]-nx*w2/2,b[1]-ny*w2/2);ctx.lineTo(a[0]-nx*w1/2,a[1]-ny*w1/2);ctx.closePath();
+  if(col){ctx.fillStyle=col;ctx.fill();circ(a[0],a[1],w1/2,col);circ(b[0],b[1],w2/2,col)}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.2;ctx.stroke()}}
+const SHOE=[[-.078,-.02],[-.08,.055],[-.065,.08],[.13,.08],[.19,.074],[.205,.052],[.16,.026],[.07,-.012],[.0,-.035],[-.04,-.04]];
+function footPts(ank,phi,pts){const c=Math.cos(phi),s=Math.sin(phi);return pts.map(q=>[ank[0]+c*q[0]-s*q[1],ank[1]+s*q[0]+c*q[1]])}
+function shoe(ank,phi,sc,col,o){o=o||{};const P_=footPts([0,0],phi,SHOE).map(q=>[ank[0]+q[0]*sc,ank[1]+q[1]*sc]);ctx.beginPath();P_.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();
+  if(o.hl){ctx.strokeStyle=o.hl;ctx.lineWidth=o.hlw||4;ctx.stroke()}ctx.fillStyle=col;ctx.fill();
+  const so=footPts([0,0],phi,[[-.072,.068],[.13,.068],[.19,.062]]).map(q=>[ank[0]+q[0]*sc,ank[1]+q[1]*sc]);poly(so,o.sole||C.sole,Math.max(1.5,sc*.012))}
+function skinC(i){return C["skin"+(i||1)]}
+/* full side view walker or runner. returns screen landmarks */
+function drawWalker(G,u,ox,gy,pxm,o){o=o||{};const Pz=gaitPose(G,u);const hip=[ox,gy+Pz.hy*pxm];const S=q=>[hip[0]+q[0]*pxm,hip[1]+q[1]*pxm];
+  const run=G.run;const lean=(run?7:3)*D2R+(o.lean||0)*D2R;const bob=0;
+  const sh=[hip[0]+Math.sin(lean)*SEGM.trunk*pxm,hip[1]-Math.cos(lean)*SEGM.trunk*pxm];
+  const fwd=(o.fhp||0);const nk=[sh[0]+(Math.sin(lean)*SEGM.neck+fwd*.5)*pxm,sh[1]-Math.cos(lean)*SEGM.neck*pxm];const hd=[nk[0]+(.03+fwd*.5)*pxm,nk[1]-SEGM.head*.85*pxm];
+  const skin=skinC(o.skin||1),shirt=C[o.shirt||"shirt1"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair"];
+  const farMix=c=>mix(c,C.ecf,.38);
+  const arm=(side,far)=>{const legD=G.legs[side==="R"?"L":"R"];const other=Pz.legs[side==="R"?"L":"R"];const hd_=other.an[0]-G.K.mean;const amp=run?1.1:.75;const sa=(hd_*amp)*D2R;const el=(run?82:16+6*Math.max(0,hd_/20))*D2R;
+    const e=[sh[0]+Math.sin(sa)*SEGM.uarm*pxm,sh[1]+Math.cos(sa)*SEGM.uarm*pxm];const fa=sa+el;const w=[e[0]+Math.sin(fa)*SEGM.farm*pxm,e[1]+Math.cos(fa)*SEGM.farm*pxm];
+    const sc=far?farMix(shirt):shirt,kc=far?farMix(skin):skin;limb(sh,e,.085*pxm,.07*pxm,sc);limb(e,w,.065*pxm,.05*pxm,kc);circ(w[0],w[1],.042*pxm,kc);return {e,w}};
+  const leg=(l,far)=>{const L=Pz.legs[l];const k=S(L.f.knee),a=S(L.f.ank);const pc=far?farMix(pants):pants;const hl=!far&&o.hl?o.hl:null;const hlR=o.hlL&&far?o.hlL:null;
+    if(hl||hlR){const c=hl||hlR;limb(hip,k,.15*pxm+5,.11*pxm+5,c);limb(k,a,.11*pxm+5,.075*pxm+5,c)}
+    limb(hip,k,.15*pxm,.11*pxm,pc);limb(k,a,.11*pxm,.075*pxm,o.shorts?(far?farMix(skin):skin):pc);if(o.shorts){limb(hip,lerpP(hip,k,.75),.15*pxm,.12*pxm,pc)}
+    shoe(a,L.f.phi,pxm,far?farMix(C.shoe):C.shoe,{hl:hl||hlR,hlw:5,sole:far?farMix(C.sole):C.sole});return {k,a,heel:S(L.f.heel),toe:S(L.f.toe),ball:S(L.f.ball)}};
+  const res={hip,sh,hd,pose:Pz};
+  res.armL=arm("L",true);res.L=leg("L",true);
+  /* torso */
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(lean);rr(-.115*pxm,-SEGM.trunk*pxm-.04*pxm,.23*pxm,SEGM.trunk*pxm+.1*pxm,.08*pxm);ctx.fillStyle=shirt;ctx.fill();
+  rr(-.12*pxm,-.04*pxm,.24*pxm,.13*pxm,.05*pxm);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  res.R=leg("R",false);
+  limb(sh,nk,.08*pxm,.075*pxm,skin);circ(hd[0],hd[1],SEGM.head*pxm,skin);
+  ctx.save();ctx.beginPath();ctx.arc(hd[0]-.012*pxm,hd[1]-.01*pxm,SEGM.head*pxm*1.04,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();ctx.restore();
+  circ(hd[0]+.07*pxm,hd[1]-.01*pxm,Math.max(1.2,.012*pxm),C.ink);
+  res.armR=arm("R",false);
+  res.com=[hip[0]+Math.sin(lean)*.1*pxm,hip[1]-.1*pxm];return res}
+function lerpP(a,b,t){return [lerp(a[0],b[0],t),lerp(a[1],b[1],t)]}
+/* ground with distance marks; off = world offset in px */
+function groundLine(x0,x1,gy,off,pxm,o){o=o||{};ctx.fillStyle=hexA(C.floor,.55);ctx.fillRect(x0,gy,x1-x0,o.depth||26);line(x0,gy,x1,gy,C["floor-line"],2);
+  const sp=(o.every||.5)*pxm;const st=-((off%sp)+sp)%sp;for(let x=x0+st;x<x1;x+=sp){const idx=Math.round((x-x0+off)/sp);line(x,gy,x,gy+(idx%2?6:11),C["floor-line"],1.5);
+    if(o.labels&&idx%2===0)txt(x,gy+19,(idx*(o.every||.5)).toFixed(0)+" m",{size:10,mono:true,align:"center",color:C["ink-soft"]})}}
+/* phase strip: shows stance and swing bars for both legs over one cycle with a cursor */
+function phaseStrip(G,x,y,w,u,o){o=o||{};const rows=[["R","Right"],["L","Left"]];const rh=o.rh||16;
+  rows.forEach((r,i)=>{const yy=y+i*(rh+6);txt(x-6,yy+rh/2,r[1],{size:11.5,weight:700,align:"right",color:C["ink-soft"]});rr(x,yy,w,rh,3);ctx.fillStyle=hexA(C.swing,.25);ctx.fill();
+    const L=G.legs[r[0]];const a=L.off,b=L.off+L.s;const seg_=(s0,s1)=>{const A=clamp(s0,0,1),B=clamp(s1,0,1);if(B>A){rr(x+A*w,yy,(B-A)*w,rh,3);ctx.fillStyle=hexA(C.stance,.75);ctx.fill()}};seg_(a,b);if(b>1)seg_(0,b-1);
+    if(o.labels!==false){const mid=mod1((a+Math.min(b,a+L.s)/1)/1);const sx=x+clamp((a+L.s/2)%1,0,1)*w;txt(sx,yy+rh/2+.5,"stance",{size:10.5,weight:700,align:"center",color:"#fff"})}});
+  if(!G.run&&o.dbl!==false){/* double support marks */for(let i=0;i<200;i++){const uu=i/200;const a=legPhase(G,uu,"R").st&&legPhase(G,uu,"L").st;if(a){ctx.fillStyle=hexA(C.dbl,.85);ctx.fillRect(x+uu*w,y+2*(rh+6),w/200+.6,6)}}
+    txt(x-6,y+2*(rh+6)+3,"Both",{size:11,weight:700,align:"right",color:C["ink-soft"]})}
+  if(G.run&&o.dbl!==false){for(let i=0;i<200;i++){const uu=i/200;const a=!legPhase(G,uu,"R").st&&!legPhase(G,uu,"L").st;if(a){ctx.fillStyle=hexA(C.flight,.95);ctx.fillRect(x+uu*w,y+2*(rh+6),w/200+.6,6)}}
+    txt(x-6,y+2*(rh+6)+3,"Flight",{size:11,weight:700,align:"right",color:C["ink-soft"]})}
+  const cx=x+mod1(u)*w;line(cx,y-6,cx,y+2*(rh+6)+12,C.ink,2);circ(cx,y-6,4,C.ink)}
+/* GRF plot over one cycle for the right foot, with total dashed */
+function grfPlot(G,x,y,w,h,u,o){o=o||{};const ymax=o.ymax||(G.run?3:1.5);const g=graph({x,y,w,h,x0:0,x1:100,y0:0,y1:ymax,xt:[0,20,40,60,80,100],yt:G.run?[0,1,2,3]:[0,.5,1,1.5],yf:v=>String(v),xf:v=>v+"%",xl:o.xl||"% of gait cycle",yl:"force (body weights)",ylx:28,title:o.title});
+  line(g.X(0),g.Y(1),g.X(100),g.Y(1),hexA(C.ink,.45),1.2,[5,4]);txt(g.X(100)-4,g.Y(1)-9,"body weight",{size:10.5,align:"right",color:C["ink-soft"],weight:600});
+  if(o.total!==false)curve(g,p=>grfLeg(G,p/100,"R")+grfLeg(G,p/100,"L"),0,100,hexA(C.ink,.5),1.6,[3,3]);
+  if(o.left)curve(g,p=>grfLeg(G,p/100,"L"),0,100,hexA(C.legL,.9),1.8);
+  const up=o.trace?mod1(u)*100:100;curve(g,p=>grfLeg(G,p/100,"R"),0,up,C.grf,3);
+  const v=grfLeg(G,u,"R");gdot(g,mod1(u)*100,v,C.grf,null,{r:5});return g}
+/* muscle activity strip over one cycle */
+function emgStrip(G,x,y,w,u,o){o=o||{};const L=G.run?EMG_R:EMG_W;const rh=o.rh||15,gap=o.gap||5;const pR=legPhase(G,u,"R").p;const lw=o.lw||150;
+  L.forEach((m,i)=>{const yy=y+i*(rh+gap);fitTxt(x,yy+rh/2,m[0],lw-8,{size:o.fs||11.5,weight:600,color:C.ink});const bx=x+lw,bw=w-lw;rr(bx,yy,bw,rh,3);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();
+    for(let k=0;k<120;k++){const uu=k/120;const p=legPhase(G,uu,"R").p;const a=emgAt(G,i,p);if(a<.06)continue;ctx.fillStyle=hexA(C.muscle,clamp(a,0,1)*.95);ctx.fillRect(bx+uu*bw,yy+rh*(1-a)*.5,bw/120+.5,rh*a)}
+    const now=emgAt(G,i,pR);if(now>.3)circ(bx-8,yy+rh/2,4+now*2,C.muscle)});
+  const cx=x+lw+mod1(u)*(w-lw);line(cx,y-4,cx,y+L.length*(rh+gap),C.ink,2)}
+/* top view footprints of a few strides */
+function footprint(x,y,s,col,right,a){withA(a==null?1:a,()=>{ell(x,y-(right?0:0),s*.55,s*.22,0,col);ell(x-s*.62,y,s*.24,s*.18,0,col)})}
+/* front view standing person. stance: "both" | "R" (standing on right) ; drop: pelvic drop deg (+ left side lower), lean: trunk lean deg (+ toward the figure's right = viewer left) */
+function frontPerson(x,gy,s,o){o=o||{};const skin=skinC(o.skin||2),shirt=C[o.shirt||"shirt2"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair"];
+  const legL=.9*s,pw=.17*s;const drop=(o.drop||0)*D2R,lean=(o.lean||0)*D2R;const sway=o.sway||0;
+  /* viewer left = person's right */
+  const stanceR=o.stance==="R";const fR=[x-pw*.9+(o.wide||0)*-s,gy-.035*s],fL=[x+pw*.9+(o.wide||0)*s+(o.stepL||0)*s,gy-.035*s];
+  const st=o.stance||"both";const cd=Math.cos(drop),sd=Math.sin(drop);let hipR,hipL,pc;
+  if(st==="R"){hipR=[fR[0]+.1*pw+sway*s,fR[1]-legL+.035*s];hipL=[hipR[0]+2*pw*cd,hipR[1]+2*pw*sd]}
+  else if(st==="L"){hipL=[fL[0]-.1*pw+sway*s,fL[1]-legL+.035*s];hipR=[hipL[0]-2*pw*cd,hipL[1]-2*pw*sd]}
+  else{const c=[x+sway*s,gy-legL];hipR=[c[0]-pw*cd,c[1]-pw*sd];hipL=[c[0]+pw*cd,c[1]+pw*sd]}
+  pc=[(hipR[0]+hipL[0])/2,(hipR[1]+hipL[1])/2];
+  const footC=C.shoe;const pantsC=pants;const lift=o.lift==null?1:o.lift;
+  const drawLeg=(h,f,lifted)=>{const ft=lifted?[lerp(f[0],h[0]+(f[0]-h[0])*.6,lift*.3),f[1]-lift*.2*s]:f;const kn=[lerp(h[0],ft[0],.5)+(lifted?.03*s*lift*(h===hipR?-1:1):0),lerp(h[1],ft[1],.5)-(lifted?.04*s*lift:0)];
+    if(o.hlLeg&&((o.hlLeg==="R"&&h===hipR)||(o.hlLeg==="L"&&h===hipL))){limb(h,kn,.15*s+5,.11*s+5,o.hlCol||C.legR);limb(kn,ft,.11*s+5,.08*s+5,o.hlCol||C.legR)}
+    limb(h,kn,.15*s,.11*s,pantsC);limb(kn,ft,.11*s,.08*s,pantsC);rr(ft[0]-.07*s,ft[1]-.015*s,.14*s,.05*s,.022*s);ctx.fillStyle=footC;ctx.fill();return {kn,ft}};
+  const R=drawLeg(hipR,fR,st==="L"),Lg=drawLeg(hipL,fL,st==="R");
+  /* pelvis band */
+  ctx.save();ctx.translate(pc[0],pc[1]);ctx.rotate(drop);rr(-pw*1.3,-.06*s,pw*2.6,.12*s,.05*s);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  /* trunk */
+  const tl=.5*s;const sc=[pc[0]-Math.sin(lean)*tl,pc[1]-Math.cos(lean)*tl];
+  ctx.save();ctx.translate(pc[0],pc[1]);ctx.rotate(-lean);ctx.beginPath();ctx.moveTo(-pw*1.1,-.02*s);ctx.lineTo(-pw*1.35,-tl+.05*s);ctx.quadraticCurveTo(-pw*1.3,-tl-.02*s,-pw*.9,-tl-.02*s);ctx.lineTo(pw*.9,-tl-.02*s);ctx.quadraticCurveTo(pw*1.3,-tl-.02*s,pw*1.35,-tl+.05*s);ctx.lineTo(pw*1.1,-.02*s);ctx.closePath();ctx.fillStyle=shirt;ctx.fill();ctx.restore();
+  const shR=[sc[0]-pw*1.3*Math.cos(lean),sc[1]-pw*1.3*Math.sin(lean)+.05*s],shL=[sc[0]+pw*1.3*Math.cos(lean),sc[1]+pw*1.3*Math.sin(lean)+.05*s];
+  [[shR,-1],[shL,1]].forEach(q=>{const e=[q[0][0]+q[1]*.05*s,q[0][1]+.28*s],w=[q[0][0]+q[1]*.07*s,q[0][1]+.54*s];limb(q[0],e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin)});
+  const hd=[sc[0]-Math.sin(lean)*.17*s,sc[1]-.17*s];limb(sc,[hd[0],hd[1]+.05*s],.08*s,.08*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0],hd[1]-.01*s,.115*s,Math.PI*1.02,Math.PI*1.98);ctx.closePath();ctx.fillStyle=hair;ctx.fill();
+  const com=[lerp(pc[0],sc[0],.12),lerp(pc[1],sc[1],.12)];return {pc,hipR,hipL,sc,hd,fR:R.ft,fL:Lg.ft,com,kneeL:Lg.kn,kneeR:R.kn}}
+/* side view standing person, facing right; returns landmarks. o.fhp = forward head (m), o.sway (m at 1 m height, + forward) */
+function sidePerson(x,gy,s,o){o=o||{};const skin=skinC(o.skin||3),shirt=C[o.shirt||"shirt3"],pants=C[o.pants||"pants"],hair=C[o.hair||"hair2"];
+  const a=(o.sway||0);const ank=[x,gy-.08*s];const kn=[x+.035*s+a*.5*s,gy-.5*s];const hip=[x+.07*s+a*.95*s,gy-.95*s];
+  const sh=[x+.05*s+a*1.45*s,gy-1.45*s];const fhp=o.fhp||0;const ear=[x+.05*s+fhp*s+a*1.6*s,gy-1.62*s];const hd=[ear[0]+.02*s,ear[1]-.02*s];
+  const farMix=c=>mix(c,C.ecf,.38);
+  limb([hip[0]-.01*s,hip[1]],[kn[0]-.01*s,kn[1]],.15*s,.11*s,farMix(pants));limb([kn[0]-.01*s,kn[1]],[ank[0]-.01*s,ank[1]],.11*s,.075*s,farMix(pants));shoe([ank[0]-.01*s,ank[1]],0,s,farMix(C.shoe));
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(Math.atan2(sh[0]-hip[0],hip[1]-sh[1]));rr(-.12*s,-.54*s,.24*s,.62*s,.08*s);ctx.fillStyle=shirt;ctx.fill();rr(-.125*s,-.04*s,.25*s,.13*s,.05*s);ctx.fillStyle=pants;ctx.fill();ctx.restore();
+  limb(hip,kn,.15*s,.11*s,pants);limb(kn,ank,.11*s,.075*s,pants);shoe(ank,0,s,C.shoe);
+  limb(sh,[ear[0]-.02*s,ear[1]+.04*s],.08*s,.075*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0]-.015*s,hd[1]-.01*s,.115*s,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();circ(hd[0]+.07*s,hd[1]-.01*s,Math.max(1.2,.012*s),C.ink);
+  ell(ear[0],ear[1],.018*s,.03*s,0,mix(skin,"#000",.15));
+  const e=[sh[0]+.0*s,sh[1]+.28*s],w=[sh[0]+.03*s,sh[1]+.54*s];limb(sh,e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin);
+  return {ank,kn,hip,sh,ear,hd,com:[x+.05*s+a*.95*s,gy-1.0*s],foot:[[ank[0]-.08*s,gy],[ank[0]+.2*s,gy]]}}
+/* sitting person facing right on a stool or chair. slump 0..1 */
+function sitPerson(x,fy,s,o){o=o||{};const skin=skinC(o.skin||4),shirt=C[o.shirt||"shirt4"],pants=C[o.pants||"pants2"],hair=C[o.hair||"hair"];const sl=o.slump||0;
+  const seatY=fy-.46*s;const hip=[x,seatY-.06*s];const kn=[x+.44*s,seatY-.04*s];const ank=[kn[0]+.04*s,fy-.08*s];
+  /* chair */
+  if(o.chair!==false){rr(x-.2*s,seatY,.5*s,.05*s,3);ctx.fillStyle=C.chair;ctx.fill();line(x-.16*s,seatY+.05*s,x-.18*s,fy,C.chair,4);line(x+.26*s,seatY+.05*s,x+.27*s,fy,C.chair,4);if(o.back){line(x-.19*s,seatY,x-.24*s,seatY-.5*s,C.chair,5)}}
+  limb(hip,kn,.15*s,.12*s,pants);limb(kn,ank,.11*s,.075*s,pants);shoe(ank,0,s,C.shoe);
+  const ang=(-4+sl*28)*D2R;/* trunk flexion */const sh=[hip[0]+Math.sin(ang)*.5*s-.02*s,hip[1]-Math.cos(ang)*.5*s];
+  ctx.save();ctx.translate(hip[0],hip[1]);ctx.rotate(ang);ctx.beginPath();ctx.moveTo(-.12*s,.05*s);ctx.quadraticCurveTo(-.14*s-sl*.07*s,-.28*s,-.1*s,-.56*s);ctx.lineTo(.1*s,-.56*s);ctx.quadraticCurveTo(.12*s,-.28*s,.12*s,.05*s);ctx.closePath();ctx.fillStyle=shirt;ctx.fill();ctx.restore();
+  const fh=(o.fhp!=null?o.fhp:sl*.08);const ear=[sh[0]+.03*s+fh*s,sh[1]-.19*s+sl*.03*s];const hd=[ear[0]+.02*s,ear[1]-.02*s];
+  limb(sh,[ear[0]-.02*s,ear[1]+.04*s],.08*s,.075*s,skin);circ(hd[0],hd[1],.11*s,skin);ctx.beginPath();ctx.arc(hd[0]-.015*s,hd[1]-.01*s,.115*s,Math.PI*.92,Math.PI*2.05);ctx.closePath();ctx.fillStyle=hair;ctx.fill();
+  const e=[sh[0]+.1*s,sh[1]+.24*s],w=[e[0]+.24*s,e[1]-.02*s];limb(sh,e,.085*s,.07*s,shirt);limb(e,w,.065*s,.05*s,skin);circ(w[0],w[1],.04*s,skin);
+  return {hip,sh,hd,ear,seatY}}
+/* motion segment: two vertebral bodies with a disc; load 0..1 squashes the disc */
+function discSeg(x,y,w,load,o){o=o||{};const h=w*.42,dh=w*.3*(1-.55*clamp(load,0,1.4)/1.4);const by=y;
+  rr(x-w/2,by-h-dh/2,w,h,w*.08);fillStroke(C.bone,C["bone-edge"],1.6);rr(x-w/2,by+dh/2,w,h,w*.08);fillStroke(C.bone,C["bone-edge"],1.6);
+  const bul=w*.08*clamp(load,0,1.4);ctx.beginPath();ctx.moveTo(x-w/2+2,by-dh/2);ctx.quadraticCurveTo(x-w/2-bul,by,x-w/2+2,by+dh/2);ctx.lineTo(x+w/2-2,by+dh/2);ctx.quadraticCurveTo(x+w/2+bul,by,x+w/2-2,by-dh/2);ctx.closePath();fillStroke(hexA(C.disc,.75),C.disc,1.4);
+  ell(x,by,w*.2,dh*.32,0,mix(C.nucleus,C.pain,clamp(load-.6,0,1)*.4));return {top:by-h-dh/2,bot:by+dh/2+h}}
+function weightArrow(x,y,len,col,lab,o){o=o||{};arrow(x,y,x,y+len,col,o.lw||3);if(lab)label(x+(o.dx||0),y+len+(o.dy||14),lab,{size:o.size||12,weight:700,border:col,mono:o.mono})}
+/* ================= walkthrough helpers ================= */
+let SYS={},SC={};
+let GW=null,GR=null,GA=null,GT=null,GS=null;
+function gaits(){if(GW)return;GW=makeGait({mode:"walk",cad:112,step:.7});GR=makeGait({mode:"run",cad:170,step:1.1});GA=makeGait({mode:"walk",cad:104,step:.6,limp:"antalgic"});
+  GT=makeGait({mode:"walk",cad:104,step:.62,limp:"trend"});GS=makeGait({mode:"walk",cad:100,step:.6,limp:"steppage"})}
+/* walker on a scrolling floor; camera follows the average progress */
+function walkScene(G,T,slow,cx,gy,pxm,o){o=o||{};const per=G.Tc*slow;const tt=T/per+(o.u0||0);const cyc=Math.floor(tt);const u=tt-cyc;const Pz=gaitPose(G,u);
+  const world=cyc*G.stride+Pz.hx;const hipX=cx+(Pz.hx-u*G.stride)*pxm;
+  if(o.ground!==false)groundLine(o.x0==null?0:o.x0,o.x1==null?800:o.x1,gy,world*pxm,pxm,{every:o.every||.5,labels:o.labels,depth:o.depth});
+  const W2S=w=>hipX+(w-world)*pxm;
+  if(o.prints)o.prints(W2S,cyc,u);
+  const res=o.noDraw?null:drawWalker(G,u,hipX,gy,pxm,Object.assign({hl:C.legR},o.fig||{}));
+  return {u,cyc,res,world,hipX,W2S,pose:Pz}}
+/* heel strike world positions for a gait (relative to the cycle start hip) */
+function strikeX(G,leg){const off=G.legs[leg].off;const Pz=gaitPose(G,off);return Pz.hx+Pz.legs[leg].f.heel[0]}
+function evNote(x,y,w,t,o){o=o||{};const n=wrapCount(t,w-24,o.size||12.5,500);const h=n*(o.lh||17)+30;panelBox(x,y,w,h,{fill:hexA(C.panel,.95),stroke:C.evid,lw:1.8});
+  rr(x,y,6,h,3);ctx.fillStyle=C.evid;ctx.fill();title(x+14,y+13,o.title||"What the evidence says",C["evid-ink"]);wrapText(t,x+14,y+31,w-26,o.lh||17,{size:o.size||12.5});return h}
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+function tagBox(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12.5,weight:700,border:col,align:o.align,mono:o.mono,bg:o.bg})}
+/* glow over a body part */
+function mGlow(x,y,rx,ry,rot,a,col){if(a<=.04)return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);ell(x,y,rx,ry,rot,hexA(col||C.muscle,.85),col||C.muscle,1.5);ctx.restore()}
+function segPt(a,b,t,off){const dx=b[0]-a[0],dy=b[1]-a[1];const L=Math.hypot(dx,dy)||1;let nx=-dy/L,ny=dx/L;if(nx<0){nx=-nx;ny=-ny}return [a[0]+dx*t+nx*off,a[1]+dy*t+ny*off,Math.atan2(dy,dx)]}
+function muscleGlows(G,u,res,pxm,o){o=o||{};const p=legPhase(G,u,"R").p;const hip=res.hip,k=res.R.k,a=res.R.a;const s=pxm;
+  const at=(i,pt,rx,ry)=>mGlow(pt[0],pt[1],rx,ry,pt[2]||0,emgAt(G,i,p)*(o.gain||1),o.col);
+  at(0,segPt(k,a,.35,.045*s),.13*s,.03*s);at(1,segPt(hip,k,.5,.06*s),.15*s,.04*s);at(2,segPt(hip,k,.5,-.06*s),.15*s,.035*s);
+  at(3,[hip[0]-.08*s,hip[1]+.0*s,1.4],.07*s,.06*s);at(4,[hip[0]-.01*s,hip[1]-.07*s,0],.08*s,.035*s);at(5,segPt(k,a,.3,-.045*s),.13*s,.035*s);at(6,[hip[0]+.07*s,hip[1]-.03*s,.9],.06*s,.03*s)}
+/* simple lines-builder worked example: rows appear one after another */
+function workLines(x,y,w,rows,t,o){o=o||{};let yy=y;const dt=o.dt||1.6;rows.forEach((r,i)=>{const a=seg(t,(o.t0||.4)+i*dt,(o.t0||.4)+i*dt+.6);if(r.c){yy+=36;if(a>0){const cw=chainWidth(r.c[0],r.c[1],{size:o.fs||14});const sc=Math.min(1,w/cw);ctx.save();ctx.translate(x,yy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],clamp((t-(o.t0||.4)-i*dt)/(dt*.9),0,1),{size:o.fs||14});ctx.restore()}yy+=32}
+    else if(r.ans){yy+=30;if(a>0)withA(a,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(w,ctx.measureText(r.ans).width);rr(x-4,yy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(x+3,yy,r.ans,w-6,{size:15,weight:700,mono:true})});yy+=20}
+    else if(r.miss){yy+=14;if(a>0){const n=wrapCount("Common mistake: "+r.miss,w-16,12);const mh=n*16+12;withA(a,()=>{rr(x-4,yy-8,w+8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+r.miss,x+4,yy+2,w-12,16,{size:12})});yy+=mh+6}else yy+=40}
+    else{yy+=r.gap||22;if(a>0)withA(a,()=>fitTxt(x,yy,r.l,w,{size:r.size||13.5,weight:r.w||600,mono:r.mono,color:r.col}))}});return yy}
+function stopwatch(x,y,r,secs,run,col){circ(x,y,r,C.panel,C.ink,2.5);rr(x-4,y-r-8,8,8,2);ctx.fillStyle=C.ink;ctx.fill();for(let i=0;i<12;i++){const a=i/12*TAU;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.4)}
+  const a=secs/60*TAU-Math.PI/2;line(x,y,x+Math.cos(a)*r*.75,y+Math.sin(a)*r*.75,col||C.evid,2.5);circ(x,y,3,C.ink)}
+function ruler(x1,x2,y,lab,col,o){o=o||{};col=col||C["ink-soft"];line(x1,y,x2,y,col,1.6);line(x1,y-6,x1,y+6,col,1.6);line(x2,y-6,x2,y+6,col,1.6);if(lab)label((x1+x2)/2,y+(o.dy==null?-12:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col})}
+function topFoot(x,y,s,col,dir,a){withA(a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(dir||0);ell(s*.18,0,s*.42,s*.17,0,col);ell(-s*.36,0,s*.19,s*.14,0,col);ctx.restore()})}
+/* ================= drawing pieces shared by both pages ================= */
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,6);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke();rr(x,y,5,h,3);ctx.fillStyle=col;ctx.fill()}
+function clipRect(x,y,w,h,fn){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();fn();ctx.restore()}
+function headLever(px,py,dpx,o){o=o||{};const sc=o.sc||1;
+  /* torso */
+  ctx.beginPath();ctx.moveTo(px-120*sc,py+120*sc);ctx.quadraticCurveTo(px-110*sc,py-10*sc,px-30*sc,py-14*sc);ctx.lineTo(px+40*sc,py-8*sc);ctx.quadraticCurveTo(px+90*sc,py+10*sc,px+100*sc,py+120*sc);ctx.closePath();ctx.fillStyle=hexA(C.shirt1,.55);ctx.fill();
+  const top=[px+dpx*1.0,py-150*sc];const pts=[];for(let i=0;i<=7;i++){const f=i/7;pts.push([lerp(px,top[0],f)+Math.sin(f*Math.PI)*10*sc,lerp(py,top[1],f)])}
+  /* extensor muscle */
+  ctx.beginPath();ctx.moveTo(px-26*sc,py+8*sc);ctx.quadraticCurveTo(px-34*sc+dpx*.4,py-80*sc,top[0]-36*sc,top[1]-6*sc);ctx.lineTo(top[0]-26*sc,top[1]+10*sc);ctx.quadraticCurveTo(px-18*sc+dpx*.4,py-70*sc,px-14*sc,py+8*sc);ctx.closePath();ctx.fillStyle=hexA(C.muscle,o.mus==null?.6:o.mus);ctx.fill();ctx.strokeStyle=C.muscle;ctx.lineWidth=1.4;ctx.stroke();
+  for(let i=0;i<7;i++){const a=pts[i],b=pts[i+1];const m=[(a[0]+b[0])/2,(a[1]+b[1])/2];const ang=Math.atan2(b[1]-a[1],b[0]-a[0])+Math.PI/2;ctx.save();ctx.translate(m[0],m[1]);ctx.rotate(ang);rr(-12*sc,-8*sc,24*sc,16*sc,4*sc);fillStroke(C.bone,C["bone-edge"],1.4);ctx.restore();if(i<6){const q=b;ell(q[0],q[1],10*sc,3*sc,0,hexA(C.disc,.8))}}
+  /* head */
+  const hc=[top[0]+18*sc,top[1]-48*sc];circ(hc[0],hc[1],62*sc,skinC(o.skin||4),hexA(C.ink,.25),1.2);ctx.beginPath();ctx.arc(hc[0]-6*sc,hc[1]-6*sc,64*sc,Math.PI*.95,Math.PI*1.95);ctx.closePath();ctx.fillStyle=C.hair;ctx.fill();
+  circ(hc[0]+34*sc,hc[1]-6*sc,3.2*sc,C.ink);ctx.beginPath();ctx.moveTo(hc[0]+58*sc,hc[1]-2*sc);ctx.lineTo(hc[0]+70*sc,hc[1]+14*sc);ctx.lineTo(hc[0]+58*sc,hc[1]+18*sc);ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=2;ctx.stroke();
+  ell(hc[0]-14*sc,hc[1]+4*sc,8*sc,13*sc,0,mix(skinC(o.skin||4),"#000",.15));
+  const com=[px+dpx,hc[1]+4*sc];return {hc,com,top}}
+function swayFn(t){return .016*Math.sin(t*.9)+.006*Math.sin(t*2.3+1)+.003*Math.sin(t*5.1)}
+function printsFn(G,yR,yL,o){o=o||{};return (W2S,cyc,u)=>{const tt=cyc+u;const sR=strikeX(G,"R"),sL=strikeX(G,"L");
+  for(let n=cyc-3;n<=cyc+1;n++){[["R",sR,0,yR],["L",sL,G.legs.L.off,yL]].forEach(q=>{const when=n+q[2];if(when>tt)return;const x=W2S(n*G.stride+q[1]);if(x<-40||x>840)return;
+    topFoot(x+.1*o.pxm,q[3],.27*o.pxm,q[0]==="R"?hexA(C.legR,.85):hexA(C.legL,.85),0)})}
+  if(o.brackets){const n=tt-1>=0?Math.floor(tt)-1:0;const r0=W2S(n*G.stride+sR),l0=W2S(n*G.stride+sL),r1=W2S((n+1)*G.stride+sR);if(tt>=n+1){ruler(r0,l0,o.by,"step",C.evid,{dy:14});ruler(r0,r1,o.by+30,"stride (1 cycle)",C.evid,{dy:14})}}}}
+function thumbs(G,list,x,y,w,cur,o){o=o||{};const n=list.length;const cw=w/n;list.forEach((q,i)=>{const cx=x+cw*i+cw/2;const on=i===cur;rr(x+cw*i+4,y,cw-8,o.h||150,6);ctx.fillStyle=on?hexA(o.col,.16):hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=on?o.col:C.rule;ctx.lineWidth=on?2.5:1;ctx.stroke();
+  const gy=y+(o.h||150)-30;line(x+cw*i+12,gy,x+cw*(i+1)-12,gy,C["floor-line"],1.5);drawWalker(G,q[0],cx,gy,o.pxm||52,{hl:C.legR});fitTxt(cx,gy+16,q[1],cw-14,{size:11.5,weight:on?700:500,align:"center"})})}
+function treadmill(x0,x1,gy){rr(x0,gy-2,x1-x0,30,6);ctx.fillStyle=hexA(C.plate,.75);ctx.fill();ctx.strokeStyle=C["plate-edge"];ctx.lineWidth=1.5;ctx.stroke();circ(x0+14,gy+13,10,C.panel,C["plate-edge"],1.5);circ(x1-14,gy+13,10,C.panel,C["plate-edge"],1.5)}
+function forceArrows(G,W_,gy,sc,o){o=o||{};["L","R"].forEach(l=>{const F=grfLeg(G,W_.u,l);if(F<.02)return;const f=W_.res[l];const pts=[f.heel,f.ball,f.toe];let lo=pts[0];pts.forEach(q=>{if(q[1]>lo[1])lo=q});
+  const col=l==="R"?C.grf:hexA(C.legL,.85);withA(.88,()=>arrow(lo[0],gy,lo[0],gy-F*sc,col,l==="R"?4.5:3));if(l==="R"&&o.lab!==false)label(lo[0]+12,gy-F*sc-12,F.toFixed(2)+" BW",{size:11.5,weight:700,mono:true,border:C.grf,align:"left"})})}
+function comY(G,u){return -.9335-.0125*Math.cos(4*Math.PI*(u-.31))}
+function supportState(G,u){const r=legPhase(G,u,"R").st,l=legPhase(G,u,"L").st;return r&&l?["Double support",C.dbl]:r?["Single support: right",C.stance]:l?["Single support: left",C.stance]:["Flight: no foot down",C.flight]}
+function spring(x,y0,y1,w,col){const n=8;const pts=[[x,y0]];for(let i=1;i<n;i++){pts.push([x+(i%2?w:-w),lerp(y0,y1,i/n)])}pts.push([x,y1]);poly(pts,col,2.5)}
+function frontWalker(G,T,slow,x,gy,s,o){o=o||{};const u=mod1(T/(G.Tc*slow));const r=legPhase(G,u,"R"),lf=legPhase(G,u,"L");const st=r.st&&lf.st?"both":r.st?"R":"L";const sw=st==="R"?lf:r;
+  const lift=st==="both"?0:Math.sin(Math.PI*clamp((sw.uu-sw.s)/(1-sw.s),0,1));const drop=pelvisFront(G,u);const lean=trunkLeanFront(G,u);const sway=-.025*Math.sin(TAU*u);
+  ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(x-170,gy,340,28);line(x-170,gy,x+170,gy,C["floor-line"],2);
+  const Rf=frontPerson(x,gy,s,Object.assign({stance:st,drop,lean,sway,lift},o.fig||{}));return {Rf,u,st,drop,lean}}
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Balance and posture",col:"act1"},
+            2:{name:"Part 2 · Head posture and levers",col:"act2"},
+            3:{name:"Part 3 · The gait cycle",col:"act3"},
+            4:{name:"Part 4 · Forces under the foot",col:"act4"},
+            5:{name:"Part 5 · Measuring gait",col:"act5"},
+            6:{name:"Part 6 · Muscles and rotation",col:"act6"},
+            7:{name:"Part 7 · Common gait patterns",col:"act7"},
+            8:{name:"Part 8 · Control and everyday load",col:"act8"}};
+const NACT=8;
+const STEPS=[
+{act:0,scene:"map",
+ desc:"On the left, a person walks in place on a floor that scrolls past, shown from the side. Their right leg has a brick red outline so you can follow it. Under the floor, two bars show when each foot is on the ground: purple for stance and pale gold for swing, with a black line sliding across as time passes. In the middle column, a blue force curve with two humps draws itself as the right foot pushes on the floor, and below it three rose coloured muscle bars brighten when each muscle is working. On the right, eight cards name the eight parts of this walkthrough and light up one after another.",
+ title:"The big picture: from standing still to walking and running",
+ body:`<p>Standing and walking look simple, but they are a constant balancing act. Your brain keeps your <b>center of mass</b> over a small patch of floor, then lets it fall forward and catches it with each step. That is all walking really is: controlled falling and catching, about 1,000 times every 10 minutes.</p>
+ <p>In this walkthrough you will watch the same movement at three levels: the <b>whole person</b> (posture and the gait cycle), the <b>forces</b> (how hard the foot pushes on the floor) and the <b>signals</b> (which muscles switch on, and when).</p>
+ <p>There is some arithmetic: torque for head posture and the speed formula for walking. Each gets an animated worked example with units and a "now you try". Nothing here is graded, and none of it is advice about your own body.</p>`,
+ analogy:"A bicycle rider stays up by steering under their own lean. A walker does the same thing with their feet: every step is placed under a body that is already tipping forward.",
+ terms:[["Center of mass","The point where the body's mass can be thought of as concentrated. In standing it sits just in front of the low spine, near hip height."],["Gait","A person's pattern of walking or running."],["Three levels","The whole person, the forces at the floor and the muscle signals that create them."]],
+ check:null,caption:"A walker in slow motion with stance and swing bars, the floor force curve and muscle signals.",
+ legend:[["legR","Right leg (followed)"],["stance","Stance (foot on floor)","s"],["swing","Swing (foot in the air)","s"],["grf","Floor force","l"],["muscle","Muscle activity","s"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"com",
+ desc:"On the left, a person is drawn from the front, standing on a floor and swaying gently side to side. A red dot on the lower belly marks the center of mass, and a red dashed line drops straight down from it to the floor. On the right, a top view shows the two shoes from above with a teal shape joining their outer edges: the base of support. A red dot in the top view shows where the dashed line meets the floor. In four stages the feet start hip width apart, then come together, then the person stands on the right leg only, and finally leans so far that the red dot slides past the teal edge; the outline flashes amber and the person steps the left foot out wide, making the teal shape much larger.",
+ title:"Center of mass and base of support",
+ body:`<p>Every body has a <b>center of mass (COM)</b>: the balance point of all its mass. In upright standing it sits roughly in front of the second sacral segment, a little above hip height. A line dropped straight down from it is the <b>line of gravity</b>.</p>
+ <p>The <b>base of support (BOS)</b> is the area on the floor enclosed by whatever touches it: both feet and the space between them. You stay balanced as long as the line of gravity falls inside the base of support. A wider base gives more room for sway; a narrow base (feet together, or one foot) gives less.</p>
+ <p>When the line of gravity drifts toward the edge, you correct it. Small drifts are fixed at the ankles, bigger ones at the hips, and the biggest ones by taking a step, which moves the base under the body again. Walking uses that last strategy on purpose, step after step.</p>`,
+ analogy:"A tall vase on a table. Tip it a little and it rocks back; tip it so its balance point passes the edge of its foot and it falls, unless someone moves a hand under it. Your step is that hand.",
+ terms:[["Center of mass","The single point that acts like the location of the body's total mass."],["Line of gravity","An imaginary vertical line straight down from the center of mass."],["Base of support","The floor area outlined by the parts of the body that touch the floor."],["Stepping strategy","Taking a step to move the base of support back under the center of mass."]],
+ check:{q:"A person stands on one foot. Compared with standing on two feet, what changes most?",opts:[
+  ["The base of support gets much smaller, so less sway is allowed",1,"Right. One foot outlines a much smaller area, so the line of gravity has less room before it reaches an edge."],
+  ["The center of mass moves outside the body",0,"In normal standing the center of mass stays inside the body, near the low spine. The size of the base is what changes most here."],
+  ["Body weight becomes smaller",0,"Body weight is the same on one foot or two. It is just carried through a smaller base."],
+  ["The line of gravity stops existing",0,"The line of gravity always exists. Balance only asks whether it falls inside the base of support."]]},
+ caption:"Feet apart, feet together, one leg, then a lean: the step widens the base of support.",
+ legend:[["com","Center of mass"],["com","Line of gravity","dl"],["bos","Base of support","s"]]},
+
+{act:1,scene:"gravity",
+ desc:"A person stands sideways facing right. A red dashed vertical line, the line of gravity, runs from near the ear lobe down to the floor, passing near the shoulder, just behind the hip joint, just in front of the knee and a few centimetres in front of the ankle. Small labelled dots mark each landmark. The person slowly sways forward and back by a few centimetres, and the line moves with them. When the line moves forward, the rose calf muscle on the back of the lower leg glows brighter and a curved arrow at the ankle shows it pulling the body back. On the right, a graph scrolls a wavy trace of the sway, and a bar shows calf activity rising and falling with it.",
+ title:"The line of gravity in upright standing",
+ body:`<p>Seen from the side, a relaxed upright posture usually lines up so that the line of gravity passes <b>near the ear lobe and shoulder</b>, <b>just behind the hip joint</b>, <b>just in front of the knee</b> and <b>a few centimetres in front of the ankle</b>. These are typical landmarks, not exact rules, and people vary.</p>
+ <p>Because the line passes in front of the ankle, gravity is always trying to tip you forward. The <b>calf muscles</b> (soleus and gastrocnemius) answer with a small, steady pull. Because the line is behind the hip and in front of the knee, ligaments at those joints take much of the load, so the big thigh muscles can stay fairly quiet.</p>
+ <p>Standing still is never truly still. Everyone shows <b>postural sway</b>: a slow drift of a few millimetres to a few centimetres that the nervous system keeps correcting, mostly at the ankle.</p>`,
+ analogy:"An inverted broom balanced on your palm. You never hold it perfectly still; you keep making tiny corrections. Your ankles do that job for your whole body.",
+ terms:[["Postural sway","The small, constant back and forth motion of the body during quiet standing."],["Ankle strategy","Correcting small sway mainly with ankle muscles, keeping the body moving as one piece."],["Plumb line","A weighted string that hangs straight down, used to compare body landmarks to vertical."]],
+ check:{q:"The line of gravity usually passes in front of the ankle. Which muscle group works steadily to keep you from tipping forward?",opts:[
+  ["The calf muscles at the back of the lower leg",1,"Right. Gravity tips the body forward around the ankle, so the calf pulls back with a small steady effort."],
+  ["The muscles on the front of the shin",0,"The shin muscles lift the foot. They would add to the forward tip, not stop it. The calf does this job."],
+  ["The abdominal muscles only",0,"The trunk helps a little, but the main forward tipping happens at the ankle, so the calf muscles carry the steady load."],
+  ["No muscle at all; bones do all the work",0,"Ligaments help at the hip and knee, but the ankle needs steady calf activity because the line falls in front of it."]]},
+ caption:"Quiet standing sways a little; the calf muscles keep pulling the body back over the feet.",
+ legend:[["com","Line of gravity","dl"],["muscle","Calf muscle activity","s"],["evid","Sway trace","l"]]},
+
+{act:1,scene:"vary",
+ desc:"On the left, one person moves through a day in short scenes: sitting upright at a desk, slouching back, standing, walking, then sitting tall again. Each pose lasts a few seconds. On the right are two horizontal comfort bars over a clock that sweeps across a day. The top bar, labelled same position all day, slowly fills from green to amber to red as time passes without change. The bottom bar, labelled changing position often, rises a little during each pose and drops back each time the person moves, so it stays mostly green. An indigo note at the bottom says research has not found one correct posture that prevents pain.",
+ title:"Posture is something you do, not something you hold",
+ body:`<p>Many people learn that there is one "correct" posture. Research does not support that idea. Studies comparing people with and without back or neck pain find a lot of overlap in how they sit and stand, and no single posture has been shown to prevent pain.</p>
+ <p>What seems to matter more is <b>variety</b>. Any position, even a "good" one, becomes uncomfortable when it is held for a long time, because the same tissues stay loaded and the same muscles stay switched on. Changing position spreads the load around.</p>
+ <p>A helpful way to say it: <b>the best posture is the next one</b>. Comfortable, relaxed positions that change often are a reasonable goal. Fear of "bad posture" can itself make people move less, which does not help.</p>`,
+ analogy:"Holding a full grocery bag. Any grip feels fine for a minute, but even the best grip hurts after twenty. Switching hands now and then is what keeps you comfortable.",
+ terms:[["Static posture","Holding one position for a long time with little movement."],["Postural variety","Changing between many comfortable positions over the day."],["Load sharing","Spreading stress across different tissues by moving and changing position."]],
+ check:{q:"Based on current research, which statement about sitting posture is most accurate?",opts:[
+  ["No single posture prevents pain; changing position often is a reasonable goal",1,"Right. Evidence does not support one correct posture. Variety and comfort matter more."],
+  ["Sitting perfectly upright all day prevents back pain",0,"Even an upright posture held for hours loads the same tissues. Research has not shown that one posture prevents pain."],
+  ["Slouching always damages the spine",0,"Slouching for a while is a normal resting position. Research does not show that it causes damage on its own."],
+  ["Posture has nothing at all to do with comfort",0,"Holding any position too long can become uncomfortable. That is why variety helps."]]},
+ caption:"Same position all day versus changing often: varied positions keep the load bar low.",
+ legend:[["good","Comfortable","s"],["warn","Getting stiff","s"],["bad","Uncomfortable","s"],["evid","Evidence note","s"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"lever",
+ desc:"On the left, a large side view shows a head on a neck. The neck bones are a stack of small ivory blocks curving down to a pivot dot at the base of the neck. A red dot in the head marks its center of mass, and a downward arrow labelled 49 N hangs from it. The head slides slowly forward and back. A bracket along the floor of the drawing measures the horizontal distance from the pivot to the weight arrow, labelled moment arm, and it reads 2 cm when the head is over the shoulders and 6 cm when it is forward. A bar labelled torque grows three times longer as the head moves forward. On the right, a worked example builds line by line: 49 newtons times 0.02 metres equals 0.98 newton metres, then 49 newtons times 0.06 metres equals 2.94 newton metres, with units cancelling in red, and a common mistake note appears at the bottom.",
+ title:"Forward head posture as a lever (worked example)",
+ body:`<p>The head weighs roughly 4.5 to 5.5 kg. Its weight acts at its center of mass. The neck pivots near its base. <b>Torque</b> (turning effect) depends on force and on the horizontal distance between them, the <b>moment arm</b>:</p>
+ <p class="tx"><b>torque = force × moment arm</b> (newtons × metres = newton metres, N·m)</p>
+ <p>Take a 5 kg head: weight = 5 kg × 9.8 m/s² = <b>49 N</b>. If its center of mass sits 2 cm (0.02 m) in front of the pivot, torque = 49 × 0.02 = <b>0.98 N·m</b>. Slide the head forward so the moment arm is 6 cm (0.06 m): 49 × 0.06 = <b>2.94 N·m</b>. Three times the distance, three times the torque. The head did not get heavier; the lever got longer.</p>
+ <p>These numbers are <b>illustrative</b>. Real necks have curves, many joints and many muscles sharing the work, so treat this as a way to understand the idea, not as an exact measurement.</p>`,
+ analogy:"Holding a gallon of milk. Close to your chest it feels light. Hold it at arm's length and your shoulder works much harder, even though the milk weighs the same.",
+ terms:[["Torque","A turning effect: force times moment arm, measured in newton metres (N·m)."],["Moment arm","The perpendicular (here, horizontal) distance from the pivot to the line of the force."],["Forward head posture","A position where the head sits further forward than the shoulders."]],
+ check:{q:"A 50 N head sits 4 cm in front of the pivot. What torque does it create?",opts:[
+  ["2.0 N·m",1,"Right. 4 cm = 0.04 m, and 50 N × 0.04 m = 2.0 N·m."],
+  ["200 N·m",0,"That used 4 instead of 0.04. Change centimetres to metres first: 4 cm = 0.04 m."],
+  ["12.5 N·m",0,"That divided 50 by 4. Torque multiplies force by distance."],
+  ["0.08 N·m",0,"That divided 4 cm by 50. Torque is force times moment arm in metres: 50 × 0.04 = 2.0 N·m."]]},
+ caption:"Same head weight, longer moment arm: the torque at the neck triples from 2 cm to 6 cm.",
+ legend:[["bone","Neck bones (vertebrae)","s"],["com","Head center of mass"],["evid","Torque bar","s"],["muscle","Neck extensor muscles","s"]]},
+
+{act:2,scene:"levertry",
+ desc:"A seesaw style diagram shows the neck as a lever. A dark triangle in the middle is the pivot. To the right, a long arm carries the head weight arrow pointing down. To the left, a short arm carries the rose neck extensor muscle pulling down. The head arm grows from 2 cm to 6 cm and back, and the muscle force arrow grows to match it so the lever stays level, with live numbers for each. A box on the right shows a now you try problem: a 50 N head with a 4 cm moment arm, and a muscle with a 5 cm moment arm. After a pause the answer appears: torque 2.0 newton metres and muscle force 40 N. An indigo evidence note at the bottom says studies linking forward head posture to neck pain are mixed.",
+ title:"The muscle side of the lever, and what the evidence says",
+ body:`<p>To hold the head still, the <b>neck extensor muscles</b> at the back of the neck must create an equal and opposite torque. Their moment arm is short, about 5 cm (0.05 m) in this simple model, so they need a large force:</p>
+ <p class="tx"><b>muscle force = torque ÷ muscle moment arm</b></p>
+ <p>For 0.98 N·m: 0.98 ÷ 0.05 = <b>19.6 N</b>. For 2.94 N·m: 2.94 ÷ 0.05 = <b>58.8 N</b>. A forward head asks the extensors to work about three times harder in this model. <b>Now you try</b>: a 50 N head with a 4 cm moment arm, muscle moment arm 5 cm. Find the torque and the muscle force.</p>
+ <p>Does this cause pain? <b>Evidence is mixed.</b> Some studies find slightly more forward head posture in people with neck pain; many find little or no link, and forward head position varies a lot from moment to moment. Large numbers you may see online come from very simplified models. A higher load is not the same as damage; tissues adapt to load when it is varied and built up gradually.</p>`,
+ analogy:"A wrench and a stuck bolt. A short handle needs a big push; the neck muscles are working on a short handle, so they push hard even for a small head shift.",
+ terms:[["Neck extensors","Muscles at the back of the neck that tilt the head back or hold it up against gravity."],["Equilibrium","Torques balance, so the head stays still: muscle torque equals head torque."],["Mixed evidence","Studies disagree or find small, inconsistent effects."]],
+ check:{q:"Head torque is 2.0 N·m and the extensor moment arm is 0.05 m. What force must the muscles supply?",opts:[
+  ["40 N",1,"Right. 2.0 N·m ÷ 0.05 m = 40 N. The metres cancel and newtons remain."],
+  ["0.1 N",0,"That multiplied 2.0 by 0.05. To find force, divide torque by the moment arm."],
+  ["400 N",0,"Check the decimal: 2.0 ÷ 0.05 = 40, not 400."],
+  ["2.0 N",0,"2.0 is the torque in N·m. Divide by the 0.05 m moment arm to get the force in newtons."]]},
+ caption:"A short muscle lever must pull hard to balance a long head lever.",
+ legend:[["muscle","Neck extensor force","l"],["com","Head weight","l"],["evid","Evidence note","s"]]},
+/* ---------- Part 3 ---------- */
+{act:3,scene:"cycle",
+ desc:"A person walks in slow motion from left to right in place while the floor scrolls under them. The right leg has a brick red outline. Each time a foot lands it leaves a footprint on a strip below the floor: brick red prints for the right foot and grey prints for the left. Brackets under the prints label one step, from a right heel to the next left heel, and one stride, from a right heel to the next right heel. At the bottom, a long bar marked 0 to 100 percent is split into a purple stance part covering about 60 percent and a gold swing part covering about 40 percent, with a black cursor moving across it in time with the right leg.",
+ title:"The gait cycle: steps, strides, stance and swing",
+ body:`<p>A <b>gait cycle</b> (also called a <b>stride</b>) runs from one event on one foot to the same event on the same foot again, usually from <b>right initial contact to the next right initial contact</b>. It is written as 0 to 100 percent.</p>
+ <p>Each leg spends about <b>60 percent</b> of the cycle in <b>stance</b> (foot on the floor) and about <b>40 percent</b> in <b>swing</b> (foot in the air). These are typical values at a comfortable speed; stance gets a little shorter as you walk faster.</p>
+ <p>A <b>step</b> is from contact of one foot to contact of the <b>other</b> foot. So one stride contains two steps: a right step and a left step. Mixing up steps and strides is one of the most common mistakes in gait math.</p>`,
+ analogy:"A stride is one full turn of a bicycle pedal: the right pedal goes all the way around. A step is half a turn, from the right pedal down to the left pedal down.",
+ terms:[["Gait cycle (stride)","From one foot's initial contact to that same foot's next initial contact."],["Step","From one foot's initial contact to the other foot's initial contact. Two steps make one stride."],["Stance phase","The part of the cycle when the foot is on the floor, about 60 percent in walking."],["Swing phase","The part of the cycle when the foot is in the air, about 40 percent in walking."]],
+ check:{q:"A person's right heel touches the floor, then the left heel, then the right heel again. How many strides and steps is that?",opts:[
+  ["One stride and two steps",1,"Right. Right heel to right heel is one stride, and it contains a right step and a left step."],
+  ["Two strides and one step",0,"Those are reversed. A stride is same foot to same foot; a step is one foot to the other."],
+  ["One stride and one step",0,"Right heel to left heel is one step, and left heel to right heel is a second step, so two steps."],
+  ["Three steps",0,"There are three contacts but only two intervals between them, so two steps make up the one stride."]]},
+ caption:"Right heel to right heel is one stride: about 60 percent stance and 40 percent swing.",
+ legend:[["legR","Right foot"],["legL","Left foot"],["stance","Stance","s"],["swing","Swing","s"]]},
+
+{act:3,scene:"stance",
+ desc:"A person walks in very slow motion with the right leg outlined in brick red. Above them, a timeline from 0 to 60 percent is split into five purple bands labelled initial contact, loading response, midstance, terminal stance and preswing, and a cursor moves across it. The name of the current phase is shown in a large box. Along the bottom, five small frozen figures show the right leg at each of the five moments: heel touching, foot flattening with knee slightly bent, body passing over the foot, heel lifting, and toes pushing off. The small figure that matches the current moment is highlighted with a purple border.",
+ title:"Stance in five parts",
+ body:`<p>Clinicians split stance into five parts, each with a job. Typical timing for the right leg:</p>
+ <ul><li><b>Initial contact</b> (0 to 2 percent): usually the heel touches first.</li>
+ <li><b>Loading response</b> (about 2 to 10 percent): the foot lowers flat and the knee bends a little to absorb the landing. The left foot is still on the floor.</li>
+ <li><b>Midstance</b> (about 10 to 30 percent): the body passes over a single supporting foot.</li>
+ <li><b>Terminal stance</b> (about 30 to 50 percent): the heel lifts and the body moves ahead of the foot.</li>
+ <li><b>Preswing</b> (about 50 to 60 percent): the other foot has landed; this foot pushes off from the toes and gets ready to swing.</li></ul>
+ <p>The older names <b>heel strike</b>, <b>foot flat</b>, <b>heel off</b> and <b>toe off</b> describe the same events. "Initial contact" is used now because not everyone lands on the heel.</p>`,
+ analogy:"Stance is like a rocking chair rolling forward: first on the back of the rocker (the heel), then the middle (the flat foot), then the front edge (the ball and toes).",
+ terms:[["Initial contact","The moment the foot first touches the floor; the start of stance."],["Loading response","Early stance, when the leg accepts body weight and the knee bends slightly to absorb it."],["Midstance","The body moves over one supporting foot."],["Preswing","The final part of stance, with toe push off just before the foot leaves the floor."]],
+ check:{q:"The right heel has just lifted, the knee is straight, and the body is moving ahead of the right foot. The left foot has not landed yet. Which phase is the right leg in?",opts:[
+  ["Terminal stance",1,"Right. Heel lift with the body moving ahead of the foot, before the other foot lands, is terminal stance."],
+  ["Loading response",0,"Loading response happens just after contact, when the foot lowers flat and the knee bends a little."],
+  ["Preswing",0,"Preswing starts once the other foot has landed. Here the left foot has not landed yet."],
+  ["Midswing",0,"In swing the foot is off the floor. Here the forefoot is still on the floor."]]},
+ caption:"Five parts of stance: initial contact, loading response, midstance, terminal stance, preswing.",
+ legend:[["legR","Right leg"],["stance","Stance phases","s"]]},
+
+{act:3,scene:"swing",
+ desc:"The same slow motion walker is shown, now with a timeline from 60 to 100 percent split into three gold bands: initial swing, midswing and terminal swing. A readout shows the right knee angle in degrees, rising to about 60 degrees in initial swing and falling back toward straight by the end. A small green bracket under the right shoe shows the toe clearance, only one or two centimetres in midswing. Along the bottom, three small frozen figures show the swing parts: knee bending as the toes leave, leg passing under the body, and the leg reaching forward with a nearly straight knee, ready for the heel to touch.",
+ title:"Swing in three parts",
+ body:`<p>Swing moves the leg forward so the foot is ready for the next contact. Typical timing:</p>
+ <ul><li><b>Initial swing</b> (about 60 to 73 percent): the foot leaves the floor and the knee bends quickly to about 60 degrees, which shortens the leg so the toes clear.</li>
+ <li><b>Midswing</b> (about 73 to 87 percent): the swinging leg passes the standing leg. Toe clearance is small, often only 1 to 2 cm, and the ankle holds the foot up.</li>
+ <li><b>Terminal swing</b> (about 87 to 100 percent): the knee straightens and the hamstrings slow the leg down so the heel lands gently.</li></ul>
+ <p>Because clearance is so small, anything that drops the toes (weak ankle lifters) or stiffens the knee can make the toes catch, which is one way people trip.</p>`,
+ analogy:"Swing is like a pendulum with a hinge in the middle. Folding the hinge (bending the knee) makes the pendulum shorter, so it swings through faster and clears the floor.",
+ terms:[["Initial swing","The foot leaves the floor and the knee bends to clear the toes."],["Midswing","The swinging leg passes the standing leg."],["Terminal swing","The knee straightens and the leg slows down before contact."],["Toe clearance","The small gap between toes and floor during swing."]],
+ check:{q:"In which part of swing is the knee most bent?",opts:[
+  ["Initial swing, at about 60 degrees",1,"Right. The knee bends most early in swing so the shortened leg can clear the floor."],
+  ["Terminal swing",0,"In terminal swing the knee straightens to reach forward for contact."],
+  ["Midstance",0,"Midstance is part of stance, when the knee is nearly straight and carrying weight."],
+  ["Initial contact",0,"At initial contact the knee is nearly straight. It bends most in early swing."]]},
+ caption:"Swing: the knee folds to clear the toes, the leg passes under the body, then reaches forward.",
+ legend:[["legR","Right leg"],["swing","Swing phases","s"],["good","Toe clearance","l"]]},
+
+{act:3,scene:"support",
+ desc:"The canvas is split in two. On the left, a walker moves in slow motion. Under them, two bars show right and left stance in purple, and a thin dark blue strip marks the two short times when both feet are on the floor, labelled double support, at the start of the cycle and near the middle. On the right, a runner in shorts moves in slow motion. Their stance bars are shorter than half the cycle, and a grey strip marks two gaps when neither foot touches the floor, labelled flight. A label above each figure changes live between double support, single support and flight.",
+ title:"Double support in walking, flight in running",
+ body:`<p>Because each foot is on the floor for about 60 percent of the cycle, there are two short periods when <b>both</b> feet are down: <b>double support</b>, about 10 percent each, at 0 to 10 percent and 50 to 60 percent. The rest is <b>single support</b>, one foot at a time.</p>
+ <p>As walking gets faster, double support shrinks. <b>Running</b> is defined by the opposite: each foot is down for less than half the cycle, so double support disappears and two <b>flight phases</b> appear, when neither foot touches the floor.</p>
+ <p>Double support is the most stable part of walking. People who feel unsteady, including many older adults, tend to spend <b>more</b> time in double support. That is a sensible adjustment, and it is one thing clinicians watch for.</p>`,
+ analogy:"Crossing a stream on stepping stones. Walking keeps one foot on a stone at all times, and sometimes both. Running is hopping stone to stone, with moments in the air.",
+ terms:[["Double support","Both feet on the floor at once; about 20 percent of the cycle in walking, split into two periods."],["Single support","Only one foot on the floor."],["Flight phase","Neither foot on the floor; found in running, not walking."]],
+ check:{q:"If each foot is on the floor for 62 percent of the cycle, how much total double support is there?",opts:[
+  ["24 percent of the cycle",1,"Right. Total double support = 2 × (62 − 50) = 24 percent, in two periods of 12 percent."],
+  ["12 percent of the cycle",0,"12 percent is one period. There are two double support periods per cycle, so the total is 24 percent."],
+  ["38 percent of the cycle",0,"38 percent is the swing time for one foot, not the double support."],
+  ["0 percent, because that is running",0,"Running has stance under 50 percent. With 62 percent stance, there is double support."]]},
+ caption:"Walking has two double support periods; running replaces them with two flight phases.",
+ legend:[["stance","Stance","s"],["dbl","Double support","s"],["flight","Flight","s"]]},
+
+/* ---------- Part 4 ---------- */
+{act:4,scene:"grfwalk",
+ desc:"A walker moves in slow motion on an instrumented treadmill drawn as a grey belt with sensor marks. While the right foot is on the belt, a blue arrow points up from under it, growing and shrinking with the force. On the right, a graph with percent of gait cycle along the bottom and force in body weights up the side traces a blue curve for the right foot: it rises to a first hump a little above the dashed body weight line, dips to a valley below it, rises to a second hump, then drops to zero at toe off. A dashed grey curve shows both feet added together. Labels appear as the trace passes: loading peak, valley, push off peak, and swing, no force.",
+ title:"Ground reaction force in walking: the double hump",
+ body:`<p>When your foot pushes on the floor, the floor pushes back equally: the <b>ground reaction force (GRF)</b>. Force plates and instrumented treadmills measure it. Its vertical part, in walking, has a famous <b>double hump</b> shape:</p>
+ <ul><li><b>Loading peak</b> (about 1.1 to 1.2 body weights) during loading response, as the body's downward motion is stopped.</li>
+ <li><b>Valley</b> (below 1 body weight) in midstance, as the body rises over the foot and is partly "unweighted".</li>
+ <li><b>Push off peak</b> (about 1.1 to 1.2 body weights) in terminal stance, as the calf pushes the body up and forward.</li></ul>
+ <p>Faster walking makes the humps taller and the valley deeper. Very slow walking flattens the curve. Averaged over a whole cycle, the vertical force from both feet must equal one body weight, because the body is not rising or falling overall.</p>`,
+ analogy:"Stepping onto a bathroom scale quickly. The reading jumps above your weight as you land, dips as you rise, then jumps again as you push off.",
+ terms:[["Ground reaction force","The force the floor applies to the foot, equal and opposite to the foot's push."],["Body weight (BW)","A handy unit: forces divided by body weight, so 1.2 BW means 120 percent of weight."],["Force plate","A floor sensor that measures ground reaction force."]],
+ check:{q:"During midstance in walking, the vertical force dips below body weight. Why?",opts:[
+  ["The body's center of mass is rising over the foot and slowing, so less force is needed",1,"Right. As the body vaults up and over the foot and then starts to come down, it is partly unweighted, so the force dips."],
+  ["The other foot is carrying most of the weight",0,"In midstance the other foot is in the air. All the support comes from this foot."],
+  ["The foot is not touching the floor",0,"The foot is flat on the floor in midstance. The force dips but does not reach zero."],
+  ["Muscles stop working in midstance",0,"Muscles such as the calf are active in midstance. The dip comes from the body's up and down motion."]]},
+ caption:"Walking force: loading peak, midstance valley, push off peak, then zero during swing.",
+ legend:[["grf","Right foot force","l"],["ink","Both feet together","dl"],["ink","Body weight","dl"]]},
+
+{act:4,scene:"pendulum",
+ desc:"A walker moves in slow motion. A red dot at the hip marks the center of mass and leaves a red wavy trail behind it, rising and falling once per step. A thin line connects the red dot to the standing foot, so the leg looks like an upside down pendulum vaulting over the foot. Labels mark the highest point, over the foot in midstance, and the lowest point, in double support. On the right, two vertical bars swap back and forth: an amber bar for height energy is tallest at midstance, while a blue bar for speed energy is tallest in double support.",
+ title:"Why the hump: walking as an inverted pendulum",
+ body:`<p>In walking, the stance leg stays fairly straight, so the body vaults up and over it like an <b>upside down pendulum</b>. The center of mass is <b>highest in midstance</b> and <b>lowest in double support</b>. Its vertical travel is small, about 4 to 5 cm in adults at comfortable speed.</p>
+ <p>As the body rises, it slows; as it falls, it speeds up. Energy swaps between <b>height energy</b> (potential) and <b>speed energy</b> (kinetic), a bit like a ball rolling up and down a hill. This exchange saves a lot of muscle work.</p>
+ <p>The swap also explains the force curve. Slowing the fall in loading response needs extra force (first hump); rising to the top of the arc needs less (valley); the push off sends the body into the next arc (second hump).</p>`,
+ analogy:"A pole vaulter's pole, kept stiff. The vaulter rises over it and comes down the other side, trading speed for height and back again.",
+ terms:[["Inverted pendulum","A model of walking where the body vaults over a nearly straight stance leg."],["Potential energy","Energy stored by height."],["Kinetic energy","Energy of motion."]],
+ check:{q:"In walking, when is the center of mass highest?",opts:[
+  ["In midstance, when the body is over the standing foot",1,"Right. The body vaults over the straight stance leg, so it peaks in midstance."],
+  ["In double support",0,"Double support is when the center of mass is lowest, with both legs spread."],
+  ["At initial contact only",0,"At initial contact the legs are spread and the center of mass is near its lowest point."],
+  ["It stays at the same height the whole time",0,"It moves up and down about 4 to 5 cm each step."]]},
+ caption:"The center of mass vaults over the stance leg, highest in midstance and lowest in double support.",
+ legend:[["com","Center of mass path","l"],["warn","Height energy","s"],["disc","Speed energy","s"]]},
+
+{act:4,scene:"grfrun",
+ desc:"A runner in shorts moves in slow motion on an instrumented treadmill. A blue arrow under the landing foot grows much longer than in walking. On the right, a graph traces the right foot force as one tall rounded peak reaching between 2 and 3 body weights, then a flat zero stretch during swing, with grey bands marking the two flight phases when neither foot touches. A faint grey double hump walking curve sits underneath for comparison. In the corner a small spring drawing squashes during stance and springs back during flight, labelled spring mass model.",
+ title:"Running: one big peak and a flight phase",
+ body:`<p>Running works more like a <b>pogo stick</b> than a pendulum. The leg bends and acts like a spring: the center of mass is <b>lowest in midstance</b>, the opposite of walking. This is called the <b>spring mass model</b>.</p>
+ <p>The vertical GRF in running has <b>one main peak</b>, usually about <b>2 to 3 body weights</b>. Some runners who land on the heel also show a small, sharp spike in the first moments of contact (an impact peak).</p>
+ <p>Why so high? Over a whole stride the average vertical force must still equal one body weight. In running, each foot is down for only about 30 to 40 percent of the cycle, and there are flight phases with zero force, so the force while the foot is down must be much bigger to make up the average. Shorter contact means a taller peak.</p>`,
+ analogy:"Paying a monthly bill in fewer, bigger payments. The total must be the same, so if you pay on fewer days, each payment must be larger. Less time on the ground means bigger force while you are on it.",
+ terms:[["Spring mass model","A model of running where the stance leg acts like a spring and the body bounces on it."],["Impact peak","A brief early spike in force seen in some heel landing runners."],["Contact time","How long each foot stays on the ground."]],
+ check:{q:"Each foot is on the ground for 35 percent of a running cycle. On average over the cycle, vertical force equals 1 body weight. About what must the average force be while a foot is down?",opts:[
+  ["About 1.4 body weights",1,"Right. Two feet × 35 percent = 70 percent of the cycle with force. 1 ÷ 0.70 ≈ 1.4 BW on average during contact, and the peak is higher still."],
+  ["Exactly 1 body weight",0,"That would only work if a foot were always on the ground. With flight phases, the force during contact must be higher."],
+  ["About 0.35 body weights",0,"That multiplied instead of divided. The same total force is squeezed into less time, so it must be bigger."],
+  ["About 2.9 body weights",0,"That is 1 ÷ 0.35, which forgets there are two feet. Two feet share the work: 1 ÷ 0.70 ≈ 1.4."]]},
+ caption:"Running force: one tall peak, then zero during flight and swing.",
+ legend:[["grf","Running force (right foot)","l"],["legL","Walking curve for comparison","l"],["flight","Flight phase","s"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"measures",
+ desc:"At the top, a small walker moves across from the side. Below, a top view of a walkway shows footprints appearing as each foot lands: brick red for the right foot and grey for the left. A measuring bracket labelled step length spans from one right heel to the next left heel, about 0.7 metres, and a longer bracket labelled stride length spans right heel to right heel, about 1.4 metres. On the right, a step counter ticks up with every footfall, a stopwatch counts seconds, and a live readout divides steps by time to show the cadence in steps per minute, settling near 112.",
+ title:"Spatiotemporal measures: step length, stride length, cadence, speed",
+ body:`<p><b>Spatiotemporal</b> means "space and time". These are the simplest and most useful gait numbers:</p>
+ <ul><li><b>Step length</b>: distance from one foot's contact to the other foot's contact, about 0.6 to 0.8 m in adults.</li>
+ <li><b>Stride length</b>: same foot to same foot, about twice the step length.</li>
+ <li><b>Cadence</b>: steps per minute, often about 100 to 120 in comfortable walking.</li>
+ <li><b>Gait speed</b>: distance per time, often about 1.2 to 1.4 m/s in healthy adults.</li></ul>
+ <p>People speed up by taking longer steps, quicker steps, or both. Two other common measures are <b>step width</b> (side to side distance between the feet) and the <b>percent of time in double support</b>.</p>`,
+ analogy:"A car's speed depends on wheel size and how fast the wheel turns. Gait speed depends on step length (wheel size) and cadence (turns per minute).",
+ terms:[["Step length","Distance from one foot's contact to the other foot's contact."],["Stride length","Distance from one foot's contact to the same foot's next contact."],["Cadence","Number of steps per minute."],["Gait speed","Distance walked per unit time, usually in metres per second."]],
+ check:{q:"A person's step length is 0.65 m. What is their stride length, assuming left and right steps are equal?",opts:[
+  ["1.3 m",1,"Right. A stride has two steps: 2 × 0.65 = 1.3 m."],
+  ["0.65 m",0,"That is one step. A stride is two steps, same foot to same foot."],
+  ["0.33 m",0,"That halved the step. A stride is longer than a step, not shorter."],
+  ["2.6 m",0,"That doubled twice. One stride is two steps: 1.3 m."]]},
+ caption:"Footprints, a step counter and a stopwatch: the raw material for gait numbers.",
+ legend:[["legR","Right footprints"],["legL","Left footprints"],["evid","Measurements","s"]]},
+
+{act:5,scene:"speedcalc",
+ desc:"On the left, a walker steps along a measured floor while a counter shows 108 steps per minute and a bracket shows a step length of 0.65 metres. On the right, a worked example builds line by line. First the formula: speed equals cadence times step length. Then a unit chain: 108 steps over 1 minute, times 0.65 metres over 1 step, times 1 minute over 60 seconds. The units steps and minutes are struck through in red as they cancel, leaving metres per second, and the answer 1.17 metres per second appears in a green box. A second line shows the same speed as 70.2 metres per minute. An amber box at the bottom explains a common mistake: forgetting to divide by 60, or using stride length with a cadence counted in steps.",
+ title:"Worked example: speed = cadence × step length",
+ body:`<p>Speed is distance per time. Cadence tells you steps per time; step length tells you distance per step. Multiply them and the steps cancel:</p>
+ <p class="tx"><b>speed = cadence × step length</b></p>
+ <p><b>Example</b>: cadence 108 steps/min, step length 0.65 m.<br>108 steps/min × 0.65 m/step = <b>70.2 m/min</b>.<br>To get metres per second, divide by 60 s/min: 70.2 ÷ 60 = <b>1.17 m/s</b>.</p>
+ <p>Check the units every time: steps cancel steps, minutes cancel minutes, and you are left with m/s. If you are given <b>stride</b> length instead, use strides per minute (half the step cadence), or turn stride length into step length first.</p>`,
+ analogy:"Paid by the piece: pieces per hour times dollars per piece gives dollars per hour. The 'pieces' cancel, just like the steps cancel here.",
+ terms:[["Unit cancelling","Writing units as fractions so matching units on top and bottom cancel, leaving the answer's unit."],["Metres per second","The usual unit for gait speed; 1 m/s = 60 m/min = 3.6 km/h."]],
+ check:{q:"Cadence is 120 steps/min and step length is 0.70 m. What is the speed in m/s?",opts:[
+  ["1.4 m/s",1,"Right. 120 × 0.70 = 84 m/min, and 84 ÷ 60 = 1.4 m/s."],
+  ["84 m/s",0,"84 is in metres per minute. Divide by 60 to get metres per second: 1.4 m/s."],
+  ["2.8 m/s",0,"That doubled the step length into a stride. Cadence counts steps, so use the 0.70 m step: 1.4 m/s."],
+  ["0.7 m/s",0,"That halved the answer, as if cadence counted strides. Cadence here is steps per minute, so the speed is 1.4 m/s."]]},
+ caption:"108 steps/min × 0.65 m/step ÷ 60 s/min = 1.17 m/s, with units cancelling.",
+ legend:[["accent","Units","s"],["bad","Cancelled unit","l"],["good","Answer","s"]]},
+
+{act:5,scene:"speedtry",
+ desc:"A walkway is drawn with a start line and a finish line 10 metres apart, plus short zones before and after for speeding up and slowing down. A walker crosses at a steady pace while a stopwatch runs only between the lines, stopping at 8.0 seconds. A calculation then appears: 10 metres divided by 8.0 seconds equals 1.25 metres per second. Below, a horizontal gait speed scale runs from 0 to 1.6 metres per second with a shaded band below about 0.8 labelled may need a closer look for fall risk, and a marker slides to 1.25. A now you try box gives a second person who takes 12.5 seconds, and after a pause shows 0.8 metres per second, with the marker sliding to the edge of the shaded band.",
+ title:"Now you try: timed walks and gait speed",
+ body:`<p>A common clinic test is a <b>timed walk</b> over a marked distance, often 10 m in the middle of a longer path so the person is already at steady speed. Gait speed = distance ÷ time.</p>
+ <p><b>Example</b>: 10 m in 8.0 s → 10 ÷ 8.0 = <b>1.25 m/s</b>.<br><b>Now you try</b>: 10 m in 12.5 s. (Answer: 0.8 m/s.)</p>
+ <p>Gait speed is sometimes called a "sixth vital sign" because it is quick to measure and tracks overall health and function. In older adults, speeds below about <b>0.8 to 1.0 m/s</b> are often linked with higher risk of falls, hospital stays and loss of independence. It is a <b>screening signal</b>, not a diagnosis: a slow speed prompts a closer look for the reasons.</p>`,
+ analogy:"Like checking a car's speedometer. One number does not tell you what is wrong, but a car stuck at low speed tells you something deserves a look under the hood.",
+ terms:[["Timed walk test","Timing a walk over a measured distance to find gait speed."],["Screening","A quick check that flags who needs a closer assessment; it does not diagnose."],["Fall risk","The chance of falling, which rises with slower, more variable gait and many other factors."]],
+ check:{q:"A person walks 6 m in 7.5 s. What is their gait speed?",opts:[
+  ["0.8 m/s",1,"Right. 6 ÷ 7.5 = 0.8 m/s."],
+  ["1.25 m/s",0,"That divided 7.5 by 6. Speed is distance divided by time: 6 ÷ 7.5 = 0.8 m/s."],
+  ["45 m/s",0,"That multiplied distance by time. Divide instead: 6 ÷ 7.5 = 0.8 m/s."],
+  ["0.08 m/s",0,"Check the decimal point: 6 ÷ 7.5 = 0.8, not 0.08."]]},
+ caption:"10 m in 8.0 s is 1.25 m/s; 10 m in 12.5 s is 0.8 m/s, near the zone that prompts a closer look.",
+ legend:[["evid","Stopwatch and result","s"],["warn","Closer look zone","s"],["good","Typical range","s"]]},
+/* ---------- Part 6 ---------- */
+{act:6,scene:"emg",
+ desc:"A walker moves in slow motion with the right leg outlined. Rose coloured glows appear on the right leg where muscles are working: on the front of the shin just after heel contact and again in swing, on the front of the thigh in early stance, on the back of the thigh at the end of swing, on the buttock around contact, on the side of the hip in early stance, on the calf in mid and late stance, and on the front of the hip as swing begins. On the right, seven horizontal rows, one per muscle, show rose bands across the gait cycle where each muscle is active, brighter where it works harder. A black cursor sweeps across the rows, and a small dot beside each row name lights when that muscle is on right now.",
+ title:"Muscle activity across the gait cycle",
+ body:`<p>Electromyography (<b>EMG</b>) records the electrical signals of working muscles. In walking, most muscles fire in <b>short bursts</b>, often to slow a motion down (eccentric work) rather than to drive it. Typical timing for one leg:</p>
+ <ul><li><b>Tibialis anterior</b> (front of shin): just after initial contact, lowering the foot gently; and in swing, holding the toes up.</li>
+ <li><b>Quadriceps</b>: loading response, controlling the small knee bend.</li>
+ <li><b>Gluteus maximus and hamstrings</b>: late swing into early stance, slowing the leg and steadying the hip.</li>
+ <li><b>Gluteus medius</b> (side of hip): early and mid stance, keeping the pelvis level on one leg.</li>
+ <li><b>Calf</b> (soleus and gastrocnemius): mid to late stance, controlling the shin, then pushing off.</li>
+ <li><b>Hip flexors</b>: around preswing and initial swing, pulling the thigh forward.</li></ul>
+ <p>Much of swing is passive, like a pendulum. That is part of why walking is so energy efficient.</p>`,
+ analogy:"A crew of stagehands who each step in for a few seconds at exactly the right moment, then step back. Nobody works the whole show.",
+ terms:[["Electromyography (EMG)","Recording the electrical activity of muscles."],["Eccentric contraction","A muscle working while it lengthens, often to slow a movement down."],["Gluteus medius","A hip muscle on the side of the pelvis that keeps it level when standing on one leg."]],
+ check:{q:"Right after the heel touches the floor, which muscle keeps the forefoot from slapping down?",opts:[
+  ["Tibialis anterior, working eccentrically",1,"Right. It lengthens under control to lower the foot gently to the floor."],
+  ["Calf muscles, pushing off",0,"The calf is mostly active later in stance, for push off, not right after heel contact."],
+  ["Hip flexors",0,"The hip flexors start swing. They do not control the foot at contact."],
+  ["No muscle; gravity alone controls it",0,"Without the tibialis anterior, the foot does slap down. That is what happens with weak ankle lifters."]]},
+ caption:"Short, well timed muscle bursts: most work happens around contact and push off.",
+ legend:[["muscle","Muscle active","s"],["legR","Right leg"]]},
+
+{act:6,scene:"rotation",
+ desc:"On the left, a person is seen from directly above while walking up the screen. The pelvis is drawn as a dark oval and the shoulders as a wider shirt coloured bar. As each leg swings forward, the pelvis twists a few degrees toward that side while the shoulders twist the opposite way, and the arms swing opposite to the legs. Small curved arrows and live angle readouts show pelvis rotation and shoulder rotation, each about 4 to 7 degrees. On the right, a front view shows the pelvis as a bar that tilts a few degrees, dropping on the side of the swinging leg, while a red center of mass dot shifts side to side over the standing foot.",
+ title:"Pelvic and trunk rotation",
+ body:`<p>Walking is not only forward and back. The <b>pelvis rotates</b> in the horizontal plane, a few degrees each way, moving forward with the swinging leg. This makes the step a little longer without dropping the body as much.</p>
+ <p>The <b>thorax and shoulders counter rotate</b>, turning the opposite way, and the <b>arms swing opposite to the legs</b>. These opposite motions cancel much of the twisting, which steadies the head and saves energy.</p>
+ <p>Seen from the front, the pelvis also <b>dips</b> a few degrees on the side of the swinging leg, and the whole body shifts side to side a few centimetres over each stance foot. The hip abductors (mainly gluteus medius) on the stance side keep that dip small.</p>`,
+ analogy:"Wringing a towel gently back and forth: the top and bottom twist in opposite directions, and the middle stays steady.",
+ terms:[["Pelvic rotation","Twisting of the pelvis around a vertical axis during walking, a few degrees each way."],["Counter rotation","The shoulders turning opposite to the pelvis."],["Pelvic drop","Slight downward tilt of the pelvis on the swing side, seen from the front."]],
+ check:{q:"As the right leg swings forward, what does the right arm usually do?",opts:[
+  ["Swings backward, opposite to the right leg",1,"Right. Arms swing opposite to the legs, which cancels twisting and steadies the body."],
+  ["Swings forward with the right leg",0,"That same side pattern happens only rarely. Normal walking pairs the right arm with the left leg."],
+  ["Stays still at the side",0,"Some people swing less, but normal walking includes opposite arm swing."],
+  ["Lifts overhead",0,"No. The arm swings a little forward and back, opposite to the same side leg."]]},
+ caption:"Pelvis and shoulders twist in opposite directions; the pelvis dips slightly on the swing side.",
+ legend:[["pants","Pelvis","s"],["shirt1","Shoulders","s"],["com","Center of mass"]]},
+
+/* ---------- Part 7 ---------- */
+{act:7,scene:"antalgic",
+ desc:"A walker moves in slow motion with a red glow at the right knee marking a painful joint. The right leg spends visibly less time on the floor. Under the walker, two stance bars show the right purple bar shorter than the left. On the right, a timing strip shows footfalls as tick marks, unevenly spaced in a short then long rhythm, and the right foot force curve is lower than the left one, drawn in grey. A label reads shortened stance on the painful side.",
+ title:"Antalgic gait: shortening the time on a painful side",
+ body:`<p><b>Antalgic</b> means "against pain". In an antalgic gait, a person spends <b>less time standing on the painful leg</b>, so its stance phase is shorter and the other leg's swing is quicker. The rhythm sounds uneven: a quick step onto the sore side, then a longer step off it.</p>
+ <p>It is a sensible protective response, not a disease. Common reasons include a sore ankle, knee, hip or foot, or a recent injury. The force under the painful foot is often lower too.</p>
+ <p>Describing a gait is not the same as explaining it. An antalgic pattern tells you to look for the source of the pain. Pain that comes with fever, a hot swollen joint, or an inability to bear weight after an injury calls for prompt medical assessment.</p>`,
+ analogy:"Walking across hot sand barefoot when one foot has a cut. You hurry off that foot and rest longer on the good one.",
+ terms:[["Antalgic gait","A limp that shortens stance on a painful leg."],["Asymmetry","A difference between the left and right sides, for example in stance time."],["Protective response","A change in movement that reduces load on a sore area."]],
+ check:{q:"A person's right ankle is painful. In an antalgic gait, what happens to the right stance phase?",opts:[
+  ["It gets shorter",1,"Right. The person spends less time on the painful leg."],
+  ["It gets longer",0,"A longer stance would load the painful side more. The protective pattern is a shorter stance."],
+  ["It stays exactly the same, only the arms change",0,"The key sign of an antalgic gait is a shorter stance on the painful side."],
+  ["The right foot never touches the floor",0,"In an antalgic gait the foot still touches down, just for less time."]]},
+ caption:"Shorter stance and lower force on the painful right side make an uneven rhythm.",
+ legend:[["pain","Painful area"],["stance","Stance","s"],["grf","Right foot force","l"],["legL","Left foot force","l"]]},
+
+{act:7,scene:"trend",
+ desc:"Two people are drawn from the front, both walking in place. In each figure the person's right side is on the viewer's left, marked R. On the left figure, labelled typical, the pelvis bar dips only a few degrees on the swing side. On the right figure, labelled Trendelenburg pattern, the right hip muscle on the side of the pelvis is drawn pale and labelled weak gluteus medius. When this person stands on the right leg, the left side of the pelvis drops much more, about 10 to 15 degrees, shown by a tilted bar and an angle readout, and the trunk leans over the right leg. When standing on the left leg, the pelvis stays level. A small yellow line traces the superior gluteal nerve to the muscle.",
+ title:"Trendelenburg gait: weak hip abductors",
+ body:`<p>When you stand on one leg, the <b>gluteus medius</b> and other hip abductors on that side hold the pelvis level. If they are weak, the pelvis <b>drops on the opposite (swing) side</b> each time weight goes on the weak leg. That drop is the <b>Trendelenburg sign</b>.</p>
+ <p>Many people compensate by <b>leaning the trunk over the weak stance leg</b>. This moves the center of mass closer to the hip, shortening its moment arm so the weak muscles have less to hold. The result is a side to side lurch.</p>
+ <p>Possible causes include hip joint problems, muscle weakness after surgery or disuse, injury to the <b>superior gluteal nerve</b>, or an L5 nerve root problem. The pattern points to the hip abductors; finding out <b>why</b> they are weak takes a full assessment.</p>`,
+ analogy:"A seesaw with a weak spring on one side. When weight goes on the side with the weak spring, the far end sags, unless you shift your weight over the spring.",
+ terms:[["Trendelenburg sign","The pelvis drops on the swing side when standing on a leg with weak hip abductors."],["Hip abductors","Muscles that move the thigh out to the side and hold the pelvis level, mainly gluteus medius and minimus."],["Compensated pattern","Leaning the trunk over the weak side to reduce the load on the hip muscles."]],
+ check:{q:"While standing on the right leg, a person's left side of the pelvis drops. Which muscle is most likely weak?",opts:[
+  ["Right gluteus medius",1,"Right. The stance side abductors hold the pelvis level. A drop on the left during right stance points to weak right abductors."],
+  ["Left gluteus medius",0,"The left side drops, but the muscle that should hold it up is on the right, the side the person is standing on."],
+  ["Right tibialis anterior",0,"Tibialis anterior lifts the foot. It does not hold the pelvis level."],
+  ["Left quadriceps",0,"The quadriceps work at the knee. Pelvic drop points to the stance side hip abductors."]]},
+ caption:"Weak right hip abductors: the left pelvis drops during right stance, and the trunk leans over the right leg.",
+ legend:[["muscle","Gluteus medius","s"],["nerve","Superior gluteal nerve","l"],["com","Center of mass"]]},
+
+{act:7,scene:"steppage",
+ desc:"On the left, a walker moves in slow motion with a steppage pattern. During swing the right foot hangs with the toes pointing down, so the right hip and knee bend much higher than usual to lift it clear of the floor, then the foot lands toes first with a small slap mark. The front of the right shin is drawn pale and labelled weak tibialis anterior. On the right, a side view of the low spine shows ivory vertebrae and blue discs. At the disc between L4 and L5, a bulge presses on a yellow nerve root labelled L5 root, which flashes. A yellow nerve line runs from the root down the leg to the shin muscles, with a second label at the knee for the common fibular nerve near the fibular head. A patch on the top of the foot and big toe glows yellow, labelled L5 skin area.",
+ title:"Steppage gait from foot drop, and the L5 link",
+ body:`<p><b>Foot drop</b> means weakness of the muscles that lift the foot and toes (<b>dorsiflexors</b>, mainly tibialis anterior). In swing the toes hang down, so to avoid tripping the person lifts the hip and knee higher than usual: a <b>steppage gait</b>. At contact, the foot may land toes first or <b>slap</b> down.</p>
+ <p>The dorsiflexors get their nerve supply through the <b>deep fibular (peroneal) nerve</b>, mainly from the <b>L5</b> nerve root (with L4). So foot drop can come from an <b>L5 radiculopathy</b> (for example a disc pressing on the L5 root), from pressure on the <b>common fibular nerve</b> where it wraps around the fibular head below the knee, or from conditions of the brain, spinal cord or muscles.</p>
+ <p>New or worsening foot drop needs prompt medical evaluation, and foot drop with bladder or bowel changes or numbness in the saddle area is an emergency. Clinicians compare strength, reflexes and skin sensation to tell a root problem from a nerve problem.</p>`,
+ analogy:"Walking with a heavy flap of cardboard hanging from your toes. You would lift your knee high so the flap does not catch on every step.",
+ terms:[["Foot drop","Weakness of the muscles that lift the foot, so the toes hang down."],["Steppage gait","High lifting of the hip and knee in swing to clear a dropped foot."],["L5 radiculopathy","Irritation or compression of the L5 nerve root, which can weaken dorsiflexion and change sensation on the top of the foot."],["Common fibular nerve","A nerve that wraps around the fibular head below the knee, where it can be compressed."]],
+ check:{q:"A person has weak ankle and big toe lifting and a steppage gait. Which nerve root is most commonly linked?",opts:[
+  ["L5",1,"Right. The dorsiflexors and big toe extensor are supplied mainly by L5, through the deep fibular nerve."],
+  ["S1",0,"S1 mainly powers pushing the foot down (plantarflexion) and the ankle reflex, not lifting the foot."],
+  ["C5",0,"C5 supplies the shoulder and arm, not the leg."],
+  ["T12",0,"T12 is a thoracic level that supplies the trunk, not the ankle lifters."]]},
+ caption:"Foot drop: the toes hang in swing, so the hip and knee lift high; an L5 root or fibular nerve problem is a common cause.",
+ legend:[["muscle","Tibialis anterior","s"],["nerve","Nerve root and nerve","l"],["disc","Disc","s"],["bone","Vertebra","s"]]},
+
+/* ---------- Part 8 ---------- */
+{act:8,scene:"variability",
+ desc:"On the left, a graph builds up knee angle curves from ten strides drawn one after another in thin indigo lines. They nearly overlap but not exactly, forming a narrow band. In the middle, three small dot plots show stride time for three walkers over many strides: one almost flat line labelled very rigid, one with small, gentle wobble labelled typical healthy variety, and one with large irregular jumps labelled very erratic. On the right, a loop diagram shows signals travelling as glowing dots: from the brain down the spinal cord to a box labelled pattern generator, out to the leg muscles, through the moving leg, and back up from sensors in the feet, eyes and inner ear.",
+ title:"Motor control and movement variability",
+ body:`<p>Walking is controlled at many levels. Networks in the <b>spinal cord</b> (often called central pattern generators) produce the basic rhythm; the <b>brain</b> adjusts it for goals and obstacles; and <b>sensors</b> in the feet, joints, eyes and inner ear feed back what is happening.</p>
+ <p>No two strides are identical. Healthy movement shows a small amount of <b>variability</b>, and that is useful: it lets the system adapt to uneven ground and share load among tissues. Very rigid patterns can be a sign of a stiff, guarded system, while large, irregular variability, for example in <b>stride time</b>, is linked with higher fall risk in older adults.</p>
+ <p>So the goal is not one perfect movement. It is a <b>flexible, adaptable</b> pattern. This is one reason why many rehabilitation programs use varied practice rather than drilling one exact movement.</p>`,
+ analogy:"A jazz musician playing a familiar tune. The melody is the same each time, but small changes let it fit the room and the band. A metronome is too rigid; random notes are too erratic.",
+ terms:[["Central pattern generator","Networks of spinal cord neurons that can produce rhythmic stepping signals."],["Movement variability","Natural stride to stride differences in how a movement is done."],["Sensory feedback","Information from the body and senses that updates movement as it happens."]],
+ check:{q:"Which statement about movement variability is best supported?",opts:[
+  ["A small amount is normal and helpful; very large irregular variability can signal fall risk",1,"Right. Healthy gait is flexible but not erratic."],
+  ["Any variability means something is wrong",0,"Healthy people show small stride to stride differences. That flexibility helps adaptation."],
+  ["The more variable, the healthier, without limit",0,"Large, irregular variability in stride time is linked with higher fall risk in older adults."],
+  ["Walking is controlled only by the brain, with no spinal cord role",0,"Spinal cord networks generate much of the basic rhythm; the brain adjusts it."]]},
+ caption:"Strides vary a little; healthy control sits between rigid and erratic.",
+ legend:[["evid","Stride data","l"],["nerve","Nerve signals"],["muscle","Muscles","s"]]},
+
+{act:8,scene:"load",
+ desc:"Six small figures stand in a row: lying on the back, standing, sitting relaxed, sitting slumped forward, standing bent forward, and lifting a box with a rounded back. A highlight moves from one to the next. Under each figure is a pair of ivory vertebrae with a blue disc between them that squashes more as the load rises, and the center of the disc turns slightly redder at high load. A bar chart along the bottom grows a bar for each position, with standing set to 100: lying about 20, sitting relaxed about 90, sitting slumped forward about 170, standing bent forward about 220, and lifting with a rounded back about 460. An indigo note says the values are approximate and come from very small studies.",
+ title:"Sitting and standing load on the low back disc",
+ body:`<p>Pressure inside a low back disc changes with position. Direct measurements, made in very few volunteers, give roughly this picture, compared with relaxed standing set to 100:</p>
+ <ul><li>Lying on the back: about <b>20</b></li><li>Relaxed sitting: about <b>90</b> (similar to standing)</li><li>Sitting slumped far forward: about <b>170</b></li><li>Standing bent forward: about <b>220</b></li><li>Lifting a load with a rounded back: about <b>460</b></li></ul>
+ <p>Older studies suggested sitting was far worse than standing; later direct measurements found relaxed sitting and standing to be similar. Bending forward and lifting raise disc pressure the most.</p>
+ <p>Higher load is <b>not the same as harm</b>. Discs and other tissues are built to take load and adapt to it, and research has not shown that avoiding sitting or bending prevents back pain. Variety and gradual build up matter more than avoiding any single position.</p>`,
+ analogy:"A water balloon under a book. Add more books, or press on one edge, and the pressure inside rises. The balloon is designed to handle that, as long as the load changes and is not extreme.",
+ terms:[["Intradiscal pressure","Pressure inside the disc's center (nucleus), which rises with load and bending."],["Relative load","A value compared with a reference position, here relaxed standing = 100."],["Load tolerance","How much load a tissue can handle; it can grow with gradual, varied loading."]],
+ check:{q:"According to direct disc pressure measurements, how does relaxed sitting compare with relaxed standing?",opts:[
+  ["They are roughly similar",1,"Right. Later direct measurements found relaxed sitting close to standing. Bending forward raises pressure much more."],
+  ["Sitting is about four times higher",0,"That big difference came from older indirect estimates. Direct measurements found them similar."],
+  ["Sitting is close to zero",0,"Lying down gives the lowest values. Relaxed sitting is near standing."],
+  ["Disc pressure does not change with position",0,"It changes a lot: lying is lowest and lifting with a rounded back is highest."]]},
+ caption:"Relative disc pressure by position, standing = 100. Approximate values from very small studies.",
+ legend:[["disc","Disc","s"],["bone","Vertebra","s"],["evid","Relative pressure","s"]]},
+
+{act:8,scene:"exercise",
+ desc:"On the left, a simple trial animation fills two rows of dots, one labelled exercise programs and one labelled usual care, as people join a study. Each dot slides to a position on a pain scale; the exercise group settles slightly further toward less pain. An indigo effect bar between the groups grows to a small to moderate size and is labelled with that phrase. On the right, an evidence ladder shows three statements with strength markers: exercise for low back pain, strong, with several filled indigo blocks; staying active rather than bed rest, strong; and one correct posture prevents pain, not supported, with empty blocks. A small walker strolls along the bottom.",
+ title:"Exercise for back pain: some of the strongest evidence we have",
+ body:`<p>For people with <b>low back pain</b>, <b>exercise therapy</b> is one of the most consistently supported treatments. Major guidelines recommend it, especially for pain lasting more than a few months. Across many trials, exercise reduces pain and improves function compared with no treatment or usual care, with effects that are usually <b>small to moderate</b> on average.</p>
+ <p>No single type of exercise is clearly best. Walking programs, strengthening, stretching, yoga and other approaches all show benefit, so the best choice is often the one a person enjoys and keeps doing. For new, short term back pain, <b>staying active</b> and keeping up normal activities as much as possible works better than bed rest.</p>
+ <p>Exercise also has strong evidence for general health: heart, metabolism, mood, sleep and bone. Back pain with <b>red flags</b> (for example fever, unexplained weight loss, a history of cancer, major trauma, progressive weakness, or bladder or bowel changes) needs prompt medical assessment before an exercise plan.</p>`,
+ analogy:"A savings account for your body. Each session is a small deposit; one deposit does not change much, but regular deposits add up.",
+ terms:[["Exercise therapy","A planned program of physical activity used as treatment."],["Effect size","How big a treatment's benefit is, often described as small, moderate or large."],["Red flags","Signs that a symptom may come from a serious condition needing prompt medical care."]],
+ check:{q:"Which statement best matches the evidence on exercise for chronic low back pain?",opts:[
+  ["It helps, with small to moderate average effects, and no single type is clearly best",1,"Right. Exercise is well supported, and the best program is often the one a person will keep doing."],
+  ["Only one specific exercise method works",0,"Many types of exercise show similar benefit. No one method is clearly best."],
+  ["Exercise makes back pain worse, so rest is better",0,"Bed rest does not help back pain. Staying active and exercise are recommended."],
+  ["Exercise cures all back pain completely",0,"Average effects are small to moderate. Exercise helps many people but is not a cure for everyone."]]},
+ caption:"Two trial groups and an effect bar, plus an evidence ladder: exercise is strongly supported.",
+ legend:[["evid","Exercise group","c"],["legL","Usual care group","c"],["evid","Evidence strength","s"]]},
+
+/* ---------- Finish ---------- */
+{act:0,scene:"finish",
+ desc:"A walker strolls across the bottom of the canvas on a scrolling floor. Above, eight recap cards fill in one at a time, each with a small drawing: a base of support outline, a head on a lever, a stance and swing bar, a double hump force curve, a speed formula, rose muscle bands, three gait pattern icons, and a disc with a pressure bar. A green check mark appears on each card as it fills.",
+ title:"Recap: posture, gait and movement",
+ body:`<p><b>Balance</b>: keep the line of gravity inside the base of support. Standing sways a little; the calf muscles do steady work. No single posture prevents pain; changing position often is a reasonable goal.</p>
+ <p><b>Levers</b>: torque = force × moment arm. A forward head increases the torque the neck muscles must balance, but the evidence linking it to pain is mixed.</p>
+ <p><b>Gait cycle</b>: stance about 60 percent (initial contact, loading response, midstance, terminal stance, preswing), swing about 40 percent (initial, mid and terminal swing), with two double support periods. Running replaces double support with flight.</p>
+ <p><b>Forces and numbers</b>: walking GRF has a double hump near 1.1 to 1.2 body weights; running has one peak of about 2 to 3. Speed = cadence × step length. Slow gait speed in older adults is a screening flag for fall risk.</p>
+ <p><b>Patterns and control</b>: antalgic (short stance on a painful side), Trendelenburg (weak hip abductors), steppage (foot drop, often L5 or the fibular nerve). Healthy movement is flexible, not rigid or erratic. Exercise has strong evidence for back pain. Now try the <a href="Gait-Lab.html">Gait Lab</a>.</p>`,
+ analogy:"Walking is a well rehearsed dance between gravity, the floor and your nervous system. Now you know the steps.",
+ terms:[["Gait cycle","Right contact to right contact: 60 percent stance, 40 percent swing."],["Speed","Cadence × step length, in m/s after dividing by 60."],["Key patterns","Antalgic, Trendelenburg and steppage."]],
+ check:null,caption:"Eight parts in review, with a walker crossing the floor.",
+ legend:[["good","Reviewed","s"],["legR","Right leg"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function resetScene(){SYS={};SC={}}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;resetScene();render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0;resetScene()};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= scenes: start, parts 1 and 2 ================= */
+/* ---------- map ---------- */
+function sceneMap(T){gaits();
+  panelBox(14,14,300,452);let W_;clipRect(15,15,298,450,()=>{W_=walkScene(GW,T,2.4,164,318,140,{x0:15,x1:313})});
+  const ph=wPhase(legPhase(GW,W_.u,"R").p);label(164,36,"Right leg: "+ph[0],{size:12.5,weight:700,border:ph[4]==="stance"?C.stance:C.swing});
+  phaseStrip(GW,70,372,226,W_.u);
+  panelBox(324,14,210,452);title(336,32,"Three levels",C["ink-soft"]);
+  title(336,58,"2 force at the floor",C["ink-soft"]);grfPlot(GW,362,100,160,104,W_.u,{trace:true,total:false,xl:"% of cycle"});
+  title(336,258,"3 muscle signals",C["ink-soft"]);
+  const sub=[0,1,5];sub.forEach((m,i)=>{const yy=276+i*30;const L=EMG_W[m];txt(336,yy,L[0].split(" (")[0],{size:11.5,weight:600});const bx=336,bw=186;rr(bx,yy+8,bw,12,3);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();
+    for(let k=0;k<100;k++){const a=L[1](k/100);if(a<.06)continue;ctx.fillStyle=hexA(C.muscle,a*.95);ctx.fillRect(bx+k/100*bw,yy+8+6*(1-a),bw/100+.5,12*a)}});
+  const cx=336+mod1(W_.u)*186;line(cx,282,cx,362,C.ink,2);
+  wrapText("Same moment, three views: the leg, the force it makes and the muscles that make it.",336,394,186,16,{size:12,color:C["ink-soft"]});
+  const parts=[["Balance and posture","COM, base of support, variety"],["Head posture and levers","torque = force × moment arm"],["The gait cycle","stance 60, swing 40"],["Forces under the foot","double hump, single peak"],["Measuring gait","speed = cadence × step"],["Muscles and rotation","EMG timing, pelvis twist"],["Common gait patterns","antalgic, Trendelenburg, steppage"],["Control and load","variability, discs, exercise"]];
+  const k=Math.floor(P(T,16)*8);
+  parts.forEach((pp,i)=>{const y=18+i*56;const col=C["act"+(i+1)];cardBox(544,y,242,50,col,i===k);badge(566,y+25,i+1,col,12);fitTxt(586,y+17,pp[0],192,{size:13,weight:700});fitTxt(586,y+35,pp[1],192,{size:11.5,weight:500,color:C["ink-soft"]})});
+}
+/* ---------- center of mass and base of support ---------- */
+function sceneCom(T){const per=18,t=P(T,per)*per;const k=Math.min(3,Math.floor(t/4.5));const tl=t-k*4.5;
+  let wide=0,stepL=0,stance="both",sway=.025*Math.sin(T*1.4),lean=0;
+  if(k===1){wide=-.075}if(k===2){stance="R";sway=.012*Math.sin(T*1.7)}
+  let out=false;if(k===3){const r=smooth(tl/2.2);sway=.03+.14*r;if(tl>2.2){out=true;stepL=.16*smooth((tl-2.2)/.5);sway=lerp(.17,.06,smooth((tl-2.4)/1.4))}}
+  panelBox(14,14,380,452);const gy=430;const s=200;
+  const R=frontPerson(204,gy,s,{stance,wide,stepL,sway,skin:2,shirt:"shirt2",hair:"hair"});
+  circ(R.com[0],R.com[1],8,C.com,C.panel,2);line(R.com[0],R.com[1]+8,R.com[0],gy,C.com,2,[6,5]);
+  label(R.com[0]+(R.com[0]>230?-14:14),R.com[1]-16,"center of mass",{size:12,weight:700,border:C.com,align:R.com[0]>230?"right":"left"});
+  txt(40,gy+22,"R",{size:13,weight:700,mono:true,color:C["ink-soft"]});txt(366,gy+22,"L",{size:13,weight:700,mono:true,color:C["ink-soft"]});
+  txt(204,34,"Front view (the person's right is on your left)",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  /* top view */
+  panelBox(404,14,382,452);title(418,32,"Top view of the feet",C["ink-soft"]);const tx=x=>595+(x-204)*1.15,ty=250;
+  const fw=.12*s*1.15,fl=.27*s*1.15;const feet=[];if(stance!=="L")feet.push(tx(R.fR[0]));if(stance!=="R")feet.push(tx(R.fL[0]));
+  const xs=feet.map(f=>[f-fw/2,f+fw/2]).flat();const bx0=Math.min(...xs),bx1=Math.max(...xs);const by0=ty-fl*.55,by1=ty+fl*.45;
+  rr(bx0-4,by0-4,bx1-bx0+8,by1-by0+8,14);ctx.fillStyle=hexA(out&&stepL<.08?C.warn:C.bos,.22);ctx.fill();ctx.strokeStyle=out&&stepL<.08?C.warn:C.bos;ctx.lineWidth=2.5;ctx.stroke();
+  feet.forEach(f=>topFoot(f,ty,fl,C.shoe,Math.PI/2));
+  const cpx=tx(R.com[0]);const inside=cpx>bx0-4&&cpx<bx1+4;circ(cpx,ty+6,8,C.com,C.panel,2);
+  label((bx0+bx1)/2,by1+30,"base of support "+Math.round((bx1-bx0)/1.15/s*100)+" cm wide",{size:12.5,weight:700,mono:true,border:C.bos});
+  const nm=["Feet hip width apart","Feet together","Standing on the right leg","Leaning too far: step out"][k];label(595,68,nm,{size:14,weight:700,border:k===3?C.warn:C.bos});
+  label(595,104,inside?"line of gravity inside the base: balanced":"line of gravity outside the base",{size:12.5,weight:700,color:inside?C.good:C["warn-ink"],border:inside?C.good:C.warn});
+  if(k===3&&stepL>.02)withA(smooth((tl-2.4)/.6),()=>label(595,420,"a step makes the base wider",{size:12.5,weight:700,border:C.good}));
+  txt(430,ty+4,"R",{size:13,weight:700,mono:true,color:C["ink-soft"]});txt(762,ty+4,"L",{size:13,weight:700,mono:true,color:C["ink-soft"]});
+}
+/* ---------- line of gravity ---------- */
+function sceneGravity(T){panelBox(14,14,420,452);const gy=444,s=215,x=150;const a=swayFn(T);
+  ctx.fillStyle=hexA(C.floor,.55);ctx.fillRect(15,gy,418,20);line(15,gy,433,gy,C["floor-line"],2);
+  const R=sidePerson(x,gy,s,{sway:a,skin:3});
+  const lx=R.com[0];line(lx,40,lx,gy,C.com,2.2,[7,5]);circ(lx,40,5,C.com);
+  const calf=clamp(.35+a*30,0,1);const cp=segPt(R.kn,R.ank,.33,-.05*s);mGlow(cp[0],cp[1],.13*s,.035*s,cp[2],calf);
+  carrow(x-30,gy-40,x-46,gy-10,x-26,gy-6,hexA(C.muscle,.4+calf*.6),2.5);
+  const lm=[[R.ear,"ear lobe"],[R.sh,"shoulder"],[R.hip,"just behind the hip joint"],[R.kn,"just in front of the knee"],[[R.ank[0],R.ank[1]],"in front of the ankle"]];
+  lm.forEach((q,i)=>{circ(q[0][0],q[0][1],4.5,C.ink,C.panel,1.5);lead(q[0][0],q[0][1],282,q[0][1]-(i===4?18:0),q[1],{size:11.5,align:"left"})});
+  label(lx,24,"line of gravity",{size:12,weight:700,border:C.com});
+  label(70,gy-120,"calf pulls back",{size:11.5,weight:700,border:C.muscle});
+  panelBox(444,14,342,452);
+  const g=graph({x:490,y:70,w:270,h:150,x0:0,x1:10,y0:-3,y1:3,xt:[0,2,4,6,8,10],yt:[-2,0,2],yf:v=>v<0?"−"+(-v):String(v),xf:v=>v+" s",xl:"last 10 seconds",yl:"sway forward (cm)",ylx:30,title:"Postural sway"});
+  line(g.x,g.Y(0),g.x+g.w,g.Y(0),hexA(C.ink,.35),1.2,[4,4]);curve(g,tt=>swayFn(T-10+tt)*100,0,10,C.evid,2.4);gdot(g,10,a*100,C.evid);
+  title(470,276,"Calf muscle activity",C["ink-soft"]);rr(470,292,290,22,5);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(470,292,290*calf,22,5);ctx.fillStyle=C.muscle;ctx.fill();
+  txt(615,330,a>0?"leaning forward: calf works harder":"leaning back: calf eases off",{size:12.5,weight:600,align:"center"});
+  wrapText("Gravity passes in front of the ankle, so quiet standing is a steady, small calf effort with constant tiny corrections.",470,374,290,17,{size:12.5,color:C["ink-soft"]});
+}
+/* ---------- posture variety ---------- */
+function sceneVary(T){gaits();const per=15,t=P(T,per)*per;const k=Math.floor(t/3);const tl=t-k*3;
+  panelBox(14,14,370,452);const names=["Sitting upright","Leaning back, slouched","Standing","Walking","Sitting tall again"];
+  clipRect(15,15,368,450,()=>{ctx.fillStyle=hexA(C.floor,.55);ctx.fillRect(15,420,368,46);line(15,420,383,420,C["floor-line"],2);
+    if(k===0||k===1||k===4){rr(250,250,120,12,3);ctx.fillStyle=C.chair;ctx.fill();line(350,262,350,420,C.chair,5);rr(262,214,56,36,3);fillStroke(C.panel,C["ink-soft"],1.5);
+      sitPerson(150,420,190,{slump:k===1?.85:0,back:true,fhp:k===1?.06:0})}
+    else if(k===2)sidePerson(190,420,190,{sway:swayFn(T)*.6});
+    else walkScene(GW,T,1.6,190,420,160,{x0:15,x1:383})});
+  label(199,38,names[k],{size:14,weight:700,border:C.accent});
+  panelBox(394,14,392,452);title(410,32,"A day, sped up",C["ink-soft"]);
+  const dx=410,dw=360;rr(dx,48,dw,10,5);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();for(let i=0;i<5;i++){line(dx+dw*i/5,46,dx+dw*i/5,60,C.rule,1)}line(dx+dw*t/per,42,dx+dw*t/per,64,C.ink,2.2);
+  const bar=(y,lab,v,sub)=>{txt(410,y,lab,{size:13,weight:700});txt(410,y+18,sub,{size:11.5,color:C["ink-soft"]});const bx=410,bw=360;rr(bx,y+30,bw,26,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();
+    const col=v<.45?C.good:v<.75?C.warn:C.bad;rr(bx,y+30,bw*clamp(v,0,1),26,6);ctx.fillStyle=col;ctx.fill();txt(bx+bw-6,y+43,v<.45?"comfortable":v<.75?"getting stiff":"uncomfortable",{size:12,weight:700,align:"right",color:C.ink})};
+  bar(90,"Same position all day",t/per*1.05,"one pose held for hours");
+  bar(176,"Changing position often",.12+.3*tl/3,"each change resets the load");
+  const h=evNote(410,268,360,"Research has not found one correct posture that prevents back or neck pain. People with and without pain sit and stand in overlapping ways. Comfortable positions that change often are a reasonable goal.",{size:12.5});
+}
+/* ---------- forward head lever ---------- */
+function sceneLever(T){const per=10,t=P(T,per)*per;const f=t<2?0:t<4?smooth((t-2)/2):t<7?1:t<9?1-smooth((t-7)/2):0;const dcm=2+4*f;const pxcm=9;
+  panelBox(14,14,420,452);const px=170,py=330;const H=headLever(px,py,dcm*pxcm,{mus:.35+.45*f});
+  circ(H.com[0],H.com[1],7,C.com,C.panel,2);arrow(H.com[0],H.com[1]+8,H.com[0],H.com[1]+90,C.com,3.5);label(H.com[0]+30,H.com[1]+70,"49 N",{size:13,weight:700,mono:true,border:C.com});
+  line(H.com[0],H.com[1]+90,H.com[0],395,hexA(C.com,.6),1.4,[4,4]);line(px,py,px,395,hexA(C.ink,.6),1.4,[4,4]);
+  ctx.beginPath();ctx.moveTo(px-11,py+10);ctx.lineTo(px+11,py+10);ctx.lineTo(px,py-6);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();label(px-16,py+26,"pivot",{size:11.5,weight:700,align:"right"});
+  ruler(px,H.com[0],398,null,C.evid);label((px+H.com[0])/2+40,416,"moment arm "+dcm.toFixed(1)+" cm",{size:12.5,weight:700,mono:true,border:C.evid});
+  label(80,100,"neck extensors",{size:11.5,weight:700,border:C.muscle});
+  const tq=49*dcm/100;txt(30,446,"torque",{size:12,weight:700});rr(84,438,300,16,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(84,438,300*tq/3.2,16,4);ctx.fillStyle=C.evid;ctx.fill();txt(384,426,tq.toFixed(2)+" N·m",{size:12.5,weight:700,mono:true,align:"right"});
+  label(224,34,f>.5?"Head forward: longer lever":"Head over the shoulders",{size:13,weight:700,border:C.accent});
+  panelBox(444,14,342,452);const t2=P(T,16)*16;title(458,32,"Worked example",C["accent-ink"]);
+  workLines(462,40,310,[{l:"torque = force × moment arm",size:14},{l:"weight = 5 kg × 9.8 m/s² = 49 N",mono:true,size:13},
+    {c:[[F("49",["N"]),F("2",["cm"]),F("1",["m"],"100",["cm"])],["0.98",["N","m"]]]},
+    {c:[[F("49",["N"]),F("6",["cm"]),F("1",["m"],"100",["cm"])],["2.94",["N","m"]]]},
+    {ans:"3 times the moment arm, 3 times the torque"},
+    {miss:"leaving the distance in cm gives 98 and 294. Change cm to m first (divide by 100)."}],t2,{dt:1.9,fs:13.5});
+}
+function sceneLevertry(T){const per=10,t=P(T,per)*per;const f=t<2?0:t<4?smooth((t-2)/2):t<7?1:t<9?1-smooth((t-7)/2):0;const d=2+4*f;const Fm=49*d/5;
+  panelBox(14,14,450,300);title(28,32,"The neck as a lever (simple model)",C["ink-soft"]);const px=200,py=170,cm=20;
+  rr(px-5*cm-10,py-8,5*cm+d*cm+20,16,6);fillStroke(C.bone,C["bone-edge"],1.6);
+  ctx.beginPath();ctx.moveTo(px,py+8);ctx.lineTo(px-18,py+44);ctx.lineTo(px+18,py+44);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();label(px,py+60,"pivot",{size:11.5,weight:700});
+  const hx_=px+d*cm;circ(hx_,py-36,26,skinC(2),hexA(C.ink,.3),1.2);ctx.beginPath();ctx.arc(hx_-3,py-39,27,Math.PI*.95,Math.PI*1.95);ctx.closePath();ctx.fillStyle=C.hair;ctx.fill();
+  arrow(hx_,py+10,hx_,py+10+49*1.3,C.com,3.5);label(hx_+40,py+64,"head 49 N",{size:12,weight:700,mono:true,border:C.com});
+  const mx=px-5*cm;rr(mx-10,py-80,20,72,8);ctx.fillStyle=hexA(C.muscle,.35+.4*f);ctx.fill();ctx.strokeStyle=C.muscle;ctx.lineWidth=1.6;ctx.stroke();
+  arrow(mx,py+10,mx,py+10+Fm*1.3,C.muscle,3.5);label(mx-6,py+24+Fm*1.3,"muscle "+Fm.toFixed(1)+" N",{size:12,weight:700,mono:true,border:C.muscle});
+  ruler(mx,px,py-100,"5 cm",C["ink-soft"]);ruler(px,hx_,py-100,d.toFixed(1)+" cm",C.evid);
+  txt(239,292,"torque "+(49*d/100).toFixed(2)+" N·m  ÷  0.05 m  =  "+Fm.toFixed(1)+" N",{size:13,weight:700,mono:true,align:"center"});
+  panelBox(474,14,312,300,{stroke:C.gold,lw:2});title(488,32,"Now you try",C["gold-ink"]);const t2=P(T,14)*14;
+  [["Head weight: 50 N"],["Head moment arm: 4 cm"],["Muscle moment arm: 5 cm"],["Find the torque and the muscle force."]].forEach((l,i)=>txt(490,62+i*24,l[0],{size:13.5,weight:i===3?700:500}));
+  const rv=seg(t2,6,7);if(rv>0)withA(rv,()=>{label(630,182,"torque = 50 × 0.04 = 2.0 N·m",{size:13,weight:700,mono:true,border:C.good,bg:C["good-wash"]});label(630,218,"muscle = 2.0 ÷ 0.05 = 40 N",{size:13,weight:700,mono:true,border:C.good,bg:C["good-wash"]})});
+  if(rv<=0)txt(630,200,"answer appears in "+Math.ceil(6-t2)+" s",{size:12.5,align:"center",color:C["ink-soft"]});
+  evNote(14,326,772,"Evidence is mixed. Some studies find slightly more forward head posture in people with neck pain; many find little or no link, and head position changes from moment to moment. Bigger numbers seen online come from very simplified models. More load is not the same as damage: tissues adapt when load is varied and built up gradually.",{size:13,lh:18});
+}
+/* ================= scenes: parts 3 and 4 ================= */
+/* ---------- gait cycle ---------- */
+function sceneCycle(T){gaits();panelBox(14,14,772,452);let W_;
+  clipRect(15,15,770,450,()=>{W_=walkScene(GW,T,2.6,330,240,118,{x0:15,x1:785,prints:printsFn(GW,284,300,{pxm:118,brackets:true,by:330})})});
+  const p=legPhase(GW,W_.u,"R").p;const ph=wPhase(p);label(120,40,"Right leg: "+(ph[4]==="stance"?"stance":"swing"),{size:13.5,weight:700,border:ph[4]==="stance"?C.stance:C.swing});
+  txt(772,292,"footprints",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  const bx=70,bw=660,by=408;rr(bx,by,bw*.6,30,5);ctx.fillStyle=hexA(C.stance,.85);ctx.fill();rr(bx+bw*.6,by,bw*.4,30,5);ctx.fillStyle=hexA(C.swing,.75);ctx.fill();
+  txt(bx+bw*.3,by+15,"STANCE about 60%",{size:13,weight:700,align:"center",color:"#fff"});txt(bx+bw*.8,by+15,"SWING about 40%",{size:13,weight:700,align:"center",color:"#10161A"});
+  [0,20,40,60,80,100].forEach(v=>txt(bx+bw*v/100,by+44,v+"%",{size:11,mono:true,align:"center",color:C["ink-soft"]}));
+  const cx=bx+bw*mod1(W_.u);line(cx,by-8,cx,by+38,C.ink,2.5);circ(cx,by-8,5,C.ink);
+  txt(bx,by-14,"one gait cycle, right heel to right heel",{size:12,weight:600,color:C["ink-soft"]});
+}
+/* ---------- stance subphases ---------- */
+function sceneStance(T){gaits();panelBox(14,14,772,452);let W_;clipRect(15,15,770,280,()=>{W_=walkScene(GW,T,4.4,400,262,108,{x0:15,x1:785})});
+  const p=legPhase(GW,W_.u,"R").p;const ph=wPhase(p);const bx=60,bw=680;
+  WPH.slice(0,5).forEach((w,i)=>{const x0=bx+bw*w[2]/.6,x1=bx+bw*w[3]/.6;rr(x0+1,26,x1-x0-2,26,4);ctx.fillStyle=hexA(C.stance,i%2?.6:.85);ctx.fill();fitTxt((x0+x1)/2,39,w[1],x1-x0-6,{size:12,weight:700,align:"center",color:"#fff",mono:true})});
+  [0,10,20,30,40,50,60].forEach(v=>txt(bx+bw*v/60,62,v+"%",{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  if(p<.6){const cx=bx+bw*p/.6;line(cx,20,cx,56,C.ink,2.5)}
+  const inSt=p<.6;label(160,96,inSt?ph[0]:"Swing (stance starts again soon)",{size:15,weight:700,border:inSt?C.stance:C.swing});
+  const cur=inSt?WPH.slice(0,5).indexOf(ph):-1;thumbs(GW,[[.008,"Initial contact"],[.06,"Loading response"],[.2,"Midstance"],[.4,"Terminal stance"],[.56,"Preswing"]],20,300,760,cur,{col:C.stance,h:158,pxm:54});
+}
+function sceneSwing(T){gaits();panelBox(14,14,772,452);let W_;clipRect(15,15,770,280,()=>{W_=walkScene(GW,T,4.4,400,262,108,{x0:15,x1:785})});
+  const p=legPhase(GW,W_.u,"R").p;const ph=wPhase(p);const bx=60,bw=680;
+  WPH.slice(5).forEach((w,i)=>{const x0=bx+bw*(w[2]-.6)/.4,x1=bx+bw*(w[3]-.6)/.4;rr(x0+1,26,x1-x0-2,26,4);ctx.fillStyle=hexA(C.swing,i%2?.55:.8);ctx.fill();fitTxt((x0+x1)/2,39,w[0],x1-x0-6,{size:12,weight:700,align:"center",color:"#10161A"})});
+  [60,70,80,90,100].forEach(v=>txt(bx+bw*(v-60)/40,62,v+"%",{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  const inSw=p>=.6;if(inSw){const cx=bx+bw*(p-.6)/.4;line(cx,20,cx,56,C.ink,2.5)}
+  label(160,96,inSw?ph[0]:"Stance (swing comes next)",{size:15,weight:700,border:inSw?C.swing:C.stance});
+  const kn=W_.pose.legs.R.an[1];label(640,96,"right knee bend "+Math.round(kn)+"°",{size:13,weight:700,mono:true,border:C.legR});
+  if(inSw&&W_.res){const f=W_.res.R;const toe=f.toe[1]>f.heel[1]?f.toe:f.heel;const lo=Math.max(f.toe[1],f.heel[1],f.ball[1]);const clr=(262-lo)/108*100;if(p>.7&&p<.9){line(f.toe[0]+14,lo,f.toe[0]+14,262,C.good,2.5);label(f.toe[0]+70,250,"clearance "+Math.max(0,clr).toFixed(1)+" cm",{size:11.5,weight:700,mono:true,border:C.good})}}
+  const cur=inSw?WPH.slice(5).indexOf(ph):-1;thumbs(GW,[[.66,"Initial swing"],[.8,"Midswing"],[.94,"Terminal swing"]],120,300,560,cur,{col:C.swing,h:158,pxm:54});
+}
+/* ---------- double support vs flight ---------- */
+function sceneSupport(T){gaits();panelBox(14,14,381,452);panelBox(405,14,381,452);let A,B;
+  clipRect(15,15,379,300,()=>{A=walkScene(GW,T,2.8,205,270,105,{x0:15,x1:394})});clipRect(406,15,379,300,()=>{B=walkScene(GR,T,3.4,595,270,95,{x0:406,x1:785,fig:{shorts:true,shirt:"shirt2",skin:3,hair:"hair2"}})});
+  title(28,32,"Walking",C["ink-soft"]);title(419,32,"Running",C["ink-soft"]);
+  const sa=supportState(GW,A.u),sb=supportState(GR,B.u);label(205,58,sa[0],{size:13,weight:700,border:sa[1]});label(595,58,sb[0],{size:13,weight:700,border:sb[1]});
+  phaseStrip(GW,72,326,300,A.u);phaseStrip(GR,462,326,300,B.u);
+  txt(205,420,"each foot down about 60%: overlap = double support",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  txt(595,420,"each foot down under 50%: gaps = flight",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  txt(205,444,"double support "+Math.round(2*(GW.legs.R.s-.5)*100)+"% of the cycle",{size:12.5,weight:700,mono:true,align:"center"});
+  txt(595,444,"flight "+Math.round(2*(.5-GR.legs.R.s)*100)+"% of the cycle",{size:12.5,weight:700,mono:true,align:"center"});
+}
+/* ---------- GRF walking ---------- */
+function sceneGrfwalk(T){gaits();panelBox(14,14,400,452);let W_;clipRect(15,15,398,450,()=>{treadmill(20,408,312);W_=walkScene(GW,T,3.2,214,312,130,{x0:34,x1:394,depth:24});forceArrows(GW,W_,312,100)});
+  label(214,440,"instrumented treadmill measures force",{size:12,weight:600,border:C["plate-edge"]});
+  panelBox(424,14,362,452);const g=grfPlot(GW,476,74,286,260,W_.u,{trace:true,title:"Vertical force, right foot"});const u=mod1(W_.u)*100;
+  const s=GW.legs.R.s*100;const notes=[[.22*s,"loading peak",-22],[.5*s,"valley",24],[.78*s,"push off peak",-22],[80,"swing: no force",-18]];
+  notes.forEach(n=>{if(u<n[0]-1)return;const v=n[0]>s?0:grfLeg(GW,n[0]/100,"R");gdot(g,n[0],v,C.grf);label(g.X(n[0]),g.Y(v)+n[2],n[1],{size:11.5,weight:700,border:C.grf})});
+  txt(605,398,"dashed grey: both feet added together",{size:12,align:"center",color:C["ink-soft"]});txt(605,420,"the average over a cycle is 1 body weight",{size:12,align:"center",color:C["ink-soft"]});
+}
+/* ---------- inverted pendulum ---------- */
+function scenePendulum(T){gaits();panelBox(14,14,520,452);const slow=3,pxm=125,gy=330,EX=5;let W_;
+  clipRect(15,15,518,450,()=>{W_=walkScene(GW,T,slow,240,gy,pxm,{x0:15,x1:533});
+    const per=GW.Tc*slow;const pts=[];for(let j=0;j<120;j++){const tt=T-j*.035;if(tt<0)break;const q=tt/per;const cyc=Math.floor(q),u=q-cyc;const Pz=gaitPose(GW,u);const w=cyc*GW.stride+Pz.hx;pts.push([W_.W2S(w),gy+(comY(GW,u)+.93)*pxm*EX-(.93*pxm)-.1*pxm])}
+    if(pts.length>1)poly(pts,C.com,3);
+    const com=[W_.hipX,gy+(comY(GW,W_.u)+.93)*pxm*EX-.93*pxm-.1*pxm];
+    ["R","L"].forEach(l=>{if(!legPhase(GW,W_.u,l).st)return;const f=W_.res[l];line(f.ball[0],gy,com[0],com[1],hexA(C.ink,.55),2,[5,4])});circ(com[0],com[1],9,C.com,C.panel,2.5)});
+  label(130,40,"center of mass path (height exaggerated 5 times)",{size:12,weight:700,border:C.com,align:"left"});
+  const h=1-(W_.pose.hy-(-0.947))/(-0.92+0.947);const hh=clamp((-comY(GW,W_.u)-.921)/(.945-.921),0,1);
+  if(hh>.75||hh<.25)label(270,72,hh>.75?"highest: midstance, over the foot":"lowest: double support",{size:12.5,weight:700,border:hh>.75?C.warn:C.disc});
+  panelBox(544,14,242,452);title(560,32,"Energy swap",C["ink-soft"]);const by=380,bh=260;
+  [[600,hh,C.warn,"height","energy"],[700,1-hh,C.disc,"speed","energy"]].forEach(q=>{rr(q[0]-28,by-bh,56,bh,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(q[0]-28,by-bh*(.2+.8*q[1]),56,bh*(.2+.8*q[1]),6);ctx.fillStyle=q[2];ctx.fill();txt(q[0],by+18,q[3],{size:12.5,weight:700,align:"center"});txt(q[0],by+36,q[4],{size:12.5,weight:700,align:"center"})});
+  wrapText("One rises as the other falls, like a ball rolling over a hill.",560,436,215,16,{size:12,color:C["ink-soft"]});
+}
+/* ---------- running GRF ---------- */
+function sceneGrfrun(T){gaits();panelBox(14,14,400,452);let W_;clipRect(15,15,398,450,()=>{treadmill(20,408,312);W_=walkScene(GR,T,3.6,200,312,108,{x0:34,x1:394,depth:24,fig:{shorts:true,shirt:"shirt2",skin:3,hair:"hair2"}});forceArrows(GR,W_,312,58)});
+  const F=grfLeg(GR,W_.u,"R")+grfLeg(GR,W_.u,"L");const top=352,len=52-F*7;rr(330,top-8,60,10,3);ctx.fillStyle=C.ink;ctx.fill();spring(360,top+2,top+2+len,12,C.grf);circ(360,top+len+12,9,C.com);
+  txt(360,444,"spring mass model",{size:11.5,weight:700,align:"center",color:C["ink-soft"]});
+  label(120,400,supportState(GR,W_.u)[0],{size:12.5,weight:700,border:supportState(GR,W_.u)[1]});
+  panelBox(424,14,362,452);const g=graph({x:476,y:74,w:286,h:260,x0:0,x1:100,y0:0,y1:3,xt:[0,20,40,60,80,100],yt:[0,1,2,3],xf:v=>v+"%",xl:"% of gait cycle",yl:"force (body weights)",ylx:28,title:"Vertical force, right foot"});
+  for(let i=0;i<100;i++){const uu=i/100;if(!legPhase(GR,uu,"R").st&&!legPhase(GR,uu,"L").st){ctx.fillStyle=hexA(C.flight,.28);ctx.fillRect(g.X(i),g.y,g.w/100+.6,g.h)}}
+  line(g.X(0),g.Y(1),g.X(100),g.Y(1),hexA(C.ink,.45),1.2,[5,4]);txt(g.X(100)-4,g.Y(1)-9,"body weight",{size:10.5,align:"right",color:C["ink-soft"],weight:600});
+  curve(g,p=>grfLeg(GW,p/100,"R"),0,100,hexA(C.legL,.8),2);curve(g,p=>grfLeg(GR,p/100,"R"),0,mod1(W_.u)*100,C.grf,3);gdot(g,mod1(W_.u)*100,grfLeg(GR,W_.u,"R"),C.grf);
+  const pk=grfPeak(GR);label(g.X(GR.legs.R.s*50),g.Y(pk)-14,"peak about "+pk.toFixed(1)+" BW",{size:11.5,weight:700,border:C.grf});
+  label(g.X(70),g.Y(.7),"walking, for comparison",{size:11,weight:600,border:C.legL});
+  txt(605,400,"grey bands: flight, no foot on the ground",{size:12,align:"center",color:C["ink-soft"]});txt(605,422,"less time on the ground means a taller peak",{size:12,align:"center",color:C["ink-soft"]});
+}
+/* ================= scenes: parts 5, 6 and 7 ================= */
+let GSC=null,G125=null,G08=null;
+function gaits2(){gaits();if(GSC)return;GSC=makeGait({mode:"walk",cad:108,step:.65});G125=makeGait({mode:"walk",cad:112,step:.67});G08=makeGait({mode:"walk",cad:96,step:.5})}
+/* ---------- measures ---------- */
+function sceneMeasures(T){gaits();panelBox(14,14,772,452);const pxm=70,slow=2.4;let W_;
+  clipRect(15,15,770,345,()=>{W_=walkScene(GW,T,slow,300,148,pxm,{x0:15,x1:785,depth:12,prints:(W2S,cyc,u)=>{rr(15,176,770,92,4);ctx.fillStyle=hexA(C.floor,.35);ctx.fill();printsFn(GW,244,200,{pxm,brackets:true,by:290})(W2S,cyc,u)}})});
+  title(28,166,"Top view of the footprints",C["ink-soft"]);txt(770,200,"left",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});txt(770,244,"right",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  label(600,290,"step length 0.70 m",{size:12,weight:700,mono:true,border:C.evid,align:"left"});label(600,320,"stride length 1.40 m",{size:12,weight:700,mono:true,border:C.evid,align:"left"});
+  const tt=T/(GW.Tc*slow);const strikes=Math.floor(tt*2+1e-6)+1;const tReal=(Math.floor(tt*2+1e-6)/2)*GW.Tc;
+  panelBox(28,366,744,88,{fill:hexA(C.panel,.95)});
+  txt(50,392,"steps counted",{size:12,weight:600,color:C["ink-soft"]});txt(50,424,String(strikes),{size:24,weight:700,mono:true});
+  stopwatch(250,410,26,tReal*6);txt(290,392,"walking time",{size:12,weight:600,color:C["ink-soft"]});txt(290,424,(tt*GW.Tc).toFixed(1)+" s",{size:20,weight:700,mono:true});
+  const cad=strikes>2?(strikes-1)/tReal*60:null;txt(450,392,"cadence = steps ÷ time × 60",{size:12,weight:600,color:C["ink-soft"]});txt(450,424,cad?Math.round(cad)+" steps/min":"counting...",{size:20,weight:700,mono:true,color:C["evid-ink"]});
+}
+/* ---------- speed worked example ---------- */
+function sceneSpeedcalc(T){gaits2();panelBox(14,14,330,452);let W_;clipRect(15,15,328,450,()=>{W_=walkScene(GSC,T,2.2,170,280,100,{x0:15,x1:343,prints:printsFn(GSC,316,300,{pxm:100})})});
+  label(178,44,"cadence 108 steps/min",{size:13,weight:700,mono:true,border:C.evid});const sR=strikeX(GSC,"R"),sL=strikeX(GSC,"L");
+  label(178,76,"step length 0.65 m",{size:13,weight:700,mono:true,border:C.evid});txt(178,370,"speed = 108 × 0.65 ÷ 60",{size:13,weight:700,mono:true,align:"center"});txt(178,396,"= 1.17 m/s",{size:15,weight:700,mono:true,align:"center",color:C.good});
+  panelBox(354,14,432,452);title(368,32,"Worked example",C["accent-ink"]);const t=P(T,18)*18;
+  workLines(370,40,400,[{l:"speed = cadence × step length",size:14},
+    {c:[[F("108",["steps"],"1",["min"]),F("0.65",["m"],"1",["step"]),F("1",["min"],"60",["s"])],["1.17",["m/s"]]]},
+    {l:"108 × 0.65 = 70.2 m/min",mono:true},{l:"70.2 ÷ 60 = 1.17 m/s",mono:true},
+    {ans:"1.17 m/s (about 4.2 km/h)"},
+    {miss:"leaving out the ÷ 60 gives 70.2, which is metres per minute, not metres per second. Using stride length with a cadence in steps doubles the answer."}],t,{dt:2,fs:14});
+}
+/* ---------- timed walk ---------- */
+function sceneSpeedtry(T){gaits2();const A=[G125,1.25,"Person A"],B=[G08,.8,"Now you try: person B"];const vs=1.5;const dA=14.5/1.25/vs,dB=14.5/.8/vs;const per=dA+3+dB+4;const t=P(T,per)*per;
+  const cur=t<dA+3?A:B;const tl=t<dA+3?t:t-dA-3;const dur=t<dA+3?dA:dB;const G=cur[0];
+  panelBox(14,14,772,452);const pxm=40,gy=176,x0=40;const sx=m=>x0+m*pxm;
+  ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(15,gy,770,22);line(15,gy,785,gy,C["floor-line"],2);
+  rr(sx(0),gy+1,2.5*pxm,20,0);ctx.fillStyle=hexA(C.warn,.2);ctx.fill();rr(sx(12.5),gy+1,2*pxm,20,0);ctx.fillStyle=hexA(C.warn,.2);ctx.fill();
+  [[2.5,"start"],[12.5,"finish"]].forEach(q=>{line(sx(q[0]),gy-110,sx(q[0]),gy+22,C.evid,3);label(sx(q[0]),gy-120,q[1],{size:12,weight:700,border:C.evid})});
+  ruler(sx(2.5),sx(12.5),gy+40,"10 m timed",C.evid,{dy:16});txt(sx(1.25),gy+12,"speed up",{size:10.5,weight:600,align:"center",color:C["warn-ink"]});txt(sx(13.5),gy+12,"slow down",{size:10.5,weight:600,align:"center",color:C["warn-ink"]});
+  const m=Math.min(14.5,tl*vs*cur[1]);const cyc=m/G.stride;const u=mod1(cyc);const Pz=gaitPose(G,u);const hipM=Math.floor(cyc)*G.stride+Pz.hx;
+  drawWalker(G,tl<dur?u:.25,sx(hipM),gy,pxm,{hl:C.legR,skin:cur===A?2:4,shirt:cur===A?"shirt1":"shirt4",hair:cur===A?"hair":"hair3"});
+  const tm=clamp((m-2.5)/cur[1],0,10/cur[1]);stopwatch(718,98,32,tm*6);txt(718,148,tm.toFixed(1)+" s",{size:18,weight:700,mono:true,align:"center"});label(400,30,cur[2],{size:13.5,weight:700,border:cur===A?C.evid:C.gold});
+  const done=m>=12.5;
+  if(done)withA(seg(tl,(12.5/cur[1])/vs,(12.5/cur[1])/vs+.6),()=>{label(400,262,"10 m ÷ "+(10/cur[1]).toFixed(1)+" s = "+cur[1].toFixed(2)+" m/s",{size:16,weight:700,mono:true,border:C.good,bg:C["good-wash"]})});
+  else if(cur===B)txt(400,262,"Try it: 10 m ÷ 12.5 s = ? m/s",{size:15,weight:700,mono:true,align:"center"});
+  const bx=80,bw=640,by=344;const X=v=>bx+v/1.6*bw;rr(bx,by,bw,24,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(bx,by,X(.8)-bx,24,4);ctx.fillStyle=hexA(C.warn,.45);ctx.fill();rr(X(1.0),by,X(1.4)-X(1.0),24,0);ctx.fillStyle=hexA(C.good,.35);ctx.fill();
+  [0,.4,.8,1.2,1.6].forEach(v=>txt(X(v),by+38,v.toFixed(1),{size:11,mono:true,align:"center",color:C["ink-soft"]}));txt(bx+bw,by+56,"gait speed (m/s)",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  txt(bx+4,by-12,"below about 0.8: a closer look for fall risk",{size:12,weight:700,color:C["warn-ink"]});txt(X(1.2),by+56,"typical adults",{size:11.5,weight:700,align:"center",color:C.good});
+  if(done){const mk=X(cur[1]);ctx.beginPath();ctx.moveTo(mk,by-2);ctx.lineTo(mk-9,by-16);ctx.lineTo(mk+9,by-16);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();line(mk,by,mk,by+24,C.ink,3);label(mk,by-28,cur[1].toFixed(2)+" m/s",{size:11.5,weight:700,mono:true,border:C.ink})}
+  wrapText("Gait speed is a screening signal, not a diagnosis. A slow speed prompts a closer look for the reasons.",bx,432,bw,17,{size:12.5,color:C["ink-soft"]});
+}
+/* ---------- muscle activity ---------- */
+function sceneEmg(T){gaits();panelBox(14,14,380,452);let W_;clipRect(15,15,378,450,()=>{W_=walkScene(GW,T,3.8,200,350,150,{x0:15,x1:393});muscleGlows(GW,W_.u,W_.res,150)});
+  const ph=wPhase(legPhase(GW,W_.u,"R").p);label(200,36,"Right leg: "+ph[0],{size:13,weight:700,border:ph[4]==="stance"?C.stance:C.swing});
+  panelBox(404,14,382,452);title(418,32,"Muscle activity across one cycle",C["ink-soft"]);emgStrip(GW,418,56,356,W_.u,{rh:24,gap:11,lw:168,fs:12});
+  [0,25,50,75,100].forEach(v=>txt(586+188*v/100,316,v+"%",{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));
+  const p=legPhase(GW,W_.u,"R").p;const on=EMG_W.map((m,i)=>[m[0],emgAt(GW,i,p),m[2]]).filter(q=>q[1]>.35).sort((a,b)=>b[1]-a[1]);
+  title(418,346,"Working now",C["ink-soft"]);if(!on.length)txt(418,370,"Mostly passive swing: little muscle work",{size:12.5,weight:600});
+  on.slice(0,2).forEach((q,i)=>{txt(418,370+i*42,q[0],{size:12.5,weight:700,color:C["muscle-ink"]});wrapText(q[2],418,388+i*42,356,15,{size:11.5,color:C["ink-soft"]})});
+}
+/* ---------- pelvic and trunk rotation ---------- */
+function sceneRotation(T){gaits();const slow=3.2;const tt=T/(GW.Tc*slow);const u=mod1(tt);const Pz=gaitPose(GW,u);
+  panelBox(14,14,400,452);title(28,32,"Seen from above (walking up the screen)",C["ink-soft"]);const cx=214,cy=262,sc=300,EX=3;
+  clipRect(15,40,398,424,()=>{const off=(tt*GW.stride*sc*.5)%40;for(let y=off;y<470;y+=40)line(60,y,368,y,hexA(C["floor-line"],.5),1.5)});
+  const rp=pelvisRot(GW,u);const rt=-0.8*rp;const pr=-rp*EX*D2R;const pcy=cy+46,scy=cy-40;
+  ["R","L"].forEach(l=>{const L=Pz.legs[l];const lat=(l==="R"?1:-1)*.1*sc;const fy=pcy-L.f.ank[0]*sc*.95;const hipP=[cx+lat*Math.cos(pr),pcy+lat*Math.sin(pr)];const ft=[cx+lat*1.05,fy];
+    line(hipP[0],hipP[1],ft[0],ft[1],l==="R"?C.pants:mix(C.pants,C.ecf,.25),20);topFoot(ft[0],ft[1]-10,.27*sc*.7,l==="R"?C.legR:C.legL,-Math.PI/2);txt(ft[0]+(l==="R"?30:-30),ft[1]-8,l,{size:12,weight:700,mono:true,align:"center",color:C["ink-soft"]})});
+  line(cx,pcy,cx,scy,hexA(C.ink,.35),10);
+  ctx.save();ctx.translate(cx,pcy);ctx.rotate(pr);ell(0,0,.19*sc,.1*sc,0,C.pants,hexA(C.ink,.4),1.5);line(-.19*sc,0,.19*sc,0,hexA("#ffffff",.6),2);ctx.restore();
+  const tr=rt*EX*D2R;
+  ["R","L"].forEach(l=>{const other=Pz.legs[l==="R"?"L":"R"];const sw=(other.an[0]-GW.K.mean)/18;const lat=(l==="R"?1:-1)*.25*sc;const sh=[cx+lat*Math.cos(tr),scy+lat*Math.sin(tr)];const hd_=[sh[0]+(l==="R"?8:-8),sh[1]-sw*60];
+    limb(sh,hd_,18,14,skinC(2));circ(hd_[0],hd_[1],9,skinC(2))});
+  ctx.save();ctx.translate(cx,scy);ctx.rotate(tr);rr(-.25*sc,-.07*sc,.5*sc,.14*sc,.06*sc);ctx.fillStyle=C.shirt1;ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
+  circ(cx,scy-6,.1*sc,C.hair,hexA(C.ink,.3),1);ell(cx,scy-6-.1*sc,10,6,0,skinC(2));
+  label(cx+150,pcy,"pelvis",{size:11.5,weight:700,border:C.pants});label(cx+150,scy,"shoulders",{size:11.5,weight:700,border:C.shirt1});
+  label(30,70,"pelvis: "+(rp>=0?"right":"left")+" side forward "+Math.abs(rp).toFixed(1)+"°",{size:12,weight:700,mono:true,border:C.pants,align:"left"});
+  label(30,98,"shoulders: "+(rt>=0?"right":"left")+" side forward "+Math.abs(rt).toFixed(1)+"°",{size:12,weight:700,mono:true,border:C.shirt1,align:"left"});
+  txt(214,452,"angles drawn 3 times larger so you can see them",{size:11.5,align:"center",color:C["ink-soft"]});
+  panelBox(424,14,362,452);title(438,32,"Front view: pelvic drop and side shift",C["ink-soft"]);
+  const r=legPhase(GW,u,"R"),lf=legPhase(GW,u,"L");const st=r.st&&lf.st?"both":r.st?"R":"L";const sw=st==="R"?lf:r;const lift=st==="both"?0:Math.sin(Math.PI*clamp((sw.uu-sw.s)/(1-sw.s),0,1));
+  const drop=pelvisFront(GW,u);const sway=-.03*Math.sin(TAU*u);ctx.fillStyle=hexA(C.floor,.5);ctx.fillRect(425,420,360,30);line(425,420,785,420,C["floor-line"],2);
+  const Rf=frontPerson(605,420,190,{stance:st,drop:drop*1.6,sway,lift,skin:2,shirt:"shirt1"});circ(Rf.com[0],Rf.com[1],8,C.com,C.panel,2);line(Rf.com[0],Rf.com[1]+8,Rf.com[0],420,C.com,1.8,[5,4]);
+  const sl=(Rf.hipL[1]-Rf.hipR[1])/(Rf.hipL[0]-Rf.hipR[0]);line(Rf.hipR[0]-30,Rf.hipR[1]-sl*30,Rf.hipL[0]+30,Rf.hipL[1]+sl*30,C.accent,2.5);
+  label(605,60,"pelvic drop "+Math.abs(drop).toFixed(1)+"° ("+(drop>0.3?"left side lower":drop<-0.3?"right side lower":"level")+")",{size:12,weight:700,mono:true,border:C.accent});
+  txt(440,446,"R",{size:13,weight:700,mono:true,color:C["ink-soft"]});txt(770,446,"L",{size:13,weight:700,mono:true,align:"right",color:C["ink-soft"]});
+}
+/* ---------- antalgic ---------- */
+function sceneAntalgic(T){gaits();panelBox(14,14,420,452);let W_;clipRect(15,15,418,450,()=>{W_=walkScene(GA,T,3.2,220,300,128,{x0:15,x1:433,fig:{skin:4,shirt:"shirt3",hair:"hair3"}});
+    const k=W_.res.R.k;const pa=.55+.35*Math.sin(T*5);glow(k[0],k[1],34,C.pain,pa);circ(k[0],k[1],7,C.pain)});
+  label(220,36,"painful right knee",{size:12.5,weight:700,border:C.pain});phaseStrip(GA,90,348,316,W_.u);
+  const rS=GA.legs.R.s,lS=GA.legs.L.s;txt(224,428,"right stance "+Math.round(rS*100)+"%, left stance "+Math.round(lS*100)+"%",{size:12.5,weight:700,mono:true,align:"center"});
+  label(224,452,"shortened stance on the painful side",{size:12,weight:700,border:C.stance});
+  panelBox(444,14,342,452);title(458,32,"Footfall rhythm",C["ink-soft"]);const tx=470,tw=300,ty=74;line(tx,ty,tx+tw,ty,C.rule,2);
+  for(let n=0;n<3;n++){[[0,"R",C.legR],[GA.legs.L.off,"L",C.legL]].forEach(q=>{const x=tx+(n+q[0])/2.6*tw;if(x>tx+tw)return;line(x,ty-12,x,ty+12,q[2],3.5);txt(x,ty-22,q[1],{size:12,weight:700,align:"center",mono:true,color:q[2]})})}
+  const sx0=tx+0,sx1=tx+GA.legs.L.off/2.6*tw,sx2=tx+1/2.6*tw;ruler(sx0,sx1,ty+30,"short",C.evid,{dy:14});ruler(sx1,sx2,ty+30,"long",C.evid,{dy:14});
+  const cx=tx+mod1(W_.u)/2.6*tw+Math.floor(0)*0;circ(tx+((T/(GA.Tc*3.2))%2.6)/2.6*tw,ty,5,C.ink);
+  grfPlot(GA,500,170,262,200,W_.u,{trace:true,left:true,total:false,title:"Force: right (blue) and left (grey)"});
+  wrapText("Less time and less force on the painful leg. The pattern says: look for the source of pain.",458,420,316,16,{size:12,color:C["ink-soft"]});
+}
+/* ---------- Trendelenburg ---------- */
+function sceneTrend(T){gaits();const slow=3.4;
+  panelBox(14,14,381,452);panelBox(405,14,381,452);
+  const A=frontWalker(GW,T,slow,204,410,165,{fig:{skin:1,shirt:"shirt3"}}),B=frontWalker(GT,T,slow,595,410,165,{fig:{skin:3,shirt:"shirt3",hair:"hair2"}});
+  [[A,204,false],[B,595,true]].forEach(q=>{const Rf=q[0].Rf;const hp=Rf.hipR;const m=[hp[0]-20,hp[1]-20];
+    ell(m[0],m[1],15,22,-.3,q[2]?hexA(C.muscle,.22):hexA(C.muscle,.8),C.muscle,1.6);if(q[2]){ctx.save();ctx.setLineDash([4,3]);ell(m[0],m[1],15,22,-.3,null,C.muscle,1.6);ctx.restore();
+      ctx.beginPath();ctx.moveTo(Rf.pc[0],Rf.pc[1]-34);ctx.quadraticCurveTo(m[0]+26,m[1]-34,m[0]+5,m[1]-10);ctx.strokeStyle=C.nerve;ctx.lineWidth=2.5;ctx.stroke()}
+    const sl=(Rf.hipL[1]-Rf.hipR[1])/(Rf.hipL[0]-Rf.hipR[0]);line(Rf.hipR[0]-26,Rf.hipR[1]-sl*26,Rf.hipL[0]+26,Rf.hipL[1]+sl*26,C.accent,2.5);
+    circ(Rf.com[0],Rf.com[1],7,C.com,C.panel,2);
+    label(q[1],56,"pelvic drop "+Math.abs(q[0].drop).toFixed(0)+"°"+(q[0].drop>1?", left side lower":q[0].drop<-1?", right side lower":""),{size:12,weight:700,mono:true,border:C.accent});
+    label(q[1],84,q[0].st==="both"?"both feet down":"standing on the "+(q[0].st==="R"?"right":"left")+" leg",{size:12,weight:700,border:C.stance});
+    txt(q[1]-160,438,"R",{size:13,weight:700,mono:true,color:C["ink-soft"]});txt(q[1]+160,438,"L",{size:13,weight:700,mono:true,align:"right",color:C["ink-soft"]})});
+  title(28,32,"Typical",C["ink-soft"]);title(419,32,"Trendelenburg pattern (weak right abductors)",C["ink-soft"]);
+  lead(B.Rf.hipR[0]-26,B.Rf.hipR[1]-30,440,320,"weak gluteus medius",{size:11.5,border:C.muscle,align:"left"});label(500,348,"superior gluteal nerve",{size:11.5,weight:700,border:C.nerve});
+  if(B.st==="R"&&Math.abs(B.drop)>6)label(700,140,"trunk leans over the right leg",{size:11.5,weight:700,border:C.com});
+}
+/* ---------- steppage and L5 ---------- */
+function sceneSteppage(T){gaits();panelBox(14,14,420,452);let W_;clipRect(15,15,418,450,()=>{W_=walkScene(GS,T,3.4,220,320,128,{x0:15,x1:433,fig:{skin:2,shirt:"shirt4",hair:"hair"}});
+    const k=W_.res.R.k,a=W_.res.R.a;const pt=segPt(k,a,.38,.05*128);ctx.save();ctx.setLineDash([4,3]);ell(pt[0],pt[1],.13*128,.03*128,pt[2],hexA(C.muscle,.25),C.muscle,1.6);ctx.restore();
+    const p=legPhase(GS,W_.u,"R").p;if(p<.08){const f=W_.res.R;const a_=1-p/.08;withA(a_,()=>{for(let i=0;i<5;i++){const an=-Math.PI*(.15+.17*i);line(f.toe[0]+Math.cos(an)*10,320+Math.sin(an)*10,f.toe[0]+Math.cos(an)*24,320+Math.sin(an)*24,C.warn,2.5)}label(f.toe[0]+30,280,"foot slap",{size:11.5,weight:700,border:C.warn})})}
+    if(p>.62&&p<.95)label(330,120,"high knee lift to clear dropped toes",{size:11.5,weight:700,border:C.legR})});
+  label(118,40,"weak tibialis anterior",{size:12,weight:700,border:C.muscle});
+  panelBox(444,14,342,452);title(458,32,"Where the weakness can come from",C["ink-soft"]);
+  const sx=530,levels=["L3","L4","L5","S1"];levels.forEach((lv,i)=>{const y=70+i*62;rr(sx-36,y,72,40,8);fillStroke(C.bone,C["bone-edge"],1.6);txt(sx-48,y+20,lv,{size:12,weight:700,mono:true,align:"right"});
+    if(i<3){const dy=y+44;const bulge=i===1?10+3*Math.sin(T*3):0;ctx.beginPath();ctx.moveTo(sx-34,dy);ctx.lineTo(sx+34,dy);ctx.quadraticCurveTo(sx+40+bulge,dy+7,sx+34,dy+14);ctx.lineTo(sx-34,dy+14);ctx.closePath();fillStroke(hexA(C.disc,.8),C.disc,1.4)}});
+  const ry=70+2*62-2;const fl=.5+.5*Math.sin(T*6);ctx.beginPath();ctx.moveTo(sx+30,ry);ctx.quadraticCurveTo(sx+66,ry+8,sx+80,ry+40);ctx.strokeStyle=C.nerve;ctx.lineWidth=5;ctx.stroke();glow(sx+52,ry+4,20,C.pain,.3+.4*fl);
+  label(sx+90,ry-14,"L5 root",{size:12,weight:700,border:C.nerve,align:"left"});label(sx+82,ry-46,"disc between L4 and L5",{size:11.5,weight:700,border:C.disc,align:"left"});
+  /* leg outline */
+  const lx=716;limb([lx,250],[lx+6,330],34,24,hexA(C.pants,.25));limb([lx+6,330],[lx+2,420],24,18,hexA(C.pants,.25));rr(lx-10,418,62,16,6);ctx.fillStyle=hexA(C.shoe,.25);ctx.fill();
+  ctx.beginPath();ctx.moveTo(sx+80,ry+40);ctx.quadraticCurveTo(lx-30,260,lx-6,320);ctx.quadraticCurveTo(lx-14,336,lx+10,350);ctx.lineTo(lx+10,410);ctx.strokeStyle=C.nerve;ctx.lineWidth=3;ctx.stroke();
+  const dots=3;for(let i=0;i<dots;i++){const f=P(T*.5+i/dots,1);const q=along([[sx+80,ry+40],[lx-24,280],[lx-6,320],[lx+10,350],[lx+10,410]],f);circ(q[0],q[1],4,C.nerve,C.ink,1)}
+  glow(lx+24,424,26,C.nerve,.55+.3*Math.sin(T*3));label(lx-20,446,"L5 skin area: top of foot, big toe",{size:11,weight:700,border:C.nerve,align:"right"});
+  label(lx-24,364,"common fibular nerve",{size:11,weight:700,border:C.nerve,align:"right"});label(lx-24,388,"(wraps the fibular head)",{size:11,weight:600,border:C.nerve,align:"right"});
+  ell(lx+16,380,7,26,0,hexA(C.muscle,.3),C.muscle,1.4);
+}
+/* ================= scenes: part 8 and finish ================= */
+function sceneVariability(T){panelBox(14,14,300,452);const n=Math.min(10,Math.floor(P(T,16)*16/1.2)+1);
+  const g=graph({x:58,y:64,w:236,h:250,x0:0,x1:100,y0:0,y1:70,xt:[0,50,100],yt:[0,20,40,60],xf:v=>v+"%",yf:v=>v+"°",xl:"% of gait cycle",yl:"knee bend",ylx:30,title:"Knee angle, 10 strides"});
+  for(let i=0;i<n;i++){const a=1+.06*(rnd(i+1)-.5),sh=.015*(rnd(i+7)-.5),o=3*(rnd(i+13)-.5);curve(g,p=>kfI(KF.walk.knee,p/100+sh)*a+o,0,100,hexA(C.evid,i===n-1?1:.35),i===n-1?2.6:1.4)}
+  wrapText("Each stride is a little different, but they stay inside a narrow band.",30,380,270,17,{size:12.5,color:C["ink-soft"]});
+  panelBox(324,14,230,452);title(338,32,"Stride time, 20 strides",C["ink-soft"]);const k=Math.min(20,Math.floor(P(T,12)*12/.45)+1);
+  [["very rigid",i=>.002*(rnd(i+3)-.5),C.legL],["typical healthy variety",i=>.035*Math.sin(i*.9)+.025*(rnd(i+5)-.5),C.good],["very erratic",i=>.16*(rnd(i*3+11)-.5),C.warn]].forEach((q,r)=>{const y0=70+r*130,h=80;rr(338,y0,204,h,5);ctx.fillStyle=hexA(C.sunk,.5);ctx.fill();line(338,y0+h/2,542,y0+h/2,hexA(C.ink,.3),1,[3,3]);
+    const pts=[];for(let i=0;i<k;i++){const x=346+i*10;const y=y0+h/2-q[1](i)*220;pts.push([x,y])}poly(pts,hexA(q[2],.6),1.5);pts.forEach(p_=>circ(p_[0],p_[1],3,q[2]));txt(440,y0+h+16,q[0],{size:12.5,weight:700,align:"center"})});
+  panelBox(564,14,222,452);title(578,32,"Control loop",C["ink-soft"]);
+  const nodes=[[675,80,"brain"],[675,190,"spinal pattern generator"],[675,300,"leg muscles"],[675,410,"sensors: feet, eyes, inner ear"]];
+  nodes.forEach((q,i)=>{ctx.font=`700 12px ${FONT}`;const w=Math.min(196,ctx.measureText(q[2]).width+20);rr(q[0]-w/2,q[1]-16,w,32,8);fillStroke(i===2?hexA(C.muscle,.25):hexA(C.nerve,.2),i===2?C.muscle:C.nerve,1.6);txt(q[0],q[1],q[2],{size:12,weight:700,align:"center"})});
+  arrow(660,98,660,172,C.nerve,2.2);arrow(660,208,660,282,C.nerve,2.2);arrow(660,318,660,392,C.muscle,2.2);
+  ctx.beginPath();ctx.moveTo(772,410);ctx.quadraticCurveTo(790,240,700,80);ctx.strokeStyle=hexA(C.nerve,.8);ctx.lineWidth=2.2;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);
+  const path=[[660,98],[660,190],[660,300],[660,392],[760,400],[774,240],[700,80]];for(let i=0;i<5;i++){const f=P(T*.22+i/5,1);const q=along(path,f);circ(q[0],q[1],4.5,C.nerve,C.ink,1)}
+  txt(740,250,"feedback",{size:11.5,weight:700,color:C["nerve-ink"],align:"center"});
+}
+/* small posture figures for the load scene */
+function lyingFig(x,gy,s){const sk=skinC(1);const y=gy-.12*s;limb([x-.75*s,y],[x-.2*s,y],.13*s,.13*s,C.shirt1);limb([x-.2*s,y],[x+.2*s,y],.14*s,.11*s,C.pants);limb([x+.2*s,y],[x+.62*s,y],.11*s,.08*s,C.pants);circ(x-.86*s,y-.02*s,.1*s,sk);rr(x-1*s,gy-.05*s,1.75*s,.05*s,3);ctx.fillStyle=hexA(C.chair,.6);ctx.fill()}
+function bentFig(x,gy,s,ang,box){const sk=skinC(2);const hip=[x,gy-.9*s];limb(hip,[x+.02*s,gy-.48*s],.14*s,.11*s,C.pants);limb([x+.02*s,gy-.48*s],[x,gy-.06*s],.11*s,.08*s,C.pants);shoe([x,gy-.075*s],0,s,C.shoe);
+  const a=ang*D2R;const sh=[hip[0]+Math.sin(a)*.52*s,hip[1]-Math.cos(a)*.52*s];ctx.beginPath();ctx.moveTo(hip[0]-.08*s,hip[1]);ctx.quadraticCurveTo(hip[0]+Math.sin(a)*.3*s-.1*s*Math.cos(a),hip[1]-Math.cos(a)*.3*s-.14*s,sh[0]-.05*s,sh[1]-.08*s);ctx.lineTo(sh[0]+.08*s,sh[1]+.06*s);ctx.lineTo(hip[0]+.1*s,hip[1]+.02*s);ctx.closePath();ctx.fillStyle=C.shirt2;ctx.fill();
+  const hd=[sh[0]+.12*s,sh[1]+.02*s];circ(hd[0],hd[1],.1*s,sk);const hand=[sh[0]+.05*s,sh[1]+.5*s];limb(sh,hand,.07*s,.05*s,sk);if(box){rr(hand[0]-.13*s,hand[1]-.02*s,.26*s,.2*s,3);fillStroke(C.paperbag||C.chair,C["ink-soft"],1.2)}}
+function sceneLoad(T){const pos=[["lying on back",20],["standing",100],["sitting relaxed",92],["sitting slumped forward",166],["standing bent forward",220],["lifting, rounded back",460]];
+  const per=15,t=P(T,per)*per;const k=Math.min(5,Math.floor(t/2.3));panelBox(14,14,772,452);
+  pos.forEach((q,i)=>{const cx=80+i*128;const on=i===k;rr(cx-60,24,120,236,6);ctx.fillStyle=on?hexA(C.evid,.12):hexA(C.panel,.6);ctx.fill();ctx.strokeStyle=on?C.evid:C.rule;ctx.lineWidth=on?2.2:1;ctx.stroke();
+    const gy=150,s=62;line(cx-54,gy,cx+54,gy,C["floor-line"],1.5);
+    if(i===0)lyingFig(cx+4,gy,s);else if(i===1)sidePerson(cx-6,gy,s,{});else if(i===2)sitPerson(cx-14,gy,s*1.05,{slump:.25,back:false});else if(i===3)sitPerson(cx-14,gy,s*1.05,{slump:1,back:false,fhp:.07});else if(i===4)bentFig(cx-12,gy,s,62,false);else bentFig(cx-12,gy,s,70,true);
+    const shown=i<k||(i===k);const ld=shown?(i<k?q[1]:q[1]*smooth((t-k*2.3)/1)):100;discSeg(cx,224,58,clamp(ld/220,0,1.4));
+    fitTxt(cx,170,q[0],112,{size:11.5,weight:on?700:600,align:"center"})});
+  const g={x:60,y:290,w:700,h:120};line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);const Y=v=>g.y+g.h-v/460*g.h;line(g.x,Y(100),g.x+g.w,Y(100),hexA(C.ink,.4),1.2,[4,4]);txt(g.x+g.w,Y(100)-8,"standing = 100",{size:10.5,align:"right",color:C["ink-soft"]});
+  pos.forEach((q,i)=>{const cx=80+i*128;const v=i<k?q[1]:i===k?q[1]*smooth((t-k*2.3)/1):0;if(v<=0)return;rr(cx-26,Y(v),52,g.y+g.h-Y(v),3);ctx.fillStyle=i===k?C.evid:hexA(C.evid,.55);ctx.fill();txt(cx,Y(v)-9,String(Math.round(v)),{size:12,weight:700,mono:true,align:"center"})});
+  wrapText("Approximate relative disc pressure from direct measurements in very few people. Higher load is not the same as harm.",60,438,700,16,{size:12,color:C["ink-soft"]});
+}
+function sceneExercise(T){gaits();panelBox(14,14,440,452);title(28,32,"A simple trial picture",C["ink-soft"]);const per=14,t=P(T,per)*per;
+  const ax=70,aw=350;const X=v=>ax+v/10*aw;const rows=[["exercise programs",C.evid,4.3,120],["usual care",C.legL,5.3,230]];
+  rows.forEach((r,ri)=>{txt(28,r[3]-50,r[0],{size:13,weight:700,color:ri?C.ink:C["evid-ink"]});line(ax,r[3]+30,ax+aw,r[3]+30,C.rule,1.2);
+    for(let i=0;i<22;i++){const at=.2+i*.22;if(t<at)continue;const f=smooth((t-at)/.9);const v=r[2]+2.4*(rnd(i*7+ri*31)-.5)+1.2*(rnd(i*3+ri*17)-.5);const x=lerp(ax-30,X(v),f);const y=r[3]-26+(i%5)*12;circ(x,y,5,r[1],hexA(C.ink,.3),1)}
+    if(t>6)withA(smooth((t-6)/.8),()=>{line(X(r[2]),r[3]-36,X(r[2]),r[3]+30,r[1],3);label(X(r[2]),r[3]+44,"average "+r[2].toFixed(1),{size:11.5,weight:700,mono:true,border:r[1]})})});
+  [0,2,4,6,8,10].forEach(v=>txt(X(v),300,String(v),{size:11,mono:true,align:"center",color:C["ink-soft"]}));txt(ax+aw,318,"pain score after the program (lower is better)",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(t>7.5){const f=smooth((t-7.5)/1.5);rr(X(4.3),346,(X(5.3)-X(4.3))*f,22,4);ctx.fillStyle=C.evid;ctx.fill();if(f>.9)label(X(4.8),386,"small to moderate average benefit",{size:12.5,weight:700,border:C.evid})}
+  txt(28,436,"Illustration only: dots are not real study data.",{size:11.5,color:C["ink-soft"]});
+  panelBox(464,14,322,452);title(478,32,"Evidence ladder",C["ink-soft"]);
+  [["Exercise for low back pain",4,"strong"],["Staying active, not bed rest",4,"strong"],["One correct posture prevents pain",0,"not supported"]].forEach((q,i)=>{const y=62+i*80;txt(478,y,q[0],{size:13,weight:700});
+    for(let b=0;b<4;b++){rr(478+b*34,y+14,28,22,4);ctx.fillStyle=b<q[1]?C.evid:hexA(C.sunk,.8);ctx.fill();ctx.strokeStyle=C.evid;ctx.lineWidth=1.2;ctx.stroke()}txt(624,y+25,q[2],{size:12.5,weight:700,color:q[1]?C["evid-ink"]:C["warn-ink"]})});
+  wrapText("Red flags (fever, weight loss, cancer history, major trauma, growing weakness, bladder or bowel changes) need prompt medical care first.",478,300,292,16,{size:12,color:C.ink});
+  clipRect(465,370,320,95,()=>{walkScene(GW,T,1.4,625,452,46,{x0:465,x1:785,depth:12,fig:{skin:3,shirt:"shirt3"}})});
+}
+function sceneFinish(T){gaits();panelBox(14,14,772,452);const cards=[["Balance","act1"],["Levers","act2"],["Gait cycle","act3"],["Forces","act4"],["Measuring","act5"],["Muscles","act6"],["Patterns","act7"],["Control and load","act8"]];
+  const k=Math.floor(P(T,16)*9);cards.forEach((c,i)=>{const x=24+(i%4)*190,y=26+Math.floor(i/4)*170;const col=C[c[1]];const on=i<k;cardBox(x,y,178,156,col,i===k-1);txt(x+14,y+20,c[0],{size:13.5,weight:700});
+    if(on){circ(x+160,y+20,10,C.good);checkMark(x+160,y+20,5,"#fff")}
+    const cx=x+92,cy=y+90;withA(on?1:.35,()=>{
+      if(i===0){rr(cx-44,cy-14,88,40,10);ctx.fillStyle=hexA(C.bos,.25);ctx.fill();ctx.strokeStyle=C.bos;ctx.lineWidth=2;ctx.stroke();topFoot(cx-22,cy+6,40,C.shoe,Math.PI/2);topFoot(cx+22,cy+6,40,C.shoe,Math.PI/2);circ(cx+6*Math.sin(T*2),cy+4,6,C.com)}
+      if(i===1){headLever(cx-20,cy+40,12+8*Math.sin(T*1.5),{sc:.3})}
+      if(i===2){rr(cx-70,cy-10,84,20,4);ctx.fillStyle=C.stance;ctx.fill();rr(cx+14,cy-10,56,20,4);ctx.fillStyle=C.swing;ctx.fill();txt(cx-28,cy+1,"60%",{size:11,weight:700,align:"center",color:"#fff"});txt(cx+42,cy+1,"40%",{size:11,weight:700,align:"center",color:"#10161A"})}
+      if(i===3){const gg={x:cx-70,y:cy-30,w:140,h:60};ctx.beginPath();for(let j=0;j<=60;j++){const s=j/60;const v=grfShapeW(s,1.15,.75);const X=gg.x+s*gg.w,Y=gg.y+gg.h-v/1.3*gg.h;j?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.grf;ctx.lineWidth=2.5;ctx.stroke()}
+      if(i===4){txt(cx,cy,"speed = cadence × step",{size:12,weight:700,mono:true,align:"center"})}
+      if(i===5){for(let r=0;r<3;r++){rr(cx-70,cy-24+r*18,140,12,3);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const m=[.05,.4,.65][r];rr(cx-70+140*m,cy-24+r*18,30,12,3);ctx.fillStyle=C.muscle;ctx.fill()}}
+      if(i===6){["antalgic","Trendelenburg","steppage"].forEach((n,j)=>txt(cx,cy-20+j*20,n,{size:12,weight:700,align:"center",color:C["accent-ink"]}))}
+      if(i===7){discSeg(cx-30,cy,46,.6+.4*Math.sin(T*2));rr(cx+20,cy-24,16,48,3);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const h=24+18*Math.sin(T*2);rr(cx+20,cy+24-h,16,h,3);ctx.fillStyle=C.evid;ctx.fill()}})});
+  clipRect(15,370,770,95,()=>{walkScene(GW,T,1.3,400,450,44,{x0:15,x1:785,depth:14})});
+}
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now(),DT=0;
+const SCENES={map:sceneMap,com:sceneCom,gravity:sceneGravity,vary:sceneVary,lever:sceneLever,levertry:sceneLevertry,cycle:sceneCycle,stance:sceneStance,swing:sceneSwing,support:sceneSupport,grfwalk:sceneGrfwalk,pendulum:scenePendulum,grfrun:sceneGrfrun,measures:sceneMeasures,speedcalc:sceneSpeedcalc,speedtry:sceneSpeedtry,emg:sceneEmg,rotation:sceneRotation,antalgic:sceneAntalgic,trend:sceneTrend,steppage:sceneSteppage,variability:sceneVariability,load:sceneLoad,exercise:sceneExercise,finish:sceneFinish};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneMap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=paused?0:dt*speed;T+=DT;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;DT=0;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

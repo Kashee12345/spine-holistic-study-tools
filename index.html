@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spine and Holistic Health Study Tools</title>
+<meta name="description" content="Animated walkthroughs, simulators and practice trainers for spine science, chiropractic history and theory, pain, evidence and holistic health, Modules 1 to 14. Dr. Akash Garg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{--ground:#F2ECEA;--panel:#FDF9F8;--panel-2:#F6EEEC;--ink:#22130F;--ink-soft:#694C46;--rule:#DEC9C4;--accent:#8E2626;--accent-wash:#F8E3E0;--shadow:0 1px 2px rgba(34,19,15,.08),0 6px 18px -8px rgba(34,19,15,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0E1519;--panel:#221615;--panel-2:#2C1D1C;--ink:#F4ECEA;--ink-soft:#CDB6B2;--rule:#45302D;--accent:#F4A7A0;--accent-wash:#3A1616;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{--ground:#0E1519;--panel:#221615;--panel-2:#2C1D1C;--ink:#F4ECEA;--ink-soft:#CDB6B2;--rule:#45302D;--accent:#F4A7A0;--accent-wash:#3A1616}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+header{background:var(--panel);border-bottom:1px solid var(--rule)}
+.in{max-width:1040px;margin:0 auto;padding:22px 16px}
+.k{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:"IBM Plex Serif",Georgia,serif;font-size:32px;margin:4px 0 6px;line-height:1.15}
+.lead{margin:0;color:var(--ink-soft);font-size:16.5px;max-width:740px}
+h2{font-family:"IBM Plex Serif",Georgia,serif;font-size:22px;margin:30px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;scroll-margin-top:12px}
+h2 i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.sub{margin:0 0 8px;color:var(--ink-soft)}
+.ch{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft);font-weight:500}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}.jump a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;padding:5px 9px;border:1px solid var(--rule);border-radius:99px;background:var(--panel);color:var(--ink);text-decoration:none}.jump a:hover,.jump a:focus-visible{border-color:var(--accent)}
+.find{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.find label{font-weight:600}
+.find input{font:inherit;padding:8px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 260px;max-width:440px}
+.find input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+#count{color:var(--ink-soft);font-size:14px}
+.dz{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:5px}
+.dz li{font-size:13px;padding:2px 9px;border-radius:99px;background:var(--panel-2);border:1px solid var(--rule);color:var(--ink)}
+.dz li.hit{background:var(--accent-wash);border-color:var(--accent);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+a.card{display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover,a.card:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.type{font-family:"IBM Plex Mono",monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.card b{font-size:18px}
+.card span.d{color:var(--ink-soft);font-size:14.5px}
+.tip{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:12px 14px;margin-top:22px;font-size:15px}
+footer{max-width:1040px;margin:0 auto;padding:24px 16px 36px;font-size:13px;color:var(--ink-soft)}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <div class="k">Spine and Holistic Health &middot; Modules 1 to 14</div>
+  <h1>Spine and Holistic Health Study Tools</h1>
+  <p class="lead">See the spine move, nerves fire, pain get turned up or down, the nervous system shift under stress, and study results build up. Each module has an animated walkthrough with worked examples and a Lab with simulators, a practice trainer, a sorting game and real life scenarios. History and traditional ideas are taught in their own terms and paired with what current research supports. Everything runs in your browser on a computer, tablet or phone. No login, nothing graded.</p>
+</div></header>
+<main class="in" id="top" style="padding-top:4px">
+  <div class="find" role="search">
+    <label for="q">Find a topic</label>
+    <input id="q" type="search" placeholder="Try: disc, dermatome, placebo, vagus, acupuncture" autocomplete="off">
+    <span id="count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Jump to module"><a href="#m1">M1</a><a href="#m2">M2</a><a href="#m3">M3</a><a href="#m4">M4</a><a href="#m5">M5</a><a href="#m6">M6</a><a href="#m7">M7</a><a href="#m8">M8</a><a href="#m9">M9</a><a href="#m10">M10</a><a href="#m11">M11</a><a href="#m12">M12</a><a href="#m13">M13</a><a href="#m14">M14</a></nav>
+  <p class="tip"><b>How to use this:</b> open the walkthrough first and go at your own pace with the arrow keys or Next. Then open the Lab: run the simulator, practise in the trainer with its hints and worked solutions, and try the scenarios. Use the tools bar at the top of each page to pause the animations, slow them down, have the text read aloud, or get a written description of each picture. <b>For learning only</b>, not medical advice and not a guide to treatment.</p>
+  <section class="mod" id="m1" data-search="the spine in three dimensions regions and curves vertebra parts atlas and axis intervertebral disc ligaments motion segment cauda equina sacroiliac joint multifidus imaging findings regions and curves, the parts of a vertebra, the disc, ligaments, the cord and cauda equina, stabilizing muscles, and why imaging findings are common without pain.">
+  <h2><i style="background:#B8860B" aria-hidden="true"></i><span class="ch">Module 1</span> The spine in three dimensions</h2>
+  <p class="sub">Regions and curves, the parts of a vertebra, the disc, ligaments, the cord and cauda equina, stabilizing muscles, and why imaging findings are common without pain.</p>
+  <ul class="dz" aria-label="Topics in module 1"><li>Regions and curves</li><li>Vertebra parts</li><li>Atlas and axis</li><li>Intervertebral disc</li><li>Ligaments</li><li>Motion segment</li><li>Cauda equina</li><li>Sacroiliac joint</li><li>Multifidus</li><li>Imaging findings</li></ul>
+  <div class="grid">
+    <a class="card" href="Spine-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>The spine in three dimensions Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Spine-Lab.html"><span class="type">Simulators and practice</span><b>Module 1 Lab</b><span class="d">3D spine explorer, vertebra trainer, matching rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m2" data-search="spinal biomechanics planes and axes facet orientation coupled motion neutral zone torque and moment arm lifting math disc pressure creep bracing planes and axes, regional motion, coupled motion, stability, torque and lifting math, disc pressure, load sharing, creep and bracing.">
+  <h2><i style="background:#2F6FB0" aria-hidden="true"></i><span class="ch">Module 2</span> Spinal biomechanics</h2>
+  <p class="sub">Planes and axes, regional motion, coupled motion, stability, torque and lifting math, disc pressure, load sharing, creep and bracing.</p>
+  <ul class="dz" aria-label="Topics in module 2"><li>Planes and axes</li><li>Facet orientation</li><li>Coupled motion</li><li>Neutral zone</li><li>Torque and moment arm</li><li>Lifting math</li><li>Disc pressure</li><li>Creep</li><li>Bracing</li></ul>
+  <div class="grid">
+    <a class="card" href="Biomech-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Spinal biomechanics Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Biomech-Lab.html"><span class="type">Simulators and practice</span><b>Module 2 Lab</b><span class="d">Lifting simulator, torque trainer, sorting rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m3" data-search="joints, cavitation and tissue response synovial fluid mechanoreceptors cavitation refractory period knuckle cracking stress strain curve healing phases wolff&#x27;s law hypermobility synovial joints and fluid, joint sensors, what the pop really is, collagen under load, healing phases, and loading versus immobilization.">
+  <h2><i style="background:#1F8A7A" aria-hidden="true"></i><span class="ch">Module 3</span> Joints, cavitation and tissue response</h2>
+  <p class="sub">Synovial joints and fluid, joint sensors, what the pop really is, collagen under load, healing phases, and loading versus immobilization.</p>
+  <ul class="dz" aria-label="Topics in module 3"><li>Synovial fluid</li><li>Mechanoreceptors</li><li>Cavitation</li><li>Refractory period</li><li>Knuckle cracking</li><li>Stress strain curve</li><li>Healing phases</li><li>Wolff&#x27;s law</li><li>Hypermobility</li></ul>
+  <div class="grid">
+    <a class="card" href="Joint-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Joints, cavitation and tissue response Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Joint-Lab.html"><span class="type">Simulators and practice</span><b>Module 3 Lab</b><span class="d">Joint gapping simulator, curve and predict trainer, sorting rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m4" data-search="manipulation and mobilization mechanics hvla thrust mobilization grades force time curve specificity proposed mechanisms placebo and context guidelines adverse events informed consent thrust versus mobilization, force time curves, how precise force really is, proposed mechanisms and their evidence, guidelines, and safety and consent.">
+  <h2><i style="background:#9B2C2C" aria-hidden="true"></i><span class="ch">Module 4</span> Manipulation and mobilization mechanics</h2>
+  <p class="sub">Thrust versus mobilization, force time curves, how precise force really is, proposed mechanisms and their evidence, guidelines, and safety and consent.</p>
+  <ul class="dz" aria-label="Topics in module 4"><li>HVLA thrust</li><li>Mobilization grades</li><li>Force time curve</li><li>Specificity</li><li>Proposed mechanisms</li><li>Placebo and context</li><li>Guidelines</li><li>Adverse events</li><li>Informed consent</li></ul>
+  <div class="grid">
+    <a class="card" href="Manip-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Manipulation and mobilization mechanics Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Manip-Lab.html"><span class="type">Simulators and practice</span><b>Module 4 Lab</b><span class="d">Force time simulator, graph reading trainer, sorting rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m5" data-search="nerve roots, dermatomes and reflexes root numbering intervertebral foramen disc herniation dermatomes myotomes reflex grading radiculopathy myelopathy straight leg raise roots and the spinal nerve, numbering and the foramen, dermatomes, myotomes, reflexes, radicular pain versus myelopathy, and red flags.">
+  <h2><i style="background:#C9A227" aria-hidden="true"></i><span class="ch">Module 5</span> Nerve roots, dermatomes and reflexes</h2>
+  <p class="sub">Roots and the spinal nerve, numbering and the foramen, dermatomes, myotomes, reflexes, radicular pain versus myelopathy, and red flags.</p>
+  <ul class="dz" aria-label="Topics in module 5"><li>Root numbering</li><li>Intervertebral foramen</li><li>Disc herniation</li><li>Dermatomes</li><li>Myotomes</li><li>Reflex grading</li><li>Radiculopathy</li><li>Myelopathy</li><li>Straight leg raise</li></ul>
+  <div class="grid">
+    <a class="card" href="Roots-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Nerve roots, dermatomes and reflexes Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Roots-Lab.html"><span class="type">Simulators and practice</span><b>Module 5 Lab</b><span class="d">Root compression simulator, findings to root trainer, matching rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m6" data-search="pain neuroscience nociceptors fiber types inflammatory soup gate control descending modulation placebo and nocebo central sensitization nociplastic pain biopsychosocial model pain scales nociception versus pain, fiber types, the four processes, sensitization, gate control, brakes from the brain, placebo and nocebo, chronic pain, and the biopsychosocial model.">
+  <h2><i style="background:#C0392B" aria-hidden="true"></i><span class="ch">Module 6</span> Pain neuroscience</h2>
+  <p class="sub">Nociception versus pain, fiber types, the four processes, sensitization, gate control, brakes from the brain, placebo and nocebo, chronic pain, and the biopsychosocial model.</p>
+  <ul class="dz" aria-label="Topics in module 6"><li>Nociceptors</li><li>Fiber types</li><li>Inflammatory soup</li><li>Gate control</li><li>Descending modulation</li><li>Placebo and nocebo</li><li>Central sensitization</li><li>Nociplastic pain</li><li>Biopsychosocial model</li><li>Pain scales</li></ul>
+  <div class="grid">
+    <a class="card" href="Pain-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Pain neuroscience Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Pain-Lab.html"><span class="type">Simulators and practice</span><b>Module 6 Lab</b><span class="d">Pain dial simulator, predict and practise trainer, matching rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m7" data-search="exam logic and red flags history taking provocation tests sensitivity and specificity predictive values likelihood ratios red flags yellow flags imaging guidance referral soap notes the history, what exam tests load, sensitivity and specificity, predictive values and prevalence, red and yellow flags, imaging, referral and soap notes.">
+  <h2><i style="background:#6B4FA0" aria-hidden="true"></i><span class="ch">Module 7</span> Exam logic and red flags</h2>
+  <p class="sub">The history, what exam tests load, sensitivity and specificity, predictive values and prevalence, red and yellow flags, imaging, referral and SOAP notes.</p>
+  <ul class="dz" aria-label="Topics in module 7"><li>History taking</li><li>Provocation tests</li><li>Sensitivity and specificity</li><li>Predictive values</li><li>Likelihood ratios</li><li>Red flags</li><li>Yellow flags</li><li>Imaging guidance</li><li>Referral</li><li>SOAP notes</li></ul>
+  <div class="grid">
+    <a class="card" href="Exam-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Exam logic and red flags Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Exam-Lab.html"><span class="type">Simulators and practice</span><b>Module 7 Lab</b><span class="d">2x2 accuracy simulator, accuracy math trainer, sorting rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m8" data-search="posture, gait and movement center of mass posture variability forward head posture gait cycle ground reaction force cadence and speed muscle timing antalgic gait foot drop exercise for back pain balance and posture, forward head levers, the gait cycle, ground reaction forces, gait speed math, muscle timing, common gait patterns, and exercise.">
+  <h2><i style="background:#3D8B3D" aria-hidden="true"></i><span class="ch">Module 8</span> Posture, gait and movement</h2>
+  <p class="sub">Balance and posture, forward head levers, the gait cycle, ground reaction forces, gait speed math, muscle timing, common gait patterns, and exercise.</p>
+  <ul class="dz" aria-label="Topics in module 8"><li>Center of mass</li><li>Posture variability</li><li>Forward head posture</li><li>Gait cycle</li><li>Ground reaction force</li><li>Cadence and speed</li><li>Muscle timing</li><li>Antalgic gait</li><li>Foot drop</li><li>Exercise for back pain</li></ul>
+  <div class="grid">
+    <a class="card" href="Gait-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Posture, gait and movement Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Gait-Lab.html"><span class="type">Simulators and practice</span><b>Module 8 Lab</b><span class="d">Walker and runner simulator, gait math trainer, sequencing and sorting rounds, and clinic scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m9" data-search="chiropractic models through history d.d. palmer b.j. palmer innate intelligence subluxation models straights and mixers licensure morikubo wilk v. ama nincds 1975 evidence today the 1800s healing landscape, d.d. and b.j. palmer, innate intelligence, how the subluxation idea changed, straights and mixers, the law, wilk v. ama, and what research supports today.">
+  <h2><i style="background:#8A5A2B" aria-hidden="true"></i><span class="ch">Module 9</span> Chiropractic models through history</h2>
+  <p class="sub">The 1800s healing landscape, D.D. and B.J. Palmer, Innate Intelligence, how the subluxation idea changed, straights and mixers, the law, Wilk v. AMA, and what research supports today.</p>
+  <ul class="dz" aria-label="Topics in module 9"><li>D.D. Palmer</li><li>B.J. Palmer</li><li>Innate Intelligence</li><li>Subluxation models</li><li>Straights and mixers</li><li>Licensure</li><li>Morikubo</li><li>Wilk v. AMA</li><li>NINCDS 1975</li><li>Evidence today</li></ul>
+  <div class="grid">
+    <a class="card" href="Models-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Chiropractic models through history Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Models-Lab.html"><span class="type">Simulators and practice</span><b>Module 9 Lab</b><span class="d">Timeline explorer, ordering and predict trainer, sorting rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m10" data-search="the transformation of american medicine heroic medicine homeopathy germ theory ama 1847 flexner report insurance and medicare epidemiologic transition biopsychosocial model complementary vs alternative integrative care competing healers, germ theory, the ama and licensing, the flexner report and who lost, hospitals and insurance, the epidemiologic transition, and integrative care.">
+  <h2><i style="background:#4A6B8A" aria-hidden="true"></i><span class="ch">Module 10</span> The transformation of American medicine</h2>
+  <p class="sub">Competing healers, germ theory, the AMA and licensing, the Flexner Report and who lost, hospitals and insurance, the epidemiologic transition, and integrative care.</p>
+  <ul class="dz" aria-label="Topics in module 10"><li>Heroic medicine</li><li>Homeopathy</li><li>Germ theory</li><li>AMA 1847</li><li>Flexner Report</li><li>Insurance and Medicare</li><li>Epidemiologic transition</li><li>Biopsychosocial model</li><li>Complementary vs alternative</li><li>Integrative care</li></ul>
+  <div class="grid">
+    <a class="card" href="Medicine-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>The transformation of American medicine Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Medicine-Lab.html"><span class="type">Simulators and practice</span><b>Module 10 Lab</b><span class="d">Medical landscape explorer, ordering trainer, sorting rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m11" data-search="reading the evidence natural history regression to the mean study designs blinding and sham mcid effect size nnt and nnh confidence intervals forest plots grade why people improve anyway, study designs, fair trials and sham controls, effect sizes, absolute and relative risk, nnt, confidence intervals, forest plots, bias and grade.">
+  <h2><i style="background:#3A49A8" aria-hidden="true"></i><span class="ch">Module 11</span> Reading the evidence</h2>
+  <p class="sub">Why people improve anyway, study designs, fair trials and sham controls, effect sizes, absolute and relative risk, NNT, confidence intervals, forest plots, bias and GRADE.</p>
+  <ul class="dz" aria-label="Topics in module 11"><li>Natural history</li><li>Regression to the mean</li><li>Study designs</li><li>Blinding and sham</li><li>MCID</li><li>Effect size</li><li>NNT and NNH</li><li>Confidence intervals</li><li>Forest plots</li><li>GRADE</li></ul>
+  <div class="grid">
+    <a class="card" href="Evidence-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Reading the evidence Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Evidence-Lab.html"><span class="type">Simulators and practice</span><b>Module 11 Lab</b><span class="d">Trial builder simulator, risk number trainer, matching rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m12" data-search="stress and the autonomic nervous system allostatic load sympathetic parasympathetic vagus nerve hpa axis cortisol rhythm chronic stress heart rate variability baroreflex appraisal homeostasis and allostatic load, sympathetic and parasympathetic wiring, organ by organ effects, the hpa axis and cortisol, chronic stress, heart rate variability and the evidence on coping.">
+  <h2><i style="background:#D2691E" aria-hidden="true"></i><span class="ch">Module 12</span> Stress and the autonomic nervous system</h2>
+  <p class="sub">Homeostasis and allostatic load, sympathetic and parasympathetic wiring, organ by organ effects, the HPA axis and cortisol, chronic stress, heart rate variability and the evidence on coping.</p>
+  <ul class="dz" aria-label="Topics in module 12"><li>Allostatic load</li><li>Sympathetic</li><li>Parasympathetic</li><li>Vagus nerve</li><li>HPA axis</li><li>Cortisol rhythm</li><li>Chronic stress</li><li>Heart rate variability</li><li>Baroreflex</li><li>Appraisal</li></ul>
+  <div class="grid">
+    <a class="card" href="Stress-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Stress and the autonomic nervous system Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Stress-Lab.html"><span class="type">Simulators and practice</span><b>Module 12 Lab</b><span class="d">Autonomic balance simulator, predict and heart rate trainer, sorting rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m13" data-search="breathing, meditation and yoga diaphragm co2 and ph overbreathing slow breathing respiratory sinus arrhythmia meditation types default mode network mbsr yoga tai chi breathing mechanics, co2 and overbreathing, breathing and the heart, meditation and the brain, mindfulness programs and their evidence, yoga, tai chi and safety.">
+  <h2><i style="background:#2E8B57" aria-hidden="true"></i><span class="ch">Module 13</span> Breathing, meditation and yoga</h2>
+  <p class="sub">Breathing mechanics, CO2 and overbreathing, breathing and the heart, meditation and the brain, mindfulness programs and their evidence, yoga, tai chi and safety.</p>
+  <ul class="dz" aria-label="Topics in module 13"><li>Diaphragm</li><li>CO2 and pH</li><li>Overbreathing</li><li>Slow breathing</li><li>Respiratory sinus arrhythmia</li><li>Meditation types</li><li>Default mode network</li><li>MBSR</li><li>Yoga</li><li>Tai chi</li></ul>
+  <div class="grid">
+    <a class="card" href="MindBody-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Breathing, meditation and yoga Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="MindBody-Lab.html"><span class="type">Simulators and practice</span><b>Module 13 Lab</b><span class="d">Breathing pacer simulator, predict and breathing math trainer, matching rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m14" data-search="traditional systems and nature therapy qi and yin yang five phases acupuncture trials sham needles doshas heavy metals st. john&#x27;s wort herb drug interactions shinrin yoku shared decisions traditional chinese medicine and acupuncture research, ayurveda and heavy metal safety, herbal medicine and herb drug interactions, naturopathy, forest bathing, and talking with patients.">
+  <h2><i style="background:#7A4E9A" aria-hidden="true"></i><span class="ch">Module 14</span> Traditional systems and nature therapy</h2>
+  <p class="sub">Traditional Chinese Medicine and acupuncture research, Ayurveda and heavy metal safety, herbal medicine and herb drug interactions, naturopathy, forest bathing, and talking with patients.</p>
+  <ul class="dz" aria-label="Topics in module 14"><li>Qi and yin yang</li><li>Five phases</li><li>Acupuncture trials</li><li>Sham needles</li><li>Doshas</li><li>Heavy metals</li><li>St. John&#x27;s wort</li><li>Herb drug interactions</li><li>Shinrin yoku</li><li>Shared decisions</li></ul>
+  <div class="grid">
+    <a class="card" href="Traditions-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Traditional systems and nature therapy Walkthrough</b><span class="d">Watch the idea happen step by step, with quick checks and worked examples.</span></a>
+    <a class="card" href="Traditions-Lab.html"><span class="type">Simulators and practice</span><b>Module 14 Lab</b><span class="d">Tradition trial simulator, herb drug interaction bench, predict trainer, sorting rounds, and real life scenarios.</span></a>
+  </div>
+  </section>
+</main>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Licensed <a href="LICENSE">Creative Commons Attribution NonCommercial ShareAlike 4.0</a>.</footer>
+<script>
+(function(){
+  var q=document.getElementById('q'),count=document.getElementById('count'),mods=[].slice.call(document.querySelectorAll('.mod'));
+  function run(){
+    var v=q.value.trim().toLowerCase(),shown=0;
+    mods.forEach(function(m){
+      var ok=!v||m.getAttribute('data-search').indexOf(v)>=0;
+      m.hidden=!ok; if(ok)shown++;
+      [].forEach.call(m.querySelectorAll('.dz li'),function(li){li.classList.toggle('hit',!!v&&li.textContent.toLowerCase().indexOf(v)>=0);});
+    });
+    count.textContent=v?(shown?shown+(shown===1?' module matches':' modules match'):'No match. Try a shorter word.'):'';
+  }
+  q.addEventListener('input',run);
+})();
+</script>
+</body>
+</html>

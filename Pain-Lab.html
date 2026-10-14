@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pain Neuroscience Lab</title>
+<meta name="description" content="Pain neuroscience lab: a pain modulation dial simulator with tissue input, sleep, stress, fear, movement, touch and expectation driving a dorsal horn gate, descending brakes and a perceived pain meter labelled as a teaching model; a predict then watch trainer with conduction time and pain scale calculations; a matching game for fiber types and mechanisms; and clinic scenarios on chronic low back pain, post surgical pain and talking about pain without blame.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#8A2424;--accent-wash:#F6E3E0;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#9B2C2C;--act2:#B8861A;--act3:#2E8A7A;--act4:#C8541E;--act5:#2F6FC1;--act6:#2F7F5F;--act7:#8E2F4A;--act8:#4C56B8;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A5E0C;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --bone:#EFE6D2;--bone-edge:#8A7A5A;--disc:#3F7FC0;--nerve:#D4A82A;--nerve-ink:#7A5E0C;--muscle:#C4566A;--lig:#2E8A7A;--symp:#D0661E;--para:#3E8E4A;
+  --pain:#C62828;--pain-ink:#A62020;--evid:#4C56B8;--evid-ink:#3B44A0;
+  --touch:#2F6FC1;--touch-ink:#1F57A0;--adelta:#C62828;--cfib:#8E2F4A;--cfib-ink:#7A2340;
+  --brake:#2F7F5F;--brake-ink:#22603F;--boost:#D0661E;--boost-ink:#9A4A12;--opioid:#7B5CC9;--opioid-ink:#5E43A8;--sero:#B0407A;--inter:#3E8E4A;
+  --gray:#D9D2C8;--white:#F3EFE6;--myelin:#F1E6C4;--skin:#E9C3A6;--derm:#F2D8C4;--fatl:#F4E2A8;--blood:#C0392B;
+  --brain:#E2A3B0;--heart:#C0392B;--organ:#C46A5A;--metal:#9AA6AF;--cup:#E9EEF2;--plate:#FFFFFF;--lamp:#F6D04D;--moon:#F2E6A8;--sky:#DCEBF5;--grass:#9CC77A;--night:#2C3E66;
+  --sk1:#F1D2B6;--sk2:#DDAA82;--sk3:#B9814F;--sk4:#8A5A3A;--sk5:#5E3D28;--sk-edge:#6B4A35;--hair1:#2B211B;--hair2:#7A4B2A;--hair3:#C9C3BA;
+  --cl1:#3F6E9E;--cl2:#8A5A9E;--cl3:#3E8E6A;--cl4:#B5683A;--cl5:#5E7183;
+  --heat:#C8452B;--cold:#2F7FC1;--glass:#E3EDF2;--glass-edge:#7F99A6;--table:#D9C3A0;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#E8BE58;--act3:#5CC4B0;--act4:#F2924F;--act5:#6FA8F0;--act6:#6BC293;--act7:#E07A9A;--act8:#949EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC4A8;--bone-edge:#8C7E62;--disc:#6FA8E6;--nerve:#E8C65A;--nerve-ink:#F0D670;--muscle:#E08A9A;--lig:#5CC4B0;--symp:#F2924F;--para:#6CC57A;
+  --pain:#F06A5E;--pain-ink:#F59A90;--evid:#949EF2;--evid-ink:#B4BCF8;
+  --touch:#6FA8F0;--touch-ink:#9CC4F6;--adelta:#F06A5E;--cfib:#E07A9A;--cfib-ink:#EEA0B8;
+  --brake:#6BC293;--brake-ink:#8ED8AE;--boost:#F2924F;--boost-ink:#F6B07A;--opioid:#A98BEF;--opioid-ink:#C4ADF6;--sero:#E07AB0;--inter:#6CC57A;
+  --gray:#5A5048;--white:#2A2E30;--myelin:#5A5236;--skin:#8A6A55;--derm:#5E4A3E;--fatl:#5E5430;--blood:#E06A5E;
+  --brain:#C47E8E;--heart:#E06A5E;--organ:#C47A6A;--metal:#5E6B75;--cup:#2A3439;--plate:#2A3439;--lamp:#F2C95C;--moon:#E8DC9A;--sky:#16242E;--grass:#3E5E2E;--night:#0C1630;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --heat:#F07A5E;--cold:#5AA9E6;--glass:#1E2C34;--glass-edge:#7F99A6;--table:#4A3E2E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#E8BE58;--act3:#5CC4B0;--act4:#F2924F;--act5:#6FA8F0;--act6:#6BC293;--act7:#E07A9A;--act8:#949EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC4A8;--bone-edge:#8C7E62;--disc:#6FA8E6;--nerve:#E8C65A;--nerve-ink:#F0D670;--muscle:#E08A9A;--lig:#5CC4B0;--symp:#F2924F;--para:#6CC57A;
+  --pain:#F06A5E;--pain-ink:#F59A90;--evid:#949EF2;--evid-ink:#B4BCF8;
+  --touch:#6FA8F0;--touch-ink:#9CC4F6;--adelta:#F06A5E;--cfib:#E07A9A;--cfib-ink:#EEA0B8;
+  --brake:#6BC293;--brake-ink:#8ED8AE;--boost:#F2924F;--boost-ink:#F6B07A;--opioid:#A98BEF;--opioid-ink:#C4ADF6;--sero:#E07AB0;--inter:#6CC57A;
+  --gray:#5A5048;--white:#2A2E30;--myelin:#5A5236;--skin:#8A6A55;--derm:#5E4A3E;--fatl:#5E5430;--blood:#E06A5E;
+  --brain:#C47E8E;--heart:#E06A5E;--organ:#C47A6A;--metal:#5E6B75;--cup:#2A3439;--plate:#2A3439;--lamp:#F2C95C;--moon:#E8DC9A;--sky:#16242E;--grass:#3E5E2E;--night:#0C1630;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --heat:#F07A5E;--cold:#5AA9E6;--glass:#1E2C34;--glass-edge:#7F99A6;--table:#4A3E2E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.est-banner{display:flex;gap:10px;align-items:flex-start;background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:var(--r);padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.est-banner b{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;padding-top:2px}
+.seg5{display:grid;grid-template-columns:1fr;gap:6px}
+.seg5 .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:7px 9px}
+.seg5 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.seg5 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.chk{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;margin:8px 0}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.playrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.playrow input[type=range]{flex:1 1 160px;accent-color:var(--accent)}
+.bigtotal{font-family:var(--mono);font-size:22px;font-weight:700;margin:6px 0 2px}
+.rangeline{font-size:13.5px;color:var(--ink-soft)}
+.choices{display:grid;grid-template-columns:1fr;gap:7px;margin:8px 0}
+.ptab{border-collapse:collapse;margin:8px 0;font-size:14px}
+.ptab th,.ptab td{border:1px solid var(--rule);padding:4px 8px;text-align:left}
+.ptab th{background:var(--panel);font-weight:600}
+.scard svg{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--fib);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.seg5.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg5.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg5.seg4 .tbtn,.seg5.seg3 .tbtn{text-align:center;padding:7px 4px}
+.playrow output{font-family:var(--mono);font-weight:600;min-width:70px}
+.stage .playrow{padding:8px 4px 0}
+.dirbtns,.wherebtns{display:grid;gap:6px;margin:6px 0 10px}
+.dirbtns{grid-template-columns:1fr 1fr}
+.dirbtns .tbtn,.wherebtns .tbtn{text-align:left;font-size:14.5px;line-height:1.3;padding:8px 10px}
+.dirbtns .tbtn.right,.wherebtns .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.dirbtns .tbtn.wrong,.wherebtns .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.qh{font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:8px 0 2px}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.presets .tbtn{font-size:13.5px;padding:6px 9px}
+.dangerbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:9px 14px;font-weight:600;cursor:pointer;font-size:14.5px}
+.dangerbtn:disabled{opacity:.6;cursor:default}
+.ctl output{font-family:var(--mono);font-weight:600}
+.est-banner{display:flex;gap:10px;align-items:flex-start;background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:var(--r);padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.est-banner b{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;padding-top:2px}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--lig);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.choices{display:grid;grid-template-columns:1fr;gap:7px;margin:8px 0}
+.playrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.stage .playrow{padding:8px 4px 0}
+.lifeq .opts{display:block}
+@media (max-width:420px){.est-banner{flex-direction:column;gap:2px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 6 &middot; Pain neuroscience</div>
+    <h1>Pain Neuroscience Lab</h1>
+    <p class="sub">Turn the dials on a model pain system and watch the spinal gate, the brainstem brakes and the pain meter respond, predict what different inputs will do, match fibers and mechanisms, and work through clinic scenarios. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Pain Dial Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-train" data-tab="train" id="tabbtn-train" type="button" tabindex="-1">Part 2 &middot; Predict and Practise</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Match It</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Pain Dial Simulator</h2>
+    <p class="est-banner"><b>Teaching model</b><span>This is a simplified picture of how inputs turn pain up or down. The meter is a teaching model, not a measurement, and its numbers are not real units. Real people vary a great deal. It is not a tool for assessing or treating anyone.</span></p>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Pain dial simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend" id="simLegend"></div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">How the model works: tissue input sets nociceptor traffic. Poor sleep, ongoing stress and fear raise a "sensitivity" level that amplifies spinal transmission and can add signal even with no tissue input, like nociplastic pain. Touch and movement send A beta input that partly closes the spinal gate. Movement, expecting relief and sudden danger strengthen the descending brakes; stress, fear, expecting harm and poor sleep strengthen the boosters. Fear, stress and expectation also change how threatening the brain judges the signal. All weights are invented for teaching.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3>Quick settings</h3>
+        <div class="presets" id="simPresets" role="group" aria-label="Quick settings"></div>
+        <div class="ctl"><label for="slTissue">Tissue input <output id="oTissue" for="slTissue"></output></label><input type="range" id="slTissue" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slSleep">Sleep last night <output id="oSleep" for="slSleep"></output></label><input type="range" id="slSleep" min="3" max="9" step="0.5"></div>
+        <div class="ctl"><label for="slStress">Ongoing stress <output id="oStress" for="slStress"></output></label><input type="range" id="slStress" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slFear">Fear of harm <output id="oFear" for="slFear"></output></label><input type="range" id="slFear" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slMove">Movement and exercise <output id="oMove" for="slMove"></output></label><input type="range" id="slMove" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slTouch">Touch, rubbing or pressure <output id="oTouch" for="slTouch"></output></label><input type="range" id="slTouch" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slExpect">Expectation <output id="oExpect" for="slExpect"></output></label><input type="range" id="slExpect" min="0" max="10" step="1"></div>
+        <div class="bar"><button class="dangerbtn" type="button" id="simDanger">Sudden danger</button><button class="tbtn" type="button" id="simReset">Reset</button></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-train" role="tabpanel" aria-labelledby="tabbtn-train" hidden>
+    <h2 class="gk-sr">Part 2: Predict and Practise</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Predict first, then watch the picture show what happens. In predict items the knobs are a teaching model, not a measurement. Calculation items use rounded textbook values.</p>
+      </div>
+      <aside class="card side" aria-label="Practice trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div id="predBox" hidden>
+          <p class="qh" id="dirH">1. Volume</p>
+          <div class="dirbtns" id="dirBtns" role="group" aria-labelledby="dirH"></div>
+          <p class="qh" id="whereH">2. Where in the system</p>
+          <div class="wherebtns" id="whereBtns" role="group" aria-labelledby="whereH"></div>
+        </div>
+        <div class="ansrow" id="calcAnsRow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Watch the answer</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">The streak counts answers right on the first check without watching the answer first.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Match It</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults. For learning only, not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="helpbox" id="lifeHelp" hidden></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Pain-Walkthrough.html">Pain Neuroscience Walkthrough</a>. The simulator and predict items use an invented teaching model, not a measurement of anyone's pain.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "nerve", "nerve-ink", "muscle", "lig", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "touch", "touch-ink", "adelta", "cfib", "cfib-ink", "brake", "brake-ink", "boost", "boost-ink", "opioid", "opioid-ink", "sero", "inter", "gray", "white", "myelin", "skin", "derm", "fatl", "blood", "brain", "heart", "organ", "metal", "cup", "plate", "lamp", "moon", "sky", "grass", "night", "sk1", "sk2", "sk3", "sk4", "sk5", "sk-edge", "hair1", "hair2", "hair3", "cl1", "cl2", "cl3", "cl4", "cl5", "heat", "cold", "glass", "glass-edge", "table"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= chemistry drawing kit (gases module) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+let SYS={};function sys(key,make){if(!SYS[key])SYS[key]=make();return SYS[key]}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u===d.u);if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* little level-of-view tags: macroscopic / particulate / symbolic */
+function pie(x,y,r,f,col,o){o=o||{};circ(x,y,r,hexA(C.sunk,.6),C["ink-soft"],1.5);if(f>0){ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,-Math.PI/2,-Math.PI/2+TAU*clamp(f,0,1));ctx.closePath();ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.2;ctx.stroke()}
+  if(o.lab)txt(x,y+r+14,o.lab,{size:12,weight:700,mono:true,align:"center",color:o.lc||C.ink})}
+/* ---------- simple drawn table ---------- */
+function ctable(x,y,cols,rows,o){o=o||{};const rh=o.rh||26;const fs=o.size||12.5;let tw=cols.reduce((a,c)=>a+c[1],0);
+  rr(x,y,tw,rh*(rows.length+1),5);ctx.fillStyle=hexA(C.paper,.95);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=hexA(C.sunk,.55);ctx.fillRect(x+1,y+1,tw-2,rh-1);
+  let cx=x;cols.forEach((c,i)=>{txt(cx+c[1]/2,y+rh/2,c[0],{size:fs-.5,weight:700,align:"center",mono:true,color:C["ink-soft"]});if(i)line(cx,y+3,cx,y+rh*(rows.length+1)-3,C["rule-soft"],1);cx+=c[1]});
+  rows.forEach((r,ri)=>{const yy=y+rh*(ri+1);const a=o.ra?o.ra[ri]:1;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+    if(o.hl&&o.hl[ri]){ctx.fillStyle=hexA(o.hl[ri],.18);ctx.fillRect(x+1,yy,tw-2,rh);ctx.strokeStyle=o.hl[ri];ctx.lineWidth=1.8;ctx.strokeRect(x+1.5,yy+.5,tw-3,rh-1)}
+    line(x+2,yy,x+tw-2,yy,C["rule-soft"],1);let c2=x;r.forEach((v,ci)=>{const hc=o.hc&&o.hc[ri+"_"+ci];txt(c2+cols[ci][1]/2,yy+rh/2,v,{size:fs,weight:hc?700:500,align:"center",mono:true,color:hc||C.ink});c2+=cols[ci][1]});ctx.restore()});
+  return {w:tw,h:rh*(rows.length+1),rowY:i=>y+rh*(i+1)+rh/2,colX:i=>{let s=x;for(let k=0;k<i;k++)s+=cols[k][1];return s+cols[i][1]/2}}}
+function wsteps(x,y,w,h,W_,t,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,W_.title||"Worked example",C["accent-ink"]);
+  const sz=o.size||12.5;let yy=y+36;if(W_.q){yy=wrapText(W_.q,x+12,yy,(o.qw||w-24),sz+4,{size:sz,weight:600})+sz+8}
+  const lx=o.lx!=null?x+o.lx:x+14;if(o.lx!=null)yy=y+(o.ly||40);
+  const per=o.step||1.6;let tt=.6;
+  (W_.lines||[]).forEach((L,i)=>{const p=clamp((t-tt)/per,0,1);
+    if(L.ch){const fs=o.cfs||14;const cy=yy+fs*.9;if(p>0){const cw=chainWidth(L.ch[0],L.ch[1],{size:fs});const sc=Math.min(1,(w-(lx-x)-16)/cw);ctx.save();ctx.translate(lx,cy);ctx.scale(sc,sc);chain(0,0,L.ch[0],L.ch[1],p,{size:fs});ctx.restore()}yy+=fs*2+24;tt+=per*1.6}
+    else if(L.gold){if(p>0)withA(p*2,()=>label(lx,yy,L.gold,{size:sz,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));yy+=sz+14;tt+=per*.6}
+    else{if(p>0)withA(p*2,()=>{ctx.font=`${L.b?700:600} ${sz+.5}px ${MONO}`;const tw=ctx.measureText(L.t).width;const mw=w-(lx-x)-16;const fs=tw>mw?(sz+.5)*mw/tw:sz+.5;txt(lx,yy,L.t,{size:fs,weight:L.b?700:600,mono:true,color:L.col||C.ink})});yy+=sz+10;tt+=per*.7}});
+  if(W_.ans){const a=seg(t,tt,tt+.6);if(a>0)withA(a,()=>{ctx.font=`700 ${sz+1.5}px ${MONO}`;const tw=ctx.measureText(W_.ans).width;rr(lx-4,yy-12,tw+14,26,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(lx+3,yy+1,W_.ans,{size:sz+1.5,weight:700,mono:true})});yy+=30;tt+=1}
+  if(W_.miss){const a=seg(t,tt+.4,tt+1);if(a>0)withA(a,()=>{const mh=o.missH||36;rr(lx-4,yy-10,w-(lx-x)-8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,lx+4,yy+4,w-(lx-x)-24,sz+3,{size:sz-1,color:C.ink})})}
+  return tt}
+/* rate meter (horizontal bar with value) */
+function meterBar(x,y,w,f,col,lab){rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w+8,y+7,lab,{size:12,weight:700,mono:true})}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sup(s){return String(s).split("").map(c=>SUP[c]||c).join("")}
+function sci(v,n){if(!isFinite(v))return "?";if(v===0)return "0";const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=3)return sig(v,n);let m=v/Math.pow(10,e);let ms=sig(m,n);if(Math.abs(+ms)>=10){m/=10;ms=sig(m,n);return ms+" × 10"+sup(e+1)}return ms+" × 10"+sup(e)}
+let SEEDC=1;function srnd(){SEEDC=(SEEDC*16807)%2147483647;return (SEEDC-1)/2147483646}
+/* ================= nutrition drawing kit: bodies, organs, food, flows ================= */
+let SC={};
+/* level tags: food / body / cell */
+function levelTag(x,y,k){const m={food:["FOOD AND DRINK",C.carb],body:["WHOLE BODY",C.act2],organ:["ORGANS",C.organ],cell:["CELLS AND MOLECULES",C.act6],sym:["NUMBERS",C.act4],brain:["BRAIN SIGNALS",C.lep]}[k]||[k,C.accent];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+/* ---------- people: diverse, neutral figures ----------
+   o: {skin:1-5, build:0.85-1.6, cloth:"cl1", pants:"cl5", hair:0 short,1 long,2 bun,3 cropped, older:bool, pose:"stand"|"walk"|"run"|"sit"|"lift"|"wave", ph:phase, muscular:bool, face:dir} */
+function limb(x1,y1,x2,y2,w,col){ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["sk-edge"],.55);ctx.lineWidth=w+2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function limb2(x1,y1,a1,L1,a2,L2,w,c1,c2){const xk=x1+Math.sin(a1)*L1,yk=y1+Math.cos(a1)*L1;const xe=xk+Math.sin(a2)*L2,ye=yk+Math.cos(a2)*L2;limb(x1,y1,xk,yk,w,c1);limb(xk,yk,xe,ye,w*.9,c2||c1);return [xe,ye,xk,yk]}
+function person(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],b=o.build||1,cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];const ph=o.ph||0;const pose=o.pose||"stand";
+  const hr=s*.075;const yS=y-s*.80,yH=y-s*.47;const tw=s*.2*b,hw=s*.18*b;const lw=s*.075*Math.pow(b,.75)*(o.muscular?1.15:1),aw=s*.06*Math.pow(b,.75)*(o.muscular?1.3:1);
+  const lean=o.older?.06:0;ctx.save();ctx.translate(x,y);ctx.rotate(lean*(o.face||1)*.5);ctx.translate(-x,-y);
+  let leg=[0,0],kneeB=[0,0],uA=[-.1,.1],fA=[-.04,.04];
+  if(pose==="walk"){const a=Math.sin(ph)*.38;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.3,Math.max(0,Math.sin(ph))*.3];uA=[-a*.85-.05,a*.85+.05];fA=[uA[0]+.25,uA[1]+.25]}
+  if(pose==="run"){const a=Math.sin(ph)*.6;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.9+.25,Math.max(0,Math.sin(ph))*.9+.25];uA=[-a*.9,a*.9];fA=[uA[0]+1.5,uA[1]+1.5]}
+  if(pose==="wave"){uA=[-.1,2.5];fA=[-.04,2.9]}
+  if(pose==="lift"){const k=.5+.5*Math.sin(ph);uA=[-.08,.08];fA=[.3+1.9*k,.3+1.9*k]}
+  if(pose==="sit"){uA=[.3,.38];fA=[1.25,1.35]}
+  const legL=s*.235;const hipX=[x-hw*.28,x+hw*.28];
+  if(pose==="sit"){/* chair */if(!o.noChair){rr(x-s*.22,yH+s*.02,s*.42,s*.05,3);fillStroke(C.metal,hexA(C.ink,.4),1);line(x-s*.18,yH+s*.07,x-s*.18,y,C.metal,4);line(x+s*.17,yH+s*.07,x+s*.17,y,C.metal,4)}
+    [0,1].forEach(i=>{const hx_=hipX[i];limb(hx_,yH,hx_+s*.2,yH+s*.02,lw,pn);limb(hx_+s*.2,yH+s*.02,hx_+s*.21,y-s*.02,lw*.92,pn);rr(hx_+s*.19,y-s*.035,s*.08,s*.035,s*.015);fillStroke(C.ink,null)})}
+  else{[0,1].forEach(i=>{const e=limb2(hipX[i],yH,leg[i],legL,leg[i]-kneeB[i],legL,lw,pn);rr(e[0]-s*.02,e[1]-s*.02,s*.075,s*.035,s*.015);fillStroke(C.ink,null)})}
+  /* torso */
+  rr(x-tw/2,yS-s*.02,tw,yH-yS+s*.06,tw*.28);fillStroke(cl,hexA(C["sk-edge"],.55),1.4);
+  /* arms */
+  const shX=[x-tw/2+aw*.35,x+tw/2-aw*.35];const armL=s*.17;
+  [0,1].forEach(i=>{const e=limb2(shX[i],yS+aw*.3,uA[i]+(i?1:-1)*.06*(b-1),armL,fA[i]+(i?1:-1)*.06*(b-1),armL,aw,cl,sk);circ(e[0],e[1],aw*.55,sk,hexA(C["sk-edge"],.6),1)});
+  /* neck + head */
+  limb(x,yS-s*.01,x,yS-s*.05,s*.05,sk);
+  const hy=yS-s*.05-hr*.9;circ(x,hy,hr,sk,hexA(C["sk-edge"],.7),1.3);
+  const hc=o.older?C.hair3:C[o.hairc||"hair1"];const hh=o.hair==null?0:o.hair;
+  ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+.5,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=hc;ctx.fill();ctx.restore();
+  if(hh===1){rr(x-hr*1.05,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fillStyle=hc;ctx.fill();rr(x+hr*.6,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fill()}
+  if(hh===2)circ(x,hy-hr*1.05,hr*.42,hc);
+  if(hh===3){ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+1.5,Math.PI*.95,Math.PI*2.05);ctx.lineWidth=hr*.5;ctx.strokeStyle=hc;ctx.stroke();ctx.restore()}
+  const f=o.face||1;circ(x+hr*.35*f,hy-hr*.05,Math.max(1,hr*.11),C.ink);ctx.beginPath();ctx.arc(x+hr*.2*f,hy+hr*.3,hr*.28,.2*Math.PI,.8*Math.PI);ctx.strokeStyle=hexA(C.ink,.7);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.glasses){circ(x+hr*.35*f,hy-hr*.05,hr*.26,null,C.ink,1.2)}
+  ctx.restore();return {head:[x,hy],chest:[x,yS+s*.08],belly:[x,yH-s*.08],hr}}
+/* a person lying asleep in bed */
+function sleeper(x,y,w,o){o=o||{};const sk=C["sk"+(o.skin||3)];rr(x,y,w,w*.16,6);fillStroke(C.cup,C["ink-soft"],1.4);rr(x+4,y-w*.06,w*.22,w*.09,w*.04);fillStroke(C.panel,C["ink-soft"],1.2);
+  circ(x+w*.14,y-w*.04,w*.055,sk,hexA(C["sk-edge"],.7),1.2);ctx.save();ctx.beginPath();ctx.arc(x+w*.14,y-w*.04,w*.056,Math.PI*.6,Math.PI*1.4);ctx.lineWidth=3;ctx.strokeStyle=C.hair1;ctx.stroke();ctx.restore();
+  const br=Math.sin((o.T||0)*1.6)*2;rr(x+w*.22,y-w*.07-br,w*.74,w*.11+br,w*.05);fillStroke(C[o.cloth||"cl2"],hexA(C.ink,.35),1.2);
+  rr(x-2,y+w*.16,6,w*.08,2);ctx.fillStyle=C.metal;ctx.fill();rr(x+w-4,y+w*.16,6,w*.08,2);ctx.fill()}
+function zzz(x,y,T,a){for(let i=0;i<3;i++){const p=P(T*.6+i/3,1);withA((a==null?1:a)*Math.sin(p*Math.PI),()=>txt(x+p*30+i*4,y-p*40,"z",{size:12+i*4+p*4,weight:700,color:C["ink-soft"]}))}}
+/* ---------- organs ---------- */
+function brainShape(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.ellipse(0,0,s,s*.72,0,0,TAU);fillStroke(C.brain,mix(C.brain,"#000",.4),1.6);
+  ctx.strokeStyle=mix(C.brain,"#000",.3);ctx.lineWidth=1.3;for(let i=0;i<5;i++){ctx.beginPath();const yy=-s*.45+i*s*.22;ctx.moveTo(-s*.8,yy);for(let k=0;k<=8;k++)ctx.lineTo(-s*.8+k*s*.2,yy+Math.sin(k*1.7+i)*s*.07);ctx.stroke()}
+  line(0,-s*.7,0,s*.3,mix(C.brain,"#000",.35),1.4);ctx.restore();if(o.hyp){circ(x+s*.05,y+s*.45,s*.16,o.hypCol||C.nerve,C.ink,1.2)}}
+function heartShape(x,y,s,beat){const k=1+(beat||0)*.08;ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.beginPath();ctx.moveTo(0,s*.75);ctx.bezierCurveTo(-s*1.1,0,-s*.75,-s*.85,0,-s*.35);ctx.bezierCurveTo(s*.75,-s*.85,s*1.1,0,0,s*.75);fillStroke(C.heart,mix(C.heart,"#000",.4),1.5);ctx.restore()}
+function liverShape(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y-s*.3);ctx.quadraticCurveTo(x-s*.2,y-s*.75,x+s*.9,y-s*.4);ctx.quadraticCurveTo(x+s*.5,y+s*.1,x-s*.1,y+s*.45);ctx.quadraticCurveTo(x-s*.9,y+s*.35,x-s,y-s*.3);fillStroke(C.liver,mix(C.liver,"#000",.4),1.5)}
+function kidneyShape(x,y,s,flip){ctx.save();ctx.translate(x,y);if(flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(0,-s);ctx.bezierCurveTo(s*.9,-s,s*.9,s,0,s);ctx.bezierCurveTo(-s*.5,s,-s*.2,s*.3,-s*.25,0);ctx.bezierCurveTo(-s*.2,-s*.3,-s*.5,-s,0,-s);fillStroke(C.kidney,mix(C.kidney,"#000",.4),1.4);ctx.restore()}
+function stomachShape(x,y,s,fill,o){o=o||{};const st=1+(fill||0)*.35;ctx.save();ctx.translate(x,y);ctx.scale(st,st);ctx.beginPath();ctx.moveTo(-s*.2,-s);ctx.quadraticCurveTo(-s*.25,-s*.4,-s*.7,-s*.2);ctx.quadraticCurveTo(-s*1.05,s*.5,-s*.2,s*.75);ctx.quadraticCurveTo(s*.6,s*.95,s*.85,s*.35);ctx.quadraticCurveTo(s*.55,s*.1,s*.25,-s*.1);ctx.quadraticCurveTo(s*.1,-s*.5,s*.15,-s);ctx.closePath();
+  fillStroke(C.stomach,mix(C.stomach,"#000",.45),1.6);if(fill>0){ctx.save();ctx.clip();ctx.fillStyle=hexA(C.carb,.55);ctx.fillRect(-s*1.2,s*.85-fill*s*1.6,s*2.4,s*2);ctx.restore()}ctx.restore()}
+function intestine(x,y,s,T){ctx.save();ctx.lineCap="round";ctx.strokeStyle=mix(C.gut,"#000",.35);ctx.lineWidth=s*.24;ctx.beginPath();for(let i=0;i<=60;i++){const a=i/60;const xx=x-s+((a*5)%1)*s*2*(Math.floor(a*5)%2?-1:1)+(Math.floor(a*5)%2?s*2:0);const yy=y-s*.6+Math.floor(a*5)*s*.3;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}ctx.stroke();ctx.strokeStyle=C.gut;ctx.lineWidth=s*.17;ctx.stroke();ctx.restore()}
+function pancreasShape(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x-s*.2,y-s*.35,x+s,y-s*.15);ctx.quadraticCurveTo(x+s*1.05,y+s*.12,x+s*.6,y+s*.12);ctx.quadraticCurveTo(x-s*.2,y+s*.3,x-s,y+s*.25);ctx.closePath();fillStroke(mix(C.fatt,C.organ,.5),mix(C.organ,"#000",.4),1.3)}
+function muscleBlock(x,y,w,h,act,T){rr(x,y,w,h,h*.45);fillStroke(C.muscle,mix(C.muscle,"#000",.4),1.5);ctx.save();rr(x,y,w,h,h*.45);ctx.clip();for(let i=1;i<6;i++){const yy=y+h*i/6+Math.sin(T*8+i)*(act||0)*1.5;line(x,yy,x+w,yy,hexA(mix(C.muscle,"#000",.4),.6),1)}ctx.restore();if(act>0)glow(x+w/2,y+h/2,w*.7,C.pa,.35*act)}
+function fatCell(x,y,r,fill,o){o=o||{};circ(x,y,r,hexA(C.fatt,.25),mix(C.fatt,"#000",.35),1.4);circ(x+r*.05,y,r*(.35+.55*clamp(fill==null?1:fill,0,1)),C.fatt,null);circ(x-r*.62,y+r*.45,r*.14,mix(C.vit,"#000",.2))}
+/* body map: neutral torso outline with organs, returns anchor points */
+function bodyMap(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)];const T=o.T||0;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;
+  /* silhouette */
+  ctx.beginPath();ctx.arc(x,y-s*.82,s*.12,0,TAU);fillStroke(hexA(sk,.55),C["sk-edge"],1.5);
+  ctx.beginPath();ctx.moveTo(x-s*.06,y-s*.71);ctx.lineTo(x-s*.27,y-s*.64);ctx.quadraticCurveTo(x-s*.33,y-s*.62,x-s*.33,y-s*.52);ctx.lineTo(x-s*.29,y-s*.05);ctx.quadraticCurveTo(x-s*.2,y+s*.06,x,y+s*.06);ctx.quadraticCurveTo(x+s*.2,y+s*.06,x+s*.29,y-s*.05);ctx.lineTo(x+s*.33,y-s*.52);ctx.quadraticCurveTo(x+s*.33,y-s*.62,x+s*.27,y-s*.64);ctx.lineTo(x+s*.06,y-s*.71);ctx.closePath();
+  fillStroke(hexA(sk,.32),C["sk-edge"],1.5);
+  if(o.fat){ctx.save();ctx.clip();ctx.strokeStyle=hexA(C.fatt,.8);ctx.lineWidth=s*.035;ctx.stroke();ctx.restore()}
+  const A={brain:[x,y-s*.85],heart:[x+s*.04,y-s*.5],liver:[x-s*.1,y-s*.33],stomach:[x+s*.12,y-s*.33],kidL:[x-s*.17,y-s*.2],kidR:[x+s*.17,y-s*.2],gut:[x,y-s*.1],panc:[x+s*.06,y-s*.25],musL:[x-s*.45,y-s*.35],musR:[x+s*.45,y-s*.35],fat:[x+s*.24,y-s*.05],mouth:[x,y-s*.76]};
+  /* arms with muscle */
+  [-1,1].forEach(d=>{rr(x+d*s*.36-s*.06,y-s*.62,s*.12,s*.55,s*.06);fillStroke(hexA(sk,.32),C["sk-edge"],1.4);});
+  if(o.lungs!==false){ell(x-s*.13,y-s*.52,s*.08,s*.11,0,hexA(C.brain,.5),hexA(C.organ,.6),1);ell(x+s*.15,y-s*.52,s*.07,s*.11,0,hexA(C.brain,.5),hexA(C.organ,.6),1)}
+  brainShape(A.brain[0],A.brain[1],s*.085,{hyp:o.hyp,hypCol:o.hypCol});
+  heartShape(A.heart[0],A.heart[1],s*.055,Math.max(0,Math.sin(T*7)));
+  liverShape(A.liver[0],A.liver[1],s*.11);stomachShape(A.stomach[0],A.stomach[1],s*.07,o.sfill||0);
+  if(o.panc)pancreasShape(A.panc[0],A.panc[1],s*.06);
+  kidneyShape(A.kidL[0],A.kidL[1],s*.04,false);kidneyShape(A.kidR[0],A.kidR[1],s*.04,true);intestine(A.gut[0],A.gut[1],s*.11,T);
+  if(o.muscles!==false){muscleBlock(x-s*.42,y-s*.5,s*.06,s*.28,o.act||0,T);muscleBlock(x+s*.36,y-s*.5,s*.06,s*.28,o.act||0,T)}
+  ctx.restore();return A}
+/* ---------- energy / flow helpers ---------- */
+function kcalDot(x,y,r,col,a){withA(a==null?1:a,()=>{glow(x,y,r*2.4,col||C.ein,.55);circ(x,y,r,col||C.ein,hexA(C.ink,.35),1)})}
+function flow(path,n,T,spd,col,r,o){o=o||{};for(let i=0;i<n;i++){const p=P(T*spd+i/n,1);const q=along(path,p);const a=o.fade?Math.sin(p*Math.PI):1;kcalDot(q[0],q[1],r||4,col,a)}}
+function pathLine(path,col,lw,dash){poly(path,col,lw||2,dash)}
+function nervePulse(path,T,col,spd,n){poly(path,hexA(col||C.nerve,.55),2.4,[5,4]);for(let i=0;i<(n||2);i++){const q=along(path,P(T*(spd||.6)+i/(n||2),1));glow(q[0],q[1],10,col||C.nerve,.9);circ(q[0],q[1],3.5,col||C.nerve)}}
+/* hormone particles: shape + colour + letter so colour is never the only cue */
+const HORM={ghr:["G","tri"],lep:["L","dia"],ins:["I","hex"],pyy:["P","sq"],cck:["C","circ"],glp:["G1","star"]};
+function hormone(x,y,k,r,a){r=r||7;const col=C[k];const sh=HORM[k]?HORM[k][1]:"circ";withA(a==null?1:a,()=>{ctx.beginPath();
+  if(sh==="tri"){ctx.moveTo(x,y-r*1.15);ctx.lineTo(x+r*1.1,y+r*.8);ctx.lineTo(x-r*1.1,y+r*.8);ctx.closePath()}
+  else if(sh==="dia"){ctx.moveTo(x,y-r*1.2);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r*1.2);ctx.lineTo(x-r,y);ctx.closePath()}
+  else if(sh==="hex"){for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;i?ctx.lineTo(x+Math.cos(an)*r*1.05,y+Math.sin(an)*r*1.05):ctx.moveTo(x+Math.cos(an)*r*1.05,y+Math.sin(an)*r*1.05)}ctx.closePath()}
+  else if(sh==="sq"){ctx.rect(x-r*.85,y-r*.85,r*1.7,r*1.7)}
+  else if(sh==="star"){for(let i=0;i<10;i++){const an=i/10*TAU-Math.PI/2;const rad=i%2?r*.5:r*1.15;i?ctx.lineTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad):ctx.moveTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad)}ctx.closePath()}
+  else ctx.arc(x,y,r,0,TAU);
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.55);ctx.lineWidth=1;ctx.stroke();if(r>=6){ctx.font=`700 ${Math.round(r*(HORM[k]&&HORM[k][0].length>1?.8:1.05))}px ${FONT}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(HORM[k]?HORM[k][0]:"",x,y+(sh==="tri"?r*.2:.5))}})}
+function vessel(path,w){ctx.save();ctx.lineCap="round";ctx.lineJoin="round";poly(path,hexA(C.blood,.35),w||14);poly(path,hexA(C.blood,.6),2);ctx.restore()}
+/* balance scale: tilt>0 means the right pan is lower */
+function scaleBeam(x,y,w,tilt,o){o=o||{};const a=clamp(tilt,-1,1)*.16;rr(x-8,y,16,o.h||120,4);fillStroke(C.metal,hexA(C.ink,.5),1.4);rr(x-50,y+(o.h||120),100,12,5);fillStroke(C.metal,hexA(C.ink,.5),1.4);
+  const lx=x-Math.cos(a)*w/2,ly=y-Math.sin(a)*w/2,rx=x+Math.cos(a)*w/2,ry=y+Math.sin(a)*w/2;line(lx,ly,rx,ry,C["ink-soft"],7);circ(x,y,8,C.gold,hexA(C.ink,.5),1.4);
+  const pw=o.pw||58,ph_=o.ph||52;const pan=(px,py)=>{line(px,py,px-pw*.8,py+ph_,C["ink-soft"],1.4);line(px,py,px+pw*.8,py+ph_,C["ink-soft"],1.4);ctx.beginPath();ctx.moveTo(px-pw,py+ph_);ctx.quadraticCurveTo(px,py+ph_+pw*.5,px+pw,py+ph_);ctx.closePath();fillStroke(hexA(C.metal,.6),C["ink-soft"],1.6);return [px,py+ph_+4]};
+  return {L:pan(lx,ly),R:pan(rx,ry)}}
+/* stacked horizontal bar */
+function stackBar(x,y,w,h,parts,o){o=o||{};const tot=o.total||parts.reduce((a,p)=>a+p.v,0);let X=x;rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();
+  parts.forEach((p,i)=>{const pw=w*p.v/tot*(p.f==null?1:p.f);if(pw<=0)return;ctx.save();rr(x,y,w,h,4);ctx.clip();ctx.fillStyle=p.col;ctx.fillRect(X,y,pw,h);if(p.hatch){ctx.strokeStyle=hexA("#fff",.45);ctx.lineWidth=2;for(let k=-h;k<pw;k+=8){ctx.beginPath();ctx.moveTo(X+k,y+h);ctx.lineTo(X+k+h,y);ctx.stroke()}}ctx.restore();
+    line(X+pw,y,X+pw,y+h,C.panel,2);if(p.lab&&pw>(o.minLab||40))txt(X+pw/2,y+h/2,p.lab,{size:o.fs||12,weight:700,align:"center",color:inkOn(p.col)});X+=pw});
+  rr(x,y,w,h,4);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();return X}
+/* vertical stacked column */
+function stackCol(x,y,w,h,parts,o){o=o||{};const tot=o.total||parts.reduce((a,p)=>a+p.v,0);let Y=y+h;rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.6);ctx.fill();
+  parts.forEach(p=>{const ph=h*p.v/tot*(p.f==null?1:p.f);if(ph<=0)return;ctx.fillStyle=p.col;ctx.fillRect(x,Y-ph,w,ph);line(x,Y-ph,x+w,Y-ph,C.panel,2);if(p.lab&&ph>16)txt(x+w/2,Y-ph/2,p.lab,{size:o.fs||11.5,weight:700,align:"center",color:inkOn(p.col)});Y-=ph});
+  rr(x,y,w,h,4);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();return Y}
+function donut(x,y,r,parts,o){o=o||{};const tot=parts.reduce((a,p)=>a+p.v,0);let a0=-Math.PI/2+(o.rot||0);const prog=o.p==null?1:o.p;
+  parts.forEach((p,i)=>{const da=TAU*p.v/tot*prog;ctx.beginPath();ctx.arc(x,y,r,a0,a0+da);ctx.arc(x,y,r*(o.hole||.55),a0+da,a0,true);ctx.closePath();ctx.fillStyle=p.col;ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=2;ctx.stroke();
+    if(p.lab&&da>.3){const am=a0+da/2;const lr=r*(1+(o.hole||.55))/2;txt(x+Math.cos(am)*lr,y+Math.sin(am)*lr,p.lab,{size:o.fs||11.5,weight:700,align:"center",color:inkOn(p.col)})}a0+=da})}
+/* ---------- food and drink ---------- */
+function plate(x,y,r){ell(x,y+3,r,r*.36,0,hexA(C.ink,.12));ell(x,y,r,r*.36,0,C.plate,C["ink-soft"],1.4);ell(x,y,r*.72,r*.26,0,null,hexA(C["ink-soft"],.5),1)}
+function foodPile(x,y,s,kind){if(kind==="grain"){for(let i=0;i<14;i++){const a=rnd(i)*TAU,rad=rnd(i+7)*s*.8;ell(x+Math.cos(a)*rad,y-s*.2+Math.sin(a)*rad*.4,s*.16,s*.08,a,mix(C.carb,"#fff",.55),hexA(C.carb,.8),.8)}}
+  else if(kind==="veg"){for(let i=0;i<6;i++){circ(x-s*.6+i*s*.24,y-s*.15+(i%2)*s*.12,s*.2,mix(C.fib,"#fff",.15),mix(C.fib,"#000",.3),1)}}
+  else if(kind==="bean"){for(let i=0;i<9;i++){ell(x-s*.5+(i%5)*s*.25,y-s*.2+Math.floor(i/5)*s*.18,s*.13,s*.09,.3,mix(C.prot,"#000",.15),hexA(C.ink,.4),.8)}}
+  else if(kind==="fish"){ell(x,y-s*.15,s*.7,s*.25,0,mix(C.prot,"#fff",.5),hexA(C.prot,.8),1.2);ctx.beginPath();ctx.moveTo(x+s*.65,y-s*.15);ctx.lineTo(x+s*.95,y-s*.35);ctx.lineTo(x+s*.95,y+s*.05);ctx.closePath();fillStroke(mix(C.prot,"#fff",.5),hexA(C.prot,.8),1.2)}
+  else if(kind==="bread"){rr(x-s*.5,y-s*.7,s,s*.75,s*.25);fillStroke(mix(C.carb,"#fff",.35),mix(C.carb,"#000",.25),1.4);rr(x-s*.38,y-s*.56,s*.76,s*.55,s*.18);ctx.fillStyle=mix(C.carb,"#fff",.7);ctx.fill()}
+  else if(kind==="apple"){circ(x,y-s*.4,s*.45,mix(C.prot,C.carb,.3),mix(C.prot,"#000",.35),1.4);line(x,y-s*.85,x+s*.06,y-s*1.05,C.hair2,2.5);ell(x+s*.2,y-s*.95,s*.16,s*.07,-.4,C.fib)}
+  else if(kind==="egg"){ell(x,y-s*.3,s*.5,s*.36,0,C.plate,C["ink-soft"],1.2);circ(x+s*.05,y-s*.3,s*.18,C.fat,mix(C.fat,"#000",.3),1)}
+  else if(kind==="oil"){rr(x-s*.2,y-s*1.1,s*.4,s*1.1,s*.12);fillStroke(hexA(C.fat,.75),mix(C.fat,"#000",.35),1.4);rr(x-s*.08,y-s*1.3,s*.16,s*.22,2);fillStroke(C["ink-soft"],null)}
+  else if(kind==="nuts"){for(let i=0;i<7;i++)ell(x-s*.45+(i%4)*s*.3,y-s*.15-Math.floor(i/4)*s*.18,s*.16,s*.11,i,mix(C.fat,C.carb,.5),hexA(C.ink,.45),.9)}
+  else if(kind==="yogurt"){rr(x-s*.4,y-s*.75,s*.8,s*.75,s*.12);fillStroke(C.plate,C["ink-soft"],1.3);ell(x,y-s*.75,s*.4,s*.1,0,mix(C.plate,C.vit,.15),C["ink-soft"],1.1)}}
+function glassDrink(x,y,s,col,lv){ctx.beginPath();ctx.moveTo(x-s*.35,y-s);ctx.lineTo(x-s*.28,y);ctx.lineTo(x+s*.28,y);ctx.lineTo(x+s*.35,y-s);ctx.closePath();fillStroke(hexA(C.glass,.6),C["glass-edge"],1.6);
+  ctx.save();ctx.clip();ctx.fillStyle=hexA(col,.8);ctx.fillRect(x-s*.4,y-s*(lv==null?.75:lv),s*.8,s);ctx.restore()}
+function mealTray(x,y,s,T){plate(x,y,s*.9);foodPile(x-s*.35,y,s*.35,"grain");foodPile(x+s*.05,y-s*.02,s*.32,"fish");foodPile(x+s*.45,y,s*.28,"veg");glassDrink(x+s*1.25,y+s*.15,s*.5,C.wat,.7)}
+/* ---------- instruments ---------- */
+function thermoBar(x,y,h,f,col,lab){rr(x-6,y-h,12,h,6);fillStroke(C.paper,C["ink-soft"],1.5);circ(x,y+6,10,col||C.heat,C["ink-soft"],1.5);rr(x-3,y-h*clamp(f,0,1),6,h*clamp(f,0,1)+4,3);ctx.fillStyle=col||C.heat;ctx.fill();if(lab)txt(x+14,y-h*clamp(f,0,1),lab,{size:12,weight:700,mono:true})}
+function gaugeDial(x,y,r,f,col,lab){circ(x,y,r,C.paper,C["ink-soft"],2);ctx.beginPath();ctx.arc(x,y,r-6,Math.PI*.75,Math.PI*2.25);ctx.strokeStyle=hexA(C.sunk,.9);ctx.lineWidth=6;ctx.stroke();ctx.beginPath();ctx.arc(x,y,r-6,Math.PI*.75,Math.PI*(.75+1.5*clamp(f,0,1)));ctx.strokeStyle=col||C.accent;ctx.stroke();
+  const a=Math.PI*(.75+1.5*clamp(f,0,1));line(x,y,x+Math.cos(a)*(r-10),y+Math.sin(a)*(r-10),C.ink,2.2);circ(x,y,3.5,C.ink);if(lab)txt(x,y+(r<34?r+12:r*.55),lab,{size:11.5,weight:700,align:"center",mono:true})}
+function clockFace(x,y,r,hours){circ(x,y,r,C.paper,C["ink-soft"],2);for(let i=0;i<12;i++){const a=i/12*TAU;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.5)}
+  const h=(hours%12)/12*TAU-Math.PI/2,m=(hours%1)*TAU-Math.PI/2;line(x,y,x+Math.cos(h)*r*.5,y+Math.sin(h)*r*.5,C.ink,3);line(x,y,x+Math.cos(m)*r*.75,y+Math.sin(m)*r*.75,C.ink,1.8);circ(x,y,3,C.ink)}
+/* ---------- small helpers ---------- */
+function bubble(x,y,w,h,text,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);if(o.tail){ctx.beginPath();ctx.moveTo(o.tail[0],o.tail[1]);ctx.lineTo(x+w*.3,y+h);ctx.lineTo(x+w*.3+16,y+h);ctx.closePath();fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);ctx.fillStyle=o.fill||C.paper;ctx.fillRect(x+w*.3+1,y+h-3,14,4)}
+  wrapText(text,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500,color:o.color||C.ink})}
+function card(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.18):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function vbar(x,y,w,h,f,col,lab,val){rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,4);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w/2,y+h+13,lab,{size:11.5,weight:700,align:"center"});if(val)txt(x+w/2,y+h*(1-ff)-10,val,{size:11.5,weight:700,align:"center",mono:true})}
+function sun(x,y,r,T){for(let i=0;i<10;i++){const a=i/10*TAU+T*.2;line(x+Math.cos(a)*r*1.25,y+Math.sin(a)*r*1.25,x+Math.cos(a)*r*1.6,y+Math.sin(a)*r*1.6,C.lamp,2.5)}circ(x,y,r,C.lamp,hexA(C.ink,.3),1)}
+function moon(x,y,r){const d=.5*r,r2=.85*r,xi=(d*d+r*r-r2*r2)/(2*d),yi=Math.sqrt(Math.max(0,r*r-xi*xi));const a=Math.atan2(yi,xi),b=Math.atan2(yi,xi-d);ctx.beginPath();ctx.arc(x,y,r,a,TAU-a,false);ctx.arc(x+d,y,r2,TAU-b,b,true);ctx.closePath();fillStroke(C.moon,hexA(C.ink,.45),1.2)}
+function snowflake(x,y,r,col){for(let i=0;i<3;i++){const a=i/3*Math.PI;line(x-Math.cos(a)*r,y-Math.sin(a)*r,x+Math.cos(a)*r,y+Math.sin(a)*r,col||C.cold,1.8)}}
+function plusMinus(x,y,plus,col){circ(x,y,9,col,C.panel,1.5);line(x-5,y,x+5,y,"#fff",2.2);if(plus)line(x,y-5,x,y+5,"#fff",2.2)}
+function bigNum(x,y,t,o){o=o||{};txt(x,y,t,{size:o.size||22,weight:700,mono:true,align:o.align||"center",color:o.color||C.ink})}
+/* ================= pain neuroscience drawing kit (shared by both pages) ================= */
+function lvl(x,y,k){const m={person:["WHOLE PERSON",C.act3],tissue:["TISSUE",C.muscle],signal:["CELL AND SIGNAL",C.nerve],cord:["SPINAL CORD",C.nerve],brain:["BRAIN",C.brain],num:["NUMBERS",C.evid],model:["TEACHING MODEL",C.evid]}[k]||[k,C.accent];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+const FIB={ab:{col:"touch",w:5.5,my:true,name:"A beta",spd:"35 to 75 m/s"},ad:{col:"adelta",w:3.4,my:true,name:"A delta",spd:"5 to 30 m/s"},c:{col:"cfib",w:2.2,my:false,name:"C",spd:"0.5 to 2 m/s"}};
+/* axon along a polyline; myelinated fibers get sheath segments */
+function axon(pts,type,o){o=o||{};const f=FIB[type];const col=C[f.col];ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;
+  poly(pts,hexA(col,.85),f.w,type==="c"?[1,0]:null);
+  if(f.my){let L=0;const ls=[];for(let i=0;i<pts.length-1;i++){const l=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]);ls.push(l);L+=l}
+    const segL=type==="ab"?30:20,gap=type==="ab"?6:5;for(let d=4;d<L-segL;d+=segL+gap){const a=along(pts,d/L),b=along(pts,(d+segL)/L);const an=Math.atan2(b[1]-a[1],b[0]-a[0]);
+      ctx.save();ctx.translate((a[0]+b[0])/2,(a[1]+b[1])/2);ctx.rotate(an);rr(-segL/2,-f.w*1.15,segL,f.w*2.3,f.w);ctx.fillStyle=C.myelin;ctx.fill();ctx.strokeStyle=hexA(col,.9);ctx.lineWidth=1.1;ctx.stroke();ctx.restore()}}
+  ctx.restore()}
+/* impulses travelling along a polyline; speed in path fractions per second */
+function impulses(pts,T,sp,col,n,o){o=o||{};n=n||2;for(let i=0;i<n;i++){const p=P(T*sp+i/n,1);if(o.max!=null&&p>o.max)continue;const q=along(pts,p);glow(q[0],q[1],o.g||11,col,.85);circ(q[0],q[1],o.r||3.6,col,C.panel,1)}}
+function dotAt(pts,p,col,r){const q=along(pts,clamp(p,0,1));glow(q[0],q[1],(r||3.6)*3,col,.8);circ(q[0],q[1],r||3.6,col,C.panel,1);return q}
+/* spike trace: times in seconds (absolute T), window in seconds */
+function spikeTrace(x,y,w,h,times,T,win,col,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.paper,.9);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();
+  const base=y+h*.72;line(x+4,base,x+w-4,base,hexA(C.ink,.35),1);ctx.save();ctx.beginPath();ctx.rect(x+2,y+2,w-4,h-4);ctx.clip();
+  times.forEach(t0=>{const age=T-t0;if(age<0||age>win)return;const X=x+w-4-(age/win)*(w-8);ctx.beginPath();ctx.moveTo(X-2,base);ctx.lineTo(X,y+6);ctx.lineTo(X+2,base+4);ctx.lineTo(X+3,base);ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.stroke()});ctx.restore();
+  if(o.lab)label(x+6,y+11,o.lab,{size:11,weight:700,color:C["ink-soft"],align:"left",bga:.95});
+  if(o.thr!=null){const ty=y+h*(.72-o.thr*.6);line(x+4,ty,x+w-4,ty,C.warn,1.2,[4,3]);txt(x+w-6,ty-8,"threshold",{size:10.5,weight:600,align:"right",color:C["warn-ink"]})}}
+/* make a regular-ish spike list for a firing rate (per second) up to T */
+function spikesFor(rate,T,win,seed){const out=[];if(rate<=0)return out;const dt=1/rate;const t0=Math.floor((T-win)/dt)-1;for(let k=Math.max(0,t0);k*dt<=T;k++){out.push(k*dt+(rnd(k+(seed||0))-.5)*dt*.5)}return out}
+/* skin cross section */
+function skinBlock(x,y,w,h,o){o=o||{};rr(x,y,w,h*.16,3);fillStroke(C.skin,hexA(C["sk-edge"],.6),1.2);
+  ctx.fillStyle=C.derm;ctx.fillRect(x,y+h*.16,w,h*.5);ctx.fillStyle=C.fatl;ctx.fillRect(x,y+h*.66,w,h*.34);ctx.strokeStyle=hexA(C["sk-edge"],.5);ctx.lineWidth=1;ctx.strokeRect(x,y,w,h);
+  for(let i=0;i<w/26;i++){circ(x+13+i*26,y+h*.8+Math.sin(i)*4,8,hexA("#fff",.25),hexA(C["sk-edge"],.25),1)}
+  if(o.labels){txt(x+w+6,y+h*.08,"epidermis",{size:11,color:C["ink-soft"]});txt(x+w+6,y+h*.4,"dermis",{size:11,color:C["ink-soft"]});txt(x+w+6,y+h*.82,"fat",{size:11,color:C["ink-soft"]})}}
+/* free nerve ending: branching terminal pointing up from (x,y) */
+function freeEnding(x,y,len,col,act,T){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.lineCap="round";const br=[[-.5,1],[.0,1.1],[.45,.95],[-.2,.7],[.25,.6]];
+  br.forEach((b,i)=>{ctx.beginPath();ctx.moveTo(x,y);const ex=x+Math.sin(b[0])*len*b[1],ey=y-Math.cos(b[0])*len*b[1];ctx.quadraticCurveTo(x+Math.sin(b[0])*len*.3,y-len*.5,ex,ey);ctx.stroke();if(act>0)glow(ex,ey,8,col,act*(.5+.5*Math.sin(T*9+i)))});ctx.restore()}
+/* spinal cord cross section; returns anchors */
+function cordX(x,y,s,o){o=o||{};ell(x,y,s,s*.72,0,C.white,C["ink-soft"],1.6);
+  ctx.save();ctx.translate(x,y);ctx.beginPath();const k=s/100;
+  ctx.moveTo(0,-20*k);ctx.bezierCurveTo(-14*k,-26*k,-30*k,-62*k,-46*k,-58*k);ctx.bezierCurveTo(-52*k,-50*k,-34*k,-28*k,-26*k,-8*k);ctx.bezierCurveTo(-44*k,4*k,-62*k,30*k,-48*k,46*k);ctx.bezierCurveTo(-30*k,52*k,-16*k,26*k,0,22*k);
+  ctx.bezierCurveTo(16*k,26*k,30*k,52*k,48*k,46*k);ctx.bezierCurveTo(62*k,30*k,44*k,4*k,26*k,-8*k);ctx.bezierCurveTo(34*k,-28*k,52*k,-50*k,46*k,-58*k);ctx.bezierCurveTo(30*k,-62*k,14*k,-26*k,0,-20*k);ctx.closePath();
+  ctx.fillStyle=C.gray;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1.2;ctx.stroke();circ(0,0,3*k+1,C.panel,hexA(C.ink,.4),1);
+  if(o.dh){glow(-40*k,-48*k,22*k,C.pain,o.dh*.6);glow(40*k,-48*k,22*k,C.pain,(o.dhR||0)*.6)}ctx.restore();
+  const k2=s/100;return {dhL:[x-40*k2,y-48*k2],dhR:[x+40*k2,y-48*k2],vhL:[x-48*k2,y+36*k2],vhR:[x+48*k2,y+36*k2],stL:[x-70*k2,y+18*k2],stR:[x+70*k2,y+18*k2],c:[x,y]}}
+/* side view brain with regions. o.hl = {s1,ins,acc,pfc,thal,pag,rvm} alpha values */
+function brainSide(x,y,s,o){o=o||{};const hl=o.hl||{};const k=s/100;ctx.save();ctx.translate(x,y);
+  ctx.beginPath();ctx.moveTo(-95*k,10*k);ctx.bezierCurveTo(-110*k,-50*k,-50*k,-92*k,10*k,-88*k);ctx.bezierCurveTo(70*k,-86*k,108*k,-46*k,100*k,6*k);ctx.bezierCurveTo(96*k,36*k,70*k,46*k,40*k,40*k);ctx.bezierCurveTo(20*k,52*k,-10*k,50*k,-30*k,42*k);ctx.bezierCurveTo(-60*k,48*k,-92*k,40*k,-95*k,10*k);ctx.closePath();
+  fillStroke(C.brain,mix(C.brain,"#000",.4),1.8);
+  ctx.save();ctx.clip();ctx.strokeStyle=mix(C.brain,"#000",.28);ctx.lineWidth=1.3;for(let i=0;i<7;i++){ctx.beginPath();const yy=-80*k+i*18*k;ctx.moveTo(-100*k,yy);for(let j=0;j<=12;j++)ctx.lineTo(-100*k+j*17*k,yy+Math.sin(j*1.9+i*1.3)*6*k);ctx.stroke()}ctx.restore();
+  /* cerebellum + brainstem */
+  ell(58*k,52*k,30*k,18*k,.2,mix(C.brain,C.organ,.4),mix(C.brain,"#000",.4),1.4);
+  ctx.beginPath();ctx.moveTo(14*k,30*k);ctx.lineTo(30*k,30*k);ctx.lineTo(32*k,100*k);ctx.lineTo(18*k,100*k);ctx.closePath();fillStroke(mix(C.brain,C.organ,.25),mix(C.brain,"#000",.4),1.4);
+  const R={s1:[8*k,-70*k],ins:[-18*k,4*k],acc:[-20*k,-36*k],pfc:[-70*k,-28*k],thal:[8*k,-4*k],pag:[22*k,38*k],rvm:[24*k,80*k]};
+  const reg=(key,draw)=>{const a=hl[key]||0;ctx.save();draw(a);ctx.restore()};
+  reg("s1",a=>{ctx.beginPath();ctx.moveTo(-2*k,-88*k);ctx.quadraticCurveTo(14*k,-50*k,30*k,-16*k);ctx.strokeStyle=a>0?hexA(C.pain,.35+.65*a):hexA(C.ink,.25);ctx.lineWidth=(2.5+2.5*a)*k+2;ctx.stroke()});
+  reg("pfc",a=>{ell(R.pfc[0],R.pfc[1],20*k,24*k,0,a>0?hexA(C.evid,.2+.6*a):hexA(C.ink,.06),hexA(C.ink,.3),1)});
+  reg("acc",a=>{ctx.beginPath();ctx.arc(-10*k,-14*k,26*k,Math.PI*1.05,Math.PI*1.75);ctx.strokeStyle=a>0?hexA(C.cfib,.35+.65*a):hexA(C.ink,.22);ctx.lineWidth=(6+5*a)*k+1;ctx.stroke()});
+  reg("ins",a=>{ell(R.ins[0],R.ins[1],16*k,9*k,-.2,a>0?hexA(C.symp,.25+.65*a):hexA(C.ink,.07),hexA(C.ink,.3),1)});
+  reg("thal",a=>{ell(R.thal[0],R.thal[1],11*k,8*k,0,a>0?hexA(C.nerve,.4+.6*a):hexA(C.nerve,.3),hexA(C.ink,.4),1.2)});
+  reg("pag",a=>{circ(R.pag[0],R.pag[1],6*k+1,a>0?hexA(C.brake,.4+.6*a):hexA(C.brake,.3),hexA(C.ink,.45),1.2)});
+  reg("rvm",a=>{circ(R.rvm[0],R.rvm[1],6*k+1,a>0?hexA(C.brake,.4+.6*a):hexA(C.brake,.3),hexA(C.ink,.45),1.2)});
+  ctx.restore();const out={};Object.keys(R).forEach(kk=>out[kk]=[x+R[kk][0],y+R[kk][1]]);out.stem=[x+24*k,y+100*k];return out}
+/* neuron soma */
+function soma(x,y,r,col,act,lab,o){o=o||{};if(act>0)glow(x,y,r*2.4,col,.55*act);circ(x,y,r,mix(col,C.panel,.25),mix(col,"#000",.35),1.8);circ(x,y,r*.35,mix(col,"#000",.25));if(lab)txt(x+(o.lx||0),y+(o.ly==null?r+13:o.ly),lab,{size:o.size||11.5,weight:700,align:o.align||"center",color:o.lc||C.ink})}
+/* vertical perceived pain meter, val 0..10 */
+function painMeter(x,y,w,h,val,o){o=o||{};ctx.font=`700 11px ${MONO}`;const pw=Math.max(w+16,ctx.measureText(o.title||"perceived pain").width+14);panelBox(x+w/2-pw/2,y-30,pw,h+60,{fill:hexA(C.paper,.95)});txt(x+w/2,y-18,o.title||"perceived pain",{size:11,weight:700,align:"center",mono:true,color:C["ink-soft"]});
+  rr(x,y,w,h,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const f=clamp(val/10,0,1);if(f>0){const g=ctx.createLinearGradient(0,y+h,0,y);g.addColorStop(0,C.nerve);g.addColorStop(.5,C.symp);g.addColorStop(1,C.pain);ctx.fillStyle=g;rr(x,y+h*(1-f),w,h*f,6);ctx.fill()}
+  for(let i=0;i<=10;i+=2){const yy=y+h-h*i/10;line(x+w,yy,x+w+5,yy,C["ink-soft"],1.2);if(!o.noNums)txt(x+w+8,yy,String(i),{size:10.5,mono:true,color:C["ink-soft"]})}
+  txt(x+w/2,y+h+16,(Math.round(val*10)/10).toFixed(1),{size:15,weight:700,mono:true,align:"center"});if(o.note!==false)txt(x+w/2,y+h+30,"model, not a measure",{size:9.5,weight:600,align:"center",color:C["ink-soft"]})}
+/* volume knob f 0..1 */
+function knob(x,y,r,f,col,lab){circ(x,y,r,C.paper,C["ink-soft"],2);ctx.beginPath();ctx.arc(x,y,r-5,Math.PI*.75,Math.PI*2.25);ctx.strokeStyle=hexA(C.sunk,.95);ctx.lineWidth=5;ctx.stroke();ctx.beginPath();ctx.arc(x,y,r-5,Math.PI*.75,Math.PI*(.75+1.5*clamp(f,0,1)));ctx.strokeStyle=col;ctx.stroke();
+  const a=Math.PI*(.75+1.5*clamp(f,0,1));line(x,y,x+Math.cos(a)*(r-9),y+Math.sin(a)*(r-9),C.ink,2.4);circ(x,y,3.5,C.ink);if(lab)txt(x,y+r+12,lab,{size:11.5,weight:700,align:"center"})}
+/* 0 to 10 numeric rating scale boxes */
+function nrsBar(x,y,w,val,o){o=o||{};const bw=w/11;for(let i=0;i<=10;i++){const on=val!=null&&Math.round(val)===i;rr(x+i*bw+1,y,bw-2,26,4);ctx.fillStyle=on?C.pain:mix(C.nerve,C.pain,i/10);ctx.globalAlpha=on?1:.35;ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle=on?C.ink:C.rule;ctx.lineWidth=on?2:1;ctx.stroke();txt(x+i*bw+bw/2,y+13,String(i),{size:12,weight:700,mono:true,align:"center",color:on?"#fff":C.ink})}
+  if(o.ends!==false){txt(x,y+40,"no pain",{size:11,color:C["ink-soft"]});txt(x+w,y+40,"worst imaginable",{size:11,color:C["ink-soft"],align:"right"})}}
+/* inflammatory and signalling molecules: shape + letter so colour is never the only cue */
+const MOL={bk:["B","tri","pain"],pg:["P","hex","symp"],sp:["S","circ","cfib"],hi:["H","dia","opioid"],h:["H+","sq","warn"],op:["O","star","opioid"],ht:["5","circ","sero"],ne:["N","sq","boost"],glu:["G","circ","nerve"],ng:["N","dia","lig"]};
+function mol(x,y,k,r,a){r=r||7;const m=MOL[k];const col=C[m[2]];withA(a==null?1:a,()=>{ctx.beginPath();const sh=m[1];
+  if(sh==="tri"){ctx.moveTo(x,y-r*1.2);ctx.lineTo(x+r*1.15,y+r*.85);ctx.lineTo(x-r*1.15,y+r*.85);ctx.closePath()}
+  else if(sh==="dia"){ctx.moveTo(x,y-r*1.25);ctx.lineTo(x+r*1.05,y);ctx.lineTo(x,y+r*1.25);ctx.lineTo(x-r*1.05,y);ctx.closePath()}
+  else if(sh==="hex"){for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;i?ctx.lineTo(x+Math.cos(an)*r*1.1,y+Math.sin(an)*r*1.1):ctx.moveTo(x+Math.cos(an)*r*1.1,y+Math.sin(an)*r*1.1)}ctx.closePath()}
+  else if(sh==="sq"){ctx.rect(x-r*.9,y-r*.9,r*1.8,r*1.8)}
+  else if(sh==="star"){for(let i=0;i<10;i++){const an=i/10*TAU-Math.PI/2;const rad=i%2?r*.55:r*1.2;i?ctx.lineTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad):ctx.moveTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad)}ctx.closePath()}
+  else ctx.arc(x,y,r,0,TAU);
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1;ctx.stroke();ctx.font=`700 ${Math.round(r*(m[0].length>1?.95:1.25))}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(m[0],x,y+(sh==="tri"?r*.2:.5))})}
+/* gate: two doors whose opening is 0..1 */
+function gate(x,y,h,open,o){o=o||{};const w=10;const gap=6+open*30;rr(x-w/2,y-h/2,w,h/2-gap/2,3);fillStroke(o.col||C.inter,hexA(C.ink,.45),1.2);rr(x-w/2,y+gap/2,w,h/2-gap/2,3);fillStroke(o.col||C.inter,hexA(C.ink,.45),1.2);
+  if(o.lab)txt(x,y-h/2-10,o.lab,{size:11.5,weight:700,align:"center"})}
+/* simple smoke alarm with sensitivity */
+function alarmIcon(x,y,s,ring,T){circ(x,y,s,C.paper,C["ink-soft"],2);circ(x,y,s*.55,hexA(C.sunk,.8),C["ink-soft"],1.2);const on=ring>0&&Math.sin(T*10)>0;circ(x+s*.55,y-s*.55,s*.16,on?C.pain:hexA(C.ink,.25));
+  if(ring>0)for(let i=1;i<=3;i++){ctx.save();ctx.globalAlpha*=ring*(1-i*.25);ctx.beginPath();ctx.arc(x,y,s*(1+i*.35+.15*Math.sin(T*6)),-.6,.6);ctx.strokeStyle=C.pain;ctx.lineWidth=2.5;ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*(1+i*.35+.15*Math.sin(T*6)),Math.PI-.6,Math.PI+.6);ctx.stroke();ctx.restore()}}
+/* flame for heat stimulus */
+function flame(x,y,s,T){const f=1+.08*Math.sin(T*14);ctx.save();ctx.translate(x,y);ctx.scale(f,1/f);ctx.beginPath();ctx.moveTo(0,-s);ctx.bezierCurveTo(s*.7,-s*.3,s*.6,s*.5,0,s*.6);ctx.bezierCurveTo(-s*.6,s*.5,-s*.7,-s*.3,0,-s);fillStroke(C.symp,mix(C.symp,"#000",.3),1.2);
+  ctx.beginPath();ctx.moveTo(0,-s*.4);ctx.bezierCurveTo(s*.35,0,s*.3,s*.45,0,s*.5);ctx.bezierCurveTo(-s*.3,s*.45,-s*.35,0,0,-s*.4);ctx.fillStyle=C.lamp;ctx.fill();ctx.restore()}
+function pin(x,y,s,col){line(x,y-s,x,y,C.metal,3);circ(x,y-s,s*.22,col||C.pain,hexA(C.ink,.4),1)}
+/* foot outline seen from the side, toes to the right */
+function footSide(x,y,s,sk){ctx.beginPath();ctx.moveTo(x,y-s*.9);ctx.lineTo(x,y-s*.25);ctx.quadraticCurveTo(x-s*.1,y,x+s*.15,y);ctx.lineTo(x+s*.95,y);ctx.quadraticCurveTo(x+s*1.1,y-s*.08,x+s*.95,y-s*.18);ctx.quadraticCurveTo(x+s*.55,y-s*.3,x+s*.3,y-s*.45);ctx.lineTo(x+s*.3,y-s*.9);ctx.closePath();fillStroke(sk||C.sk3,hexA(C["sk-edge"],.7),1.4)}
+/* seated or standing person with a hand on the other elbow (rubbing) */
+function rubber(x,y,s,T,o){o=o||{};const p=person(x,y,s,Object.assign({pose:"stand"},o));const sk=C["sk"+(o.skin||2)];const r=Math.sin(T*8)*s*.03;const ex=x+s*.12,ey=y-s*.58;circ(ex+r,ey,s*.045,sk,hexA(C["sk-edge"],.7),1.2);return [ex,ey]}
+/* small clock for minutes or months */
+function tinyCal(x,y,lab,col){rr(x-20,y-16,40,34,4);fillStroke(C.paper,C["ink-soft"],1.3);ctx.fillStyle=col||C.accent;ctx.fillRect(x-20,y-16,40,9);txt(x,y+5,lab,{size:11,weight:700,align:"center",mono:true})}
+/* dashed arrow helper */
+function darrow(x1,y1,x2,y2,col,lw){arrow(x1,y1,x2,y2,col,lw||2,[5,4])}
+/* simple bed */
+function bedIcon(x,y,w,T,o){sleeper(x,y,w,Object.assign({T},o||{}))}
+/* fictional speech bubble with text */
+function say(x,y,w,h,t,o){bubble(x,y,w,h,t,Object.assign({size:12.5},o||{}))}
+/* a stack of descending arrows (brake traffic) */
+function brakeArrow(x1,y1,x2,y2,T,rate,col,lab){line(x1,y1,x2,y2,hexA(col,.5),3,[6,4]);const n=Math.max(0,Math.round(rate*4));for(let i=0;i<n;i++){const p=P(T*.45+i/n,1);const X=lerp(x1,x2,p),Y=lerp(y1,y2,p);glow(X,Y,9,col,.7);circ(X,Y,3.6,col,C.panel,1)}if(lab)txt((x1+x2)/2+8,(y1+y2)/2,lab,{size:11.5,weight:700,color:col})}
+/* deterministic spike times from a firing rate function (works when time is frozen) */
+function spikesInt(rateFn,t0,T,win,dt){dt=dt||.01;const out=[];let ph=0;for(let t=t0;t<=T;t+=dt){ph+=Math.max(0,rateFn(t))*dt;if(ph>=1){ph-=1;if(T-t<=win)out.push(t)}}return out}
+/* ================= pain modulation teaching model =================
+   A deliberately simple, made up model for learning. It is NOT a measurement and the numbers
+   are not real units. Directions of effect follow mainstream pain science. */
+function painModel(s){const sleepDebt=clamp((7.5-s.sleep)/4.5,0,1);
+  const sigma=clamp(.4*sleepDebt+.3*s.stress/10+.3*s.fear/10,0,1);
+  const A=1+.5*sigma,B0=1.5*Math.pow(sigma,1.5);
+  const g=clamp(1-.35*s.touch/10-.12*s.move/10,.4,1);
+  const relief=Math.max(0,s.expect-5)/5,worry=Math.max(0,5-s.expect)/5;
+  const b=.2+.2*s.move/10+.25*relief+.5*(s.danger||0)+.1*(1-sleepDebt);
+  const f=.25*s.stress/10+.2*s.fear/10+.25*worry+.2*sleepDebt;
+  const d=clamp(1-b+f,.25,1.8);
+  const spinalIn=s.tissue*A+B0;const S=spinalIn*g*d;
+  const a=1+.25*s.fear/10+.1*s.stress/10+.1*worry-.08*relief;
+  return {sleepDebt,sigma,A,B0,g,b,f,d,spinalIn,S,a,p:clamp(S*a,0,10)}}
+const SIM0={tissue:5,sleep:7.5,stress:3,fear:2,move:4,touch:0,expect:5};
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-pain-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-pain-lab-"+k,v)}catch(e){}}};
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+const S1=makeStage("cvSim",800,470),S3=makeStage("cvCalc",800,470),S5=makeStage("cvLife",800,470);
+let a11yKey="",a11yT=0,curTab="sim";
+/* ================= PART 1: pain dial simulator ================= */
+const SIM=Object.assign({},SIM0,{danger:0,p:null,hist:[],tt:0,done:new Set(),lastDanger:-99});
+const SLD=[["slTissue","tissue","oTissue",v=>v+" of 10"],["slSleep","sleep","oSleep",v=>v+" hours"],["slStress","stress","oStress",v=>v+" of 10"],["slFear","fear","oFear",v=>v+" of 10"],["slMove","move","oMove",v=>v+" of 10"],["slTouch","touch","oTouch",v=>v+" of 10"],["slExpect","expect","oExpect",v=>v<=1?"expects harm":v<=3?"some worry":v<=6?"neutral":v<=8?"hopeful":"expects relief"]];
+const PRESETS=[["Fresh ankle sprain",{tissue:7,sleep:7.5,stress:3,fear:4,move:2,touch:0,expect:5}],["Rough week",{tissue:3,sleep:4.5,stress:8,fear:6,move:1,touch:0,expect:3}],["Good day",{tissue:3,sleep:8.5,stress:1,fear:1,move:7,touch:0,expect:7}],["Rub the bump",{tissue:6,sleep:7.5,stress:2,fear:2,move:2,touch:9,expect:6}]];
+const SIMCHAL=["With tissue input at 6 or more, bring perceived pain below 3 without lowering the tissue input.","Set tissue input to 0 and still get perceived pain above 2, a nociplastic style pattern.","With tissue input at 5 or more, turn touch to 8 or more and close the gate below 70 percent open.","Press Sudden danger and watch the brakes surge.","Get perceived pain above 7 while tissue input is 5 or less."];
+function simUI(){SLD.forEach(s=>{const el=document.getElementById(s[0]);el.value=SIM[s[1]];document.getElementById(s[2]).textContent=s[3](SIM[s[1]]);el.setAttribute("aria-valuetext",s[3](SIM[s[1]]))})}
+SLD.forEach(s=>{document.getElementById(s[0]).addEventListener("input",e=>{SIM[s[1]]=+e.target.value;simUI();simChange()})});
+$("#simPresets").innerHTML="";PRESETS.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=p[0];b.onclick=()=>{Object.assign(SIM,p[1]);simUI();simChange();simMsg("info","Loaded: "+p[0]+".")};$("#simPresets").appendChild(b)});
+$("#simReset").onclick=()=>{Object.assign(SIM,SIM0);SIM.danger=0;simUI();simChange();simMsg("info","Back to the starting settings.")};
+$("#simDanger").onclick=()=>{SIM.danger=1;SIM.lastDanger=SIM.tt;SIM.done.add(3);simChange();simMsg("good","Sudden danger: the brainstem brakes surge, so the signal is turned down for a while. When the danger passes, the brakes ease off.")};
+function simMsg(cls,t){const m=$("#simStatus");m.className="status "+(cls==="good"?"good":cls==="warn"?"warn":"");m.textContent=t}
+function simModel(){return painModel(SIM)}
+function simChange(){const M=simModel();const p=M.p;
+  if(SIM.tissue>=6&&p<3)SIM.done.add(0);if(SIM.tissue===0&&p>2)SIM.done.add(1);if(SIM.tissue>=5&&SIM.touch>=8&&M.g<.7)SIM.done.add(2);if(p>7&&SIM.tissue<=5)SIM.done.add(4);
+  chalUI($("#simChal"),SIMCHAL,SIM.done);simRead();a11yKey="";
+  let t=M.d<.85?"The descending brakes are stronger than the boosters, so the signal is turned down.":M.d>1.15?"The boosters are stronger than the brakes, so the signal is turned up.":"Brakes and boosters are roughly balanced.";
+  if(M.g<.8)t+=" Touch and movement have partly closed the spinal gate.";if(M.sigma>.4)t+=" Sensitivity is high, so the spinal cord amplifies even small inputs.";if(SIM.tissue===0&&M.p>.5)t+=" There is pain with no tissue input: the system itself is producing it.";simMsg("info",t)}
+function pct(v){return Math.round(v*100)+"%"}
+function simRead(){const M=simModel();const rows=[["Tissue input",SIM.tissue+" of 10"],["Spinal sensitivity",pct(M.sigma)],["Spinal gate open",pct(M.g)],["Descending brakes",pct(M.b)],["Descending boosters",pct(M.f)],["Net descending effect",M.d<.97?"turns down to "+pct(M.d):M.d>1.03?"turns up to "+pct(M.d):"about neutral"],["Spinal output",(M.S).toFixed(1)],["Perceived pain (model)",M.p.toFixed(1)+" of 10"]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
+function simStep(dt){SIM.tt+=dt;if(SIM.danger>0){const age=SIM.tt-SIM.lastDanger;SIM.danger=age<3?1:Math.max(0,1-(age-3)/7);if(SIM.danger===0)simRead()}
+  const M=simModel();if(SIM.p==null)SIM.p=M.p;SIM.p+=(M.p-SIM.p)*Math.min(1,dt*1.6);
+  if(!SIM.hist.length||SIM.tt-SIM.hist[SIM.hist.length-1][0]>=.25){SIM.hist.push([SIM.tt,SIM.p]);while(SIM.hist.length&&SIM.tt-SIM.hist[0][0]>60)SIM.hist.shift()}
+  if(dt>0&&Math.floor(SIM.tt*2)!==Math.floor((SIM.tt-dt)*2))simRead()}
+function chip(x,y,w,txt_,col,up){rr(x,y-13,w,26,13);ctx.fillStyle=hexA(col,.16);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.stroke();txt(x+10,y,txt_,{size:12,weight:700});if(up!=null){const ax=x+w-14;if(up>0)arrow(ax,y+6,ax,y-7,col,2);else if(up<0)arrow(ax,y-6,ax,y+7,col,2)}}
+function simDraw(now){use(S1);const T=now/1000;const M=simModel();const P_=SIM.p==null?M.p:SIM.p;
+  lvl(14,16,"model");
+  /* brain */
+  const R=brainSide(150,110,70,{hl:{pag:M.b,rvm:M.b,pfc:.25+.5*Math.max(0,SIM.expect-5)/5,acc:.2+.6*SIM.fear/10,ins:.2+.5*SIM.stress/10,thal:clamp(M.S/10,0,1),s1:clamp(P_/10,0,1)}});
+  txt(R.stem[0]-14,R.stem[1]-6,"brain and brainstem",{size:11.5,weight:700,align:"right",color:C["ink-soft"]});
+  /* factor chips */
+  const sd=M.sleepDebt;chip(270,40,150,"sleep "+SIM.sleep+" h",sd>.2?C.pain:C.brake,sd>.2?1:-1);
+  chip(270,74,150,"stress "+SIM.stress,SIM.stress>3?C.pain:C.brake,SIM.stress>3?1:SIM.stress<3?-1:0);
+  chip(270,108,150,"fear "+SIM.fear,SIM.fear>2?C.pain:C.brake,SIM.fear>2?1:SIM.fear<2?-1:0);
+  chip(270,142,150,SIM.expect>5?"expects relief":SIM.expect<5?"expects harm":"expectation neutral",SIM.expect>5?C.brake:SIM.expect<5?C.pain:C["ink-soft"],SIM.expect>5?-1:SIM.expect<5?1:0);
+  chip(270,176,150,"movement "+SIM.move,SIM.move>4?C.brake:C["ink-soft"],SIM.move>4?-1:0);
+  if(SIM.danger>0)label(150,30,"sudden danger: brakes surge",{size:12,weight:700,border:C.brake,a:SIM.danger});
+  /* tissue panel */
+  panelBox(14,262,236,196);title(26,280,"tissue",C["ink-soft"]);skinBlock(30,300,200,110);
+  const ta=SIM.tissue/10;freeEnding(90,345,40,C.nerve,ta,T);if(SIM.tissue>0)glow(90,312,20+ta*18,C.pain,.25+.4*ta);
+  for(let r=12;r>3;r-=3)ell(185,352,r*.7,r,0,null,C.touch,1.3);if(SIM.touch>0||SIM.move>0)glow(185,352,18,C.touch,.25+.6*Math.max(SIM.touch,SIM.move*.4)/10);
+  if(SIM.touch>0){const hx=185+Math.sin(T*8)*14*(SIM.touch/10);rr(hx-22,286,44,14,7);fillStroke(C.sk3,C["sk-edge"],1.2);txt(185,440,"rubbing",{size:11.5,weight:700,align:"center",color:C["touch-ink"]})}
+  txt(90,440,"nociceptor",{size:11.5,weight:700,align:"center"});
+  /* fibers into the dorsal horn */
+  const pC=[[90,345],[90,420],[255,420],[330,420],[440,350]],pA=[[185,340],[230,300],[330,290],[440,318]];
+  axon(pC,"c",{a:.5+.5*ta});axon(pA,"ab",{a:.35+.65*Math.max(SIM.touch,SIM.move*.4)/10});
+  const nC=Math.round((SIM.tissue+M.B0)*.7),nA=Math.round(Math.max(SIM.touch,SIM.move*.4)*.6);
+  impulses(pC,T,.35,C.cfib,Math.max(1,nC),{max:nC>0?1:-1,r:3.2});impulses(pA,T,.9,C.touch,Math.max(1,nA),{max:nA>0?1:-1,r:3.2});
+  /* dorsal horn */
+  panelBox(270,232,286,226,{fill:hexA(C.gray,.35)});title(282,446,"dorsal horn: spinal gate",C["ink-soft"]);
+  const Tc=[490,340],SG=[420,400];const sgA=clamp(1-(M.g-.4)/.6,0,1);
+  soma(SG[0],SG[1],13,C.inter,.15+.85*sgA,"interneuron",{ly:24,size:11});line(SG[0]+12,SG[1]-4,Tc[0]-40,Tc[1]+16,hexA(C.inter,.5+.5*sgA),2.4);
+  gate(Tc[0]-40,Tc[1],80,(M.g-.4)/.6,{col:C.inter});txt(Tc[0]-40,Tc[1]-50,"gate "+pct(M.g),{size:11.5,weight:700,align:"center"});
+  const sOut=clamp(M.S/10,0,1);soma(Tc[0],Tc[1],20,C.pain,sOut,"T cell",{ly:32,size:11.5});
+  if(M.sigma>.15){ctx.save();ctx.globalAlpha*=M.sigma;ctx.strokeStyle=C.cfib;ctx.lineWidth=2;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(Tc[0],Tc[1],28+2*Math.sin(T*4),0,TAU);ctx.stroke();ctx.restore();txt(Tc[0]+30,Tc[1]+48,"sensitized",{size:11,weight:700,color:C["cfib-ink"],a:1})}
+  /* ascending output */
+  const up=[[Tc[0],Tc[1]-20],[Tc[0],218],[R.stem[0]+40,218],[R.stem[0]+4,R.stem[1]+4]];poly(up,hexA(C.pain,.4),2.4);const nU=Math.round(sOut*8);impulses(up,T,.5,C.pain,Math.max(1,nU),{max:nU>0?1:-1,r:3.6});
+  /* descending */
+  const dB=[[R.rvm[0]-4,R.rvm[1]],[R.rvm[0]-4,248],[340,248],[Tc[0]-18,Tc[1]-14]],dF=[[R.rvm[0]+4,R.rvm[1]],[R.rvm[0]+4,240],[348,240],[Tc[0]-10,Tc[1]-18]];
+  poly(dB,hexA(C.brake,.45),2,[5,4]);poly(dF,hexA(C.boost,.45),2,[5,4]);const nb=Math.round(M.b*7),nf=Math.round(M.f*7);
+  impulses(dB,T,.3,C.brake,Math.max(1,nb),{max:nb>0?1:-1,r:3.4});impulses(dF,T,.3,C.boost,Math.max(1,nf),{max:nf>0?1:-1,r:3});
+  txt(440,36,"descending brakes",{size:11.5,weight:700,color:C["brake-ink"]});meterBar(440,46,130,M.b,C.brake,"");txt(440,80,"descending boosters",{size:11.5,weight:700,color:C["boost-ink"]});meterBar(440,90,130,clamp(M.f,0,1),C.boost,"");
+  /* meter */
+  painMeter(624,64,40,210,P_,{title:"perceived pain",note:false});txt(644,324,"teaching model,",{size:11,weight:700,align:"center",color:C["ink-soft"]});txt(644,338,"not a measurement",{size:11,weight:700,align:"center",color:C["ink-soft"]});
+  /* history graph */
+  const g=graph({x:580,y:372,w:200,h:70,x0:-60,x1:0,y0:0,y1:10,xt:[-60,-30,0],yt:[0,10],xf:v=>v===0?"now":(-v)+" s ago",grid:false});
+  ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w,g.h+4);ctx.clip();ctx.beginPath();SIM.hist.forEach((h,i)=>{const X=g.X(h[0]-SIM.tt),Y=g.Y(h[1]);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.strokeStyle=C.pain;ctx.lineWidth=2.2;ctx.stroke();ctx.restore();
+  txt(580,360,"last minute",{size:11,weight:700,color:C["ink-soft"]})}
+function simA11y(){const M=simModel();const P_=M.p;
+  const lab=`Pain dial simulator. Tissue input ${SIM.tissue} of 10, gate ${pct(M.g)} open, brakes ${pct(M.b)}, boosters ${pct(M.f)}, perceived pain about ${P_.toFixed(0)} of 10 in the teaching model.`;
+  const d=`Red dots for nociceptor signals flow from the tissue panel at the lower left into the dorsal horn in the centre, at a rate set by tissue input (${SIM.tissue} of 10)${SIM.touch>0?", and blue touch dots flow in along a thick A beta fiber":""}. The green gate doors in front of the red transmission cell are ${pct(M.g)} open. From the brainstem at the top left, green brake dots and orange booster dots travel down to the gate; brakes are ${pct(M.b)} and boosters ${pct(M.f)}${SIM.danger>0?", with a sudden danger surge in the brakes":""}. Red output dots climb back to the brain. The vertical meter on the right reads about ${P_.toFixed(1)} of 10, labelled a teaching model, and a small line graph below shows the last minute.`;
+  return [lab,d]}
+/* ================= PART 2: predict and practise ================= */
+const NAMES=["Ana","Ben","Chloe","Dev","Elena","Femi","Grace","Hiro","Isla","Jamal","Kai","Lena","Mateo","Nora","Omar","Priya","Quinn","Rosa","Sam","Tara","Uma","Victor","Wen","Yusuf","Zoe"];
+const WHERE={tissue:"In the tissue (the nerve endings)",spinal:"In the spinal cord (dorsal horn)",brain:"In the brain and brainstem"};
+const DIRS={up:"Turns the volume up",down:"Turns the volume down"};
+const EVENTS=[
+ ["up","tissue","inflamed tissue",["{n} sprained an ankle an hour ago, and now it is swollen and warm.","{n} has a cut on the hand that has become red, warm and inflamed."],"Inflammatory chemicals such as bradykinin and prostaglandins lower the nociceptors' threshold. This is peripheral sensitization, in the tissue."],
+ ["up","tissue","sunburn",["{n} has a sunburn and then steps into a warm shower.","{n}'s sunburned shoulders sting when a warm backpack strap rests on them."],"Sunburned skin has sensitized nociceptors, so warmth or pressure that is normally fine now hurts. The change starts in the tissue."],
+ ["down","tissue","less prostaglandin",["After a dental procedure, {n} takes an anti inflammatory medicine that reduces prostaglandin production.","{n} takes an anti inflammatory medicine for a swollen, sore wrist."],"Fewer prostaglandins means the nociceptors' threshold rises back toward normal, so less signal starts in the tissue."],
+ ["down","tissue","healing",["Two weeks after a minor sprain, the swelling in {n}'s ankle has gone down.","{n}'s grazed knee has healed over and is no longer red."],"As inflammation settles, peripheral sensitization fades and the nerve endings fire less."],
+ ["down","tissue","cooling",["{n} holds a cool pack on a bruised shin for a few minutes.","{n} runs cool water over a minor kitchen burn."],"Cooling reduces nociceptor firing and slows local nerve conduction, so less signal starts in the tissue."],
+ ["up","spinal","wind up",["In a research test, {n}'s forearm is tapped with the same firm probe once every second for 20 seconds.","{n} has a firm probe pressed on the same spot once per second, again and again."],"Repeated C fiber input at a fast enough rate makes dorsal horn neurons respond more each time. This is wind up, in the spinal cord."],
+ ["up","spinal","allodynia",["Days after a bad burn, light touch from a shirt sleeve near the burn now hurts {n}.","Since a shoulder injury, even a light blanket over the area feels painful to {n}."],"Central sensitization lets A beta touch input reach pain pathways in the dorsal horn, so touch now hurts. This is allodynia."],
+ ["up","spinal","secondary hyperalgesia",["After a deep cut, the healthy skin around the wound on {n}'s arm becomes extra sensitive to a pin prick.","The skin several centimetres around {n}'s injured knee is now unusually sensitive to firm pokes."],"Sensitivity in healthy tissue around an injury comes from more excitable spinal neurons: secondary hyperalgesia from central sensitization."],
+ ["down","spinal","rubbing",["{n} bumps an elbow on a door frame and rubs it straight away.","{n} stubs a toe and squeezes and rubs the foot."],"Rubbing sends A beta touch signals that excite inhibitory interneurons and help close the spinal gate."],
+ ["down","spinal","vibration",["{n} rests a gently vibrating pad beside a sore knee.","{n} uses a vibrating massage device near an aching calf muscle."],"Vibration activates A beta fibers, which help close the gate in the dorsal horn."],
+ ["down","brain","placebo",["{n} is given an inactive cream, told it often helps, and expects real relief.","{n} takes a sugar pill believing it is a strong pain reliever."],"Expecting relief activates prefrontal areas and the PAG and RVM brakes, partly through the body's own opioids. This is placebo analgesia."],
+ ["up","brain","nocebo",["Just before an injection, {n} is told, \"This is going to really hurt.\"","{n} reads a long list of frightening side effects and expects a procedure to be agony."],"Expecting harm raises threat appraisal and boosts descending facilitation. This is a nocebo effect, in the brain and brainstem."],
+ ["up","brain","poor sleep",["{n} slept only 4 hours last night.","{n} has had broken sleep for three nights in a row."],"Sleep loss weakens descending inhibition and raises pain sensitivity the next day."],
+ ["down","brain","good sleep",["After a week of regular 8 hour nights, {n}'s sleep is back on track.","{n} has been sleeping well since setting a steady bedtime routine."],"Good sleep supports the descending brakes and lowers pain sensitivity."],
+ ["up","brain","ongoing stress",["{n} has been under heavy money and work stress for months.","{n} has been caring for a sick relative with little rest for months."],"Long lasting stress weakens the brakes and strengthens the boosters, so the brain and brainstem turn pain up."],
+ ["down","brain","sudden danger",["During an emergency evacuation, {n} twists a knee but feels little pain until safely outside.","{n} is hurt during a sudden accident and only notices the pain once help arrives."],"Sudden intense threat triggers stress induced analgesia: the descending brakes surge for a while."],
+ ["up","brain","catastrophizing",["{n} keeps thinking, \"This back pain means my spine is crumbling.\"","{n} cannot stop imagining the worst about a sore neck and feels helpless."],"Catastrophizing raises the threat value the brain assigns and strengthens descending boosters."],
+ ["down","brain","distraction",["{n} gets absorbed in a favourite video game and notices a headache much less.","{n} becomes engrossed in a conversation with friends and forgets about a sore wrist for a while."],"Attention shifts away from the signal, and the brain turns down how much it is processed."],
+ ["down","brain","exercise",["{n} finishes a 20 minute brisk walk, and a sore knee feels less sensitive for a while.","After a steady bike ride, {n}'s pressure pain threshold is higher than before."],"Exercise induced hypoalgesia comes mainly from descending brakes and related brain mechanisms."],
+ ["down","brain","social support",["{n} holds the hand of a trusted partner during a painful procedure.","{n}'s family responds calmly and kindly when {n} has a flare of back pain."],"Feeling supported lowers threat and stress, so the brain turns pain down."],
+ ["up","brain","fear of harm",["{n} avoids bending because a friend said bending will damage a spinal disc.","{n} is afraid that walking on a healing ankle will break something."],"Fear of harm raises threat appraisal and feeds the boosters, turning pain up."],
+ ["down","brain","pain education",["{n} learns that most back pain is not a sign of serious damage and feels much less worried.","A clinician explains to {n} how the nervous system can become more protective, and {n}'s fear eases."],"Understanding pain reduces threat and fear, which helps the brain turn the volume down."]];
+const CTYPES=[["mix","Mixed practice"],["volume","Predict: up or down, and where"],["time","Calculate: conduction time"],["mcid","Calculate: change in pain score"]];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function fmtD(v,dp){return fmtNum(v,dp)}
+const GEN={
+ volume(){const e=pick(EVENTS);const n=pick(NAMES);const text=pick(e[3]).split("{n}").join(n);
+   return {kind:"pred",title:"Predict then watch",html:`<p>${text}</p><p class="small">Predict both parts, then press Check.</p>`,dir:e[0],where:e[1],tag:e[2],why:e[4],name:n,unit:"",
+     hints:["Ask first: does this make the system more protective (up) or less protective (down)?","Where does it act: in the injured tissue itself, in the dorsal horn of the spinal cord, or in the brain and brainstem with its brakes and boosters?",e[0]==="up"?"It turns the volume up. "+e[4].split(".")[0]+".":"It turns the volume down. "+e[4].split(".")[0]+"."],slips:[]}},
+ time(){const f=pick(["ad","ad","c","c","ab"]);const sp={ad:[10,12,15,20,25,30],c:[.5,.8,1,1.2,1.5,2],ab:[40,50,60,70]}[f];const v=pick(sp);const site=pick([["foot",1.0],["foot",1.1],["calf",.8],["hand",.8],["hand",.75],["shoulder",.5],["knee",.6]]);const d=site[1];
+   const sec=d/v;const ms=f!=="c";const ans=ms?sec*1000:sec;const dp=ms?(ans<10?1:0):(sec<1?2:2);const unit=ms?"ms":"s";
+   const fname={ad:"A delta",c:"C",ab:"A beta"}[f];
+   return {kind:"num",f,v,d,site:site[0],sec,title:"Conduction time",html:`<p>A signal travels about <b>${d} m</b> from the ${site[0]} to the spinal cord on a <b>${fname}</b> fiber conducting at <b>${v} m/s</b>. How long does it take, in <b>${unit}</b>?</p>`,ans:+fmtD(ans,dp).replace(/,/g,""),dp,unit,tol:.02,
+     hints:["Time = distance ÷ speed.","Keep distance in metres and speed in metres per second. Metres cancel and the answer comes out in seconds.",ms?`${d} ÷ ${v} = ${+sec.toPrecision(3)} s, then multiply by 1000 to get ms.`:`${d} ÷ ${v} gives the answer in seconds.`],
+     slips:[[ms?v/d*1000:v/d,"That divides speed by distance. Time = distance ÷ speed."],[ms?sec:sec*1000,ms?"That is the answer in seconds. Multiply by 1000 to give ms.":"That is in ms. The question asks for seconds."]],
+     lines:[{t:"time = distance ÷ speed"},{ch:[[F(String(d),"m"),F("1","s",String(v),"m")],[String(+sec.toPrecision(3)),["s"]]]}].concat(ms?[{t:`${+sec.toPrecision(3)} s × 1000 = ${fmtD(ans,dp)} ms`}]:[]),
+     sol:`${fmtD(ans,dp)} ${unit}`,miss:"dividing speed by distance, or forgetting to convert seconds to ms."}},
+ mcid(){const b=4+Math.floor(Math.random()*7);const a=Math.max(0,b-1-Math.floor(Math.random()*Math.min(5,b)));const ch=b-a;const pc=ch/b*100;const ans=Math.round(pc);
+   const meets=pc>=30;return {kind:"num",b,a,title:"Change in pain score",html:`<p>On a 0 to 10 numeric rating scale, pain falls from <b>${b}</b> to <b>${a}</b>. What is the <b>percent change</b>, rounded to a whole number?</p>`,ans,dp:0,unit:"%",tol:.004,
+     hints:["Find the change in points first: before minus after.","Divide the change by the BEFORE score, not the after score.",`${ch} ÷ ${b} × 100 = ?`],
+     slips:[[a>0?Math.round(ch/a*100):NaN,"That divides by the after score. Divide the change by the starting score."],[ch,"That is the change in points. Turn it into a percent of the starting score."],[Math.round(a/b*100),"That is the after score as a share of the before score. Use the change instead."]].filter(s=>isFinite(s[0])&&s[0]!==ans),
+     lines:[{t:`change = ${b} − ${a} = ${ch} point${ch===1?"":"s"}`},{t:`percent = ${ch} ÷ ${b} × 100`},{t:`= ${fmtD(pc,1)} percent`}],sol:`${ans} percent`,
+     note:meets?`That meets the common benchmark of about 30 percent${ch>=2?" and 2 points":""}.`:`That is below the common benchmark of about 30 percent${ch>=2?", although it does reach 2 points":""}.`,miss:"dividing by the after score makes the change look bigger than it is."}}};
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:+(store.get("best")||0),count:0,solT:0,pd:null,pw:null};
+function calcNew(){const keys=Object.keys(GEN);const k=TR.type==="mix"?pick(keys):TR.type;const q=GEN[k]();
+  TR.p=q;TR.p.gen=k;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.pd=null;TR.pw=null;
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}`;const pred=q.kind==="pred";
+  $("#predBox").hidden=!pred;$("#calcAnsRow").hidden=pred;$("#calcUnit").textContent=q.unit;$("#calcAns").value="";
+  if(pred){const db=$("#dirBtns"),wb=$("#whereBtns");db.innerHTML="";wb.innerHTML="";
+    Object.keys(DIRS).forEach(k2=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=DIRS[k2];b.dataset.k=k2;b.setAttribute("aria-pressed","false");b.onclick=()=>{TR.pd=k2;db.querySelectorAll("button").forEach(x=>{x.setAttribute("aria-pressed",String(x.dataset.k===k2));x.classList.remove("wrong","right")})};db.appendChild(b)});
+    Object.keys(WHERE).forEach(k2=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=WHERE[k2];b.dataset.k=k2;b.setAttribute("aria-pressed","false");b.onclick=()=>{TR.pw=k2;wb.querySelectorAll("button").forEach(x=>{x.setAttribute("aria-pressed",String(x.dataset.k===k2));x.classList.remove("wrong","right")})};wb.appendChild(b)})}
+  $("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=pred?"Predict, then watch the knob and meter move.":q.title+": the picture shows the setup; the worked solution builds after you answer.";a11yKey=""}
+function parseAns(s){s=String(s).trim().replace(/,/g,"").replace(/−/g,"-").replace(/\s*(ms|s|seconds?|percent|%)\s*$/i,"");if(!/^[+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){if(p.kind==="pred"){const pr=String(str).split("|");if(pr.length<2||!pr[0]||!pr[1])return {ok:false,kind:"empty"};const dOk=pr[0]===p.dir,wOk=pr[1]===p.where;
+    if(dOk&&wOk)return {ok:true};return {ok:false,kind:"pred",dOk,wOk}}
+  const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};const tolA=Math.max(p.tol*Math.abs(p.ans),.6*Math.pow(10,-p.dp));
+  if(Math.abs(v-p.ans)<=tolA)return {ok:true};
+  const sl=p.slips.find(s=>isFinite(s[0])&&Math.abs(v-s[0])<=Math.max(.015*Math.abs(s[0]),.6*Math.pow(10,-p.dp)));if(sl)return {ok:false,kind:"slip",msg:sl[1]};
+  if(p.ans&&Math.abs(v-p.ans)/Math.abs(p.ans)<=.06)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function ansStr(p){return p.kind==="pred"?`${DIRS[p.dir].toLowerCase()}, ${WHERE[p.where].charAt(0).toLowerCase()+WHERE[p.where].slice(1)}`:p.sol}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcCheck(){const p=TR.p;const str=p.kind==="pred"?(TR.pd||"")+"|"+(TR.pw||""):$("#calcAns").value;const j=judge(p,str);
+  if(j.kind==="empty"){calcMsg("info",p.kind==="pred"?"Pick one answer in each part first.":"Type a number in the answer box first.");return}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;
+    if(p.kind==="pred"){document.querySelectorAll("#dirBtns button,#whereBtns button").forEach(b=>{if(b.getAttribute("aria-pressed")==="true")b.classList.add("right")})}
+    let t=p.kind==="pred"?`✓ Correct: it ${DIRS[p.dir].toLowerCase()}, mainly ${WHERE[p.where].charAt(0).toLowerCase()+WHERE[p.where].slice(1)}. ${p.why}`:`✓ Correct: ${ansStr(p)}.`;if(p.note)t+=" "+p.note;calcMsg("good",t+" Now watch the picture.");showSol(false)}
+  else{TR.first=false;TR.streak=0;let msg="Not quite. ";
+    if(j.kind==="pred"){document.querySelectorAll("#dirBtns button").forEach(b=>{if(b.getAttribute("aria-pressed")==="true")b.classList.add(j.dOk?"right":"wrong")});document.querySelectorAll("#whereBtns button").forEach(b=>{if(b.getAttribute("aria-pressed")==="true")b.classList.add(j.wOk?"right":"wrong")});
+      msg+=(j.dOk?"The volume direction is right. ":"Check the direction: is the system becoming more or less protective? ")+(j.wOk?"The place is right.":"Check where it acts. "+TR.p.hints[1])}
+    else if(j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Keep extra digits in the middle steps and round only at the end.";else msg+="Check the setup. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+$("#calcType").innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");$("#calcType").onchange=e=>{TR.type=e.target.value;calcNew()};
+$("#calcCheck").onclick=()=>calcCheck();$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+$("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;
+  b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Watch the answer.</div>`:"")};
+$("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Answer: ${ansStr(TR.p)}. `+(TR.p.kind==="pred"?TR.p.why:"Watch each step build, then try a new problem."))};
+$("#calcNew").onclick=()=>{calcNew();const f=TR.p.kind==="pred"?$("#dirBtns button"):$("#calcAns");if(f)f.focus()};
+/* ---------- trainer picture ---------- */
+function drawCalc(now){use(S3);const T=now/1000;const p=TR.p;if(!p)return;const st=TR.sol?(now-TR.solT)/1000:-1;
+  if(p.kind==="pred")drawPred(p,T,st);else if(p.gen==="time")drawTime(p,T,st);else drawMcid(p,T,st)}
+function drawPred(p,T,st){lvl(14,16,"model");const sites=["tissue","spinal","brain"];const nm=["tissue","spinal cord","brain and brainstem"];const k=st<0?0:smooth(clamp((st-.4)/2,0,1));
+  label(400,44,st<0?"predict: up or down, and where?":p.tag,{size:15,weight:700,border:C.evid});
+  line(40,170,700,170,hexA(C.nerve,.8),4);const kv=sites.map(s=>s===p.where?.5+(p.dir==="up"?.32:-.32)*k:.5);
+  sites.forEach((s,i)=>{const x=40+i*230;const hi=st>=0&&s===p.where;card(x,100,200,140,hi?(p.dir==="up"?C.pain:C.brake):C.act3,hi);txt(x+100,120,nm[i],{size:14,weight:700,align:"center"});
+    if(i===0)skinBlock(x+40,140,120,60);if(i===1)cordX(x+100,180,46);if(i===2)brainShape(x+100,180,44);
+    knob(x+100,320,40,kv[i],hi?(p.dir==="up"?C.pain:C.brake):C.act3,"");if(st<0)txt(x+100,385,"?",{size:22,weight:700,align:"center",color:C["ink-soft"]});else if(hi)label(x+100,385,p.dir==="up"?"turned up":"turned down",{size:13,weight:700,border:p.dir==="up"?C.pain:C.brake})});
+  let tot=1;kv.forEach(v=>tot*=.5+v);const val=4*tot;
+  for(let i=0;i<7;i++){const q=P(T*.13+i/7,1);const x=lerp(30,710,q);let s=4;sites.forEach((ss,j)=>{if(x>40+j*230+100)s*=.5+kv[j]});glow(x,170,s*3,C.pain,.8);circ(x,170,s,C.pain,C.panel,1)}
+  painMeter(735,100,24,230,val,{title:"pain",noNums:true,note:false});txt(747,400,"model",{size:10.5,weight:600,align:"center",color:C["ink-soft"]});
+  txt(400,440,st<0?"Predict the direction and the place, then press Check.":(p.dir==="up"?"Volume up ":"Volume down ")+"in the "+nm[sites.indexOf(p.where)]+".",{size:13.5,weight:700,align:"center"})}
+function drawTime(p,T,st){lvl(14,16,"num");const ms=p.unit==="ms";
+  /* body to cord */
+  person(80,440,300,{skin:2,cloth:"cl3",hair:1});const startY={foot:432,calf:380,knee:372,hand:300,shoulder:225}[p.site]||432;const startX={foot:86,calf:86,knee:86,hand:110,shoulder:100}[p.site]||86;
+  const path=[[startX,startY],[96,260],[78,200]];poly(path,hexA(C.nerve,.9),2.4);ell(78,200,8,12,0,C.white,C["ink-soft"],1.2);label(124,200,"spinal cord",{size:11.5,weight:700,align:"left",border:C.nerve});
+  const col=C[FIB[p.f].col];const travel=clamp(P(T,4)*4/2.5,0,1);dotAt(path,travel,col,5);label(startX+50,startY-14,p.d+" m",{size:12.5,weight:700,border:C.ink,align:"left"});
+  axon([[200,110],[380,110]],p.f);txt(290,140,FIB[p.f].name+" fiber, "+p.v+" m/s",{size:13,weight:700,align:"center"});
+  if(st<0){panelBox(410,40,370,180);title(424,62,"set up",C["accent-ink"]);txt(424,92,"distance = "+p.d+" m",{size:14,weight:600,mono:true});txt(424,120,"speed = "+p.v+" m/s",{size:14,weight:600,mono:true});txt(424,148,"time = ?  ("+p.unit+")",{size:14,weight:600,mono:true});wrapText("Answer on the right, then watch the worked solution.",424,186,340,17,{size:12.5,color:C["ink-soft"]})}
+  else wsteps(410,30,375,420,{title:"Worked solution",lines:p.lines,ans:p.sol,miss:p.miss},st*1.3,{size:13,step:1.1,missH:40});
+  const g=graph({x:200,y:250,w:180,h:120,x0:0,x1:1,y0:0,y1:1,xt:[],yt:[],grid:false,title:"arrival"});const frac=clamp(P(T,4)*4/2.5,0,1);rr(g.x+2,g.y+40,(g.w-4)*frac,30,5);ctx.fillStyle=hexA(col,.7);ctx.fill();txt(g.x+g.w/2,g.y+g.h+16,ms?"fast: milliseconds":"slow: about a second or more",{size:12,weight:700,align:"center"})}
+function drawMcid(p,T,st){lvl(14,16,"num");const k=smooth(clamp(P(T,6)*6/2,0,1));const v=p.b-(p.b-p.a)*k;
+  title(30,52,"numeric rating scale",C["ink-soft"]);nrsBar(30,66,360,v);label(30+360/11*(p.b+.5),120,"before "+p.b,{size:12,weight:700,border:C.ink});
+  title(30,170,"benchmark",C["ink-soft"]);rr(30,186,360,24,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(30,186,360*.3,24,6);ctx.fillStyle=hexA(C.gold,.75);ctx.fill();txt(40,198,"about 30%",{size:12,weight:700});
+  if(st>=0){const pc=(p.b-p.a)/p.b;rr(30,220,360*pc*clamp(st/1.5,0,1),24,6);ctx.fillStyle=C.pain;ctx.fill();txt(40,232,Math.round(pc*100)+"%",{size:12,weight:700,color:"#fff"})}
+  if(st<0){panelBox(410,40,370,180);title(424,62,"set up",C["accent-ink"]);txt(424,92,"before = "+p.b+", after = "+p.a,{size:14,weight:600,mono:true});txt(424,120,"percent change = ?",{size:14,weight:600,mono:true});wrapText("Answer on the right, then watch the worked solution.",424,160,340,17,{size:12.5,color:C["ink-soft"]})}
+  else wsteps(410,30,375,420,{title:"Worked solution",lines:p.lines,ans:p.sol,miss:p.miss},st*1.3,{size:13,step:1.1,missH:40});
+  person(150,450,170,{skin:5,cloth:"cl2",hair:2});say(200,290,170,46,"About a "+p.a+" now.",{tail:[170,330],size:13,weight:700,a:k})}
+function calcA11y(){const p=TR.p;if(!p)return ["",""];if(p.kind==="pred")return [`Predict item: ${p.tag}. ${TR.sol?"Answer shown: "+ansStr(p)+".":"Not answered yet."}`,`Three boxes sit in a row, labelled tissue, spinal cord, and brain and brainstem, joined by a yellow line with red signal dots flowing left to right. Each box has a volume knob under it, and a pain meter labelled model stands on the right. ${TR.sol?"The knob under the "+p.where+" box turns "+p.dir+" and the meter "+(p.dir==="up"?"rises":"falls")+".":"Question marks sit under the knobs until you answer."}`];
+  if(p.gen==="time")return [`Conduction time problem: ${p.d} m at ${p.v} m/s.`,`A person stands on the left with a yellow nerve line from the ${p.site} to the spinal cord, and a coloured dot travels along it. A ${FIB[p.f].name} fiber is drawn at the top. ${TR.sol?"On the right, a worked solution builds: time equals distance divided by speed, giving "+p.sol+".":"On the right, a set up box lists the distance and speed."}`];
+  return [`Pain score change from ${p.b} to ${p.a}.`,`A 0 to 10 rating scale with coloured boxes shows the highlight moving from ${p.b} to ${p.a}. Below it, a gold benchmark bar marks about 30 percent. ${TR.sol?"A red bar shows the actual percent change and a worked solution builds on the right, ending at "+p.sol+".":"A set up box on the right lists the before and after scores."}`]}
+/* ================= PART 3: matching game ================= */
+const SROUNDS=[
+{name:"Fiber type to properties",goal:"Match each property to the fiber type it describes.",bins:[["ab","A beta"],["ad","A delta"],["c","C fiber"]],cards:[
+ ["Thick and heavily myelinated","ab","A beta fibers: the thickest of the three, with the most myelin."],
+ ["Carries light touch and vibration","ab","A beta fibers: they carry touch, pressure and vibration, not pain in healthy tissue."],
+ ["Fastest: about 35 to 75 m/s","ab","A beta fibers: thick myelinated fibers conduct fastest."],
+ ["Rubbing a bump sends signals along these","ab","A beta fibers: their touch input helps close the spinal gate."],
+ ["Thin and lightly myelinated","ad","A delta fibers: thin, with a thin myelin wrap."],
+ ["Sharp, quick, well localized first pain","ad","A delta fibers: they carry fast first pain."],
+ ["About 5 to 30 m/s","ad","A delta fibers: faster than C, slower than A beta."],
+ ["Thinnest, with no myelin","c","C fibers: unmyelinated, so they are the slowest."],
+ ["Dull, aching or burning second pain","c","C fibers: they carry slow, poorly localized second pain."],
+ ["About 0.5 to 2 m/s","c","C fibers: the slowest of the three."],
+ ["Many are polymodal and release substance P","c","C fibers: many respond to heat, pressure and chemicals and release substance P."],
+ ["Repeated input at about 1 per second causes wind up","c","C fibers: repeated C input drives wind up in the dorsal horn."]]},
+{name:"Mechanism to example",goal:"Match each example to the mechanism that best explains it.",bins:[["psens","Peripheral sensitization"],["gate","Gate control"],["desc","Descending modulation"],["csens","Central sensitization"]],cards:[
+ ["A sunburn makes a warm shower sting","psens","Peripheral sensitization: sunburned skin has sensitized nociceptors."],
+ ["Bradykinin and prostaglandins lower nociceptor thresholds","psens","Peripheral sensitization: the inflammatory soup acts on the nerve endings."],
+ ["A swollen sprain hurts with light pressure on the sore spot","psens","Peripheral sensitization: primary hyperalgesia at the injured site."],
+ ["Rubbing a bumped elbow eases the pain","gate","Gate control: A beta touch input quiets transmission cells."],
+ ["A vibrating pad near a sore knee dulls the ache","gate","Gate control: vibration activates A beta fibers."],
+ ["Touch fibers excite inhibitory interneurons in the dorsal horn","gate","Gate control: this is the core of Melzack and Wall's idea."],
+ ["An athlete feels little pain until the game ends","desc","Descending modulation: stress induced analgesia from the brainstem brakes."],
+ ["Placebo relief that an opioid blocker can reduce","desc","Descending modulation: placebo relief uses the body's own opioid brakes."],
+ ["Serotonin and norepinephrine released in the dorsal horn","desc","Descending modulation: these are part of the brainstem brakes."],
+ ["A shirt sleeve on skin near a healing burn hurts","csens","Central sensitization: touch now reaches pain pathways (allodynia)."],
+ ["Repeated identical taps feel worse each time","csens","Central sensitization: wind up and temporal summation in the spinal cord."],
+ ["Healthy skin around an injury becomes extra sensitive","csens","Central sensitization: secondary hyperalgesia."]]},
+{name:"Pain mechanism types",goal:"Sort each description into the main mechanism type.",bins:[["noci","Nociceptive"],["neuro","Neuropathic"],["nocip","Nociplastic"]],cards:[
+ ["Ankle sprain in the first week","noci","Nociceptive: injured tissue is activating nociceptors."],
+ ["Knee arthritis pain that comes with activity","noci","Nociceptive: joint tissue changes activate nociceptors."],
+ ["Pain at a surgical incision in the first days","noci","Nociceptive: the surgery caused tissue injury and inflammation."],
+ ["Pain from activation of nociceptors by tissue damage or threat","noci","Nociceptive: this is the IASP definition."],
+ ["Burning, shooting leg pain from a compressed nerve root","neuro","Neuropathic: the nerve root itself is affected."],
+ ["Pain that continues after a shingles rash has healed","neuro","Neuropathic: the virus damaged sensory nerves."],
+ ["Numbness and burning in both feet with diabetes","neuro","Neuropathic: diabetic nerve damage."],
+ ["Pain caused by a lesion or disease of the somatosensory nervous system","neuro","Neuropathic: this is the IASP definition."],
+ ["Widespread pain with poor sleep and fatigue and normal tests","nocip","Nociplastic: the pattern seen in fibromyalgia."],
+ ["Pain with extra sensitivity to touch, light and sound and no tissue cause found","nocip","Nociplastic: signs of altered processing in the nervous system."],
+ ["Pain from altered nociception without tissue damage or nerve disease to explain it","nocip","Nociplastic: this is the IASP 2017 definition."]]},
+{name:"Turns it up or turns it down",goal:"Sort each factor by its usual effect on pain.",bins:[["up","Tends to turn pain up"],["down","Tends to turn pain down"]],cards:[
+ ["Several nights of poor sleep","up","Turns it up: sleep loss lowers pain thresholds and weakens the brakes."],
+ ["Catastrophizing","up","Turns it up: expecting the worst raises threat and boosters."],
+ ["Fear of movement and avoidance","up","Turns it up: it feeds the fear avoidance cycle."],
+ ["Being told the back is crumbling","up","Turns it up: frightening words can cause a nocebo effect."],
+ ["Months of heavy stress","up","Turns it up: ongoing stress weakens the brakes."],
+ ["Expecting harm","up","Turns it up: this is a nocebo effect."],
+ ["Regular exercise and movement","down","Turns it down: exercise induced hypoalgesia and better fitness."],
+ ["Learning how pain works","down","Turns it down: education lowers fear and threat."],
+ ["Supportive family and friends","down","Turns it down: support lowers threat and stress."],
+ ["Expecting relief","down","Turns it down: this is placebo analgesia."],
+ ["Rubbing or gentle pressure","down","Turns it down: A beta input closes the spinal gate."],
+ ["Sudden intense danger, for a while","down","Turns it down: stress induced analgesia."]]}];
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  switch(k){
+  case "ab":return sv('<circle cx="28" cy="23" r="17" fill="var(--myelin)" stroke="var(--touch)" stroke-width="2"/><circle cx="28" cy="23" r="10" fill="var(--touch)"/>');
+  case "ad":return sv('<circle cx="28" cy="23" r="12" fill="var(--myelin)" stroke="var(--adelta)" stroke-width="2"/><circle cx="28" cy="23" r="7" fill="var(--adelta)"/>');
+  case "c":return sv('<circle cx="20" cy="23" r="5" fill="var(--cfib)"/><circle cx="33" cy="18" r="5" fill="var(--cfib)"/><circle cx="34" cy="30" r="5" fill="var(--cfib)"/>');
+  case "psens":return sv('<path d="M14 36 L22 22 L30 36 Z" fill="var(--pain)" stroke="var(--ink)"/><polygon points="40,12 46,15 46,22 40,25 34,22 34,15" fill="var(--symp)" stroke="var(--ink)"/><path d="M28 44 V30" stroke="var(--nerve)" stroke-width="3"/>');
+  case "gate":return sv('<rect x="18" y="6" width="8" height="15" rx="2" fill="var(--inter)" stroke="var(--ink)"/><rect x="18" y="27" width="8" height="15" rx="2" fill="var(--inter)" stroke="var(--ink)"/><circle cx="42" cy="24" r="9" fill="var(--pain)" stroke="var(--ink)"/>');
+  case "desc":return sv('<path d="M28 4 V36" stroke="var(--brake)" stroke-width="4"/><path d="M18 30 L28 42 L38 30" fill="none" stroke="var(--brake)" stroke-width="4"/>');
+  case "csens":return sv('<circle cx="28" cy="23" r="9" fill="var(--pain)" stroke="var(--ink)"/><circle cx="28" cy="23" r="17" fill="none" stroke="var(--cfib)" stroke-width="2" stroke-dasharray="3 3"/>');
+  case "noci":return sv('<path d="M16 4 V30 Q16 40 26 40 H46 Q50 34 44 31 L26 26 V4 Z" fill="var(--sk3)" stroke="var(--ink)"/><circle cx="20" cy="32" r="6" fill="var(--pain)"/>');
+  case "neuro":return sv('<path d="M6 30 H24 L34 18 H50" stroke="var(--nerve)" stroke-width="4" fill="none"/><path d="M30 4 L24 16 H30 L26 26" stroke="var(--pain)" stroke-width="2.5" fill="none"/>');
+  case "nocip":return sv('<circle cx="28" cy="25" r="16" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/><path d="M28 25 L39 15" stroke="var(--cfib)" stroke-width="3"/><circle cx="28" cy="25" r="2.5" fill="var(--ink)"/>');
+  case "up":return sv('<path d="M28 42 V10" stroke="var(--pain)" stroke-width="4"/><path d="M18 18 L28 6 L38 18" fill="none" stroke="var(--pain)" stroke-width="4"/>');
+  case "down":return sv('<path d="M28 4 V36" stroke="var(--brake)" stroke-width="4"/><path d="M18 30 L28 42 L38 30" fill="none" stroke="var(--brake)" stroke-width="4"/>');
+  }return ""}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Read the card again, or press Hint to see the right box glow.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+const LIFE=[
+{name:"Chronic low back pain with fear of movement",who:"Scenario 1 · persistent pain",
+ story:"Marcus is 46. He has had low back pain for 8 months since lifting a heavy box. A scan report mentioned disc degeneration, and he now believes his spine is worn out. He has stopped bending and lifting, rests most evenings, sleeps poorly and says, \"If I bend, I will do damage.\" A careful history and exam found no red flags: no change in bladder or bowel control, no numbness in the groin, no fever, no weight loss, no history of cancer and no worsening weakness.",
+ cap:"Marcus avoids bending; disc changes on scans are common even in people without pain.",
+ help:"<b>Evidence in brief:</b> for chronic low back pain, guidelines recommend staying active, exercise and education. Spinal manipulation, massage and some other nonpharmacologic options are listed as choices in several guidelines, with small to moderate effects similar to other recommended care.",
+ desc:"On the left, Marcus stands stiffly beside a cardboard box he is not lifting, with a thought bubble that reads if I bend, I will do damage. Beside him, a small red loop turns with the words fear, avoid, weaker, more pain. On the right, an indigo bar chart titled disc changes in people with no back pain shows bars rising with age: about 37 percent at age 20, 52 percent at 30, 68 percent at 40, 80 percent at 50, 88 percent at 60 and 93 percent at 70. A label reads common, and not a sign of a fragile spine.",
+ draw(T){panelBox(10,10,780,450);lvl(22,26,"person");
+   rr(200,330,90,70,4);fillStroke(C.table,hexA(C.ink,.4),1.4);line(200,340,290,340,hexA(C.ink,.3),1);person(120,440,240,{skin:3,cloth:"cl1",hair:0,build:1.1});
+   say(40,60,220,48,"If I bend, I will do damage.",{tail:[120,190],size:13,weight:700});
+   const L=["fear","avoid","weaker","more pain"];const cx=290,cy=200,r=50;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.strokeStyle=hexA(C.pain,.5);ctx.lineWidth=2.5;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);
+   L.forEach((w,i)=>{const a=-Math.PI/2+i/4*TAU;label(cx+Math.cos(a)*r,cy+Math.sin(a)*r,w,{size:11.5,weight:700,border:C.pain})});const pa=-Math.PI/2+P(T*.15,1)*TAU;circ(cx+Math.cos(pa)*r,cy+Math.sin(pa)*r,5,C.pain);
+   const ages=[[20,37],[30,52],[40,68],[50,80],[60,88],[70,93]];const g=graph({x:430,y:90,w:330,h:250,x0:0,x1:6,y0:0,y1:100,xt:[],yt:[0,50,100],yf:v=>v+"%",grid:true,title:"disc changes in people with no back pain"});
+   const grow=smooth(clamp(P(T,10)*10/3,0,1));ages.forEach((a,i)=>{const h=a[1]*grow;rr(g.X(i+.15),g.Y(h),g.X(.7)-g.X(0),g.Y(0)-g.Y(h),3);ctx.fillStyle=hexA(C.evid,.8);ctx.fill();txt(g.X(i+.5),g.y+g.h+12,"age "+a[0],{size:11,weight:600,align:"center",color:C["ink-soft"]});if(grow>.9)txt(g.X(i+.5),g.Y(h)-10,a[1]+"%",{size:11.5,weight:700,align:"center"})});
+   label(595,400,"common, and not a sign of a fragile spine",{size:12.5,weight:700,border:C.evid});txt(595,428,"rounded values from a large review of imaging studies",{size:11,weight:600,align:"center",color:C["ink-soft"]})},
+ qs:[{q:"Which explanation best fits how fear may be keeping Marcus's pain going?",opts:[["Fear and avoidance lead to disuse, poor sleep and low mood, which keep the nervous system sensitive",1,"Yes. This is the fear avoidance cycle. Avoidance seems protective but tends to keep pain and disability going."],["Each time he bends he causes new damage to the disc",0,"Bending is a normal movement. With no red flags, his pain mostly reflects a sensitive, protective system rather than new damage."],["His pain cannot be real because many people have disc changes without pain",0,"His pain is real. Common disc changes just mean the scan does not explain the pain on its own."],["Complete rest until the pain is gone is the safest plan",0,"Long rest tends to make chronic back pain and disability worse. Staying active is recommended."]]},
+  {q:"Which way of talking about his scan is most helpful and accurate?",opts:[["Disc changes like these are very common in people without pain and do not mean his back is fragile; activity can be built up step by step",1,"Yes. This is honest, reduces threat and supports gradual return to activity."],["Your spine is crumbling, so protect it at all costs",0,"Frightening words like this can create a nocebo effect and feed fear avoidance."],["The scan shows nothing, so the pain is in your head",0,"This dismisses real pain and damages trust. Pain is always real to the person."],["Ignore the pain and start lifting very heavy loads right away",0,"Building up gradually is safer and more realistic than jumping to heavy loads."]]},
+  {q:"Which new finding would need prompt medical referral?",opts:[["New numbness in the groin with trouble passing urine",1,"Yes. These can be signs of cauda equina syndrome, a red flag that needs urgent medical assessment."],["Pain that is worse after sitting for a long time",0,"This is a common feature of nonspecific low back pain, not a red flag."],["Morning stiffness that eases with movement",0,"This is common. It is worth noting but is not an emergency sign."],["Pain that changes with stress and sleep",0,"This fits how the nervous system modulates pain. It is not a red flag."]]}]},
+{name:"Post surgical pain",who:"Scenario 2 · acute pain",
+ story:"Priya is 62 and had a knee replacement three days ago. Her pain is about 6 out of 10 at rest and about 8 out of 10 when her physical therapist bends the knee. The knee is swollen and warm around the incision. She is worried the pain means the new joint is failing and is afraid to move. Her surgical team has given her a pain plan and an exercise plan.",
+ cap:"Expected inflammation after surgery drives nociceptive pain that settles over days to weeks.",
+ desc:"On the left, a knee is drawn from the side with a vertical incision line and a soft red glow of swelling around it. Small red triangles and orange hexagons, the inflammatory chemicals, drift around the incision. On the right, a line graph titled pain over the first two weeks shows two falling lines: a solid red line for pain with exercises starting near 8, and a dashed orange line for pain at rest starting near 6. A dot moves along each line day by day. A note under the graph reads expected to settle as tissues heal.",
+ draw(T){panelBox(10,10,780,450);lvl(22,26,"tissue");
+   ctx.beginPath();ctx.moveTo(60,80);ctx.lineTo(160,80);ctx.lineTo(170,230);ctx.quadraticCurveTo(178,262,160,300);ctx.lineTo(150,420);ctx.lineTo(70,420);ctx.lineTo(80,300);ctx.quadraticCurveTo(54,262,70,230);ctx.closePath();fillStroke(C.sk2,C["sk-edge"],1.6);
+   glow(120,250,80,C.pain,.35+.1*Math.sin(T*2));line(120,190,120,310,C.pain,3);for(let y=196;y<310;y+=12)line(113,y,127,y,mix(C.pain,"#000",.3),1.6);
+   for(let i=0;i<6;i++){const a=i/6*TAU+T*.4;mol(120+Math.cos(a)*(62+8*Math.sin(T+i)),250+Math.sin(a)*70,i%2?"bk":"pg",7)}txt(120,445,"day 3 after surgery",{size:12.5,weight:700,align:"center"});
+   label(200,50,"swelling and warmth: expected",{size:12,weight:700,border:C.pain,align:"left"});
+   const g=graph({x:420,y:80,w:340,h:260,x0:0,x1:14,y0:0,y1:10,xt:[0,3,7,10,14],yt:[0,5,10],xl:"days after surgery",yl:"pain (0 to 10)",title:"pain over the first two weeks"});
+   const ex=v=>8.4*Math.exp(-v/12)+.4,rs=v=>6.6*Math.exp(-v/7)+.3;const d=P(T,10)*14;curve(g,v=>v>d?NaN:ex(v),0,14,C.pain,3);curve(g,v=>v>d?NaN:rs(v),0,14,C.boost,3,[6,4]);gdot(g,d,ex(d),C.pain);gdot(g,d,rs(d),C.boost);
+   txt(g.x+g.w,g.Y(ex(14))-14,"with exercises",{size:11.5,weight:700,align:"right",color:C["pain-ink"]});txt(g.x+g.w,g.Y(rs(14))+16,"at rest",{size:11.5,weight:700,align:"right",color:C["boost-ink"]});
+   txt(590,400,"expected to settle as tissues heal",{size:12.5,weight:700,align:"center"});txt(590,420,"illustrative curve, people vary",{size:11,weight:600,align:"center",color:C["ink-soft"]})},
+ qs:[{q:"What is the main driver of Priya's pain right now?",opts:[["Nociceptive pain with peripheral sensitization from surgical inflammation, expected to settle with healing",1,"Yes. Surgery injured tissue, and the inflammatory soup has sensitized the nerve endings around the knee."],["Nociplastic pain from nervous system changes alone",0,"Three days after surgery, there is clear tissue injury. Nociceptive pain is the main driver."],["Neuropathic pain from spinal cord disease",0,"Nothing suggests nerve disease. The tissue injury explains her pain."],["There is no tissue cause for her pain",0,"Surgery is a clear tissue cause, and her pain is fully expected."]]},
+  {q:"Why does her care team encourage gentle movement within the plan?",opts:[["Guided early movement helps recovery and limits stiffness, and some pain during exercises is expected and does not mean harm",1,"Yes. Within the team's limits, movement supports recovery and can reduce fear."],["Movement makes the inflammation disappear immediately",0,"Inflammation settles over days to weeks. Movement helps recovery but is not instant."],["Pain during exercise always means the new joint is being damaged",0,"Some pain with exercise is expected after surgery. Hurt does not always mean harm."],["She should not move at all until her pain is zero",0,"Waiting for zero pain would mean stiffness and slower recovery."]]},
+  {q:"Which change should prompt her to contact her surgical team promptly?",opts:[["Fever, spreading redness or drainage from the wound, or a swollen, painful calf",1,"Yes. These can be signs of infection or a blood clot and need prompt medical review."],["Mild warmth around the incision that is slowly improving",0,"Some warmth is expected while tissues heal, especially if it is improving."],["Extra soreness after therapy that settles within a few hours",0,"Short lived soreness after exercise is common and expected."],["Pain scores that slowly fall from 6 to 4 over a week",0,"That is the expected direction of recovery."]]}]},
+{name:"Talking about pain without blame",who:"Scenario 3 · communication",
+ story:"Dana is 35 and has had widespread pain for two years, with poor sleep and fatigue. Blood tests and scans have been normal. A previous clinician told her, \"It is all in your head,\" and she now feels dismissed and worries that no one believes her pain is real.",
+ cap:"Words matter: respect the person's report and explain pain in a way that removes blame.",
+ help:"<b>Helpful phrases:</b> \"Your pain is real.\" \"Hurt does not always mean harm.\" \"Your nervous system has become more protective, and that can change.\" <b>Phrases to avoid:</b> \"It is all in your head.\" \"There is nothing wrong with you.\"",
+ desc:"Two people sit facing each other at a small table. Above Dana, a grey speech bubble with the words it is all in your head is struck through in red, with a red X beside it. Above the clinician, a green bubble reads your pain is real, and we can work on it together. On the right, a body outline has soft maroon patches spread across the shoulders, back, hips and legs, and a volume knob beside it is turned high, labelled nervous system more protective. Below, three green chips light up in turn: education, gradual exercise and sleep support.",
+ draw(T){panelBox(10,10,780,450);lvl(22,26,"person");
+   rr(130,330,200,14,3);fillStroke(C.table,hexA(C.ink,.4),1.2);person(100,440,190,{pose:"sit",skin:4,cloth:"cl2",hair:1});person(360,440,190,{pose:"sit",skin:1,cloth:"cl3",hair:3,face:-1});
+   say(30,60,200,44,"It is all in your head.",{tail:[100,200],size:13,weight:700,fill:hexA(C.sunk,.9)});line(38,77,190,77,C.bad,2.4);crossMark(212,82,8,C.bad);
+   say(250,120,220,52,"Your pain is real, and we can work on it together.",{tail:[350,220],size:13,weight:700,stroke:C.good});
+   const cx=600;circ(cx,90,20,hexA(C.sk2,.6),C["sk-edge"],1.4);rr(cx-30,114,60,100,14);fillStroke(hexA(C.sk2,.6),C["sk-edge"],1.4);rr(cx-52,118,18,82,8);fillStroke(hexA(C.sk2,.6),C["sk-edge"],1.4);rr(cx+34,118,18,82,8);fillStroke(hexA(C.sk2,.6),C["sk-edge"],1.4);rr(cx-26,214,22,74,9);fillStroke(hexA(C.sk2,.6),C["sk-edge"],1.4);rr(cx+4,214,22,74,9);fillStroke(hexA(C.sk2,.6),C["sk-edge"],1.4);
+   [[cx-20,124],[cx+20,128],[cx,160],[cx-14,200],[cx+14,204],[cx-15,240],[cx+15,250],[cx-44,150],[cx+44,150]].forEach((q,i)=>glow(q[0],q[1],14+3*Math.sin(T*2+i),C.cfib,.6));
+   knob(720,150,30,.82+.05*Math.sin(T),C.cfib,"");txt(720,198,"nervous system",{size:11.5,weight:700,align:"center"});txt(720,212,"more protective",{size:11.5,weight:700,align:"center"});
+   const on=Math.floor(T/1.6)%3;["education","gradual exercise","sleep support"].forEach((w,i)=>label(520,330+i*36,w,{size:13,weight:700,border:on===i?C.good:C.rule,bg:on===i?C["good-wash"]:C.panel,align:"left"}))},
+ qs:[{q:"Which response best respects Dana's experience?",opts:[["Your pain is real. Tests can be normal while the nervous system has become more sensitive, and we can work on that together.",1,"Yes. It validates her pain, explains it without blame and opens a shared plan."],["Since your tests are normal, there is nothing wrong.",0,"Normal tests do not mean no pain. This repeats the dismissal she already felt."],["You just need to think more positively.",0,"This puts the blame on her and ignores the biology of a sensitized nervous system."],["It is probably stress, so it is not real pain.",0,"Stress can influence pain, but the pain is still real."]]},
+  {q:"Which explanation fits current pain science best?",opts:[["Nociplastic pain: altered processing in the nervous system can amplify signals even without tissue damage",1,"Yes. This is a recognised mechanism, not a sign that pain is imagined."],["Pain without tissue damage is always made up",0,"The IASP definition includes pain that resembles tissue damage. It is real."],["Normal tests prove that she has no pain",0,"Tests look for tissue damage or disease, not for pain itself."],["Only a scan can confirm that pain is real",0,"Pain is confirmed by the person's report, which should be respected."]]},
+  {q:"Which plan is most consistent with the evidence and a blame free approach?",opts:[["Shared goals with pain education, gradual exercise, sleep support and attention to stress and mood, adjusted to how she responds",1,"Yes. Combined, person centred care matches the biopsychosocial model."],["Strict bed rest until the pain disappears",0,"Long rest tends to worsen widespread pain, fitness and mood."],["Avoid mentioning sleep or stress so she does not feel blamed",0,"These factors can be discussed without blame. Leaving them out removes useful options."],["One single treatment that promises a complete cure",0,"No single treatment reliably cures this kind of pain. Be honest about what to expect."]]}]}];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  const hb=$("#lifeHelp");if(S.help){hb.hidden=false;hb.innerHTML=S.help}else hb.hidden=true;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;SYS={};lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;SYS={};lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;SYS={};lifeUI()};
+function drawLife(now){use(S5);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},train:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+function a11yKeyOf(lab){if(curTab!=="sim")return curTab+"|"+lab;const M=simModel();return "sim|"+[SIM.tissue,SIM.sleep,SIM.stress,SIM.fear,SIM.move,SIM.touch,SIM.expect,Math.round(M.p),SIM.danger>0?1:0].join(",")}
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=a11yKeyOf(lab);if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+const TABS=["sim","train","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S3,S5].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function legendHTML(l){return `<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`}
+$("#simLegend").innerHTML=[["cfib","C fiber danger signals","s"],["touch","A beta touch signals","s"],["inter","Gate (interneuron)","s"],["brake","Descending brakes","s"],["boost","Descending boosters","s"],["pain","Output and perceived pain","s"]].map(legendHTML).join("");
+$("#simCap").textContent="Move the sliders and watch signals pass the spinal gate, the brakes and boosters act, and the meter respond.";
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim"){simStep(dt);simDraw(now)}else if(curTab==="train")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__sp={tab:k=>showTab(k),model:o=>painModel(o),sim:o=>{Object.assign(SIM,o);simUI();simChange()},simModel:()=>simModel(),simDone:()=>[...SIM.done],
+  calcTypes:()=>CTYPES.map(c=>c[0]),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>{const p=TR.p;return {kind:p.kind,gen:p.gen,dir:p.dir,where:p.where,str:p.kind==="pred"?p.dir+"|"+p.where:fmtD(p.ans,p.dp),unit:p.unit}},
+  gen:t=>{const q=GEN[t]();q.gen=t;if(q.kind==="pred"){const good=q.dir+"|"+q.where;const od=q.dir==="up"?"down":"up";const ow=Object.keys(WHERE).filter(w=>w!==q.where);return {kind:"pred",good,j1:judge(q,good),j2:judge(q,od+"|"+q.where),j3:judge(q,q.dir+"|"+ow[0]),j4:judge(q,q.dir+"|"+ow[1]),j5:judge(q,od+"|"+ow[0]),hints:q.hints.length,text:q.html}}
+    const good=fmtD(q.ans,q.dp).replace(/,/g,"");const bad=fmtD(q.ans*1.25+1,q.dp);return {kind:"num",ans:q.ans,dp:q.dp,unit:q.unit,good,j1:judge(q,good),j1u:judge(q,good+" "+q.unit),j2:judge(q,bad),jslip:q.slips.length?judge(q,String(q.slips[0][0])):null,html:q.html,lines:q.lines.length,hints:q.hints.length}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,total:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;SYS={};lifeUI()},lifeN:()=>LIFE.length,data:()=>({EVENTS,SROUNDS,LIFE:LIFE.map(l=>Object.assign({},l,{draw:null})),SIMCHAL,PRESETS,CTYPES,WHERE,DIRS})};
+readColors();simUI();simChange();calcNew();updCalcMeter();sLoad(0);lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

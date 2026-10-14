@@ -1,0 +1,1423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stress and Autonomic Balance Lab</title>
+<meta name="description" content="Stress and autonomic balance lab: a simulator where stressor intensity, duration, sleep, recovery activities and breathing drive a body view, live heart rate, an ECG strip with RR intervals, an HRV readout and a cortisol curve across the day; a predict then watch trainer with heart rate from RR interval practice; a sympathetic and parasympathetic sorting game with the HPA hormone order; and real life scenarios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#8A2424;--accent-wash:#F7E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#9B2C2C;--act2:#C8661E;--act3:#2F8A4F;--act4:#8A4FC7;--act5:#B5485A;--act6:#2F7FC1;--act7:#4B56B8;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A5E0C;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF7;
+  --carb:#C9821F;--prot:#B4505A;--fat:#D4AE1E;--alc:#7D868D;--fib:#3E8E4A;--wat:#2F7FC1;--vit:#7B5CC9;--min:#5E7183;
+  --ein:#B88A12;--bmr:#2E8A7A;--tef:#C8661E;--pa:#A04E8C;--at:#5468C8;
+  --ghr:#C8541E;--lep:#8A4FC7;--ins:#2F6FC1;--pyy:#1E8A80;--cck:#B0407A;--glp:#6F8A1E;
+  --muscle:#B5483F;--fatt:#E8C150;--bone:#E9E2D0;--organ:#C46A5A;--liver:#8E3B2E;--brain:#E2A3B0;--heart:#C0392B;--kidney:#9C4A3A;--stomach:#E8A08C;--gut:#E7B49A;--blood:#C0392B;--nerve:#D4A82A;
+  --sk1:#F1D2B6;--sk2:#DDAA82;--sk3:#B9814F;--sk4:#8A5A3A;--sk5:#5E3D28;--sk-edge:#6B4A35;--hair1:#2B211B;--hair2:#7A4B2A;--hair3:#C9C3BA;
+  --cl1:#3F6E9E;--cl2:#8A5A9E;--cl3:#3E8E6A;--cl4:#B5683A;--cl5:#5E7183;
+  --heat:#C8452B;--cold:#2F7FC1;--o2:#2F7FC1;--co2:#6B747B;--water:#CFE5F1;--waterline:#3F8FD0;--metal:#9AA6AF;--glass:#E3EDF2;--glass-edge:#7F99A6;
+  --plate:#FFFFFF;--table:#D9C3A0;--cup:#E9EEF2;--sky:#DCEBF5;--grass:#9CC77A;--night:#2C3E66;--moon:#F2E6A8;--lamp:#F6D04D;
+  --carb-ink:#8A5608;--prot-ink:#8E3540;--fat-ink:#6E5A00;--fib-ink:#2C6B36;--pa-ink:#7E3A6E;--bmr-ink:#1F6B5E;--tef-ink:#9A4A12;--at-ink:#3B4DA8;--ghr-ink:#9A3E12;--lep-ink:#6A37A3;--ins-ink:#1F57A0;--pyy-ink:#156A62;--cck-ink:#8E2F60;
+  --glu:#E0AE5C;--atp:#0F8F94;--adp:#86C3C6;--mito:#F4D9C2;--mito-edge:#B8561A;--matrix:#F9E7D6;--lac:#7D7A1E;--cyto:#FBF3E2;--aa:#B4505A;
+  --sys1:#B0407A;--sys2:#C8661E;--sys3:#2E8A7A;--sys1-ink:#8E2F60;--sys2-ink:#9A4A12;--sys3-ink:#1F6B5E;
+  --wat-ink:#1F5F96;--min-ink:#46566A;--vit-ink:#5E43A8;--lac-ink:#5E5C10;--atp-ink:#0B6B6F;
+  --sym:#C8661E;--para:#2F8A4F;--sym-ink:#9A4A12;--para-ink:#1F6B3A;--sym-wash:#F8E6D6;--para-wash:#DDEFE3;
+  --pain:#C0392B;--pain-ink:#A3291F;--evid:#4B56B8;--evid-ink:#3B45A0;--disc:#2F7FC1;--lig:#2E8A7A;--bone-edge:#8A7A5A;--rose:#B5485A;
+  --crh:#1E8A80;--acth:#2F6FC1;--cort:#8A4FC7;--cort-ink:#6A37A3;--epi:#B5541A;--ach:#2F8A4F;--ne:#C8661E;--ecg:#C0392B;--ecgpaper:#FBEDEA;--ecggrid:#F0C9C2;--sky2:#CFE3F2;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#F2A055;--act3:#6CC98A;--act4:#B98AF0;--act5:#E68A9A;--act6:#5AA9E6;--act7:#9BA6F2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --carb:#E9A94A;--prot:#E07A84;--fat:#E8C94E;--alc:#A9B3BA;--fib:#6CC57A;--wat:#5AA9E6;--vit:#A98BEF;--min:#A9B7C2;
+  --ein:#F2C95C;--bmr:#5CC4B0;--tef:#F09A55;--pa:#D186C0;--at:#94A6F2;
+  --ghr:#F2924F;--lep:#B98AF0;--ins:#6FA8F0;--pyy:#4FC9BC;--cck:#E07AB0;--glp:#A9C75A;
+  --muscle:#D9746A;--fatt:#E8C94E;--bone:#CFC6B0;--organ:#C47A6A;--liver:#B5604E;--brain:#C47E8E;--heart:#E06A5E;--kidney:#B86A58;--stomach:#C08070;--gut:#B88A72;--blood:#E06A5E;--nerve:#E8C65A;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --heat:#F07A5E;--cold:#5AA9E6;--o2:#6FB3EC;--co2:#A9B3BA;--water:#1F3A4A;--waterline:#6FB3EC;--metal:#5E6B75;--glass:#1E2C34;--glass-edge:#7F99A6;
+  --plate:#2A3439;--table:#4A3E2E;--cup:#2A3439;--sky:#16242E;--grass:#3E5E2E;--night:#0C1630;--moon:#E8DC9A;--lamp:#F2C95C;
+  --carb-ink:#F2BE6A;--prot-ink:#F0A0A8;--fat-ink:#F0D670;--fib-ink:#8ED89A;--pa-ink:#E6A8D8;--bmr-ink:#7ED8C6;--tef-ink:#F6B07A;--at-ink:#B4C2F8;--ghr-ink:#F6AE7A;--lep-ink:#CDAAF6;--ins-ink:#9CC4F6;--pyy-ink:#7ED8CE;--cck-ink:#EEA0C8;
+  --glu:#A8782C;--atp:#4FD1D1;--adp:#2E6E70;--mito:#3A2A20;--mito-edge:#F0985A;--matrix:#2E2219;--lac:#C9C45A;--cyto:#1E1A14;--aa:#E07A84;
+  --sys1:#E07AB0;--sys2:#F09A55;--sys3:#5CC4B0;--sys1-ink:#EEA0C8;--sys2-ink:#F6B07A;--sys3-ink:#7ED8C6;
+  --wat-ink:#8CC4F0;--min-ink:#C2CDD6;--vit-ink:#C4ADF6;--lac-ink:#DCD77A;--atp-ink:#7FE0E0;
+  --sym:#F2A055;--para:#6CC98A;--sym-ink:#F6B07A;--para-ink:#8ED8A6;--sym-wash:#3A2614;--para-wash:#15301F;
+  --pain:#F07A6E;--pain-ink:#F4A39A;--evid:#9BA6F2;--evid-ink:#B4BCF8;--disc:#5AA9E6;--lig:#5CC4B0;--bone-edge:#A89A7A;--rose:#E68A9A;
+  --crh:#4FC9BC;--acth:#6FA8F0;--cort:#B98AF0;--cort-ink:#CDAAF6;--epi:#F2924F;--ach:#6CC98A;--ne:#F2A055;--ecg:#F07A6E;--ecgpaper:#1E2124;--ecggrid:#3A2A2A;--sky2:#16242E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#F2A055;--act3:#6CC98A;--act4:#B98AF0;--act5:#E68A9A;--act6:#5AA9E6;--act7:#9BA6F2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --carb:#E9A94A;--prot:#E07A84;--fat:#E8C94E;--alc:#A9B3BA;--fib:#6CC57A;--wat:#5AA9E6;--vit:#A98BEF;--min:#A9B7C2;
+  --ein:#F2C95C;--bmr:#5CC4B0;--tef:#F09A55;--pa:#D186C0;--at:#94A6F2;
+  --ghr:#F2924F;--lep:#B98AF0;--ins:#6FA8F0;--pyy:#4FC9BC;--cck:#E07AB0;--glp:#A9C75A;
+  --muscle:#D9746A;--fatt:#E8C94E;--bone:#CFC6B0;--organ:#C47A6A;--liver:#B5604E;--brain:#C47E8E;--heart:#E06A5E;--kidney:#B86A58;--stomach:#C08070;--gut:#B88A72;--blood:#E06A5E;--nerve:#E8C65A;
+  --sk1:#E9C7A8;--sk2:#D49F76;--sk3:#B07A4A;--sk4:#8A5A3A;--sk5:#6A4630;--sk-edge:#2A1C12;--hair1:#3A2E26;--hair2:#8A5A36;--hair3:#D6D0C6;
+  --cl1:#5A8CC0;--cl2:#A97CBE;--cl3:#5CB088;--cl4:#D08A5A;--cl5:#8A9AA8;
+  --heat:#F07A5E;--cold:#5AA9E6;--o2:#6FB3EC;--co2:#A9B3BA;--water:#1F3A4A;--waterline:#6FB3EC;--metal:#5E6B75;--glass:#1E2C34;--glass-edge:#7F99A6;
+  --plate:#2A3439;--table:#4A3E2E;--cup:#2A3439;--sky:#16242E;--grass:#3E5E2E;--night:#0C1630;--moon:#E8DC9A;--lamp:#F2C95C;
+  --carb-ink:#F2BE6A;--prot-ink:#F0A0A8;--fat-ink:#F0D670;--fib-ink:#8ED89A;--pa-ink:#E6A8D8;--bmr-ink:#7ED8C6;--tef-ink:#F6B07A;--at-ink:#B4C2F8;--ghr-ink:#F6AE7A;--lep-ink:#CDAAF6;--ins-ink:#9CC4F6;--pyy-ink:#7ED8CE;--cck-ink:#EEA0C8;
+  --glu:#A8782C;--atp:#4FD1D1;--adp:#2E6E70;--mito:#3A2A20;--mito-edge:#F0985A;--matrix:#2E2219;--lac:#C9C45A;--cyto:#1E1A14;--aa:#E07A84;
+  --sys1:#E07AB0;--sys2:#F09A55;--sys3:#5CC4B0;--sys1-ink:#EEA0C8;--sys2-ink:#F6B07A;--sys3-ink:#7ED8C6;
+  --wat-ink:#8CC4F0;--min-ink:#C2CDD6;--vit-ink:#C4ADF6;--lac-ink:#DCD77A;--atp-ink:#7FE0E0;
+  --sym:#F2A055;--para:#6CC98A;--sym-ink:#F6B07A;--para-ink:#8ED8A6;--sym-wash:#3A2614;--para-wash:#15301F;
+  --pain:#F07A6E;--pain-ink:#F4A39A;--evid:#9BA6F2;--evid-ink:#B4BCF8;--disc:#5AA9E6;--lig:#5CC4B0;--bone-edge:#A89A7A;--rose:#E68A9A;
+  --crh:#4FC9BC;--acth:#6FA8F0;--cort:#B98AF0;--cort-ink:#CDAAF6;--epi:#F2924F;--ach:#6CC98A;--ne:#F2A055;--ecg:#F07A6E;--ecgpaper:#1E2124;--ecggrid:#3A2A2A;--sky2:#16242E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.est-banner{display:flex;gap:10px;align-items:flex-start;background:var(--accent-wash);border:1.5px solid var(--accent);border-radius:var(--r);padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.est-banner b{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;padding-top:2px}
+.seg5{display:grid;grid-template-columns:1fr;gap:6px}
+.seg5 .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:7px 9px}
+.seg5 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.seg5 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.chk{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;margin:8px 0}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.playrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.playrow input[type=range]{flex:1 1 160px;accent-color:var(--accent)}
+.bigtotal{font-family:var(--mono);font-size:22px;font-weight:700;margin:6px 0 2px}
+.rangeline{font-size:13.5px;color:var(--ink-soft)}
+.choices{display:grid;grid-template-columns:1fr;gap:7px;margin:8px 0}
+.ptab{border-collapse:collapse;margin:8px 0;font-size:14px}
+.ptab th,.ptab td{border:1px solid var(--rule);padding:4px 8px;text-align:left}
+.ptab th{background:var(--panel);font-weight:600}
+.scard svg{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+.helpbox{background:var(--panel-2);border-left:4px solid var(--fib);border-radius:4px;padding:8px 12px;margin:10px 0 0;font-size:14px}
+.seg5.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg5.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg5.seg4 .tbtn,.seg5.seg3 .tbtn{text-align:center;padding:7px 4px}
+.playrow output{font-family:var(--mono);font-weight:600;min-width:70px}
+.stage .playrow{padding:8px 4px 0}
+#simRead td{white-space:normal}
+</style>
+<script src="holistic-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 12 &middot; Stress and the autonomic nervous system</div>
+    <h1>Stress and Autonomic Balance Lab</h1>
+    <p class="sub">Run a day in a simulated body and watch the autonomic balance, heart rhythm and cortisol respond, predict what each branch does and practise heart rate math, sort the ideas, and work through real life situations. Every number here is a rounded teaching value. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Autonomic Balance Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button" tabindex="-1">Part 2 &middot; Predict and Practise</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort It Out</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In Real Life</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Autonomic Balance Simulator</h2>
+    <p class="est-banner"><b>Teaching model</b><span>A simplified model of one healthy adult across one day. A stressor, such as an exam or a work deadline, happens from 9 to 11 am each day. The settings shape autonomic balance, heart rate, HRV and cortisol. Real people vary a lot; this is not a diagnosis or a treatment plan.</span></p>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Autonomic balance simulator."></canvas></div>
+        <div class="playrow"><button class="btn" type="button" id="simPlay">Pause</button><label for="simTime" class="gk-sr">Time of day</label><input type="range" id="simTime" min="0" max="24" step="0.25"><output id="oSimTime" for="simTime"></output></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend" id="simLegend"></div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts at the selected time</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">How the model works: sympathetic and parasympathetic activity are each scored from 0 to 100 percent. They depend on the time of day, sleep, the daily stressor, how long the stress has lasted (which builds allostatic load), sleep debt and recovery activities. Heart rate and HRV (RMSSD) follow the balance; the ECG beats are generated from that heart rate with breathing linked variation. Cortisol follows a daily rhythm with a peak after waking at 7 am, a rise after the stressor, and a flatter shape with long lasting stress and short sleep. Simplified for learning.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <div class="ctl"><label for="slInt">Stressor intensity <output id="oInt" for="slInt"></output></label><input type="range" id="slInt" min="0" max="10" step="1"></div>
+        <div class="ctl"><label for="slDur">How long the stress has lasted <output id="oDur" for="slDur"></output></label><input type="range" id="slDur" min="0" max="6" step="1"></div>
+        <div class="ctl"><label for="slSleep">Sleep each night <output id="oSleep" for="slSleep"></output></label><input type="range" id="slSleep" min="4" max="9" step="0.5"></div>
+        <div class="ctl"><label for="slRec">Recovery activities <output id="oRec" for="slRec"></output></label><input type="range" id="slRec" min="0" max="90" step="15"></div>
+        <p class="small">Recovery activities: exercise, time outdoors, time with friends, mindfulness or other things that help you unwind.</p>
+        <h3 id="br-h">Breathing right now</h3>
+        <div class="seg5 seg3" id="simBreath" role="group" aria-labelledby="br-h"></div>
+        <div class="bar"><button class="tbtn" type="button" id="simReset">Reset</button></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc" hidden>
+    <h2 class="gk-sr">Part 2: Predict and Practise</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Predict items: choose first, then watch the organ respond. Number items: the worked solution builds step by step after a correct answer or when you ask for it, and units that cancel are struck out in red.</p>
+      </div>
+      <aside class="card side" aria-label="Practice trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div class="ansrow" id="calcAnsRow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div class="choices" id="calcChoices" role="group" aria-label="Answer choices" hidden></div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a number (commas are fine). Answers within normal rounding are accepted. The streak counts answers right on the first try without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In Real Life</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional people and rounded teaching values. Not medical advice.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="helpbox" id="lifeHelp" hidden></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Stress-Walkthrough.html">Stress and Autonomic Balance Walkthrough</a>. Heart rates, HRV values and cortisol curves come from simplified teaching models; they are not a diagnosis or a plan for any person.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "carb", "prot", "fat", "alc", "fib", "wat", "vit", "min", "ein", "bmr", "tef", "pa", "at", "ghr", "lep", "ins", "pyy", "cck", "glp", "muscle", "fatt", "bone", "organ", "liver", "brain", "heart", "kidney", "stomach", "gut", "blood", "nerve", "sk1", "sk2", "sk3", "sk4", "sk5", "sk-edge", "hair1", "hair2", "hair3", "cl1", "cl2", "cl3", "cl4", "cl5", "heat", "cold", "o2", "co2", "water", "waterline", "metal", "glass", "glass-edge", "plate", "table", "cup", "sky", "grass", "night", "moon", "lamp", "carb-ink", "prot-ink", "fat-ink", "fib-ink", "pa-ink", "bmr-ink", "tef-ink", "at-ink", "ghr-ink", "lep-ink", "ins-ink", "pyy-ink", "cck-ink", "glu", "atp", "adp", "mito", "mito-edge", "matrix", "lac", "cyto", "aa", "sys1", "sys2", "sys3", "sys1-ink", "sys2-ink", "sys3-ink", "wat-ink", "min-ink", "vit-ink", "lac-ink", "atp-ink", "sym", "para", "sym-ink", "para-ink", "sym-wash", "para-wash", "pain", "pain-ink", "evid", "evid-ink", "disc", "lig", "bone-edge", "rose", "crh", "acth", "cort", "cort-ink", "epi", "ach", "ne", "ecg", "ecgpaper", "ecggrid", "sky2"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){if(t===""||t==null)return 0;o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= chemistry drawing kit (gases module) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+let SYS={};function sys(key,make){if(!SYS[key])SYS[key]=make();return SYS[key]}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u===d.u);if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* little level-of-view tags: macroscopic / particulate / symbolic */
+function pie(x,y,r,f,col,o){o=o||{};circ(x,y,r,hexA(C.sunk,.6),C["ink-soft"],1.5);if(f>0){ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,-Math.PI/2,-Math.PI/2+TAU*clamp(f,0,1));ctx.closePath();ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.2;ctx.stroke()}
+  if(o.lab)txt(x,y+r+14,o.lab,{size:12,weight:700,mono:true,align:"center",color:o.lc||C.ink})}
+/* ---------- simple drawn table ---------- */
+function ctable(x,y,cols,rows,o){o=o||{};const rh=o.rh||26;const fs=o.size||12.5;let tw=cols.reduce((a,c)=>a+c[1],0);
+  rr(x,y,tw,rh*(rows.length+1),5);ctx.fillStyle=hexA(C.paper,.95);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=hexA(C.sunk,.55);ctx.fillRect(x+1,y+1,tw-2,rh-1);
+  let cx=x;cols.forEach((c,i)=>{txt(cx+c[1]/2,y+rh/2,c[0],{size:fs-.5,weight:700,align:"center",mono:true,color:C["ink-soft"]});if(i)line(cx,y+3,cx,y+rh*(rows.length+1)-3,C["rule-soft"],1);cx+=c[1]});
+  rows.forEach((r,ri)=>{const yy=y+rh*(ri+1);const a=o.ra?o.ra[ri]:1;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+    if(o.hl&&o.hl[ri]){ctx.fillStyle=hexA(o.hl[ri],.18);ctx.fillRect(x+1,yy,tw-2,rh);ctx.strokeStyle=o.hl[ri];ctx.lineWidth=1.8;ctx.strokeRect(x+1.5,yy+.5,tw-3,rh-1)}
+    line(x+2,yy,x+tw-2,yy,C["rule-soft"],1);let c2=x;r.forEach((v,ci)=>{const hc=o.hc&&o.hc[ri+"_"+ci];txt(c2+cols[ci][1]/2,yy+rh/2,v,{size:fs,weight:hc?700:500,align:"center",mono:true,color:hc||C.ink});c2+=cols[ci][1]});ctx.restore()});
+  return {w:tw,h:rh*(rows.length+1),rowY:i=>y+rh*(i+1)+rh/2,colX:i=>{let s=x;for(let k=0;k<i;k++)s+=cols[k][1];return s+cols[i][1]/2}}}
+function wsteps(x,y,w,h,W_,t,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,W_.title||"Worked example",C["accent-ink"]);
+  const sz=o.size||12.5;let yy=y+36;if(W_.q){yy=wrapText(W_.q,x+12,yy,(o.qw||w-24),sz+4,{size:sz,weight:600})+sz+8}
+  const lx=o.lx!=null?x+o.lx:x+14;if(o.lx!=null)yy=y+(o.ly||40);
+  const per=o.step||1.6;let tt=.6;
+  (W_.lines||[]).forEach((L,i)=>{const p=clamp((t-tt)/per,0,1);
+    if(L.ch){const fs=o.cfs||14;const cy=yy+fs*.9;if(p>0){const cw=chainWidth(L.ch[0],L.ch[1],{size:fs});const sc=Math.min(1,(w-(lx-x)-16)/cw);ctx.save();ctx.translate(lx,cy);ctx.scale(sc,sc);chain(0,0,L.ch[0],L.ch[1],p,{size:fs});ctx.restore()}yy+=fs*2+24;tt+=per*1.6}
+    else if(L.gold){if(p>0)withA(p*2,()=>label(lx,yy,L.gold,{size:sz,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));yy+=sz+14;tt+=per*.6}
+    else{if(p>0)withA(p*2,()=>{ctx.font=`${L.b?700:600} ${sz+.5}px ${MONO}`;const tw=ctx.measureText(L.t).width;const mw=w-(lx-x)-16;const fs=tw>mw?(sz+.5)*mw/tw:sz+.5;txt(lx,yy,L.t,{size:fs,weight:L.b?700:600,mono:true,color:L.col||C.ink})});yy+=sz+10;tt+=per*.7}});
+  if(W_.ans){const a=seg(t,tt,tt+.6);if(a>0)withA(a,()=>{ctx.font=`700 ${sz+1.5}px ${MONO}`;const tw=ctx.measureText(W_.ans).width;rr(lx-4,yy-12,tw+14,26,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(lx+3,yy+1,W_.ans,{size:sz+1.5,weight:700,mono:true})});yy+=30;tt+=1}
+  if(W_.miss){const a=seg(t,tt+.4,tt+1);if(a>0)withA(a,()=>{const mh=o.missH||36;rr(lx-4,yy-10,w-(lx-x)-8,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,lx+4,yy+4,w-(lx-x)-24,sz+3,{size:sz-1,color:C.ink})})}
+  return tt}
+/* rate meter (horizontal bar with value) */
+function meterBar(x,y,w,f,col,lab){rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w+8,y+7,lab,{size:12,weight:700,mono:true})}
+const SUP={"-":"⁻","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function sup(s){return String(s).split("").map(c=>SUP[c]||c).join("")}
+function sci(v,n){if(!isFinite(v))return "?";if(v===0)return "0";const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=3)return sig(v,n);let m=v/Math.pow(10,e);let ms=sig(m,n);if(Math.abs(+ms)>=10){m/=10;ms=sig(m,n);return ms+" × 10"+sup(e+1)}return ms+" × 10"+sup(e)}
+let SEEDC=1;function srnd(){SEEDC=(SEEDC*16807)%2147483647;return (SEEDC-1)/2147483646}
+/* ================= nutrition drawing kit: bodies, organs, food, flows ================= */
+let SC={};
+/* level tags: food / body / cell */
+function levelTag(x,y,k){const m={food:["FOOD AND DRINK",C.carb],body:["WHOLE BODY",C.act2],organ:["ORGANS",C.organ],cell:["CELLS AND MOLECULES",C.act6],sym:["NUMBERS",C.act4],brain:["BRAIN SIGNALS",C.lep]}[k]||[k,C.accent];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+/* ---------- people: diverse, neutral figures ----------
+   o: {skin:1-5, build:0.85-1.6, cloth:"cl1", pants:"cl5", hair:0 short,1 long,2 bun,3 cropped, older:bool, pose:"stand"|"walk"|"run"|"sit"|"lift"|"wave", ph:phase, muscular:bool, face:dir} */
+function limb(x1,y1,x2,y2,w,col){ctx.save();ctx.lineCap="round";ctx.strokeStyle=hexA(C["sk-edge"],.55);ctx.lineWidth=w+2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function limb2(x1,y1,a1,L1,a2,L2,w,c1,c2){const xk=x1+Math.sin(a1)*L1,yk=y1+Math.cos(a1)*L1;const xe=xk+Math.sin(a2)*L2,ye=yk+Math.cos(a2)*L2;limb(x1,y1,xk,yk,w,c1);limb(xk,yk,xe,ye,w*.9,c2||c1);return [xe,ye,xk,yk]}
+function person(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)],b=o.build||1,cl=C[o.cloth||"cl1"],pn=C[o.pants||"cl5"];const ph=o.ph||0;const pose=o.pose||"stand";
+  const hr=s*.075;const yS=y-s*.80,yH=y-s*.47;const tw=s*.2*b,hw=s*.18*b;const lw=s*.075*Math.pow(b,.75)*(o.muscular?1.15:1),aw=s*.06*Math.pow(b,.75)*(o.muscular?1.3:1);
+  const lean=o.older?.06:0;ctx.save();ctx.translate(x,y);ctx.rotate(lean*(o.face||1)*.5);ctx.translate(-x,-y);
+  let leg=[0,0],kneeB=[0,0],uA=[-.1,.1],fA=[-.04,.04];
+  if(pose==="walk"){const a=Math.sin(ph)*.38;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.3,Math.max(0,Math.sin(ph))*.3];uA=[-a*.85-.05,a*.85+.05];fA=[uA[0]+.25,uA[1]+.25]}
+  if(pose==="run"){const a=Math.sin(ph)*.6;leg=[a,-a];kneeB=[Math.max(0,-Math.sin(ph))*.9+.25,Math.max(0,Math.sin(ph))*.9+.25];uA=[-a*.9,a*.9];fA=[uA[0]+1.5,uA[1]+1.5]}
+  if(pose==="wave"){uA=[-.1,2.5];fA=[-.04,2.9]}
+  if(pose==="lift"){const k=.5+.5*Math.sin(ph);uA=[-.08,.08];fA=[.3+1.9*k,.3+1.9*k]}
+  if(pose==="sit"){uA=[.3,.38];fA=[1.25,1.35]}
+  const legL=s*.235;const hipX=[x-hw*.28,x+hw*.28];
+  if(pose==="sit"){/* chair */if(!o.noChair){rr(x-s*.22,yH+s*.02,s*.42,s*.05,3);fillStroke(C.metal,hexA(C.ink,.4),1);line(x-s*.18,yH+s*.07,x-s*.18,y,C.metal,4);line(x+s*.17,yH+s*.07,x+s*.17,y,C.metal,4)}
+    [0,1].forEach(i=>{const hx_=hipX[i];limb(hx_,yH,hx_+s*.2,yH+s*.02,lw,pn);limb(hx_+s*.2,yH+s*.02,hx_+s*.21,y-s*.02,lw*.92,pn);rr(hx_+s*.19,y-s*.035,s*.08,s*.035,s*.015);fillStroke(C.ink,null)})}
+  else{[0,1].forEach(i=>{const e=limb2(hipX[i],yH,leg[i],legL,leg[i]-kneeB[i],legL,lw,pn);rr(e[0]-s*.02,e[1]-s*.02,s*.075,s*.035,s*.015);fillStroke(C.ink,null)})}
+  /* torso */
+  rr(x-tw/2,yS-s*.02,tw,yH-yS+s*.06,tw*.28);fillStroke(cl,hexA(C["sk-edge"],.55),1.4);
+  /* arms */
+  const shX=[x-tw/2+aw*.35,x+tw/2-aw*.35];const armL=s*.17;
+  [0,1].forEach(i=>{const e=limb2(shX[i],yS+aw*.3,uA[i]+(i?1:-1)*.06*(b-1),armL,fA[i]+(i?1:-1)*.06*(b-1),armL,aw,cl,sk);circ(e[0],e[1],aw*.55,sk,hexA(C["sk-edge"],.6),1)});
+  /* neck + head */
+  limb(x,yS-s*.01,x,yS-s*.05,s*.05,sk);
+  const hy=yS-s*.05-hr*.9;circ(x,hy,hr,sk,hexA(C["sk-edge"],.7),1.3);
+  const hc=o.older?C.hair3:C[o.hairc||"hair1"];const hh=o.hair==null?0:o.hair;
+  ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+.5,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=hc;ctx.fill();ctx.restore();
+  if(hh===1){rr(x-hr*1.05,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fillStyle=hc;ctx.fill();rr(x+hr*.6,hy-hr*.3,hr*.45,hr*1.7,hr*.2);ctx.fill()}
+  if(hh===2)circ(x,hy-hr*1.05,hr*.42,hc);
+  if(hh===3){ctx.save();ctx.beginPath();ctx.arc(x,hy,hr+1.5,Math.PI*.95,Math.PI*2.05);ctx.lineWidth=hr*.5;ctx.strokeStyle=hc;ctx.stroke();ctx.restore()}
+  const f=o.face||1;circ(x+hr*.35*f,hy-hr*.05,Math.max(1,hr*.11),C.ink);ctx.beginPath();ctx.arc(x+hr*.2*f,hy+hr*.3,hr*.28,.2*Math.PI,.8*Math.PI);ctx.strokeStyle=hexA(C.ink,.7);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.glasses){circ(x+hr*.35*f,hy-hr*.05,hr*.26,null,C.ink,1.2)}
+  ctx.restore();return {head:[x,hy],chest:[x,yS+s*.08],belly:[x,yH-s*.08],hr}}
+/* a person lying asleep in bed */
+function sleeper(x,y,w,o){o=o||{};const sk=C["sk"+(o.skin||3)];rr(x,y,w,w*.16,6);fillStroke(C.cup,C["ink-soft"],1.4);rr(x+4,y-w*.06,w*.22,w*.09,w*.04);fillStroke(C.panel,C["ink-soft"],1.2);
+  circ(x+w*.14,y-w*.04,w*.055,sk,hexA(C["sk-edge"],.7),1.2);ctx.save();ctx.beginPath();ctx.arc(x+w*.14,y-w*.04,w*.056,Math.PI*.6,Math.PI*1.4);ctx.lineWidth=3;ctx.strokeStyle=C.hair1;ctx.stroke();ctx.restore();
+  const br=Math.sin((o.T||0)*1.6)*2;rr(x+w*.22,y-w*.07-br,w*.74,w*.11+br,w*.05);fillStroke(C[o.cloth||"cl2"],hexA(C.ink,.35),1.2);
+  rr(x-2,y+w*.16,6,w*.08,2);ctx.fillStyle=C.metal;ctx.fill();rr(x+w-4,y+w*.16,6,w*.08,2);ctx.fill()}
+function zzz(x,y,T,a){for(let i=0;i<3;i++){const p=P(T*.6+i/3,1);withA((a==null?1:a)*Math.sin(p*Math.PI),()=>txt(x+p*30+i*4,y-p*40,"z",{size:12+i*4+p*4,weight:700,color:C["ink-soft"]}))}}
+/* ---------- organs ---------- */
+function brainShape(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.ellipse(0,0,s,s*.72,0,0,TAU);fillStroke(C.brain,mix(C.brain,"#000",.4),1.6);
+  ctx.strokeStyle=mix(C.brain,"#000",.3);ctx.lineWidth=1.3;for(let i=0;i<5;i++){ctx.beginPath();const yy=-s*.45+i*s*.22;ctx.moveTo(-s*.8,yy);for(let k=0;k<=8;k++)ctx.lineTo(-s*.8+k*s*.2,yy+Math.sin(k*1.7+i)*s*.07);ctx.stroke()}
+  line(0,-s*.7,0,s*.3,mix(C.brain,"#000",.35),1.4);ctx.restore();if(o.hyp){circ(x+s*.05,y+s*.45,s*.16,o.hypCol||C.nerve,C.ink,1.2)}}
+function heartShape(x,y,s,beat){const k=1+(beat||0)*.08;ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.beginPath();ctx.moveTo(0,s*.75);ctx.bezierCurveTo(-s*1.1,0,-s*.75,-s*.85,0,-s*.35);ctx.bezierCurveTo(s*.75,-s*.85,s*1.1,0,0,s*.75);fillStroke(C.heart,mix(C.heart,"#000",.4),1.5);ctx.restore()}
+function liverShape(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y-s*.3);ctx.quadraticCurveTo(x-s*.2,y-s*.75,x+s*.9,y-s*.4);ctx.quadraticCurveTo(x+s*.5,y+s*.1,x-s*.1,y+s*.45);ctx.quadraticCurveTo(x-s*.9,y+s*.35,x-s,y-s*.3);fillStroke(C.liver,mix(C.liver,"#000",.4),1.5)}
+function kidneyShape(x,y,s,flip){ctx.save();ctx.translate(x,y);if(flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(0,-s);ctx.bezierCurveTo(s*.9,-s,s*.9,s,0,s);ctx.bezierCurveTo(-s*.5,s,-s*.2,s*.3,-s*.25,0);ctx.bezierCurveTo(-s*.2,-s*.3,-s*.5,-s,0,-s);fillStroke(C.kidney,mix(C.kidney,"#000",.4),1.4);ctx.restore()}
+function stomachShape(x,y,s,fill,o){o=o||{};const st=1+(fill||0)*.35;ctx.save();ctx.translate(x,y);ctx.scale(st,st);ctx.beginPath();ctx.moveTo(-s*.2,-s);ctx.quadraticCurveTo(-s*.25,-s*.4,-s*.7,-s*.2);ctx.quadraticCurveTo(-s*1.05,s*.5,-s*.2,s*.75);ctx.quadraticCurveTo(s*.6,s*.95,s*.85,s*.35);ctx.quadraticCurveTo(s*.55,s*.1,s*.25,-s*.1);ctx.quadraticCurveTo(s*.1,-s*.5,s*.15,-s);ctx.closePath();
+  fillStroke(C.stomach,mix(C.stomach,"#000",.45),1.6);if(fill>0){ctx.save();ctx.clip();ctx.fillStyle=hexA(C.carb,.55);ctx.fillRect(-s*1.2,s*.85-fill*s*1.6,s*2.4,s*2);ctx.restore()}ctx.restore()}
+function intestine(x,y,s,T){ctx.save();ctx.lineCap="round";ctx.strokeStyle=mix(C.gut,"#000",.35);ctx.lineWidth=s*.24;ctx.beginPath();for(let i=0;i<=60;i++){const a=i/60;const xx=x-s+((a*5)%1)*s*2*(Math.floor(a*5)%2?-1:1)+(Math.floor(a*5)%2?s*2:0);const yy=y-s*.6+Math.floor(a*5)*s*.3;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}ctx.stroke();ctx.strokeStyle=C.gut;ctx.lineWidth=s*.17;ctx.stroke();ctx.restore()}
+function pancreasShape(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x-s*.2,y-s*.35,x+s,y-s*.15);ctx.quadraticCurveTo(x+s*1.05,y+s*.12,x+s*.6,y+s*.12);ctx.quadraticCurveTo(x-s*.2,y+s*.3,x-s,y+s*.25);ctx.closePath();fillStroke(mix(C.fatt,C.organ,.5),mix(C.organ,"#000",.4),1.3)}
+function muscleBlock(x,y,w,h,act,T){rr(x,y,w,h,h*.45);fillStroke(C.muscle,mix(C.muscle,"#000",.4),1.5);ctx.save();rr(x,y,w,h,h*.45);ctx.clip();for(let i=1;i<6;i++){const yy=y+h*i/6+Math.sin(T*8+i)*(act||0)*1.5;line(x,yy,x+w,yy,hexA(mix(C.muscle,"#000",.4),.6),1)}ctx.restore();if(act>0)glow(x+w/2,y+h/2,w*.7,C.pa,.35*act)}
+function fatCell(x,y,r,fill,o){o=o||{};circ(x,y,r,hexA(C.fatt,.25),mix(C.fatt,"#000",.35),1.4);circ(x+r*.05,y,r*(.35+.55*clamp(fill==null?1:fill,0,1)),C.fatt,null);circ(x-r*.62,y+r*.45,r*.14,mix(C.vit,"#000",.2))}
+/* body map: neutral torso outline with organs, returns anchor points */
+function bodyMap(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)];const T=o.T||0;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;
+  /* silhouette */
+  ctx.beginPath();ctx.arc(x,y-s*.82,s*.12,0,TAU);fillStroke(hexA(sk,.55),C["sk-edge"],1.5);
+  ctx.beginPath();ctx.moveTo(x-s*.06,y-s*.71);ctx.lineTo(x-s*.27,y-s*.64);ctx.quadraticCurveTo(x-s*.33,y-s*.62,x-s*.33,y-s*.52);ctx.lineTo(x-s*.29,y-s*.05);ctx.quadraticCurveTo(x-s*.2,y+s*.06,x,y+s*.06);ctx.quadraticCurveTo(x+s*.2,y+s*.06,x+s*.29,y-s*.05);ctx.lineTo(x+s*.33,y-s*.52);ctx.quadraticCurveTo(x+s*.33,y-s*.62,x+s*.27,y-s*.64);ctx.lineTo(x+s*.06,y-s*.71);ctx.closePath();
+  fillStroke(hexA(sk,.32),C["sk-edge"],1.5);
+  if(o.fat){ctx.save();ctx.clip();ctx.strokeStyle=hexA(C.fatt,.8);ctx.lineWidth=s*.035;ctx.stroke();ctx.restore()}
+  const A={brain:[x,y-s*.85],heart:[x+s*.04,y-s*.5],liver:[x-s*.1,y-s*.33],stomach:[x+s*.12,y-s*.33],kidL:[x-s*.17,y-s*.2],kidR:[x+s*.17,y-s*.2],gut:[x,y-s*.1],panc:[x+s*.06,y-s*.25],musL:[x-s*.45,y-s*.35],musR:[x+s*.45,y-s*.35],fat:[x+s*.24,y-s*.05],mouth:[x,y-s*.76]};
+  /* arms with muscle */
+  [-1,1].forEach(d=>{rr(x+d*s*.36-s*.06,y-s*.62,s*.12,s*.55,s*.06);fillStroke(hexA(sk,.32),C["sk-edge"],1.4);});
+  if(o.lungs!==false){ell(x-s*.13,y-s*.52,s*.08,s*.11,0,hexA(C.brain,.5),hexA(C.organ,.6),1);ell(x+s*.15,y-s*.52,s*.07,s*.11,0,hexA(C.brain,.5),hexA(C.organ,.6),1)}
+  brainShape(A.brain[0],A.brain[1],s*.085,{hyp:o.hyp,hypCol:o.hypCol});
+  heartShape(A.heart[0],A.heart[1],s*.055,Math.max(0,Math.sin(T*7)));
+  liverShape(A.liver[0],A.liver[1],s*.11);stomachShape(A.stomach[0],A.stomach[1],s*.07,o.sfill||0);
+  if(o.panc)pancreasShape(A.panc[0],A.panc[1],s*.06);
+  kidneyShape(A.kidL[0],A.kidL[1],s*.04,false);kidneyShape(A.kidR[0],A.kidR[1],s*.04,true);intestine(A.gut[0],A.gut[1],s*.11,T);
+  if(o.muscles!==false){muscleBlock(x-s*.42,y-s*.5,s*.06,s*.28,o.act||0,T);muscleBlock(x+s*.36,y-s*.5,s*.06,s*.28,o.act||0,T)}
+  ctx.restore();return A}
+/* ---------- energy / flow helpers ---------- */
+function kcalDot(x,y,r,col,a){withA(a==null?1:a,()=>{glow(x,y,r*2.4,col||C.ein,.55);circ(x,y,r,col||C.ein,hexA(C.ink,.35),1)})}
+function flow(path,n,T,spd,col,r,o){o=o||{};for(let i=0;i<n;i++){const p=P(T*spd+i/n,1);const q=along(path,p);const a=o.fade?Math.sin(p*Math.PI):1;kcalDot(q[0],q[1],r||4,col,a)}}
+function pathLine(path,col,lw,dash){poly(path,col,lw||2,dash)}
+function nervePulse(path,T,col,spd,n){poly(path,hexA(col||C.nerve,.55),2.4,[5,4]);for(let i=0;i<(n||2);i++){const q=along(path,P(T*(spd||.6)+i/(n||2),1));glow(q[0],q[1],10,col||C.nerve,.9);circ(q[0],q[1],3.5,col||C.nerve)}}
+/* hormone particles: shape + colour + letter so colour is never the only cue */
+const HORM={ghr:["G","tri"],lep:["L","dia"],ins:["I","hex"],pyy:["P","sq"],cck:["C","circ"],glp:["G1","star"]};
+function hormone(x,y,k,r,a){r=r||7;const col=C[k];const sh=HORM[k]?HORM[k][1]:"circ";withA(a==null?1:a,()=>{ctx.beginPath();
+  if(sh==="tri"){ctx.moveTo(x,y-r*1.15);ctx.lineTo(x+r*1.1,y+r*.8);ctx.lineTo(x-r*1.1,y+r*.8);ctx.closePath()}
+  else if(sh==="dia"){ctx.moveTo(x,y-r*1.2);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r*1.2);ctx.lineTo(x-r,y);ctx.closePath()}
+  else if(sh==="hex"){for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;i?ctx.lineTo(x+Math.cos(an)*r*1.05,y+Math.sin(an)*r*1.05):ctx.moveTo(x+Math.cos(an)*r*1.05,y+Math.sin(an)*r*1.05)}ctx.closePath()}
+  else if(sh==="sq"){ctx.rect(x-r*.85,y-r*.85,r*1.7,r*1.7)}
+  else if(sh==="star"){for(let i=0;i<10;i++){const an=i/10*TAU-Math.PI/2;const rad=i%2?r*.5:r*1.15;i?ctx.lineTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad):ctx.moveTo(x+Math.cos(an)*rad,y+Math.sin(an)*rad)}ctx.closePath()}
+  else ctx.arc(x,y,r,0,TAU);
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.55);ctx.lineWidth=1;ctx.stroke();if(r>=6){ctx.font=`700 ${Math.round(r*(HORM[k]&&HORM[k][0].length>1?.8:1.05))}px ${FONT}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(HORM[k]?HORM[k][0]:"",x,y+(sh==="tri"?r*.2:.5))}})}
+function vessel(path,w){ctx.save();ctx.lineCap="round";ctx.lineJoin="round";poly(path,hexA(C.blood,.35),w||14);poly(path,hexA(C.blood,.6),2);ctx.restore()}
+/* balance scale: tilt>0 means the right pan is lower */
+function scaleBeam(x,y,w,tilt,o){o=o||{};const a=clamp(tilt,-1,1)*.16;rr(x-8,y,16,o.h||120,4);fillStroke(C.metal,hexA(C.ink,.5),1.4);rr(x-50,y+(o.h||120),100,12,5);fillStroke(C.metal,hexA(C.ink,.5),1.4);
+  const lx=x-Math.cos(a)*w/2,ly=y-Math.sin(a)*w/2,rx=x+Math.cos(a)*w/2,ry=y+Math.sin(a)*w/2;line(lx,ly,rx,ry,C["ink-soft"],7);circ(x,y,8,C.gold,hexA(C.ink,.5),1.4);
+  const pw=o.pw||58,ph_=o.ph||52;const pan=(px,py)=>{line(px,py,px-pw*.8,py+ph_,C["ink-soft"],1.4);line(px,py,px+pw*.8,py+ph_,C["ink-soft"],1.4);ctx.beginPath();ctx.moveTo(px-pw,py+ph_);ctx.quadraticCurveTo(px,py+ph_+pw*.5,px+pw,py+ph_);ctx.closePath();fillStroke(hexA(C.metal,.6),C["ink-soft"],1.6);return [px,py+ph_+4]};
+  return {L:pan(lx,ly),R:pan(rx,ry)}}
+/* stacked horizontal bar */
+function stackBar(x,y,w,h,parts,o){o=o||{};const tot=o.total||parts.reduce((a,p)=>a+p.v,0);let X=x;rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();
+  parts.forEach((p,i)=>{const pw=w*p.v/tot*(p.f==null?1:p.f);if(pw<=0)return;ctx.save();rr(x,y,w,h,4);ctx.clip();ctx.fillStyle=p.col;ctx.fillRect(X,y,pw,h);if(p.hatch){ctx.strokeStyle=hexA("#fff",.45);ctx.lineWidth=2;for(let k=-h;k<pw;k+=8){ctx.beginPath();ctx.moveTo(X+k,y+h);ctx.lineTo(X+k+h,y);ctx.stroke()}}ctx.restore();
+    line(X+pw,y,X+pw,y+h,C.panel,2);if(p.lab&&pw>(o.minLab||40))txt(X+pw/2,y+h/2,p.lab,{size:o.fs||12,weight:700,align:"center",color:inkOn(p.col)});X+=pw});
+  rr(x,y,w,h,4);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();return X}
+/* vertical stacked column */
+function stackCol(x,y,w,h,parts,o){o=o||{};const tot=o.total||parts.reduce((a,p)=>a+p.v,0);let Y=y+h;rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.6);ctx.fill();
+  parts.forEach(p=>{const ph=h*p.v/tot*(p.f==null?1:p.f);if(ph<=0)return;ctx.fillStyle=p.col;ctx.fillRect(x,Y-ph,w,ph);line(x,Y-ph,x+w,Y-ph,C.panel,2);if(p.lab&&ph>16)txt(x+w/2,Y-ph/2,p.lab,{size:o.fs||11.5,weight:700,align:"center",color:inkOn(p.col)});Y-=ph});
+  rr(x,y,w,h,4);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();return Y}
+function donut(x,y,r,parts,o){o=o||{};const tot=parts.reduce((a,p)=>a+p.v,0);let a0=-Math.PI/2+(o.rot||0);const prog=o.p==null?1:o.p;
+  parts.forEach((p,i)=>{const da=TAU*p.v/tot*prog;ctx.beginPath();ctx.arc(x,y,r,a0,a0+da);ctx.arc(x,y,r*(o.hole||.55),a0+da,a0,true);ctx.closePath();ctx.fillStyle=p.col;ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=2;ctx.stroke();
+    if(p.lab&&da>.3){const am=a0+da/2;const lr=r*(1+(o.hole||.55))/2;txt(x+Math.cos(am)*lr,y+Math.sin(am)*lr,p.lab,{size:o.fs||11.5,weight:700,align:"center",color:inkOn(p.col)})}a0+=da})}
+/* ---------- food and drink ---------- */
+function plate(x,y,r){ell(x,y+3,r,r*.36,0,hexA(C.ink,.12));ell(x,y,r,r*.36,0,C.plate,C["ink-soft"],1.4);ell(x,y,r*.72,r*.26,0,null,hexA(C["ink-soft"],.5),1)}
+function foodPile(x,y,s,kind){if(kind==="grain"){for(let i=0;i<14;i++){const a=rnd(i)*TAU,rad=rnd(i+7)*s*.8;ell(x+Math.cos(a)*rad,y-s*.2+Math.sin(a)*rad*.4,s*.16,s*.08,a,mix(C.carb,"#fff",.55),hexA(C.carb,.8),.8)}}
+  else if(kind==="veg"){for(let i=0;i<6;i++){circ(x-s*.6+i*s*.24,y-s*.15+(i%2)*s*.12,s*.2,mix(C.fib,"#fff",.15),mix(C.fib,"#000",.3),1)}}
+  else if(kind==="bean"){for(let i=0;i<9;i++){ell(x-s*.5+(i%5)*s*.25,y-s*.2+Math.floor(i/5)*s*.18,s*.13,s*.09,.3,mix(C.prot,"#000",.15),hexA(C.ink,.4),.8)}}
+  else if(kind==="fish"){ell(x,y-s*.15,s*.7,s*.25,0,mix(C.prot,"#fff",.5),hexA(C.prot,.8),1.2);ctx.beginPath();ctx.moveTo(x+s*.65,y-s*.15);ctx.lineTo(x+s*.95,y-s*.35);ctx.lineTo(x+s*.95,y+s*.05);ctx.closePath();fillStroke(mix(C.prot,"#fff",.5),hexA(C.prot,.8),1.2)}
+  else if(kind==="bread"){rr(x-s*.5,y-s*.7,s,s*.75,s*.25);fillStroke(mix(C.carb,"#fff",.35),mix(C.carb,"#000",.25),1.4);rr(x-s*.38,y-s*.56,s*.76,s*.55,s*.18);ctx.fillStyle=mix(C.carb,"#fff",.7);ctx.fill()}
+  else if(kind==="apple"){circ(x,y-s*.4,s*.45,mix(C.prot,C.carb,.3),mix(C.prot,"#000",.35),1.4);line(x,y-s*.85,x+s*.06,y-s*1.05,C.hair2,2.5);ell(x+s*.2,y-s*.95,s*.16,s*.07,-.4,C.fib)}
+  else if(kind==="egg"){ell(x,y-s*.3,s*.5,s*.36,0,C.plate,C["ink-soft"],1.2);circ(x+s*.05,y-s*.3,s*.18,C.fat,mix(C.fat,"#000",.3),1)}
+  else if(kind==="oil"){rr(x-s*.2,y-s*1.1,s*.4,s*1.1,s*.12);fillStroke(hexA(C.fat,.75),mix(C.fat,"#000",.35),1.4);rr(x-s*.08,y-s*1.3,s*.16,s*.22,2);fillStroke(C["ink-soft"],null)}
+  else if(kind==="nuts"){for(let i=0;i<7;i++)ell(x-s*.45+(i%4)*s*.3,y-s*.15-Math.floor(i/4)*s*.18,s*.16,s*.11,i,mix(C.fat,C.carb,.5),hexA(C.ink,.45),.9)}
+  else if(kind==="yogurt"){rr(x-s*.4,y-s*.75,s*.8,s*.75,s*.12);fillStroke(C.plate,C["ink-soft"],1.3);ell(x,y-s*.75,s*.4,s*.1,0,mix(C.plate,C.vit,.15),C["ink-soft"],1.1)}}
+function glassDrink(x,y,s,col,lv){ctx.beginPath();ctx.moveTo(x-s*.35,y-s);ctx.lineTo(x-s*.28,y);ctx.lineTo(x+s*.28,y);ctx.lineTo(x+s*.35,y-s);ctx.closePath();fillStroke(hexA(C.glass,.6),C["glass-edge"],1.6);
+  ctx.save();ctx.clip();ctx.fillStyle=hexA(col,.8);ctx.fillRect(x-s*.4,y-s*(lv==null?.75:lv),s*.8,s);ctx.restore()}
+function mealTray(x,y,s,T){plate(x,y,s*.9);foodPile(x-s*.35,y,s*.35,"grain");foodPile(x+s*.05,y-s*.02,s*.32,"fish");foodPile(x+s*.45,y,s*.28,"veg");glassDrink(x+s*1.25,y+s*.15,s*.5,C.wat,.7)}
+/* ---------- instruments ---------- */
+function thermoBar(x,y,h,f,col,lab){rr(x-6,y-h,12,h,6);fillStroke(C.paper,C["ink-soft"],1.5);circ(x,y+6,10,col||C.heat,C["ink-soft"],1.5);rr(x-3,y-h*clamp(f,0,1),6,h*clamp(f,0,1)+4,3);ctx.fillStyle=col||C.heat;ctx.fill();if(lab)txt(x+14,y-h*clamp(f,0,1),lab,{size:12,weight:700,mono:true})}
+function gaugeDial(x,y,r,f,col,lab){circ(x,y,r,C.paper,C["ink-soft"],2);ctx.beginPath();ctx.arc(x,y,r-6,Math.PI*.75,Math.PI*2.25);ctx.strokeStyle=hexA(C.sunk,.9);ctx.lineWidth=6;ctx.stroke();ctx.beginPath();ctx.arc(x,y,r-6,Math.PI*.75,Math.PI*(.75+1.5*clamp(f,0,1)));ctx.strokeStyle=col||C.accent;ctx.stroke();
+  const a=Math.PI*(.75+1.5*clamp(f,0,1));line(x,y,x+Math.cos(a)*(r-10),y+Math.sin(a)*(r-10),C.ink,2.2);circ(x,y,3.5,C.ink);if(lab)txt(x,y+(r<34?r+12:r*.55),lab,{size:11.5,weight:700,align:"center",mono:true})}
+function clockFace(x,y,r,hours){circ(x,y,r,C.paper,C["ink-soft"],2);for(let i=0;i<12;i++){const a=i/12*TAU;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.5)}
+  const h=(hours%12)/12*TAU-Math.PI/2,m=(hours%1)*TAU-Math.PI/2;line(x,y,x+Math.cos(h)*r*.5,y+Math.sin(h)*r*.5,C.ink,3);line(x,y,x+Math.cos(m)*r*.75,y+Math.sin(m)*r*.75,C.ink,1.8);circ(x,y,3,C.ink)}
+/* ---------- small helpers ---------- */
+function bubble(x,y,w,h,text,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);if(o.tail){ctx.beginPath();ctx.moveTo(o.tail[0],o.tail[1]);ctx.lineTo(x+w*.3,y+h);ctx.lineTo(x+w*.3+16,y+h);ctx.closePath();fillStroke(o.fill||C.paper,o.stroke||C["ink-soft"],1.5);ctx.fillStyle=o.fill||C.paper;ctx.fillRect(x+w*.3+1,y+h-3,14,4)}
+  wrapText(text,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500,color:o.color||C.ink})}
+function card(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.18):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function vbar(x,y,w,h,f,col,lab,val){rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const ff=clamp(f,0,1);if(ff>0){rr(x,y+h*(1-ff),w,h*ff,4);ctx.fillStyle=col;ctx.fill()}if(lab)txt(x+w/2,y+h+13,lab,{size:11.5,weight:700,align:"center"});if(val)txt(x+w/2,y+h*(1-ff)-10,val,{size:11.5,weight:700,align:"center",mono:true})}
+function sun(x,y,r,T){for(let i=0;i<10;i++){const a=i/10*TAU+T*.2;line(x+Math.cos(a)*r*1.25,y+Math.sin(a)*r*1.25,x+Math.cos(a)*r*1.6,y+Math.sin(a)*r*1.6,C.lamp,2.5)}circ(x,y,r,C.lamp,hexA(C.ink,.3),1)}
+function moon(x,y,r){const d=.5*r,r2=.85*r,xi=(d*d+r*r-r2*r2)/(2*d),yi=Math.sqrt(Math.max(0,r*r-xi*xi));const a=Math.atan2(yi,xi),b=Math.atan2(yi,xi-d);ctx.beginPath();ctx.arc(x,y,r,a,TAU-a,false);ctx.arc(x+d,y,r2,TAU-b,b,true);ctx.closePath();fillStroke(C.moon,hexA(C.ink,.45),1.2)}
+function snowflake(x,y,r,col){for(let i=0;i<3;i++){const a=i/3*Math.PI;line(x-Math.cos(a)*r,y-Math.sin(a)*r,x+Math.cos(a)*r,y+Math.sin(a)*r,col||C.cold,1.8)}}
+function plusMinus(x,y,plus,col){circ(x,y,9,col,C.panel,1.5);line(x-5,y,x+5,y,"#fff",2.2);if(plus)line(x,y-5,x,y+5,"#fff",2.2)}
+function bigNum(x,y,t,o){o=o||{};txt(x,y,t,{size:o.size||22,weight:700,mono:true,align:o.align||"center",color:o.color||C.ink})}
+/* ================= shared scene helpers (walkthrough and lab) ================= */
+function personF(x,y,s,o){if(o&&o.flip){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);const r=person(x,y,s,Object.assign({},o,{flip:false}));ctx.restore();return r}return person(x,y,s,o)}
+function heatWave2(x,y,T){const p=P(T*.8,1);withA(Math.sin(p*Math.PI)*.9,()=>{ctx.beginPath();for(let k=0;k<=14;k++){const yy=y-k*3-p*24;const xx=x+Math.sin(k*.7+T*4)*3;k?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}ctx.strokeStyle=C.tef;ctx.lineWidth=2.2;ctx.stroke()})}
+function baby(x,y,s,o){o=o||{};const sk=C["sk"+(o.skin||2)];ell(x,y-s*.3,s*.55,s*.3,0,C[o.cloth||"cl2"],hexA(C.ink,.4),1.2);circ(x-s*.55,y-s*.45,s*.3,sk,hexA(C["sk-edge"],.7),1.2);circ(x-s*.48,y-s*.5,1.8,C.ink);limb(x+s*.3,y-s*.1,x+s*.6,y+s*.0,s*.13,sk);limb(x-s*.1,y-s*.1,x-s*.2,y+s*.05,s*.12,sk)}
+function thyroid(x,y,s){ctx.beginPath();ctx.ellipse(x-s*.55,y,s*.5,s*.75,-.2,0,TAU);ctx.ellipse(x+s*.55,y,s*.5,s*.75,.2,0,TAU);fillStroke(mix(C.organ,"#fff",.2),mix(C.organ,"#000",.4),1.4);rr(x-s*.3,y-s*.1,s*.6,s*.3,4);fillStroke(mix(C.organ,"#fff",.2),null)}
+function o2(x,y,r,a){withA(a,()=>{circ(x-r*.55,y,r,C.o2,hexA(C.ink,.4),1);circ(x+r*.55,y,r,C.o2,hexA(C.ink,.4),1)})}
+function co2(x,y,r,a){withA(a,()=>{circ(x-r*1.1,y,r*.85,C.co2,hexA(C.ink,.4),1);circ(x+r*1.1,y,r*.85,C.co2,hexA(C.ink,.4),1);circ(x,y,r,mix(C.co2,"#000",.3),hexA(C.ink,.4),1)})}
+function seesaw(x,y,w,tilt,lA,lB,cA,cB){const a=tilt*.22;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-14,y+22);ctx.lineTo(x+14,y+22);ctx.closePath();fillStroke(C.metal,hexA(C.ink,.5),1.2);
+  const lx=x-Math.cos(a)*w/2,ly=y-Math.sin(a)*w/2,rx=x+Math.cos(a)*w/2,ry=y+Math.sin(a)*w/2;line(lx,ly,rx,ry,C["ink-soft"],6);
+  circ(lx,ly-14,13,cA,hexA(C.ink,.5),1.2);circ(rx,ry-14,13,cB,hexA(C.ink,.5),1.2);label(lx,ly+20,lA,{size:12,weight:700,border:cA});label(rx,ry+20,lB,{size:12,weight:700,border:cB})}
+function fork(x,y){line(x,y-10,x,y+10,C.ink,2);for(let i=-1;i<=1;i++)line(x+i*4,y-10,x+i*4,y-3,C.ink,1.5)}
+function vbarS(x,y,w,h,f,col){rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(x,y+h*(1-clamp(f,0,1)),w,h*clamp(f,0,1),4);ctx.fillStyle=col;ctx.fill()}
+function hbarT(x,y,lab,f,col,k){hormone(x+8,y,k,7);txt(x+22,y,lab,{size:12,weight:700});rr(x+80,y-7,90,14,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(x+80,y-7,90*clamp(f,0,1),14,6);ctx.fillStyle=col;ctx.fill()}
+
+function outlinePath(x,y,s,b){b=b||1;const hr=s*.075,yS=y-s*.80,yH=y-s*.47,tw=s*.2*b,lw=s*.075*Math.pow(b,.75),aw=s*.06*Math.pow(b,.75);
+  const hy=yS-s*.05-hr*.9;ctx.beginPath();ctx.moveTo(x+hr,hy);ctx.arc(x,hy,hr,0,TAU);
+  const R=(x0,y0,w,h,r)=>{r=Math.min(r,w/2,h/2);ctx.moveTo(x0+r,y0);ctx.arcTo(x0+w,y0,x0+w,y0+h,r);ctx.arcTo(x0+w,y0+h,x0,y0+h,r);ctx.arcTo(x0,y0+h,x0,y0,r);ctx.arcTo(x0,y0,x0+w,y0,r);ctx.closePath()};
+  R(x-s*.025,yS-s*.06,s*.05,s*.07,s*.02);R(x-tw/2,yS-s*.02,tw,yH-yS+s*.06,tw*.28);
+  R(x-tw/2-aw*.7,yS,aw,s*.36,aw*.5);R(x+tw/2-aw*.3,yS,aw,s*.36,aw*.5);
+  R(x-s*.18*b*.28-lw/2,yH-s*.02,lw,s*.49,lw*.45);R(x+s*.18*b*.28-lw/2,yH-s*.02,lw,s*.49,lw*.45)}
+function lensView2(x,y,R,fn){ctx.save();ctx.beginPath();ctx.arc(x,y,R,0,TAU);ctx.fillStyle=C.paper;ctx.fill();ctx.clip();fn();ctx.restore();circ(x,y,R,null,C["ink-soft"],3)}
+function compBar(x,y,w,lean,col){rr(x,y,w,16,4);ctx.fillStyle=C.fatt;ctx.fill();rr(x,y,w*lean,16,4);ctx.fillStyle=C.muscle;ctx.fill();rr(x,y,w,16,4);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();
+  txt(x+w*lean/2,y+8,"lean",{size:11.5,weight:700,align:"center",color:inkOn(C.muscle)});txt(x+w*lean+w*(1-lean)/2,y+8,"fat",{size:11.5,weight:700,align:"center",color:inkOn(C.fatt)})}
+function icon(k,x,y,T){switch(k){
+  case "dna":for(let i=0;i<12;i++){const a=i*.6+T;const y1=y-20+i*3.4;circ(x+Math.sin(a)*12,y1,2.6,C.act6);circ(x-Math.sin(a)*12,y1,2.6,C.act3);if(i%2)line(x+Math.sin(a)*12,y1,x-Math.sin(a)*12,y1,hexA(C["ink-soft"],.6),1)}break;
+  case "shelf":rr(x-22,y-20,44,40,3);fillStroke(null,C["ink-soft"],1.6);line(x-22,y,x+22,y,C["ink-soft"],1.6);[C.carb,C.prot,C.fib,C.fat].forEach((c,i)=>{rr(x-18+i*10,y-16,8,14,1);ctx.fillStyle=c;ctx.fill();rr(x-18+i*10,y+4,8,14,1);ctx.fillStyle=[C.wat,C.vit,C.carb,C.min][i];ctx.fill()});break;
+  case "moon":moon(x,y,15);break;
+  case "stress":for(let w=0;w<3;w++)poly([[x-18,y-8+w*8],[x-9,y-13+w*8],[x,y-8+w*8],[x+9,y-13+w*8],[x+18,y-8+w*8]],C.tef,2.2);break;
+  case "pill":rr(x-12,y-14,24,30,4);fillStroke(C.cup,C["ink-soft"],1.4);rr(x-14,y-20,28,8,2);fillStroke(C.vit,null);break;
+  case "tag":ctx.beginPath();ctx.moveTo(x-18,y-10);ctx.lineTo(x+8,y-10);ctx.lineTo(x+20,y);ctx.lineTo(x+8,y+10);ctx.lineTo(x-18,y+10);ctx.closePath();fillStroke(C.gold,hexA(C.ink,.5),1.3);circ(x+8,y,2.5,C.panel);txt(x-6,y,"$",{size:12,weight:700,align:"center",color:"#10161A"});break;
+  case "table":rr(x-24,y,48,6,2);fillStroke(C.table,hexA(C.ink,.4),1);line(x-18,y+6,x-18,y+20,C.table,3);line(x+18,y+6,x+18,y+20,C.table,3);[-14,0,14].forEach(d=>ell(x+d,y-3,6,2.5,0,C.plate,C["ink-soft"],1));break;
+  case "park":line(x-24,y+14,x+24,y+14,C.grass,4);ctx.beginPath();ctx.moveTo(x-6,y+14);ctx.quadraticCurveTo(x,y,x+14,y-12);ctx.strokeStyle=C.table;ctx.lineWidth=4;ctx.stroke();circ(x-12,y-6,10,C.fib);line(x-12,y+4,x-12,y+14,C.hair2,3);break}}
+function bpCuff(x,y){rr(x-16,y-8,32,16,4);fillStroke(C.ins,hexA(C.ink,.5),1.2);circ(x+26,y+10,8,C.metal,hexA(C.ink,.5),1);line(x+16,y,x+20,y+6,C["ink-soft"],1.6)}
+function tube(x,y){rr(x-5,y-18,10,32,5);fillStroke(C.glass,C["glass-edge"],1.4);rr(x-5,y,10,14,5);ctx.fillStyle=C.blood;ctx.fill()}
+function bike(x,y,T){circ(x-14,y+6,9,null,C.ink,2);circ(x+14,y+6,9,null,C.ink,2);poly([[x-14,y+6],[x-2,y-8],[x+14,y+6]],C.pa,2.2);line(x-2,y-8,x+6,y-8,C.ink,2)}
+function heartIcon(x,y,s,col){ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,s*.6);ctx.bezierCurveTo(-s,0,-s*.6,-s*.8,0,-s*.3);ctx.bezierCurveTo(s*.6,-s*.8,s,0,0,s*.6);ctx.fillStyle=col;ctx.fill();ctx.restore()}
+function building(x,y,w,h,col,sym){rr(x-w/2,y-h,w,h,4);fillStroke(C.panel,C["ink-soft"],1.6);ctx.beginPath();ctx.moveTo(x-w/2-6,y-h);ctx.lineTo(x,y-h-18);ctx.lineTo(x+w/2+6,y-h);ctx.closePath();fillStroke(col,hexA(C.ink,.4),1.2);
+  if(sym==="cross"){rr(x-4,y-h+10,8,22,1);ctx.fillStyle=C.bad;ctx.fill();rr(x-11,y-h+17,22,8,1);ctx.fill()}else{rr(x-12,y-h+10,24,16,6);fillStroke(C.paper,C["ink-soft"],1.2)}rr(x-6,y-14,12,14,1);ctx.fillStyle=C["ink-soft"];ctx.fill()}
+function phoneIcon(x,y){rr(x-12,y-22,24,44,5);fillStroke(C.ink,null);rr(x-9,y-17,18,30,2);ctx.fillStyle=C.sky;ctx.fill();circ(x,y+18,2,C.panel)}
+/* ================= stress module: physiology teaching models (shared) ================= */
+/* cortisol across the day, relative units (100 = a typical morning peak).
+   o: {wake:7, flat:0..1 chronic flattening, eve:0..1 extra evening level (poor sleep), acute:[[startHour,durHours,amp]]} */
+function cortBase(h,o){o=o||{};const wake=o.wake==null?7:o.wake;let dt=((h-wake)%24+24)%24;/* hours since waking */
+  const flat=o.flat||0,eve=o.eve||0;const peak=100*(1-.32*flat),wakeV=62*(1-.25*flat);let v;
+  if(dt>20){/* last 4 h of sleep: early morning rise */const f=(dt-20)/4;v=lerp(7+6*flat,wakeV,f*f)}
+  else if(dt<.6){v=lerp(wakeV,peak,smooth(dt/.6))}
+  else{const k=4.6;v=Math.max(6,peak*Math.exp(-(dt-.6)/k));v+=flat*22*smooth((dt-3)/8)+eve*14*smooth((dt-9)/5);v=Math.min(v,peak)}
+  if(dt>16&&dt<=20)v=Math.max(v,6+flat*8+eve*10*(1-(dt-16)/4));
+  return v}
+function cortAcute(h,ac){let s=0;(ac||[]).forEach(a=>{const t0=a[0],d=a[1],amp=a[2];let m=(h-t0)*60;if(m<0)m+=24*60;if(m>24*60-1)return;const lag=8;const e=d*60;
+  if(m<lag)return;const mm=m-lag;if(mm<=e)s+=amp*(1-Math.exp(-mm/14));else s+=amp*(1-Math.exp(-e/14))*Math.exp(-(mm-e)/55)});return s}
+function cortisol(h,o){return cortBase(h,o)+cortAcute(h,o&&o.acute)}
+/* ---------- heartbeat generator with respiratory sinus arrhythmia ----------
+   hr: mean heart rate (bpm); rmssd: target RMSSD in ms; bp: breathing period in s */
+function beatTrain(seed,t0,t1,par){const out=[];let t=t0;let s=seed;const rnd_=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646};
+  let guard=0;while(t<t1&&guard++<4000){const p=typeof par==="function"?par(t):par;const R=60/p.hr;const bp=p.bp||4;const f=2*Math.PI*R/bp;
+    const A=(p.rmssd||30)/1000/Math.max(.25,f*.7071)*.9;const noise=(rnd_()-.5)*2*(p.rmssd||30)/1000*.35;
+    const ph=p.ph!=null?p.ph:t/bp;const rr=clamp(R-A*Math.sin(2*Math.PI*ph)+noise,.3,2.2);out.push({t,rr});t+=rr}
+  return out}
+function rmssdOf(list){if(list.length<3)return 0;let s=0;for(let i=1;i<list.length;i++){const d=(list[i]-list[i-1])*1000;s+=d*d}return Math.sqrt(s/(list.length-1))}
+/* ECG voltage at time t given beat (R peak) times */
+function ecgV(t,beats){let v=0;for(let i=0;i<beats.length;i++){const b=beats[i].t;const d=t-b;if(d<-.35||d>.6)continue;const rr=beats[i].rr||.85;const tt=.2+.08*rr;
+  v+=.12*gauss(d,-.16,.022)-.1*gauss(d,-.03,.007)+1.0*gauss(d,0,.011)-.22*gauss(d,.03,.009)+.28*gauss(d,tt,.042)}return v}
+/* breathing phase helper: 0..1 lung volume for period bp at time t (inhale rising) */
+function breathVol(t,bp){return .5-.5*Math.cos(2*Math.PI*t/bp)}
+/* keep a growing beat list in a cache object (survives frames, reset with the scene) */
+function beatsUpTo(cache,key,T,par,seed){let L=cache[key];if(!L||!L.length||T<L[0].t||L[L.length-1].t<T-6){L=beatTrain(seed||7,Math.max(0,T-14),T+2,par);cache[key]=L;return L}
+  const last=L[L.length-1];if(last.t<T+.25){const more=beatTrain((seed||7)+L.length,last.t+last.rr,T+1,par);L.push(...more)}if(L.length>80)L.splice(0,L.length-80);return L}
+/* ================= stress module drawing kit (shared by both pages) ================= */
+/* hormone and transmitter particles: shape + letters so colour is never the only cue */
+const HM={epi:["E","tri"],ne:["NE","circ"],ach:["ACh","circ"],cort:["C","hex"],crh:["CRH","dia"],acth:["ACTH","sq"]};
+function horm(x,y,k,r,a){r=r||7;const col=C[k];const sh=HM[k]?HM[k][1]:"circ";withA(a==null?1:a,()=>{ctx.beginPath();
+  if(sh==="tri"){ctx.moveTo(x,y-r*1.2);ctx.lineTo(x+r*1.15,y+r*.85);ctx.lineTo(x-r*1.15,y+r*.85);ctx.closePath()}
+  else if(sh==="dia"){ctx.moveTo(x,y-r*1.25);ctx.lineTo(x+r*1.1,y);ctx.lineTo(x,y+r*1.25);ctx.lineTo(x-r*1.1,y);ctx.closePath()}
+  else if(sh==="hex"){for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;const X=x+Math.cos(an)*r*1.08,Y=y+Math.sin(an)*r*1.08;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+  else if(sh==="sq"){ctx.rect(x-r*.9,y-r*.9,r*1.8,r*1.8)}
+  else ctx.arc(x,y,r,0,TAU);
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.55);ctx.lineWidth=1;ctx.stroke();
+  if(r>=7&&HM[k]){const t=HM[k][0];const fs=Math.round(r*(t.length>2?.62:t.length>1?.8:1.05));ctx.font=`700 ${fs}px ${FONT}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(t,x,y+(sh==="tri"?r*.22:.5))}})}
+/* spinal cord with segments: returns y of a segment name. o:{sym:bool,para:bool,labels:bool} */
+const SEGS=(()=>{const a=[];for(let i=1;i<=8;i++)a.push("C"+i);for(let i=1;i<=12;i++)a.push("T"+i);for(let i=1;i<=5;i++)a.push("L"+i);for(let i=1;i<=5;i++)a.push("S"+i);return a})();
+function cordY(y0,y1,name){const i=SEGS.indexOf(name);return lerp(y0,y1,(i+.5)/SEGS.length)}
+function spinalCord(x,y0,y1,o){o=o||{};const w=o.w||16;
+  /* vertebral column hint (bone ivory with outline) */
+  if(o.bones!==false)for(let i=0;i<SEGS.length;i++){const y=lerp(y0,y1,i/SEGS.length);const h=(y1-y0)/SEGS.length;rr(x-w*1.6,y+1,w*3.2,h-2,3);fillStroke(hexA(C.bone,.9),hexA(C["bone-edge"],.7),1)}
+  rr(x-w/2,y0-6,w,y1-y0+6,w/2);fillStroke(C.nerve,mix(C.nerve,"#000",.4),1.4);
+  if(o.sym){const a=cordY(y0,y1,"T1")-6,b=cordY(y0,y1,"L2")+6;rr(x-w/2-3,a,w+6,b-a,6);ctx.strokeStyle=C.sym;ctx.lineWidth=3;ctx.stroke()}
+  if(o.para){const a=cordY(y0,y1,"S2")-5,b=cordY(y0,y1,"S4")+5;rr(x-w/2-3,a,w+6,b-a,6);ctx.strokeStyle=C.para;ctx.lineWidth=3;ctx.stroke()}
+  if(o.labels){[["Cervical","C4"],["Thoracic","T6"],["Lumbar","L3"],["Sacral","S3"]].forEach(r=>txt(x-w*1.6-6,cordY(y0,y1,r[1]),r[0],{size:11.5,weight:600,align:"right",color:C["ink-soft"]}))}}
+function ganglion(x,y,r,col,glowA){if(glowA)glow(x,y,r*2.4,col,glowA);ell(x,y,r,r*.8,0,mix(col,C.panel,.35),mix(col,"#000",.35),1.6)}
+/* neuron drawn from a to b with optional travelling impulses */
+function axon(pts,col,T,o){o=o||{};poly(pts,hexA(col,o.a==null?.95:o.a),o.lw||2.6,o.dash);if(o.soma!==false)circ(pts[0][0],pts[0][1],o.sr||4.5,col,hexA(C.ink,.5),1);
+  const e=pts[pts.length-1];if(o.end!==false){circ(e[0],e[1],3.2,col,hexA(C.ink,.4),1)}
+  if(o.rate>0){const n=o.n||2;for(let i=0;i<n;i++){const p=P(T*o.rate+i/n,1);const q=along(pts,p);glow(q[0],q[1],9,col,.85);circ(q[0],q[1],3,col)}}}
+/* eye seen from the front: pupil fraction 0 (pinpoint) to 1 (wide) */
+function eyeFront(x,y,r,pf,o){o=o||{};ell(x,y,r*1.55,r,0,C.paper,C["ink-soft"],1.6);ctx.save();ctx.beginPath();ctx.ellipse(x,y,r*1.55,r,0,0,TAU);ctx.clip();
+  const ir=r*.92;circ(x,y,ir,mix(C.lig,C.paper,.25),mix(C.lig,"#000",.35),1.2);
+  /* radial dilator fibres (sympathetic) and circular sphincter (parasympathetic) */
+  const pr=ir*(.18+.6*clamp(pf,0,1));
+  if(o.fibres){for(let i=0;i<20;i++){const a=i/20*TAU;line(x+Math.cos(a)*(pr+2),y+Math.sin(a)*(pr+2),x+Math.cos(a)*ir*.95,y+Math.sin(a)*ir*.95,hexA(C.sym,o.symA==null?.8:o.symA),1.6)}
+    for(let k=0;k<2;k++)circ(x,y,pr+2+k*3,null,hexA(C.para,o.paraA==null?.8:o.paraA),1.8)}
+  else for(let i=0;i<16;i++){const a=i/16*TAU;line(x+Math.cos(a)*(pr+1),y+Math.sin(a)*(pr+1),x+Math.cos(a)*ir*.9,y+Math.sin(a)*ir*.9,hexA(mix(C.lig,"#000",.3),.45),1)}
+  circ(x,y,pr,"#0B0F12");circ(x-pr*.35,y-pr*.35,Math.max(1.2,pr*.22),hexA("#fff",.8));ctx.restore();return pr}
+/* lungs with airway tree; open 0 (narrow) to 1 (wide) */
+function lungsPair(x,y,s,open,vol){const k=1+(vol||0)*.06;[-1,1].forEach(d=>{ctx.save();ctx.translate(x+d*s*.36,y);ctx.scale(d*k,k);ctx.beginPath();ctx.moveTo(-s*.06,-s*.5);ctx.quadraticCurveTo(s*.32,-s*.55,s*.34,s*.1);ctx.quadraticCurveTo(s*.34,s*.48,s*.02,s*.42);ctx.quadraticCurveTo(-s*.12,s*.2,-s*.06,-s*.5);
+    fillStroke(hexA(mix(C.brain,C.organ,.3),.55),mix(C.organ,"#000",.25),1.4);ctx.restore()});
+  const w=1.6+3.4*clamp(open,0,1);line(x,y-s*.75,x,y-s*.3,C["ink-soft"],w+3);
+  [-1,1].forEach(d=>{poly([[x,y-s*.3],[x+d*s*.2,y-s*.12],[x+d*s*.3,y+s*.12]],mix(C.organ,"#000",.2),w*.9);poly([[x+d*s*.2,y-s*.12],[x+d*s*.42,y-s*.05]],mix(C.organ,"#000",.2),w*.7);poly([[x+d*s*.3,y+s*.12],[x+d*s*.46,y+s*.24]],mix(C.organ,"#000",.2),w*.6);poly([[x+d*s*.3,y+s*.12],[x+d*s*.24,y+s*.3]],mix(C.organ,"#000",.2),w*.55)})}
+/* airway cross section: ring of smooth muscle, open 0..1, mucus 0..1 */
+function airwayCS(x,y,r,open,mucus){circ(x,y,r,mix(C.organ,C.panel,.45),mix(C.organ,"#000",.3),1.5);const lr=r*(.25+.5*clamp(open,0,1));
+  for(let i=0;i<14;i++){const a=i/14*TAU;ell(x+Math.cos(a)*(lr+r*.16),y+Math.sin(a)*(lr+r*.16),r*.1,r*.05,a+Math.PI/2,C.rose,null)}
+  circ(x,y,lr,C.sky2,mix(C.organ,"#000",.3),1.2);if(mucus>0)for(let i=0;i<6;i++){const a=i/6*TAU+.3;circ(x+Math.cos(a)*lr*.8,y+Math.sin(a)*lr*.8,lr*.22*mucus,hexA(C.fat,.8))}return lr}
+/* blood vessel cross section: constrict 0 (relaxed, wide) to 1 (narrow) */
+function vesselCS(x,y,r,constrict,o){o=o||{};circ(x,y,r,mix(C.blood,C.panel,.75),mix(C.blood,"#000",.35),1.5);const lr=r*(.72-.42*clamp(constrict,0,1));
+  ctx.beginPath();ctx.arc(x,y,r*.95,0,TAU);ctx.arc(x,y,lr+2,0,TAU,true);ctx.fillStyle=hexA(C.rose,.55);ctx.fill();
+  circ(x,y,lr,hexA(C.blood,.85),hexA(C.ink,.3),1);if(o.T!=null)for(let i=0;i<3;i++){const p=P(o.T*.8+i/3,1);circ(x+Math.cos(i*2.1)*lr*.4,y+Math.sin(i*2.1)*lr*.4,lr*.22*(.8+.2*Math.sin(p*TAU)),hexA("#fff",.35))}return lr}
+/* gut tube with peristaltic waves; mot 0..1 */
+function gutTube(x,y,w,h,T,mot,o){o=o||{};const N=60;ctx.beginPath();for(let i=0;i<=N;i++){const u=i/N;const sq=mot*.42*Math.max(0,Math.sin(u*TAU*2.5-T*(1+3*mot)));ctx.lineTo(x+u*w,y-h/2*(1-sq))}
+  for(let i=N;i>=0;i--){const u=i/N;const sq=mot*.42*Math.max(0,Math.sin(u*TAU*2.5-T*(1+3*mot)));ctx.lineTo(x+u*w,y+h/2*(1-sq))}ctx.closePath();fillStroke(C.gut,mix(C.gut,"#000",.4),1.6);
+  if(o.food!==false)for(let i=0;i<4;i++){const u=P(T*(.02+.09*mot)+i/4,1);ell(x+u*w,y,h*.18,h*.14,0,mix(C.carb,C.gut,.3),hexA(C.ink,.3),1)}}
+/* adrenal gland on top of a kidney: cortex (outer) and medulla (inner) */
+function adrenal(x,y,s,o){o=o||{};kidneyShape(x,y+s*.9,s*.75,o.flip);if(o.cort)glow(x,y,s*1.6,C.cort,.5*o.cort);ctx.beginPath();ctx.moveTo(x-s*.7,y+s*.2);ctx.quadraticCurveTo(x-s*.1,y-s*.75,x+s*.7,y+s*.15);ctx.quadraticCurveTo(x,y+s*.35,x-s*.7,y+s*.2);
+  fillStroke(mix(C.fatt,C.cort,.25+.5*(o.cort||0)),mix(C.cort,"#000",.3),1.4);
+  ell(x,y,s*.3,s*.14,-.05,o.med?mix(C.sym,C.paper,.15):mix(C.sym,C.paper,.6),mix(C.sym,"#000",.3),1.2);if(o.med)glow(x,y,s*1.1,C.epi,.6*o.med)}
+/* sagittal brain with hypothalamus and pituitary */
+function brainSag(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(-s,s*.1);ctx.bezierCurveTo(-s*1.05,-s*.75,s*.2,-s*.95,s*.85,-s*.35);ctx.bezierCurveTo(s*1.1,-s*.05,s*.95,s*.45,s*.55,s*.5);ctx.lineTo(-s*.15,s*.45);ctx.bezierCurveTo(-s*.6,s*.5,-s*.95,s*.4,-s,s*.1);
+  fillStroke(C.brain,mix(C.brain,"#000",.4),1.6);ctx.strokeStyle=mix(C.brain,"#000",.3);ctx.lineWidth=1.2;for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(-s*.1+i*s*.22,-s*.2,s*.22,Math.PI*1.1,Math.PI*1.9);ctx.stroke()}
+  /* brainstem */rr(s*.25,s*.38,s*.2,s*.62,s*.08);fillStroke(mix(C.brain,C.nerve,.35),mix(C.brain,"#000",.4),1.3);ctx.restore();
+  const H=[x-s*.05,y+s*.36],Pi=[x-s*.08,y+s*.66];if(o.hyp)glow(H[0],H[1],s*.35,C.crh,.55*o.hyp);circ(H[0],H[1],s*.12,mix(C.crh,C.paper,.3),mix(C.crh,"#000",.3),1.3);
+  line(H[0],H[1]+s*.1,Pi[0],Pi[1]-s*.08,mix(C.crh,"#000",.3),2.2);if(o.pit)glow(Pi[0],Pi[1],s*.3,C.acth,.55*o.pit);ell(Pi[0],Pi[1],s*.11,s*.09,0,mix(C.acth,C.paper,.3),mix(C.acth,"#000",.3),1.3);
+  return {hyp:H,pit:Pi,stem:[x+s*.35,y+s*.9],amyg:[x+s*.2,y+s*.18],cortex:[x-s*.3,y-s*.5]}}
+/* ECG paper strip. beats:[{t,rr}], tNow: time at the right edge, win: seconds shown */
+function ecgStrip(x,y,w,h,beats,tNow,win,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=C.ecgpaper;ctx.fill();ctx.save();rr(x,y,w,h,4);ctx.clip();
+  const pxs=w/win;const t0=tNow-win;const small=.04*pxs;if(small>2.5){for(let k=Math.ceil(t0/.04);k*.04<=tNow;k++){const X=x+(k*.04-t0)*pxs;line(X,y,X,y+h,hexA(C.ecggrid,k%5?.5:1),k%5?.6:1.2)}
+    for(let j=0;j*small<=h;j++){const Y=y+h-j*small;line(x,Y,x+w,Y,hexA(C.ecggrid,j%5?.5:1),j%5?.6:1.2)}}
+  const base=y+h*(o.base||.68),amp=h*(o.amp||.55);ctx.beginPath();const N=Math.round(w);for(let i=0;i<=N;i++){const t=t0+i/N*win;const v=ecgV(t,beats);const Y=base-v*amp;i?ctx.lineTo(x+i,Y):ctx.moveTo(x,Y)}
+  ctx.strokeStyle=C.ecg;ctx.lineWidth=2;ctx.lineJoin="round";ctx.stroke();
+  if(o.rr!==false){const vis=beats.filter(b=>b.t>=t0&&b.t<=tNow);for(let i=1;i<vis.length;i++){const a=x+(vis[i-1].t-t0)*pxs,b=x+(vis[i].t-t0)*pxs;const yy=y+(o.rry||14);
+      line(a,yy,b,yy,C.ink,1.2);line(a,yy-4,a,yy+4,C.ink,1.2);line(b,yy-4,b,yy+4,C.ink,1.2);if(b-a>46)label((a+b)/2,yy+12,Math.round((vis[i].t-vis[i-1].t)*1000)+" ms",{size:o.rrs||11,weight:700,mono:true,bga:.85})}}
+  ctx.restore();rr(x,y,w,h,4);ctx.strokeStyle=hexA(C.ecg,.6);ctx.lineWidth=1.2;ctx.stroke()}
+/* tachogram: RR (ms) for the last n beats */
+function tachogram(x,y,w,h,list,o){o=o||{};const lo=o.lo||500,hi=o.hi||1300;rr(x,y,w,h,4);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();
+  const n=list.length;if(n<2)return;const bw=w/Math.max(n,o.n||n);list.forEach((v,i)=>{const f=clamp((v-lo)/(hi-lo),0,1);const X=x+i*bw;rr(X+1,y+h-h*f,Math.max(1,bw-2),h*f,1);ctx.fillStyle=o.col||C.para;ctx.fill()});
+  if(o.lab)txt(x+4,y-9,o.lab,{size:11.5,weight:700,color:C["ink-soft"]})}
+/* tone dimmer: vertical track, knob height f 0..1 */
+function dimmer(x,y,h,f,col,lab,o){o=o||{};rr(x-7,y-h,14,h,7);ctx.fillStyle=hexA(C.sunk,.9);ctx.fill();rr(x-7,y-h*clamp(f,0,1),14,h*clamp(f,0,1),7);ctx.fillStyle=hexA(col,.85);ctx.fill();
+  const ky=y-h*clamp(f,0,1);rr(x-16,ky-7,32,14,5);fillStroke(C.paper,col,2);if(lab)txt(x,y+16,lab,{size:12,weight:700,align:"center",color:o.lc||C.ink});if(o.val)txt(x,y-h-12,o.val,{size:11.5,weight:700,mono:true,align:"center"})}
+/* evidence bar: f 0..1 strength, with label */
+function evBar(x,y,w,f,lab,word,o){o=o||{};txt(x,y-10,lab,{size:12.5,weight:700});rr(x,y,w,14,7);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();if(f>0){rr(x,y,Math.max(14,w*clamp(f,0,1)),14,7);ctx.fillStyle=o.col||C.evid;ctx.fill()}
+  if(word)txt(x+w+8,y+7,word,{size:12,weight:700,color:o.wc||C["evid-ink"]})}
+/* small tag that names which branch is winning, colour plus words */
+function effTag(x,y,t,br,o){o=o||{};const col=br==="s"?C.sym:br==="p"?C.para:C["ink-soft"];return label(x,y,t,{size:o.size||11.5,weight:700,border:col,align:o.align||"center",a:o.a})}
+/* whole body autonomic figure. st:{S,V,hr} S sympathetic 0..1, V vagal 0..1 */
+function ansFigure(cx,top,s,st,T,o){o=o||{};const u=s/440;const S=clamp(st.S,0,1),V=clamp(st.V,0,1);const bal=clamp(.5+.6*(S-V),0,1);const sk=C["sk"+(o.skin||3)];
+  const hy=top+52*u;
+  /* body silhouette */
+  ctx.beginPath();ctx.moveTo(cx-18*u,top+92*u);ctx.lineTo(cx-86*u,top+112*u);ctx.quadraticCurveTo(cx-100*u,top+118*u,cx-100*u,top+140*u);ctx.lineTo(cx-92*u,top+340*u);ctx.quadraticCurveTo(cx-60*u,top+372*u,cx,top+372*u);ctx.quadraticCurveTo(cx+60*u,top+372*u,cx+92*u,top+340*u);ctx.lineTo(cx+100*u,top+140*u);ctx.quadraticCurveTo(cx+100*u,top+118*u,cx+86*u,top+112*u);ctx.lineTo(cx+18*u,top+92*u);ctx.closePath();fillStroke(hexA(sk,.28),C["sk-edge"],1.6);
+  [-1,1].forEach(d=>{rr(cx+d*112*u-14*u,top+122*u,28*u,190*u,14*u);fillStroke(hexA(sk,.28),C["sk-edge"],1.4)});
+  rr(cx-12*u,top+80*u,24*u,18*u,4);fillStroke(hexA(sk,.4),C["sk-edge"],1.2);
+  circ(cx,hy,40*u,hexA(sk,.5),C["sk-edge"],1.6);ctx.save();ctx.beginPath();ctx.arc(cx,hy,40.5*u,Math.PI*1.05,Math.PI*1.95);ctx.closePath();ctx.fillStyle=C.hair1;ctx.fill();ctx.restore();
+  /* eyes */
+  const pr=[-1,1].map(d=>eyeFront(cx+d*15*u,hy-2*u,8*u,bal));
+  /* mouth and saliva */
+  ctx.beginPath();ctx.arc(cx,hy+18*u,8*u,.15*Math.PI,.85*Math.PI);ctx.strokeStyle=hexA(C.ink,.6);ctx.lineWidth=1.5;ctx.stroke();
+  const sal=V*(1-S*.6);for(let i=0;i<3;i++){const p=P(T*.7+i/3,1);withA(sal*Math.sin(p*Math.PI),()=>drop2(cx+(i-1)*5*u,hy+24*u+p*14*u,2.6*u+2,C.water))}
+  /* spinal cord + sympathetic chain along the side, vagus from the brainstem */
+  const sx=cx-128*u-30*u;
+  const lung=breathVol(T,st.bp||4);lungsPair(cx,top+175*u,150*u,bal,lung);
+  heartShape(cx+12*u,top+205*u,22*u,Math.max(0,Math.sin((T*(st.hr||70)/60)*TAU))*1.2);
+  liverShape(cx-34*u,top+252*u,40*u);stomachShape(cx+30*u,top+252*u,22*u,0);
+  gutTube(cx-60*u,top+305*u,120*u,22*u,T,clamp(.55*V-.4*S+.3,0,1),{food:true});
+  /* adrenal glands */
+  adrenal(cx+62*u,top+270*u,12*u,{med:S,cort:o.cort||0,flip:true});adrenal(cx-62*u,top+270*u,12*u,{med:S,cort:o.cort||0});
+  /* skin vessel and sweat (forearm) */
+  const vx=cx+112*u,vy=top+270*u;vesselCS(vx,vy,11*u+2,clamp(.25+.7*S,0,1),{T});
+  for(let i=0;i<2;i++){const p=P(T*.8+i/2,1);withA(S*Math.sin(p*Math.PI),()=>drop2(cx-112*u+(i?6:-6)*u,top+240*u+p*30*u,2.4*u+2,C.wat))}
+  return {eye:[cx+15*u,hy-2*u],mouth:[cx,hy+22*u],lungs:[cx+52*u,top+170*u],heart:[cx+12*u,top+205*u],gut:[cx+50*u,top+305*u],adr:[cx+62*u,top+270*u],vessel:[vx,vy],sweat:[cx-112*u,top+250*u],liver:[cx-34*u,top+252*u],head:[cx,hy],pupil:pr[1],u}}
+function drop2(x,y,r,col){ctx.beginPath();ctx.moveTo(x,y-r*1.8);ctx.quadraticCurveTo(x+r*1.2,y-r*.2,x,y+r);ctx.quadraticCurveTo(x-r*1.2,y-r*.2,x,y-r*1.8);ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=.8;ctx.stroke()}
+/* simple calipers between two x positions at height y */
+function calipers(x1,x2,y,lab,col){col=col||C.ink;line(x1,y,x2,y,col,1.8);line(x1,y-7,x1,y+7,col,1.8);line(x2,y-7,x2,y+7,col,1.8);if(lab)label((x1+x2)/2,y-14,lab,{size:12,weight:700,mono:true,border:col})}
+/* heart rate number tile */
+function hrTile(x,y,hr,lab,col){panelBox(x,y,112,54,{fill:hexA(C.paper,.95)});heartIcon(x+18,y+27,14,col||C.heart);txt(x+34,y+22,Math.round(hr)+"",{size:22,weight:700,mono:true});txt(x+34,y+42,lab||"beats per min",{size:10.5,weight:600,color:C["ink-soft"]})}
+function hm(h){h=((h%24)+24)%24;const H=Math.floor(h),M=Math.floor((h-H)*60);const ap=H<12?"am":"pm";const h12=H%12===0?12:H%12;return h12+":"+String(M).padStart(2,"0")+" "+ap}
+/* cortisol day graph helper. o passed to cortisol(); returns graph */
+function cortGraph(x,y,w,h,o,co){co=co||{};const g=graph({x,y,w,h,x0:0,x1:24,y0:0,y1:co.ymax||130,xt:[0,6,12,18,24],xf:t=>t===0||t===24?"12 am":t===12?"12 pm":t===6?"6 am":"6 pm",yt:co.yt||[0,50,100],yl:co.yl||"cortisol, relative",grid:true,title:co.title});
+  if(co.sleep!==false){const wk=(o&&o.wake)||7;ctx.fillStyle=hexA(C.night,.13);ctx.fillRect(g.X(0),g.y,g.X(wk)-g.X(0),g.h);ctx.fillRect(g.X(23),g.y,g.X(24)-g.X(23),g.h);txt(g.X(wk/2),g.y+12,"asleep",{size:11,weight:600,align:"center",color:C["ink-soft"]})}
+  if(co.ref)curve(g,t=>cortisol(t,{}),0,24,hexA(C["ink-soft"],.8),2,[5,4]);
+  curve(g,t=>cortisol(t,o),0,24,co.col||C.cort,co.lw||3);return g}
+function fixedBeats(t0,t1,rr){const out=[];for(let t=Math.floor(t0/rr)*rr;t<t1;t+=rr)out.push({t,rr});return out}
+function salGland(x,y,s,out,thick,T){ctx.beginPath();for(let i=0;i<5;i++)ctx.arc(x+Math.cos(i*1.3)*s*.4,y+Math.sin(i*1.3)*s*.3,s*.35,0,TAU);fillStroke(mix(C.organ,C.panel,.3),mix(C.organ,"#000",.3),1.3);
+  line(x+s*.3,y+s*.2,x+s*1.1,y+s*.9,mix(C.organ,"#000",.3),3);const n=Math.round(1+5*out);for(let i=0;i<n;i++){const p=P(T*(.4+.6*out)+i/n,1);withA(Math.sin(p*Math.PI),()=>drop2(x+s*1.1+p*8,y+s*.95+p*30,thick?5:3.4,thick?mix(C.water,C.fat,.5):C.water))}}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-stress-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("nutr-sp-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: autonomic balance simulator ================= */
+const DUR=[["1 day (acute)",.14],["3 days",.43],["1 week",1],["2 weeks",2],["1 month",4.3],["3 months",13],["6 months",26]];
+const BREATH=[["fast","Fast<small>24 per min</small>",2.5],["normal","Normal<small>15 per min</small>",4],["slow","Slow<small>6 per min</small>",10]];
+const SIM0={I:6,dur:0,sleep:7.5,rec:30,breath:"normal",hour:8,play:true};
+const SIM=Object.assign({},SIM0,{done:new Set(),beats:{},base:0,lastHour:8});
+function simParams(){const I=SIM.I/10,wk=DUR[SIM.dur][1];const chronic=I*(1-Math.exp(-wk/3));const sd=clamp((7.5-SIM.sleep)/3.5,0,1);const rec=SIM.rec/90;
+  const L=clamp(.68*chronic+.36*sd-.22*rec,0,1);return {I,wk,chronic,sd,rec,L,flat:clamp((.85*chronic+.25*sd)*(1-.35*rec),0,1),eve:clamp(.8*sd+.3*chronic,0,1)}}
+function asleepAt(h){const bed=24-(SIM.sleep-7);/* wake at 7 */const b=((bed%24)+24)%24;return b>7?(h>=b||h<7):(h>=b&&h<7)}
+function stressAt(h,I){return I*smooth(seg(h,8.95,9.15))*(1-smooth(seg(h,10.95,11.15)))}
+function simModel(h){const p=simParams();const a=stressAt(h,p.I);const sl=asleepAt(h)?1:0;const day=sl?0:1;
+  const br=SIM.breath;const bAdj=br==="slow"?1:br==="fast"?-1:0;
+  const S=clamp(.25+.1*day+.2*p.L+.55*a-.08*sl+(br==="fast"?.06:0),0,1);
+  const V=clamp(.6+.15*sl-.35*p.L-.45*a+.1*p.rec+.06*bAdj,0,1);
+  const hr=68+40*S-26.7*V;const rm=clamp(10+58*V-8*a+(br==="slow"?9:br==="fast"?-5:0),8,95);
+  const bp=106+30*S+12*p.L;const glu=86+26*a+16*p.L+4*p.sd;
+  const co=cortisol(h,{flat:p.flat,eve:p.eve,acute:p.I>0?[[9,2,p.I*5*(1-.3*p.chronic)]]:[]});
+  const pain=1+.45*p.L+.3*p.sd-.35*a;const immune=a>.3&&p.L<.35?"cells mobilized (short term)":p.L>.45?"lower defence":p.L>.25?"slightly lower":"normal";
+  const dig=S>.6?"slowed":V>.6?"active":"normal";
+  return {a,sl,S,V,hr,rm,bp,glu,co,pain,immune,dig,L:p.L,p,bpPer:BREATH.find(b=>b[0]===br)[2]}}
+function simUI(){$("#slInt").value=SIM.I;$("#slDur").value=SIM.dur;$("#slSleep").value=SIM.sleep;$("#slRec").value=SIM.rec;$("#simTime").value=SIM.hour;simOut();
+  segBtns($("#simBreath"),BREATH.map(b=>[b[0],b[1]]),()=>SIM.breath,v=>{SIM.breath=v;simChange()})}
+function simOut(){$("#oInt").textContent=SIM.I+" of 10";$("#oDur").textContent=DUR[SIM.dur][0];$("#oSleep").textContent=SIM.sleep+" h";$("#oRec").textContent=SIM.rec+" min a day";$("#oSimTime").textContent=hm(SIM.hour);$("#simTime").setAttribute("aria-valuetext",hm(SIM.hour))}
+["slInt","slDur","slSleep","slRec"].forEach(id=>$("#"+id).addEventListener("input",e=>{const v=+e.target.value;if(id==="slInt")SIM.I=v;if(id==="slDur")SIM.dur=v;if(id==="slSleep")SIM.sleep=v;if(id==="slRec")SIM.rec=v;simChange()}));
+$("#simTime").addEventListener("input",e=>{SIM.hour=+e.target.value;SIM.play=false;$("#simPlay").textContent="Play";simChange()});
+$("#simPlay").onclick=()=>{SIM.play=!SIM.play;$("#simPlay").textContent=SIM.play?"Pause":"Play"};
+$("#simReset").onclick=()=>{Object.assign(SIM,SIM0);SIM.beats={};$("#simPlay").textContent="Pause";simUI();simChange()};
+const SIMCH=["Push heart rate above 95 beats per minute during the 9 to 11 am stressor.","Make the daily cortisol curve clearly flatter than the healthy dashed curve.","Make resting HRV (RMSSD) fall below 30 ms at a time with no stressor.","With stress at 8 or more lasting 3 months or longer, use sleep and recovery to bring allostatic load under 40 percent.","Switch to slow breathing and watch HRV rise compared with normal breathing."];
+let SIMbaseRm=null;
+function simChange(fromClock){if(!fromClock)SIM.chg=performance.now()/1000;simOut();const m=simModel(SIM.hour);
+  if(m.a>.5&&m.hr>95)SIM.done.add(0);if(m.p.flat>=.5)SIM.done.add(1);if(m.a<.05&&m.rm<30)SIM.done.add(2);if(SIM.I>=8&&SIM.dur>=5&&m.L<.4)SIM.done.add(3);if(SIM.breath==="slow")SIM.done.add(4);
+  chalUI($("#simChal"),SIMCH,SIM.done);simRead();
+  const st=$("#simStatus");st.textContent=m.a>.3?"Stressor happening now: sympathetic activity is up.":m.sl?"Asleep: parasympathetic activity is higher.":m.L>.45?"High allostatic load: resting balance is tilted toward sympathetic.":"Resting balance.";a11yKey=""}
+function simRead(){const m=simModel(SIM.hour);const rows=[["Time of day",hm(SIM.hour)+(m.sl?" (asleep)":m.a>.3?" (stressor)":"")],["Heart rate",Math.round(m.hr)+" beats per min"],["HRV (RMSSD)",Math.round(m.rm)+" ms"],["Sympathetic and parasympathetic",Math.round(m.S*100)+"% and "+Math.round(m.V*100)+"%"],["Blood pressure (systolic)",Math.round(m.bp)+" mmHg"],["Blood glucose",Math.round(m.glu)+" mg/dL"],["Cortisol",Math.round(m.co)+" (100 = typical morning peak)"],["Allostatic load",Math.round(m.L*100)+"%"],["Pain sensitivity",m.pain>1.15?"raised":m.pain<.85?"dampened for now":"usual"],["Immune readiness",m.immune],["Digestion",m.dig]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}
+let simRT=0;
+function simStep(dt){if(SIM.play){SIM.hour=(SIM.hour+dt/3)%24;$("#simTime").value=SIM.hour;simOut();if((simRT+=dt)>.5){simRT=0;simChange(true)}}}
+function simDraw(now){use(S1);const T=now/1000;const m=simModel(SIM.hour);
+  /* body view */panelBox(10,10,330,450);levelTag(22,26,"body");
+  const A=ansFigure(120,52,340,{S:m.S,V:m.V,hr:m.hr,bp:m.bpPer},T,{cort:clamp(m.co/120,0,1)});
+  const tg=[[A.eye,52,m.S>m.V+.1?"pupils wider":m.V>m.S+.1?"pupils smaller":"pupils medium"],[A.lungs,148,m.S>m.V+.1?"airways wider":"airways at rest"],[A.heart,200,"heart "+Math.round(m.hr)+" per min"],[A.adr,252,m.S>.55?"adrenals: epinephrine":"adrenals: quiet"],[A.gut,304,"gut "+m.dig],[A.vessel,356,m.S>.55?"vessels narrow":"vessels medium"],[A.sweat,408,m.S>.55?"sweating":"little sweat"]];
+  tg.forEach(t=>{const br=/wider|narrow|epinephrine|slowed|sweating/.test(t[2])?"s":/smaller|active/.test(t[2])?"p":"n";line(t[0][0],t[0][1],250,t[1],hexA(C["ink-soft"],.5),1);circ(t[0][0],t[0][1],2.5,C["ink-soft"]);effTag(256,t[1],t[2],br,{align:"left",size:11})});
+  /* ECG */const L=beatsUpTo(SIM.beats,"b",T,t=>{const q=simModel(SIM.hour);return {hr:q.hr,rmssd:q.rm,bp:q.bpPer}},3);
+  ecgStrip(352,30,320,108,L,T,4,{rry:14,rrs:10.5});
+  const vis=L.filter(x=>x.t<=T).slice(-30);const vr=vis.filter(x=>x.t>(SIM.chg||0)+.5);const live=vr.length>=8?rmssdOf(vr.map(x=>x.rr)):m.rm;
+  hrTile(678,30,vis.length?60/vis[vis.length-1].rr:m.hr,"beats per min",C.heart);panelBox(678,88,112,50,{fill:hexA(C.paper,.95)});txt(688,104,"HRV, last 30 beats",{size:10.5,weight:700,color:C["ink-soft"]});txt(688,125,Math.round(live)+" ms",{size:18,weight:700,mono:true,color:C["para-ink"]});
+  /* cortisol curve */const p=m.p;const g=cortGraph(390,170,390,120,{flat:p.flat,eve:p.eve,acute:p.I>0?[[9,2,p.I*5*(1-.3*p.chronic)]]:[]},{ref:true,yt:[0,100],ymax:160,yl:"cortisol across the day (dashed: healthy)"});
+  if(p.I>0){ctx.fillStyle=hexA(C.sym,.14);ctx.fillRect(g.X(9),g.y,g.X(11)-g.X(9),g.h);txt(g.X(10),g.y+g.h-8,"stressor",{size:10.5,weight:700,align:"center",color:C["sym-ink"]})}
+  line(g.X(SIM.hour),g.y,g.X(SIM.hour),g.y+g.h,C.accent,1.6,[4,3]);gdot(g,SIM.hour,m.co,C.cort,null);
+  /* balance */panelBox(352,322,438,138,{fill:hexA(C.panel,.9)});
+  dimmer(384,440,90,m.S,C.sym,"sym",{lc:C["sym-ink"],val:Math.round(m.S*100)+"%"});dimmer(444,440,90,m.V,C.para,"para",{lc:C["para-ink"],val:Math.round(m.V*100)+"%"});
+  seesaw(560,376,150,(m.S-m.V)*1.4,"","",C.sym,C.para);txt(560,420,m.S>m.V+.15?"tilted toward sympathetic":m.V>m.S+.15?"tilted toward parasympathetic":"fairly balanced",{size:12,weight:700,align:"center"});
+  txt(660,342,"allostatic load",{size:11.5,weight:700});rr(660,352,118,14,7);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(660,352,Math.max(14,118*m.L),14,7);ctx.fillStyle=mix(C.good,C.bad,m.L);ctx.fill();txt(660,380,Math.round(m.L*100)+"%",{size:12,weight:700,mono:true});
+  txt(660,404,"BP "+Math.round(m.bp)+" mmHg",{size:11.5,weight:700,mono:true});txt(660,424,"glucose "+Math.round(m.glu),{size:11.5,weight:700,mono:true});txt(660,444,"clock "+hm(SIM.hour),{size:11.5,weight:700,mono:true});
+}
+function simA11y(){const m=simModel(SIM.hour);const lab=`Simulator at ${hm(SIM.hour)}${m.sl?", asleep":m.a>.3?", during the stressor":""}. Heart rate ${Math.round(m.hr)}, HRV ${Math.round(m.rm)} ms, sympathetic ${Math.round(m.S*100)} percent, parasympathetic ${Math.round(m.V*100)} percent, cortisol ${Math.round(m.co)}, allostatic load ${Math.round(m.L*100)} percent.`;
+  return [lab,`On the left, a body figure shows ${m.S>m.V+.1?"wider pupils, open airways, a fast heartbeat, slow gut waves, glowing adrenal glands and sweat drops":m.V>m.S+.1?"smaller pupils, a slow heartbeat and busy gut waves":"medium sized pupils, a steady heartbeat and gentle gut waves"}, with tags naming each change. At the top right, an ECG strip scrolls with RR intervals in milliseconds, next to a heart rate tile and a live HRV number. Below it, a purple cortisol curve for the whole day is drawn against a dashed healthy curve, with the stressor hours shaded and a marker at the current time. At the bottom right, orange and green dimmers and a seesaw show the balance, beside an allostatic load bar that is ${Math.round(m.L*100)} percent full.`]}
+/* ================= PART 2: predict and practise ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const f1=v=>(Math.round(v*10)/10).toFixed(1);
+const f0=v=>Math.round(v).toLocaleString("en-US");
+const f2=v=>(Math.round(v*100)/100).toFixed(2);
+const fmtD=(v,dp)=>dp===0?f0(v):dp===1?f1(v):f2(v);
+const n1=v=>String(Math.round(v*10)/10);
+const CTYPES=[["mix","All types, mixed"],["organ","Predict: what does this branch do to the organ?"],["branch","Predict: which branch causes this?"],["hr","Heart rate from an RR interval"],["rr","RR interval from a heart rate"],["boxes","Heart rate from ECG paper boxes"],["breath","Breathing rate from breath timing"]];
+const filt=(sl,ans)=>sl.filter(s=>isFinite(s[0])&&s[0]>0&&Math.abs(s[0]-ans)/Math.abs(ans)>.03);
+/* organ bank: s and p effects; "none" marks no direct supply */
+const ORG=[
+ {k:"heart",n:"the heart rate",s:"Speeds up (NE and epinephrine on beta 1 receptors)",p:"Slows down (vagal ACh, the vagal brake)",sw:"Sympathetic input steepens the pacemaker ramp, so the SA node fires sooner.",pw:"Vagal ACh flattens the pacemaker ramp, so the SA node fires later."},
+ {k:"airways",n:"the airways",s:"Widen (mainly epinephrine on beta 2 receptors)",p:"Narrow a little and make more mucus",sw:"Circulating epinephrine relaxes airway smooth muscle.",pw:"Vagal ACh tightens airway smooth muscle and boosts mucus."},
+ {k:"pupils",n:"the pupils",s:"Widen (the radial dilator muscle contracts)",p:"Get smaller (the circular sphincter muscle contracts)",sw:"Sympathetic fibres contract the spoke shaped dilator.",pw:"Cranial nerve III fibres contract the ring shaped sphincter."},
+ {k:"gut",n:"movement of the intestine (peristalsis)",s:"Slows down",p:"Speeds up",sw:"Sympathetic input turns down the gut's own nerve network.",pw:"Vagal input turns up the squeezing waves."},
+ {k:"saliva",n:"the salivary glands",s:"Make a small amount of thick saliva",p:"Make plenty of watery saliva",sw:"Fight or flight dries the mouth.",pw:"Rest and digest brings watery saliva for eating."},
+ {k:"secretion",n:"stomach acid and digestive enzymes",s:"Decrease",p:"Increase",sw:"Digestion is put on hold during action.",pw:"Vagal input boosts digestive secretions."},
+ {k:"sphincter",n:"the gut sphincters (ring muscles)",s:"Tighten",p:"Relax so food can move on",sw:"Sympathetic input closes the rings.",pw:"Parasympathetic input lets contents pass."},
+ {k:"vessel",n:"blood vessels in the skin",s:"Narrow (vasoconstriction)",p:"No direct parasympathetic supply; they widen only when sympathetic tone falls",sw:"Sympathetic tone squeezes skin vessels.",pw:"Most vessels have little or no parasympathetic supply.",pNone:true},
+ {k:"sweat",n:"the sweat glands",s:"Make more sweat (using ACh)",p:"No direct parasympathetic supply",sw:"Sympathetic fibres to sweat glands release ACh.",pw:"Sweat glands are run by the sympathetic branch only.",pNone:true},
+ {k:"liver",n:"the liver's glucose output",s:"Releases glucose into the blood",p:"Stores glucose as glycogen",sw:"Epinephrine and sympathetic input free glucose for fuel.",pw:"At rest the liver tends to store glucose."},
+ {k:"bladder",n:"the bladder wall",s:"Relaxes so the bladder can hold urine",p:"Contracts to empty the bladder",sw:"Sympathetic input helps the bladder fill and hold.",pw:"Sacral parasympathetic fibres (S2 to S4) contract the wall."},
+ {k:"adrenal",n:"the adrenal medulla",s:"Releases epinephrine into the blood",p:"No parasympathetic supply",sw:"Preganglionic sympathetic fibres trigger the medulla directly.",pw:"The adrenal medulla is a sympathetic target only.",pNone:true}];
+function organQ(){const o=pick(ORG);const br=o.pNone&&Math.random()<.65?"s":pick(["s","p"]);const right=br==="s"?o.s:o.p,opp=br==="s"?o.p:o.s;
+  const fw=t=>t.split(" ")[0];const other=pick(ORG.filter(x=>x.k!==o.k&&fw(br==="s"?x.s:x.p)!==fw(right)&&(br==="s"?x.s:x.p)!==right&&!/No direct|No parasympathetic/.test(br==="s"?x.s:x.p)));const oe=br==="s"?other.s:other.p;
+  let ch=[[right,"✓ "+(br==="s"?o.sw:o.pw)],[opp,"That is the "+(br==="s"?"parasympathetic":"sympathetic")+" effect on "+o.n+"."],[oe,"That describes "+other.n+", not "+o.n+"."]];
+  if(!/No direct|No parasympathetic/.test(right))ch.push(["No change at all",(br==="s"?"The sympathetic":"The parasympathetic")+" branch does change "+o.n+". "+(br==="s"?o.sw:o.pw)]);else ch.push(["Narrows it, the same as the sympathetic branch","Parasympathetic fibres do not reach this target, so they cannot narrow it."]);
+  const order=shuffle([0,1,2,3]);const choices=order.map(i=>ch[i]);const ans=order.indexOf(0);const bn=br==="s"?"sympathetic":"parasympathetic";
+  return {title:"Predict, then watch",html:`Predict: what does <b>${bn}</b> activity do to <b>${o.n}</b>? Choose, then watch the picture respond.`,choices,ans,unit:"",dp:0,
+   lines:[{gold:bn+" branch acting on "+o.n.replace(/ \(.*\)/,"")},{t:(br==="s"?o.s:o.p).replace(/ \(.*\)$/,"")},{t:(br==="s"?o.sw:o.pw)}],
+   hints:[br==="s"?"Think fight or flight: what helps you act fast?":"Think rest and digest: what helps you recover and digest?",br==="s"?"Sympathetic targets: faster heart, open airways, wide pupils, slow gut, narrow skin vessels, sweat, glucose out.":"Parasympathetic targets: vagal brake, digestion, saliva, small pupils, bladder emptying.",o.pNone&&br==="p"?"Some targets have no parasympathetic supply at all.":"The two branches usually push "+o.n.replace(/ \(.*\)/,"")+" in opposite directions."],note:"",vis:{k:"organ",o:o.k,br,name:o.n}}}
+function branchQ(){const o=pick(ORG);const useS=o.pNone?true:Math.random()<.5;const eff=(useS?o.s:o.p).replace(/ \(.*\)$/,"");const right=useS?"Sympathetic":"Parasympathetic";
+  const ch=[[right,"✓ "+(useS?o.sw:o.pw)],[useS?"Parasympathetic":"Sympathetic",useS?"The parasympathetic branch would push "+o.n+" the other way, or has no supply here.":"The sympathetic branch pushes "+o.n+" the other way."],["Both branches equally","The two branches usually have opposite effects on "+o.n+", not the same one."],["Neither: it is a somatic motor effect","Somatic nerves move skeletal muscle. This is an autonomic target."]];
+  const order=shuffle([0,1,2,3]);return {title:"Predict, then watch",html:`Which branch causes this? <b>${o.n[0].toUpperCase()+o.n.slice(1)}: ${eff.toLowerCase()}</b>.`,choices:order.map(i=>ch[i]),ans:order.indexOf(0),unit:"",dp:0,
+   lines:[{gold:(o.n[0].toUpperCase()+o.n.slice(1)).replace(/ \(.*\)/,"")+": "+eff.toLowerCase()},{t:"caused by the "+right.toLowerCase()+" branch"},{t:useS?o.sw:o.pw}],
+   hints:["Ask: does this help you act fast, or rest and digest?","Fight or flight is sympathetic; rest and digest is parasympathetic.","Remember the special cases: sweat glands, most vessels and the adrenal medulla are sympathetic only."],note:"",vis:{k:"organ",o:o.k,br:useS?"s":"p",name:o.n}}}
+const GEN={
+ organ:organQ,branch:branchQ,
+ hr(){const rr=ri(40,150)*10;const ans=60000/rr;const s=rr/1000;
+  return {title:"Heart rate from an RR interval",html:`An ECG shows an RR interval of <b>${f0(rr)} ms</b>. What is the heart rate at that beat, in beats per minute? (Round to a whole number.)`,ans,unit:"beats per min",dp:0,tol:.006,
+   lines:[{gold:"heart rate = 60 ÷ RR interval in seconds"},{t:`RR = ${f0(rr)} ms ÷ 1,000 = ${s.toFixed(3)} s`},{ch:[[F(60,["s"],"1",["min"]),F("1",["beat"],s.toFixed(3),["s"])],[f0(ans),["beats/min"]]]}],
+   slips:filt([[60/rr,"That divides 60 by milliseconds. Change "+f0(rr)+" ms to "+s.toFixed(3)+" s first."],[rr/60,"That divides the RR interval by 60. Heart rate is 60 divided by the RR interval in seconds."],[60*s,"That multiplies. Heart rate is 60 divided by the RR interval."]],ans),
+   hints:["One RR interval is the time for one beat.",`Change ms to seconds: ${f0(rr)} ÷ 1,000 = ${s.toFixed(3)} s.`,`60 ÷ ${s.toFixed(3)} = ?`],note:"",vis:{k:"ecg",rr,ans,ask:"hr"}}},
+ rr(){const hr=ri(40,180);const ans=60000/hr;
+  return {title:"RR interval from a heart rate",html:`A heart beats at <b>${hr} beats per minute</b>. About how long is each RR interval, in milliseconds? (Round to a whole number.)`,ans,unit:"ms",dp:0,tol:.006,
+   lines:[{gold:"RR interval in seconds = 60 ÷ heart rate"},{t:`60 ÷ ${hr} = ${(60/hr).toFixed(3)} s`},{t:`${(60/hr).toFixed(3)} s × 1,000 = ${f0(ans)} ms`,b:true}],
+   slips:filt([[60/hr,"That is the RR interval in seconds. Multiply by 1,000 to get milliseconds."],[hr/60,"That divides heart rate by 60. Divide 60 by the heart rate instead."],[hr*60,"That multiplies. Divide 60 by the heart rate."]],ans),
+   hints:["Heart rate and RR interval are flipped versions of each other.","RR in seconds = 60 ÷ heart rate.",`60 ÷ ${hr} = ${(60/hr).toFixed(3)} s; now change to ms.`],note:"",vis:{k:"ecg",rr:ans,ans,ask:"rr",hr}}},
+ boxes(){const n=ri(10,40);const ans=1500/n;
+  return {title:"Heart rate from ECG paper boxes",html:`On standard ECG paper running at 25 mm per second, each small box is <b>0.04 s</b>. Two R waves are <b>${n} small boxes</b> apart. What is the heart rate? (Round to a whole number.)`,ans,unit:"beats per min",dp:0,tol:.006,
+   lines:[{t:`RR = ${n} boxes × 0.04 s = ${(n*.04).toFixed(2)} s`},{ch:[[F(60,["s"],"1",["min"]),F("1",["beat"],(n*.04).toFixed(2),["s"])],[f0(ans),["beats/min"]]]},{gold:"shortcut: 1,500 ÷ small boxes = heart rate"}],
+   slips:filt([[300/n,"300 ÷ boxes is the shortcut for the big 5 mm boxes. These are small boxes, so use 1,500 ÷ boxes."],[n*.04,"That is the RR interval in seconds. Now divide 60 by it."],[60/n,"That skips the 0.04 s per box. First find RR in seconds."]],ans),
+   hints:["First turn boxes into seconds: each small box is 0.04 s.",`${n} × 0.04 = ${(n*.04).toFixed(2)} s.`,`60 ÷ ${(n*.04).toFixed(2)} = ?`],note:"",vis:{k:"boxes",n,ans}}},
+ breath(){const i=ri(2,6),o=ri(2,9);const ans=60/(i+o);
+  return {title:"Breathing rate from breath timing",html:`A person breathes in for <b>${i} s</b> and out for <b>${o} s</b>, over and over. What is their breathing rate in breaths per minute? (1 decimal place.)`,ans,unit:"breaths per min",dp:1,tol:.01,
+   lines:[{t:`one breath = ${i} s + ${o} s = ${i+o} s`},{gold:"breaths per minute = 60 ÷ seconds per breath"},{t:`60 ÷ ${i+o} = ${f1(ans)} breaths per min`,b:true}],
+   slips:filt([[60/i,"That uses only the time breathing in. One full breath is in plus out."],[60/o,"That uses only the time breathing out. Add both parts first."],[i+o,"That is seconds per breath. Divide 60 by it."],[(i+o)/60,"That is upside down. Divide 60 by the seconds per breath."]],ans),
+   hints:["A full breath is the in breath plus the out breath.",`${i} + ${o} = ${i+o} s per breath.`,`60 ÷ ${i+o} = ?`],note:ans<=7?"Slow breathing near 6 per minute tends to widen heart rate swings with the breath.":"",vis:{k:"breath",i,o,ans}}}
+};
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:+(store.get("best")||0),count:0,solT:0,typed:null,ansT:0};
+function calcNew(){const keys=Object.keys(GEN);const k=TR.type==="mix"?pick(keys):TR.type;const q=GEN[k]();
+  TR.p=q;TR.p.kind=k;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.typed=null;TR.ansT=0;
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}`;
+  $("#calcUnit").textContent=q.unit;$("#calcAns").value="";$("#calcAnsRow").hidden=!!q.choices;const cb=$("#calcChoices");cb.hidden=!q.choices;cb.innerHTML="";
+  if(q.choices)q.choices.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=c[0];b.onclick=()=>{TR.typed=i;cb.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));calcCheck(String(i),b)};cb.appendChild(b)});
+  $("#calcCheck").hidden=!!q.choices;$("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=q.choices?"Predict first; the organ responds when you answer.":q.title+": the picture shows the set up and your answer.";a11yKey=""}
+function parseAns(s){s=String(s).trim().replace(/,/g,"").replace(/−/g,"-").replace(/\s*(beats?\s*per\s*min(ute)?|bpm|breaths?\s*per\s*min(ute)?|ms|s)\s*$/i,"");if(!/^[+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){if(p.choices){const i=+str;return i===p.ans?{ok:true}:{ok:false,kind:"choice",msg:p.choices[i]?p.choices[i][1]:""}}
+  const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};const tolA=Math.max(p.tol*Math.abs(p.ans),.6*Math.pow(10,-p.dp));
+  if(Math.abs(v-p.ans)<=tolA)return {ok:true};
+  const sl=p.slips.find(s=>isFinite(s[0])&&s[0]!==0&&Math.abs(v-s[0])<=Math.max(.015*Math.abs(s[0]),.6*Math.pow(10,-Math.max(p.dp,s[0]<1?3:p.dp))));if(sl)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)/Math.abs(p.ans)<=.05)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function ansStr(p){return p.choices?p.choices[p.ans][0]:fmtD(p.ans,p.dp)+" "+p.unit}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcCheck(strIn,btn){const p=TR.p;const str=strIn!=null?strIn:$("#calcAns").value;const j=judge(p,str);
+  if(j.kind==="empty"){calcMsg("info","Type a number in the answer box first (for example 75 or 1,200).");return}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;if(btn)btn.classList.add("right");
+    let t=p.choices?"✓ Correct. "+p.choices[p.ans][1].replace(/^✓ /,""):`✓ Correct: ${ansStr(p)}.`;if(p.note)t+=" "+p.note;
+    calcMsg("good",t+(p.choices?" Watch the organ respond.":" Watch the worked solution build in the picture."));if(!TR.ansT)TR.ansT=performance.now();showSol(false)}
+  else{TR.first=false;TR.streak=0;if(btn)btn.classList.add("wrong");let msg="Not quite. ";if(j.kind==="choice"||j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Keep extra digits in the middle steps and round only at the end.";else msg+="Check the set up. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();if(!TR.ansT)TR.ansT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+$("#calcType").innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");$("#calcType").onchange=e=>{TR.type=e.target.value;calcNew()};
+$("#calcCheck").onclick=()=>calcCheck();$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+$("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;
+  b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+$("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${ansStr(TR.p)}. Watch each step, then try a new problem.`)};
+$("#calcNew").onclick=()=>{calcNew();const f=TR.p.choices?$("#calcChoices .opt"):$("#calcAns");if(f)f.focus()};
+/* ---------- trainer drawing ---------- */
+function yourAns(x,y,tv,unit,dp,col){label(x,y,"your answer: "+(tv!=null?fmtD(tv,dp)+" "+unit:"?"),{size:13,weight:700,mono:true,border:col||C.accent})}
+/* draw one organ; m: -1 parasympathetic, 0 neutral, +1 sympathetic (fractional for transitions) */
+function organView(k,x,y,m,T){const s=Math.max(0,m),p=Math.max(0,-m);
+  switch(k){
+  case "heart":{const hr=72+38*s-17*p;heartShape(x,y,62,Math.max(0,Math.sin(T*hr/60*TAU))*1.3);circ(x+28,y-28,7,C.nerve,hexA(C.ink,.4),1.2);return Math.round(hr)+" beats per min"}
+  case "airways":{airwayCS(x,y,74,.55+.4*s-.35*p,p);return s>.5?"wide opening":p>.5?"narrow, with mucus":"medium"}
+  case "pupils":{eyeFront(x,y,62,.5+.4*s-.35*p,{fibres:true,symA:.3+.6*s,paraA:.3+.6*p});return s>.5?"pupil wider":p>.5?"pupil smaller":"medium pupil"}
+  case "gut":{gutTube(x-120,y,240,50,T,.5-.4*s+.45*p);return s>.5?"slow waves":p>.5?"strong, fast waves":"gentle waves"}
+  case "saliva":{ctx.beginPath();ctx.arc(x+40,y+40,40,.1*Math.PI,.9*Math.PI);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=3;ctx.stroke();salGland(x-30,y-40,56,.5-.4*s+.5*p,s>.5,T);return s>.5?"a little thick saliva":p>.5?"plenty of watery saliva":"some saliva"}
+  case "secretion":{stomachShape(x,y,60,0);const n=Math.round(3+6*p-2*s);for(let i=0;i<n;i++){const q=P(T*.5+i/n,1);withA(Math.sin(q*Math.PI),()=>circ(x-20+(i%4)*12,y+20-q*40,5,C.acth))}return s>.5?"fewer secretions":p>.5?"more acid and enzymes":"some secretions"}
+  case "sphincter":{const op=.5-.4*s+.45*p;circ(x,y,62,mix(C.rose,C.panel,.25),mix(C.rose,"#000",.3),2);circ(x,y,8+44*op,C.ecf,mix(C.rose,"#000",.3),1.5);return s>.5?"ring tightened":p>.5?"ring relaxed, open":"partly open"}
+  case "vessel":{vesselCS(x,y,70,.4+.5*s,{T});return s>.5?"narrower":"medium (no parasympathetic supply)"}
+  case "sweat":{rr(x-26,y-50,52,90,24);fillStroke(mix(C.wat,C.panel,.6),C.wat,1.4);const n=Math.round(1+5*s);for(let i=0;i<n;i++){const q=P(T*.9+i/n,1);withA(Math.sin(q*Math.PI),()=>drop2(x-10+i*5,y+46+q*34,5,C.wat))}return s>.5?"more sweat":"little sweat (no parasympathetic supply)"}
+  case "liver":{liverShape(x,y,70);const n=5;for(let i=0;i<n;i++){const q=P(T*.4+i/n,1);const out=s>=p;circ(out?x+50+q*70:x+120-q*70,y+10+(i%3)*10,6,C.glu,hexA(C.ink,.4),1)}return s>.5?"glucose released":p>.5?"glucose stored":"steady"}
+  case "bladder":{const c=.5+.5*p-.3*s;ell(x,y,70*(1.1-.35*c),60*(1.1-.35*c),0,mix(C.wat,C.panel,.65),mix(C.rose,"#000",.2),3+5*c);return s>.5?"wall relaxed, holding":p>.5?"wall contracting, emptying":"filling"}
+  case "adrenal":{adrenal(x,y,56,{med:s});if(s>.4)for(let i=0;i<4;i++){const q=P(T*.6+i/4,1);horm(x+40+q*80,y-20+i*10,"epi",7,Math.sin(q*Math.PI))}return s>.5?"epinephrine released":"quiet (no parasympathetic supply)"}}
+  return ""}
+function drawCalc(now){use(S3);const p=TR.p;const T=now/1000;const vs=p.vis;const tv0=p.choices?null:parseAns($("#calcAns").value);const tv=tv0!=null&&isFinite(tv0)?tv0:null;
+  panelBox(10,10,780,232);if(TR.solved){circ(764,30,13,C.good);checkMark(764,30,6,"#fff")}
+  if(vs.k==="organ"){levelTag(22,26,"organ");const done=TR.solved||TR.sol;const f=done?smooth(clamp((now-TR.ansT)/1500,0,1)):0;const m=(vs.br==="s"?1:-1)*f;
+    title(40,58,"before",C["ink-soft"]);organView(vs.o,170,140,0,T);title(440,58,done?"after: "+(vs.br==="s"?"sympathetic":"parasympathetic"):"predict first",done?(vs.br==="s"?C["sym-ink"]:C["para-ink"]):C["ink-soft"]);
+    const res=organView(vs.o,560,140,m,T);arrow(330,140,400,140,C["ink-soft"],2.4);if(done)effTag(560,226,res,vs.br,{size:12.5});else label(560,140,"?",{size:28,weight:700,border:C.accent});
+    txt(170,226,vs.name.replace(/ \(.*\)/,""),{size:12.5,weight:700,align:"center"})}
+  else if(vs.k==="ecg"){levelTag(22,26,"sym");const rr=vs.rr/1000;const bt=fixedBeats(T-6,T+2,rr);const win=Math.max(2.2,rr*3.2);ecgStrip(30,40,560,170,bt,T,win,{rr:false,amp:.55});
+    const vis=bt.filter(b=>b.t>T-win&&b.t<T);if(vis.length>=2){const pxs=560/win;const a=30+(vis[0].t-(T-win))*pxs,b=30+(vis[1].t-(T-win))*pxs;calipers(a,b,62,vs.ask==="hr"?"RR = "+f0(vs.rr)+" ms":"RR = ? ms",C.ink)}
+    if(vs.ask==="hr"){yourAns(690,90,tv,p.unit,p.dp,C.heart);if(tv!=null)hrTile(634,130,tv,"your heart rate",C.heart);else label(690,150,"heart rate = ?",{size:13,weight:700,mono:true})}else{hrTile(634,60,vs.hr,"beats per min",C.heart);yourAns(690,150,tv,p.unit,p.dp,C.ecg)}}
+  else if(vs.k==="boxes"){levelTag(22,26,"sym");const x0=40,y0=46,bw=Math.min(14,520/(vs.n+6));const w=bw*(vs.n+6),h=150;rr(x0,y0,w,h,3);ctx.fillStyle=C.ecgpaper;ctx.fill();
+    for(let i=0;i<=vs.n+6;i++)line(x0+i*bw,y0,x0+i*bw,y0+h,hexA(C.ecggrid,i%5?.6:1),i%5?.7:1.4);for(let j=0;j*bw<=h;j++)line(x0,y0+h-j*bw,x0+w,y0+h-j*bw,hexA(C.ecggrid,j%5?.6:1),j%5?.7:1.4);
+    const r1=x0+3*bw,r2=r1+vs.n*bw;const sec=bw/.04;const bt=[{t:0,rr:vs.n*.04},{t:vs.n*.04,rr:vs.n*.04}];ctx.beginPath();for(let i=0;i<=w;i++){const t=(i-3*bw)/sec;const v=ecgV(t,bt);const Y=y0+h*.7-v*h*.55;i?ctx.lineTo(x0+i,Y):ctx.moveTo(x0,Y)}ctx.strokeStyle=C.ecg;ctx.lineWidth=2;ctx.stroke();
+    const cnt=Math.min(vs.n,Math.floor(P(T,vs.n*.12+2)*(vs.n+8)));for(let i=0;i<cnt;i++){ctx.fillStyle=hexA(C.accent,.18);ctx.fillRect(r1+i*bw,y0+h-bw,bw,bw)}calipers(r1,r2,y0+h+16,vs.n+" small boxes",C.ink);
+    txt(620,70,"each small box = 0.04 s",{size:12.5,weight:700});txt(620,92,"paper speed 25 mm per s",{size:12,color:C["ink-soft"]});yourAns(690,150,tv,p.unit,p.dp,C.heart)}
+  else if(vs.k==="breath"){levelTag(22,26,"body");const per=vs.i+vs.o;const t=P(T,per)*per;const vol=t<vs.i?smooth(t/vs.i):1-smooth((t-vs.i)/vs.o);lungsPair(110,140,120,.7,vol*1.4);
+    const x0=230,x1=580,y=110;rr(x0,y-14,(x1-x0)*vs.i/per,28,6);ctx.fillStyle=hexA(C.o2,.4);ctx.fill();rr(x0+(x1-x0)*vs.i/per,y-14,(x1-x0)*vs.o/per,28,6);ctx.fillStyle=hexA(C.para,.35);ctx.fill();
+    txt(x0+(x1-x0)*vs.i/per/2,y,"in "+vs.i+" s",{size:12.5,weight:700,align:"center"});txt(x0+(x1-x0)*(vs.i+vs.o/2)/per,y,"out "+vs.o+" s",{size:12.5,weight:700,align:"center"});
+    const mx=x0+(x1-x0)*t/per;line(mx,y-24,mx,y+24,C.accent,2.4);txt(x0,y+42,"one full breath = "+(TR.solved||TR.sol?per+" s":"? s"),{size:12.5,weight:700});yourAns(690,150,tv,p.unit,p.dp,C.o2)}
+  if(p.choices){panelBox(10,250,780,212,{fill:hexA(C.paper,.96)});title(22,268,"What happens and why",C["accent-ink"]);
+    if(TR.sol){const tt=(now-TR.solT)/1000+.0001;wsteps(10,250,780,212,{title:"What happens and why",lines:p.lines,ans:"Answer: "+p.choices[p.ans][0]},tt,{step:.9,size:12.5})}
+    else wrapText("Choose an answer on the right. When you get it right, or press Show worked solution, the organ on the right side of the picture changes to show the effect, and the reason appears here.",24,300,740,18,{size:13,color:C["ink-soft"]})}
+  else if(TR.sol){const tt=(now-TR.solT)/1000+.0001;wsteps(10,250,780,212,{title:"Worked solution",lines:p.lines,ans:"Answer: "+ansStr(p)},tt,{step:.9,cfs:13.5,size:12.5})}
+  else{panelBox(10,250,780,212,{fill:hexA(C.paper,.96)});title(22,268,"Worked solution",C["accent-ink"]);wrapText("The worked solution builds here after a correct answer, or when you press Show worked solution. Units that cancel are struck out in red, and key rules are flagged in gold.",24,300,740,18,{size:13,color:C["ink-soft"]})}}
+function calcA11y(){const p=TR.p;const v=p.choices?(TR.solved?"answered correctly":"not answered yet"):$("#calcAns").value.trim();const lab=`Practice problem, ${p.title}. ${p.choices?"Prediction "+v:"Your answer "+(v||"not entered")}.${TR.solved?" Correct.":""}`;
+  const vs=p.vis;const vk=vs.k==="organ"?`${vs.name} drawn twice: on the left in a neutral state, and on the right ${TR.solved||TR.sol?"changing to show the "+(vs.br==="s"?"sympathetic":"parasympathetic")+" effect, with a tag naming it":"hidden behind a question mark until you predict"}`:vs.k==="ecg"?"an ECG strip with calipers spanning one RR interval and a heart rate tile":vs.k==="boxes"?"a close up of ECG grid paper with small boxes shaded one by one between two R waves and calipers labelled with the box count":"a pair of lungs breathing and a timeline bar split into the in breath and the out breath";
+  return [lab,`The top of the picture shows ${vk}. ${TR.sol?"The bottom shows the solution line by line, ending with the answer "+ansStr(p)+" in a green box.":"The bottom panel is waiting for your answer."}`]}
+/* ================= PART 3: sorting game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;const num=n=>sv(`<circle cx="28" cy="23" r="17" fill="var(--panel)" stroke="var(--cort)" stroke-width="2.5"/><text x="28" y="29" text-anchor="middle" font-size="18" font-weight="700" fill="var(--ink)" font-family="IBM Plex Sans,sans-serif">${n}</text>`);
+  switch(k){
+  case "sym":return sv('<path d="M30 4 L16 26 H27 L22 42 L40 18 H29 Z" fill="var(--sym)" stroke="var(--ink)" stroke-width="1"/>');
+  case "para":return sv('<path d="M8 30 q10 -18 20 0 q10 18 20 0" fill="none" stroke="var(--para)" stroke-width="4"/><circle cx="28" cy="12" r="6" fill="var(--para)"/>');
+  case "both":return sv('<rect x="8" y="10" width="10" height="28" rx="5" fill="var(--sym)"/><rect x="38" y="10" width="10" height="28" rx="5" fill="var(--para)"/><path d="M20 24 h16" stroke="var(--ink)" stroke-width="2"/>');
+  case "s1":return num(1);case "s2":return num(2);case "s3":return num(3);case "s4":return num(4);
+  case "acute":return sv('<path d="M4 34 h12 l6 -24 l6 24 h24" fill="none" stroke="var(--sym)" stroke-width="3"/>');
+  case "chronic":return sv('<path d="M4 34 l8 -14 h40" fill="none" stroke="var(--bad)" stroke-width="3"/><path d="M4 40 h48" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="3 3"/>');
+  }return ""}
+const SROUNDS=[
+{name:"Organ effects: which branch?",goal:"Put each effect with the branch that causes it.",
+ bins:[["sym","Sympathetic (fight or flight)"],["para","Parasympathetic (rest and digest)"]],
+ cards:[["Heart rate speeds up","sym","Sympathetic input and epinephrine act on beta 1 receptors."],["Heart rate slows down","para","The vagal brake slows the SA node."],["Pupils widen","sym","The radial dilator muscle contracts."],["Pupils get smaller","para","Cranial nerve III contracts the sphincter."],
+  ["Airways widen","sym","Mainly epinephrine on beta 2 receptors."],["Airways narrow a little and make mucus","para","Vagal ACh tightens airway muscle."],["Gut waves speed up","para","Vagal input boosts peristalsis."],["Gut waves slow down","sym","Digestion is put on hold."],
+  ["Plenty of watery saliva","para","Rest and digest saliva for eating."],["Dry mouth, a little thick saliva","sym","Fight or flight dries the mouth."],["Skin vessels narrow","sym","Sympathetic tone causes vasoconstriction."],["Sweating with cold hands","sym","Sympathetic fibres to sweat glands use ACh."],["Liver releases glucose","sym","Epinephrine frees glucose for fuel."],["Bladder wall contracts to empty","para","Sacral fibres, S2 to S4."]]},
+{name:"Wiring and messengers",goal:"Sort each feature: sympathetic, parasympathetic, or true of both branches.",
+ bins:[["sym","Sympathetic"],["para","Parasympathetic"],["both","Both branches"]],
+ cards:[["Outflow from T1 to L2","sym","The thoracolumbar division."],["Outflow from the brainstem and S2 to S4","para","The craniosacral division."],["Chain ganglia beside the spine","sym","Two rows of linked ganglia."],["Ganglia in or next to the organ","para","Terminal ganglia, short second fibres."],
+  ["Releases NE at most targets","sym","Norepinephrine on alpha and beta receptors."],["Releases ACh at organ targets","para","ACh on muscarinic receptors."],["The vagus nerve","para","Cranial nerve X carries most parasympathetic fibres."],["Triggers the adrenal medulla","sym","Epinephrine into the blood."],
+  ["ACh released in the ganglion","both","Every preganglionic neuron releases ACh."],["A two neuron chain to the organ","both","Preganglionic, ganglion, postganglionic."],["Active all day, with ongoing tone","both","Both branches are always on; the balance shifts."],["Long preganglionic fibre","para","Ganglia sit far out at the organ."],["Short preganglionic fibre","sym","Ganglia sit close to the spinal cord."]]},
+{name:"HPA hormone order",goal:"Put each step of the HPA axis in order, from first to last.",
+ bins:[["s1","Step 1"],["s2","Step 2"],["s3","Step 3"],["s4","Step 4"]],
+ cards:[["Hypothalamus responds to the stressor","s1","The first gland in the chain."],["CRH released toward the pituitary","s1","Corticotropin releasing hormone travels a short way to the pituitary."],["Anterior pituitary responds","s2","The second gland in the chain."],["ACTH released into the blood","s2","ACTH travels to the adrenal glands."],
+  ["Adrenal cortex responds","s3","The outer part of the adrenal gland."],["Cortisol released, peaking in about 20 to 30 minutes","s3","The final hormone of the chain."],["Cortisol slows CRH and ACTH release","s4","Negative feedback switches the axis back down."],["Hypothalamus and pituitary sense cortisol","s4","Feedback acts on both glands."]]},
+{name:"Acute or chronic stress?",goal:"Sort each change: typical of a short burst of stress, or of stress lasting weeks to months.",
+ bins:[["acute","Acute: a short burst, then recovery"],["chronic","Chronic: weeks to months"]],
+ cards:[["Pain feels weaker for a while","acute","Stress induced analgesia is short term."],["Immune cells move into the blood, ready to act","acute","A short term shift."],["Glucose rises during an exam","acute","Fuel for the challenge."],["Heart rate up during a talk, back to normal after","acute","On, then off."],
+  ["More colds and slower wound healing","chronic","Long term stress weakens some immune defences."],["A flattened daily cortisol curve","chronic","Lower morning peak, higher evening."],["Pain sensitivity raised","chronic","Ongoing stress and poor sleep raise pain."],["Trouble sleeping for weeks","chronic","Arousal at night keeps sleep light."],["Blood pressure tends to stay higher","chronic","Adds to heart risk over time."]]}];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in real life ================= */
+function phone(x,y,w,h){rr(x,y,w,h,10);fillStroke(C.ink,null);rr(x+5,y+12,w-10,h-24,4);ctx.fillStyle=C.paper;ctx.fill()}
+function watchFace(x,y,r,txt1,txt2){rr(x-r*.55,y-r*1.6,r*1.1,r*3.2,6);ctx.fillStyle=C["ink-soft"];ctx.fill();circ(x,y,r,"#10161A",C["ink-soft"],3);txt(x,y-6,txt1,{size:15,weight:700,mono:true,align:"center",color:"#fff"});txt(x,y+14,txt2,{size:10.5,weight:600,align:"center",color:"#E8EEF1"})}
+const LIFE=[
+{name:"A student during exam week",who:"Scenario 1 · exam week",
+ story:"Jordan is 20 and has four exams in five days. Jordan is sleeping about 5 hours a night, drinking several energy drinks a day and skipping meals. Before each exam, Jordan's heart pounds, hands get cold and sweaty, the mouth feels dry and the stomach is upset. Jordan wonders if something is wrong with their heart.",
+ cap:"Exam week: a normal stress response, made bigger by short sleep and caffeine.",
+ desc:"A student sits at a desk covered with books under a lamp, with a calendar showing exam days marked in orange. Above the student, a heart rate tile climbs from about 70 to over 100 as an exam clock appears. Small tags around the student read heart pounding, cold sweaty hands, dry mouth and stomach upset, each with an orange border for sympathetic. At the bottom, a sleep bar shows 5 hours against a dashed 7 to 9 hour target, and a row of energy drink cans sits beside the books.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"body");const k=.5+.5*Math.sin(T*.5);
+   rr(160,300,360,14,4);fillStroke(C.table,null);person(330,380,190,{pose:"sit",skin:3,cloth:"cl2",hair:1,noChair:false});
+   for(let i=0;i<3;i++){rr(186+i*8,286-i*14,70,14,2);fillStroke([C.cl1,C.cl4,C.cl3][i],hexA(C.ink,.4),1)}line(470,300,500,200,C["ink-soft"],3);ell(505,195,24,12,-.4,C.lamp,hexA(C.ink,.4),1);
+   for(let i=0;i<3;i++){rr(420+i*18,272,14,28,3);fillStroke(i%2?C.sym:C.act6,hexA(C.ink,.4),1)}txt(445,320,"energy drinks",{size:11.5,weight:700,align:"center"});
+   rr(560,50,200,130,6);fillStroke(C.paper,C["ink-soft"],1.4);rr(560,50,200,24,6);ctx.fillStyle=C.accent;ctx.fill();txt(660,62,"exam week",{size:12,weight:700,align:"center",color:"#fff"});
+   ["M","T","W","T","F"].forEach((d,i)=>{const x=580+i*36;txt(x+10,92,d,{size:12,weight:700,align:"center"});rr(x,104,22,22,4);fillStroke(i===2?C.panel:hexA(C.sym,.6),C["ink-soft"],1);if(i!==2)txt(x+11,115,"!",{size:12,weight:700,align:"center"})});
+   hrTile(40,50,70+36*k,"beats per min",C.heart);
+   [["heart pounding",80,140],["cold sweaty hands",80,200],["dry mouth",560,220],["stomach upset",560,270]].forEach(t=>effTag(t[1],t[2],t[0],"s",{align:"left",size:12}));
+   title(40,404,"sleep last night");rr(40,416,420,18,9);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(40,416,420*5/10,18,9);ctx.fillStyle=C.night;ctx.fill();ctx.fillStyle=hexA(C.good,.3);ctx.fillRect(40+420*.7,416,420*.2,18);txt(480,425,"5 h (target 7 to 9 h)",{size:12,weight:700})},
+ qs:[{q:"What best explains Jordan's pounding heart, cold sweaty hands and dry mouth before exams?",opts:[["A normal sympathetic stress response, made stronger by short sleep and lots of caffeine",1,"Yes. These are classic fight or flight signs, and sleep loss and caffeine both raise arousal."],["A parasympathetic surge",0,"Parasympathetic activity would slow the heart and bring watery saliva."],["Proof of a heart disease",0,"These signs fit a stress response. Chest pain, fainting or a racing heart at rest would still need a medical check."],["Low cortisol",0,"Cortisol tends to rise with exam stress; it does not explain these fast signs."]]},
+  {q:"Which plan is most likely to help Jordan get through the week?",opts:[["Protect 7 or more hours of sleep, eat regular meals, cut back on energy drinks, take short walks and make a study plan",1,"Yes. Sleep, food, less caffeine, movement and a plan (problem focused coping) all lower load."],["Study all night before each exam",0,"Sleep loss raises arousal and hurts memory, which makes exams harder."],["Add more energy drinks to stay alert",0,"More caffeine adds to the pounding heart and poor sleep."],["Skip all breaks to save time",0,"Short breaks and movement help focus and recovery."]]},
+  {q:"Jordan feels a racing heart right before an exam starts. Which quick strategy has reasonable support for easing that moment?",opts:[["A few minutes of slow, steady breathing, with a longer out breath",1,"Yes. Slow breathing strengthens the vagal swing on each out breath and many people find it calming."],["Holding the breath as long as possible",0,"Breath holding can add strain rather than calm."],["Drinking another energy drink",0,"More caffeine is likely to add to the racing heart."],["Telling themselves the stress means they will fail",0,"Seeing the moment as a challenge, not a threat, tends to make the response smaller."]]}]},
+{name:"Chronic stress and poor sleep",who:"Scenario 2 · a patient visit",
+ story:"Maria is 46 and has been caring for her father after his stroke for the past 8 months while working full time. She sleeps 5 to 6 hours a night, has had three colds this winter, and says her neck and back pain feel worse than before. At a recent check up her blood pressure was a little higher than usual. She asks a practitioner whether stress could be part of this.",
+ cap:"Months of stress and short sleep can affect immunity, pain and blood pressure.",
+ help:"<b>Getting support:</b> people caring for a family member can ask their primary care clinician about caregiver support, respite services and mental health care. Anyone feeling unable to cope should reach out to a health professional or a crisis line.",
+ desc:"Maria sits at a kitchen table late at night with a pill organizer and a phone, beside a calendar that marks 8 months of caregiving. Four gauges drift on the right: immune defence lower with a note about three colds, sleep at 5 to 6 hours, pain sensitivity higher, and blood pressure a little higher. Below, a small cortisol day curve is flatter than a dashed healthy curve, and an allostatic load bar is mostly full. A green box at the bottom lists a team plan: primary care, sleep habits, support for the caregiver, and movement.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"body");rr(40,300,300,14,4);fillStroke(C.table,null);person(170,380,190,{pose:"sit",skin:4,cloth:"cl2",hair:2,older:false});moon(80,70,20);
+   rr(240,276,60,20,4);fillStroke(C.paper,C["ink-soft"],1);for(let i=0;i<4;i++)circ(250+i*14,286,4,[C.sym,C.act6,C.para,C.cort][i]);phone(300,250,26,46);
+   rr(40,110,130,70,6);fillStroke(C.paper,C["ink-soft"],1.2);txt(105,128,"caregiving",{size:12,weight:700,align:"center"});txt(105,156,"8 months",{size:16,weight:700,mono:true,align:"center",color:C["sym-ink"]});
+   const f=.7+.05*Math.sin(T*.6);[["immune defence",.35,"three colds","p"],["sleep",.3,"5 to 6 h","p"],["pain sensitivity",.75,"higher","s"],["blood pressure",.65,"a little higher","s"]].forEach((g,i)=>{const x=440+(i%2)*170,y=80+Math.floor(i/2)*110;gaugeDial(x,y,30,g[1]+(i>1?.03:-.03)*Math.sin(T+i),g[3]==="s"?C.sym:C.para,null);txt(x,y+42,g[0],{size:12,weight:700,align:"center"});txt(x,y+58,g[2],{size:11.5,weight:600,align:"center",color:g[3]==="s"?C["sym-ink"]:C["para-ink"]})});
+   cortGraph(400,300,220,70,{flat:.6,eve:.5},{ref:true,yt:[0,100],yl:"cortisol across the day",lw:2.4});rr(640,316,130,14,7);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(640,316,130*f,14,7);ctx.fillStyle=mix(C.good,C.bad,f);ctx.fill();txt(640,304,"allostatic load",{size:11.5,weight:700});
+   rr(40,400,730,48,6);fillStroke(C["para-wash"],C.para,1.4);txt(54,424,"team plan: primary care check, sleep habits, caregiver support, regular movement",{size:12.5,weight:700})},
+ qs:[{q:"Which statement about Maria's symptoms is most accurate?",opts:[["Long lasting stress and short sleep are linked with more infections, higher pain sensitivity and higher blood pressure, so they may be part of the picture",1,"Yes. That is the allostatic load idea, stated with care: a likely contributor, not a full diagnosis."],["Stress cannot affect the body, so it is unrelated",0,"There is good evidence linking chronic stress and sleep loss with immune, pain and blood pressure changes."],["Stress is certainly the only cause, so no medical check is needed",0,"Other causes need to be checked. Stress can contribute, but a clinician should assess her."],["Her symptoms prove her adrenal glands are worn out",0,"Adrenal fatigue is not a recognized diagnosis, and tests do not support it."]]},
+  {q:"Which next step is most appropriate?",opts:[["Encourage a primary care visit for her blood pressure and health, plus support for sleep, caregiving help and regular movement",1,"Yes. A team approach covers medical checks and the stress itself."],["Recommend she ignore the blood pressure reading",0,"A raised reading should be followed up by her clinician."],["Recommend a supplement to lower cortisol",0,"No supplement has good evidence for this, and some interact with medicines."],["Tell her more sleep is impossible, so nothing will help",0,"Even modest changes in sleep, support and activity can help."]]},
+  {q:"Maria asks whether hands on treatment for her neck could also help her stress. What is the most honest answer?",opts:[["It may feel relaxing and can bring small, short term shifts in measures like heart rate or HRV, but evidence is mixed and it is not a treatment for stress or blood pressure",1,"Yes. That respects her experience and stays within what the research shows."],["It will reset her nervous system and fix her blood pressure",0,"Research does not support lasting resetting or blood pressure treatment from manipulation."],["Touch has no effect on how anyone feels",0,"Comfortable touch can feel calming; the evidence is about how big and how lasting the effects are."],["She should stop seeing her primary care clinician",0,"Manual care, if used, works alongside medical care, not instead of it."]]}]},
+{name:"Reading a wearable HRV number",who:"Scenario 3 · a wearable",
+ story:"Sam is 31 and wears a fitness watch. This morning it shows an HRV of 38 ms, down from his usual range of about 50 to 60 ms. His friend's watch says 80 ms. Sam had two drinks last night, went to bed late and feels a scratchy throat. He worries that his nervous system is unhealthy.",
+ cap:"Compare HRV with your own baseline, and think about what changed.",
+ desc:"A large watch face shows HRV 38 ms. Next to it, a line chart covers the last 14 days, with a green band for Sam's usual range of 50 to 60 ms and one low dot today. Around the dot, small icons name possible reasons: a glass for alcohol, a moon for a late night, a thermometer for a possible cold, and a dumbbell for a hard workout. A second watch in the corner shows his friend's 80 ms, crossed out with a note: do not compare with others.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"sym");watchFace(120,190,62,"38 ms","HRV today");
+   const d=[55,52,57,54,58,53,56,51,55,59,54,57,53,38];const g=graph({x:260,y:70,w:470,h:220,x0:0,x1:13,y0:20,y1:90,xt:[0,7,13],xf:v=>v===13?"today":v===0?"14 days ago":"1 week ago",yt:[30,50,70,90],yl:"HRV, ms",grid:true});
+   ctx.fillStyle=hexA(C.good,.18);ctx.fillRect(g.x,g.Y(60),g.w,g.Y(50)-g.Y(60));txt(g.x+g.w-6,g.Y(50)+12,"Sam's usual range",{size:11.5,weight:700,color:C.good,align:"right"});
+   const n=Math.min(14,1+Math.floor(P(T,10)*16));poly(d.slice(0,n).map((v,i)=>[g.X(i),g.Y(v)]),C.para,2.4);d.slice(0,n).forEach((v,i)=>circ(g.X(i),g.Y(v),i===13?7:4,i===13?C.warn:C.para,C.panel,1.5));
+   if(n>=14){[[C.act6,"alcohol",-150,-40],[C.night,"late night",-150,10],[C.heat,"possible cold",-60,60],[C["ink-soft"],"hard workout",-260,60]].forEach((r,i)=>{const x=g.X(13)+r[2],y=g.Y(38)+r[3];label(x,y,r[1],{size:11.5,weight:700,border:C.warn})})}
+   watchFace(720,390,32,"80","friend");crossMark(720,390,34,hexA(C.bad,.8));txt(640,440,"do not compare with others",{size:12,weight:700,align:"right"})},
+ qs:[{q:"How should Sam read today's 38 ms?",opts:[["Compare it with his own usual range, measured the same way; a one day dip is common and often has a simple reason",1,"Yes. HRV varies a lot between people, so your own baseline is the useful comparison."],["His friend's 80 ms proves Sam's nervous system is unhealthy",0,"HRV differs widely between people with age, fitness and many other factors. Comparing across people is not meaningful."],["38 ms means he has heart disease",0,"A wearable HRV number is not a diagnosis."],["HRV numbers are always perfectly accurate",0,"Wearables estimate HRV and can be thrown off by fit, movement and timing."]]},
+  {q:"Which factor is LEAST likely to explain the one day drop?",opts:[["The color of his watch strap",1,"Right, that has nothing to do with HRV. Alcohol, a late night and an early cold can all lower HRV for a day or two."],["Alcohol last night",0,"Alcohol commonly lowers overnight HRV."],["A late bedtime and short sleep",0,"Poor sleep tends to lower HRV the next day."],["An infection starting",0,"Illness often lowers HRV, sometimes before symptoms are strong."]]},
+  {q:"When would it make sense for Sam to see a clinician?",opts:[["If he has symptoms such as chest pain, fainting, a racing or irregular heartbeat at rest, or illness that is getting worse, not just because of one HRV number",1,"Yes. Symptoms matter more than a single wearable reading."],["Every time HRV falls below his friend's number",0,"Comparing with a friend is not useful, and a number alone is not a reason to worry."],["Never, because watches replace medical care",0,"Wearables are not medical devices for diagnosis. Concerning symptoms need a clinician."],["Only if his HRV goes up",0,"A higher HRV is usually not a concern by itself."]]}]},
+{name:"A nervous patient before treatment",who:"Scenario 4 · talking with patients",
+ story:"Priya, 38, arrives for her first visit for low back pain. She is visibly anxious, her hands are cold and damp, and her heart rate is 98 at check in. She says she read online that a single treatment can balance her nervous system and cure her anxiety. She asks if that is true.",
+ cap:"Calm explanation, consent and honest evidence help an anxious patient.",
+ desc:"In a treatment room, Priya sits on the edge of a table while a practitioner sits at eye level beside her, talking. A heart rate tile beside Priya starts at 98 and slowly falls toward the 80s as the conversation continues. A speech bubble from the practitioner reads let me explain what we will do, and you can stop at any time. A second bubble reads hands on care can feel relaxing, but it is not a cure for anxiety. Small tags near Priya name cold damp hands and fast heart, with orange borders.",
+ draw(T){panelBox(10,10,780,450);levelTag(22,26,"body");rr(120,300,260,18,5);fillStroke(C.table,hexA(C.ink,.4),1.2);line(140,318,140,400,C.metal,5);line(360,318,360,400,C.metal,5);
+   person(250,380,190,{pose:"sit",skin:3,cloth:"cl4",hair:2,noChair:true});person(500,400,180,{pose:"sit",skin:5,cloth:"cl3",hair:0,face:-1});
+   const t=P(T,16);const hr=98-14*smooth(seg(t,.2,.9));hrTile(40,60,hr,"beats per min",C.heart);
+   effTag(60,170,"cold damp hands","s",{align:"left",size:12});effTag(60,200,"fast heart","s",{align:"left",size:12});
+   if(t>.15)bubble(440,60,300,56,"Let me explain what we will do, and you can stop at any time.",{size:12.5,weight:600});
+   if(t>.45)bubble(440,130,300,56,"Hands on care can feel relaxing, but it is not a cure for anxiety.",{size:12.5,weight:600})},
+ qs:[{q:"What is the most likely reason for Priya's cold damp hands and heart rate of 98?",opts:[["A sympathetic stress response to a new, uncertain situation",1,"Yes. Narrow skin vessels, active sweat glands and a faster heart are classic signs."],["A parasympathetic surge",0,"Parasympathetic activity would slow the heart and would not cause cold sweaty hands."],["Proof of a serious heart problem",0,"These signs fit anxiety. If they did not settle or came with other symptoms, a medical check would be wise."],["Her low back pain itself causing sweat",0,"Pain can add to stress, but the pattern here is a whole body fight or flight response."]]},
+  {q:"Which response to her question is most honest and respectful?",opts:[["Explain that some studies show small, short term calming effects from hands on care, but evidence does not show it cures anxiety; offer to talk about other support",1,"Yes. That is truthful, respects her hopes and keeps her safe."],["Agree that one treatment will cure her anxiety",0,"That claim is not supported by evidence."],["Tell her that her worry is silly",0,"Dismissing her concern damages trust and does not help."],["Refuse to discuss anxiety at all",0,"Anxiety matters to her care; it can be discussed honestly and referred if needed."]]},
+  {q:"Which approach is most likely to help her feel calmer during the visit?",opts:[["Explain each step before it happens, ask for consent, let her ask questions and invite a few slow breaths if she wants",1,"Yes. Predictability, control and slow breathing can all ease a stress response."],["Start right away without explaining, to save time",0,"Uncertainty tends to raise stress. Explanation and consent build safety."],["Tell her to stop being nervous",0,"Being told to calm down rarely helps and can increase stress."],["Turn on loud music",0,"That may add stimulation rather than calm."]]}]}];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  const hb=$("#lifeHelp");if(S.help){hb.hidden=false;hb.innerHTML=S.help}else hb.hidden=true;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;SYS={};lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;SYS={};lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;SYS={};lifeUI()};
+function drawLife(now){use(S5);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,470),S3=makeStage("cvCalc",800,470),S5=makeStage("cvLife",800,470);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},calc:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yKeyOf(lab){return curTab+"|"+(curTab==="sim"?lab.replace(/^Simulator at [^.,]*/,"").replace(/\d+/g,d=>String(Math.round(+d/10)))+Math.floor(SIM.hour):lab)}
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=a11yKeyOf(lab||d);if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","calc","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S3,S5].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function legendHTML(l){return `<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`}
+$("#simLegend").innerHTML=[["sym","Sympathetic","s"],["para","Parasympathetic","s"],["ecg","ECG trace","l"],["cort","Cortisol (dashed: healthy day)","l"],["accent","Current time","l"]].map(legendHTML).join("");
+$("#simCap").textContent="Set the stressor, how long it has lasted, sleep, recovery and breathing, then watch one day play out.";
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim"){simStep(dt);simDraw(now)}else if(curTab==="calc")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__sp={tab:k=>showTab(k),sim:o=>{Object.assign(SIM,o);simUI();simChange()},simModel:h=>{const m=simModel(h);return {hr:m.hr,rm:m.rm,S:m.S,V:m.V,co:m.co,L:m.L,flat:m.p.flat,a:m.a,sl:m.sl}},simDone:()=>[...SIM.done],
+  calcTypes:()=>CTYPES.map(c=>c[0]),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,dp:TR.p.dp,unit:TR.p.unit,choices:TR.p.choices?TR.p.choices.length:0,kind:TR.p.kind,str:TR.p.choices?String(TR.p.ans):fmtD(TR.p.ans,TR.p.dp)}),
+  gen:t=>{const q=GEN[t]();if(q.choices){const wrong=[0,1,2,3].filter(i=>i!==q.ans);return {choice:true,n:q.choices.length,j1:judge(q,String(q.ans)),j2s:wrong.map(i=>judge(q,String(i)).ok),expl:q.choices.every(c=>c[1]&&c[1].length>10),uniq:new Set(q.choices.map(c=>c[0])).size,hints:q.hints.length,lines:q.lines.length,html:q.html}}
+    const good=fmtD(q.ans,q.dp).replace(/,/g,""),goodC=fmtD(q.ans,q.dp);const bad=fmtD(q.ans*1.25,q.dp);return {ans:q.ans,dp:q.dp,unit:q.unit,good,j1:judge(q,good),j1c:judge(q,goodC),j1u:judge(q,goodC+" "+q.unit),j2:judge(q,bad),jslip:q.slips.length?judge(q,String(q.slips[0][0])):null,html:q.html,lines:q.lines.length,hints:q.hints.length}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,total:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;SYS={};lifeUI()},lifeN:()=>LIFE.length};
+readColors();simUI();simChange();calcNew();updCalcMeter();sLoad(0);lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

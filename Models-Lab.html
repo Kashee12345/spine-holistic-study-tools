@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chiropractic Models Lab</title>
+<meta name="description" content="Chiropractic models lab: an interactive timeline explorer with philosophy, education, law and research layers and a model then versus now comparison panel; a predict then watch and put the events in order trainer with hints and animated solutions; a sorting game for historical models, current evidence and legal history plus people and their contributions; and real life scenarios about subluxation, straights and mixers, Wilk v. AMA and licensure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7F2222;--accent-wash:#F6E3E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#7B5CC9;--act2:#B8561A;--act3:#2F7FC1;--act4:#2E8A7A;--act5:#B07A10;--act6:#9B2C2C;--act7:#A04E8C;--act8:#4B4FBF;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#F3EBD8;--bone-2:#E2D5B6;--bone-edge:#7E6A45;--bone-ink:#5E4E30;
+  --disc:#3F7FC8;--disc-ink:#1D5C93;--nucleus:#A9CDF2;--endplate:#8FB0D0;
+  --nerve:#E0AE10;--nerve-ink:#7A5C00;--cord:#F2D36A;
+  --muscle:#C8506E;--muscle-ink:#9B2C4A;--muscle-2:#E8A3B4;
+  --lig:#1E8C83;--lig-ink:#156B64;
+  --symp:#D9731A;--para:#3E9B4F;--pain:#C8302C;--pain-ink:#A12623;--evid:#4B4FBF;--evid-ink:#3A3D9E;
+  --artery:#B8333A;--csf:#CDE7F2;--dura:#8C7FB0;--fat:#F2E2A8;--skin:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;
+  --rc:#7B5CC9;--rt:#B8561A;--rl:#2F7FC1;--rs:#A04E8C;--rx:#5E7183;
+  --rc-ink:#5B3FA8;--rt-ink:#8A3C0E;--rl-ink:#1D5C93;--rs-ink:#7E3369;--rx-ink:#45576A;
+  --film:#1A1F24;--film-ink:#E8EEF1;
+  --phil:#7B4FB8;--phil-ink:#5B3A92;--edu:#2F6FB0;--edu-ink:#1D528A;--law:#1E7F72;--law-ink:#14615A;--model:#7B4FB8;
+  --land:#E9E1CC;--land-edge:#A89A7A;--sea:#D3E4EF;--parch:#F6EDD6;--parch-edge:#B49A6A;--wood:#8A5A34;--metal:#9AA6AF;--canada:#DCE3D3;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#A98BEF;--act2:#F0985A;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#E8BE5A;--act6:#F4A7A0;--act7:#D186C0;--act8:#9A9EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CCAE;--bone-2:#AFA285;--bone-edge:#2A2418;--bone-ink:#E6DCC2;
+  --disc:#5E9EE6;--disc-ink:#8CC6F2;--nucleus:#2D5E95;--endplate:#7FA3C8;
+  --nerve:#F2CF4A;--nerve-ink:#F2D468;--cord:#C9A93A;
+  --muscle:#E07A95;--muscle-ink:#F4A6B8;--muscle-2:#8A3E52;
+  --lig:#4FC2B4;--lig-ink:#7AD6CB;
+  --symp:#F5A05A;--para:#6CCB7C;--pain:#F07A70;--pain-ink:#F49A92;--evid:#9A9EF2;--evid-ink:#B4B7F6;
+  --artery:#E8686E;--csf:#1F3E4E;--dura:#A99FCC;--fat:#6A5E34;--skin:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --rc:#A98BEF;--rt:#F0985A;--rl:#5AA9E6;--rs:#D186C0;--rx:#A9B7C2;
+  --rc-ink:#BFA6F4;--rt-ink:#F5B07A;--rl-ink:#8CC6F2;--rs-ink:#DFA0D0;--rx-ink:#B5C5D3;
+  --film:#05080A;--film-ink:#E8EEF1;
+  --phil:#B696F0;--phil-ink:#C9B0F5;--edu:#6FB0EC;--edu-ink:#8CC6F2;--law:#5CC7B8;--law-ink:#7AD6CB;--model:#B696F0;
+  --land:#2C3328;--land-edge:#6E7A62;--sea:#14303E;--parch:#2E2A20;--parch-edge:#8A7650;--wood:#B07A4A;--metal:#7F8C95;--canada:#26302A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#A98BEF;--act2:#F0985A;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#E8BE5A;--act6:#F4A7A0;--act7:#D186C0;--act8:#9A9EF2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#D8CCAE;--bone-2:#AFA285;--bone-edge:#2A2418;--bone-ink:#E6DCC2;
+  --disc:#5E9EE6;--disc-ink:#8CC6F2;--nucleus:#2D5E95;--endplate:#7FA3C8;
+  --nerve:#F2CF4A;--nerve-ink:#F2D468;--cord:#C9A93A;
+  --muscle:#E07A95;--muscle-ink:#F4A6B8;--muscle-2:#8A3E52;
+  --lig:#4FC2B4;--lig-ink:#7AD6CB;
+  --symp:#F5A05A;--para:#6CCB7C;--pain:#F07A70;--pain-ink:#F49A92;--evid:#9A9EF2;--evid-ink:#B4B7F6;
+  --artery:#E8686E;--csf:#1F3E4E;--dura:#A99FCC;--fat:#6A5E34;--skin:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --rc:#A98BEF;--rt:#F0985A;--rl:#5AA9E6;--rs:#D186C0;--rx:#A9B7C2;
+  --rc-ink:#BFA6F4;--rt-ink:#F5B07A;--rl-ink:#8CC6F2;--rs-ink:#DFA0D0;--rx-ink:#B5C5D3;
+  --film:#05080A;--film-ink:#E8EEF1;
+  --phil:#B696F0;--phil-ink:#C9B0F5;--edu:#6FB0EC;--edu-ink:#8CC6F2;--law:#5CC7B8;--law-ink:#7AD6CB;--model:#B696F0;
+  --land:#2C3328;--land-edge:#6E7A62;--sea:#14303E;--parch:#2E2A20;--parch-edge:#8A7650;--wood:#B07A4A;--metal:#7F8C95;--canada:#26302A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.layers .tbtn{display:flex;align-items:center;gap:8px;text-align:left;font-size:13.5px;line-height:1.25;padding:8px}
+.layers .tbtn i{width:12px;height:12px;border-radius:3px;flex:0 0 auto;display:inline-block}
+.layers .tbtn[aria-pressed="false"] i{opacity:.35}
+.layers .tbtn[aria-pressed="false"]{color:var(--ink-soft)}
+.evlist{list-style:none;margin:6px 0;padding:0;max-height:260px;overflow:auto;border:1px solid var(--rule-soft);border-radius:var(--r)}
+.evlist li{border-top:1px solid var(--rule-soft)}
+.evlist li:first-child{border-top:0}
+.evlist button{display:flex;gap:8px;width:100%;text-align:left;background:none;border:0;padding:6px 8px;cursor:pointer;font-size:14px;line-height:1.3;align-items:baseline}
+.evlist button:hover{background:var(--panel-2)}
+.evlist button[aria-pressed="true"]{background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.evlist .yr{font-family:var(--mono);font-size:12.5px;min-width:76px;color:var(--ink-soft)}
+.evlist button[aria-pressed="true"] .yr{color:var(--accent-ink)}
+.evlist .lane{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 auto}
+.detail{margin-top:10px;padding:10px 12px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:14.5px}
+.detail h3{margin:0 0 4px!important;font-family:var(--sans)!important;font-size:15.5px!important;text-transform:none!important;letter-spacing:0!important;color:var(--ink)!important}
+.detail .meta{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
+.topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.topics .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.cmpgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.cmpbox{border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);font-size:14.5px}
+.cmpbox b.k{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.cmpbox.then{border-left:5px solid var(--phil)}.cmpbox.then b.k{color:var(--phil-ink)}
+.cmpbox.now{border-left:5px solid var(--evid)}.cmpbox.now b.k{color:var(--evid-ink)}
+@media (max-width:640px){.cmpgrid{grid-template-columns:1fr}.topics{grid-template-columns:1fr 1fr}.layers{grid-template-columns:1fr}}
+.cmpcard{margin-top:16px}
+.cmpcard h2{font-family:var(--serif);font-size:21px;margin:0 0 4px;font-weight:600}
+.item .yrtag{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--good);display:none}
+.item.right .yrtag{display:inline}
+.item .txt{min-width:0;overflow-wrap:break-word}
+.trtype{display:grid;grid-template-columns:1fr;gap:6px}
+.trtype .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.trtype .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.trtype .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.cmpcard .canvas-holder{max-width:900px;margin:0 auto}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 9 &middot; Chiropractic models through history</div>
+    <h1>Chiropractic Models Lab</h1>
+    <p class="sub">Explore a layered timeline and compare each model then with the evidence now; predict events and put them in order; sort statements and people; and try the history in real conversations. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-tl" data-tab="tl" id="tabbtn-tl" type="button">Part 1 &middot; Timeline Explorer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-train" data-tab="train" id="tabbtn-train" type="button" tabindex="-1">Part 2 &middot; Predict and Order Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort It Out</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In Real Life</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-tl" role="tabpanel" aria-labelledby="tabbtn-tl">
+    <h2 class="gk-sr">Part 1: Timeline Explorer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvTl" role="img" aria-label="Layered timeline of chiropractic history."></canvas></div>
+        <div class="stagebar"><span class="caption" id="tlCap"></span></div>
+        <div class="legend">
+          <span><i class="s" style="background:var(--phil)"></i>Philosophy and models</span><span><i class="s" style="background:var(--edu)"></i>Education</span><span><i class="s" style="background:var(--law)"></i>Law and recognition</span><span><i class="s" style="background:var(--evid)"></i>Research</span><span><i class="s" style="background:var(--accent)"></i>Year cursor</span>
+        </div>
+        <table class="readouts" id="tlRead"><caption class="gk-sr">Timeline readout</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">The years from 1770 to 1870 are squeezed into the first part of the line so the busy decades after 1870 have room. Dates marked "about" or given as a decade are approximate. Click a dot on the timeline, or pick an event from the list, to read about it.</p>
+      </div>
+      <aside class="card side" aria-label="Timeline controls">
+        <h3 id="lay-h">Layers</h3>
+        <div class="layers" id="tlLayers" role="group" aria-labelledby="lay-h"></div>
+        <h3>Build the timeline</h3>
+        <div class="bar"><button class="btn" type="button" id="tlPlay">Pause build</button><button class="tbtn" type="button" id="tlRestart">Build again</button><button class="tbtn" type="button" id="tlAll">Show all</button></div>
+        <div class="ctl"><label for="tlYear">Show events up to <output id="tlYearOut" for="tlYear">1770</output></label><input type="range" id="tlYear" min="1770" max="2020" step="1" value="1770"></div>
+        <h3 id="ev-h">Events shown</h3>
+        <ul class="evlist" id="tlList" aria-labelledby="ev-h"></ul>
+        <div class="detail" id="tlDetail" aria-live="polite"></div>
+      </aside>
+    </div>
+    <div class="card cmpcard">
+      <h2>Model then vs now</h2>
+      <p class="small">Pick a topic. The left side shows the historical model in its own terms; the right side shows what current evidence says.</p>
+      <div class="topics" id="cmpTopics" role="group" aria-label="Comparison topics"></div>
+      <div class="canvas-holder"><canvas id="cvCmp" role="img" aria-label="Model then vs now comparison."></canvas></div>
+      <div class="cmpgrid"><div class="cmpbox then"><b class="k">Then: historical model</b><span id="cmpThen"></span></div><div class="cmpbox now"><b class="k">Now: current evidence</b><span id="cmpNow"></span></div></div>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-train" role="tabpanel" aria-labelledby="tabbtn-train" hidden>
+    <h2 class="gk-sr">Part 2: Predict and Order Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvTr" role="img" aria-label="Practice problem picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="trCap"></span></div>
+        <p class="sim-note">Problems are drawn at random from the events and ideas in this module. For predict then watch items, choose first; the picture then plays what really happened. For ordering items, the worked solution slides each card onto a timeline.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <h3 id="tt-h">Problem type</h3>
+        <div class="trtype" id="trTypes" role="group" aria-labelledby="tt-h"></div>
+        <div class="probcard" id="trProb" aria-live="polite"></div>
+        <div id="trChoices" class="mopts" role="group" aria-label="Answer choices"></div>
+        <ol class="list" id="trOrder" aria-label="Events to put in order, earliest at the top" hidden></ol>
+        <div class="bar">
+          <button class="btn" id="trCheck" type="button">Check order</button>
+          <button class="tbtn" id="trHint" type="button">Hint</button>
+          <button class="tbtn" id="trSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="trNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="trMsg" role="status"></div>
+        <ol class="hintlist" id="trHints" aria-label="Hints"></ol>
+        <div class="meter streak"><span>Streak <b id="trStreak">0</b></span><span>Best <b id="trBest">0</b></span><span>Solved <b id="trSolved">0</b></span></div>
+        <p class="small">The hint ladder has three steps. The streak counts problems solved on the first try without opening the solution. For ordering, drag a card, or use its up and down buttons.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In Real Life</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults with generic names. Teaching examples about history and evidence, not medical advice.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Models-Walkthrough.html">Chiropractic Models Walkthrough</a>. Dates follow mainstream histories of the profession; approximate dates are marked.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-2", "bone-edge", "bone-ink", "disc", "disc-ink", "nucleus", "endplate", "nerve", "nerve-ink", "cord", "muscle", "muscle-ink", "muscle-2", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "artery", "csf", "dura", "fat", "skin", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "rc", "rt", "rl", "rs", "rx", "rc-ink", "rt-ink", "rl-ink", "rs-ink", "rx-ink", "film", "film-ink", "phil", "phil-ink", "edu", "edu-ink", "law", "law-ink", "model", "land", "land-edge", "sea", "parch", "parch-edge", "wood", "metal", "canada"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= history drawing kit (both pages) ================= */
+const TAGS={model:["HISTORICAL MODEL","phil"],prop:["PROPOSED MODEL","phil"],phil:["PHILOSOPHICAL MODEL","phil"],evid:["CURRENT EVIDENCE","evid"],told:["AS TOLD BY D.D. PALMER","gold"],
+  law:["LAW AND PROFESSION","law"],edu:["EDUCATION","edu"],res:["RESEARCH","evid"],era:["THE 1800s","act2"],anat:["WHAT ANATOMY SHOWS","evid"],map:["SCHEMATIC MAP","act3"],claim:["WHAT WAS CLAIMED","phil"]};
+function tagPill(x,y,k,o){o=o||{};const m=TAGS[k];const col=C[m[1]];ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);ctx.font=`700 11px ${MONO}`;const w=ctx.measureText(m[0]).width+14;const x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+  rr(x0,y-9,w,18,9);ctx.fillStyle=mix(C.panel,col,.16);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.stroke();ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x0+7,y+.5);ctx.restore();return w}
+const LAYERS={phil:["Philosophy and models","phil"],edu:["Education","edu"],law:["Law and recognition","law"],res:["Research","evid"]};
+/* ---------- year axis ---------- */
+function yAxis(x,y,w,y0,y1,ticks,o){o=o||{};const X=v=>x+(v-y0)/(y1-y0)*w;line(x,y,x+w,y,C["ink-soft"],2);
+  (ticks||[]).forEach(t=>{line(X(t),y-5,X(t),y+5,C["ink-soft"],1.6);txt(X(t),y+(o.below===false?-14:16),String(t),{size:o.size||12,align:"center",mono:true,color:C["ink-soft"],weight:600})});return X}
+/* growing axis with a moving "now" cursor */
+function cursor(x,y1,y2,col,lab){line(x,y1,x,y2,col,2,[5,4]);if(lab)label(x,y1-10,lab,{size:12,weight:700,mono:true,border:col})}
+function pin(x,y,col,r,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);r=r||7;circ(x,y,r,col,C.panel,2);circ(x,y,r*.38,C.panel);ctx.restore()}
+/* event card that drops into place: p 0..1 */
+function evCard(x,y,w,h,yr,t,col,p,o){o=o||{};if(p<=0)return;const e=smooth(p);ctx.save();ctx.globalAlpha*=clamp(p*1.6,0,1);const yy=y-(1-e)*40;
+  rr(x,yy,w,h,7);ctx.fillStyle=o.on?mix(C.panel,col,.2):hexA(C.panel,.96);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=o.on?2.6:1.6;ctx.stroke();
+  rr(x,yy,6,h,3);ctx.fillStyle=col;ctx.fill();
+  if(yr!=null&&yr!==""){ctx.font=`700 12.5px ${MONO}`;ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(String(yr),x+12,yy+13)}
+  wrapText(t,x+12,yy+(yr!=null&&yr!==""?31:15),w-18,o.lh||15,{size:o.size||12.5,weight:o.w||500,color:C.ink});ctx.restore()}
+function tlink(x1,y1,x2,y2,col,p){if(p<=0)return;ctx.save();ctx.globalAlpha*=clamp(p,0,1);line(x1,y1,x1+(x2-x1)*smooth(p),y1+(y2-y1)*smooth(p),col,1.4,[3,3]);ctx.restore()}
+/* ---------- people (generic, simplified) ---------- */
+const SKINS=["skin","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function person(x,y,s,o){o=o||{};const sk=C[o.skin||"skin"],sh=o.shirtCol||C[o.shirt||"shirt1"];const lean=o.lean||0;ctx.save();ctx.translate(x,y);ctx.rotate(lean);
+  /* legs */ if(o.sit){rr(-s*.32,-s*.05,s*.64,s*.16,s*.06);ctx.fillStyle=mix(sh,"#000",.35);ctx.fill();rr(-s*.3,s*.08,s*.14,s*.45,s*.05);ctx.fill();rr(s*.16,s*.08,s*.14,s*.45,s*.05);ctx.fill()}
+  else{rr(-s*.24,0,s*.2,s*.62,s*.07);ctx.fillStyle=mix(sh,"#000",.35);ctx.fill();rr(s*.04,0,s*.2,s*.62,s*.07);ctx.fill()}
+  /* body */ ctx.beginPath();ctx.moveTo(-s*.34,s*.02);ctx.quadraticCurveTo(-s*.38,-s*.52,-s*.14,-s*.6);ctx.lineTo(s*.14,-s*.6);ctx.quadraticCurveTo(s*.38,-s*.52,s*.34,s*.02);ctx.closePath();fillStroke(sh,hexA(C.ink,.35),1.2);
+  if(o.coat){ctx.beginPath();ctx.moveTo(0,-s*.6);ctx.lineTo(-s*.1,-s*.1);ctx.lineTo(0,s*.02);ctx.lineTo(s*.1,-s*.1);ctx.closePath();ctx.fillStyle=C.paper;ctx.fill()}
+  /* arms */ const ar=o.arm||0;ctx.save();ctx.translate(s*.3,-s*.5);ctx.rotate(-.25-ar);rr(-s*.06,0,s*.13,s*.46,s*.06);ctx.fillStyle=sh;ctx.fill();circ(0,s*.48,s*.07,sk);ctx.restore();
+  ctx.save();ctx.translate(-s*.3,-s*.5);ctx.rotate(.25+(o.arm2||0));rr(-s*.07,0,s*.13,s*.46,s*.06);ctx.fillStyle=sh;ctx.fill();circ(0,s*.48,s*.07,sk);ctx.restore();
+  /* head */ circ(0,-s*.82,s*.2,sk,hexA(C.ink,.35),1);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(0,-s*.84,s*.21,Math.PI*1.02,Math.PI*1.98);ctx.quadraticCurveTo(0,-s*.94,-s*.2,-s*.86);ctx.closePath();ctx.fillStyle=o.hairCol||C.hair;ctx.fill()}
+  if(o.beard){ctx.beginPath();ctx.moveTo(-s*.15,-s*.78);ctx.quadraticCurveTo(0,-s*.35,s*.15,-s*.78);ctx.quadraticCurveTo(0,-s*.66,-s*.15,-s*.78);ctx.fillStyle=o.beardCol||"#B9B4AA";ctx.fill()}
+  if(o.hat){rr(-s*.28,-s*1.02,s*.56,s*.06,2);ctx.fillStyle=C.ink;ctx.fill();rr(-s*.17,-s*1.3,s*.34,s*.3,3);ctx.fill()}
+  if(o.cap){ctx.beginPath();ctx.arc(0,-s*.92,s*.2,Math.PI,0);ctx.fillStyle=o.capCol||C.ink;ctx.fill()}
+  ctx.restore()}
+function speech(x,y,w,h,t,o){o=o||{};if(o.a!=null&&o.a<=0)return;ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);rr(x,y,w,h,10);fillStroke(C.panel,o.col||C["ink-soft"],1.5);
+  ctx.beginPath();const tx=o.tx==null?x+20:o.tx;ctx.moveTo(tx,y+h);ctx.lineTo(tx+(o.tdx||-8),y+h+12);ctx.lineTo(tx+12,y+h);ctx.closePath();ctx.fillStyle=C.panel;ctx.fill();ctx.strokeStyle=o.col||C["ink-soft"];ctx.stroke();rr(x+1,y+h-3,w-2,3,1);ctx.fillStyle=C.panel;ctx.fill();
+  wrapText(t,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.w||500,color:C.ink});ctx.restore()}
+/* ---------- buildings, documents, objects ---------- */
+function building(x,y,w,h,o){o=o||{};const col=o.col||C.edu;ctx.beginPath();ctx.moveTo(x-8,y-h);ctx.lineTo(x+w/2,y-h-h*.32);ctx.lineTo(x+w+8,y-h);ctx.closePath();fillStroke(mix(C.panel,col,.35),col,1.6);
+  rr(x,y-h,w,h,2);fillStroke(mix(C.panel,col,.12),col,1.6);const n=Math.max(2,Math.round(w/26));for(let i=0;i<n;i++){const cx=x+(i+.5)*w/n;rr(cx-5,y-h+12,10,h*.32,2);ctx.fillStyle=o.lit&&o.lit>i/n?C.gold:hexA(col,.35);ctx.fill();if(i!==Math.floor(n/2)){rr(cx-5,y-h*.45,10,h*.25,2);ctx.fill()}}
+  rr(x+w/2-8,y-h*.36,16,h*.36,2);ctx.fillStyle=col;ctx.fill();line(x-10,y,x+w+10,y,C["ink-soft"],2)}
+function docPaper(x,y,w,h,o){o=o||{};ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);rr(-w/2,-h/2,w,h,4);fillStroke(C.parch,C["parch-edge"],1.5);
+  if(o.title)txt(0,-h/2+15,o.title,{size:o.ts||12,weight:700,align:"center",mono:true,color:C.ink});const n=o.lines==null?5:o.lines;for(let i=0;i<n;i++){const ly=-h/2+(o.title?32:14)+i*10;if(ly>h/2-8)break;line(-w/2+10,ly,w/2-10-(i%3)*10,ly,hexA(C.ink,.35),1.4)}
+  if(o.seal)circ(w/2-16,h/2-16,9,o.seal,null);ctx.restore()}
+function gavel(x,y,ang,s){s=s||1;ctx.save();ctx.translate(x,y);ctx.rotate(ang);rr(-4*s,0,8*s,46*s,3);ctx.fillStyle=C.wood;ctx.fill();rr(-22*s,-12*s,44*s,20*s,5);ctx.fillStyle=mix(C.wood,"#000",.15);ctx.fill();ctx.restore()}
+function scales(x,y,tilt,o){o=o||{};const s=o.s||1;line(x,y,x,y-90*s,C["ink-soft"],3);rr(x-26*s,y,52*s,8*s,3);ctx.fillStyle=C["ink-soft"];ctx.fill();
+  ctx.save();ctx.translate(x,y-86*s);ctx.rotate(tilt);line(-70*s,0,70*s,0,C["ink-soft"],3);ctx.restore();circ(x,y-88*s,5,C.gold);
+  [[-1,o.l],[1,o.r]].forEach(([d,lab])=>{const px=x+d*70*s*Math.cos(tilt),py=y-86*s+d*70*s*Math.sin(tilt);line(px,py,px-18*s,py+40*s,C["ink-soft"],1.2);line(px,py,px+18*s,py+40*s,C["ink-soft"],1.2);
+    ctx.beginPath();ctx.ellipse(px,py+40*s,26*s,7*s,0,0,Math.PI);fillStroke(mix(C.panel,C.gold,.4),C.gold,1.5);if(lab)label(px,py+62*s,lab,{size:12,weight:700,border:d<0?C.phil:C.law})})}
+function quill(x,y,a){ctx.save();ctx.translate(x,y);ctx.rotate(a||-.6);ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(10,-30,4,-60);ctx.quadraticCurveTo(-6,-30,0,0);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();line(0,0,3,-56,C["ink-soft"],1);ctx.restore()}
+function bottle(x,y,s,col,lab){rr(x-s*.35,y-s,s*.7,s,4);fillStroke(hexA(col,.25),col,1.6);rr(x-s*.14,y-s*1.3,s*.28,s*.3,2);fillStroke(C.panel,col,1.4);if(lab)txt(x,y-s*.45,lab,{size:10.5,weight:700,align:"center",mono:true,color:C.ink})}
+/* ---------- tile map of the 50 states (schematic) ---------- */
+const STATES=[["AK",0,0],["ME",0,10],["WI",1,5],["VT",1,9],["NH",1,10],["WA",2,0],["ID",2,1],["MT",2,2],["ND",2,3],["MN",2,4],["IL",2,5],["MI",2,6],["NY",2,8],["MA",2,9],
+ ["OR",3,0],["NV",3,1],["WY",3,2],["SD",3,3],["IA",3,4],["IN",3,5],["OH",3,6],["PA",3,7],["NJ",3,8],["CT",3,9],["RI",3,10],
+ ["CA",4,0],["UT",4,1],["CO",4,2],["NE",4,3],["MO",4,4],["KY",4,5],["WV",4,6],["VA",4,7],["MD",4,8],["DE",4,9],
+ ["AZ",5,1],["NM",5,2],["KS",5,3],["AR",5,4],["TN",5,5],["NC",5,6],["SC",5,7],["OK",6,3],["LA",6,4],["MS",6,5],["AL",6,6],["GA",6,7],["HI",7,0],["TX",7,3],["FL",7,8]];
+function tileMap(x,y,s,fill,o){o=o||{};const gap=s*.1;const pos={};STATES.forEach(st=>{const X=x+st[2]*s,Y=y+st[1]*s;pos[st[0]]=[X+s/2,Y+s/2];const f=fill?fill(st[0]):null;
+  rr(X+gap/2,Y+gap/2,s-gap,s-gap,3);ctx.fillStyle=f||C.land;ctx.fill();ctx.strokeStyle=C["land-edge"];ctx.lineWidth=1;ctx.stroke();
+  if(o.labels!==false)txt(X+s/2,Y+s/2+.5,st[0],{size:o.ls||Math.min(12,s*.36),weight:600,align:"center",mono:true,color:f&&o.inkOn?o.inkOn(st[0]):C.ink})});return pos}
+/* ---------- spine: lateral motion segment (anterior to the left unless flipped) ---------- */
+function vertebraL(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.rotate(o.rot||0);const b=C.bone,e=C["bone-edge"];
+  rr(-s*.62,-s*.25,s*.72,s*.5,s*.08);fillStroke(b,e,1.6);/* body */
+  line(-s*.58,-s*.25,s*.06,-s*.25,hexA(e,.5),3);line(-s*.58,s*.25,s*.06,s*.25,hexA(e,.5),3);/* endplates */
+  ctx.beginPath();ctx.moveTo(s*.08,-s*.24);ctx.lineTo(s*.36,-s*.22);ctx.lineTo(s*.36,-s*.04);ctx.lineTo(s*.08,-s*.02);ctx.closePath();fillStroke(b,e,1.4);/* pedicle */
+  ctx.beginPath();ctx.moveTo(s*.34,-s*.44);ctx.lineTo(s*.5,-s*.46);ctx.lineTo(s*.56,s*.36);ctx.lineTo(s*.4,s*.38);ctx.closePath();fillStroke(b,e,1.4);/* articular pillar with facets */
+  ctx.beginPath();ctx.moveTo(s*.5,-s*.16);ctx.lineTo(s*1.12,s*.02);ctx.lineTo(s*1.1,s*.2);ctx.lineTo(s*.52,s*.14);ctx.closePath();fillStroke(b,e,1.4);/* lamina and spinous process */
+  ctx.restore()}
+/* two vertebrae + disc + nerve root. o.shift (px, top bone slides), o.rot (rad), o.pinch 0..1, o.flip (anterior to the right) */
+function segment(x,y,s,o){o=o||{};const sh=o.shift||0,rot=o.rot||0,f=o.flip?-1:1;const gap=s*.2;const narrow=clamp(o.pinch||0,0,1);
+  const yT=y-gap/2-s*.25,yB=y+gap/2+s*.25;
+  ctx.save();ctx.translate(x,y);ctx.scale(f,1);ctx.beginPath();ctx.moveTo(-s*.6+sh*.5,-gap/2);ctx.lineTo(s*.06+sh*.5,-gap/2);ctx.quadraticCurveTo(s*.14,0,s*.06,gap/2);ctx.lineTo(-s*.6,gap/2);ctx.quadraticCurveTo(-s*.68,0,-s*.6+sh*.5,-gap/2);
+  fillStroke(hexA(C.disc,.55),C.disc,1.6);ell(-s*.24+sh*.3,0,s*.13,gap*.3,0,C.nucleus,null);ctx.restore();
+  vertebraL(x,yB,s,{flip:o.flip});vertebraL(x+sh*f,yT,s,{rot:rot*f,flip:o.flip});
+  /* foramen: between pedicles, behind the disc */
+  const fx=x+f*(s*.22+sh*.5),fy=y-s*.02;ell(fx,fy,s*.11*(1-narrow*.45),s*.15*(1-narrow*.5),0,hexA(C.ecf,.95),hexA(C["bone-edge"],.7),1.2);
+  const rc=narrow>.5?C.pain:C.nerve;circ(fx,fy,s*.06*(1-narrow*.35),rc,hexA(C.ink,.4),1);
+  if(narrow>.5){ctx.save();ctx.globalAlpha*=narrow;circ(fx,fy,s*.17,null,C.pain,2);ctx.restore()}
+  return {fx,fy,root:[[fx,fy],[fx-f*s*.25,fy+s*.32],[fx-f*s*.7,fy+s*.42]]}}
+/* yellow signal dots along a path, rate = dots per second relative */
+function signal(path,T,rate,n,col,r){n=n||6;for(let i=0;i<n;i++){const p=P(T*rate+i/n,1);const q=along(path,p);circ(q[0],q[1],r||4,col||C.nerve,hexA(C.ink,.3),1)}}
+/* ---------- idea flow ---------- */
+function node(x,y,w,h,t,sub,col,on,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);rr(x,y,w,h,9);ctx.fillStyle=on?mix(C.panel,col,.22):hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=on?2.6:1.6;ctx.stroke();
+  if(sub){txt(x+w/2,y+h/2-9,t,{size:13.5,weight:700,align:"center"});wrapText(sub,x+w/2,y+h/2+9,w-14,14,{size:11.5,align:"center",color:C["ink-soft"]})}else txt(x+w/2,y+h/2,t,{size:13.5,weight:700,align:"center"});ctx.restore()}
+function flow(x1,y1,x2,y2,col,T,p,n){if(p!=null&&p<=0)return;const e=p==null?1:smooth(p);const X2=x1+(x2-x1)*e,Y2=y1+(y2-y1)*e;arrow(x1,y1,X2,Y2,hexA(col,.85),2.2);
+  if(e>=1){n=n||3;for(let i=0;i<n;i++){const q=P(T*.6+i/n,1);circ(lerp(x1,x2,q),lerp(y1,y2,q),3.6,col)}}}
+/* ---------- split scene frame ---------- */
+function splitFrame(lt,rt,o){o=o||{};panelBox(12,12,382,456,{fill:hexA(mix(C.panel,C.phil,.06),.95),stroke:hexA(C.phil,.7)});panelBox(406,12,382,456,{fill:hexA(mix(C.panel,C.evid,.06),.95),stroke:hexA(C.evid,.7)});
+  tagPill(24,32,o.lk||"model");tagPill(418,32,o.rk||"evid");if(lt)txt(24,56,lt,{size:13.5,weight:700});if(rt)txt(418,56,rt,{size:13.5,weight:700})}
+/* ---------- trial arms (evidence) ---------- */
+function trialArms(x,y,w,T,o){o=o||{};const n=o.n||40;const fill=clamp(T/(o.dur||6),0,1);const k=Math.floor(n*fill);
+  [["Manipulation",C.evid,o.a||.62],["Other recommended care",C.act3,o.b||.58]].forEach((arm,j)=>{const yy=y+j*70;txt(x,yy,arm[0],{size:12.5,weight:700});
+    for(let i=0;i<n;i++){const cx=x+8+(i%20)*((w-16)/20),cy=yy+18+Math.floor(i/20)*14;const on=i<k;const better=rnd(i*7+j*31)<arm[2];circ(cx,cy,5,on?(better?arm[1]:C.panel):hexA(C.rule,.5),on?arm[1]:null,1.2)}})}
+function spectrumBar(x,y,w,lt,rt){const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,C.phil);g.addColorStop(1,C.evid);rr(x,y-6,w,12,6);ctx.fillStyle=g;ctx.fill();
+  txt(x,y+24,lt,{size:12.5,weight:700});txt(x+w,y+24,rt,{size:12.5,weight:700,align:"right"})}
+function bigYear(x,y,t,col,a){if(a!=null&&a<=0)return;ctx.save();if(a!=null)ctx.globalAlpha*=clamp(a,0,1);ctx.font=`700 30px ${MONO}`;ctx.fillStyle=col||C.ink;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,x,y);ctx.restore()}
+function ear(x,y,s){ctx.beginPath();ctx.ellipse(x,y,s*.6,s,0,0,TAU);fillStroke(C.skin,hexA(C.ink,.4),1.4);ctx.beginPath();ctx.ellipse(x+s*.05,y,s*.3,s*.6,0,0,TAU);ctx.strokeStyle=hexA(C.ink,.35);ctx.stroke()}
+function soundWaves(x,y,T,col,a){for(let i=0;i<3;i++){const p=P(T*.8+i/3,1);ctx.save();ctx.globalAlpha*=(1-p)*(a==null?1:a);ctx.beginPath();ctx.arc(x,y,10+p*40,-.6,.6);ctx.strokeStyle=col;ctx.lineWidth=2.4;ctx.stroke();ctx.restore()}}
+let SYS={},SC={};
+/* ================= shared event bank (both pages) =================
+   [id, year (for placement), shown date, lane, short label, title, detail, approx?] */
+const EV_RAW=[
+ ["mesmer",1775,"1770s","phil","Mesmer","Mesmer teaches animal magnetism","Franz Anton Mesmer taught that an invisible magnetic fluid flows through the body and that blocked flow causes illness. Healers passed their hands over patients to move it.",1],
+ ["comm",1784,"1784","res","Commission","A French commission tests animal magnetism","A royal commission in France tested Mesmer's claims, found no magnetic fluid and credited the effects to imagination and expectation. It was one of the first organized tests of a healing claim.",0],
+ ["heroic",1815,"early 1800s","phil","Heroic medicine","Heroic medicine at its height","Many doctors bled, purged and blistered patients to force the body back into balance. Harsh treatments pushed patients toward gentler rival systems.",1],
+ ["still",1874,"1874","edu","Osteopathy","A.T. Still announces osteopathy","Andrew Taylor Still, a Missouri doctor, founded osteopathy, a hands on system built on the idea that structure affects function.",0],
+ ["palmag",1886,"1880s","phil","Magnetic healer","D.D. Palmer works as a magnetic healer","Palmer practised magnetic healing in Davenport, Iowa, before he founded chiropractic.",1],
+ ["kirks",1892,"1892","edu","Kirksville","First osteopathic school opens","A.T. Still opened his first school in Kirksville, Missouri.",0],
+ ["lillard",1895,"1895","phil","First adjustment","Palmer's first adjustment, as he told it","In September 1895 Palmer adjusted Harvey Lillard, a janitor who had been nearly deaf for about 17 years. Palmer wrote that his hearing improved. The story rests mainly on Palmer's own account.",0],
+ ["name",1896,"1896","phil","The name","The name chiropractic","A patient, the Reverend Samuel Weed, suggested joining the Greek words cheir (hand) and praxis (practice): done by hand.",0],
+ ["school",1897,"1897","edu","Palmer School","The Palmer School begins","Palmer began teaching students in Davenport, the start of the first chiropractic school.",0],
+ ["jail",1906,"1906","law","Palmer jailed","D.D. Palmer jailed","Palmer was convicted in Iowa of practising medicine without a licence and spent time in jail, like many early chiropractors.",0],
+ ["bj",1906,"about 1906","edu","B.J. leads","B.J. Palmer takes over the school","D.D. Palmer's son B.J. took control of the Palmer School and led it for more than fifty years.",1],
+ ["morikubo",1907,"1907","law","Morikubo","The Morikubo trial","Shegataro Morikubo, charged in Wisconsin with practising osteopathy without a licence, was acquitted after his lawyer argued chiropractic was a separate system.",0],
+ ["book",1910,"1910","phil","Tone","Palmer's 1910 book and the tone model","Palmer's large 1910 book moved from bone pinching nerve to tone, the tension of nerves, and claimed that about 95 percent of disease came from displaced vertebrae.",0],
+ ["kansas",1913,"1913","law","Kansas","Kansas passes the first licensing law","Kansas became the first state to license chiropractors.",0],
+ ["ncm",1924,"1924","edu","Neurocalometer","B.J. Palmer introduces the neurocalometer","A heat reading instrument slid along the spine. B.J. taught that temperature differences marked subluxations. The device and its cost split the profession.",0],
+ ["premise",1927,"1927","phil","Major premise","The 33 principles and the major premise","R.W. Stephenson set out chiropractic philosophy as 33 principles, starting from the major premise that a Universal Intelligence is in all matter.",0],
+ ["bjdeath",1961,"1961","edu","B.J. dies","B.J. Palmer dies","B.J. Palmer died after leading the Palmer School for more than five decades.",0],
+ ["quack",1963,"1963","law","AMA committee","AMA forms its Committee on Quackery","The American Medical Association formed a committee that worked to contain chiropractic. It was disbanded in 1974.",0],
+ ["medicare",1972,"1972","law","Medicare","Medicare adds limited coverage","Congress added Medicare coverage for manual manipulation of the spine to correct a subluxation.",0],
+ ["cce",1974,"1974","edu","CCE","CCE recognized to accredit programs","The US Office of Education recognized the Council on Chiropractic Education as the accrediting agency for chiropractic programs.",0],
+ ["louisiana",1974,"1974","law","Louisiana","Louisiana: licensure in all 50 states","Louisiana became the last state to pass a chiropractic licensing law.",0],
+ ["nincds",1975,"1975","res","NINCDS","The NINCDS research conference","A US government institute brought chiropractors, osteopaths, medical doctors and scientists together and concluded that too little good research existed; it called for studies.",0],
+ ["wilkfile",1976,"1976","law","Wilk suit","Wilk v. AMA is filed","Chester Wilk and four other chiropractors sued the AMA and other groups under antitrust law.",0],
+ ["wilk",1987,"1987","law","Wilk ruling","The Wilk ruling","A federal judge ruled that the AMA had run an illegal boycott of chiropractors and ordered it to stop. The ruling did not decide whether chiropractic works.",0],
+ ["appeal",1990,"1990","law","Appeal","The Wilk ruling is upheld","An appeals court upheld the 1987 ruling.",0],
+ ["ahcpr",1994,"1994","res","Back guideline","A federal guideline lists manipulation","A US federal guideline on acute low back problems listed spinal manipulation as an option in the first weeks.",0],
+ ["acc",1996,"1996","phil","Definition","The colleges agree on a subluxation definition","The chiropractic colleges defined subluxation broadly as a complex of joint changes that compromise nerve integrity and may influence health.",0],
+ ["xray",2000,"2000","law","X ray rule","Medicare drops its X ray requirement","Medicare stopped requiring an X ray to show a subluxation before covering manipulation.",0],
+ ["guide17",2017,"2017","res","Guideline","A major guideline includes manipulation","A major physician guideline listed spinal manipulation among several nonpharmacologic choices for low back pain.",0]];
+const EVENTS=EV_RAW.map(r=>({id:r[0],y:r[1],yr:r[2],lane:r[3],short:r[4],title:r[5],detail:r[6],approx:!!r[7]}));
+const EVI={};EVENTS.forEach(e=>EVI[e.id]=e);
+const LANE_ORDER=["phil","edu","law","res"];
+/* piecewise year axis: 1770 to 1870 squeezed into the first 12 percent */
+function yearX(x,w,v){const a=w*.12;return v<1870?x+(v-1770)/100*a:x+a+(v-1870)/150*(w-a)}
+const TL_TICKS=[1770,1870,1900,1925,1950,1975,2000,2020];
+/* lay out labels in rows inside each lane: returns map id->{row,full} */
+function tlLayout(evs,x,w,rows,keyFont){const out={};ctx.font=keyFont;
+  LANE_ORDER.forEach(L=>{const list=evs.filter(e=>e.lane===L).sort((a,b)=>a.y-b.y);const ends=new Array(rows).fill(-1e9);
+    list.forEach(e=>{const X=yearX(x,w,e.y);const full=e.yr+" "+e.short,wf=ctx.measureText(full).width+12,wy=ctx.measureText(e.yr).width+12;let placed=false;
+      for(let r=0;r<rows&&!placed;r++){if(X-6>ends[r]+4&&X-6+wf<x+w+30){ends[r]=X-6+wf;out[e.id]={row:r,text:full};placed=true}}
+      for(let r=0;r<rows&&!placed;r++){if(X-6>ends[r]+4){ends[r]=X-6+wy;out[e.id]={row:r,text:e.yr};placed=true}}
+      if(!placed)out[e.id]={row:-1,text:""}})});return out}
+/* draw the layered timeline. o: {x,y,w,h,evs,prog:fn(e)->0..1,sel:id,T,cursor:year|null,lanes:set} */
+function tlDraw(o){const L=LANE_ORDER.filter(k=>!o.lanes||o.lanes.has(k));const n=Math.max(1,L.length);const lh=o.h/n;const font=`600 11.5px ${MONO}`;
+  const rows=Math.max(1,Math.floor((lh-34)/17));const lay=tlLayout(o.evs.filter(e=>L.indexOf(e.lane)>=0),o.x,o.w,rows,font);const hits=[];
+  L.forEach((k,i)=>{const col=C[LAYERS[k][1]];const by=o.y+i*lh;rr(o.x-8,by+2,o.w+16,lh-4,6);ctx.fillStyle=hexA(col,.08);ctx.fill();ctx.strokeStyle=hexA(col,.45);ctx.lineWidth=1;ctx.stroke();
+    txt(o.x-2,by+12,LAYERS[k][0].toUpperCase(),{size:10.5,weight:700,mono:true,color:C["ink-soft"]});line(o.x,by+lh-14,o.x+o.w,by+lh-14,hexA(col,.4),1.2,[2,4])});
+  /* axis */ const ay=o.y+o.h+8;line(o.x,ay,o.x+o.w,ay,C["ink-soft"],2);TL_TICKS.forEach(t=>{const X=yearX(o.x,o.w,t);line(X,ay-4,X,ay+4,C["ink-soft"],1.5);txt(X,ay+14,String(t),{size:11.5,align:"center",mono:true,color:C["ink-soft"],weight:600})});
+  const bx=yearX(o.x,o.w,1870);line(bx-4,ay-6,bx,ay+6,C["ink-soft"],1.5);line(bx,ay-6,bx+4,ay+6,C["ink-soft"],1.5);
+  if(o.cursor!=null){const X=yearX(o.x,o.w,clamp(o.cursor,1770,2020));line(X,o.y,X,ay,C.accent,2,[5,4]);label(X,o.y-8,String(Math.floor(o.cursor)),{size:12,weight:700,mono:true,border:C.accent})}
+  o.evs.forEach(e=>{const li=L.indexOf(e.lane);if(li<0)return;const p=o.prog?o.prog(e):1;if(p<=0)return;const col=C[LAYERS[e.lane][1]];const X=yearX(o.x,o.w,e.y);const by=o.y+li*lh;const py=by+lh-14;const ly=by+26+lay[e.id].row*17;const on=o.sel===e.id;const e2=smooth(p);
+    ctx.save();ctx.globalAlpha*=clamp(p*1.5,0,1);const dy=(1-e2)*-26;
+    if(lay[e.id].row>=0){line(X,py+dy,X,ly+7+dy,hexA(col,.7),1.1);ctx.font=font;const tw=ctx.measureText(lay[e.id].text).width;rr(X-6,ly-8+dy,tw+12,17,4);ctx.fillStyle=on?mix(C.panel,col,.3):C.panel;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=on?2.2:1.2;ctx.stroke();
+      ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(lay[e.id].text,X,ly+.5+dy)}
+    if(on){const pr=P(o.T||0,1.4);ctx.save();ctx.globalAlpha*=(1-pr);circ(X,py+dy,8+pr*14,null,col,2.5);ctx.restore()}
+    pin(X,py+dy,col,on?8:6);ctx.restore();hits.push({id:e.id,x:X,y:py,ly})});
+  return hits}
+/* ---------- helpers shared with the walkthrough scenes ---------- */
+const ap=(T,a,d)=>seg(T,a,a+(d||1));
+function organ(k,x,y,s){if(k==="heart"){ctx.beginPath();ctx.moveTo(x,y+s*.6);ctx.bezierCurveTo(x-s,y,x-s*.5,y-s*.7,x,y-s*.2);ctx.bezierCurveTo(x+s*.5,y-s*.7,x+s,y,x,y+s*.6);fillStroke(C.artery,hexA(C.ink,.4),1.2)}
+  else if(k==="lungs"){ell(x-s*.35,y,s*.3,s*.55,.1,hexA(C.muscle,.6),hexA(C.ink,.4),1.2);ell(x+s*.35,y,s*.3,s*.55,-.1,hexA(C.muscle,.6),hexA(C.ink,.4),1.2)}
+  else if(k==="stomach"){ctx.beginPath();ctx.ellipse(x,y,s*.6,s*.38,-.4,0,TAU);fillStroke(hexA(C.act2,.5),hexA(C.ink,.4),1.2)}
+  else {ell(x,y,s*.25,s*.6,0,C.muscle,hexA(C.ink,.4),1.2)}}
+function backSpine(x,y0,n,sp){for(let i=0;i<n;i++){const y=y0+i*sp;rr(x-14,y,28,sp*.62,4);fillStroke(C.bone,C["bone-edge"],1.3);line(x-26,y+sp*.3,x-14,y+sp*.3,C["bone-edge"],2);line(x+14,y+sp*.3,x+26,y+sp*.3,C["bone-edge"],2)}}
+TAGS.sup=["SUPPORTED OR REASONABLE","good"];TAGS.nots=["NOT SUPPORTED","bad"];
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-models-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-models-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: timeline explorer + then vs now ================= */
+const TL={lanes:new Set(LANE_ORDER),cursor:1770,playing:true,sel:"lillard",hits:[],listKey:"",yInt:1770};
+function tlVisible(){return EVENTS.filter(e=>TL.lanes.has(e.lane)&&e.y<=TL.cursor)}
+function tlInit(){const box=$("#tlLayers");box.innerHTML="";LANE_ORDER.forEach(k=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.setAttribute("aria-pressed","true");
+    b.innerHTML=`<i style="background:var(--${LAYERS[k][1]})"></i>${LAYERS[k][0]}`;b.onclick=()=>{if(TL.lanes.has(k)){if(TL.lanes.size>1)TL.lanes.delete(k)}else TL.lanes.add(k);b.setAttribute("aria-pressed",String(TL.lanes.has(k)));tlUI(true)};box.appendChild(b)});
+  $("#tlPlay").onclick=()=>{if(TL.cursor>=2020&&!TL.playing){TL.cursor=1770}TL.playing=!TL.playing;tlUI(true)};
+  $("#tlRestart").onclick=()=>{TL.cursor=1770;TL.playing=true;tlUI(true)};
+  $("#tlAll").onclick=()=>{TL.cursor=2020;TL.playing=false;tlUI(true)};
+  $("#tlYear").oninput=e=>{TL.cursor=+e.target.value;TL.playing=false;tlUI(true)};
+  $("#cvTl").addEventListener("click",e=>{const r=e.currentTarget.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*800,y=(e.clientY-r.top)/r.height*TLH;let best=null,bd=22;
+    TL.hits.forEach(h=>{const d=Math.min(Math.hypot(h.x-x,h.y-y),Math.hypot(h.x-x,h.ly-y));if(d<bd){bd=d;best=h}});if(best){tlSelect(best.id)}});
+  tlUI(true)}
+function tlSelect(id){TL.sel=id;tlUI(true);a11yKey=""}
+function tlUI(force){const yi=Math.floor(TL.cursor);if(!force&&yi===TL.yInt)return;TL.yInt=yi;
+  $("#tlYear").value=yi;$("#tlYearOut").textContent=String(yi);$("#tlPlay").textContent=TL.playing?"Pause build":(TL.cursor>=2020?"Build again":"Play build");
+  const vis=tlVisible().sort((a,b)=>a.y-b.y);const key=vis.map(e=>e.id).join(",")+"|"+TL.sel;
+  if(key!==TL.listKey||force){TL.listKey=key;const ul=$("#tlList");ul.innerHTML="";if(!vis.length)ul.innerHTML='<li><span class="small" style="padding:6px 8px;display:block">No events yet. Press Play build or move the slider.</span></li>';
+    vis.forEach(e=>{const li=document.createElement("li");const b=document.createElement("button");b.type="button";b.setAttribute("aria-pressed",String(e.id===TL.sel));
+      b.innerHTML=`<span class="lane" style="background:var(--${LAYERS[e.lane][1]})" aria-hidden="true"></span><span class="yr">${e.yr}</span><span>${e.title}</span>`;b.onclick=()=>tlSelect(e.id);li.appendChild(b);ul.appendChild(li)})}
+  const s=EVI[TL.sel];$("#tlDetail").innerHTML=`<div class="meta">${s.yr} &middot; ${LAYERS[s.lane][0]}${s.approx?" &middot; approximate date":""}</div><h3>${s.title}</h3><p style="margin:4px 0 0">${s.detail}</p>`;
+  $("#tlDetail").style.borderLeftColor=`var(--${LAYERS[s.lane][1]})`;
+  $("#tlRead tbody").innerHTML=[["Year cursor",String(yi)],["Layers on",[...TL.lanes].map(k=>LAYERS[k][0]).join(", ")],["Events shown",vis.length+" of "+EVENTS.filter(e=>TL.lanes.has(e.lane)).length],["Selected",s.yr+", "+s.title]].map(r=>`<tr><th scope="row">${r[0]}</th><td class="l">${r[1]}</td></tr>`).join("");
+  $("#tlCap").textContent=TL.playing?"Watch events drop into their layers as the year cursor moves.":"Year "+yi+": "+vis.length+" events shown. Selected: "+s.title+".";}
+const TLH=500;
+function drawTl(now){use(SL1);const T=now/1000;if(TL.playing){TL.cursor=Math.min(2020,TL.cursor+DT*(TL.cursor<1870?30:9));if(TL.cursor>=2020)TL.playing=false;tlUI(false)}
+  TL.hits=tlDraw({x:70,y:30,w:700,h:400,evs:EVENTS,lanes:TL.lanes,prog:e=>clamp((TL.cursor-e.y)/5,0,1),sel:TL.sel,T,cursor:TL.cursor<2020?TL.cursor:null});
+  const s=EVI[TL.sel];const shown=TL.lanes.has(s.lane)&&s.y<=TL.cursor;panelBox(14,468,772,26);txt(26,481,(shown?"Selected: ":"Selected (not yet on the line): ")+s.yr+", "+s.title,{size:12.5,weight:700})}
+function tlA11y(){const vis=tlVisible();const s=EVI[TL.sel];const by=LANE_ORDER.filter(k=>TL.lanes.has(k)).map(k=>LAYERS[k][0]+": "+vis.filter(e=>e.lane===k).map(e=>e.yr).join(", ")).join("; ");
+  return ["Timeline up to "+Math.floor(TL.cursor)+", "+vis.length+" events shown. Selected: "+s.title+".","A layered timeline runs from 1770 to 2020 with one coloured lane per layer. A dashed year cursor is at "+Math.floor(TL.cursor)+". Events shown by lane are "+(by||"none")+". The selected event, "+s.title+" ("+s.yr+"), has a pulsing ring."]}
+/* ---------- then vs now ---------- */
+function germ(x,y,r,col){for(let i=0;i<8;i++){const a=i/8*TAU;line(x+Math.cos(a)*r,y+Math.sin(a)*r,x+Math.cos(a)*r*1.5,y+Math.sin(a)*r*1.5,col,2)}circ(x,y,r,hexA(col,.4),col,2)}
+function helix(x,y,h,T,col){for(let i=0;i<14;i++){const yy=y-h/2+i*h/13;const a=Math.sin(i*.8+T*2)*12;circ(x+a,yy,3,col);circ(x-a,yy,3,C.disc);line(x+a,yy,x-a,yy,hexA(C["ink-soft"],.5),1)}}
+function vessel(x,y,w,col){rr(x-w/2,y-9,w,18,9);fillStroke(hexA(col,.3),col,2);rr(x-w/2+8,y-3,w*.4,6,3);ctx.fillStyle=C.gold;ctx.fill()}
+const CMP=[
+ ["cause","Cause of disease","Most disease comes from displaced vertebrae pressing on nerves. Palmer wrote that about 95 percent of disease came from them.","Diseases have many well studied causes: infections, genes, blood vessel disease, injuries, toxins and lifestyle. Research does not show that small vertebral shifts cause organ disease.",
+  (T,p)=>{const sg=segment(150,170,70,{shift:8,pinch:1,flip:true});const path=[sg.root[2],[300,230],[330,250]];poly(path,C.pain,3);signal(path,T,.2,2,C.pain,4);organ("stomach",350,250,46);label(200,280,"one cause for most disease",{size:12.5,weight:700,border:C.phil})},
+  (T,p)=>{organ("stomach",600,190,56);const ic=[["germs",470,110],["genes",730,110],["blood vessels",470,270],["lifestyle",730,270]];const k=Math.floor(T/1.5)%4;
+    ic.forEach((c,i)=>{const on=i===k;if(i===0)germ(c[1],c[2],14,C.para);if(i===1)helix(c[1],c[2],44,T,C.phil);if(i===2)vessel(c[1],c[2],60,C.artery);if(i===3)person(c[1],c[2]+20,40,{skin:"skin3",shirt:"shirt3"});
+      arrow(c[1]+(c[1]<600?30:-30),c[2]+(c[2]<190?16:-16),600+(c[1]<600?-38:38),190+(c[2]<190?-20:20),hexA(C.evid,on?1:.35),on?3:1.6);label(c[1],c[2]+(i<2?-38:42),c[0],{size:12,weight:700,border:on?C.evid:C.rule})})}],
+ ["sublux","What a subluxation is","A vertebra slightly out of place that narrows the nerve opening and presses on the nerve.","Many now describe joint dysfunction: a painful joint that moves too little. Small shifts seen on images do not track symptoms well, and the term itself is debated within the profession.",
+  (T,p)=>{const sh=16*(.5+.5*Math.sin(T*1.4));segment(190,180,90,{shift:sh,pinch:sh/16,flip:true});label(200,290,"bone out of place (model)",{size:12.5,weight:700,border:C.phil})},
+  (T,p)=>{segment(590,170,90,{rot:.035*Math.sin(T*1.6),flip:true});glow(560,170,40,C.pain,.25+.15*Math.sin(T*3));label(600,280,"painful, moves too little",{size:12.5,weight:700,border:C.evid})}],
+ ["found","How it is found","By feeling for a bone out of place, by X ray, and from 1924 by heat reading instruments.","Clinicians take a history, examine movement and nerves, and screen for red flags. Hand findings vary between examiners, and heat readings are not valid tests for subluxation.",
+  (T,p)=>{backSpine(140,60,9,26);const py=lerp(70,280,P(T,6));rr(110,py-8,60,16,5);fillStroke(C.ink,C.ink,1);ctx.beginPath();ctx.arc(290,200,44,Math.PI,0);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+    const a=Math.PI*1.5+Math.sin(T*5)*.6;line(290,200,290+Math.cos(a)*38,200+Math.sin(a)*38,C.pain,2.5);label(290,232,"heat dial",{size:12,weight:700,border:C.phil})},
+  (T,p)=>{docPaper(440,60,170,220,{title:"Exam",lines:0});["history","movement","nerve tests","red flags"].forEach((s,i)=>{const a=ap(T%8,.5+i*.8,.5);txt(470,110+i*40,s,{size:13,weight:600});if(a>0)withA(a,()=>checkMark(456,110+i*40,6,C.good))});
+    txt(640,90,"hand findings agree",{size:12,weight:700});rr(640,104,140,14,5);ctx.fillStyle=hexA(C.rule,.5);ctx.fill();rr(640,104,140*.35,14,5);ctx.fillStyle=C.evid;ctx.fill();txt(640,132,"low to fair",{size:12,color:C["ink-soft"]});
+    txt(640,170,"heat readings valid",{size:12,weight:700});crossMark(652,196,7,C.bad);txt(668,196,"not shown",{size:12,color:C["ink-soft"]})}],
+ ["nerves","The nervous system","Innate Intelligence sends messages through the nerves; interference at the spine blocks them.","The brain, nerves, hormones and the immune system regulate the body together through feedback loops. No life force is needed to explain them, and one cannot be tested.",
+  (T,p)=>{circ(120,80,24,hexA(C.skin,.4),hexA(C.ink,.4),1.4);for(let i=0;i<4;i++){const q=P(T*.4+i/4,1);circ(120,lerp(24,60,q),3.5,C.phil)}line(120,104,120,290,C.cord,6);signal([[120,104],[120,290]],T,.5,5,C.nerve,4);
+    [["heart",280,150],["stomach",290,240]].forEach((o,i)=>{const pth=[[120,140+i*90],[200,140+i*90],[o[1]-40,o[2]]];poly(pth,hexA(C.nerve,.8),2.5);signal(pth,T,.6,3,C.nerve,4);organ(o[0],o[1],o[2],34)});label(200,300,"Innate flows through the nerves",{size:12.5,weight:700,border:C.phil})},
+  (T,p)=>{blobPath(520,110,40,1,T*.3,.05);fillStroke(hexA(C.muscle,.2),C.muscle,1.6);txt(520,110,"brain",{size:12,weight:700,align:"center"});ell(700,110,24,16,0,hexA(C.gold,.5),C.gold,1.6);txt(700,140,"gland",{size:12,weight:700,align:"center"});
+    organ("heart",610,240,40);const n1=[[540,140],[600,220]];poly(n1,C.nerve,3);signal(n1,T,.8,3,C.nerve,4);for(let i=0;i<4;i++){const q=P(T*.35+i/4,1);circ(lerp(700,630,q),lerp(126,226,q)+Math.sin(q*9)*4,4,C.gold)}
+    ctx.beginPath();ctx.arc(610,170,100,.4,1.2);ctx.strokeStyle=hexA(C.evid,.7);ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);label(610,296,"nerves, hormones, feedback",{size:12.5,weight:700,border:C.evid})}],
+ ["scope","Scope of practice","Straights: find and adjust subluxations only. Mixers: add other methods. The split began in the early 1900s.","Scope is set by state law and varies. Views today form a spectrum from traditional subluxation centred care to evidence based musculoskeletal care, with most in between.",
+  (T,p)=>{poly([[30,180],[140,180],[220,110],[370,110]],hexA(C.sunk,.9),24);poly([[140,180],[220,250],[370,250]],hexA(C.sunk,.9),24);label(290,80,"straights",{size:12.5,weight:700,border:C.phil});label(290,284,"mixers",{size:12.5,weight:700,border:C.act3});
+    for(let i=0;i<2;i++){const q=along([[30,180],[140,180],[220,110],[370,110]],P(T*.1+i/2,1));person(q[0],q[1]+8,30,{skin:SKINS[i],shirt:"shirt4"});const r=along([[30,180],[140,180],[220,250],[370,250]],P(T*.1+i/2+.25,1));person(r[0],r[1]+8,30,{skin:SKINS[i+2],shirt:"shirt1"})}},
+  (T,p)=>{spectrumBar(430,190,330,"traditional","evidence based");for(let i=0;i<12;i++){const u=rnd(i*3.3+2),v=rnd(i*7.7+5);const pos=clamp(.5+(u+v-1)*.55,.04,.96);person(430+pos*330+Math.sin(T+i)*2,176,26,{skin:SKINS[i%4],shirt:SHIRTS[i%4]})}label(595,270,"most fall in between",{size:12.5,weight:700,border:C.evid})}],
+ ["relation","Relation to medicine","From 1963 the AMA worked to contain chiropractic and told doctors not to associate with chiropractors.","The 1987 Wilk ruling found an illegal boycott. Today many chiropractors work alongside medical doctors, and guidelines list manipulation as one option for back pain.",
+  (T,p)=>{for(let i=0;i<2;i++){person(70+i*50,280,60,{skin:SKINS[i],shirtCol:C.act3,coat:true});person(290+i*50,280,60,{skin:SKINS[i+2],shirtCol:C.act2})}rr(196,120,20,170,4);ctx.fillStyle=hexA(C.pain,.75);ctx.fill();
+    arrow(130,190,186,190,hexA(C.act3,.8),2);crossMark(192,190,6,C.pain);arrow(280,220,224,220,hexA(C.act2,.8),2);crossMark(218,220,6,C.pain);label(206,100,"boycott, 1963 to 1987",{size:12.5,weight:700,border:C.pain})},
+  (T,p)=>{for(let i=0;i<2;i++){person(470+i*50,280,60,{skin:SKINS[(i+1)%4],shirtCol:C.act3,coat:true});person(690+i*50,280,60,{skin:SKINS[(i+3)%4],shirtCol:C.act2})}
+    for(let k=0;k<2;k++){const y=190+k*30;line(540,y,680,y,hexA(k?C.act2:C.act3,.6),2,[5,4]);for(let i=0;i<3;i++){const q=P(T*.4+i/3,1);circ(k?lerp(680,540,q):lerp(540,680,q),y,4,k?C.act2:C.act3)}}label(610,100,"referrals both ways",{size:12.5,weight:700,border:C.good})}]];
+const CM={i:0,t0:0};
+function cmpInit(){const box=$("#cmpTopics");box.innerHTML="";CMP.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=c[1];b.setAttribute("aria-pressed",String(i===CM.i));b.onclick=()=>{CM.i=i;CM.t0=performance.now();cmpUI()};box.appendChild(b)});cmpUI()}
+function cmpUI(){$("#cmpTopics").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(i===CM.i)));const c=CMP[CM.i];$("#cmpThen").textContent=c[2];$("#cmpNow").textContent=c[3];
+  $("#cvCmp").setAttribute("aria-label","Model then vs now: "+c[1]+". Left, historical model: "+c[2]+" Right, current evidence: "+c[3])}
+function drawCmp(now){use(SL2);const T=now/1000;const el=(now-CM.t0)/1000;const c=CMP[CM.i];
+  panelBox(12,12,382,316,{fill:hexA(mix(C.panel,C.phil,.06),.95),stroke:hexA(C.phil,.7)});panelBox(406,12,382,316,{fill:hexA(mix(C.panel,C.evid,.06),.95),stroke:hexA(C.evid,.7)});
+  tagPill(24,32,"model");tagPill(418,32,"evid");txt(24,56,"Then: "+c[1].toLowerCase(),{size:13,weight:700});txt(418,56,"Now: "+c[1].toLowerCase(),{size:13,weight:700});
+  const pl=smooth(clamp(el/1,0,1)),pr=smooth(clamp((el-.8)/1,0,1));
+  ctx.save();ctx.beginPath();ctx.rect(12,64,382,264);ctx.clip();ctx.globalAlpha*=pl;ctx.translate(-(1-pl)*40,0);c[4](T,pl);ctx.restore();
+  ctx.save();ctx.beginPath();ctx.rect(406,64,382,264);ctx.clip();ctx.globalAlpha*=pr;ctx.translate((1-pr)*40,0);c[5](T,pr);ctx.restore()}
+/* ================= PART 2: predict then watch, and put events in order ================= */
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));const pick=a=>a[Math.floor(Math.random()*a.length)];
+const CATN={m:"Historical model",e:"Current evidence",l:"Legal and professional history"},CATC={m:"phil",e:"evid",l:"law"};
+/* [question, correct, [[wrong, why]x3], category, why right, [hint1, hint2, hint3]] */
+const CONCEPT=[
+ ["In Palmer's philosophy, what is Innate Intelligence?","An inborn share of Universal Intelligence that runs the body",[["A nerve fibre seen under the microscope","Nerve fibres are real structures. Innate is a philosophical concept."],["A hormone made by the spinal cord","No such hormone exists. Innate is an idea, not a chemical."],["The name of Palmer's first school","The school was the Palmer School. Innate is a concept in his philosophy."]],"m","Yes. It is taught as a philosophical model, which science cannot test.",["This comes from philosophy, not anatomy.","It is described as a share of something larger.","Think of an inborn wisdom said to run the body."]],
+ ["What did the defence argue in the 1907 Morikubo trial?","Chiropractic is a separate system from osteopathy",[["Chiropractic had been proven in clinical trials","No trials existed in 1907. The defence was about chiropractic being distinct."],["Morikubo held a medical licence","He did not. That is why he was charged."],["Wisconsin had a chiropractic licensing law","No state had one until Kansas in 1913."]],"l","Yes. He was charged with practising osteopathy without a licence and was acquitted.",["Think about what he was charged with.","The charge was practising osteopathy without a licence.","The defence said the law did not apply to him."]],
+ ["What did the 1975 NINCDS conference conclude?","Too little good research existed to judge manipulation",[["Manipulation cures heart disease","The conference made no such claim."],["Chiropractic should be banned","It made no legal ruling. It called for research."],["Subluxations had been measured in every patient","No such finding was made."]],"e","Yes. It was a call for proper studies, not a verdict.",["It was a research meeting.","Ask: was there enough good evidence in 1975?","Its main message was that more studies were needed."]],
+ ["Which state passed the first chiropractic licensing law?","Kansas, in 1913",[["Louisiana, in 1974","Louisiana was the last state, not the first."],["Iowa, in 1895","1895 is the year of Palmer's first adjustment; there was no law then."],["Wisconsin, in 1907","1907 is the Morikubo trial, not a licensing law."]],"l","Yes. Kansas was first in 1913, and Louisiana was last in 1974.",["The first law came after the Morikubo trial.","It was a state in the middle of the country.","The year was 1913."]],
+ ["What did the 1987 Wilk ruling decide?","The AMA had run an illegal boycott of chiropractors",[["Chiropractic was proven to work","The court did not rule on effectiveness."],["Chiropractors must use the 33 principles","Courts do not set professional philosophy."],["Medicare must cover all chiropractic care","The case was about antitrust law, not Medicare."]],"l","Yes. It was an antitrust ruling about fair competition.",["It was an antitrust case.","Antitrust law is about competition.","The judge found a boycott."]],
+ ["What does current evidence say about spinal manipulation for low back pain?","Small to moderate benefit, similar to other recommended care",[["It cures nearly everyone","Average benefits are modest, not a cure."],["It has no effect in any trial","Trials do show modest benefits."],["It works far better than exercise","Benefits are similar to other recommended care such as exercise."]],"e","Yes. Guidelines list it as one of several nonpharmacologic options.",["Think modest, not dramatic.","Compare it with other recommended care.","The effect size band is small to moderate."]],
+ ["Does current evidence support manipulation to treat asthma?","No, trials do not show it treats asthma",[["Yes, it is a first line asthma treatment","Asthma treatment relies on medicines and trigger control; manipulation is not shown to help."],["Yes, because nerves reach the lungs","Nerves reach the lungs, but trials still do not show benefit."],["Only in children","Trials in children also do not show benefit."]],"e","Yes. Evidence does not support manipulation for asthma, high blood pressure or ear infections.",["This is about an organ condition, not back pain.","Ask what trials have shown, not what a model predicts.","Mainstream evidence lists asthma among conditions not supported."]],
+ ["In Palmer's first model, how did a subluxation cause disease?","A displaced bone pressed on a nerve and changed nerve energy",[["Germs entered through the spine","Germ theory was not part of Palmer's model."],["Blood could not reach the brain","Palmer's model was about nerves, not blood flow."],["Magnetic fluid leaked out","That was Mesmer's idea, not Palmer's subluxation model."]],"m","Yes. Too much or too little nerve energy was said to cause disease.",["Think bone and nerve.","The opening where a nerve leaves the spine narrows.","Palmer said this caused too much or too little nerve energy."]],
+ ["What did Palmer's 1910 tone model add?","Nerves have a normal tension; too tight or too slack meant disease",[["Disease comes from germs","Tone was about nerve tension, not germs."],["Adjustments should be replaced by surgery","Palmer kept adjustment."],["Hearing travels on cranial nerve VIII","That is modern anatomy, not the tone model."]],"m","Yes. He wrote that life is the expression of tone.",["Think of a guitar string.","The model is about tension.","Too tight or too slack."]],
+ ["Which is one of the five parts of the vertebral subluxation complex?","Kinesiopathology, meaning abnormal joint motion",[["Universal Intelligence","That is from Palmer's philosophy, not the five components."],["Neurocalometry","That refers to the 1924 heat device."],["Antitrust","That is legal history."]],"m","Yes. The five are kinesiopathology, neuropathology, myopathology, histopathology and biochemical changes.",["The parts end in pathology.","One is about motion.","Kinesio means movement."]],
+ ["What did the neurocalometer measure?","Skin temperature differences along the spine",[["Electrical brain waves","It measured skin heat, not brain waves."],["Bone density","It measured temperature, not bone."],["The amount of Innate Intelligence","No device can measure a philosophical concept."]],"m","Yes. B.J. Palmer taught that heat differences marked subluxations.",["It was introduced in 1924.","Calor means heat.","It slid along both sides of the spine."]],
+ ["Why is a skin temperature difference a weak test for subluxation?","Many things change skin heat, and it has not been shown to be valid",[["Skin temperature never changes","It changes often, which is the problem."],["Heat cannot be measured","Heat can be measured; the meaning is the issue."],["The device was too new","Age is not the issue; validity is."]],"e","Yes. A test must measure what it claims to, reliably.",["Think about what else changes skin heat.","Blood flow, room temperature, clothing.","Validity means measuring what it claims to."]],
+ ["What is the major premise of 1927 chiropractic philosophy?","A Universal Intelligence is in all matter and gives it its properties",[["Ninety five percent of disease comes from the spine","That claim is from Palmer's 1910 book, not the major premise."],["Exercise is the best treatment","That is not part of the 33 principles."],["Hearing loss is caused by bone pressure","That is the Lillard story, not the major premise."]],"m","Yes. It is principle 1 of the 33 principles.",["It is principle number 1.","It is about intelligence in all matter.","The word Universal is in it."]],
+ ["What did Medicare's 1972 chiropractic coverage pay for?","Manual manipulation of the spine to correct a subluxation",[["All chiropractic services","Coverage was limited to spinal manipulation."],["X ray machines for clinics","Coverage was for the manipulation service."],["Neurocalometer readings","Temperature readings were not covered services."]],"l","Yes. That wording kept the word subluxation in billing.",["Coverage was limited.","It names one service.","It uses the word subluxation."]],
+ ["What did the Council on Chiropractic Education gain in 1974?","Recognition as the accrediting agency for chiropractic programs",[["The power to license chiropractors","States license; accreditors review schools."],["Victory in the Wilk case","Wilk was decided in 1987."],["Medicare coverage","Medicare coverage came in 1972."]],"l","Yes. Accreditation checks schools against shared standards.",["It is about schools.","The word education is in its name.","Accreditation reviews programs."]],
+ ["What separated straights from mixers?","Whether to add other methods to spinal adjustment",[["Whether to use the hands at all","Both groups adjusted by hand."],["Which state they lived in","The split was about methods, not location."],["Whether to accept Medicare","The split began in the early 1900s, long before Medicare."]],"l","Yes. It is a debate about scope of practice.",["Think about what each group does.","Straights do one thing only.","Mixers add other methods."]],
+ ["Why do historians treat the 1895 Lillard story with caution?","It rests mainly on Palmer's own account",[["It happened in Canada","It happened in Davenport, Iowa."],["The year is unknown","The date, September 1895, is well established."],["Lillard was a doctor who disagreed","Lillard was a janitor in the building."]],"l","Yes. No hearing tests were recorded, and family accounts differ.",["Ask who wrote the story down.","Were there outside records?","A founder's own account is a primary source with a point of view."]],
+ ["Which nerve carries hearing to the brain?","Cranial nerve VIII, which stays inside the skull",[["A spinal nerve from the upper back","Spinal nerves from the upper back do not reach the inner ear."],["The sciatic nerve","The sciatic nerve serves the leg."],["The phrenic nerve","The phrenic nerve serves the diaphragm."]],"e","Yes. This is why Palmer's explanation of Lillard's hearing does not fit anatomy.",["It is a cranial nerve.","It connects the inner ear and the brainstem.","Its number is eight."]],
+ ["What did the 1784 French commission conclude about animal magnetism?","No magnetic fluid; the effects came from imagination",[["Magnetic fluid was real","The commission found no fluid."],["The spine controls magnetism","The spine was not part of the question."],["It should be taught in medical schools","It found the claims unsupported."]],"e","Yes. It was one of the first organized tests of a healing claim.",["It was a test, not a belief.","Patients reacted when they believed they were treated.","Think expectation."]],
+ ["Which fairly describes chiropractic views today?","A spectrum from traditional to evidence based, with most in between",[["Every chiropractor follows the 1927 principles exactly","Some do, many do not."],["All chiropractors reject manipulation","Manipulation remains central for most."],["The profession has one agreed model","Its identity is still debated."]],"l","Yes. The debate is open and the views vary.",["Think spectrum, not one camp.","Surveys show a range.","Most sit between the ends."]],
+ ["Which describes the fixation or segmental dysfunction model?","A spinal segment that moves too little",[["A bone fully dislocated","That would be a dislocation, which is different."],["A force flowing from the brain","That describes Innate in the philosophical model."],["A licence problem","That is legal history."]],"m","Yes. The focus moved from position to motion.",["Think movement, not position.","Fixation means stuck.","Segmental means one spinal level."]],
+ ["How well do examiners agree when they palpate for a stuck segment?","Agreement is often low",[["They always agree exactly","Studies show they often disagree."],["Agreement has never been studied","It has been studied many times."],["Agreement is perfect with heat devices","Heat devices are not valid for this."]],"e","Yes. That makes it hard to test whether a given segment causes symptoms.",["This is about reliability.","Two examiners, one patient.","Results are often inconsistent."]],
+ ["Which statement about manipulation safety matches mainstream evidence?","Serious harms are rare, the neck artery link is debated, and screening matters",[["There is no possible harm","No treatment is free of risk."],["Serious harms are common","Serious harms are rare."],["Red flags can be ignored","Red flags need prompt medical referral."]],"e","Yes. Screening and referral for red flags are part of safe care.",["Think rare but possible.","One debated link involves a neck artery.","Screening for red flags matters."]],
+ ["Who suggested the name chiropractic?","Samuel Weed, a patient, in 1896",[["Harvey Lillard","Lillard was the 1895 patient in Palmer's founding story."],["A.T. Still","Still founded osteopathy."],["Chester Wilk","Wilk led the 1976 antitrust suit."]],"l","Yes. It joins Greek words for hand and practice.",["He was a patient and a reverend.","It happened in 1896.","His last name is Weed."]],
+ ["Which was the last state to license chiropractors?","Louisiana, in 1974",[["Kansas, in 1913","Kansas was first."],["Iowa, in 1897","1897 is when the Palmer School began."],["Missouri, in 1892","1892 is the first osteopathic school."]],"l","Yes. After Louisiana, all 50 states licensed chiropractors.",["It was the 1970s.","The same year the CCE was recognized.","A southern state."]],
+ ["Which is a vitalistic idea?","Life depends on a special force beyond chemistry and physics",[["Nerves carry electrical signals","That is mainstream physiology."],["Hormones travel in the blood","That is mainstream physiology."],["Trials compare treatment groups","That is research method, not vitalism."]],"m","Yes. Innate Intelligence is an example of a vitalistic idea.",["Vita means life.","It needs a special force.","Innate Intelligence is an example."]],
+ ["What do most modern manipulation trials measure?","Pain, function and disability",[["Innate Intelligence","It cannot be measured."],["Skin temperature","It is not a valid outcome for subluxation."],["Number of displaced vertebrae on images","Small shifts on images do not track symptoms well."]],"e","Yes. These outcomes matter to patients and can be measured.",["Think about what patients feel and do.","Outcomes, not causes.","Pain is one of them."]]];
+const TTYPES=[["predict","Predict then watch","Choose first, then the picture shows what happened"],["order","Put events in order","Random sets of four or five events"],["mix","Mixed practice","A random mix of both"]];
+const exact=EVENTS.filter(e=>!e.approx);
+function evPair(minGap,maxGap){for(let k=0;k<200;k++){const a=pick(exact),b=pick(exact);const g=Math.abs(a.y-b.y);if(a!==b&&g>=minGap&&g<=maxGap)return [a,b]}return [EVI.still,EVI.lillard]}
+function cap1(s){return s[0].toUpperCase()+s.slice(1)}
+function genPredict(){const f=pick(["first","first","gap","decade","concept","concept","concept"]);
+  if(f==="first"){const [a,b]=evPair(3,250);const early=a.y<b.y?a:b,late=a.y<b.y?b:a;
+    const opts=shuffle([{t:a.title,ok:a===early},{t:b.title,ok:b===early}]).concat([{t:"They happened in the same year",ok:false},{t:"There is no way to tell from history",ok:false}]);
+    opts.forEach(o=>{o.why=o.ok?`Yes. ${cap1(early.title)} was in ${early.yr}; ${late.title.toLowerCase()} was in ${late.yr}.`:o.t.startsWith("They")?`They were ${late.y-early.y} years apart: ${early.yr} and ${late.yr}.`:o.t.startsWith("There")?`Both dates are well recorded: ${early.yr} and ${late.yr}.`:`That one came later, in ${late.yr}. The earlier event was in ${early.yr}.`});
+    return {kind:"mc",form:"first",html:`<span class="pt">Predict, then watch</span>Which came first?`,opts,a:early,b:late,hints:["Place each event in its century first.",`One of them happened in the ${Math.floor(early.y/10)*10}s.`,`The earlier one is in the ${LAYERS[early.lane][0].toLowerCase()} layer.`],cap:`${early.yr} comes before ${late.yr}`}}
+  if(f==="gap"){const [a,b]=evPair(5,120);const early=a.y<b.y?a:b,late=a.y<b.y?b:a;const g=late.y-early.y;const ws=new Set();[g+10,g-10,g+1,g-1,g+20,late.y%100].forEach(v=>{if(v>0&&v!==g&&ws.size<3)ws.add(v)});
+    const opts=shuffle([{t:g+" years",ok:true,why:`Yes. ${late.y} minus ${early.y} equals ${g}.`}].concat([...ws].map(v=>({t:v+" years",ok:false,why:v===late.y%100?`${v} is just the last two digits of ${late.y}. Subtract ${early.y} from ${late.y}.`:`Check the subtraction: ${late.y} minus ${early.y} is ${g}, not ${v}.`}))));
+    return {kind:"mc",form:"gap",html:`<span class="pt">Years between</span>About how many years passed between <b>${early.title.toLowerCase()}</b> (${early.yr}) and <b>${late.title.toLowerCase()}</b> (${late.yr})?`,opts,a:early,b:late,g,hints:["Subtract the earlier year from the later year.",`Later year: ${late.y}. Earlier year: ${early.y}.`,`${late.y} minus ${early.y} = ?`],cap:`${late.y} minus ${early.y} = ${g} years`}}
+  if(f==="decade"){const e=pick(exact);const d=Math.floor(e.y/10)*10;const ds=new Set([d]);while(ds.size<4){const v=d+pick([-30,-20,-10,10,20,30]);if(v>=1770&&v<=2010)ds.add(v)}
+    const opts=shuffle([...ds]).map(v=>({t:"the "+v+"s",ok:v===d,why:v===d?`Yes. ${cap1(e.title)}: ${e.yr}.`:`Not that decade. ${cap1(e.title)} happened in ${e.yr}, in the ${d}s.`}));
+    return {kind:"mc",form:"decade",html:`<span class="pt">Predict, then watch</span>In which decade did this happen? <b>${e.title}</b>`,opts,e,d,hints:["Is it from the 1800s, the early 1900s or later?",`It is in the ${LAYERS[e.lane][0].toLowerCase()} layer.`,`The year ends in ${String(e.y).slice(-1)}.`],cap:`${e.title}: ${e.yr}`}}
+  const c=pick(CONCEPT);const opts=shuffle([{t:c[1],ok:true,why:c[4]}].concat(c[2].map(w=>({t:w[0],ok:false,why:w[1]}))));
+  return {kind:"mc",form:"concept",html:`<span class="pt">Predict, then watch</span>${c[0]}`,opts,c,cat:c[3],hints:c[5],cap:CATN[c[3]]+": "+c[1]}}
+function genOrder(){const n=pick([4,4,5]);let set=[];for(let k=0;k<500&&set.length<n;k++){const e=pick(EVENTS);if(set.indexOf(e)>=0)continue;if(set.every(s=>Math.abs(s.y-e.y)>=((s.approx||e.approx)?6:1)))set.push(e)}
+  const ids=set.sort((a,b)=>a.y-b.y).map(e=>e.id);let start;do{start=shuffle(ids)}while(start.join()===ids.join());
+  const f=EVI[ids[0]],l=EVI[ids[ids.length-1]];
+  return {kind:"order",ids,start,html:`<span class="pt">Put events in order</span>Drag or use the arrows to put these ${n} events in order, <b>earliest at the top</b>.`,hints:["Sort by era first: the 1800s, the early 1900s, the middle 1900s, or later.",`The earliest is: ${f.title}.`,`The latest is: ${l.title}.`],cap:"Earliest "+f.yr+", latest "+l.yr}}
+function genOne(type){if(type==="mix")type=Math.random()<.5?"predict":"order";return type==="predict"?genPredict():genOrder()}
+function judge(q,ans){if(q.kind==="mc")return {ok:!!(q.opts[ans]&&q.opts[ans].ok)};return {ok:Array.isArray(ans)&&ans.join()===q.ids.join()}}
+/* ---------- UI ---------- */
+const TR={type:"predict",p:null,hintN:0,firstTry:true,solShown:false,answered:false,cur:[],t0:0,streak:0,best:0,solved:0,watch:false};
+function trInit(){const box=$("#trTypes");box.innerHTML="";TTYPES.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=`${t[1]}<small>${t[2]}</small>`;b.setAttribute("aria-pressed",String(t[0]===TR.type));b.onclick=()=>{TR.type=t[0];box.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(TTYPES[i][0]===TR.type)));trNew()};box.appendChild(b)});
+  $("#trCheck").onclick=trCheckOrder;$("#trHint").onclick=trHint;$("#trSol").onclick=trSolution;$("#trNew").onclick=trNew;try{TR.best=+(store.get("best")||0)}catch(e){}trMeter()}
+function trMeter(){$("#trStreak").textContent=TR.streak;$("#trBest").textContent=TR.best;$("#trSolved").textContent=TR.solved}
+function trMsg(cls,t){const m=$("#trMsg");m.className="msg show "+cls;m.textContent=t}
+function trNew(){TR.p=genOne(TR.type);TR.hintN=0;TR.firstTry=true;TR.solShown=false;TR.answered=false;TR.watch=false;TR.t0=performance.now();$("#trMsg").className="msg";$("#trHints").innerHTML="";
+  const q=TR.p;$("#trProb").innerHTML=q.html;const ch=$("#trChoices"),ol=$("#trOrder");
+  if(q.kind==="mc"){ol.hidden=true;ch.hidden=false;$("#trCheck").hidden=true;ch.innerHTML="";q.opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o.t;b.onclick=()=>trPick(i,b);ch.appendChild(b)})}
+  else{ch.hidden=true;ol.hidden=false;$("#trCheck").hidden=false;TR.cur=q.start.slice();trRenderOrder()}
+  $("#trCap").textContent=q.kind==="mc"?"Make your prediction, then watch.":"Put the cards in order, then check. The worked solution draws here.";a11yKey=""}
+function trPick(i,b){const q=TR.p;const r=judge(q,i);const box=$("#trChoices");box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+  if(r.ok){b.classList.add("right");trMsg("good","✓ "+q.opts[i].why);trWin()}else{b.classList.add("wrong");TR.firstTry=false;trMsg("warn","Not quite. "+q.opts[i].why)}}
+function trWin(){if(TR.answered)return;TR.answered=true;TR.watch=true;TR.t0=performance.now();TR.solved++;if(TR.firstTry&&!TR.solShown){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}else TR.streak=0;trMeter();
+  $("#trCap").textContent="Watch: "+TR.p.cap+".";a11yKey=""}
+function trHint(){const q=TR.p;if(TR.hintN>=3){trMsg("info","That was the last hint. Try the worked solution if you are stuck.");return}TR.hintN++;TR.firstTry=false;
+  $("#trHints").innerHTML=q.hints.slice(0,TR.hintN).map(h=>`<li>${h}</li>`).join("");if(q.kind==="order")trRenderOrder()}
+function trSolution(){const q=TR.p;TR.solShown=true;TR.streak=0;trMeter();TR.watch=true;TR.t0=performance.now();
+  if(q.kind==="mc"){const i=q.opts.findIndex(o=>o.ok);const b=$("#trChoices").querySelectorAll(".opt")[i];b.classList.add("right");trMsg("info","Worked solution: "+q.opts[i].why)}
+  else{TR.cur=q.ids.slice();trRenderOrder(true);trMsg("info","Worked solution: "+q.ids.map(id=>EVI[id].yr+" "+EVI[id].title).join(", then ")+".")}
+  TR.answered=true;$("#trCap").textContent="Worked solution: "+q.cap+".";a11yKey=""}
+function trCheckOrder(){const q=TR.p;if(q.kind!=="order")return;const r=judge(q,TR.cur);
+  if(r.ok){trRenderOrder(true);trMsg("good","✓ Correct order: "+q.ids.map(id=>EVI[id].yr).join(", ")+".");trWin()}
+  else{TR.firstTry=false;let k=0;while(k<q.ids.length&&TR.cur[k]===q.ids[k])k++;trRenderOrder(false,true);trMsg("warn",`Not quite. ${k} ${k===1?"card is":"cards are"} in the right place from the top. Look at the first card marked in amber, then try a hint.`)}}
+function trRenderOrder(showYears,mark){const q=TR.p;const ol=$("#trOrder");ol.innerHTML="";const hintIds=TR.hintN>=2?[q.ids[0]].concat(TR.hintN>=3?[q.ids[q.ids.length-1]]:[]):[];
+  TR.cur.forEach((id,i)=>{const e=EVI[id];const li=document.createElement("li");li.className="item"+(showYears||(mark&&q.ids[i]===id)?" right":mark?" off":"")+(hintIds.indexOf(id)>=0?" hinted":"");li.dataset.id=id;li.style.borderLeftColor=`var(--${LAYERS[e.lane][1]})`;
+    li.innerHTML=`<span class="pos" aria-hidden="true">${i+1}</span><span class="grip" aria-hidden="true">⋮⋮</span><span class="txt">${e.title} <span class="yrtag">(${e.yr})</span></span><span class="mv"><button type="button" aria-label="Move up: ${e.title}">▲</button><button type="button" aria-label="Move down: ${e.title}">▼</button></span>`;
+    const [up,dn]=li.querySelectorAll(".mv button");up.disabled=i===0;dn.disabled=i===TR.cur.length-1;up.onclick=()=>trMove(i,-1);dn.onclick=()=>trMove(i,1);
+    li.addEventListener("pointerdown",ev=>trDragStart(ev,li));ol.appendChild(li)})}
+function trMove(i,d){const j=i+d;if(j<0||j>=TR.cur.length)return;[TR.cur[i],TR.cur[j]]=[TR.cur[j],TR.cur[i]];trRenderOrder();const b=$("#trOrder").children[j].querySelectorAll(".mv button")[d<0?0:1];if(b&&!b.disabled)b.focus();else{const o=$("#trOrder").children[j].querySelector(".mv button:not(:disabled)");if(o)o.focus()}a11yKey=""}
+let odrag=null;
+function trDragStart(e,li){if(e.button>0||e.target.closest(".mv"))return;odrag={li,y0:e.clientY,top0:li.offsetTop,id:e.pointerId};li.setPointerCapture(e.pointerId);li.classList.add("drag");
+  li.addEventListener("pointermove",trDragMove);li.addEventListener("pointerup",trDragEnd);li.addEventListener("pointercancel",trDragEnd)}
+function trDragMove(e){if(!odrag)return;const li=odrag.li;const ol=li.parentNode;const want=odrag.top0+(e.clientY-odrag.y0);const next=li.nextElementSibling,prev=li.previousElementSibling;
+  if(next&&want+li.offsetHeight>next.offsetTop+next.offsetHeight/2)ol.insertBefore(next,li);
+  else if(prev&&want<prev.offsetTop+prev.offsetHeight/2){if(li.nextElementSibling)ol.insertBefore(prev,li.nextElementSibling);else ol.appendChild(prev)}
+  li.style.transform=`translateY(${want-li.offsetTop}px)`}
+function trDragEnd(e){if(!odrag)return;const li=odrag.li;li.classList.remove("drag");li.style.transform="";li.removeEventListener("pointermove",trDragMove);li.removeEventListener("pointerup",trDragEnd);li.removeEventListener("pointercancel",trDragEnd);odrag=null;
+  TR.cur=[...$("#trOrder").children].map(x=>x.dataset.id);trRenderOrder();a11yKey=""}
+/* ---------- picture ---------- */
+function drawTr(now){use(SL3);const T=now/1000;const q=TR.p;if(!q)return;const w=TR.watch?(now-TR.t0)/1000:0;
+  if(q.kind==="order"){const ids=TR.watch?q.ids:TR.cur;const ys=q.ids.map(id=>EVI[id].y);const y0=Math.floor((Math.min(...ys)-5)/10)*10,y1=Math.ceil((Math.max(...ys)+5)/10)*10;
+    title(24,28,TR.watch?"Worked solution: on the timeline":"Your current order",TR.watch?C.good:C["ink-soft"]);
+    const X=v=>60+(v-y0)/(y1-y0)*680;line(60,300,740,300,C["ink-soft"],2);const step=(y1-y0)>120?50:(y1-y0)>50?20:10;for(let v=Math.ceil(y0/step)*step;v<=y1;v+=step){line(X(v),295,X(v),305,C["ink-soft"],1.5);txt(X(v),320,String(v),{size:12,mono:true,align:"center",color:C["ink-soft"]})}
+    ids.forEach((id,i)=>{const e=EVI[id];const col=C[LAYERS[e.lane][1]];const n=ids.length;const cw=Math.min(150,(720-(n-1)*10)/n);const sx=40+i*(cw+10),sy=360;
+      const p=TR.watch?smooth(clamp((w-.4-i*.7)/1,0,1)):0;const tx=clamp(X(e.y)-cw/2,10,790-cw),ty=60+(i%3)*72;const x=lerp(sx,tx,p),y=lerp(sy,ty,p);
+      if(p>0){line(X(e.y),300,X(e.y),y+70,hexA(col,.6*p),1.4,[3,3]);pin(X(e.y),300,col,6,p)}
+      evCard(x,y,cw,70,p>.5?e.yr:"",e.title,col,1,{size:11.5,lh:13.5});if(!TR.watch)badge(x+cw/2,y-12,i+1,col,10)});
+    if(!TR.watch)txt(400,450,"Cards slide onto the timeline when you check a correct order or open the solution.",{size:12.5,align:"center",color:C["ink-soft"]});return}
+  if(q.form==="first"||q.form==="gap"){const a=q.a,b=q.b;const lo=Math.floor((a.y-10)/10)*10,hi=Math.ceil((b.y+10)/10)*10;const X=v=>70+(v-lo)/(hi-lo)*660;
+    title(24,28,q.form==="gap"?"Years between two events":"Which came first?",C["ink-soft"]);line(70,300,730,300,C["ink-soft"],2);const step=(hi-lo)>120?50:(hi-lo)>50?20:10;
+    for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step){line(X(v),295,X(v),305,C["ink-soft"],1.5);txt(X(v),320,String(v),{size:12,mono:true,align:"center",color:C["ink-soft"]})}
+    const show=q.form==="gap"||TR.watch;[a,b].forEach((e,i)=>{const col=C[LAYERS[e.lane][1]];const p=TR.watch?smooth(clamp((w-i*.8)/1,0,1)):0;const hx=i?560:80,hy=100;
+      const tx=clamp(X(e.y)-100,10,590),ty=i?190:90;const x=q.form==="gap"?tx:lerp(hx,tx,p),y=q.form==="gap"?ty:lerp(hy+(i?0:0),ty,p);
+      evCard(x,y,200,64,show||p>.5?e.yr:"?",e.title,col,1,{size:12});if(q.form==="gap"||p>0){line(X(e.y),300,X(e.y),y+64,hexA(col,.6),1.4,[3,3]);pin(X(e.y),300,col,7)}});
+    if(q.form==="gap"&&TR.watch){const p=smooth(clamp(w/2.5,0,1));const xa=X(a.y),xb=X(b.y);rr(xa,354,(xb-xa)*p,14,7);ctx.fillStyle=hexA(C.gold,.7);ctx.fill();label((xa+xb)/2,392,Math.round(q.g*p)+" years",{size:14,weight:700,mono:true,border:C.gold})}
+    if(q.form==="first"&&TR.watch&&w>2)label(X(a.y),400,"earlier: "+a.yr,{size:13,weight:700,border:C.good});
+    if(!TR.watch)txt(400,440,q.form==="gap"?"Pick an answer to watch the span fill in.":"Pick an answer to watch both events drop onto the line.",{size:12.5,align:"center",color:C["ink-soft"]});return}
+  if(q.form==="decade"){const e=q.e;const col=C[LAYERS[e.lane][1]];title(24,28,"Which decade?",C["ink-soft"]);const X=v=>yearX(40,720,v);
+    line(40,300,760,300,C["ink-soft"],2);TL_TICKS.forEach(t=>{const x=X(t);line(x,295,x,305,C["ink-soft"],1.5);txt(x,320,String(t),{size:12,mono:true,align:"center",color:C["ink-soft"]})});
+    q.opts.forEach(o=>{const v=+o.t.match(/\d+/)[0];const x0=X(v),x1=X(v+10);const on=TR.watch&&o.ok;rr(x0,270,Math.max(6,x1-x0),26,3);ctx.fillStyle=on?hexA(C.good,.5):hexA(C.gold,.25);ctx.fill();if(on)label((x0+x1)/2,250,o.t,{size:12.5,weight:700,border:C.good})});
+    const p=TR.watch?smooth(clamp(w/1.4,0,1)):0;const x=lerp(300,clamp(X(e.y)-110,10,570),p),y=lerp(90,150,p);evCard(x,y,220,64,p>.6?e.yr:"?",e.title,col,1,{size:12});if(p>0){line(X(e.y),300,X(e.y),y+64,hexA(col,.6),1.4,[3,3]);pin(X(e.y),300,col,7,p)}
+    if(!TR.watch)txt(400,440,"Gold bands mark the four choices. Pick one to watch the event drop in.",{size:12.5,align:"center",color:C["ink-soft"]});return}
+  /* concept: three columns */ const cols=["m","e","l"];title(24,24,"Where does this idea belong?",C["ink-soft"]);
+  cols.forEach((k,i)=>{const x=20+i*258;const on=TR.watch&&q.cat===k;panelBox(x,230,244,220,{stroke:on?C[CATC[k]]:C.rule,lw:on?2.6:1.2,fill:on?hexA(mix(C.panel,C[CATC[k]],.15),.95):null});wrapText(CATN[k],x+122,252,220,16,{size:13,weight:700,align:"center"})});
+  const ci=cols.indexOf(q.cat);const p=TR.watch?smooth(clamp(w/1.2,0,1)):0;const bob=TR.watch?0:Math.sin(T*2)*5;const x=lerp(150,20+ci*258+8,p),y=lerp(56,300,p)+bob;const wd=lerp(500,228,p);
+  rr(x,y,wd,p>.5?120:150,9);fillStroke(hexA(C.panel,.97),TR.watch?C[CATC[q.cat]]:C.accent,2);wrapText(TR.watch?q.c[1]:q.c[0],x+12,y+20,wd-24,16,{size:p>.5?12:13.5,weight:600});
+  if(TR.watch)wrapText(q.c[0],40,70,720,20,{size:15,weight:600});if(!TR.watch)txt(400,212,"Pick your answer to watch the idea land in its column.",{size:12.5,align:"center",color:C["ink-soft"]})}
+function trA11y(){const q=TR.p;if(!q)return [null,""];if(q.kind==="order"){const ids=TR.watch?q.ids:TR.cur;return ["Ordering problem. "+(TR.watch?"Solution shown on a timeline.":"Cards in your current order."),(TR.watch?"Cards slide onto a timeline in the correct order: ":"Your current order, top to bottom: ")+ids.map(id=>(TR.watch?EVI[id].yr+", ":"")+EVI[id].title).join("; ")+"."]}
+  if(q.form==="concept")return ["Predict then watch: "+q.c[0],TR.watch?"Three columns are labelled historical model, current evidence, and legal and professional history. The answer card, "+q.c[1]+", drops into the "+CATN[q.cat].toLowerCase()+" column, which lights up.":"Three columns are labelled historical model, current evidence, and legal and professional history. A question card floats above them waiting for your answer."];
+  if(q.form==="decade")return ["Which decade: "+q.e.title,TR.watch?"An event card drops onto a timeline from 1770 to 2020 and lands in the "+q.d+"s band, which turns green.":"A timeline from 1770 to 2020 shows four gold bands for the four decade choices. An event card with a question mark floats above."];
+  return [q.form==="gap"?"Years between "+q.a.yr+" and "+q.b.yr:"Which came first",TR.watch?"Two event cards sit above a timeline at their years, "+q.a.yr+" and "+q.b.yr+(q.form==="gap"?", and a gold bar fills the span between them, counting up to "+q.g+" years.":". A green label marks the earlier one."):"Two event cards float above an empty timeline, waiting for your answer."]}
+/* ================= PART 3: sorting and matching game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  const face=(ini,col,beard)=>sv(`<circle cx="28" cy="15" r="9" fill="var(--skin)" stroke="var(--ink)" stroke-width="1"/><path d="M12 44 Q12 26 28 26 Q44 26 44 44 Z" fill="var(--${col})" stroke="var(--ink)" stroke-width="1"/>`+(beard?`<path d="M21 17 Q28 30 35 17 Q28 22 21 17 Z" fill="#B9B4AA"/>`:"")+`<rect x="34" y="2" width="21" height="13" rx="3" fill="var(--panel)" stroke="var(--${col})"/><text x="44.5" y="12" font-size="9" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" fill="var(--ink)">${ini}</text>`);
+  switch(k){
+  case "model":return sv('<circle cx="28" cy="23" r="20" fill="var(--phil)" fill-opacity=".18"/>'+[6,14,22,30,38].map(y=>`<rect x="22" y="${y}" width="12" height="6" rx="2" fill="var(--bone)" stroke="var(--bone-edge)"/>`).join("")+'<path d="M40 10 q6 6 0 12" fill="none" stroke="var(--phil)" stroke-width="2"/>');
+  case "evid":return sv('<line x1="8" y1="40" x2="50" y2="40" stroke="var(--ink-soft)" stroke-width="2"/>'+[[12,22],[22,14],[32,26],[42,8]].map(b=>`<rect x="${b[0]}" y="${b[1]}" width="7" height="${40-b[1]}" fill="var(--evid)"/>`).join("")+'<circle cx="44" cy="8" r="4" fill="none" stroke="var(--evid)" stroke-width="2"/>');
+  case "law":return sv('<rect x="10" y="10" width="26" height="12" rx="3" transform="rotate(-25 23 16)" fill="var(--wood)"/><rect x="24" y="16" width="5" height="24" rx="2" transform="rotate(-25 26 28)" fill="var(--wood)"/><rect x="30" y="38" width="22" height="5" rx="2" fill="var(--law)"/>');
+  case "ddp":return face("DD","shirt1",1);case "bjp":return face("BJ","act3",0);case "still":return face("AS","edu",1);case "mesmer":return face("FM","gold",0);
+  case "lillard":return face("HL","shirt3",0);case "weed":return face("SW","shirt4",0);case "morikubo":return face("SM","law",0);case "wilk":return face("CW","act2",0);case "steph":return face("RS","phil",0);
+  default:return sv("")}}
+const BIN3=[["model","Historical model"],["evid","Current evidence"],["law","Legal and professional history"]];
+const SROUNDS=[
+{name:"Model, evidence or history? Set 1",goal:"Sort each statement: is it a historical model, a current evidence statement, or a piece of legal and professional history?",bins:BIN3,cards:[
+ ["Innate Intelligence runs the body through the nerves","model","Think philosophy. It is a philosophical model from Palmer's teaching, which science cannot test."],
+ ["About 95 percent of disease comes from displaced vertebrae","model","Think 1910. It was Palmer's claim in his 1910 book; research does not support it."],
+ ["Spinal manipulation gives small to moderate benefit for low back pain","evid","Think trials. This is the mainstream summary of many trials."],
+ ["Kansas passed the first chiropractic licensing law in 1913","law","Think statute books. It is a fact of legal history."],
+ ["A displaced bone presses on a nerve and causes too much or too little nerve energy","model","Think founder's theory. It is Palmer's original subluxation model."],
+ ["Manipulation is not shown to treat asthma, high blood pressure or ear infections","evid","Think trial results. Studies do not support these uses."],
+ ["Morikubo was acquitted in 1907 after arguing chiropractic was separate from osteopathy","law","Think courtroom. A 1907 trial in Wisconsin."],
+ ["Hearing travels on cranial nerve VIII, inside the skull","evid","Think anatomy. It is well established anatomy."],
+ ["Straights and mixers split over scope of practice","law","Think professional debate. It is professional history from the early 1900s."]]},
+{name:"Model, evidence or history? Set 2",goal:"Sort each statement into historical model, current evidence, or legal and professional history.",bins:BIN3,cards:[
+ ["Nerves have a normal tone; too tight or too slack means disease","model","Think 1910 theory. It is Palmer's tone model."],
+ ["A Universal Intelligence is in all matter and gives it its properties","model","Think principle 1. It is the 1927 major premise, a philosophical statement."],
+ ["The subluxation is a complex of five linked components","model","Think proposed model. The vertebral subluxation complex is a late 1900s model."],
+ ["Examiners often disagree when palpating for a stuck segment","evid","Think reliability studies. Agreement between examiners is often low."],
+ ["Heat readings have not been shown to reliably find subluxations","evid","Think validity. Many things change skin temperature."],
+ ["Serious harms after manipulation are rare, and screening matters","evid","Think safety data. It is the mainstream safety statement."],
+ ["In 1987 a judge found the AMA ran an illegal boycott","law","Think antitrust. It is the Wilk ruling."],
+ ["Medicare added limited coverage for spinal manipulation in 1972","law","Think federal law. Congress added it in 1972."],
+ ["Louisiana became the last state to license chiropractors in 1974","law","Think state laws. It completed licensure in all 50 states."]]},
+{name:"Who did what? Set 1",goal:"Match each contribution to the person.",bins:[["ddp","D.D. Palmer"],["bjp","B.J. Palmer"],["still","A.T. Still"],["mesmer","Franz Mesmer"]],cards:[
+ ["Taught animal magnetism in the 1770s","mesmer","Think magnets. Mesmer's animal magnetism came first."],
+ ["His claims were tested by a 1784 French commission","mesmer","Think 1784. The commission found no magnetic fluid."],
+ ["Announced osteopathy in 1874","still","Think Missouri. Andrew Taylor Still founded osteopathy."],
+ ["Opened the first osteopathic school in Kirksville","still","Think 1892. Still opened it in Kirksville, Missouri."],
+ ["Gave the first adjustment, as he told it, in 1895","ddp","Think founder. D.D. Palmer and Harvey Lillard."],
+ ["Wrote the 1910 book with the tone model","ddp","Think 1910. D.D. Palmer's large book."],
+ ["Introduced the neurocalometer in 1924","bjp","Think the son. B.J. Palmer introduced the heat device."],
+ ["Led the Palmer School from about 1906 and used radio to promote it","bjp","Think promoter. B.J. Palmer led for over fifty years."]]},
+{name:"Who did what? Set 2",goal:"Match each description to the person.",bins:[["lillard","Harvey Lillard"],["weed","Samuel Weed"],["morikubo","Shegataro Morikubo"],["wilk","Chester Wilk"],["steph","R.W. Stephenson"]],cards:[
+ ["The janitor in Palmer's 1895 founding story","lillard","Think 1895. Harvey Lillard worked in Palmer's building."],
+ ["Said he had been nearly deaf for about 17 years","lillard","Think hearing. This is part of the Lillard story as Palmer told it."],
+ ["Suggested the name chiropractic in 1896","weed","Think naming. Samuel Weed was a patient and a reverend."],
+ ["A patient who joined Greek words for hand and practice","weed","Think Greek. Cheir plus praxis."],
+ ["Acquitted in 1907 in Wisconsin","morikubo","Think courtroom, 1907. Shegataro Morikubo."],
+ ["His trial pushed chiropractic to stress a separate philosophy","morikubo","Think distinct system. The defence said chiropractic was not osteopathy."],
+ ["Led the 1976 antitrust suit against the AMA","wilk","Think antitrust. Chester Wilk and four others."],
+ ["His case ended in a 1987 ruling against a boycott","wilk","Think 1987. Wilk v. AMA."],
+ ["Set out 33 principles in 1927","steph","Think 1927. R.W. Stephenson's text."],
+ ["Wrote down the major premise as principle 1","steph","Think principle 1. Stephenson's 1927 list."]]}];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in real life ================= */
+function table(x,y,w){rr(x,y,w,16,5);fillStroke(C.panel,C["ink-soft"],1.6);line(x+14,y+16,x+14,y+70,C["ink-soft"],3);line(x+w-14,y+16,x+w-14,y+70,C["ink-soft"],3)}
+function board(x,y,w,h){rr(x,y,w,h,6);fillStroke(C.film,C.wood,4)}
+const LIFE=[
+{name:"A patient asks what a subluxation is",who:"Scenario 1 · the clinic",
+ story:"Dana, 52, has low back pain that started after a weekend of gardening. During a visit, Dana asks the chiropractic student who is observing that day: \"My neighbour says I have a subluxation blocking my nerves. What is a subluxation?\"",
+ cap:"Dana asks a student what a subluxation is; a split panel shows the old model and what can be measured today.",
+ desc:"Dana sits on the edge of a treatment table on the left, with a speech bubble that says what is a subluxation. A student stands beside Dana. On the right, a split panel shows two small drawings: tagged historical model, a vertebra slides out of line and presses on a nerve; tagged current evidence, a spine segment moves a little while bars for pain and movement go up and down. A small red flag symbol in the corner reminds the viewer to screen for warning signs.",
+ draw(T){table(40,330,230);person(110,330,100,{skin:"skin2",shirt:"shirt2",sit:true});person(310,400,120,{skin:"skin4",shirt:"shirt3",coat:true,arm:.4});
+  speech(30,140,220,44,"What is a subluxation?",{tx:110,size:13.5,w:600});
+  panelBox(420,40,366,200,{stroke:C.phil});tagPill(432,60,"model");const sh=12*(.5+.5*Math.sin(T*1.4));segment(560,150,64,{shift:sh,pinch:sh/12,flip:true});label(560,224,"bone on nerve",{size:12,weight:700,border:C.phil});
+  panelBox(420,256,366,200,{stroke:C.evid});tagPill(432,276,"evid");segment(520,370,56,{rot:.04*Math.sin(T*1.6),flip:true});
+  [["pain",.6],["movement",.45]].forEach((b,i)=>{const y=330+i*44;txt(620,y,b[0],{size:12.5,weight:600});rr(620,y+10,140,12,4);ctx.fillStyle=hexA(C.rule,.5);ctx.fill();rr(620,y+10,140*(b[1]+.12*Math.sin(T*1.2+i*2)),12,4);ctx.fillStyle=C.evid;ctx.fill()});
+  label(560,440,"what we can measure",{size:12,weight:700,border:C.evid});
+  const fl=.5+.5*Math.sin(T*3);ctx.save();ctx.globalAlpha*=.5+.5*fl;line(40,50,40,96,C["ink-soft"],2.5);ctx.beginPath();ctx.moveTo(40,50);ctx.lineTo(74,60);ctx.lineTo(40,72);ctx.closePath();ctx.fillStyle=C.pain;ctx.fill();ctx.restore();txt(84,62,"screen for red flags",{size:12.5,weight:700})},
+ qs:[{q:"Which answer is honest and accurate?",opts:[
+   ["\"It is a historical term. D.D. Palmer used it for a bone out of place pressing on a nerve. Today it is used in different ways, and research has not shown it causes disease. What we can measure is your pain and movement.\"",true,"This explains the history respectfully, separates the model from the evidence, and brings the focus back to what can be measured."],
+   ["\"It is a bone out of place that blocks your nerve energy, and that is why you get sick.\"",false,"That presents a historical model as proven fact. Research does not show subluxations cause disease."],
+   ["\"Your neighbour is foolish. It means nothing.\"",false,"That is dismissive and mocks the term's history. Explain it respectfully instead."],
+   ["\"It is a small fracture in the spine.\"",false,"A subluxation is not a fracture. That would be a different and more serious finding."]]},
+  {q:"Dana asks: \"Could fixing it also cure my high blood pressure?\" What is the best reply?",opts:[
+   ["Research does not support manipulation for high blood pressure; keep working with your medical doctor on it.",true,"Correct and safe. It states the evidence plainly and keeps Dana's medical care in place."],
+   ["Yes, so you can stop your blood pressure medicine.",false,"Unsafe. Evidence does not support this, and stopping medicine can cause harm."],
+   ["Yes, because nerves reach the heart.",false,"Nerves do reach the heart, but trials do not show manipulation treats high blood pressure. That is the model, not the evidence."],
+   ["Try stopping the medicine for a week and see.",false,"Never advise stopping a prescribed medicine. That decision belongs with the prescriber."]]},
+  {q:"Dana then mentions new numbness around the groin and trouble passing urine since yesterday. What should happen?",opts:[
+   ["Treat it as a red flag and arrange urgent medical care today.",true,"Yes. These can be signs of cauda equina syndrome, which needs emergency assessment."],
+   ["Continue the planned visit and recheck next week.",false,"These symptoms are red flags. Waiting could cause lasting harm."],
+   ["Suggest gentle stretching at home.",false,"Self care is not appropriate for red flag symptoms. Urgent referral is."],
+   ["Note it in the chart and say nothing.",false,"Red flags need prompt action and referral, not just a note."]]}]},
+{name:"A student explains straights and mixers",who:"Scenario 2 · the classroom",
+ story:"In a health history class, Marcus has two minutes to explain the straights and mixers debate to his classmates. He wants to be accurate and fair to both sides.",
+ cap:"Marcus explains straights and mixers at the board while classmates listen.",
+ desc:"A dark board on the wall shows a road splitting into two paths labelled straights and mixers. On the straights path is one card, adjustment only. On the mixers path, cards appear for adjustment, exercise and physical therapies. Marcus stands at the board pointing, and three seated classmates face him. Small dots travel along both paths.",
+ draw(T){board(150,30,500,220);const up=[[180,140],[300,140],[380,80],[620,80]],dn=[[300,140],[380,200],[620,200]];poly(up,hexA(C.phil,.9),14);poly(dn,hexA(C.act3,.9),14);poly([[180,140],[300,140]],hexA(C["ink-soft"],.9),14);
+  label(500,56,"straights: adjustment only",{size:12.5,weight:700,border:C.phil});["adjustment","exercise","physical therapies"].forEach((c,i)=>{const a=ap(T%9,1+i,.6);label(420+i*80,226,c,{size:11.5,weight:700,border:C.act3,a})});label(420,180,"mixers",{size:12.5,weight:700,border:C.act3});
+  for(let i=0;i<3;i++){const q=along(up,P(T*.2+i/3,1));circ(q[0],q[1],4,"#fff");const r=along([[180,140],...dn],P(T*.2+i/3,1));circ(r[0],r[1],4,"#fff")}
+  person(110,420,130,{skin:"skin3",shirt:"shirt1",arm:1.6+.1*Math.sin(T*2)});for(let i=0;i<3;i++)person(420+i*120,470,90,{skin:SKINS[(i+1)%4],shirt:SHIRTS[(i+2)%4],sit:true});label(110,460,"Marcus",{size:12.5,weight:700,border:C.act3})},
+ qs:[{q:"Which summary is accurate?",opts:[
+   ["Straights limit care to finding and adjusting subluxations; mixers add other methods such as exercise or physical therapies. The split began in the early 1900s.",true,"Yes. It is a debate about scope of practice."],
+   ["Straights are licensed and mixers are not.",false,"Licensing does not depend on camp. Both practise under state chiropractic laws."],
+   ["Mixers combine chiropractic with surgery.",false,"Mixers add conservative methods such as exercise and physical therapies, not surgery."],
+   ["The debate ended in 1913 when Kansas passed its law.",false,"Licensing did not settle the debate. Versions of it continue today."]]},
+  {q:"Which way of presenting is fair and respectful?",opts:[
+   ["Describe each view in its own terms, then say what evidence and law say, without mocking either group.",true,"Yes. That is how historians and good students handle a debate."],
+   ["Call the side he disagrees with quacks.",false,"Mocking a group is not fair or useful. Describe views accurately instead."],
+   ["Only present the side he agrees with.",false,"A fair summary covers both sides."],
+   ["Say the history does not matter today.",false,"The history helps explain debates that are still going on."]]},
+  {q:"A classmate asks which side B.J. Palmer championed. What should Marcus say?",opts:[
+   ["The straights: adjustment of subluxations only.",true,"Yes. B.J. Palmer was the leading voice for straight chiropractic."],
+   ["The mixers.",false,"B.J. Palmer opposed adding other methods."],
+   ["Neither; he left chiropractic for osteopathy.",false,"He led the Palmer School for decades."],
+   ["Both equally.",false,"He strongly favoured the straight approach."]]}]},
+{name:"A reporter asks about Wilk v. AMA",who:"Scenario 3 · the interview",
+ story:"Priya, a reporter writing about the history of health care, interviews Sam, who teaches chiropractic history. She asks what Wilk v. AMA was about, and what it proved.",
+ cap:"Priya interviews Sam; a timeline behind them builds the Wilk case dates.",
+ desc:"On the right, Priya holds a notepad and a microphone toward Sam on the left. Behind them, a timeline builds three cards: 1976 suit filed, 1987 ruling finds an illegal boycott, 1990 ruling upheld. A gavel taps above the 1987 card. A speech bubble from Priya says what did the case prove.",
+ draw(T){const X=yAxis(80,200,640,1970,1995,[1970,1980,1990]);[[1976,"suit filed"],[1987,"illegal boycott found"],[1990,"upheld on appeal"]].forEach((e,i)=>{const a=ap(T%12,.5+i*1.4,.8);evCard(40+i*250,40,230,64,String(e[0]),e[1],C.law,a,{size:12.5});if(a>0){tlink(155+i*250,104,X(e[0]),200,C.law,a);pin(X(e[0]),200,C.law,6,a)}});
+  gavel(330,26,P(T,2)<.15?-.2:-.9,.6);person(200,460,150,{skin:"skin",shirt:"shirt3",coat:true});person(580,460,150,{skin:"skin3",shirt:"shirt2",arm:.9});
+  rr(470,330,40,10,4);ctx.fillStyle=C.ink;ctx.fill();circ(468,335,9,C["ink-soft"]);docPaper(620,360,50,64,{lines:4,rot:.15});
+  speech(440,236,200,40,"What did the case prove?",{tx:560,size:13,w:600});label(200,480,"Sam",{size:12.5,weight:700,border:C.rule});label(580,480,"Priya",{size:12.5,weight:700,border:C.rule})},
+ qs:[{q:"What was the case about?",opts:[
+   ["An antitrust suit: chiropractors argued the AMA organized a boycott to contain their profession.",true,"Yes. It was about restraint of fair competition."],
+   ["A malpractice suit over a single patient.",false,"It was not about one patient. It was an antitrust case."],
+   ["A dispute over Medicare payment rates.",false,"Medicare coverage dates from 1972 and was not the subject of the case."],
+   ["A trial of whether Innate Intelligence exists.",false,"Courts do not rule on philosophical beliefs."]]},
+  {q:"Which dates are right?",opts:[
+   ["Filed in 1976, ruling in 1987, upheld on appeal in 1990.",true,"Yes. A long legal fight of more than a decade."],
+   ["Filed in 1963, ruling in 1974.",false,"1963 to 1974 are the years of the AMA committee, not the suit."],
+   ["Filed in 1907, ruling in 1913.",false,"Those are the Morikubo trial and the first state licence."],
+   ["Filed in 1987, ruling in 1990.",false,"1987 was the ruling; the suit was filed in 1976."]]},
+  {q:"Priya asks: \"So the court proved chiropractic works?\" What is the accurate answer?",opts:[
+   ["No. The ruling was about fair competition. Whether treatments work is a question for research.",true,"Yes. Keep the legal question and the scientific question apart."],
+   ["Yes, the judge reviewed the trials and found it effective.",false,"The court did not decide effectiveness."],
+   ["It proved the subluxation theory.",false,"The case did not test any model of disease."],
+   ["It banned doctors from ever criticizing chiropractic.",false,"It stopped an illegal boycott; it did not ban criticism."]]}]},
+{name:"A student asks about licensure",who:"Scenario 4 · the advising office",
+ story:"Jordan, a pre health student, read that early chiropractors went to jail. Jordan asks an advisor whether chiropractors are licensed today and why the early ones were prosecuted.",
+ cap:"A map fills with licensed states from Kansas in 1913 to Louisiana in 1974, while Jordan reads on a phone.",
+ desc:"On the left, Jordan holds a phone. On the right, a schematic tile map of the United States fills in teal, starting with Kansas, labelled 1913 first, and ending with Louisiana, labelled 1974 last. A small courthouse icon from 1906 fades as a licence certificate icon appears.",
+ draw(T){const t=T%16;person(120,430,150,{skin:"skin2",shirt:"shirt4",arm:1.2});rr(160,300,26,44,5);fillStroke(C.ink,C.ink,1);rr(163,304,20,36,3);ctx.fillStyle=C.evid;ctx.fill();label(120,456,"Jordan",{size:12.5,weight:700,border:C.rule});
+  const ids=STATES.map(s=>s[0]).filter(s=>s!=="KS"&&s!=="LA");const order=ids.map((s,i)=>[s,rnd(i*4.1+3)]).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);const at={KS:.5};order.forEach((s,i)=>at[s]=1.5+i/order.length*9);at.LA=11;
+  const pos=tileMap(270,60,44,s=>ap(t,at[s],.5)>0?mix(C.land,C.law,.75):null,{ls:11,inkOn:s=>inkOn(mix(C.land,C.law,.75))});label(pos.KS[0],pos.KS[1]-30,"1913 first",{size:12,weight:700,border:C.gold});if(t>11)label(pos.LA[0]+10,pos.LA[1]+32,"1974 last",{size:12,weight:700,border:C.gold});
+  const f=smooth(ap(t,4,3));withA(1-f,()=>{rr(40,60,120,90,6);fillStroke(C.panel,C["ink-soft"],1.5);for(let i=0;i<5;i++)line(56+i*22,70,56+i*22,140,C["ink-soft"],3);txt(100,164,"1906 jailed",{size:12,weight:700,align:"center"})});
+  withA(f,()=>{docPaper(40,60,120,90,{title:"LICENCE",lines:3,seal:C.law})})},
+ qs:[{q:"Are chiropractors licensed today?",opts:[
+   ["Yes, in all 50 states since 1974. Kansas was first in 1913 and Louisiana was last.",true,"Yes. Each state sets its own scope of practice."],
+   ["Only in Iowa, where chiropractic began.",false,"All 50 states license chiropractors."],
+   ["No state licenses them.",false,"Every state does, and has since 1974."],
+   ["Only since the 1987 Wilk ruling.",false,"Licensure was complete by 1974, before the Wilk ruling."]]},
+  {q:"Why were early chiropractors prosecuted?",opts:[
+   ["Before chiropractic laws existed, they were charged with practising medicine, or osteopathy, without a licence.",true,"Yes. D.D. Palmer himself was jailed in 1906."],
+   ["Because adjustments were banned by federal law.",false,"There was no such federal ban. The charges were state licensing charges."],
+   ["Because they refused to pay Medicare taxes.",false,"Medicare did not exist until the 1960s."],
+   ["Because of the Wilk case.",false,"Wilk came much later, in 1976 to 1987."]]},
+  {q:"Why did the 1907 Morikubo case matter?",opts:[
+   ["His acquittal, on the argument that chiropractic was a separate system, encouraged the profession to stress its distinct philosophy.",true,"Yes. That legal need helped keep the philosophy central."],
+   ["It created the first state licence.",false,"The first licence was Kansas in 1913."],
+   ["It proved manipulation cures disease.",false,"Trials do not decide that, and neither do criminal courts."],
+   ["It merged chiropractic with osteopathy.",false,"The defence argued the opposite: that they were separate."]]}]}];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+function drawLife(now){use(SL4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+function lifeInit(){$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()}}
+/* ---------------- stages ---------------- */
+const SL1=makeStage("cvTl",800,500),SL2=makeStage("cvCmp",800,340),SL3=makeStage("cvTr",800,460),SL4=makeStage("cvLife",800,500);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={tl:{cv:"#cvTl",f:tlA11y},train:{cv:"#cvTr",f:trA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="tl";
+const TABS=["tl","train","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[SL1,SL2,SL3,SL4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="tl"){drawTl(now);drawCmp(now)}else if(curTab==="train")drawTr(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__nb={tab:k=>showTab(k),tlState:()=>({cursor:TL.cursor,playing:TL.playing,sel:TL.sel,lanes:[...TL.lanes],shown:tlVisible().length}),tlSel:id=>tlSelect(id),cmpN:()=>CMP.length,cmpGo:i=>{CM.i=i;CM.t0=performance.now();cmpUI()},
+  trTypes:()=>TTYPES.map(t=>t[0]),trSet:t=>{TR.type=t;trNew()},trProb:()=>{const q=TR.p;return q.kind==="mc"?{kind:"mc",ok:q.opts.findIndex(o=>o.ok),n:q.opts.length,form:q.form}:{kind:"order",ids:q.ids.slice(),cur:TR.cur.slice()}},
+  gen:t=>{const q=genOne(t);if(q.kind==="mc"){const ok=q.opts.findIndex(o=>o.ok);const bad=q.opts.findIndex(o=>!o.ok);const nOk=q.opts.filter(o=>o.ok).length;const uniq=new Set(q.opts.map(o=>o.t)).size;
+      return {kind:"mc",form:q.form,j1:judge(q,ok),j2:judge(q,bad),nOk,uniq,n:q.opts.length,hints:q.hints.length,whys:q.opts.every(o=>o.why&&o.why.length>10),text:q.html+" "+q.opts.map(o=>o.t+" "+o.why).join(" ")+" "+q.hints.join(" ")}}
+    return {kind:"order",j1:judge(q,q.ids),j2:judge(q,q.start),n:q.ids.length,hints:q.hints.length,sorted:q.ids.every((id,i)=>i===0||EVI[q.ids[i-1]].y<EVI[id].y),text:q.html+" "+q.hints.join(" ")+" "+q.ids.map(id=>EVI[id].title).join(" ")}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();tlInit();cmpInit();trInit();trNew();sLoad(0);lifeInit();lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

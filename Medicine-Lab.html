@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>American Medicine Lab</title>
+<meta name="description" content="American medicine lab: a medical landscape explorer where a year slider shows which healing groups, medical schools, laws and payment systems existed from 1800 to today, with live charts of medical schools, causes of death and life expectancy; a predict then watch and ordering trainer; a sorting game for conventional, complementary, alternative, integrative and holistic, and for events and eras; and real life scenarios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7E2222;--accent-wash:#F6E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B5701A;--act2:#2E8A7A;--act3:#2F6FB0;--act4:#9B2C2C;--act5:#7B5CC9;--act6:#3F7F3A;--act7:#4B55B5;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A5A00;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#EFE6D2;--bone-edge:#9C8A6A;--disc:#3F7FC8;--nerve:#D9A400;--muscle:#C9566B;--lig:#2E8A86;--symp:#D9731E;--para:#3E9A4A;--pain:#C8352B;--evid:#4B55B5;
+  --g-reg:#2F5F9E;--g-homeo:#8A4FC0;--g-ecl:#3E8A3A;--g-thom:#C27A1A;--g-hydro:#1E8FB0;--g-osteo:#2E8A7A;--g-chiro:#B0413E;--g-patent:#7A6E64;--g-natur:#6E8A22;--g-cih:#4B55B5;
+  --inf:#C8352B;--chron:#6B4BA8;--life:#2F7F4F;--money:#B5862A;--sch-b:#B5862A;--sch-w:#A04E8C;--gov:#2F6FB0;--corp:#5E7183;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;--shirt5:#B5701A;
+  --wall:#E6DCCB;--wall-edge:#9C8A6A;--roof:#8A4A3A;--win:#BFD8E6;--wood:#B88A5A;--street:#D9D2C4;--water:#3F8FD0;--steam:#9FB2BC;--germ:#6E8F22;--glass:#E3EDF2;--glass-edge:#7F99A6;--broth:#E8C77A;--cloud:#B9A35A;--leaf:#4E9A3A;--blood:#C8352B;--metal:#9AA6AF;--sheet:#FFFFFF;--map:#E4E9DC;--map-edge:#8C9A80;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1D;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0A85A;--act2:#5CC4B0;--act3:#6FA8E6;--act4:#F4A7A0;--act5:#A98BEF;--act6:#8CCB7A;--act7:#9AA2F0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#F2C95C;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#5A554A;--bone-edge:#C9B898;--disc:#6FA8E6;--nerve:#F2C95C;--muscle:#E68A9C;--lig:#5CC4BE;--symp:#F29A4E;--para:#6CCB7C;--pain:#F0685E;--evid:#9AA2F0;
+  --g-reg:#6FA0E0;--g-homeo:#B98AEF;--g-ecl:#7CC46C;--g-thom:#F0A84A;--g-hydro:#5CC0E0;--g-osteo:#5CC4B0;--g-chiro:#F08A80;--g-patent:#B5A99C;--g-natur:#A9C85A;--g-cih:#9AA2F0;
+  --inf:#F0685E;--chron:#B48AF0;--life:#6BC293;--money:#E0BE58;--sch-b:#E0BE58;--sch-w:#D990C4;--gov:#6FA8E6;--corp:#A9B7C2;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--shirt5:#C88A3A;
+  --wall:#3A352E;--wall-edge:#B9A88A;--roof:#9A5A4A;--win:#3E5A6A;--wood:#8A6A4A;--street:#2A2824;--water:#6FB3EC;--steam:#7E8E96;--germ:#A9CB5A;--glass:#1E2C34;--glass-edge:#7F99A6;--broth:#B8974A;--cloud:#8A7A40;--leaf:#6EB85A;--blood:#F0685E;--metal:#5E6B75;--sheet:#D8DEE2;--map:#24302A;--map-edge:#7E9070;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1E1D;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0A85A;--act2:#5CC4B0;--act3:#6FA8E6;--act4:#F4A7A0;--act5:#A98BEF;--act6:#8CCB7A;--act7:#9AA2F0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#F2C95C;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#5A554A;--bone-edge:#C9B898;--disc:#6FA8E6;--nerve:#F2C95C;--muscle:#E68A9C;--lig:#5CC4BE;--symp:#F29A4E;--para:#6CCB7C;--pain:#F0685E;--evid:#9AA2F0;
+  --g-reg:#6FA0E0;--g-homeo:#B98AEF;--g-ecl:#7CC46C;--g-thom:#F0A84A;--g-hydro:#5CC0E0;--g-osteo:#5CC4B0;--g-chiro:#F08A80;--g-patent:#B5A99C;--g-natur:#A9C85A;--g-cih:#9AA2F0;
+  --inf:#F0685E;--chron:#B48AF0;--life:#6BC293;--money:#E0BE58;--sch-b:#E0BE58;--sch-w:#D990C4;--gov:#6FA8E6;--corp:#A9B7C2;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--shirt5:#C88A3A;
+  --wall:#3A352E;--wall-edge:#B9A88A;--roof:#9A5A4A;--win:#3E5A6A;--wood:#8A6A4A;--street:#2A2824;--water:#6FB3EC;--steam:#7E8E96;--germ:#A9CB5A;--glass:#1E2C34;--glass-edge:#7F99A6;--broth:#B8974A;--cloud:#8A7A40;--leaf:#6EB85A;--blood:#F0685E;--metal:#5E6B75;--sheet:#D8DEE2;--map:#24302A;--map-edge:#7E9070;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.evlist{list-style:none;padding:0;margin:6px 0;display:flex;flex-direction:column;gap:5px}
+.evlist li{display:grid;grid-template-columns:52px 1fr;gap:8px;font-size:14px;line-height:1.35;padding:5px 8px;border:1px solid var(--rule-soft);border-left:4px solid var(--accent);border-radius:4px;background:var(--panel-2)}
+.evlist li b{font-family:var(--mono);font-size:13px}
+.evlist li.none{display:block;border-left-color:var(--rule);color:var(--ink-soft)}
+.jump .tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+#ordList{margin:8px 0}
+#ordList .item .yr{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--good);white-space:nowrap}
+.scard .yrtag{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+#simRead td{white-space:normal}#simRead th{padding-right:8px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 10 &middot; The transformation of American medicine</div>
+    <h1>American Medicine Lab</h1>
+    <p class="sub">Slide through two hundred years and watch healers, schools, laws and payment systems appear and fade; predict how the curves move, then watch; sort the key terms and events; and try them in real life situations. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Landscape Explorer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-train" data-tab="train" id="tabbtn-train" type="button" tabindex="-1">Part 2 &middot; Predict and Order Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort It Out</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In Real Life</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Landscape Explorer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Medical landscape explorer."></canvas></div>
+        <div class="slwrap"><label for="simYear">Year</label><input type="range" id="simYear" min="1800" max="2025" step="1" value="1840"><output id="simYearOut" for="simYear">1840</output></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--g-reg)"></i>Regular (MD) schools</span>
+          <span><i style="background:var(--g-homeo)"></i>Homeopathic</span>
+          <span><i style="background:var(--g-ecl)"></i>Eclectic</span>
+          <span><i style="background:var(--sch-w)"></i>Women's colleges</span>
+          <span><i class="s" style="background:var(--sch-b)"></i>Schools for Black physicians (diamonds)</span>
+          <span><i class="t" style="border-bottom-color:var(--g-osteo)"></i>Osteopathic</span>
+          <span><i class="ln" style="border-top-color:var(--inf)"></i>Infection deaths</span>
+          <span><i class="ln" style="border-top-color:var(--chron)"></i>Chronic disease deaths</span>
+          <span><i class="ln" style="border-top-color:var(--life)"></i>Life expectancy</span>
+        </div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Readouts for the chosen year</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">A teaching model with rounded, approximate values. Counts of schools are approximate, early values (before about 1900) and the size of each healer group are illustrative, and the school map places dots near real cities but not at exact addresses. Shares of deaths count infections (pneumonia, influenza, tuberculosis, gut infections and others) and chronic disease (heart disease, cancer, stroke). Payment shares before 1960 are illustrative.</p>
+      </div>
+      <aside class="card side" aria-label="Explorer controls">
+        <div class="bar"><button class="btn" type="button" id="simPlay">Play history</button><button class="tbtn" type="button" id="simBack">Back 10 years</button><button class="tbtn" type="button" id="simFwd">Forward 10 years</button></div>
+        <h3 id="era-h">Jump to an era</h3>
+        <div class="jump" id="simEra" role="group" aria-labelledby="era-h"></div>
+        <h3>Around this year</h3>
+        <ul class="evlist" id="simEvents"></ul>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-train" role="tabpanel" aria-labelledby="tabbtn-train" hidden>
+    <h2 class="gk-sr">Part 2: Predict and Order Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Make your prediction or put the events in order first; the picture then plays what really happened. Values are rounded and approximate.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div id="calcMC" class="tropts" role="group" aria-label="Answer choices"></div>
+        <ol class="list" id="ordList" aria-label="Events to put in order, earliest first" hidden></ol>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check order</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Hints come in three steps, each a little more specific. To reorder, drag a card by its grip, or use the up and down buttons. The streak counts answers right on the first try without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In Real Life</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults and simplified settings. For learning only, not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Medicine-Walkthrough.html">American Medicine Walkthrough</a>. Charts use rounded, approximate values; where exact historical counts are uncertain the chart says it is illustrative.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "nerve", "muscle", "lig", "symp", "para", "pain", "evid", "g-reg", "g-homeo", "g-ecl", "g-thom", "g-hydro", "g-osteo", "g-chiro", "g-patent", "g-natur", "g-cih", "inf", "chron", "life", "money", "sch-b", "sch-w", "gov", "corp", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "shirt5", "wall", "wall-edge", "roof", "win", "wood", "street", "water", "steam", "germ", "glass", "glass-edge", "broth", "cloud", "leaf", "blood", "metal", "sheet", "map", "map-edge"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ---- helpers lifted from chem kit ---- */
+/* ================= chemistry drawing kit (gases module) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+/* ---------- graphs ---------- */
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&(n.u===d.u||n.u.replace(/s$/,'')===d.u.replace(/s$/,'')));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;let rx_=rx,rw_=rw;if(o.noteLeft){yy2=ly+6;rx_=x+16;rw_=sw-30}const rx2=rx_,rw2=rw_;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx2,yy2,rw2,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx2-4,yy2-10,rw2+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx2+4,yy2+3,rw2-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* ================= module 10 drawing kit and data ================= */
+/* piecewise linear lookup in a [[year,value],...] table */
+function pw(tab,yr){if(yr<=tab[0][0])return tab[0][1];for(let i=1;i<tab.length;i++){if(yr<=tab[i][0]){const a=tab[i-1],b=tab[i];return lerp(a[1],b[1],(yr-a[0])/(b[0]-a[0]))}}return tab[tab.length-1][1]}
+/* ---------- approximate data (rounded; many early values are illustrative) ---------- */
+const D={
+ schools:[[1765,1],[1800,4],[1820,13],[1840,30],[1850,42],[1860,50],[1870,75],[1880,100],[1890,133],[1900,160],[1904,166],[1910,131],[1915,96],[1920,85],[1925,80],[1930,76],[1940,77],[1950,79],[1960,86],[1970,103],[1980,126],[1990,126],[2000,125],[2010,134],[2020,155],[2025,158]],
+ homeo:[[1835,0],[1848,1],[1860,4],[1870,7],[1880,12],[1890,16],[1900,22],[1910,13],[1918,7],[1923,2],[1935,1],[1940,0],[2025,0]],
+ ecl:[[1829,0],[1830,1],[1845,3],[1850,5],[1870,8],[1880,9],[1900,10],[1910,8],[1915,5],[1920,2],[1930,1],[1939,0],[2025,0]],
+ black:[[1867,0],[1868,1],[1876,2],[1882,3],[1890,5],[1900,7],[1910,7],[1912,5],[1915,3],[1923,2],[1977,2],[1978,3],[1981,4],[2025,4]],
+ women:[[1847,0],[1848,1],[1850,2],[1870,4],[1880,6],[1890,7],[1900,5],[1910,3],[1920,1],[1969,1],[1970,0],[2025,0]],
+ osteo:[[1891,0],[1892,1],[1900,8],[1910,8],[1920,7],[1930,6],[1960,6],[1970,7],[1980,14],[1990,15],[2000,19],[2010,26],[2020,37],[2025,41]],
+ life:[[1850,38],[1880,40],[1900,47.3],[1910,50],[1917,51],[1918,39.1],[1919,54.7],[1920,54.1],[1930,59.7],[1940,62.9],[1950,68.2],[1960,69.7],[1970,70.8],[1980,73.7],[1990,75.4],[2000,76.8],[2010,78.7],[2019,78.8],[2020,77],[2021,76.4],[2022,77.5],[2023,78.4],[2025,78.6]],
+ inf:[[1850,50],[1880,45],[1900,37],[1910,32],[1917,28],[1918,45],[1919,30],[1930,20],[1940,14],[1950,7],[1960,6],[1980,4],[2000,5],[2019,5],[2020,13],[2021,14],[2022,9],[2023,6],[2025,6]],
+ chron:[[1850,10],[1900,18],[1920,25],[1930,33],[1940,45],[1950,55],[1960,63],[1970,62],[1980,60],[1990,57],[2000,53],[2010,47],[2019,48],[2020,42],[2021,41],[2023,45],[2025,45]],
+ insured:[[1925,0],[1930,1],[1940,9],[1945,22],[1950,50],[1960,70],[1965,72],[1970,80],[1980,87],[2000,86],[2010,84],[2016,91],[2023,92],[2025,92]],
+ gdp:[[1930,3.5],[1940,4],[1950,4.5],[1960,5],[1970,6.9],[1980,8.9],[1990,12.1],[2000,13.3],[2010,17.2],[2020,19.5],[2022,17.3],[2023,17.6],[2025,17.6]],
+ hosp:[[1850,60],[1873,178],[1890,1000],[1909,4359],[1920,6000],[1930,6700],[1950,6800],[1975,7150],[2000,5800],[2025,6100]],
+ cam:[[1990,34],[1997,42],[2002,36],[2007,38],[2012,33]]
+};
+/* practitioner groups: key, name, colour token, start, fade start, end (null = still present), idea */
+const GROUPS=[
+ ["reg","Regular physicians (MD)","g-reg",1765,null,null,"bleeding and purging early on, then lab science"],
+ ["thom","Thomsonians","g-thom",1813,1845,1860,"botanical remedies, steam and lobelia"],
+ ["homeo","Homeopaths","g-homeo",1825,1910,null,"like cures like, tiny doses"],
+ ["ecl","Eclectics","g-ecl",1830,1910,1939,"botanical drugs plus whatever seemed to work"],
+ ["hydro","Hydropaths (water cure)","g-hydro",1843,1880,1900,"baths, wet sheets, diet and rest"],
+ ["patent","Patent medicine sellers","g-patent",1800,1906,1940,"bottled remedies with secret ingredients"],
+ ["osteo","Osteopathic physicians (DO)","g-osteo",1874,null,null,"began with manual treatment, now full medical practice"],
+ ["chiro","Chiropractors","g-chiro",1895,null,null,"spine focused manual care"],
+ ["natur","Naturopaths","g-natur",1902,1940,null,"natural remedies, diet, lifestyle"],
+ ["cih","Complementary and integrative practitioners","g-cih",1971,null,null,"acupuncture, massage, mind body and more"]
+];
+/* relative visibility of a group in a given year (0 to 1, illustrative) */
+function groupLevel(g,yr){const s=g[3],f=g[4],e=g[5];if(yr<s)return 0;const rise=clamp((yr-s)/15,0,1);let v=rise;if(f!=null&&yr>f){v*=e!=null?clamp(1-(yr-f)/(e-f),0,1)*.9+.1*(yr<e?1:0):Math.max(.25,1-(yr-f)/40)}if(e!=null&&yr>=e)v=0;return v}
+/* events: year, text, era index (1..5), kind */
+const ERAS=[["Healers compete","1800 to 1870","act1"],["Labs and reform","1870 to 1920","act2"],["Hospitals and insurance","1920 to 1965","act5"],["Big programs, chronic disease","1965 to 1990","act6"],["Integrative era","1990 to today","act7"]];
+function eraOf(y){return y<1870?0:y<1920?1:y<1965?2:y<1990?3:4}
+const EVENTS=[
+ [1793,"Bloodletting used widely during a yellow fever epidemic","pluralism"],
+ [1796,"Jenner tests the first smallpox vaccine in England","vaccine"],
+ [1813,"Samuel Thomson patents his botanical system","pluralism"],
+ [1825,"Homeopathy arrives in the United States","pluralism"],
+ [1844,"Homeopaths form the first national medical society","profession"],
+ [1846,"Public demonstration of ether anesthesia in Boston","hospital"],
+ [1847,"American Medical Association (AMA) founded","profession"],
+ [1849,"Elizabeth Blackwell: first woman to earn an MD in the US","school"],
+ [1864,"Rebecca Lee Crumpler: first Black woman MD in the US","school"],
+ [1867,"Lister publishes on antiseptic surgery","germ"],
+ [1874,"Andrew Taylor Still announces osteopathy","pluralism"],
+ [1882,"Koch identifies the tuberculosis bacterium","germ"],
+ [1889,"Dent v. West Virginia upholds state medical licensing","law"],
+ [1893,"Johns Hopkins medical school opens","school"],
+ [1895,"D.D. Palmer gives the first chiropractic adjustment","pluralism"],
+ [1895,"X rays discovered","germ"],
+ [1906,"Pure Food and Drug Act","law"],
+ [1910,"Flexner Report on medical education","school"],
+ [1913,"First state licenses chiropractors","law"],
+ [1918,"Influenza pandemic","disease"],
+ [1928,"Penicillin observed killing bacteria","drug"],
+ [1929,"Dallas teachers' prepaid hospital plan: the Blue Cross idea","pay"],
+ [1938,"Federal Food, Drug and Cosmetic Act","law"],
+ [1946,"Hill Burton Act funds hospital building","hospital"],
+ [1954,"Tax law: employer health benefits not taxed as income","pay"],
+ [1955,"Polio vaccine licensed","vaccine"],
+ [1965,"Medicare and Medicaid signed into law","pay"],
+ [1974,"Last state licenses chiropractors","law"],
+ [1977,"Engel proposes the biopsychosocial model","model"],
+ [1980,"Smallpox declared eradicated","vaccine"],
+ [1987,"Wilk v. AMA: AMA boycott of chiropractors broke antitrust law","law"],
+ [1991,"Congress creates an Office of Alternative Medicine at NIH","cih"],
+ [1994,"Dietary Supplement Health and Education Act","law"],
+ [1998,"NCCAM established at NIH","cih"],
+ [2010,"Affordable Care Act","pay"],
+ [2014,"NCCAM renamed NCCIH","cih"]
+];
+/* ---------- people ---------- */
+const SKINS=["skin1","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4","shirt5"];
+function person(x,y,s,o){o=o||{};const sk=C[o.skin||SKINS[(o.i||0)%4]],sh=o.shirt?C[o.shirt]||o.shirt:C[SHIRTS[(o.i||0)%5]];s=s||1;
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+  const bob=o.walk?Math.sin(o.walk)*1.5:0;
+  if(o.walk){line(-4,-2+bob,-6+Math.sin(o.walk)*4,14,hexA(C.ink,.7),3);line(4,-2+bob,6-Math.sin(o.walk)*4,14,hexA(C.ink,.7),3)}
+  else{line(-4,-2,-5,14,hexA(C.ink,.7),3);line(4,-2,5,14,hexA(C.ink,.7),3)}
+  rr(-8,-22+bob,16,22,6);ctx.fillStyle=sh;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1;ctx.stroke();
+  circ(0,-29+bob,7,sk,hexA(C.ink,.35),1);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(0,-31+bob,7.2,Math.PI*1.05,Math.PI*1.95);ctx.fillStyle=C.hair;ctx.fill()}
+  if(o.sick){circ(0,-29+bob,9,null,C.inf,2)}
+  if(o.coat){rr(-9,-22+bob,18,23,5);ctx.fillStyle=hexA(C.sheet,.95);ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.stroke();line(0,-21+bob,0,0+bob,hexA(C.ink,.3),1)}
+  ctx.restore()}
+function lying(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s||1,s||1);rr(-60,-6,120,18,5);ctx.fillStyle=C.wood;ctx.fill();rr(-58,-14,112,12,5);ctx.fillStyle=C.sheet;ctx.fill();ctx.strokeStyle=hexA(C.ink,.3);ctx.lineWidth=1;ctx.stroke();
+  circ(-48,-16,8,C[o.skin||"skin2"],hexA(C.ink,.35),1);if(o.sick)circ(-48,-16,10.5,null,C.inf,2);ctx.restore()}
+/* ---------- buildings ---------- */
+function building(x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+  const col=o.col||C.wall;rr(x,y,w,h,3);ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=o.edge||C["wall-edge"];ctx.lineWidth=1.4;ctx.stroke();
+  if(o.roof!=="flat"){ctx.beginPath();ctx.moveTo(x-5,y);ctx.lineTo(x+w/2,y-h*.38);ctx.lineTo(x+w+5,y);ctx.closePath();ctx.fillStyle=o.roofCol||C.roof;ctx.fill()}
+  else{ctx.fillStyle=o.roofCol||C.roof;ctx.fillRect(x-3,y-5,w+6,6)}
+  const cols=Math.max(1,Math.floor(w/16)),rows=Math.max(1,Math.floor((h-14)/16));
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const wx=x+6+c*((w-12)/cols),wy=y+5+r*15;const lit=o.lit&&rnd(c*7+r*3+(o.seed||0))<o.lit;rr(wx,wy,Math.max(4,(w-12)/cols-5),9,1.5);ctx.fillStyle=lit?C.gold:C.win;ctx.fill()}
+  rr(x+w/2-5,y+h-12,10,12,1);ctx.fillStyle=C.wood;ctx.fill();
+  if(o.cross){const cx=x+w/2,cy=y-h*.18;ctx.fillStyle=C.inf;ctx.fillRect(cx-2.5,cy-7,5,14);ctx.fillRect(cx-7,cy-2.5,14,5)}
+  if(o.cross2){const cx=x+w-12,cy=y+10;ctx.fillStyle=C.inf;ctx.fillRect(cx-2,cy-6,4,12);ctx.fillRect(cx-6,cy-2,12,4)}
+  ctx.restore()}
+/* ---------- simplified map of the lower 48 states ---------- */
+const USPTS=[[-124.7,48.4],[-123.9,46.2],[-124.4,42.8],[-124.2,40.3],[-122.5,37.8],[-120.6,34.6],[-117.1,32.5],[-114.7,32.7],[-111,31.3],[-108.2,31.3],[-106.5,31.8],[-104.5,29.6],[-103,29],[-101.4,29.8],[-99.5,27.5],[-97.4,25.9],[-97.4,27.8],[-94.7,29.4],[-90,29.1],[-89.2,30.3],[-85.1,29.7],[-83.5,29.9],[-82.7,27.5],[-81.8,26],[-80.4,25.2],[-80.1,26.8],[-81.3,30.3],[-80,32.8],[-78.5,33.9],[-76.5,34.7],[-75.5,35.3],[-76.3,37],[-75,38.8],[-74,40.5],[-72,41],[-70,41.8],[-70.7,42.6],[-69.9,43.8],[-67,44.8],[-67.8,47.1],[-69.2,47.4],[-70.9,45.3],[-74.8,45],[-76.6,43.6],[-79,43.3],[-79.1,42.7],[-82.4,41.7],[-82.5,43],[-82.1,43.6],[-84,46.5],[-89,48],[-95.2,49],[-123,49]];
+function proj(lon,lat,b){return [b.x+(lon+125)/58*b.w,b.y+(49.5-lat)/25*b.h]}
+function usMap(b,o){o=o||{};ctx.beginPath();USPTS.forEach((p,i)=>{const q=proj(p[0],p[1],b);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])});ctx.closePath();ctx.fillStyle=o.fill||C.map;ctx.fill();ctx.strokeStyle=o.stroke||C["map-edge"];ctx.lineWidth=1.4;ctx.stroke()}
+/* school sites: lon, lat, kind (r regular, h homeopathic, e eclectic, b Black, w women, o osteopathic), seed */
+const CITIES=[[-75.2,40,"Philadelphia"],[-74,40.7,"New York"],[-71.1,42.4,"Boston"],[-76.6,39.3,"Baltimore"],[-77,38.9,"Washington"],[-84.5,39.1,"Cincinnati"],[-87.6,41.9,"Chicago"],[-90.2,38.6,"St. Louis"],[-85.8,38.3,"Louisville"],[-86.8,36.2,"Nashville"],[-90.1,30,"New Orleans"],[-81.7,41.5,"Cleveland"],[-94.6,39.1,"Kansas City"],[-104.9,39.7,"Denver"],[-122.4,37.8,"San Francisco"],[-84.4,33.7,"Atlanta"],[-77.4,37.5,"Richmond"],[-90,35.1,"Memphis"],[-78.6,35.8,"Raleigh"],[-83.9,36,"Knoxville"],[-92.6,40.2,"Kirksville"],[-118.2,34,"Los Angeles"],[-83,42.3,"Detroit"],[-93.3,45,"Minneapolis"],[-73.8,42.7,"Albany"],[-80,40.4,"Pittsburgh"],[-86.2,39.8,"Indianapolis"],[-96,41.3,"Omaha"],[-95.4,29.8,"Houston"],[-122.7,45.5,"Portland"],[-88,43,"Milwaukee"],[-81,34,"Columbia"]];
+/* build a deterministic list of school dots */
+const SCHOOLDOTS=(function(){const out=[];const wt=CITIES.map((c,i)=>i<12?4:i<22?2:1);
+  function cityIdx(seed){let tot=wt.reduce((a,b)=>a+b,0);let r=rnd(seed)*tot;for(let i=0;i<wt.length;i++){r-=wt[i];if(r<=0)return i}return 0}
+  for(let i=0;i<170;i++){const c=CITIES[cityIdx(i*3.7+1)];out.push({lon:c[0]+(rnd(i*5.3)-.5)*2.2,lat:c[1]+(rnd(i*9.1)-.5)*1.6,k:"r",rank:i})}
+  return out})();
+const BLACKSITES=[[-77,38.9,"Washington, D.C.",1],[-86.8,36.2,"Nashville",1],[-78.6,35.8,"Raleigh",0],[-90.1,30,"New Orleans",0],[-85.8,38.3,"Louisville",0],[-83.9,36,"Knoxville",0],[-90,35.1,"Memphis",0]];
+/* draw school dots for a given year onto map box b. Returns counts */
+function schoolDots(b,yr,o){o=o||{};const n=Math.round(pw(D.schools,yr));const nh=Math.round(pw(D.homeo,yr)),ne=Math.round(pw(D.ecl,yr)),nw=Math.round(pw(D.women,yr));let shown=0;
+  SCHOOLDOTS.forEach((d,i)=>{if(i>=n)return;const q=proj(d.lon,d.lat,b);let col=C["g-reg"];if(i<nh)col=C["g-homeo"];else if(i<nh+ne)col=C["g-ecl"];else if(i<nh+ne+nw)col=C["sch-w"];circ(q[0],q[1],o.r||3.2,col,hexA(C.panel,.8),1);shown++});
+  const nb=Math.round(pw(D.black,yr));BLACKSITES.forEach((s,i)=>{if(i>=nb&&!(yr>1975&&false))return;const q=proj(s[0],s[1],b);ctx.save();ctx.translate(q[0],q[1]);ctx.rotate(Math.PI/4);ctx.fillStyle=C["sch-b"];ctx.fillRect(-3.6,-3.6,7.2,7.2);ctx.strokeStyle=C.panel;ctx.lineWidth=1;ctx.strokeRect(-3.6,-3.6,7.2,7.2);ctx.restore()});
+  const no=Math.round(pw(D.osteo,yr));for(let i=0;i<Math.min(no,40);i++){const c=i===0?CITIES[20]:CITIES[Math.floor(rnd(i*4.1+8)*CITIES.length)];const q=proj(c[0]+(rnd(i*2.9)-.5)*2,c[1]+(rnd(i*6.7)-.5)*1.4,b);ctx.beginPath();ctx.moveTo(q[0],q[1]-4.2);ctx.lineTo(q[0]+4,q[1]+3);ctx.lineTo(q[0]-4,q[1]+3);ctx.closePath();ctx.fillStyle=C["g-osteo"];ctx.fill()}
+  return {n,nh,ne,nb,nw,no}}
+/* ---------- microbes, flasks, coins ---------- */
+function rod(x,y,len,ang,col,a){withA(a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(ang);rr(-len/2,-3,len,6,3);ctx.fillStyle=col||C.germ;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=.8;ctx.stroke();ctx.restore()})}
+function cocci(x,y,r,col,a){withA(a==null?1:a,()=>circ(x,y,r,col||C.germ,hexA(C.ink,.35),.8))}
+function coin(x,y,r,a){withA(a==null?1:a,()=>{circ(x,y,r,C.money,hexA(C.ink,.4),1);txt(x,y+.5,"$",{size:r*1.3,weight:700,align:"center",color:"#10161A"})})}
+function flask(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  ctx.beginPath();ctx.moveTo(-10,-40);ctx.lineTo(-10,-14);ctx.lineTo(-34,22);ctx.quadraticCurveTo(-36,30,-26,30);ctx.lineTo(26,30);ctx.quadraticCurveTo(36,30,34,22);ctx.lineTo(10,-14);ctx.lineTo(10,-40);
+  ctx.fillStyle=hexA(C.glass,.7);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=2;ctx.stroke();
+  ctx.save();ctx.clip();ctx.fillStyle=o.cloudy?mix(C.broth,C.cloud,o.cloudy):C.broth;ctx.fillRect(-40,4,80,30);ctx.restore();ctx.restore()}
+function timelineAxis(x,y,w,y0,y1,step,o){o=o||{};line(x,y,x+w,y,C["ink-soft"],2);for(let t=Math.ceil(y0/step)*step;t<=y1;t+=step){const X=x+(t-y0)/(y1-y0)*w;line(X,y-4,X,y+4,C["ink-soft"],1.5);txt(X,y+(o.below===false?-12:14),String(t),{size:o.size||10.5,mono:true,align:"center",color:C["ink-soft"]})}return t=>x+(t-y0)/(y1-y0)*w}
+function viewTag(x,y,t){label(x,y,t,{size:11,weight:700,align:"left",mono:true,color:C["ink-soft"],bg:C.panel,border:C.rule})}
+function tagModel(x,y,t,col){label(x,y,t||"HISTORICAL MODEL",{size:11,weight:700,mono:true,align:"left",border:col||C.gold,bg:C["gold-wash"]})}
+function yearBig(x,y,yr,o){o=o||{};txt(x,y,String(Math.round(yr)),{size:o.size||30,weight:700,mono:true,align:o.align||"left",color:o.color||C.ink})}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke();ctx.fillStyle=col;rr(x,y,5,h,2);ctx.fill()}
+function plantSprig(x,y,s,col,T){ctx.save();ctx.translate(x,y);ctx.scale(s,s);line(0,0,0,-36,C.leaf,2.4);for(let i=0;i<4;i++){const yy=-8-i*8,sw=Math.sin((T||0)*1.5+i)*.08;ell(-7,yy,7,3,-.5+sw,C.leaf);ell(7,yy-3,7,3,.5+sw,C.leaf)}circ(0,-38,4,col||C["g-homeo"]);ctx.restore()}
+function drop(x,y,r,col){ctx.beginPath();ctx.moveTo(x,y-r*1.6);ctx.quadraticCurveTo(x+r,y-r*.2,x+r,y+.2*r);ctx.arc(x,y+.2*r,r,0,Math.PI);ctx.quadraticCurveTo(x-r,y-r*.2,x,y-r*1.6);ctx.fillStyle=col;ctx.fill()}
+function steamPuff(x,y,T,n,col){for(let i=0;i<(n||5);i++){const p=P(T*.5+i/(n||5),1);circ(x+Math.sin(p*6+i)*8,y-p*50,4+p*7,hexA(col||C.steam,(1-p)*.6))}}
+function docIcon(x,y,w,h,col,lines){rr(x,y,w,h,3);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=col||C.rule;ctx.lineWidth=1.5;ctx.stroke();for(let i=0;i<(lines||4);i++)line(x+6,y+10+i*8,x+w-6-(i%2)*8,y+10+i*8,hexA(C.ink,.35),1.4)}
+function microscope(x,y,s,col){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fillStyle=col||C.metal;rr(-18,18,36,6,2);ctx.fill();rr(-3,-6,6,26,2);ctx.fill();ctx.save();ctx.rotate(-.4);rr(-4,-34,8,28,3);ctx.fill();ctx.restore();rr(-12,4,24,4,1);ctx.fill();ctx.restore()}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+let SYS={},SC={};
+function sup(n){const m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};return String(n).replace("-","−").split("").map(c=>m[c]||c).join("")}
+function eraBands(x,y,w,h,y0,y1,o){o=o||{};const X=t=>x+(t-y0)/(y1-y0)*w;const short=["Healers","Labs, reform","Hospitals, insurance","Big programs","Integrative"];const bounds=[1800,1870,1920,1965,1990,2025];
+  ERAS.forEach((e,i)=>{const a=Math.max(y0,bounds[i]),b=Math.min(y1,bounds[i+1]);if(b<=a)return;const on=o.hl===i;rr(X(a)+1,y,X(b)-X(a)-2,h,4);ctx.fillStyle=hexA(C[e[2]],on?.45:.2);ctx.fill();ctx.strokeStyle=C[e[2]];ctx.lineWidth=on?2.2:1;ctx.stroke();
+    if(X(b)-X(a)>58)txt((X(a)+X(b))/2,y+h/2,short[i],{size:11,weight:700,align:"center",color:C.ink})});return X}
+function schoolChart(g,yr,o){o=o||{};graph(g);curve(g,t=>pw(D.schools,t),g.x0,Math.min(g.x1,yr),C.evid,2.6);if(o.extra){curve(g,t=>pw(D.osteo,t),g.x0,Math.min(g.x1,yr),C["g-osteo"],2,[5,3])}
+  const v=pw(D.schools,yr);if(yr>=g.x0&&yr<=g.x1)gdot(g,yr,v,C.evid,Math.round(v)+" schools",{dy:-18,align:yr>g.x1-40?"right":"center"})}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("medicine-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("medicine-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: landscape explorer ================= */
+const SM={yr:1840,play:false,done:new Set(),lastEv:""};
+const PAY=[[1800,85,15,0,0],[1900,85,15,0,0],[1929,83,15,1,1],[1940,75,12,6,7],[1950,62,8,15,15],[1960,47,8,22,23],[1966,40,7,24,29],[1970,33,7,22,38],[1980,23,7,28,42],[1990,19,6,33,42],[2000,15,6,35,44],[2010,12,7,33,48],[2025,10,8,30,52]];
+function payShare(yr){const out=[];for(let k=1;k<=4;k++)out.push(pw(PAY.map(r=>[r[0],r[k]]),yr));return out}
+const PAYN=[["Out of pocket","rule"],["Charity and other","gold"],["Private insurance","money"],["Government programs","gov"]];
+const SHORTG={reg:["Regular","(MD)"],thom:["Thomsonian",""],homeo:["Homeopathic",""],ecl:["Eclectic",""],hydro:["Water cure",""],patent:["Patent","medicine"],osteo:["Osteopathic","(DO)"],chiro:["Chiropractic",""],natur:["Naturopathic",""],cih:["Complementary",""]};
+const GPOS=i=>[150+(i%5)*130,62+Math.floor(i/5)*66];
+function licStatus(yr){return yr<1830?["Weak state license laws in some states","warn"]:yr<1870?["Most license laws repealed or ignored","bad"]:yr<1900?["Licensing boards returning state by state","warn"]:["Nearly every state licenses physicians","good"]}
+function groupWeight(g,yr){const l=groupLevel(g,yr);if(l<=0)return 0;let b=.6;if(g[0]==="reg")b=1+3*seg(yr,1880,1930);if(g[0]==="patent")b=.45;if(g[0]==="cih")b=.5+seg(yr,1990,2000)*.6;return l*b}
+const SIMCHAL=[["Find a year when all five early groups (regular, Thomsonian, homeopath, eclectic, water cure) are active",yr=>["reg","thom","homeo","ecl","hydro"].every(k=>groupLevel(GROUPS.find(g=>g[0]===k),yr)>.05)],
+ ["Find the peak in the number of MD schools",yr=>yr>=1900&&yr<=1908],
+ ["Find a year when only two schools for Black physicians remain open",yr=>yr>=1923&&yr<=1977],
+ ["Find the year Medicare and Medicaid were signed",yr=>Math.round(yr)===1965],
+ ["Find a year when chronic disease deaths outnumber infection deaths more than five to one",yr=>yr>=1900&&pw(D.chron,yr)/pw(D.inf,yr)>5],
+ ["Find a year when NCCAM existed, before it was renamed",yr=>yr>=1998&&yr<2014]];
+function simUI(){const yr=Math.round(SM.yr);$("#simYear").value=yr;$("#simYearOut").textContent=yr;
+  const life=yr<1900?"about 38 to 47 years (rough estimate)":"about "+Math.round(pw(D.life,yr))+" years";const c=n=>Math.round(n);
+  const rows=[["Medical (MD) schools","about "+c(pw(D.schools,yr))],["Homeopathic and eclectic schools","about "+c(pw(D.homeo,yr)+pw(D.ecl,yr))],["Schools for Black physicians",String(c(pw(D.black,yr)))],["Osteopathic (DO) schools",yr<1892?"none yet":"about "+c(pw(D.osteo,yr))],
+    ["Life expectancy at birth",life],["Deaths from infection",yr<1900?"no reliable national data":"about "+c(pw(D.inf,yr))+"%"],["Deaths from heart disease, cancer, stroke",yr<1900?"no reliable national data":"about "+c(pw(D.chron,yr))+"%"],["People with health insurance",yr<1929?"almost none":"about "+c(pw(D.insured,yr))+"%"],["Health spending, share of economy",yr<1930?"not tracked":"about "+(Math.round(pw(D.gdp,yr)*2)/2)+"%"+(yr<1960?" (rough)":"")]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("");
+  const ev=EVENTS.filter(e=>Math.abs(e[0]-yr)<=6).slice(0,5);const key=ev.map(e=>e[0]+e[1]).join("|");if(key!==SM.lastEv){SM.lastEv=key;$("#simEvents").innerHTML=ev.length?ev.map(e=>`<li><b>${e[0]}</b><span>${e[1]}</span></li>`).join(""):'<li class="none">No major events in this list within 6 years. Try sliding a little.</li>'}
+  const ls=licStatus(yr);const st=$("#simStatus");st.className="status "+ls[1];st.textContent="Licensing: "+ls[0]+".";
+  SIMCHAL.forEach((ch,i)=>{if(ch[1](SM.yr))SM.done.add(i)});chalUI($("#simChal"),SIMCHAL.map(c=>c[0]),SM.done);
+  const e=eraOf(yr);$("#simEra").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(i===e)));
+  $("#simCap").textContent=yr+": "+ERAS[e][0].toLowerCase()+" era. "+capYear(yr)}
+function capYear(yr){if(yr<1847)return "Many kinds of healers compete; patients pay each one directly.";if(yr<1870)return "The AMA exists, but licensing is weak and rival groups thrive.";if(yr<1904)return "Germ theory and labs arrive; schools multiply and boards return.";if(yr<1930)return "After the Flexner Report, schools close and hospitals grow.";if(yr<1965)return "Insurance spreads through jobs; antibiotics and vaccines arrive.";if(yr<1990)return "Medicare and Medicaid pay a big share; chronic disease leads causes of death.";return "Complementary and integrative health enter research and academic centers."}
+function simSet(y){SM.yr=clamp(y,1800,2025);simUI()}
+$("#simYear").addEventListener("input",e=>{SM.play=false;simPlayBtn();simSet(+e.target.value)});
+$("#simPlay").onclick=()=>{SM.play=!SM.play;if(SM.play&&SM.yr>=2024)SM.yr=1800;simPlayBtn()};
+function simPlayBtn(){$("#simPlay").textContent=SM.play?"Pause history":"Play history"}
+$("#simBack").onclick=()=>simSet(Math.round(SM.yr)-10);$("#simFwd").onclick=()=>simSet(Math.round(SM.yr)+10);
+$("#simEra").innerHTML=ERAS.map((e,i)=>`<button type="button" class="tbtn" data-i="${i}" aria-pressed="false">${e[0]} <span class="small">(${e[1]})</span></button>`).join("");
+$("#simEra").querySelectorAll("button").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;simSet([1840,1895,1945,1975,2005][i])});
+function simStep(dt){if(!SM.play)return;const before=Math.round(SM.yr);SM.yr+=dt*8;if(SM.yr>=2025){SM.yr=2025;SM.play=false;simPlayBtn()}if(Math.round(SM.yr)!==before)simUI()}
+function drawSim(now){use(S1);const T=now/1000;const yr=SM.yr;
+  /* healers band */
+  panelBox(8,8,784,166);title(20,24,"Who people turn to (sizes illustrative)",C["ink-soft"]);yearBig(780,26,yr,{size:22,align:"right"});
+  const px=60,py=96;circ(px,py,34,hexA(C.accent,.08),C.accent,1.6);for(let i=0;i<4;i++)person(px-15+(i%2)*30,py+6+Math.floor(i/2)*4-(i<2?14:-14)*.3,.55,{i});txt(px,py+46,"patients",{size:11.5,weight:700,align:"center"});
+  const ws=GROUPS.map(g=>groupWeight(g,yr));const tot=ws.reduce((a,b)=>a+b,0)||1;
+  GROUPS.forEach((g,i)=>{const [x,y]=GPOS(i);const lv=groupLevel(g,yr);const col=C[g[2]];const sh=SHORTG[g[0]];
+    if(lv<=0){ctx.save();ctx.setLineDash([3,3]);circ(x,y,13,null,C["ink-faint"],1.2);ctx.restore()}
+    else{const r=7+12*Math.sqrt(ws[i]/Math.max(.6,Math.max(...ws)));glow(x,y,r+6,col,.3);circ(x,y,r,hexA(col,.75),col,2)}
+    const tc=lv>0?C.ink:C["ink-soft"];txt(x+28,y-(sh[1]?8:0),sh[0],{size:12,weight:700,color:tc});if(sh[1])txt(x+28,y+8,sh[1],{size:12,weight:600,color:tc});txt(x+28,y+(sh[1]?24:16),lv<=0?(yr<g[3]?"not yet":"faded away"):"",{size:11,color:C["ink-soft"]})});
+  for(let i=0;i<26;i++){const ph=P(T*.22+i/26,1);const trip=Math.floor(T*.22+i/26);let r=rnd(i*7.3+trip*1.9)*tot,k=0;for(;k<ws.length;k++){r-=ws[k];if(r<=0)break}if(k>=ws.length)k=0;if(ws[k]<=0)continue;
+    const [gx,gy]=GPOS(k);const x=lerp(px+30,gx,ph),y=lerp(py,gy,ph)-Math.sin(ph*Math.PI)*14;circ(x,y,3.2,C[GROUPS[k][2]],C.panel,1)}
+  /* map */
+  panelBox(8,182,388,232);title(20,198,"Medical schools",C["ink-soft"]);const b={x:16,y:212,w:372,h:194};usMap(b);const cnt=schoolDots(b,yr,{r:2.8});
+  label(386,402,"about "+cnt.n+" MD"+(cnt.no?", "+cnt.no+" DO":""),{size:11.5,weight:700,mono:true,align:"right",border:C.evid});
+  /* charts */
+  panelBox(404,182,388,232);
+  const g1={x:448,y:212,w:120,h:150,x0:1800,x1:2025,y0:0,y1:180,xt:[1800,1900,2000],yt:[0,90,180],title:"Schools"};graph(g1);curve(g1,t=>pw(D.schools,t),1800,2025,hexA(C.evid,.35),2);curve(g1,t=>pw(D.schools,t),1800,yr,C.evid,2.6);curve(g1,t=>pw(D.osteo,t),1890,Math.max(1890,yr),C["g-osteo"],2,[4,3]);line(g1.X(yr),g1.y,g1.X(yr),g1.y+g1.h,C.accent,1.6);
+  const g2={x:610,y:212,w:150,h:150,x0:1900,x1:2025,y0:0,y1:100,xt:[1900,1960,2020],yt:[0,50,100],yf:v=>v+"%",title:"Causes of death"};graph(g2);
+  curve(g2,t=>pw(D.inf,t),1900,2025,hexA(C.inf,.3),2);curve(g2,t=>pw(D.chron,t),1900,2025,hexA(C.chron,.3),2);
+  if(yr>=1900){curve(g2,t=>pw(D.inf,t),1900,yr,C.inf,2.6);curve(g2,t=>pw(D.chron,t),1900,yr,C.chron,2.6);const L=v=>g2.y+g2.h-(v-30)/(85-30)*g2.h;ctx.beginPath();for(let t=1900;t<=yr;t+=.5){const X=g2.X(t),Y=L(pw(D.life,t));t===1900?ctx.moveTo(X,Y):ctx.lineTo(X,Y)}ctx.strokeStyle=C.life;ctx.lineWidth=2.4;ctx.stroke();line(g2.X(yr),g2.y,g2.X(yr),g2.y+g2.h,C.accent,1.6)}
+  else{wrapText("No reliable national data before 1900",g2.x+10,g2.y+g2.h/2,g2.w-20,15,{size:11.5,color:C["ink-soft"]})}
+  txt(g2.x+g2.w+4,g2.y+6,"85",{size:10,mono:true,color:C.life});txt(g2.x+g2.w+4,g2.y+g2.h,"30",{size:10,mono:true,color:C.life});
+  txt(416,400,"MD solid, DO dashed",{size:11,color:C["ink-soft"]});txt(600,400,"infection, chronic, life exp.",{size:11,color:C["ink-soft"]});
+  /* laws and institutions */
+  panelBox(8,422,464,170);title(20,438,"Laws and institutions so far",C["ink-soft"]);
+  const past=EVENTS.filter(e=>e[0]<=yr&&["law","profession","school","pay","cih"].indexOf(e[2])>=0).slice(-5);
+  past.forEach((e,i)=>{const y=462+i*25;const fresh=yr-e[0]<4;rr(20,y-10,440,21,5);ctx.fillStyle=fresh?C["accent-wash"]:hexA(C.panel,.9);ctx.fill();ctx.strokeStyle=fresh?C.accent:C["rule-soft"];ctx.lineWidth=fresh?1.8:1;ctx.stroke();txt(28,y,String(e[0]),{size:11.5,weight:700,mono:true});
+    const t_=e[1].length>64?e[1].slice(0,e[1].lastIndexOf(" ",62))+" ...":e[1];txt(72,y,t_,{size:11.5})});
+  if(!past.length)txt(20,470,"No national medical laws or organizations yet.",{size:12,color:C["ink-soft"]});
+  /* who pays */
+  panelBox(480,422,312,170);title(492,438,"Who pays (approximate)",C["ink-soft"]);const sh=payShare(yr);let x0=492;
+  sh.forEach((v,i)=>{const w=v/100*288;if(w<.5)return;rr(x0,452,w,24,i===0?4:0);ctx.fillStyle=i===0?hexA(C["ink-faint"],.6):C[PAYN[i][1]];ctx.fill();if(w>34)txt(x0+w/2,464,Math.round(v)+"%",{size:11,weight:700,mono:true,align:"center",color:i===0?C.ink:"#10161A"});x0+=w});
+  PAYN.forEach((p,i)=>{const y=494+i*18,x=492;rr(x,y-6,11,11,2);ctx.fillStyle=i===0?hexA(C["ink-faint"],.6):C[p[1]];ctx.fill();txt(x+16,y,p[0],{size:11})});
+  building(712,520,64,50,{cross:true,lit:.4,roofCol:C.inf,roof:"flat"});
+  let acc=0;const cum=sh.map(v=>(acc+=v,acc));for(let i=0;i<8;i++){const ph=P(T*.35+i/8,1);let r=rnd(i*3.1+Math.floor(T*.35+i/8))*100,k=0;while(k<3&&r>cum[k])k++;const sx=492+(cum[k]-sh[k]/2)/100*288;coin(lerp(sx,740,ph),lerp(478,540,ph)-Math.sin(ph*Math.PI)*10,5,1-ph*.3)}
+  txt(492,578,yr<1960?"before 1960: illustrative":"share of personal health spending",{size:11,color:C["ink-soft"]})}
+function simA11y(){const ys=Math.round(SM.yr);
+  const sh=payShare(ys);const lab=`Landscape in ${ys}: about ${Math.round(pw(D.schools,ys))} MD schools`+(ys>=1900?`, infections about ${Math.round(pw(D.inf,ys))} percent of deaths`:"");
+  const d=`Year ${ys}. Active healer groups, shown as coloured circles fed by a stream of patient dots: ${GROUPS.filter(g=>groupLevel(g,ys)>0).map(g=>g[1]).join(", ")}. The map shows about ${Math.round(pw(D.schools,ys))} medical school dots`+(pw(D.black,ys)>=1?`, including ${Math.round(pw(D.black,ys))} gold diamonds for schools that trained Black physicians`:"")+`. `+(ys>=1900?`The causes of death chart shows infections at about ${Math.round(pw(D.inf,ys))} percent and heart disease, cancer and stroke at about ${Math.round(pw(D.chron,ys))} percent, with life expectancy about ${Math.round(pw(D.life,ys))} years. `:"There is no reliable national death data before 1900. ")+`The payment bar shows about ${Math.round(sh[0])} percent paid out of pocket and about ${Math.round(sh[3])} percent by government.`;
+  return [lab,d]}
+/* ================= PART 2: predict and order trainer ================= */
+const CTYPES=[["predict","Predict then watch: how did the curve move?"],["order","Put the events in order"],["when","When did it happen?"]];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));const pick=a=>a[Math.floor(Math.random()*a.length)];
+const SERIES=[["schools","the number of MD schools",D.schools,"schools",1840,2025,0],["homeo","the number of homeopathic schools",D.homeo,"schools",1850,1935,0],["osteo","the number of osteopathic (DO) schools",D.osteo,"schools",1900,2025,0],
+ ["life","life expectancy at birth",D.life,"years",1900,2023,1],["inf","the share of deaths caused by infections",D.inf,"percent",1900,2023,0],["chron","the share of deaths from heart disease, cancer and stroke",D.chron,"percent",1900,2023,0],
+ ["insured","the share of people with health insurance",D.insured,"percent",1932,2023,0],["gdp","health spending as a share of the economy",D.gdp,"percent",1960,2023,1],["black","the number of schools training Black physicians",D.black,"schools",1900,1990,0]];
+const PCAT=["It rose by more than 10 percent","It stayed within about 10 percent","It fell by 10 to 40 percent","It fell by more than 40 percent"];
+function catOf(r){return r>1.1?0:r>=.9?1:r>=.6?2:3}
+function nearB(r){return [1.1,.9,.6].some(b=>Math.abs(r-b)<.035)}
+function evIn(a,b){return EVENTS.filter(e=>e[0]>=a&&e[0]<=b)}
+function fv(s,v){return s[6]?(Math.round(v*10)/10).toString():String(Math.round(v))}
+function genOne(type){
+  if(type==="predict"){let s,a,b,va,vb,r,tries=0;
+    do{s=pick(SERIES);const L=pick([10,15,20,25,30]);a=ri(s[4],s[5]-L);b=a+L;va=pw(s[2],a);vb=pw(s[2],b);r=va>0?vb/va:NaN;tries++}
+    while(tries<400&&(!(va>0)||nearB(r)||(a>=1916&&a<=1920)||(b>=1916&&b<=1920)));
+    const ci=catOf(r);const pct=Math.round(Math.abs(r-1)*100);const dir=r>=1?"rise":"drop";const ev=evIn(a,b);
+    const real=`It went from about ${fv(s,va)} to about ${fv(s,vb)} ${s[3]}, about ${pct} percent ${r>=1?"higher":"lower"}.`;
+    const ctx_=ev.length?` In this window: ${ev[0][0]}, ${ev[0][1]}.`:"";
+    const opts=PCAT.map((t,i)=>({t,ok:i===ci,why:i===ci?`Yes. ${real}${ctx_}`:`${real} So the change was ${PCAT[ci].replace(/^It /,"").toLowerCase()}, not ${t.replace(/^It /,"").toLowerCase()}.`}));
+    const hints=[ev.length?`Think about what happened between ${a} and ${b}: ${ev.slice(0,2).map(e=>e[0]+", "+e[1]).join("; ")}.`:`Think about the era: ${ERAS[eraOf(a)][0].toLowerCase()} (${ERAS[eraOf(a)][1]}).`,`At the start, in ${a}, it was about ${fv(s,va)} ${s[3]}.`,`At the end, in ${b}, it was about ${fv(s,vb)} ${s[3]}. Divide the end by the start: about ${(Math.round(r*100)/100)}.`];
+    return {type,kind:"mc",form:"predict",s,a,b,va,vb,r,opts,hints,html:`<span class="pt">Predict, then watch</span>Between <b>${a}</b> and <b>${b}</b>, what happened to <b>${s[1]}</b>?`,cap:`${s[1]}, ${a} to ${b}: ${fv(s,va)} to ${fv(s,vb)} ${s[3]}`}}
+  if(type==="order"){let ev;let tries=0;do{ev=shuffle(EVENTS).slice(0,4);tries++}while(tries<300&&ev.some((e,i)=>ev.some((f,j)=>i!==j&&Math.abs(e[0]-f[0])<3)));
+    const sorted=ev.slice().sort((x,y)=>x[0]-y[0]);const n19=ev.filter(e=>e[0]<1900).length;
+    const hints=[`Sort by century first: ${n19} of these happened before 1900.`,`The earliest one is: ${sorted[0][1]}.`,`The latest one is: ${sorted[3][1]}.`];
+    return {type,kind:"order",ev,sorted,hints,html:`<span class="pt">Put in order</span>Arrange these four events from <b>earliest</b> (top) to <b>latest</b> (bottom).`,cap:sorted.map(e=>e[0]).join(", ")}}
+  /* when */
+  const e=pick(EVENTS);const others=[];shuffle(EVENTS).forEach(f=>{if(others.length<3&&Math.abs(f[0]-e[0])>=8&&others.every(o=>Math.abs(o[0]-f[0])>=8))others.push(f)});
+  const opts=shuffle([e].concat(others)).map(f=>({t:String(f[0]),ok:f===e,why:f===e?`Yes. ${e[0]}: ${e[1]}.`:`${f[0]} is too ${f[0]<e[0]?"early":"late"}. In ${f[0]}: ${f[1]}. This event came in ${e[0]}.`}));
+  const anchor=EVENTS.filter(f=>Math.abs(f[0]-e[0])>=5&&Math.abs(f[0]-e[0])<=30&&f!==e);const an=anchor.length?pick(anchor):null;
+  const hints=[`It belongs to the era: ${ERAS[eraOf(e[0])][0].toLowerCase()} (${ERAS[eraOf(e[0])][1]}).`,an?`It happened ${an[0]<e[0]?"after":"before"} this: ${an[0]}, ${an[1]}.`:`Think about which century it belongs to.`,`Two wrong years are crossed out.`];
+  return {type,kind:"mc",form:"when",e,opts,hints,html:`<span class="pt">When did it happen?</span><b>${e[1]}</b>`,cap:`${e[1]}: ${e[0]}`}}
+const TR={type:"predict",p:null,hint:0,streak:0,best:+(store.get("best")||0),solved:0,first:true,show:false,t0:0,answered:-1,order:[]};
+function judge(p,s){if(p.kind==="mc"){const i=+s;return {ok:!!(p.opts[i]&&p.opts[i].ok)}}
+  if(p.kind==="order"){const arr=s;if(!Array.isArray(arr)||arr.length!==4)return {ok:false};for(let i=1;i<4;i++)if(p.ev[arr[i]][0]<p.ev[arr[i-1]][0])return {ok:false};return {ok:true}}return {ok:false}}
+function calcNew(){TR.p=genOne(TR.type);TR.hint=0;TR.first=true;TR.show=false;TR.answered=-1;TR.t0=performance.now();$("#calcProb").innerHTML=TR.p.html;$("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcHintBox").innerHTML="";
+  const mc=TR.p.kind==="mc";$("#calcMC").hidden=!mc;$("#ordList").hidden=mc;$("#calcCheck").hidden=mc;
+  if(mc){$("#calcMC").innerHTML="";TR.p.opts.forEach((o,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o.t;b.onclick=()=>calcPick(i,b);$("#calcMC").appendChild(b)})}
+  else{TR.order=[0,1,2,3];ordRender()}
+  $("#calcCap").textContent=TR.p.form==="predict"?"Make your prediction; then the curve plays through the shaded years.":TR.p.kind==="order"?"Order the cards, then check; the events then drop onto the timeline.":"Pick a year; the event then drops onto the timeline.";a11yKey=""}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcWin(){TR.solved++;if(TR.first&&!TR.show){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}updCalcMeter()}
+function calcPick(i,b){const o=TR.p.opts[i];$("#calcMC").querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+  if(o.ok){b.classList.add("right");calcMsg("good","✓ "+o.why);if(TR.answered<0){TR.answered=i;TR.t0=performance.now();calcWin()}$("#calcCap").textContent="Watch: "+TR.p.cap+"."}
+  else{b.classList.add("wrong");calcMsg("warn","Not quite. "+o.why);if(TR.first){TR.first=false;TR.streak=0;updCalcMeter()}}a11yKey=""}
+/* ordering list */
+function ordRender(){const ol=$("#ordList");ol.innerHTML="";const done=TR.answered>=0||TR.show;TR.order.forEach((k,pos)=>{const e=TR.p.ev[k];const li=document.createElement("li");li.className="item";li.dataset.k=k;
+    li.innerHTML=`<span class="pos">${pos+1}</span><span class="grip" aria-hidden="true">⠿</span><span class="txt">${e[1]}${done?` <span class="yr">(${e[0]})</span>`:""}</span><span class="mv"><button type="button" aria-label="Move up: ${e[1]}">▲</button><button type="button" aria-label="Move down: ${e[1]}">▼</button></span>`;
+    const [up,dn]=li.querySelectorAll(".mv button");up.disabled=pos===0;dn.disabled=pos===3;up.onclick=()=>ordMove(pos,-1);dn.onclick=()=>ordMove(pos,1);
+    li.addEventListener("pointerdown",ev=>{if(ev.target.closest("button"))return;ordDragStart(ev,li)});ol.appendChild(li)})}
+function ordMove(pos,d){const j=pos+d;if(j<0||j>3)return;[TR.order[pos],TR.order[j]]=[TR.order[j],TR.order[pos]];ordRender();const b=$("#ordList").children[j].querySelectorAll(".mv button")[d<0?0:1];if(b&&!b.disabled)b.focus();else{const o=$("#ordList").children[j].querySelector(".mv button:not([disabled])");if(o)o.focus()}a11yKey=""}
+let OD=null;
+function ordDragStart(e,li){if(e.button>0)return;e.preventDefault();li.setPointerCapture(e.pointerId);OD={li,y0:e.clientY,id:e.pointerId};li.classList.add("drag");
+  li.onpointermove=ev=>{if(!OD||ev.pointerId!==OD.id)return;let dy=ev.clientY-OD.y0;const nx=li.nextElementSibling,pv=li.previousElementSibling;
+    if(dy>0&&nx){const h=nx.offsetHeight+7;if(dy>h/2){li.parentNode.insertBefore(nx,li);OD.y0+=h;dy-=h}}
+    if(dy<0&&pv){const h=pv.offsetHeight+7;if(-dy>h/2){li.parentNode.insertBefore(pv,li.nextSibling);OD.y0-=h;dy+=h}}
+    li.style.transform=`translateY(${dy}px)`};
+  li.onpointerup=li.onpointercancel=ev=>{if(!OD)return;li.style.transform="";li.classList.remove("drag");li.onpointermove=null;li.onpointerup=null;li.onpointercancel=null;OD=null;
+    TR.order=[...$("#ordList").children].map(x=>+x.dataset.k);ordRender();a11yKey=""}}
+$("#calcCheck").onclick=()=>{const p=TR.p;if(p.kind!=="order")return;const j=judge(p,TR.order);const items=$("#ordList").children;
+  if(j.ok){calcMsg("good","✓ Right order: "+p.sorted.map(e=>e[0]).join(", ")+". Watch them land on the timeline.");if(TR.answered<0){TR.answered=1;TR.t0=performance.now();calcWin()}ordRender();[...$("#ordList").children].forEach(x=>x.classList.add("right"))}
+  else{let firstBad=-1;for(let i=0;i<4;i++){if(p.ev[TR.order[i]]!==p.sorted[i]){firstBad=i;break}}[...items].forEach((x,i)=>x.classList.toggle("off",i>=firstBad));calcMsg("warn",`Not quite. The first ${firstBad} ${firstBad===1?"card is":"cards are"} in the right place; check from position ${firstBad+1} down. Try a hint.`);if(TR.first){TR.first=false;TR.streak=0;updCalcMeter()}}a11yKey=""};
+$("#calcHint").onclick=()=>{const p=TR.p;if(TR.hint<3)TR.hint++;const hb=$("#calcHintBox");hb.hidden=false;hb.innerHTML=`<b>Hint ${TR.hint} of 3</b><ol class="hintlist">`+p.hints.slice(0,TR.hint).map(h=>`<li>${h}</li>`).join("")+"</ol>";
+  if(TR.hint===3&&p.kind==="mc"){let k=0;$("#calcMC").querySelectorAll(".opt").forEach((b,i)=>{if(!p.opts[i].ok&&k<2&&!b.classList.contains("hide")){b.classList.add("hide");b.setAttribute("aria-label",b.textContent+" (ruled out)");k++}})}};
+$("#calcSol").onclick=()=>{TR.show=true;TR.t0=performance.now();TR.first=false;TR.streak=0;updCalcMeter();const p=TR.p;
+  if(p.kind==="mc"){const i=p.opts.findIndex(o=>o.ok);const b=$("#calcMC").querySelectorAll(".opt")[i];b.classList.add("right");calcMsg("info","Answer: "+p.opts[i].t+". "+p.opts[i].why.replace(/^Yes\. /,""));TR.answered=i}
+  else{TR.order=p.sorted.map(e=>p.ev.indexOf(e));ordRender();[...$("#ordList").children].forEach(x=>x.classList.add("right"));calcMsg("info","Answer, earliest first: "+p.sorted.map(e=>e[0]+" "+e[1]).join("; ")+".")}a11yKey=""};
+$("#calcNew").onclick=calcNew;
+$("#calcType").innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");$("#calcType").onchange=e=>{TR.type=e.target.value;calcNew()};
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.solved}
+/* ---------- trainer picture ---------- */
+function drawCalc(now){use(S2);const T=now/1000;const p=TR.p;if(!p)return;const solved=TR.answered>=0||TR.show;const ts=(now-TR.t0)/1000;
+  if(p.form==="predict"){const s=p.s;const x0=s[4]<1900?1840:1900,x1=2025;const mx=Math.max(...s[2].filter(r=>r[0]>=x0).map(r=>r[1]));const y1=s[3]==="years"?85:Math.ceil(mx*1.2/10)*10;const y0=s[3]==="years"?30:0;
+    panelBox(10,10,780,450);const g={x:70,y:60,w:680,h:320,x0,x1,y0,y1,xt:x0<1900?[1850,1900,1950,2000]:[1900,1925,1950,1975,2000,2025],yt:[y0,lerp(y0,y1,.5),y1].map(v=>Math.round(v)),title:s[1]+(s[3]==="percent"?" (%)":" ("+s[3]+")"),xl:"year"};
+    graph(g);rr(g.X(p.a),g.y,g.X(p.b)-g.X(p.a),g.h,0);ctx.fillStyle=hexA(C.gold,.18);ctx.fill();line(g.X(p.a),g.y,g.X(p.a),g.y+g.h,C.gold,1.6,[4,3]);line(g.X(p.b),g.y,g.X(p.b),g.y+g.h,C.gold,1.6,[4,3]);
+    curve(g,t=>pw(s[2],t),x0,p.a,C.evid,3);gdot(g,p.a,p.va,C.evid,fv(s,p.va),{dy:-18});
+    if(!solved){txt((g.X(p.a)+g.X(p.b))/2,g.y+g.h/2,"?",{size:44,weight:700,align:"center",color:C["ink-soft"]});label((g.X(p.a)+g.X(p.b))/2,g.y-12,p.a+" to "+p.b,{size:12,weight:700,border:C.gold});txt(70,420,"The curve stops at "+p.a+". Predict how it moves through the shaded years.",{size:13,weight:600});return}
+    const f=clamp(ts/3,0,1);const te=lerp(p.a,x1,smooth(f));curve(g,t=>pw(s[2],t),p.a,Math.min(te,p.b),C.accent,3.6);if(te>p.b)curve(g,t=>pw(s[2],t),p.b,te,hexA(C.evid,.6),2.4);
+    if(te>=p.b){gdot(g,p.b,p.vb,C.accent,fv(s,p.vb),{dy:-18});const up=p.vb>=p.va;label((g.X(p.a)+g.X(p.b))/2,g.y+16,"change: "+(up?"+":"−")+Math.round(Math.abs(p.r-1)*100)+"%",{size:13,weight:700,mono:true,border:up?C.good:C.bad})}
+    txt(70,420,PCAT[catOf(p.r)]+": about "+fv(s,p.va)+" to about "+fv(s,p.vb)+" "+s[3]+".",{size:13,weight:600});return}
+  /* timeline types */
+  panelBox(10,10,780,450);const evs=p.kind==="order"?p.sorted:[p.e];const yrs=evs.map(e=>e[0]);let lo=Math.min(...yrs),hi=Math.max(...yrs);if(p.form==="when"){lo=Math.min(lo,...p.opts.map(o=>+o.t));hi=Math.max(hi,...p.opts.map(o=>+o.t))}
+  const pad=Math.max(8,(hi-lo)*.12);const a=Math.floor((lo-pad)/10)*10,b=Math.ceil((hi+pad)/10)*10;const step=b-a>120?25:b-a>60?10:5;
+  title(26,30,p.kind==="order"?"Timeline":"Where does it fall?",C["ink-soft"]);eraBands(40,48,720,20,a,b,{});const AX=p.kind==="order"?290:250;const X=timelineAxis(40,AX,720,a,b,step);
+  if(p.form==="when"){p.opts.forEach((o,i)=>{const x=X(+o.t);const hidden=$("#calcMC").children[i]&&$("#calcMC").children[i].classList.contains("hide");withA(hidden?.3:1,()=>{line(x,236,x,264,C["ink-soft"],2);label(x,284,o.t,{size:12,weight:700,mono:true,border:C.rule})})})}
+  if(!solved){if(p.kind==="order"){TR.order.forEach((k,i)=>{const e=p.ev[k];panelBox(40+i*182,340,172,106,{stroke:C.rule});wrapText(e[1],40+i*182+12,362,150,15,{size:11.5});badge(40+i*182+160,340,i+1,C.accent,11)});txt(400,100,"Your order is shown below. Check it to see the real dates.",{size:13,weight:600,align:"center"})}
+    else{wrapText(p.e[1],60,120,680,20,{size:15,weight:700});txt(400,190,"?",{size:40,weight:700,align:"center",color:C["ink-soft"]})}return}
+  evs.forEach((e,i)=>{const f=smooth(clamp((ts-i*.7)/1,0,1));if(f<=0)return;const x=X(e[0]);const ty=p.kind==="order"?96+i*44:120;const y=lerp(ty-60,ty,f);
+    withA(f,()=>{line(x,y+18,x,AX-6,C.accent,1.6,[3,3]);circ(x,AX,7,C.accent,C.panel,2);const w=p.kind==="order"?250:300;const bx=clamp(x-w/2,20,780-w);panelBox(bx,y-22,w,40,{stroke:C.accent});txt(bx+8,y-8,String(e[0]),{size:12,weight:700,mono:true,color:C["accent-ink"]});
+      const t_=e[1].length>(p.kind==="order"?40:52)?e[1].slice(0,e[1].lastIndexOf(" ",p.kind==="order"?38:50))+" ...":e[1];txt(bx+8,y+8,t_,{size:11.5})})});
+  if(p.kind==="order")p.sorted.forEach((e,i)=>{const f=smooth(clamp((ts-2.8-i*.3)/.8,0,1));if(f<=0)return;withA(f,()=>{panelBox(40+i*182,340,172,106,{stroke:C.good});badge(40+i*182+160,340,i+1,C.good,11);txt(40+i*182+12,362,String(e[0]),{size:13,weight:700,mono:true,color:C.good});wrapText(e[1],40+i*182+12,384,150,15,{size:11.5})})});
+  else{const near=EVENTS.filter(f=>f!==p.e&&f[0]>=a&&f[0]<=b).sort((u,v)=>Math.abs(u[0]-p.e[0])-Math.abs(v[0]-p.e[0])).slice(0,4).sort((u,v)=>u[0]-v[0]);title(40,326,"Nearby events for context",C["ink-soft"]);near.forEach((f,i)=>{const x=X(f[0]);const ff=smooth(clamp((ts-1-i*.3)/.8,0,1));withA(ff,()=>{circ(x,250,4,C["ink-soft"]);label(46,352+i*26,f[0]+": "+f[1],{size:11.5,weight:600,align:"left",border:C.rule})})})}}
+function calcA11y(){const p=TR.p;if(!p)return [null,""];const solved=TR.answered>=0||TR.show;const plain=p.html.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+  if(p.form==="predict")return ["Trainer: "+(solved?p.cap:"prediction waiting"),"Problem: "+plain+" A line chart shows "+p.s[1]+" up to "+p.a+", with the years "+p.a+" to "+p.b+" shaded gold. "+(solved?"The curve now plays through the shaded years: "+p.cap+".":"The curve stops at the start of the shaded years until you predict.")];
+  if(p.kind==="order")return ["Trainer: "+(solved?"events placed on the timeline":"order the events"),"Problem: "+plain+" "+(solved?"The events drop onto a timeline in order: "+p.sorted.map(e=>e[0]+", "+e[1]).join("; ")+".":"Four cards below an empty timeline show your current order: "+TR.order.map(k=>p.ev[k][1]).join("; ")+".")];
+  return ["Trainer: "+(solved?p.cap:"pick a year"),"Problem: "+plain+" A timeline shows the four answer years as tick marks. "+(solved?"The event now sits at "+p.e[0]+", with nearby events shown for context.":"The event is placed after you answer.")]}
+/* ================= PART 3: sorting game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;const st='stroke="var(--ink)" stroke-width="1"';
+  const person=(x,y,c)=>`<circle cx="${x}" cy="${y-9}" r="5" fill="var(--skin2)" ${st}/><rect x="${x-6}" y="${y-4}" width="12" height="14" rx="4" fill="${c}"/>`;
+  switch(k){
+    case "conv":return sv(`<rect x="4" y="6" width="48" height="34" rx="6" fill="var(--g-reg)" opacity=".2" stroke="var(--g-reg)" stroke-width="2"/>`+person(18,28,"#fff")+`<rect x="32" y="14" width="12" height="20" rx="3" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="32" y="14" width="12" height="6" rx="2" fill="var(--g-reg)"/>`);
+    case "comp":return sv(`<rect x="2" y="10" width="24" height="26" rx="5" fill="var(--g-reg)" opacity=".35"/><rect x="30" y="10" width="24" height="26" rx="5" fill="var(--g-cih)" opacity=".35"/><text x="28" y="27" font-size="14" text-anchor="middle" fill="var(--ink)" font-family="monospace" font-weight="700">+</text>`);
+    case "alt":return sv(`<rect x="2" y="10" width="24" height="26" rx="5" fill="none" stroke="var(--g-reg)" stroke-width="2" stroke-dasharray="3 3"/><rect x="30" y="10" width="24" height="26" rx="5" fill="var(--g-cih)" opacity=".5"/><path d="M6 14 L22 32 M22 14 L6 32" stroke="var(--bad)" stroke-width="2.5"/>`);
+    case "integ":return sv(`<rect x="2" y="10" width="20" height="26" rx="5" fill="var(--g-reg)" opacity=".45"/><rect x="34" y="10" width="20" height="26" rx="5" fill="var(--g-cih)" opacity=".45"/><rect x="20" y="18" width="16" height="10" rx="3" fill="var(--good)"/>`);
+    case "holi":return sv(`<circle cx="28" cy="23" r="19" fill="var(--gold)" opacity=".25" stroke="var(--gold)" stroke-width="2"/>`+person(28,30,"var(--shirt3)"));
+    case "era0":return sv(`<rect x="6" y="18" width="12" height="20" fill="var(--g-reg)"/><rect x="22" y="18" width="12" height="20" fill="var(--g-thom)"/><rect x="38" y="18" width="12" height="20" fill="var(--g-homeo)"/><path d="M4 18 L52 18 L48 10 L8 10 Z" fill="var(--roof)"/>`);
+    case "era1":return sv(`<rect x="22" y="6" width="8" height="24" rx="2" fill="var(--metal)" transform="rotate(-20 26 18)"/><rect x="14" y="34" width="28" height="6" rx="2" fill="var(--metal)"/><rect x="25" y="26" width="6" height="10" fill="var(--metal)"/>`);
+    case "era2":return sv(`<rect x="10" y="14" width="30" height="26" fill="var(--wall)" ${st}/><rect x="22" y="4" width="6" height="14" fill="var(--inf)"/><rect x="18" y="8" width="14" height="6" fill="var(--inf)"/><circle cx="46" cy="34" r="7" fill="var(--money)" ${st}/>`);
+    case "era3":return sv(`<path d="M28 40 C10 28 10 12 20 10 C25 9 28 14 28 16 C28 14 31 9 36 10 C46 12 46 28 28 40Z" fill="var(--inf)"/>`);
+    case "era4":return sv(`<rect x="2" y="12" width="20" height="22" rx="5" fill="var(--g-reg)"/><rect x="34" y="12" width="20" height="22" rx="5" fill="var(--g-cih)"/><path d="M22 23 H34" stroke="var(--good)" stroke-width="4"/>`);
+    case "reg":return sv(`<ellipse cx="28" cy="36" rx="16" ry="5" fill="var(--metal)"/><path d="M28 6 C32 14 34 18 28 22 C22 18 24 14 28 6Z" fill="var(--blood)"/><path d="M14 10 L30 18" stroke="var(--metal)" stroke-width="3"/>`);
+    case "thom":return sv(`<rect x="8" y="22" width="22" height="18" rx="2" fill="var(--wood)"/><circle cx="14" cy="16" r="4" fill="var(--steam)"/><circle cx="22" cy="12" r="5" fill="var(--steam)"/><path d="M42 40 V14" stroke="var(--leaf)" stroke-width="2"/><ellipse cx="38" cy="22" rx="5" ry="2.5" fill="var(--leaf)"/><ellipse cx="46" cy="28" rx="5" ry="2.5" fill="var(--leaf)"/><circle cx="42" cy="12" r="3" fill="var(--g-homeo)"/>`);
+    case "homeo":return sv([8,22,36].map((x,i)=>`<rect x="${x}" y="8" width="10" height="30" rx="3" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="${x}" y="${22}" width="10" height="16" rx="3" fill="var(--g-homeo)" opacity="${.7-i*.25}"/>`).join(""));
+    case "ecl":return sv(`<path d="M16 40 V14" stroke="var(--leaf)" stroke-width="2"/><ellipse cx="12" cy="22" rx="5" ry="2.5" fill="var(--g-ecl)"/><ellipse cx="20" cy="28" rx="5" ry="2.5" fill="var(--g-ecl)"/><path d="M38 40 V14" stroke="var(--leaf)" stroke-width="2"/><ellipse cx="34" cy="20" rx="5" ry="2.5" fill="var(--g-ecl)"/><ellipse cx="42" cy="26" rx="5" ry="2.5" fill="var(--g-ecl)"/><circle cx="38" cy="12" r="3" fill="var(--gold)"/>`);
+    case "hydro":return sv(`<path d="M10 8 H40 V14" stroke="var(--metal)" stroke-width="3" fill="none"/>`+[16,24,32,40].map((x,i)=>`<circle cx="${x}" cy="${20+i%2*6}" r="2.5" fill="var(--water)"/>`).join("")+`<ellipse cx="28" cy="38" rx="20" ry="5" fill="var(--water)" opacity=".5"/>`);
+    case "bio":return sv(`<circle cx="28" cy="23" r="17" fill="var(--evid)" opacity=".2" stroke="var(--evid)" stroke-width="2"/><circle cx="28" cy="23" r="6" fill="var(--evid)"/>`);
+    case "bps":return sv(`<circle cx="28" cy="17" r="12" fill="var(--evid)" opacity=".35"/><circle cx="20" cy="29" r="12" fill="var(--symp)" opacity=".35"/><circle cx="36" cy="29" r="12" fill="var(--para)" opacity=".35"/>`);
+    case "medicare":return sv(`<rect x="6" y="8" width="44" height="30" rx="6" fill="var(--gov)" opacity=".25" stroke="var(--gov)" stroke-width="2"/><text x="28" y="28" font-size="12" text-anchor="middle" fill="var(--ink)" font-family="monospace" font-weight="700">65+</text>`);
+    case "medicaid":return sv(`<rect x="6" y="8" width="44" height="30" rx="6" fill="var(--g-osteo)" opacity=".25" stroke="var(--g-osteo)" stroke-width="2"/>`+person(20,30,"var(--shirt1)")+person(36,32,"var(--shirt2)"));
+    case "employer":return sv(`<rect x="10" y="12" width="36" height="26" rx="2" fill="var(--wall)" ${st}/><path d="M10 12 L28 4 L46 12Z" fill="var(--money)"/><circle cx="28" cy="25" r="6" fill="var(--money)" ${st}/>`);
+    case "oop":return sv(`<rect x="8" y="14" width="40" height="22" rx="6" fill="var(--wood)"/><circle cx="20" cy="25" r="6" fill="var(--money)" ${st}/><circle cx="34" cy="25" r="6" fill="var(--money)" ${st}/>`);
+  }return ""}
+/* card: [text, bin, why] */
+const SROUNDS=[
+ {name:"Five key terms",goal:"Sort each situation by the term that fits it best: conventional, complementary, alternative, integrative or holistic.",
+  bins:[["conv","Conventional"],["comp","Complementary (used with)"],["alt","Alternative (used instead of)"],["integ","Integrative (coordinated)"],["holi","Holistic (whole person philosophy)"]],
+  cards:[["A family doctor prescribes a blood pressure medicine","conv","Care from medical doctors using mainstream treatments is conventional."],
+   ["A physical therapist leads exercise therapy for back pain","conv","Physical therapists are allied health professionals within conventional care."],
+   ["A patient adds massage on her own while still seeing her physical therapist","comp","Used together with conventional care, but not coordinated: complementary."],
+   ["Weekly yoga classes alongside cardiac rehab, with no contact between the two","comp","Both are used, side by side, without a shared plan: complementary."],
+   ["Using only herbal remedies instead of recommended cancer treatment","alt","Used in place of conventional care: alternative. For serious illness this can be risky."],
+   ["Stopping prescribed insulin and relying on a special diet alone","alt","Replacing conventional treatment is alternative use, and here it is dangerous."],
+   ["A cancer center team adds acupuncture for nausea during chemotherapy, with shared notes","integ","One team coordinates both, with attention to evidence and safety: integrative."],
+   ["A pain clinic plans medicine, physical therapy and a mindfulness program as one plan","integ","Conventional and complementary care in one coordinated plan: integrative."],
+   ["A doctor asks about sleep, stress, family and work, not just the lab results","holi","Caring for the whole person is a holistic philosophy any clinician can use."],
+   ["A chiropractor considers a patient's job, mood and support at home when planning care","holi","Looking at the whole person and their life is a holistic approach."]]},
+ {name:"Event to era",goal:"Place each event in its era.",
+  bins:[["era0","Healers compete (1800 to 1870)"],["era1","Labs and reform (1870 to 1920)"],["era2","Hospitals and insurance (1920 to 1965)"],["era3","Big programs, chronic disease (1965 to 1990)"],["era4","Integrative era (1990 to today)"]],
+  cards:[["Thomson patents his botanical system","era0","1813: Thomsonian medicine spreads in the age of pluralism."],["The AMA is founded","era0","1847: regular physicians organize."],["Homeopathy arrives in the United States","era0","1825: one of the main rival systems arrives."],
+   ["Koch finds the tuberculosis bacterium","era1","1882: germ theory and the lab revolution."],["The Flexner Report","era1","1910: the report that led to many school closings."],["Johns Hopkins medical school opens","era1","1893: the new model of medical education."],
+   ["A prepaid hospital plan for Dallas teachers","era2","1929: the idea behind Blue Cross."],["Penicillin is mass produced","era2","The 1940s: the antibiotic era begins."],
+   ["Medicare and Medicaid are signed","era3","1965: government becomes a major payer; this begins the era."],["Engel proposes the biopsychosocial model","era3","1977: a wider model of health and illness."],
+   ["NCCAM is established at NIH","era4","1998: federal research on complementary approaches expands."],["NCCAM is renamed NCCIH","era4","2014: the shift toward integrative health."]]},
+ {name:"Healers and their ideas",goal:"Match each idea or practice to the 19th century group it belongs to.",
+  bins:[["reg","Regular physicians"],["thom","Thomsonians"],["homeo","Homeopaths"],["ecl","Eclectics"],["hydro","Hydropaths (water cure)"]],
+  cards:[["Bloodletting and calomel to restore balance","reg","Heroic medicine was practised by many regular physicians early in the 1800s."],["Later built its authority on lab science and germ theory","reg","Regulars used the lab revolution to claim scientific authority."],
+   ["Lobelia, cayenne pepper and steam baths","thom","Thomson's remedies were based on heat and plants."],["Families bought the right to use the system at home","thom","Thomson sold family rights with a guidebook."],
+   ["Like cures like","homeo","A core idea of homeopathy, taught here as a historical model."],["Remedies diluted again and again with shaking","homeo","Homeopathy's infinitesimal doses."],
+   ["Botanical drugs plus any method that seemed to work","ecl","Eclectic means choosing from many sources."],["Its main school opened in Cincinnati in 1845","ecl","The eclectics' main school; the last eclectic school closed in 1939."],
+   ["Wet sheet wraps, baths, plain diet and rest","hydro","The water cure."],["Resorts where patients stayed for weeks","hydro","Water cure resorts were popular from the 1840s."]]},
+ {name:"Two models of health",goal:"Is each statement closer to the biomedical model or to Engel's biopsychosocial model?",
+  bins:[["bio","Biomedical model"],["bps","Biopsychosocial model"]],
+  cards:[["Disease is explained by measurable changes in cells and molecules","bio","The biomedical model defines disease by biology."],["The body is studied by breaking it into smaller and smaller parts","bio","Reductionism is central to the biomedical model."],
+   ["Diagnosis rests on finding a biological cause, such as a germ or a blocked artery","bio","The biomedical model looks for a biological cause."],["Mind and body are treated as separate topics","bio","Engel criticized the biomedical model for separating mind and body."],
+   ["Stress and sleep can change how much pain a person feels","bps","Psychological factors interact with biology."],["Family, work and income are part of the health picture","bps","Social factors are one of the three parts."],
+   ["Proposed by George Engel in 1977","bps","Engel described the biopsychosocial model in 1977."],["Two people with the same scan can have very different disability","bps","Biology alone does not explain the difference; mind and social life matter too."]]},
+ {name:"Who pays?",goal:"Match each situation to how the bill is mainly paid.",
+  bins:[["medicare","Medicare"],["medicaid","Medicaid"],["employer","Employer insurance"],["oop","Out of pocket"]],
+  cards:[["A 70 year old retiree's hospital stay in 1970","medicare","Medicare mainly covers adults 65 and older."],["Federal coverage mainly for adults 65 and older","medicare","That is Medicare, created in 1965."],
+   ["Coverage for a family with a very low income, run by the federal government and the state","medicaid","Medicaid is joint federal and state coverage for low incomes."],["A joint federal and state program created in 1965","medicaid","Medicaid, signed along with Medicare."],
+   ["A factory worker's plan offered as a job benefit","employer","Job based coverage is employer insurance."],["Grew during World War II when wages were limited","employer","Employers offered benefits instead of raises."],
+   ["A patient in 1900 paying the doctor in cash or farm goods","oop","Before insurance, patients paid directly."],["An uninsured adult paying the full bill for a clinic visit","oop","Without coverage, the patient pays out of pocket."]]}
+];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in real life ================= */
+function bubble(x,y,w,h,text,col,tx,ty){rr(x,y,w,h,10);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=col||C.rule;ctx.lineWidth=1.6;ctx.stroke();if(tx!=null){ctx.beginPath();ctx.moveTo(x+w*.3,y+h);ctx.lineTo(tx,ty);ctx.lineTo(x+w*.45,y+h);ctx.closePath();ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=col||C.rule;ctx.stroke()}wrapText(text,x+10,y+16,w-20,16,{size:12})}
+function seated(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);rr(-14,8,28,6,2);ctx.fillStyle=C.wood;ctx.fill();line(-12,14,-12,34,C.wood,3);line(12,14,12,34,C.wood,3);ctx.restore();person(x,y+8*s,s,o)}
+const LIFE=[
+ {who:"Scenario 1 · Present day",name:"Explaining integrative care",
+  story:"Maria, 46, has had low back pain for eight months. Physical therapy is helping somewhat. A friend told her about an integrative clinic at a large medical center. At her visit she asks: \"Does integrative mean I stop seeing my regular doctor? And will acupuncture fix my back?\"",
+  cap:"One coordinated plan links conventional and complementary care.",
+  desc:"A clinician in a white coat and Maria sit facing each other on the left, with a speech bubble from Maria asking if integrative means she stops seeing her doctor. On the right, a care plan card in the centre is linked by pulsing green lines to four boxes: family doctor, physical therapy and exercise, acupuncture or massage, and a mindfulness program. A small gold check labelled evidence and safety check sits on the link lines.",
+  draw(T){panelBox(10,10,780,450);title(24,30,"Present day clinic",C["ink-soft"]);
+    seated(110,300,1.6,{i:0,coat:true});seated(250,300,1.6,{i:2,shirt:"shirt2"});label(110,390,"clinician",{size:12,weight:700,border:C["g-reg"]});label(250,390,"Maria, 46",{size:12,weight:700,border:C["g-cih"]});
+    bubble(150,70,240,74,"Does integrative mean I stop seeing my regular doctor?",C["g-cih"],245,226);
+    const cx=590,cy=240;const nodes=[["family doctor",470,110,"g-reg"],["physical therapy and exercise",704,110,"g-reg"],["acupuncture or massage",470,370,"g-cih"],["mindfulness program",704,370,"g-cih"]];
+    nodes.forEach((n,i)=>{const p=.5+.5*Math.sin(T*2.4-i*1.2);line(n[1],n[2],cx,cy,hexA(C.good,.4+.5*p),2+2*p);const q=P(T*.4+i/4,1);circ(lerp(n[1],cx,q),lerp(n[2],cy,q),4,C.good)});
+    nodes.forEach(n=>{rr(n[1]-72,n[2]-22,144,44,8);ctx.fillStyle=hexA(C[n[3]],.15);ctx.fill();ctx.strokeStyle=C[n[3]];ctx.lineWidth=2;ctx.stroke();wrapText(n[0],n[1]-62,n[2]-(n[0].length>20?6:0),124,15,{size:12,weight:600})});
+    rr(cx-62,cy-32,124,64,8);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=2.4;ctx.stroke();txt(cx,cy-10,"one shared",{size:13,weight:700,align:"center"});txt(cx,cy+10,"care plan",{size:13,weight:700,align:"center"});
+    label(cx,cy+52,"evidence and safety check",{size:11.5,weight:700,border:C.gold,bg:C["gold-wash"]})},
+  qs:[{q:"Which explanation of integrative care is most accurate?",opts:[
+     ["It coordinates her conventional care with evidence informed complementary approaches in one plan, and she keeps her doctor",true,"Yes. Integrative means coordinated use of both, not replacing one with the other."],
+     ["It replaces her doctor with natural therapies",false,"That describes alternative use, which means instead of conventional care."],
+     ["It means every therapy she chooses is proven and covered by insurance",false,"Evidence and coverage vary a lot between therapies; integrative teams weigh both."],
+     ["It is another word for a set of herbal treatments",false,"Integrative describes how care is coordinated, not a specific set of treatments."]]},
+   {q:"Maria asks if acupuncture will help her back. Which reply is most evidence based?",opts:[
+     ["Research suggests it may give modest short term relief for some people with chronic low back pain, trials of real and sham needling often come out closer than expected, and exercise has the strongest evidence",true,"Yes. That is honest, modest and keeps exercise at the center."],
+     ["It is proven to cure back pain permanently",false,"No therapy for chronic low back pain has that kind of evidence."],
+     ["It has no effect at all, so she should not ask about it",false,"That overstates the evidence and shuts down an open conversation."],
+     ["It works only for people who believe in qi",false,"Trials do not show that benefit depends on belief in a traditional concept."]]},
+   {q:"Maria also takes an herbal supplement she did not mention before. What should the team do?",opts:[
+     ["Ask about all supplements openly and without judgment, and check them for interactions with her medicines",true,"Yes. Many patients do not mention supplements unless asked, and some interact with medicines."],
+     ["Ignore it, because natural products are always safe",false,"Natural does not mean safe; some herbs interact with medicines or are contaminated."],
+     ["Tell her she must stop all complementary care",false,"That ends the conversation. The goal is a safe, shared plan."],
+     ["Tell only the acupuncturist",false,"Everyone on the team, especially the prescriber, needs to know."]]}]},
+ {who:"Scenario 2 · Ohio, 1905",name:"A 1905 patient chooses a healer",
+  story:"Walter, 38, works at a sawmill in a small Ohio town in 1905. Two days ago he cut his hand deeply. Now it is red, hot and swollen, and a red streak is creeping up his arm. On Main Street he can visit a regular physician and surgeon who works at the new town hospital, a homeopathic physician his aunt trusts, an eclectic doctor, or the general store, which sells a bottled patent medicine promising to cure blood poison.",
+  cap:"1905: many choices, very different tools.",
+  desc:"A small town main street in 1905 runs across the picture with four storefronts: Physician and Surgeon with a red cross hospital behind it, Homeopathic Physician in violet, Eclectic Doctor in green, and a General Store with patent medicine bottles in the window. Walter stands in the street with a bandaged hand that glows red, and a red streak climbs his arm. A thought bubble above him cycles through the four choices, highlighting each storefront in turn.",
+  draw(T){panelBox(10,10,780,450);title(24,30,"Main Street, 1905",C["ink-soft"]);ctx.fillStyle=C.street;ctx.fillRect(12,360,776,98);
+    const shops=[["Physician and Surgeon","g-reg"],["Homeopathic Physician","g-homeo"],["Eclectic Doctor","g-ecl"],["General Store","g-patent"]];const k=Math.floor(P(T,12)*4);
+    building(600,120,150,90,{cross:true,roof:"flat",lit:.5,roofCol:C.inf});label(675,230,"town hospital",{size:11.5,weight:700,border:C.inf});
+    shops.forEach((s,i)=>{const x=30+i*140,y=220;const on=i===k;building(x,y,124,130,{roofCol:C[s[1]],lit:on?.6:.2,seed:i});rr(x+6,y+6,112,26,4);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C[s[1]];ctx.lineWidth=on?3:1.5;ctx.stroke();wrapText(s[0],x+12,y+19-(s[0].length>14?6:0),102,13,{size:11,weight:700});
+      if(i===3){for(let j=0;j<4;j++){rr(x+16+j*24,y+50,12,30,3);ctx.fillStyle=hexA(C.money,.7);ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.stroke()}}if(on)glow(x+62,y+60,90,C[s[1]],.25)});
+    const wx=640,wy=400;person(wx,wy,1.6,{i:1,shirt:"shirt5"});glow(wx+16,wy-26,18+4*Math.sin(T*3),C.inf,.7);circ(wx+16,wy-26,6,C.sheet,C.inf,2);line(wx+14,wy-30,wx+10,wy-48,hexA(C.inf,.8),2.4);label(wx+60,wy-10,"Walter",{size:12,weight:700,border:C.accent});
+    bubble(520,290,250,46,"Which one can treat a spreading infection?",C.accent,wx,wy-56);
+    label(400,446,"Main street, 1905: four storefronts, very different tools",{size:12,weight:600,bg:C.panel})},
+  qs:[{q:"Which option offered something genuinely new and effective in 1905 for a spreading wound infection?",opts:[
+     ["The regular surgeon at the hospital, who could clean and drain the wound using aseptic technique",true,"Yes. Antibiotics did not exist yet, but surgical cleaning and drainage under aseptic conditions could save lives."],
+     ["The patent medicine, since its label promised to cure blood poison",false,"Before the 1906 Pure Food and Drug Act, labels did not have to list dangerous ingredients, and many bottles were mostly alcohol or contained narcotics. The promise was not tested."],
+     ["The homeopath, whose highly diluted remedies would clear the bacteria",false,"Homeopathy was gentler than heroic medicine, but highly diluted remedies cannot clear a bacterial infection."],
+     ["Waiting a week to see if it settles",false,"A red streak suggests a spreading infection, which could be deadly in 1905."]]},
+   {q:"By 1905, what did most states do about who could practise medicine?",opts:[
+     ["Required a state license, often after an exam; some states had separate boards for homeopaths and eclectics",true,"Yes. Licensing returned from the 1870s, and Dent v. West Virginia (1889) upheld it."],
+     ["Nothing, because licensing was repealed everywhere",false,"Repeal happened in the 1830s and 1840s; by 1905 nearly every state had a board again."],
+     ["Licensed only members of the AMA",false,"Licensing is a state matter, and boards did not require AMA membership."],
+     ["Banned homeopathy and eclectic medicine",false,"Both were legal and often licensed; their schools closed mostly after 1910."]]},
+   {q:"Why might Walter, like many people of his time, try more than one healer?",opts:[
+     ["No single group had full authority, care was paid out of pocket, and people mixed options based on cost, trust and results",true,"Yes. That is medical pluralism from the patient's side."],
+     ["His insurance required a second opinion",false,"Health insurance barely existed in 1905; patients paid directly."],
+     ["A law required him to visit every type of healer",false,"There was no such law; choice was up to the patient."],
+     ["Antibiotics were too expensive at the regular doctor",false,"Antibiotics did not exist until the late 1920s and were not in wide use until the 1940s."]]}]},
+ {who:"Scenario 3 · 1963 and 1967",name:"Before and after Medicare",
+  story:"Ruth, 70, is a retired seamstress. In the winter of 1963 she needs a hospital stay for pneumonia. Four years later, in 1967, she needs another one. Her job never offered health insurance, and she lives on a small Social Security check.",
+  cap:"The same patient, before and after 1965.",
+  desc:"The picture is split down the middle. On the left, labelled 1963, Ruth sits at a kitchen table under a lamp with a stack of bills, and gold coins drain out of her purse toward a hospital. On the right, labelled 1967, Ruth holds a blue card labelled Medicare, and coins flow from a blue Medicare box to the hospital instead. A banner across the middle reads July 1965: Medicare and Medicaid signed into law.",
+  draw(T){panelBox(10,10,385,450);panelBox(405,10,385,450);txt(200,34,"1963",{size:20,weight:700,mono:true,align:"center"});txt(597,34,"1967",{size:20,weight:700,mono:true,align:"center"});
+    rr(40,300,200,14,3);ctx.fillStyle=C.wood;ctx.fill();seated(110,280,1.5,{i:3,shirt:"shirt4"});for(let i=0;i<4;i++)docIcon(170+i*8,230-i*6,40,52,C.bad,4);label(200,330,"hospital bill",{size:12,weight:700,border:C.bad});
+    building(270,120,100,90,{cross:true,roof:"flat",lit:.4,roofCol:C.inf});for(let i=0;i<5;i++){const p=P(T*.4+i/5,1);coin(lerp(120,300,p),lerp(250,210,p)-Math.sin(p*Math.PI)*40,6)}
+    wrapText("Paid from savings, family help or charity",40,380,320,17,{size:12.5,weight:600});
+    label(400,72,"July 1965: Medicare and Medicaid signed into law",{size:12.5,weight:700,border:C.gov});
+    seated(480,280,1.5,{i:3,shirt:"shirt4"});rr(505,220,70,44,6);ctx.fillStyle=hexA(C.gov,.25);ctx.fill();ctx.strokeStyle=C.gov;ctx.lineWidth=2;ctx.stroke();txt(540,242,"Medicare",{size:12,weight:700,align:"center"});
+    rr(560,330,110,50,8);ctx.fillStyle=hexA(C.gov,.2);ctx.fill();ctx.strokeStyle=C.gov;ctx.lineWidth=2;ctx.stroke();txt(615,355,"Medicare",{size:13,weight:700,align:"center"});
+    building(670,120,100,90,{cross:true,roof:"flat",lit:.5,roofCol:C.inf});for(let i=0;i<5;i++){const p=P(T*.4+i/5,1);coin(lerp(640,710,p),lerp(330,215,p),6)}
+    wrapText("Medicare pays much of the hospital bill",430,410,320,17,{size:12.5,weight:600})},
+  qs:[{q:"In 1967, which program would most likely pay much of Ruth's hospital bill?",opts:[
+     ["Medicare",true,"Yes. Medicare covers most adults 65 and older, and coverage began in 1966."],
+     ["Employer insurance",false,"Ruth is retired and her job never offered coverage."],
+     ["Medicaid alone",false,"Medicaid covers people with low incomes and may help some older adults, but Medicare is the main program for people 65 and older."],
+     ["The Flexner Report fund",false,"There is no such fund; the Flexner Report was about medical schools in 1910."]]},
+   {q:"Why might Ruth have struggled to pay in 1963?",opts:[
+     ["Many older adults had no hospital insurance; job based plans often ended at retirement, and private plans were costly for older people",true,"Yes. This gap was a main argument for Medicare."],
+     ["Hospitals were free for everyone in 1963",false,"Hospitals charged patients; charity care existed but was limited."],
+     ["Medicare had run out of money",false,"Medicare did not exist yet in 1963."],
+     ["The AMA did not allow older adults in hospitals",false,"There was no such rule."]]},
+   {q:"What else did Medicare push many hospitals to do?",opts:[
+     ["Desegregate, because they had to follow the 1964 Civil Rights Act to receive Medicare payments",true,"Yes. Payment rules became a powerful tool for ending hospital segregation."],
+     ["Close their emergency rooms",false,"Medicare did not require that."],
+     ["Stop training residents",false,"Medicare actually helped pay for residency training."],
+     ["Hire only general practitioners",false,"Specialists continued to grow after 1965."]]}]},
+ {who:"Scenario 4 · Present day",name:"Herbs, medicines and a shared decision",
+  story:"Dev, 58, takes a prescribed antidepressant and a heart medicine. He read online that St. John's wort is a natural option for low mood and wants to switch to it. He brings a bottle of the herbal capsules to his visit and asks what his clinician thinks.",
+  cap:"Shared decision making, with a safety check for interactions.",
+  desc:"Dev and a clinician sit at a small table. Between them are two bottles: a prescription bottle on the left and an herbal capsule bottle on the right. A red warning symbol with two clashing arrows pulses between the bottles, labelled possible interaction. Above them, a balance scale slowly settles as cards slide on: options, benefits and harms, and evidence from the clinician's side, and goals, worries and daily life from Dev's side.",
+  draw(T){panelBox(10,10,780,450);title(24,30,"A shared decision",C["ink-soft"]);
+    seated(160,330,1.6,{i:0,coat:true});seated(640,330,1.6,{i:2,shirt:"shirt1"});label(160,420,"clinician",{size:12,weight:700,border:C["g-reg"]});label(640,420,"Dev, 58",{size:12,weight:700,border:C["g-cih"]});
+    rr(250,350,300,14,4);ctx.fillStyle=C.wood;ctx.fill();
+    rr(300,290,40,58,6);ctx.fillStyle=hexA(C.glass,.95);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.stroke();rr(300,290,40,14,4);ctx.fillStyle=C["g-reg"];ctx.fill();txt(320,325,"Rx",{size:12,weight:700,align:"center",mono:true});
+    rr(460,290,40,58,6);ctx.fillStyle=hexA(C.glass,.95);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.stroke();rr(460,290,40,14,4);ctx.fillStyle=C.leaf;ctx.fill();plantSprig(480,342,.5,C.gold,T);
+    const pz=.5+.5*Math.sin(T*3);glow(400,310,30+8*pz,C.bad,.4);arrow(352,310,392,310,C.bad,2.4);arrow(448,310,408,310,C.bad,2.4);label(400,270,"possible interaction",{size:12,weight:700,border:C.bad,bg:C["bad-wash"]});
+    const t=P(T,12)*12;const tilt=Math.sin(T*2)*.05*Math.max(0,1-t/8);ctx.save();ctx.translate(400,110);ctx.rotate(tilt);line(-150,0,150,0,C.metal,4);[-1,1].forEach(s=>{line(s*140,0,s*140,30,C["ink-soft"],1.2);ell(s*140,36,60,8,0,hexA(C.metal,.5),C.metal,1.4)});ctx.restore();line(400,110,400,230,C.metal,4);
+    ["options","benefits and harms","evidence"].forEach((c,i)=>{const f=smooth(seg(t,1+i,2+i));if(f>0)label(lerp(180,260,f),lerp(240,128-i*22,f),c,{size:11.5,weight:700,border:C["g-reg"]})});
+    ["goals","worries","daily life"].forEach((c,i)=>{const f=smooth(seg(t,1.5+i,2.5+i));if(f>0)label(lerp(620,540,f),lerp(240,128-i*22,f),c,{size:11.5,weight:700,border:C["g-cih"]})})},
+  qs:[{q:"What is the main safety concern with Dev's plan?",opts:[
+     ["St. John's wort can interact with many medicines, including some antidepressants and heart medicines, changing how they work",true,"Yes. It is one of the best known herb and drug interactions."],
+     ["Natural products cannot interact with medicines",false,"Many herbs affect how the body handles medicines; St. John's wort is a well known example."],
+     ["The only risk is a bitter taste",false,"Interactions are the main concern, not taste."],
+     ["It is illegal to sell in the United States",false,"It is sold as a supplement; legality is not the issue."]]},
+   {q:"Which response best reflects shared decision making?",opts:[
+     ["Lay out the options, including staying on his current plan, with benefits, harms and evidence, then ask what matters most to Dev and decide together",true,"Yes. Evidence plus Dev's values, decided together."],
+     ["Tell Dev never to use herbs and end the conversation",false,"That shuts down the discussion and may lead him to switch without telling anyone."],
+     ["Give him a stack of studies and let him decide alone",false,"Shared means working through it together, not leaving him on his own."],
+     ["Switch him to the herb right away because he prefers it",false,"Preferences matter, but the safety concern must be weighed first."]]},
+   {q:"Dev asks if he can stop his prescribed antidepressant tomorrow and start the herb. What should he hear?",opts:[
+     ["Do not stop or change a prescribed medicine on your own; any change should be planned with the prescriber",true,"Yes. Stopping some medicines suddenly can cause problems, and switching needs a plan."],
+     ["Yes, as long as he takes the herb at the same time of day",false,"Timing does not solve the interaction or the risks of stopping suddenly."],
+     ["Yes, because herbs work faster than medicines",false,"There is no basis for that claim."],
+     ["Only if the store clerk agrees",false,"Changes to prescribed medicines belong with the prescriber."]]}]}
+];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  const all=i=>LIFE[i].qs.every((q,qi)=>LS.ans[i+"-"+qi]);
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${all(i)?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LIFE[i].qs.every((q,qi)=>LS.ans[i+"-"+qi])&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()};
+function drawLife(now){use(S4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,600),S2=makeStage("cvCalc",800,470),S4=makeStage("cvLife",800,470);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},train:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","train","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim"){simStep(dt);drawSim(now)}else if(curTab==="train")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__md={tab:k=>showTab(k),simYear:y=>simSet(y),simState:()=>({yr:SM.yr,done:[...SM.done]}),simPlay:()=>{SM.play=true;simPlayBtn()},chalN:()=>SIMCHAL.length,
+  calcTypes:()=>CTYPES.map(c=>c[0]),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({kind:TR.p.kind,ok:TR.p.kind==="mc"?TR.p.opts.findIndex(o=>o.ok):null,n:TR.p.kind==="mc"?TR.p.opts.length:0,sorted:TR.p.kind==="order"?TR.p.sorted.map(e=>TR.p.ev.indexOf(e)):null}),
+  calcOrder:o=>{TR.order=o;ordRender()},
+  gen:t=>{const q=genOne(t);if(q.kind==="mc"){const ci=q.opts.findIndex(o=>o.ok);return {kind:"mc",n:q.opts.length,nOk:q.opts.filter(o=>o.ok).length,right:judge(q,ci).ok,wrong:q.opts.map((o,i)=>i).filter(i=>i!==ci).some(i=>judge(q,i).ok),uniq:new Set(q.opts.map(o=>o.t)).size===q.opts.length,hints:q.hints.length,whyOk:q.opts.every(o=>o.why&&o.why.length>10),text:q.html+" "+q.opts.map(o=>o.t+" "+o.why).join(" ")+" "+q.hints.join(" ")}}
+    const right=q.sorted.map(e=>q.ev.indexOf(e));const wrongs=[[...right].reverse(),[right[1],right[0],right[2],right[3]],[right[0],right[1],right[3],right[2]]];return {kind:"order",right:judge(q,right).ok,wrong:wrongs.some(w=>judge(q,w).ok),uniqYears:new Set(q.ev.map(e=>e[0])).size===4,hints:q.hints.length,text:q.html+" "+q.hints.join(" ")+" "+q.ev.map(e=>e[1]).join(" ")}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();simUI();calcNew();updCalcMeter();sLoad(0);lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

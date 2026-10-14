@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading the Evidence Walkthrough</title>
+<meta name="description" content="Animated walkthrough on reading research: why people improve after any treatment, anecdote versus data, study designs and the evidence pyramid, randomization, blinding and sham controls, control groups, outcomes and the minimal clinically important difference, mean difference and effect size, absolute and relative risk, NNT and NNH, confidence intervals and p values, forest plots, bias, GRADE and evidence based practice for manual therapy, acupuncture and mindfulness.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#7E2222;--accent-wash:#F6E3E0;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B8561A;--act2:#2F7FC1;--act3:#B07A10;--act4:#2E8A7A;--act5:#7B5CC9;--act6:#3E9B4F;--act7:#A04E8C;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#F1E8D2;--bone-edge:#8A7650;--disc:#3F7FC9;--nerve:#D9A90F;--muscle:#C8577A;--lig:#2E8A86;--symp:#E07A1F;--para:#3E9B4F;--pain:#D23B32;
+  --evid:#4C52B5;--evid-wash:#E4E5F6;--evid-ink:#3A3F9A;
+  --treat:#4C52B5;--ctrl:#C27A1A;--treat-ink:#3A3F9A;--ctrl-ink:#7A4A08;
+  --nat:#2E8A86;--rtm:#8A5CC0;--plac:#D08A1A;--coi:#7A8794;--spec:#4C52B5;--harm:#C8453F;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;
+  --news:#FFFFFF;--needle:#9AA6AF;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A6;--bone-edge:#EDE3C8;--disc:#6FB0EE;--nerve:#F2D45A;--muscle:#E88AA6;--lig:#5CC4BE;--symp:#F2A15A;--para:#6CCB7C;--pain:#F0706A;
+  --evid:#9198F0;--evid-wash:#22264A;--evid-ink:#B4B9F6;
+  --treat:#9198F0;--ctrl:#E8A64A;--treat-ink:#B4B9F6;--ctrl-ink:#F0BE70;
+  --nat:#5CC4BE;--rtm:#B18BE6;--plac:#F0B050;--coi:#A9B7C2;--spec:#9198F0;--harm:#E0605A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --news:#20292F;--needle:#7F8E98;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F7BDB7;--accent-wash:#3A1C1A;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#5CC4B0;--act5:#A98BEF;--act6:#6CCB7C;--act7:#D186C0;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A6;--bone-edge:#EDE3C8;--disc:#6FB0EE;--nerve:#F2D45A;--muscle:#E88AA6;--lig:#5CC4BE;--symp:#F2A15A;--para:#6CCB7C;--pain:#F0706A;
+  --evid:#9198F0;--evid-wash:#22264A;--evid-ink:#B4B9F6;
+  --treat:#9198F0;--ctrl:#E8A64A;--treat-ink:#B4B9F6;--ctrl-ink:#F0BE70;
+  --nat:#5CC4BE;--rtm:#B18BE6;--plac:#F0B050;--coi:#A9B7C2;--spec:#9198F0;--harm:#E0605A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --news:#20292F;--needle:#7F8E98;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+.body .practice{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:6px 10px;font-size:14.5px;color:var(--ink)}
+.body .practice b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 11 &middot; Reading the evidence</div>
+    <h1>Reading the Evidence Walkthrough</h1>
+    <p class="sub">Watch pain scores drift without any treatment, trial arms fill with randomized participants, confidence intervals dance and a forest plot pool into a diamond. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Use the left and right arrow keys to move between steps. Numbers in the examples are made up for teaching unless a step says otherwise. Practise next in the <a href="Evidence-Lab.html">Reading the Evidence Lab</a>.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "disc", "nerve", "muscle", "lig", "symp", "para", "pain", "evid", "evid-wash", "evid-ink", "treat", "ctrl", "treat-ink", "ctrl-ink", "nat", "rtm", "plac", "coi", "spec", "harm", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "news", "needle"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= evidence drawing kit: base pieces =================
+*/
+let SC={};let SYS={};
+function levelTag(x,y,k){const m={person:["THE PERSON",C.act1],group:["THE GROUP",C.act2],data:["THE DATA",C.evid],sym:["THE MATH",C.accent],time:["OVER TIME",C.act4],study:["THE STUDY",C.act3]}[k];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.16);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+const SKINS=["skin1","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function person(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=o.col||C[SHIRTS[(o.shirt||0)%4]];const bw=(o.w||1);ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+  rr(x-s*.42*bw,y-s*1.2,s*.84*bw,s*1.25,s*.32);fillStroke(sh,hexA(C.ink,.4),1.2);
+  rr(x-s*.3*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.06*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x,y-s*1.55,s*.36,sk,hexA(C.ink,.4),1.2);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(x,y-s*1.6,s*.37,Math.PI*1.05,Math.PI*1.95);ctx.fillStyle=C.hair;ctx.fill()}
+  if(o.mood){circ(x-s*.12,y-s*1.56,1.6,C.ink);circ(x+s*.12,y-s*1.56,1.6,C.ink);ctx.beginPath();ctx.arc(x,y-s*1.48,s*.12,.2,Math.PI-.2);ctx.strokeStyle=C.ink;ctx.lineWidth=1.3;ctx.stroke()}
+  ctx.restore()}
+function bar(x,y,w,h,f,col,o){o=o||{};rr(x,y,w,h,Math.min(4,h/2));ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){rr(x,y,w*clamp(f,0,1),h,Math.min(4,h/2));ctx.fillStyle=col;ctx.fill()}if(o.over&&f>1){txt(x+w+4,y+h/2,"+",{size:12,weight:700,color:C.bad})}}
+function vbar(x,y,w,h,f,col){rr(x,y,w,h,3);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){const hh=h*clamp(f,0,1);rr(x,y+h-hh,w,hh,3);ctx.fillStyle=col;ctx.fill()}}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function tick(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+/* a speech bubble */
+function bubble(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.panel,o.stroke||C.rule,1.6);ctx.beginPath();const tx=o.tx==null?x+24:o.tx;ctx.moveTo(tx,y+h);ctx.lineTo(tx+10,y+h);ctx.lineTo(tx-4,y+h+14);ctx.closePath();ctx.fillStyle=o.fill||C.panel;ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.stroke();
+  rr(tx-1,y+h-3,13,5,0);ctx.fillStyle=o.fill||C.panel;ctx.fill();wrapText(t,x+10,y+16,w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500})}
+/* headline card */
+function headline(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,6);fillStroke(C.paper,o.border||C.rule,1.6);rr(x,y,w,20,6);ctx.fillStyle=hexA(C.ink,.08);ctx.fill();txt(x+10,y+10,o.src||"NEWS FEED",{size:10.5,weight:700,mono:true,color:C["ink-soft"]});wrapText(t,x+10,y+36,w-20,o.lh||18,{size:o.size||14,weight:700})}
+/* count wrapped lines */
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+/* fit one line of text into a width (shrinks font) */
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+/* worked example panel: rows = [{c:[items,res]} | {l:"text"} | {ans:"text"}], animates over `per` seconds */
+function wk(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);
+  const sw=o.split||0;const sz=o.size||12.5;
+  if(sw){let ly=wrapText(W_.q,x+12,y+38,sw-22,sz+4,{size:sz,weight:600})+sz+8;(W_.given||[]).forEach((g,i)=>{const a=seg(t,.6+i*.4,1+i*.4);if(a>0)withA(a,()=>wrapText(g,x+14,ly,sw-26,sz+3,{size:sz-.5,mono:true,weight:500}));ly+=wrapCount(g,sw-26,sz-.5)*(sz+3)+6});line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2)}
+  const rx=x+sw+14,rw=w-sw-28;let cy=y+(o.cy||30);const fs=o.cfs||14;const t0=o.t0||1.2;const dt=o.dt||1.8;
+  W_.rows.forEach((r,i)=>{const p_=clamp((t-t0-i*dt)/(dt*.85),0,1);
+    if(r.c){cy+=fs+6;if(p_>0){const cw=chainWidth(r.c[0],r.c[1],{size:fs});const sc=Math.min(1,rw/cw);ctx.save();ctx.translate(rx,cy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],p_,{size:fs});ctx.restore()}cy+=fs+(o.rowGap||16)}
+    else if(r.l){cy+=12;if(p_>0)withA(p_,()=>fitTxt(rx,cy,r.l,rw,{size:o.lfs||13.5,weight:600,mono:true}));cy+=(o.lh||16)}
+    else if(r.ans){cy+=16;if(p_>0)withA(p_,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(rw,ctx.measureText(r.ans).width);rr(rx-4,cy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(rx+3,cy,r.ans,rw-6,{size:15,weight:700,mono:true})});cy+=18}});
+  if(W_.miss){const tm=t0+W_.rows.length*dt+.4;const a=seg(t,tm,tm+.6);if(a>0){const mw=o.missFull?w-24:rw+8;const mx=o.missFull?x+12:rx-4;const n=wrapCount("Common mistake: "+W_.miss,mw-16,sz-1);const mh=n*(sz+2)+10;
+    withA(a,()=>{rr(mx,y+h-mh-8,mw,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,mx+8,y+h-mh-8+5+(sz)/2+1,mw-16,sz+2,{size:sz-1})})}}
+  return t}
+/* ================= evidence drawing kit (shared by both pages) ================= */
+/* signed number with a true minus sign, never a hyphen */
+function sn(v,dp){dp=dp==null?1:dp;if(Math.abs(v)<Math.pow(10,-dp)/2)v=0;return (+v).toFixed(dp).replace("-","−")}
+function spl(v,dp){const s=sn(v,dp);return v>0&&Math.abs(v)>=Math.pow(10,-(dp==null?1:dp))/2?"+"+s:s}
+function rnorm(i){const u=Math.max(1e-6,rnd(i)),v=rnd(i+.37);return Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v)}
+function pdf(x,m,s){return Math.exp(-(x-m)*(x-m)/(2*s*s))}
+/* a 0 to 10 pain scale on a horizontal line */
+function painAxis(x,y,w,o){o=o||{};const X=v=>x+v/10*w;line(x,y,x+w,y,C["ink-soft"],1.6);
+  for(let v=0;v<=10;v++){line(X(v),y-4,X(v),y+4,C["ink-soft"],1.2);if(o.nums!==false&&(v%2===0||o.all))txt(X(v),y+14,String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  if(o.label)txt(x+w,y+(o.nums===false?14:28),o.label,{size:11,weight:600,align:"right",color:C["ink-soft"]});return X}
+/* small person icon for icon arrays */
+function mini(x,y,s,col,o){o=o||{};ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);circ(x,y-s*.62,s*.26,col,o.edge||null,1);rr(x-s*.32,y-s*.3,s*.64,s*.78,s*.24);ctx.fillStyle=col;ctx.fill();if(o.edge){ctx.strokeStyle=o.edge;ctx.lineWidth=1;ctx.stroke()}ctx.restore()}
+/* icon array: n people in cols columns; on(i) decides colour */
+function iconArray(x,y,cols,n,cell,on,colOn,colOff,o){o=o||{};for(let i=0;i<n;i++){const cx=x+(i%cols)*cell+cell/2,cy=y+Math.floor(i/cols)*cell+cell/2;const st=on(i);
+  const col=st===2?(o.col2||C.good):st?colOn:colOff;mini(cx,cy+cell*.08,cell*.78,col,{a:o.a,edge:st===2?C.ink:null});
+  if(st&&o.mark){/* small text mark so colour is not the only signal */ctx.save();ctx.font=`700 ${Math.round(cell*.34)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(st===2?"+":"x",cx,cy+cell*.2);ctx.restore()}}}
+/* normal curve inside a graph g (uses g.X, g.Y) scaled so peak = peakVal */
+function bellG(g,m,s,peakVal,col,o){o=o||{};const a=g.x0,b=g.x1;ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w,g.h+2);ctx.clip();ctx.beginPath();const N=120;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const Y=g.Y(peakVal*pdf(v,m,s));i?ctx.lineTo(g.X(v),Y):ctx.moveTo(g.X(v),Y)}
+  if(o.fill!==false){ctx.lineTo(g.X(b),g.Y(0));ctx.lineTo(g.X(a),g.Y(0));ctx.closePath();ctx.fillStyle=hexA(col,o.fa==null?.22:o.fa);ctx.fill();ctx.beginPath();for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const Y=g.Y(peakVal*pdf(v,m,s));i?ctx.lineTo(g.X(v),Y):ctx.moveTo(g.X(v),Y)}}
+  ctx.strokeStyle=col;ctx.lineWidth=o.lw||2.4;ctx.setLineDash(o.dash||[]);ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+/* forest plot. rows: [{n,md,lo,hi,w}], pooled {md,lo,hi}. g = {x,y,w,rowH,x0,x1}. p: 0..1 build progress */
+function forest(g,rows,pooled,p,o){o=o||{};const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w;const nr=rows.length;const top=g.y;const bot=top+(nr+1.4)*g.rowH;
+  line(X(0),top-6,X(0),bot,C["ink-soft"],1.6);
+  if(o.mcid!=null)line(X(o.mcid),top-6,X(o.mcid),bot,hexA(C.good,.8),1.4,[4,4]);
+  const ticks=o.ticks||[g.x0,(g.x0+g.x1)/2,0,g.x1].filter((v,i,a)=>a.indexOf(v)===i);
+  ticks.forEach(t=>{line(X(t),bot,X(t),bot+4,C["ink-soft"],1.2);txt(X(t),bot+14,sn(t,o.tdp==null?1:o.tdp),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});
+  line(X(g.x0),bot,X(g.x1),bot,C["ink-soft"],1.4);
+  if(o.left)txt(X(0)-6,bot+30,o.left,{size:11,weight:600,align:"right",color:C["treat-ink"]});
+  if(o.right)txt(X(0)+6,bot+30,o.right,{size:11,weight:600,align:"left",color:C["ctrl-ink"]});
+  const maxW=Math.max.apply(null,rows.map(r=>r.w||1));
+  rows.forEach((r,i)=>{const a=clamp(p*(nr+1.5)-i,0,1);if(a<=0)return;const y=top+i*g.rowH+g.rowH/2;withA(a,()=>{
+    if(o.names!==false)txt(g.x-10,y,r.n,{size:o.fsz||11.5,weight:600,align:"right"});
+    line(X(Math.max(g.x0,r.lo)),y,X(Math.min(g.x1,r.hi)),y,o.col||C.evid,2);
+    const s=4+9*Math.sqrt((r.w||1)/maxW);ctx.fillStyle=o.col||C.evid;ctx.fillRect(X(r.md)-s/2,y-s/2,s,s);
+    if(o.vals)txt(g.x+g.w+10,y,sn(r.md,1)+" ("+sn(r.lo,1)+" to "+sn(r.hi,1)+")",{size:10.5,mono:true,color:C["ink-soft"]})})});
+  if(pooled){const a=clamp(p*(nr+1.5)-nr-.3,0,1);if(a>0){const y=top+nr*g.rowH+g.rowH*.8;withA(a,()=>{
+    ctx.beginPath();ctx.moveTo(X(pooled.lo),y);ctx.lineTo(X(pooled.md),y-8);ctx.lineTo(X(pooled.hi),y);ctx.lineTo(X(pooled.md),y+8);ctx.closePath();ctx.fillStyle=o.pcol||C.accent;ctx.fill();
+    if(o.names!==false)txt(g.x-10,y,o.pname||"Pooled",{size:o.fsz||11.5,weight:700,align:"right"});
+    if(o.vals)txt(g.x+g.w+10,y,sn(pooled.md,1)+" ("+sn(pooled.lo,1)+" to "+sn(pooled.hi,1)+")",{size:10.5,mono:true,weight:700})})}}
+  return {X,bot}}
+/* inverse variance pooling of rows with 95% CI */
+function poolRows(rows){let sw=0,sm=0;rows.forEach(r=>{const se=(r.hi-r.lo)/3.92;const w=1/(se*se);r.w=w;sw+=w;sm+=w*r.md});const md=sm/sw,se=Math.sqrt(1/sw);return {md,lo:md-1.96*se,hi:md+1.96*se}}
+/* blindfold band over a person's eyes (person drawn with person()) */
+function blindfold(x,y,s,on){if(!on)return;rr(x-s*.4,y-s*1.66,s*.8,s*.16,s*.06);ctx.fillStyle=C.ink;ctx.fill();line(x+s*.36,y-s*1.6,x+s*.55,y-s*1.4,C.ink,2)}
+/* eye open marker */
+function eyes(x,y,s){circ(x-s*.12,y-s*1.58,1.8,C.ink);circ(x+s*.12,y-s*1.58,1.8,C.ink)}
+/* a vertebra pair with a blue disc, side view (bone ivory with outline) */
+function spineSeg(x,y,s,T){const wob=Math.sin(T*1.6)*.06;ctx.save();ctx.translate(x,y);
+  rr(-s*.5,-s*.62,s,s*.42,s*.08);fillStroke(C.bone,C["bone-edge"],1.6);ell(0,-s*.1+wob*s,s*.48,s*.1,0,hexA(C.disc,.85),C.disc,1.2);rr(-s*.5,s*.0+wob*s*.5,s,s*.42,s*.08);fillStroke(C.bone,C["bone-edge"],1.6);
+  rr(s*.5,-s*.55,s*.42,s*.18,s*.06);fillStroke(C.bone,C["bone-edge"],1.2);rr(s*.5,s*.08+wob*s*.5,s*.42,s*.18,s*.06);fillStroke(C.bone,C["bone-edge"],1.2);ctx.restore()}
+/* needle into skin layers. sham: blunt shaft slides up into the handle and the tip stays on the skin. p 0..1 */
+function needleScene(x,y,w,h,p,sham){rr(x,y,w,h,6);ctx.fillStyle=hexA(C.panel,.9);ctx.fill();const sy=y+h*.4;
+  ctx.fillStyle=hexA(C.skin1,.95);ctx.fillRect(x+4,sy,w-8,9);ctx.fillStyle=hexA(C.nerve,.18);ctx.fillRect(x+4,sy+9,w-8,16);ctx.fillStyle=hexA(C.muscle,.42);ctx.fillRect(x+4,sy+25,w-8,y+h-sy-29);
+  for(let i=0;i<5;i++)line(x+10,sy+33+i*9,x+w-10,sy+35+i*9,hexA(C.muscle,.7),1);
+  const cx=x+w/2;const D=h*.36;const move=sham?Math.min(p*D,24):p*D;const hb=sy-30+move;
+  rr(cx-6,hb-34,12,34,3);fillStroke(C.needle,C["ink-soft"],1.2);
+  if(!sham){line(cx,hb,cx,sy+p*D,C["ink-soft"],1.8);if(p*D>12)glow(cx,sy+p*D,12,C.nerve,.7)}
+  else{line(cx,hb,cx,sy,C["ink-soft"],1.8);ell(cx,sy+1,6,2.5,0,hexA(C.pain,.35),null);if(move>8){line(cx-3,hb-30,cx-3,hb-30+move*.9,hexA(C.ink,.5),1.2,[2,2])}}}
+/* small verdict chip that never relies on colour alone */
+function verdict(x,y,t,ok){const col=ok===true?C.good:ok===false?C.bad:C.warn;return label(x,y,(ok===true?"✓ ":ok===false?"✗ ":ok==="mid"?"! ":"? ")+t,{size:12,weight:700,border:col,bg:ok===true?C["good-wash"]:ok===false?C["bad-wash"]:C["warn-wash"]})}
+/* labelled stacked bar from bottom (x,y bottom, w width, scale px per point) parts: [[val,colKey,label]] up to progress p */
+function stackBar(x,y,w,sc,parts,p,o){o=o||{};let yy=y;const tot=parts.reduce((a,b)=>a+b[0],0);let acc=0;
+  parts.forEach((pt,i)=>{const f=clamp(p*parts.length-i,0,1);if(f<=0)return;const h=pt[0]*sc*f;rr(x,yy-h,w,h,2);ctx.fillStyle=hexA(C[pt[1]],.85);ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=1.5;ctx.stroke();
+    if(o.labels!==false&&f>.6&&pt[0]*sc>14)withA((f-.6)/.4,()=>txt(x+w+(o.lx||8),yy-h/2,pt[2]+" "+sn(pt[0],1),{size:11.5,weight:600,color:C.ink}));yy-=h;acc+=pt[0]*f});return {top:yy,acc}}
+/* sealed envelope */
+function envelope(x,y,w,h,open,txt_,col){rr(x,y,w,h,3);fillStroke(C.paper,C["ink-soft"],1.4);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w/2,y+h*(open?-.5:.55));ctx.lineTo(x+w,y);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();
+  if(open&&txt_){rr(x+w*.18,y-h*.5,w*.64,h*.8,3);fillStroke(C.panel,col||C.ink,1.6);txt(x+w/2,y-h*.1,txt_,{size:13,weight:700,mono:true,align:"center",color:col||C.ink})}}
+/* GRADE dots ●●●○ */
+function gradeDots(x,y,n,col,r){r=r||6;for(let i=0;i<4;i++)circ(x+i*(r*2+4),y,r,i<n?col:null,col,1.6)}
+/* worked example card. L = [{k:"q"|"eq"|"ans"|"miss"|"try"|"cancel", t:"text", parts:[[text,strike]]}] lines appear one by one over per seconds */
+function workCard(x,y,w,h,L,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+18,o.title||"Worked example",C["accent-ink"]);let yy=y+40;const dt=o.dt||1.1,t0=o.t0||.5;
+  L.forEach((ln,i)=>{const s0=t0+i*dt;const a=seg(t,s0,s0+.5);
+    if(ln.k==="miss"||ln.k==="try"){const col=ln.k==="miss"?C.warn:C.gold,wash=ln.k==="miss"?C["warn-wash"]:C["gold-wash"];const head=ln.k==="miss"?"Common mistake: ":"Now you try: ";const n=wrapCount(head+ln.t,w-40,12);const bh=n*16+12;
+      if(a>0)withA(a,()=>{rr(x+10,yy-6,w-20,bh,5);ctx.fillStyle=wash;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.3;ctx.stroke();wrapText(head+ln.t,x+18,yy+6,w-40,16,{size:12,color:C.ink})});yy+=bh+8}
+    else if(ln.k==="ans"){if(a>0)withA(a,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(w-36,ctx.measureText(ln.t).width);rr(x+12,yy-6,tw+16,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(x+20,yy+8,ln.t,w-44,{size:15,weight:700,mono:true})});yy+=36}
+    else if(ln.k==="eq"){if(a>0)withA(a,()=>fitTxt(x+14,yy+6,ln.t,w-28,{size:13.5,weight:700,mono:true}));yy+=24}
+    else if(ln.k==="cancel"){if(a>0)withA(a,()=>{ctx.font=`700 13.5px ${MONO}`;let px=x+14;const sa=seg(t,s0+.8,s0+1.3);ln.parts.forEach(pt=>{const pw=ctx.measureText(pt[0]).width;txt(px,yy+6,pt[0],{size:13.5,weight:700,mono:true,color:pt[1]?C["accent-ink"]:C.ink});if(pt[1]&&sa>0)line(px-1,yy+12,px-1+(pw+2)*sa,yy,C.bad,2.4);px+=pw})});yy+=24}
+    else{const n=wrapCount(ln.t,w-28,12.5,ln.k==="q"?600:500);if(a>0)withA(a,()=>wrapText(ln.t,x+14,yy+6,w-28,17,{size:12.5,weight:ln.k==="q"?600:500,color:ln.k==="note"?C["ink-soft"]:C.ink}));yy+=n*17+8}});
+  return t}
+/* horizontal stacked bar: parts [[val,colKey]] */
+function hbar(x,y,h,sc,parts,p){let xx=x;parts.forEach((pt,i)=>{const f=clamp(p*parts.length-i,0,1);if(f<=0)return;const w=pt[0]*sc*f;rr(xx,y,w,h,2);ctx.fillStyle=hexA(C[pt[1]],.85);ctx.fill();ctx.strokeStyle=C.panel;ctx.lineWidth=1.4;ctx.stroke();xx+=w});return xx}
+/* normal CDF (for overlap and p values) */
+function erf(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+.3275911*x);const y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return s*y}
+function Phi(z){return .5*(1+erf(z/Math.SQRT2))}
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Why people get better",col:"act1"},
+            2:{name:"Part 2 · Anecdotes and study designs",col:"act2"},
+            3:{name:"Part 3 · Building a fair trial",col:"act3"},
+            4:{name:"Part 4 · Measuring change",col:"act4"},
+            5:{name:"Part 5 · Risk and numbers needed",col:"act5"},
+            6:{name:"Part 6 · Uncertainty and pooling",col:"act6"},
+            7:{name:"Part 7 · Bias, certainty and practice",col:"act7"}};
+const NACT=7;
+const STEPS=[
+{act:0,scene:"map",
+ desc:"Three panels sit across the top. On the left, THE PERSON: one adult figure stands beside a pain gauge whose red level slowly falls from 7 to 3. In the middle, THE GROUP: small dots split into two lanes, indigo dots for a treatment group and amber dots for a control group, and every dot slides to the left along a 0 to 10 pain scale as scores improve. On the right, THE DATA: a mini forest plot builds one row at a time with indigo squares and lines, then a brick red diamond appears at the bottom. Below, seven cards name the seven parts of this walkthrough and light up one after another.",
+ title:"The big picture: from one person to a pile of studies",
+ body:`<p>Every health claim, from a spinal adjustment to a supplement to a meditation app, comes down to one question: <b>did people get better because of this treatment, or would they have improved anyway?</b></p>
+ <p>This walkthrough follows that question at three levels. <b>The person</b>: one patient whose pain changes over time. <b>The group</b>: many people in a study, split into arms. <b>The data</b>: numbers, graphs and reviews that pull many studies together.</p>
+ <p>You will meet study designs, fair trial methods, effect sizes, risk numbers like the <b>NNT</b>, confidence intervals, forest plots, bias and certainty ratings. Each calculation gets an animated worked example and a "now you try". Nothing here is graded.</p>`,
+ analogy:"Reading evidence is like being a fair judge. One witness (a single story) can be honest and still wrong about what caused what. A judge wants many witnesses, a fair process and a clear look at the whole picture before deciding.",
+ terms:[["Evidence","Information from careful observation and research that helps answer whether something works and for whom."],["Treatment effect","How much better people do because of a treatment, beyond what would have happened without it."],["Three levels","The person, the group (a study) and the data (numbers and reviews)."]],
+ check:null,caption:"One person, a group in a trial, and the data that pools many trials.",
+ legend:[["treat","Treatment group"],["ctrl","Control group"],["pain","Pain level"],["accent","Pooled result","d"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"natural",
+ desc:"A graph shows pain score from 0 to 10 on the vertical axis and weeks 0 to 12 along the bottom. Forty teal dots start high, mostly between 6 and 8, at week 0. A vertical cursor sweeps from left to right, and each dot wobbles up and down a little but mostly drifts downward as the weeks pass, leaving a faint trail. A thick teal line traces the group average, falling quickly over the first few weeks and then levelling off near 3. A label says no treatment was given, and a readout at the top right shows the current week and average pain.",
+ title:"Natural history: many problems get better on their own",
+ body:`<p>The <b>natural history</b> of a condition is what happens to it with no treatment at all. For many common problems, the natural history is improvement.</p>
+ <p>A new episode of <b>acute low back pain</b> is a good example. Research suggests that many people improve a great deal over the first few weeks, even though some still have pain months later and episodes can come back.</p>
+ <p>So if someone tries any treatment during those weeks and then feels better, the improvement may have happened anyway. That does not mean the treatment did nothing. It means a before and after story cannot tell us.</p>`,
+ analogy:"A cold usually clears up in about a week. If you drink a special tea every day and feel better on day seven, the tea gets the credit, but the cold was going to clear up anyway.",
+ terms:[["Natural history","The usual course of a condition over time when it is not treated."],["Acute","Recent in onset, often meaning less than about 6 weeks."],["Before and after comparison","Measuring the same people before and after a treatment with no comparison group; it cannot separate the treatment from natural recovery."]],
+ check:{q:"Forty people with new low back pain receive no treatment. Their average pain falls from 7 to 3 in six weeks. What does this show?",opts:[
+  ["Improvement can happen without any treatment, so a treated group needs a comparison",1,"Right. Their natural history alone produced a big drop, so any treatment study has to beat this."],
+  ["Low back pain never needs any care",0,"The graph shows average improvement. Some people still have pain, and some have red flags that need prompt medical care."],
+  ["The people must have been treated secretly",0,"No treatment was given. Improvement over time is common for this condition."],
+  ["Pain scores are not reliable",0,"The scores can be reliable. The point is that pain often changes on its own over time."]]},
+ caption:"Forty untreated people: pain scores wobble but mostly drift down over the weeks.",
+ legend:[["nat","One person's pain score"],["nat","Group average","l"]]},
+
+{act:1,scene:"rtm",
+ desc:"The top panel shows one person's daily pain score as a wavy brick red line that bounces between about 3 and 8 around a dashed average line at 5. A red flag marks a day when the score spikes to 8, labelled enrolls in a study on a bad day. A few weeks later a second marker shows the score back near 5, with a green arrow and the words looks better, but nothing changed. The bottom panel shows thirty purple dots at time 1 in a left column. The dots above a cut off line at 7 are outlined and selected. Lines run from each selected dot to its score at time 2 in a right column, and these lines slope down toward the middle.",
+ title:"Regression to the mean: people come in on their worst days",
+ body:`<p>Pain and many other symptoms go up and down from day to day. People tend to <b>seek care, or join a study, when symptoms are at their worst</b>.</p>
+ <p>A score that is unusually high on one day is likely to be closer to that person's usual level next time, just by chance. This is called <b>regression to the mean</b>. It looks like improvement, but it is just the ups and downs settling back.</p>
+ <p>Regression to the mean is strongest when people are picked because their scores were extreme, and when the measurement bounces around a lot.</p>`,
+ analogy:"If you only weigh yourself right after a big holiday dinner, the next weigh in will almost always look better, even if you change nothing.",
+ terms:[["Regression to the mean","The tendency for an extreme measurement to be followed by one closer to the average, by chance."],["Fluctuation","Natural up and down variation in a symptom or measurement over time."],["Selection on extremes","Picking people because their score was very high (or low), which sets up regression to the mean."]],
+ check:{q:"A study only enrolls people whose pain is 8 or higher on the day they sign up. At follow up, the average is 5.5. Why is this hard to interpret?",opts:[
+  ["Some of the drop is expected from regression to the mean, because people were picked on a bad day",1,"Yes. Picking extreme scores guarantees some drift back toward each person's usual level."],
+  ["The pain scale must be broken",0,"The scale is fine. Picking people on their worst day sets up a drop by chance."],
+  ["A drop from 8 to 5.5 proves the treatment works",0,"Without a comparison group, the drop mixes regression to the mean, natural history and any real effect."],
+  ["Regression to the mean only happens with blood tests",0,"It happens with any measurement that varies, including pain ratings."]]},
+ caption:"Picked on a bad day, the next score is usually closer to normal, with or without treatment.",
+ legend:[["pain","Daily pain score","l"],["ink-soft","Usual average","dl"],["rtm","Selected people"],["good","Next measurement"]]},
+
+{act:1,scene:"placebo",
+ desc:"On the left, a clinician figure and a patient figure sit facing each other. Context icons pop in around them one at a time with labels: a speech bubble for a warm explanation, a clock for time and attention, a thought bubble that says this will help for expectation, and a small tray of treatment tools for the ritual. On the right, a simple drawing shows a brain at the top, a spinal cord running down, and red pain pulses travelling up from the back. As an expectation dial in the middle turns up, green pulses travel down from the brain and the red pulses become smaller. A pain bar at the far right falls from 7 to 5.",
+ title:"Placebo and contextual effects: the visit itself can change pain",
+ body:`<p>A <b>placebo</b> is a treatment with no specific active ingredient or mechanism for the condition. A <b>placebo response</b> is any improvement seen after it. Part of that response is natural history and regression to the mean, and part can be real changes in how the brain handles pain.</p>
+ <p><b>Contextual effects</b> are the effects of everything around a treatment: expectation, a warm and confident clinician, time and attention, a clear explanation, and the ritual of the treatment itself. These are strong for symptoms like pain that the brain can turn up or down.</p>
+ <p>Research shows that expectation can activate <b>descending pain control</b> from the brain, which can involve the body's own opioids. These effects are real for symptoms, but they rarely change things like tumour size or blood tests.</p>`,
+ analogy:"The same song sounds better in a warm concert hall with friends than through a cracked phone speaker. The song (the treatment) did not change. The setting changed how you experienced it.",
+ terms:[["Placebo","An inactive or sham treatment used for comparison."],["Placebo response","All improvement seen after a placebo, including natural history and regression to the mean."],["Contextual effects","Effects of expectation, attention, the clinician relationship and treatment ritual."],["Descending pain control","Signals from the brain down the spinal cord that can turn pain signals down or up."]],
+ check:{q:"Which outcome is most likely to change because of contextual effects?",opts:[
+  ["A patient's pain rating",1,"Right. Pain is processed by the brain and is strongly shaped by expectation and context."],
+  ["The size of a bone fracture gap on an X ray",0,"Contextual effects mainly change symptoms like pain, not structural healing seen on images."],
+  ["A blood glucose level measured by a lab",0,"Lab values are much less affected by expectation than symptoms are."],
+  ["The patient's height",0,"Height is not changed by expectation or the clinical setting."]]},
+ caption:"Expectation and a caring context send signals down the spinal cord that turn pain signals down.",
+ legend:[["pain","Pain signal going up"],["para","Descending control going down"],["plac","Context and expectation"]]},
+
+{act:1,scene:"stack",
+ desc:"Two tall stacked bars grow from the bottom. The left bar, labelled treatment group, fills in five coloured layers with numbers: teal for natural recovery 1.8 points, purple for regression to the mean 0.7, amber for context and placebo 0.6, slate grey for co interventions 0.3, and indigo for the specific effect of the treatment 0.6, for a total of 4.0 points of improvement. The right bar, labelled sham control group, fills with the same first four layers to 3.4 points but has no indigo layer. A bracket between the bar tops shows the difference, 0.6 points, which matches the indigo layer. Small icons for a pill, a heat pack and walking shoes float beside the slate co interventions layer.",
+ title:"Putting it together: what a control group subtracts",
+ body:`<p>When a treated group improves by 4 points, that number is a <b>sum</b> of several parts: natural recovery, regression to the mean, contextual and placebo effects, <b>co interventions</b> (other things people did at the same time, like taking pain medicine, using heat or walking more) and, maybe, the <b>specific effect</b> of the treatment itself.</p>
+ <p>A good control group gets all the shared parts too. When you <b>subtract the control group's improvement from the treatment group's</b>, the shared parts cancel and what is left is the effect of the treatment.</p>
+ <p>The numbers in the picture are made up for teaching. In real trials, the shared parts are often much bigger than the specific effect.</p>`,
+ analogy:"Two boats sail in the same river current. To know how fast your engine really pushes, compare your boat with a boat drifting in the same current, not with the riverbank.",
+ terms:[["Co intervention","Any other treatment or change a participant makes during a study, such as medicine, heat or exercise."],["Specific effect","The part of the improvement caused by the treatment's own mechanism."],["Between group difference","Treatment group change minus control group change; the shared parts cancel out."]],
+ check:{q:"Treatment group improves 4.0 points. A well matched sham group improves 3.4 points. What is the best estimate of the specific effect?",opts:[
+  ["0.6 points",1,"Yes. 4.0 minus 3.4 = 0.6 points. The shared parts cancel when you subtract."],
+  ["4.0 points",0,"That is the whole improvement in the treatment group, which includes natural recovery and context."],
+  ["7.4 points",0,"That added the two groups. Subtract the control group from the treatment group."],
+  ["3.4 points",0,"That is the control group's improvement, which is the shared part, not the treatment's effect."]]},
+ caption:"Improvement is a stack of parts. A matched control group cancels the shared layers.",
+ legend:[["nat","Natural recovery","s"],["rtm","Regression to the mean","s"],["plac","Context and placebo","s"],["coi","Co interventions","s"],["spec","Specific effect","s"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"anecdote",
+ desc:"A grid of 100 small person icons is labelled tried the treatment. Over a few seconds, 60 of the icons turn green with a plus mark for improved, and 40 stay grey. Speech bubbles saying it worked for me rise only from green icons and float to a testimonials board on the right, which fills with five cards. The grey icons stay silent with a note: you rarely hear from these. Then a second grid of 100 icons appears below, labelled did not get the treatment, and 55 of its icons turn green, showing a similar improvement rate.",
+ title:"Anecdote versus data",
+ body:`<p>An <b>anecdote</b> or <b>testimonial</b> is one person's story: "I tried it and my back pain went away." The person may be completely honest, and the improvement may be real. What a story cannot tell us is <b>why</b> they improved.</p>
+ <p>Stories are also filtered. People who improved are much more likely to share their story than people who did not. We rarely hear from the 40 who saw no change.</p>
+ <p><b>Data</b> count everyone, including people who did not improve, and compare them with a group who did not get the treatment. In the picture, 60 of 100 improved with treatment, but 55 of 100 improved without it.</p>`,
+ analogy:"A lottery advert shows smiling winners. It never shows the millions of people who bought a ticket and won nothing. To judge the odds, you need everyone, not only the winners.",
+ terms:[["Anecdote","A single personal account; useful for ideas and questions, weak for proving cause."],["Testimonial","A story offered as support for a product or treatment, often from people who improved."],["Comparison group","People who did not get the treatment, used to see what would have happened anyway."]],
+ check:{q:"A clinic website shows 12 glowing testimonials for a new back pain treatment. What is the biggest problem?",opts:[
+  ["We do not see the people who did not improve, or what would have happened without the treatment",1,"Yes. Testimonials are selected stories with no denominator and no comparison group."],
+  ["The patients are probably lying",0,"People can be completely honest. The issue is that stories cannot separate cause from natural recovery."],
+  ["Twelve stories are enough to prove it works",0,"Even many stories cannot rule out natural history, regression to the mean or context."],
+  ["Testimonials are illegal",0,"They are common and legal in many places. They are simply weak evidence of cause."]]},
+ caption:"Only improvers tend to share stories. A comparison group shows what happens without the treatment.",
+ legend:[["good","Improved (plus mark)"],["coi","No change"],["treat","Testimonial card","s"]]},
+
+{act:2,scene:"obs",
+ desc:"Three panels sit side by side. Case report: one person figure with a clipboard note that fills in line by line. Case series: a row of eight person figures who all received the same treatment, each with a small arrow showing their outcome, most pointing down for less pain. Cross sectional: a camera frame flashes over a crowd of twenty figures at one moment, and a two by two table below fills with counts for back pain yes or no and regular exercise yes or no. Each panel lights up in turn with a strength and a weakness written underneath.",
+ title:"Describing what we see: case report, case series, cross sectional",
+ body:`<p>A <b>case report</b> describes one patient in detail, and a <b>case series</b> describes a group of patients who had the same treatment or condition. They are quick, they can spot something new or rare (such as an unusual side effect) and they raise questions. But there is <b>no comparison group</b>, so they cannot show that a treatment caused the outcome.</p>
+ <p>A <b>cross sectional study</b> is a snapshot. It measures exposure and outcome at the <b>same moment</b> in a group of people, for example how many people with and without back pain exercise regularly. It is good for estimating how common something is (<b>prevalence</b>), but because it is one moment in time, it cannot show which came first.</p>`,
+ analogy:"A case report is one photo of one person. A case series is a photo album of similar people. A cross sectional study is one group photo of a whole crowd at a single instant.",
+ terms:[["Case report","A detailed description of one patient; good for new or rare findings, no comparison."],["Case series","A description of several patients with the same treatment or condition, no comparison group."],["Cross sectional study","Measures exposure and outcome at one point in time; shows prevalence and associations."],["Prevalence","The share of people who have a condition at a given time."]],
+ check:{q:"A survey finds people with back pain exercise less than people without it. What can a cross sectional design NOT tell us?",opts:[
+  ["Whether low exercise came before the back pain or the pain caused people to exercise less",1,"Right. A snapshot cannot show which came first, so cause and effect is unclear."],
+  ["How common back pain is in the group",0,"Cross sectional studies are good at measuring prevalence."],
+  ["Whether exercise and back pain are associated in this group",0,"It can show an association. It cannot show the direction of cause."],
+  ["How many people were surveyed",0,"The study knows its own sample size."]]},
+ caption:"Case report, case series and a cross sectional snapshot: good for ideas and prevalence, weak for cause.",
+ legend:[["evid","Study panel in focus","s"],["good","Strength"],["warn","Weakness"]]},
+
+{act:2,scene:"cohort",
+ desc:"A long timeline runs across the middle, with PAST on the left, NOW in the centre and FUTURE on the right. In the top half, labelled cohort study, two groups of figures stand at NOW: people who do regular exercise and people who do not. Arrows travel forward to the right into the future, and counts appear showing how many in each group develop a new back pain episode. In the bottom half, labelled case control study, a group of cases who already have chronic back pain and a group of controls without it stand at NOW, and arrows travel backward to the left into the past to check earlier exposures. A small triangle diagram at the far right links exposure and outcome through a third factor labelled confounder, such as age.",
+ title:"Following people over time: cohort and case control studies",
+ body:`<p>A <b>cohort study</b> starts with people grouped by an <b>exposure</b> (for example, whether they exercise regularly) and follows them <b>forward in time</b> to see who develops an outcome. It shows what came first and can measure risk, but it is slow and expensive.</p>
+ <p>A <b>case control study</b> starts with people who already have an outcome (the <b>cases</b>) and people who do not (the <b>controls</b>), then looks <b>backward</b> at past exposures. It is fast and good for rare outcomes, but memories of the past can be biased.</p>
+ <p>Both are <b>observational</b>: researchers watch but do not assign the exposure. The big weakness is <b>confounding</b>, where a third factor such as age, income or general health is linked to both exposure and outcome.</p>`,
+ analogy:"A cohort study is like planting two rows of seeds in different soils and watching which row grows. A case control study is like finding wilted plants and good plants in a garden and asking the gardener what each one was fed last year.",
+ terms:[["Cohort study","Follows groups defined by exposure forward in time to see who develops an outcome."],["Case control study","Compares people with an outcome (cases) to people without it (controls), looking back at past exposures."],["Confounding","Mixing of effects when a third factor is linked to both the exposure and the outcome."],["Observational study","Researchers observe exposures; they do not assign them."]],
+ check:{q:"Researchers find 300 people with a rare spinal infection and 600 people without it, then compare their past medical histories. What design is this?",opts:[
+  ["Case control study",1,"Yes. They start from the outcome (cases and controls) and look backward at exposures. This suits rare outcomes."],
+  ["Cohort study",0,"A cohort starts from the exposure and follows people forward. Here they started from the outcome."],
+  ["Randomized controlled trial",0,"Nobody was assigned a treatment, so it is observational."],
+  ["Case series",0,"A case series has no control group. Here there are 600 controls."]]},
+ caption:"Cohort studies look forward from exposure. Case control studies look back from the outcome.",
+ legend:[["evid","Exposed or case group"],["coi","Unexposed or control group"],["warn","Confounder link","l"]]},
+
+{act:2,scene:"rct",
+ desc:"A pool of twenty four person icons sits on the left, gold for younger adults and slate grey for older adults, each with a small letter Y or O. One by one they pass through a spinning randomizer wheel in the middle and are sent either to an indigo treatment lane at the top right or an amber control lane at the bottom right. Bars beside each lane count how many older adults landed there, and the two bars stay close to equal. At the end, both lanes move along a pain scale and the outcome is measured the same way in both.",
+ title:"The randomized controlled trial",
+ body:`<p>In a <b>randomized controlled trial (RCT)</b>, researchers use chance, like a computer generated coin flip, to decide who gets the treatment and who gets the control. This is <b>randomization</b>.</p>
+ <p>Chance does something no researcher can do by hand: it tends to balance the groups for <b>everything</b>, including factors nobody measured, such as motivation, sleep or genes. With enough people, the groups start out alike, so a later difference is most likely caused by the treatment.</p>
+ <p>That is why well run RCTs are the strongest single study design for questions about whether a treatment works. They can still be small, short, badly blinded or not like everyday patients, so design alone does not settle it.</p>`,
+ analogy:"Shuffling a deck before dealing two hands. Nobody can stack the deck, so neither hand is likely to get all the aces.",
+ terms:[["Randomized controlled trial","A study where chance decides who gets the treatment or the control, then outcomes are compared."],["Randomization","Using a chance process to assign participants to groups."],["Baseline balance","The groups are similar at the start, before treatment."]],
+ check:{q:"Why does randomization help more than carefully matching groups by age and sex?",opts:[
+  ["It tends to balance unmeasured factors too, not only the ones researchers thought of",1,"Right. Chance balances known and unknown factors on average, which matching cannot do."],
+  ["It guarantees the groups are exactly identical",0,"Small trials can still be unbalanced by chance. Randomization makes balance likely, not certain."],
+  ["It makes blinding unnecessary",0,"Randomization handles who gets what. Blinding handles expectations after assignment."],
+  ["It makes the treatment work better",0,"Randomization does not change the treatment, only how fairly it is tested."]]},
+ caption:"Chance sends each person to an arm, so older and younger adults end up spread evenly.",
+ legend:[["treat","Treatment arm"],["ctrl","Control arm"],["coi","Older adult (O)"],["gold","Younger adult (Y)"]]},
+
+{act:2,scene:"pyramid",
+ desc:"A pyramid builds from the bottom up in seven tiers, each a different shade from pale to deep indigo. From bottom to top the tiers read: case report, case series, cross sectional, case control, cohort, randomized controlled trial, and at the top, systematic review and meta analysis. A highlight moves up the tiers one at a time, and a side card shows that tier's main strength in green and main weakness in amber. At the top, small study cards slide in from the sides and merge into the top tier. A note under the pyramid says a well done study can outrank a poorly done study higher up.",
+ title:"The evidence pyramid, and pulling studies together",
+ body:`<p>The <b>evidence pyramid</b> ranks study designs by how well they usually protect against bias for questions about treatment effects. Descriptive studies sit at the bottom, observational studies in the middle, RCTs near the top.</p>
+ <p>At the top is the <b>systematic review</b>: a planned search for <b>all</b> studies on a question, with clear rules for which to include and how to judge their quality. A <b>meta analysis</b> is the statistics step that combines the numbers from those studies into one pooled estimate.</p>
+ <p>The pyramid is a rough guide, not a law. A large, careful cohort study can be more useful than a tiny, unblinded RCT, and a review is only as good as the studies inside it. Modern systems like <b>GRADE</b> (Part 7) judge the whole body of evidence, not just the design label.</p>`,
+ analogy:"Asking one friend for a restaurant tip is a case report. Reading every review of the restaurant with a rule for spotting fake ones, then averaging the honest ones, is a systematic review with a meta analysis.",
+ terms:[["Evidence pyramid","A ranking of study designs by typical protection against bias."],["Systematic review","A planned, reproducible search and appraisal of all studies on one question."],["Meta analysis","A statistical method that pools results from several studies into one estimate."]],
+ check:{q:"What makes a systematic review different from an ordinary review article?",opts:[
+  ["It uses a planned, reproducible search for all relevant studies and clear rules for including and judging them",1,"Yes. The method is written down so others could repeat it, which limits cherry picking."],
+  ["It only includes studies that agree with the author",0,"That is the problem a systematic review is designed to avoid."],
+  ["It always includes a new experiment",0,"Systematic reviews summarise existing studies rather than running new ones."],
+  ["It is always correct",0,"A review can only be as good as the studies inside it and how carefully it was done."]]},
+ caption:"Designs stack by typical protection against bias, with systematic reviews and meta analyses on top.",
+ legend:[["evid","Study design tier","s"],["good","Strength"],["warn","Weakness"]]},
+/* ---------- Part 3 ---------- */
+{act:3,scene:"alloc",
+ desc:"The left half, labelled concealed, shows a stack of sealed white envelopes made from a computer generated random list. A participant figure walks up, signs a consent form, and only then is the top envelope opened, revealing a card with A for treatment or B for control. The recruiter figure beside it cannot see inside. The right half, labelled not concealed, shows an open list that the recruiter can read. A participant with high pain, shown with a red pain badge, is steered toward the control lane, and two baseline pain bars at the bottom drift apart, with the control bar higher. A warning chip reads groups no longer start alike.",
+ title:"Randomization needs allocation concealment",
+ body:`<p>A random list only helps if nobody can <b>see or predict</b> the next assignment before a person is enrolled. Keeping it hidden is called <b>allocation concealment</b>. Common methods are a central phone or web system, or sealed, opaque, numbered envelopes.</p>
+ <p>Without concealment, a recruiter who knows the next slot is "treatment" might, even without meaning to, enrol a more hopeful patient and hold back a sicker one. The groups then start out different, and the trial result is biased. This is a form of <b>selection bias</b>.</p>
+ <p>Concealment protects the moment of assignment. <b>Blinding</b> (next step) protects what happens after it.</p>`,
+ analogy:"A fair card dealer shuffles and deals from the top without peeking. If the dealer can see the next card, they could choose who gets it, even if they mean well.",
+ terms:[["Allocation concealment","Hiding the upcoming group assignment until a participant is enrolled."],["Random sequence","A list of group assignments made by a chance process, such as a computer."],["Selection bias","Systematic differences between groups at the start of a study caused by how people were chosen or assigned."]],
+ check:{q:"Assignments are written on a list pinned to the wall of the recruitment office. What is the main risk?",opts:[
+  ["Recruiters could steer certain patients into one group, so the groups start out different",1,"Yes. A visible list breaks allocation concealment and invites selection bias."],
+  ["The list will be too short",0,"Length is not the problem. Visibility of the next assignment is."],
+  ["Patients will get the wrong dose",0,"The concern is who ends up in which group, not dosing."],
+  ["It makes the trial blinded",0,"It does the opposite. Anyone reading the list knows the assignments."]]},
+ caption:"Sealed assignments are opened only after enrolment. An open list lets people steer patients.",
+ legend:[["treat","Assigned to A (treatment)"],["ctrl","Assigned to B (control)"],["pain","High baseline pain"]]},
+
+{act:3,scene:"blind",
+ desc:"Three figures stand in a row with labels: participant, clinician and outcome assessor. A dark band appears over the eyes of each one who is blinded. In a drug trial row, all three get the band, labelled double blind. In a manual therapy row, the clinician has no band and a label says knows the treatment, the participant's band flickers with a question mark for may guess, and the assessor has a band. Below, two tissue windows show skin, fat and muscle layers. In the left window a real needle slides down into the muscle and a yellow glow appears at its tip. In the right window a sham needle's blunt shaft slides up into its handle so the tip only presses the skin surface, making a small pink dent.",
+ title:"Blinding, and why it is hard for manual therapy",
+ body:`<p><b>Blinding</b> means people in a trial do not know who got which treatment. Blinding the <b>participant</b> controls expectation. Blinding the <b>clinician</b> keeps them from treating groups differently. Blinding the <b>outcome assessor</b> keeps measurements fair. Trials that skip blinding tend to show bigger effects for symptoms like pain.</p>
+ <p>A pill trial can use identical sugar pills. Hands on care is harder: the clinician always knows whether they gave a real <b>spinal manipulation</b>, and a <b>sham manipulation</b> (for example, positioning without the usual quick thrust) may feel different to the patient. Researchers check whether patients could guess their group.</p>
+ <p><b>Sham acupuncture</b> uses needles placed shallowly at non acupuncture points, or retractable blunt needles that touch the skin but slide into the handle instead of going in. Shams are not truly inert: touch, attention and ritual still create contextual effects, which is part of what a sham is meant to match.</p>`,
+ analogy:"A taste test is fairest when neither the taster nor the person serving knows which cup is which brand. If the server knows, a tiny smile can give it away.",
+ terms:[["Blinding","Keeping participants, clinicians or assessors unaware of group assignment."],["Double blind","Usually means both participants and the people giving care or measuring outcomes are blinded."],["Sham","A fake procedure designed to look and feel like the real one without its proposed active part."],["Assessor blinding","The person measuring outcomes does not know group assignment; usually possible even when other blinding is not."]],
+ check:{q:"In a spinal manipulation trial, who can almost always be blinded?",opts:[
+  ["The outcome assessor who measures pain and function",1,"Yes. A separate assessor who never sees the treatment can usually stay blinded."],
+  ["The clinician giving the manipulation",0,"The clinician knows whether they performed a real thrust or a sham."],
+  ["Nobody can ever be blinded in any trial",0,"Assessors can be blinded, and participants partly so with a good sham."],
+  ["Only the statistician, and that is enough",0,"Blinding the analyst helps, but the people measuring outcomes matter most for pain trials."]]},
+ caption:"Bands show who is blinded. A sham needle retracts into its handle instead of entering the skin.",
+ legend:[["ink","Blindfold band = blinded","r"],["needle","Needle handle","s"],["nerve","Needling sensation at the tip"],["muscle","Muscle layer","s"]]},
+
+{act:3,scene:"controls",
+ desc:"Four horizontal lanes are stacked down the canvas, labelled no treatment or wait list, usual care, sham, and active comparator. Each lane has two short stacked bars side by side, a treatment bar and a control bar, built from the same coloured layers used earlier: teal natural recovery, amber context and placebo, and indigo specific effect, with a rose layer for usual care and a green layer for the other active treatment. A bracket on the right of each lane shows what the difference between the bars measures, with a label such as specific effect plus context, added value over usual care, specific effect only, or better or worse than another treatment. The lanes light up one after another.",
+ title:"Choosing a control group",
+ body:`<p>What a trial can tell you depends on <b>what it compares against</b>:</p>
+ <ul><li><b>No treatment or wait list</b>: shows the total effect of getting the treatment, including context and attention. It cannot separate the specific effect from placebo effects.</li>
+ <li><b>Usual care</b>: shows whether adding the treatment to normal care helps. This is very useful for real world decisions.</li>
+ <li><b>Sham</b>: matches the context and ritual, so the difference estimates the <b>specific effect</b>. Good shams are hard to design for hands on care.</li>
+ <li><b>Active comparator</b>: compares two real treatments, for example manipulation versus a supervised exercise program. It asks "is this better than another option?"</li></ul>
+ <p>No control is "best" for every question. A treatment can beat a wait list, match usual care and barely beat a sham, all at once.</p>`,
+ analogy:"To test a new running shoe you could compare it with running barefoot, with your old shoes, with a look alike shoe that lacks the new foam, or with a top rival shoe. Each comparison answers a different question.",
+ terms:[["Wait list control","Participants get the treatment later; until then they serve as an untreated comparison."],["Usual care","Whatever care participants would normally receive."],["Sham control","A fake version of the treatment that matches its look and ritual."],["Active comparator","Another real treatment used for comparison."]],
+ check:{q:"A trial compares acupuncture with a wait list and finds a large benefit. What can it NOT tell us?",opts:[
+  ["How much of the benefit comes from needling itself rather than expectation and attention",1,"Right. A wait list group gets no context or ritual, so placebo effects are mixed into the difference."],
+  ["Whether people who got acupuncture felt better than people who waited",0,"That is exactly what this comparison shows."],
+  ["Whether the trial had a control group",0,"The wait list is the control group."],
+  ["How many people were in each group",0,"Group sizes are reported by the trial."]]},
+ caption:"Each control group cancels different layers, so each difference answers a different question.",
+ legend:[["nat","Natural recovery","s"],["plac","Context and placebo","s"],["spec","Specific effect","s"],["muscle","Usual care","s"],["para","Other active treatment","s"]]},
+
+/* ---------- Part 4 ---------- */
+{act:4,scene:"mcid",
+ desc:"At the top, a 0 to 10 pain rating scale is drawn as a row of numbered boxes with simple faces above 0, 5 and 10. A red marker for one patient slides from 7 down to 5, and a green ruler segment two points long lights up under it, labelled MCID about 2 points. Lower down, a second scale for a disability questionnaire from 0 to 24 shows a marker moving 5 points. At the bottom, two group averages, indigo and amber, sit only half a point apart on a pain scale, and a small ruler shows that this between group gap is much shorter than the 2 point ruler for one person's change.",
+ title:"Outcomes and the minimal clinically important difference",
+ body:`<p>An <b>outcome</b> is what a trial measures to judge success. For back pain, common outcomes are <b>pain intensity</b> on a 0 to 10 scale and <b>function</b> or disability on a questionnaire. These are <b>patient reported outcomes</b>: the patient rates how they feel or what they can do.</p>
+ <p>A change can be real but too small to matter. The <b>minimal clinically important difference (MCID)</b> is the smallest change that patients notice as meaningful. For a 0 to 10 pain scale it is often about <b>2 points or about 30 percent</b>, though values vary between studies and conditions.</p>
+ <p>Careful: the MCID was built for one person's change over time. The difference <b>between two group averages</b> is usually smaller, and researchers debate how big it must be to matter.</p>`,
+ analogy:"A kitchen scale might show your bag of apples weighs 3 grams more today. That change is real, but you would never notice it when you pick up the bag.",
+ terms:[["Outcome","The result a study measures, such as pain, function or return to work."],["Patient reported outcome","A rating made by the patient, such as a pain score or disability questionnaire."],["MCID","Minimal clinically important difference: the smallest change patients see as meaningful."]],
+ check:{q:"A patient's pain goes from 6 to 5.5 on a 0 to 10 scale. Using a typical MCID, how would you describe this?",opts:[
+  ["A small change, below the usual MCID of about 2 points",1,"Yes. Half a point is real but well under the change most patients notice as meaningful."],
+  ["A large and important change",0,"The usual MCID is about 2 points or about 30 percent; 0.5 points is well below that."],
+  ["Impossible to measure",0,"It is easy to measure. The question is whether it matters."],
+  ["Proof the treatment failed",0,"One patient's small change does not prove anything about a treatment."]]},
+ caption:"One person's 2 point drop is about the MCID; group average gaps are usually smaller.",
+ legend:[["pain","One patient's score"],["good","MCID ruler","r"],["treat","Treatment group average"],["ctrl","Control group average"]]},
+
+{act:4,scene:"md",
+ desc:"A graph shows two bell shaped curves of pain at 8 weeks on a 0 to 10 axis: an amber curve for the control group centred at 4.6 and an indigo curve for the treatment group centred at 3.8. Vertical lines mark each mean, and a bracket between them labelled mean difference grows as the means slide into place. A worked example card on the right builds line by line: mean difference equals treatment mean minus control mean, 3.8 minus 4.6 equals minus 0.8 points. An amber common mistake box appears, then a gold now you try box.",
+ title:"Worked example: the mean difference",
+ body:`<p>For an outcome measured on a scale, trials usually report the <b>mean difference (MD)</b>: the average score in the treatment group minus the average score in the control group, at the same time point.</p>
+ <p class="tx">MD = treatment mean − control mean</p>
+ <p>At 8 weeks, the treatment group's average pain is 3.8 and the control group's is 4.6. MD = 3.8 − 4.6 = <b>−0.8 points</b>. The minus sign means the treatment group had <b>less</b> pain, which favours treatment. The units stay as the scale's units: points on a 0 to 10 scale.</p>
+ <p>Is 0.8 points worthwhile? It is below the 2 point MCID for one person, though it is an average: some people improved more and some less.</p>
+ <p class="practice"><b>Now you try:</b> treatment mean 2.9, control mean 4.1. Answer in the quick check.</p>`,
+ analogy:"Two classes take the same quiz. One class averages 82 and the other 78. The mean difference is 4 points. It tells you how far apart the averages are, not whether every student in one class did better.",
+ terms:[["Mean difference","Treatment group average minus control group average, in the outcome's own units."],["Direction","For pain, a negative MD favours treatment (less pain); always check how the trial defines it."],["Time point","The moment outcomes are compared, such as 8 weeks after starting."]],
+ check:{q:"Now you try: at 8 weeks, treatment mean pain is 2.9 and control mean pain is 4.1. What is the mean difference?",opts:[
+  ["−1.2 points, favouring treatment",1,"Correct. 2.9 − 4.1 = −1.2 points. Lower pain in the treatment group, so it favours treatment."],
+  ["+1.2 points, favouring control",0,"The size is right but the sign is flipped. Treatment minus control is 2.9 − 4.1 = −1.2."],
+  ["7.0 points",0,"That added the two means. Subtract: treatment minus control."],
+  ["−1.2 percent",0,"The unit stays as points on the 0 to 10 scale, not percent."]]},
+ caption:"Mean difference: treatment mean minus control mean, in points on the pain scale.",
+ legend:[["treat","Treatment group"],["ctrl","Control group"],["accent","Mean difference bracket","r"]]},
+
+{act:4,scene:"smd",
+ desc:"Two bell curves, indigo for treatment and amber for control, overlap on a horizontal axis. The indigo curve slides away from the amber one in three stages, pausing at labels small, d 0.2, then medium, d 0.5, then large, d 0.8, while the shaded overlap area shrinks. On the right, a worked example card builds: d equals mean difference divided by standard deviation, 1.0 point divided by 2.0 points equals 0.5, with the word points struck through in red to show the units cancel. A common mistake box and a now you try box follow.",
+ title:"Worked example: standardized effect size",
+ body:`<p>Different trials use different scales: one measures pain 0 to 10, another 0 to 100, another uses a disability score. To compare or pool them, researchers use a <b>standardized mean difference (SMD)</b>, often called <b>Cohen's d</b>:</p>
+ <p class="tx">SMD = mean difference ÷ standard deviation</p>
+ <p>The <b>standard deviation (SD)</b> describes how spread out people's scores are. If the MD is 1.0 point and the SD is 2.0 points, d = 1.0 ÷ 2.0 = <b>0.5</b>. The points cancel, so d has <b>no units</b>.</p>
+ <p>A common rough guide: about <b>0.2 is small, 0.5 is medium, 0.8 is large</b>. Many treatments for chronic pain have small effects in this sense.</p>
+ <p class="practice"><b>Now you try:</b> MD 0.6 points, SD 2.0 points. Answer in the quick check.</p>`,
+ analogy:"Converting prices into one currency before comparing shops in different countries. The SMD converts each trial's result into the same \"currency\" of standard deviations.",
+ terms:[["Standardized mean difference","The mean difference divided by the standard deviation; has no units."],["Standard deviation","A measure of how spread out individual scores are around the average."],["Small, medium, large","Rough guides of about 0.2, 0.5 and 0.8 for a standardized effect size."]],
+ check:{q:"Now you try: MD 0.6 points, SD 2.0 points. What is the standardized effect size, and roughly how big is it?",opts:[
+  ["0.3, a small effect",1,"Correct. 0.6 ÷ 2.0 = 0.3, which is between 0.2 (small) and 0.5 (medium), so small."],
+  ["1.2, a large effect",0,"That multiplied instead of dividing. d = MD ÷ SD = 0.6 ÷ 2.0 = 0.3."],
+  ["3.3, a huge effect",0,"That divided the SD by the MD. Put the MD on top: 0.6 ÷ 2.0 = 0.3."],
+  ["0.3 points",0,"The number is right, but the units cancel. A standardized effect has no units."]]},
+ caption:"Cohen's d: as the curves pull apart from 0.2 to 0.8, overlap shrinks.",
+ legend:[["treat","Treatment scores"],["ctrl","Control scores"],["evid","Overlap","s"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"risk",
+ desc:"Two icon arrays of 100 small people sit side by side. In the left array, labelled control, 20 icons are filled red with an x mark for people who had a flare up that led to missed work. In the right array, labelled treatment, 15 icons are red. The 5 icons that are red in the control array but not in the treatment array flash with a gold outline. Below, a calculation panel builds: control risk 20 percent, treatment risk 15 percent, relative risk 0.75, relative risk reduction 25 percent, absolute risk reduction 5 percentage points. Two headline cards appear at the bottom: one says cuts risk by 25 percent and the other says 5 fewer people per 100.",
+ title:"Worked example: absolute and relative risk",
+ body:`<p>For yes or no outcomes, start with the <b>risk</b> in each group: the share who had the event. Control risk (CER) = 20 of 100 = <b>20%</b>. Treatment risk (EER) = 15 of 100 = <b>15%</b>.</p>
+ <p class="tx">Relative risk (RR) = EER ÷ CER = 15% ÷ 20% = 0.75<br>Relative risk reduction (RRR) = 1 − RR = 0.25 = 25%<br>Absolute risk reduction (ARR) = CER − EER = 20% − 15% = 5 percentage points</p>
+ <p>Both are true, but they feel very different. "Cuts risk by 25%" sounds big. "5 fewer people out of every 100" is the same result in absolute terms. Relative numbers <b>always look bigger</b> when the starting risk is small.</p>
+ <p class="practice"><b>Now you try:</b> control risk 30%, treatment risk 20%. Find the ARR in the quick check.</p>`,
+ analogy:"A sale that takes 50 percent off a one dollar pen saves you 50 cents. The same 50 percent off a laptop saves hundreds. The relative discount is the same; the absolute savings are not.",
+ terms:[["Risk","The share of people in a group who have the event, such as 15 out of 100."],["Relative risk reduction","How much the treatment lowers risk compared with control, as a fraction of the control risk."],["Absolute risk reduction","The simple difference in risk between control and treatment groups."],["Percentage points","The unit for a difference between two percentages."]],
+ check:{q:"Now you try: control risk 30%, treatment risk 20%. What is the absolute risk reduction?",opts:[
+  ["10 percentage points",1,"Correct. ARR = 30% − 20% = 10 percentage points."],
+  ["33%",0,"That is the relative risk reduction: 10 ÷ 30 = 0.33. The question asks for the absolute difference."],
+  ["50%",0,"That divided 10 by 20. ARR is a subtraction: control risk minus treatment risk."],
+  ["0.67",0,"That is the relative risk, 20 ÷ 30. ARR = 30% − 20%."]]},
+ caption:"20 of 100 versus 15 of 100: a 25 percent relative cut is 5 people per 100 in absolute terms.",
+ legend:[["harm","Had the event (x mark)"],["coi","No event"],["gold","Event prevented","r"]]},
+
+{act:5,scene:"nnt",
+ desc:"Twenty person icons stand in a row of ten and a row of ten, labelled 20 people treated. Their colours appear in order: 16 turn grey with a check mark for would have been fine anyway, 3 turn red with an x mark for had the event anyway, and 1 turns green with a plus mark and a glow, labelled helped by the treatment. On the right, a worked example card builds: NNT equals 1 divided by ARR, 1 divided by 0.05 equals 20 people. An amber common mistake box warns against dividing by the relative risk reduction, and a gold now you try box appears.",
+ title:"Worked example: number needed to treat",
+ body:`<p>The <b>number needed to treat (NNT)</b> is how many people need the treatment for <b>one extra person</b> to benefit, compared with control:</p>
+ <p class="tx">NNT = 1 ÷ ARR (with ARR as a decimal)</p>
+ <p>From the last step, ARR = 5% = 0.05. NNT = 1 ÷ 0.05 = <b>20 people</b>. Out of 20 people treated, about 16 would have been fine anyway, about 3 had the event anyway, and about 1 was helped. If the division does not come out even, <b>round an NNT up</b> to the next whole person.</p>
+ <p>The same idea works for good outcomes. If 50% improve with treatment and 40% with control, the absolute benefit is 10 percentage points and the NNT is 1 ÷ 0.10 = 10. A smaller NNT means a more effective treatment.</p>
+ <p class="practice"><b>Now you try:</b> ARR is 10 percentage points. Find the NNT in the quick check.</p>`,
+ analogy:"If you hand out 20 umbrellas and only 1 person was actually caught in rain that day without one, you needed to hand out 20 umbrellas to keep one person dry.",
+ terms:[["NNT","Number needed to treat: 1 ÷ ARR; people treated for one extra good outcome."],["Absolute benefit increase","For good outcomes: treatment rate minus control rate."],["Round up","NNTs are rounded up to whole people, so 12.5 becomes 13."]],
+ check:{q:"Now you try: the ARR is 10 percentage points. What is the NNT?",opts:[
+  ["10 people",1,"Correct. NNT = 1 ÷ 0.10 = 10."],
+  ["0.1 people",0,"That is the ARR as a decimal. NNT is its reciprocal: 1 ÷ 0.10 = 10."],
+  ["100 people",0,"That used 1 ÷ 0.01. Ten percentage points is 0.10, so NNT = 10."],
+  ["4 people",0,"That might come from dividing by a relative risk reduction. Always use the absolute risk reduction."]]},
+ caption:"Treat 20 people and about 1 extra person is helped: NNT = 1 ÷ 0.05 = 20.",
+ legend:[["coi","Fine anyway (check)"],["harm","Event anyway (x)"],["good","Helped by treatment (plus)"]]},
+
+{act:5,scene:"nnh",
+ desc:"Two icon arrays of 50 people sit side by side, labelled placebo and new pain medicine. In the placebo array, 2 icons turn orange with an exclamation mark for stomach upset, which is 4 percent. In the medicine array, 7 icons turn orange, which is 14 percent. The 5 extra orange icons pulse. A worked example card builds: absolute risk increase equals 14 percent minus 4 percent equals 10 percentage points, NNH equals 1 divided by 0.10 equals 10 people. Below, a balance scale tips between a green NNT 8 for pain relief on one side and an orange NNH 10 for stomach upset on the other.",
+ title:"Worked example: number needed to harm",
+ body:`<p>Treatments can cause harms as well as benefits. The <b>number needed to harm (NNH)</b> is how many people need the treatment for <b>one extra person</b> to have a particular harm.</p>
+ <p class="tx">Absolute risk increase (ARI) = treatment harm rate − control harm rate<br>NNH = 1 ÷ ARI</p>
+ <p>A made up pain medicine causes stomach upset in 14% of people versus 4% on placebo. ARI = 14% − 4% = 10 percentage points = 0.10. NNH = 1 ÷ 0.10 = <b>10 people</b>.</p>
+ <p>A <b>large</b> NNH is good news (the harm is uncommon). The useful question is the balance: if the NNT for meaningful pain relief is 8 and the NNH for a mild, short lived upset is 10, many people might accept it. If the harm were serious, the same numbers would look very different.</p>
+ <p class="practice"><b>Now you try:</b> harm in 9% with treatment versus 4% with control. Find the NNH in the quick check.</p>`,
+ analogy:"A new hiking route saves time, but 1 in every 10 hikers twists an ankle. Whether it is worth it depends on how much time you save and how bad the ankle twist is.",
+ terms:[["NNH","Number needed to harm: 1 ÷ ARI; people treated for one extra person to have a harm."],["Absolute risk increase","Treatment harm rate minus control harm rate."],["Benefit harm balance","Weighing NNT against NNH, and how serious each outcome is."]],
+ check:{q:"Now you try: a harm happens in 9% with treatment and 4% with control. What is the NNH?",opts:[
+  ["20 people",1,"Correct. ARI = 9% − 4% = 5 points = 0.05. NNH = 1 ÷ 0.05 = 20."],
+  ["5 people",0,"5 is the ARI in percentage points. NNH = 1 ÷ 0.05 = 20."],
+  ["11 people",0,"That used 1 ÷ 0.09, the treatment harm rate alone. Subtract the control rate first."],
+  ["2.25 people",0,"That divided 9 by 4 (a relative risk). NNH uses the absolute difference."]]},
+ caption:"Five extra people per 50 have stomach upset: ARI 10 points, NNH = 10.",
+ legend:[["symp","Stomach upset (! mark)"],["coi","No upset"],["good","Benefit side"]]},
+/* ---------- Part 6 ---------- */
+{act:6,scene:"ci",
+ desc:"A vertical green dashed line marks the true effect at 1.0 point on a horizontal axis from minus 1 to 3. One by one, twenty horizontal interval lines drop in from the top, each from a new imaginary repeat of the same study, with a dot at its estimate. Lines that cross the true effect line are indigo with a check mark; the occasional line that misses it is red with an x mark. A counter at the top right counts how many intervals caught the true value, ending near 19 of 20. A slider shaped bar at the bottom shows that bigger studies make shorter intervals.",
+ title:"Confidence intervals in plain words",
+ body:`<p>Any one study gives an <b>estimate</b>, such as a mean difference of 1.1 points. If you ran the same study again with new people, you would get a slightly different number, just by chance.</p>
+ <p>A <b>95% confidence interval (CI)</b> is a range around the estimate that shows this uncertainty. In plain words: <b>it is the range of effect sizes that fit reasonably well with the data</b>. If we repeated the study many times, about 95 out of 100 of the intervals made this way would contain the true effect.</p>
+ <p>Look at both ends. A CI of 0.2 to 2.0 points says the true effect could be tiny or fairly large. Bigger studies give <b>narrower</b> intervals, which means more precise estimates.</p>`,
+ analogy:"A weather forecast that says \"between 18 and 24 degrees\" is more honest than one exact number. A narrow range means the forecaster is more sure.",
+ terms:[["Estimate","The single best guess from the study, such as the mean difference."],["95% confidence interval","A range of values consistent with the data; built so that about 95% of such ranges catch the true value."],["Precision","How narrow the interval is; larger studies are usually more precise."]],
+ check:{q:"A trial reports MD −1.1 points, 95% CI −2.0 to −0.2. Which reading is best?",opts:[
+  ["The treatment probably reduces pain, by somewhere between a tiny amount and about 2 points",1,"Yes. The whole interval is below zero (favouring treatment), and its ends run from 0.2 to 2.0 points of benefit."],
+  ["Exactly 1.1 points is the true effect for everyone",0,"1.1 is the best estimate. The true average could be anywhere in the interval, and individuals vary."],
+  ["The result is uncertain because the interval crosses zero",0,"This interval does not cross zero: both ends are negative."],
+  ["95% of patients improved",0,"A confidence interval is about the average effect, not the share of patients who improved."]]},
+ caption:"Twenty repeat studies: about 19 of 20 intervals catch the true value.",
+ legend:[["good","True effect","dl"],["evid","Interval that catches it"],["bad","Interval that misses"]]},
+
+{act:6,scene:"pval",
+ desc:"A bell shaped histogram builds up from falling grey dots, each dot one imaginary trial in a world where the treatment truly has no effect, so the dots pile up around zero. A brick red marker shows the observed difference of 1.1 points on the right. The two tails of the histogram beyond plus and minus 1.1 points turn red, and a label reads p = 0.03, about 3 in 100 no effect trials are this extreme. Below, two statement cards appear: a correct one with a check mark, if there were no effect, results this extreme would be rare, and a wrong one with a red x through it, 3 percent chance the treatment does not work.",
+ title:"P values in plain words",
+ body:`<p>A <b>p value</b> answers a narrow question: <b>if the treatment truly had no effect, how often would we see a difference at least this big just by chance?</b></p>
+ <p>The picture builds the "no effect" world: thousands of imaginary trials where the true difference is zero. Most land near zero. If the real trial's result of 1.1 points sits far out in the tails, where only about 3 in 100 no effect trials land, then p = 0.03.</p>
+ <p>A p value is <b>not</b> the chance that the treatment works, and it is <b>not</b> the size of the effect. By custom, p below 0.05 is called <b>statistically significant</b>, but that cut off is arbitrary. A p value of 0.06 is not very different from 0.04. Always look at the effect size and its confidence interval.</p>`,
+ analogy:"Your friend flips a coin and gets 9 heads out of 10. If the coin were fair, that would be quite rare. That surprise is what a small p value measures. It does not tell you how unfair the coin is.",
+ terms:[["P value","The probability of results at least this extreme if there were truly no effect."],["Null hypothesis","The starting assumption that the treatment has no effect."],["Statistically significant","By custom, p below 0.05; it means the result is unlikely under no effect, not that it is important."]],
+ check:{q:"A trial reports p = 0.03. Which statement is correct?",opts:[
+  ["If the treatment had no effect, a difference this large would show up about 3 times in 100 trials",1,"Correct. That is exactly what a p value describes."],
+  ["There is a 3% chance the treatment does not work",0,"This is the most common misreading. A p value assumes no effect; it does not give the chance that no effect is true."],
+  ["97% of patients will improve",0,"A p value says nothing about how many patients improve."],
+  ["The effect is large",0,"Tiny effects can have small p values in big trials. Look at the effect size."]]},
+ caption:"In a world with no effect, results this far from zero turn up about 3 times in 100.",
+ legend:[["coi","Imaginary no effect trials"],["accent","Observed result","l"],["bad","Tails as extreme or more","s"]]},
+
+{act:6,scene:"sig",
+ desc:"A horizontal axis shows mean difference in pain, with a solid line at zero and a green dashed line at 1 point labelled smallest worthwhile difference. Four trials, A to D, draw their confidence intervals one at a time. A is a huge trial with a very short interval from 0.2 to 0.4: a chip says statistically significant, not clinically important. B runs from 1.2 to 2.2: significant and important. C is a small trial with a wide interval from minus 0.5 to 2.5 crossing both lines: uncertain. D is narrow around zero from minus 0.2 to 0.3: likely no worthwhile effect. A trial size circle beside each row shows A largest and C smallest.",
+ title:"Statistical significance versus clinical importance",
+ body:`<p><b>Statistically significant</b> means a result is unlikely to be pure chance. <b>Clinically important</b> means the effect is big enough to matter to patients. They are different questions.</p>
+ <p>A very large trial can find a tiny effect, such as 0.3 points of pain, that is statistically significant but too small to notice (trial A). A small trial can find a promising effect that is uncertain because its interval is wide (trial C). That is not proof of no effect; it is <b>not enough information</b>.</p>
+ <p>The best habit is to compare the <b>whole confidence interval</b> with zero and with a threshold for a worthwhile difference. Here the threshold is set at 1 point for teaching.</p>`,
+ analogy:"A very sensitive bathroom scale can reliably detect that you gained 50 grams. The change is real and measurable, but it is not important.",
+ terms:[["Clinical importance","Whether an effect is large enough to matter to patients."],["Smallest worthwhile difference","The smallest between group effect that would make the treatment worth its costs and risks."],["Imprecise","A result with a wide interval that includes both trivial and important effects."]],
+ check:{q:"A trial of 6,000 people finds MD 0.3 points less pain, 95% CI 0.2 to 0.4, p below 0.001. What is the best summary?",opts:[
+  ["The effect is very likely real but very likely too small to matter",1,"Yes. The narrow interval sits entirely below a worthwhile threshold such as 1 point."],
+  ["A tiny p value means a big benefit",0,"The p value is tiny because the trial is huge. The effect is only 0.3 points."],
+  ["The trial was too small to tell",0,"With 6,000 people, the interval is narrow. The answer is clear: small effect."],
+  ["The result is clinically important because it is significant",0,"Significance and importance are different. Check the size of the effect against the threshold."]]},
+ caption:"Compare each interval with zero and with the smallest worthwhile difference.",
+ legend:[["evid","95% confidence interval"],["good","Worthwhile threshold","dl"],["ink-soft","No difference line","l"]]},
+
+{act:6,scene:"forest",
+ desc:"A forest plot builds row by row for a made up review of six back pain trials. Each row has a trial name on the left, an indigo horizontal line for its 95% confidence interval and an indigo square at its estimate, with bigger squares for trials that carry more weight. A vertical line marks zero, with favours treatment written on the left and favours control on the right. After the six rows, small indigo particles flow down from each square, more from the big squares, and gather into a brick red diamond at the bottom labelled pooled. The diamond's centre is the pooled estimate and its width is the pooled confidence interval, which is narrower than any single trial's line.",
+ title:"Forest plots and pooling",
+ body:`<p>A <b>forest plot</b> is the main picture in a meta analysis. Each row is one study: the <b>square</b> is its estimate and the <b>line</b> is its 95% CI. The <b>size of the square</b> shows its weight, which is larger for bigger, more precise studies.</p>
+ <p>The vertical <b>line of no effect</b> is at zero for a mean difference (or at 1 for a risk ratio). Rows that cross it are uncertain on their own.</p>
+ <p>The <b>diamond</b> at the bottom is the <b>pooled estimate</b>: a weighted average of all the studies. Its width is the pooled CI. Pooling makes the estimate more precise, but only if the studies are similar enough to combine. When results disagree a lot, this is called <b>heterogeneity</b> and should make you more cautious.</p>`,
+ analogy:"Several people each guess the weight of a pumpkin. Averaging the guesses, and trusting the people with better scales a bit more, usually beats any single guess.",
+ terms:[["Forest plot","A chart of each study's estimate and CI with a pooled diamond at the bottom."],["Weight","How much a study counts in the pooled result; more precise studies get more weight."],["Pooled estimate","The combined result of a meta analysis, shown as a diamond."],["Heterogeneity","How much study results differ from each other beyond chance."]],
+ check:{q:"In a forest plot of pain scores, the pooled diamond runs from −1.1 to −0.3 points. What does this mean?",opts:[
+  ["Pooled across studies, treatment lowers pain by about 0.3 to 1.1 points on average",1,"Right. The diamond is entirely on the favours treatment side, and its width is the pooled CI."],
+  ["Every study found a benefit",0,"Individual studies can cross zero even when the pooled diamond does not."],
+  ["The treatment lowers pain by at least 2 points",0,"The diamond's ends are 0.3 and 1.1 points, well below 2."],
+  ["The result is not statistically significant",0,"The diamond does not touch zero, so the pooled result is statistically significant."]]},
+ caption:"Squares and lines for each trial; their weighted average becomes the diamond.",
+ legend:[["evid","Study estimate and CI","s"],["accent","Pooled diamond","d"],["ink-soft","Line of no effect","l"]]},
+
+/* ---------- Part 7 ---------- */
+{act:7,scene:"bias",
+ desc:"Four small panels light up in turn. Selection bias: healthier looking green figures are funnelled into the treatment door while sicker figures with red pain badges go to the control door. Publication bias: a funnel shaped scatter plot of study dots, with dashed empty circles in the lower right corner labelled never published, small studies with no benefit. Funding bias: a coin with a dollar sign sits on top of a study report and tilts a balance toward favours sponsor. Attrition bias: dots leave the treatment arm through an exit door, and most of the leaving dots are the ones whose pain did not improve, so the remaining dots look better than the whole group.",
+ title:"Bias: when results lean one way",
+ body:`<p><b>Bias</b> is a systematic error that pushes results in one direction. Unlike chance, more participants do not fix it.</p>
+ <ul><li><b>Selection bias</b>: groups differ at the start because of how people were chosen or assigned (poor randomization or concealment).</li>
+ <li><b>Publication bias</b>: studies with exciting, positive results are more likely to be published than small "no effect" studies, so reviews can overestimate benefit. A lopsided <b>funnel plot</b> can be a clue.</li>
+ <li><b>Funding bias</b>: studies paid for by someone who gains from a result are more likely to report favourable findings. Funding does not make a study wrong, but it is worth noting.</li>
+ <li><b>Attrition bias</b>: people drop out, and the dropouts differ between groups. An <b>intention to treat</b> analysis, which keeps everyone in the group they were assigned to, helps.</li></ul>
+ <p>Lack of blinding causes bias too: <b>performance bias</b> (groups treated differently) and <b>detection bias</b> (outcomes measured differently).</p>`,
+ analogy:"A bathroom scale that always reads 2 kilograms light. Weighing yourself 100 times will not fix it; you will just be very sure of the wrong number.",
+ terms:[["Bias","A systematic error that pushes results away from the truth in one direction."],["Publication bias","Selective publication of studies based on their results."],["Attrition bias","Bias from dropouts that differ between groups."],["Intention to treat","Analysing everyone in the group they were randomized to, whether or not they finished."]],
+ check:{q:"A treatment group loses 30% of participants, mostly people who were not improving, while the control group loses 5%. Analysing only completers will probably:",opts:[
+  ["Make the treatment look better than it really is",1,"Yes. The people left in the treatment arm are the ones doing well, which inflates its average. This is attrition bias."],
+  ["Make the treatment look worse",0,"Losing the non improvers raises the treatment group's average, not lowers it."],
+  ["Have no effect, because dropout is random",0,"Here dropout is not random; it is linked to poor response."],
+  ["Fix publication bias",0,"Dropout and publication bias are different problems."]]},
+ caption:"Four common biases: who gets in, what gets published, who pays, and who drops out.",
+ legend:[["accent","Panel in focus","s"],["evid","Study result"],["pain","Poor responder"]]},
+
+{act:7,scene:"grade",
+ desc:"A ladder with four rungs reads, from top to bottom: high with four filled circles, moderate with three, low with two, and very low with one. A marker labelled RCTs starts on the high rung. Reason chips slide in from the right one at a time, risk of bias, then imprecision, and each one pushes the marker down one rung, landing on low. A second marker labelled observational studies starts on low, and a chip labelled large effect lifts it up one rung. The five reasons to rate down are listed in a column: risk of bias, inconsistency, indirectness, imprecision, publication bias.",
+ title:"GRADE: how sure can we be?",
+ body:`<p><b>GRADE</b> is a widely used system for rating the <b>certainty of evidence</b> for one outcome across all the studies, on four levels: <b>high, moderate, low and very low</b>.</p>
+ <p>Evidence from RCTs starts at high; evidence from observational studies starts at low. Reviewers then <b>rate down</b> for five problems: <b>risk of bias</b>, <b>inconsistency</b> (studies disagree), <b>indirectness</b> (different patients or outcomes than the question), <b>imprecision</b> (wide CIs, few people) and <b>publication bias</b>. Observational evidence can be <b>rated up</b> for a very large effect or a clear dose response.</p>
+ <p>"Low certainty" does not mean the treatment does not work. It means the true effect <b>may be quite different</b> from the estimate, and new studies could change the picture.</p>`,
+ analogy:"A detective's confidence in a theory. A clear confession starts strong, but if the witness is unreliable, the story keeps changing, or the evidence is about a different suspect, confidence drops a rung each time.",
+ terms:[["Certainty of evidence","How confident we are that the true effect is close to the estimate."],["Rate down","Lower certainty for risk of bias, inconsistency, indirectness, imprecision or publication bias."],["Rate up","Raise certainty for observational evidence with a large effect or a dose response."]],
+ check:{q:"A set of RCTs is rated down once for risk of bias and once for imprecision. What is the GRADE certainty?",opts:[
+  ["Low",1,"Right. RCT evidence starts at high, then drops two levels: high to moderate to low."],
+  ["High",0,"RCTs start high, but two problems each lower it one level."],
+  ["Moderate",0,"That is one step down. Two problems mean two steps: low."],
+  ["Very low",0,"That would be three steps down from high. Two steps land on low."]]},
+ caption:"Certainty starts high for RCTs and drops a rung for each serious problem.",
+ legend:[["evid","Certainty level dots"],["warn","Reason to rate down","r"],["good","Reason to rate up","r"]]},
+
+{act:7,scene:"ebp",
+ desc:"Three large translucent circles slide together until they overlap in the middle. The indigo circle is labelled best research evidence, the brick red circle is labelled clinical expertise, and the green circle is labelled patient values and preferences. A larger dashed outline around all three is labelled clinical context, such as setting, cost and safety. In the centre overlap, a small clinician figure and a patient figure face each other with alternating speech bubbles, and the words shared decision glow. Small icons orbit each circle: a forest plot for research, a stethoscope for expertise, and a heart for values.",
+ title:"Evidence based practice: three sources, one decision",
+ body:`<p><b>Evidence based practice</b> is not "only do what RCTs say". It combines three things:</p>
+ <ul><li>The <b>best available research evidence</b>, judged for quality and certainty.</li>
+ <li><b>Clinical expertise</b>: skill in examination, spotting red flags that need prompt medical referral, and judging how evidence applies to this person.</li>
+ <li><b>Patient values and preferences</b>: goals, beliefs, past experience, culture and what they are willing to try.</li></ul>
+ <p>These come together in <b>shared decision making</b>: the clinician explains realistic benefits, harms and options, including doing less, and the patient helps choose. When evidence is weak, honesty about uncertainty matters even more.</p>`,
+ analogy:"Planning a trip with a travel guide (research), an experienced driver who knows the roads (expertise) and the traveller's own wishes about where to go (values). Missing any one of them makes a worse trip.",
+ terms:[["Evidence based practice","Integrating research evidence, clinical expertise and patient values in decisions."],["Shared decision making","Clinician and patient choose together after discussing options, benefits and harms."],["Clinical context","The setting, resources, costs and safety issues around a decision."]],
+ check:{q:"A patient strongly prefers active exercise over passive treatments, and both have similar evidence for her condition. What fits evidence based practice?",opts:[
+  ["Discuss both honestly and support her preference for exercise",1,"Yes. When evidence is similar, patient values can rightly decide."],
+  ["Insist on the treatment the clinician likes best",0,"Clinical expertise matters, but it should not override patient values when the evidence is similar."],
+  ["Refuse to treat until a perfect trial exists",0,"Decisions use the best available evidence, even when it is imperfect."],
+  ["Choose whatever has the most testimonials online",0,"Testimonials are weak evidence and are not the same as patient values."]]},
+ caption:"Research, expertise and patient values overlap in a shared decision.",
+ legend:[["evid","Research evidence"],["accent","Clinical expertise"],["para","Patient values"]]},
+
+{act:7,scene:"apply",
+ desc:"Three cards sit side by side. The manual therapy card shows two ivory vertebrae with a blue disc between them and a small forest style chart with two diamonds: manipulation versus other recommended care sitting close to zero, and versus sham showing a small benefit. The acupuncture card shows a needle and a chart where real and sham needling both beat usual care by a similar amount, with only a small gap between real and sham. The mindfulness card shows a seated figure breathing, with a gently rising and falling green line, and a chart showing a modest benefit for stress, anxiety and pain. A strip along the bottom lists claims evidence does not support, with an x mark: manipulation for asthma, high blood pressure or ear infections. Each card glows in turn.",
+ title:"Applying it honestly: manual therapy, acupuncture and mindfulness",
+ body:`<p><b>Spinal manipulation</b> is one of several nonpharmacologic options in major guidelines for low back pain. Reviews suggest <b>small to moderate</b> benefits that are similar to other recommended care such as exercise. Evidence does not support manipulation for conditions such as asthma, high blood pressure or ear infections. Serious harms are rare; mild, short lived soreness is common.</p>
+ <p><b>Acupuncture</b> trials often show real and sham needling performing more similarly than expected, while both can do better than usual care. That pattern points to strong contextual effects, and the specific effect of needling is debated.</p>
+ <p><b>Mindfulness</b> programs show modest benefits for stress, anxiety and pain in many trials. <b>Exercise</b> has strong evidence for back pain and general health. Honest practice means telling patients both what is known and how sure we are.</p>`,
+ analogy:"A good friend recommending a restaurant says, \"The pasta is reliably good, the dessert is hit or miss, and I would skip the fish.\" Honest advice includes the limits.",
+ terms:[["Nonpharmacologic","Not using medicines; examples include exercise, manual therapy and mindfulness."],["Specific versus contextual effect","What the technique itself does, versus effects of expectation, touch and attention."],["Honest framing","Describing realistic benefits, harms and uncertainty without overselling or dismissing."]],
+ check:{q:"A patient asks whether acupuncture will help her chronic back pain. Which answer best reflects the evidence?",opts:[
+  ["Some people feel better and trials show benefit over usual care, but sham needling often does almost as well, so expectation and context seem to play a big part",1,"Yes. This is honest about the benefit and about the open question of specific effects."],
+  ["It cures back pain in almost everyone",0,"No treatment cures chronic back pain in almost everyone. This oversells the evidence."],
+  ["It is pure fake and has no effect at all",0,"This dismisses the benefit over usual care that many trials show. Honest framing avoids both extremes."],
+  ["Nobody has ever studied it",0,"Acupuncture has been studied in many trials and reviews."]]},
+ caption:"Modest, honest summaries for manual therapy, acupuncture and mindfulness research.",
+ legend:[["bone","Vertebra (bone)"],["disc","Disc"],["evid","Comparison estimate","s"],["para","Breathing line","l"]]},
+
+{act:0,scene:"finish",
+ desc:"A clipboard titled questions to ask any health claim fills with eight lines, each ticked with a green check mark as it appears: compared with what, randomized and concealed, who was blinded, how big is the effect, how precise is it, absolute or relative, what about harms, and how certain is the whole body of evidence. Around the clipboard, small pictures from earlier steps float by: drifting teal dots, a sham needle, an icon array, a confidence interval and a brick red forest plot diamond.",
+ title:"Finish: your evidence checklist",
+ body:`<p>You can now read a health claim the way researchers do. When you meet a headline, a testimonial or a new study, ask:</p>
+ <ol><li><b>Compared with what?</b> Natural history, regression to the mean and context can explain a lot.</li>
+ <li><b>Was it randomized, with concealed allocation?</b></li>
+ <li><b>Who was blinded?</b> Could a sham have been used?</li>
+ <li><b>How big is the effect?</b> Mean difference, SMD or risk numbers, compared with the MCID.</li>
+ <li><b>How precise?</b> Look at both ends of the confidence interval.</li>
+ <li><b>Absolute or relative?</b> Ask for the ARR and the NNT.</li>
+ <li><b>What about harms?</b> Look for the NNH and how serious the harm is.</li>
+ <li><b>How certain is the whole body of evidence?</b> Look for a systematic review and a GRADE rating.</li></ol>
+ <p>Then bring in clinical expertise and the patient's values. Try the lab next to run your own virtual trials.</p>`,
+ analogy:"A pilot's preflight checklist. Experienced pilots still use it every time, because it catches the problems that are easy to miss.",
+ terms:[["Critical appraisal","Judging a study's methods and results to decide how much to trust it."],["Body of evidence","All the relevant studies on one question, taken together."],["Uncertainty","An honest description of how much we do not yet know."]],
+ check:null,caption:"Eight questions to ask of any health claim.",
+ legend:[["good","Checked"],["nat","Drifting scores"],["evid","Study data"],["accent","Pooled diamond","d"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function resetScene(){SYS={};SC={}}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;resetScene();render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0;resetScene()};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= scenes: start, parts 1 and 2 ================= */
+/* ---------- map ---------- */
+function sceneMap(T){
+  panelBox(14,14,250,236);levelTag(26,32,"person");
+  person(92,196,40,{skin:1,shirt:0,mood:true});
+  const pv=lerp(7,3,smooth(clamp(P(T,10)*1.3,0,1)));
+  const gx=190,gy=62,gh=150;rr(gx,gy,28,gh,7);fillStroke(C.sunk,C.rule,1.2);const fh=gh*pv/10;rr(gx,gy+gh-fh,28,fh,7);ctx.fillStyle=C.pain;ctx.fill();
+  txt(gx+14,gy-12,"pain",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});label(gx+14,gy+gh+16,sn(pv,1),{size:13,weight:700,mono:true,border:C.pain});
+  panelBox(274,14,250,236);levelTag(286,32,"group");
+  const X=painAxis(300,222,200,{label:"pain score"});
+  const pr=smooth(clamp(P(T,10)*1.3-.1,0,1));
+  [["treat",90,3],["ctrl",160,4.3]].forEach((ln,li)=>{txt(300,ln[1]-26,li?"control":"treatment",{size:11.5,weight:700,color:C[ln[0]+"-ink"]});
+    for(let i=0;i<12;i++){const b=6+2*rnd(i*7+li),e=ln[2]+1.6*rnorm(i*3+li*11)*.6;const v=clamp(lerp(b,e,pr),0,10);circ(X(v),ln[1]+(i%3-1)*10,5,C[ln[0]],hexA(C.ink,.35),1)}});
+  panelBox(534,14,252,236);levelTag(546,32,"data");
+  const rows=[{n:"Trial A",md:-1.2,lo:-2.4,hi:0},{n:"Trial B",md:-.5,lo:-1.1,hi:.1},{n:"Trial C",md:-.8,lo:-1.4,hi:-.2},{n:"Trial D",md:-.3,lo:-1.3,hi:.7}];const pl=poolRows(rows);
+  forest({x:610,y:56,w:160,rowH:28,x0:-3,x1:2},rows,pl,clamp(P(T,10)*1.25,0,1),{fsz:11,ticks:[-2,0,2],tdp:0});
+  const parts=[["Why people get better","natural history, placebo"],["Anecdotes and designs","from stories to RCTs"],["Building a fair trial","randomize, conceal, blind"],["Measuring change","MCID, MD, effect size"],["Risk and numbers needed","ARR, RRR, NNT, NNH"],["Uncertainty and pooling","CI, p value, forest plots"],["Bias, certainty, practice","bias, GRADE, honest use"]];
+  const k=Math.floor(P(T,14)*7);
+  parts.forEach((pp,i)=>{const r=i<4?0:1,c=i<4?i:i-4;const w=i<4?186:250,x=14+c*(w+(i<4?2.67:3)),y=262+r*104;const col=C["act"+(i+1)];cardBox(x,y,w,96,col,i===k);badge(x+22,y+26,i+1,col,12);
+    txt(x+42,y+26,pp[0],{size:12.5,weight:700});wrapText(pp[1],x+14,y+56,w-24,16,{size:11.5,color:C["ink-soft"]})});
+}
+/* ---------- natural history ---------- */
+function natPain(i,t){const s=6+2.2*rnd(i*3.1+1),pers=rnd(i*5.7+2)<.2;const f=pers?4+1.5*rnd(i+9):1.2+2.2*rnd(i*1.3+4);const tau=1.4+2.2*rnd(i*2.9+3);
+  return clamp(f+(s-f)*Math.exp(-t/tau)+.55*Math.sin(t*1.9+i*1.7)*rnd(i+.5)+.3*Math.sin(t*3.3+i),0,10)}
+function sceneNatural(T){
+  const g=graph({x:70,y:48,w:520,h:372,x0:0,x1:12,y0:0,y1:10,xt:[0,2,4,6,8,10,12],yt:[0,2,4,6,8,10],xl:"weeks",yl:"pain score (0 to 10)",ylx:44});
+  const wk=Math.min(12,P(T,13)*14);
+  line(g.X(wk),g.y,g.X(wk),g.y+g.h,hexA(C.ink,.35),1.4,[4,4]);
+  for(let i=0;i<40;i++){ctx.beginPath();for(let s=0;s<=40;s++){const t=wk*s/40;const v=natPain(i,t);s?ctx.lineTo(g.X(t),g.Y(v)):ctx.moveTo(g.X(t),g.Y(v))}ctx.strokeStyle=hexA(C.nat,.16);ctx.lineWidth=1.2;ctx.stroke()}
+  for(let i=0;i<40;i++)circ(g.X(wk),g.Y(natPain(i,wk)),4.2,hexA(C.nat,.75),hexA(C.ink,.3),1);
+  const mean=t=>{let s=0;for(let i=0;i<40;i++)s+=natPain(i,t);return s/40};
+  ctx.beginPath();for(let s=0;s<=60;s++){const t=wk*s/60;s?ctx.lineTo(g.X(t),g.Y(mean(t))):ctx.moveTo(g.X(t),g.Y(mean(t)))}ctx.strokeStyle=C.nat;ctx.lineWidth=4;ctx.stroke();
+  const m=mean(wk);
+  panelBox(608,48,178,190);title(620,68,"Readout",C["accent-ink"]);txt(620,96,"week "+wk.toFixed(1),{size:13,weight:700,mono:true});txt(620,122,"average pain",{size:12,color:C["ink-soft"]});
+  label(620,148,sn(m,1)+" of 10",{size:15,weight:700,mono:true,align:"left",border:C.nat});txt(620,178,"started at "+sn(mean(0),1),{size:12,color:C["ink-soft"]});txt(620,200,"40 people",{size:12,color:C["ink-soft"]});
+  panelBox(608,250,178,170);title(620,270,"No treatment given",C.ink);
+  person(668,388,30,{skin:2,shirt:2,mood:true});person(730,388,30,{skin:0,shirt:3,mood:true});
+  wrapText("Many episodes ease on their own",620,300,160,16,{size:12,color:C["ink-soft"]});
+  label(g.X(wk)+(wk>9?-8:8),g.y+14,"group average",{size:11.5,weight:700,align:wk>9?"right":"left",border:C.nat});
+}
+/* ---------- regression to the mean ---------- */
+function rtmF(d){return clamp(5+1.5*Math.sin(d*.42+.3)+1.1*Math.sin(d*1.13+1)+.7*Math.sin(d*2.6+2),0,10)}
+function sceneRtm(T){
+  panelBox(14,14,772,222);levelTag(26,32,"person");
+  const g=graph({x:70,y:48,w:690,h:150,x0:0,x1:60,y0:0,y1:10,xt:[0,10,20,30,40,50,60],yt:[0,5,10],xl:"days"});
+  line(g.x,g.Y(5),g.x+g.w,g.Y(5),C["ink-soft"],1.4,[5,4]);txt(g.x+g.w-4,g.Y(5)-9,"usual average 5",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  let dE=10,vE=0;for(let d=10;d<=28;d+=.1){const v=rtmF(d);if(v>vE){vE=v;dE=d}}const dF=dE+21;
+  const up=Math.min(60,P(T,13)*72);
+  ctx.beginPath();for(let d=0;d<=up;d+=.25){d?ctx.lineTo(g.X(d),g.Y(rtmF(d))):ctx.moveTo(g.X(d),g.Y(rtmF(d)))}ctx.strokeStyle=C.pain;ctx.lineWidth=2.4;ctx.stroke();
+  if(up>dE){const x=g.X(dE),y=g.Y(vE);line(x,y,x,y-30,C.pain,2);ctx.beginPath();ctx.moveTo(x,y-30);ctx.lineTo(x+16,y-25);ctx.lineTo(x,y-20);ctx.closePath();ctx.fillStyle=C.pain;ctx.fill();circ(x,y,6,C.pain,C.panel,2);
+    label(x+22,y-26,"enrolls in a study on a bad day: "+sn(vE,0),{size:11.5,weight:700,align:"left",border:C.pain})}
+  if(up>dF){const x=g.X(dF),y=g.Y(rtmF(dF));circ(x,y,6,C.good,C.panel,2);arrow(g.X(dE)+8,g.Y(vE)+6,x-8,y-4,C.good,2);label(x+10,y+22,"next visit: "+sn(rtmF(dF),0)+", looks better, but nothing changed",{size:11.5,weight:700,align:x>520?"right":"left",border:C.good})}
+  panelBox(14,246,772,220);levelTag(26,264,"group");
+  const Y=v=>452-v/10*176;const x1=230,x2=560;
+  line(150,Y(0),150,Y(10),C["ink-soft"],1.4);[0,5,10].forEach(v=>txt(142,Y(v),String(v),{size:10.5,mono:true,align:"right",color:C["ink-soft"]}));
+  txt(x1,268,"time 1 (sign up)",{size:12,weight:700,align:"center"});txt(x2,268,"time 2 (follow up)",{size:12,weight:700,align:"center"});
+  line(x1-60,Y(7),x2+60,Y(7),hexA(C.rtm,.7),1.4,[4,4]);txt(x1-66,Y(7),"cut off 7",{size:11,weight:700,align:"right",color:C.rtm});
+  const p=seg(P(T,13)*13,2,8);let s1=0,s2=0,n=0;
+  for(let i=0;i<40;i++){const mu=5.2+.9*rnorm(i*4.1+2),v1=clamp(mu+1.5*rnorm(i*2.3+7),0.3,9.7),v2=clamp(mu+1.5*rnorm(i*3.7+13),0.3,9.7);const sel=v1>=7;const jx=(rnd(i*9.3)-.5)*40;
+    if(sel){n++;s1+=v1;s2+=v2;const q=clamp(p*1.4-i*.01,0,1);if(q>0){line(x1+jx,Y(v1),lerp(x1+jx,x2+jx,q),lerp(Y(v1),Y(v2),q),hexA(C.rtm,.7),1.6)}}
+    circ(x1+jx,Y(v1),5,sel?C.rtm:hexA(C.coi,.55),sel?C.ink:null,1.4);
+    if(p>.2)withA(sel?1:.5,()=>circ(x2+jx,Y(v2),5,sel?C.good:hexA(C.coi,.55),sel?C.ink:null,1.4))}
+  if(p>.6&&n){withA((p-.6)/.4,()=>{panelBox(630,300,146,120);txt(642,320,"selected people",{size:12,weight:700});txt(642,346,"time 1 average",{size:11.5,color:C["ink-soft"]});txt(642,364,sn(s1/n,1),{size:14,weight:700,mono:true,color:C.rtm});txt(642,388,"time 2 average",{size:11.5,color:C["ink-soft"]});txt(642,406,sn(s2/n,1),{size:14,weight:700,mono:true,color:C.good})})}
+}
+/* ---------- placebo and context ---------- */
+function scenePlacebo(T){
+  panelBox(14,14,336,452);levelTag(26,32,"person");
+  const t=P(T,14)*14;const ex=smooth(seg(t,1,8));
+  person(96,300,44,{skin:2,shirt:2,mood:true});txt(96,356,"clinician",{size:12,weight:600,align:"center"});
+  person(250,300,44,{skin:0,shirt:0,mood:true});txt(250,356,"patient",{size:12,weight:600,align:"center"});
+  const icons=[[1,"warm explanation"],[2.6,"time and attention"],[4.2,"this will help"],[5.8,"treatment ritual"]];
+  icons.forEach((ic,i)=>{const a=seg(t,ic[0],ic[0]+.6);if(a<=0)return;withA(a,()=>{
+    if(i===0){bubble(30,60,140,44,"Here is what is going on...",{size:11.5,tx:80});label(100,120,ic[1],{size:11.5,weight:700,border:C.plac})}
+    if(i===1){circ(285,82,20,C.panel,C.plac,2.4);const an=t*1.4;line(285,82,285+Math.cos(an)*14,82+Math.sin(an)*14,C.ink,2);line(285,82,285,68,C.ink,2);label(285,120,ic[1],{size:11.5,weight:700,border:C.plac})}
+    if(i===2){[[230,206,5],[240,190,7]].forEach(c=>circ(c[0],c[1],c[2],C.panel,C.rule,1.4));rr(196,148,128,30,14);fillStroke(C.panel,C.plac,1.8);txt(260,163,"this will help",{size:12,weight:700,align:"center"});label(260,138,"expectation",{size:11.5,weight:700,border:C.plac})}
+    if(i===3){rr(130,400,90,20,4);fillStroke(C["panel-2"],C.plac,1.6);[145,165,185,205].forEach((x,k)=>line(x,404,x+6,416,C["ink-soft"],2));label(175,440,ic[1],{size:11.5,weight:700,border:C.plac})}})});
+  /* pain rating */
+  const pr=lerp(7,5,ex);rr(300,380,30,70,6);fillStroke(C.sunk,C.rule,1);const fh=70*pr/10;rr(300,450-fh,30,fh,6);ctx.fillStyle=C.pain;ctx.fill();label(315,368,"pain "+sn(pr,1),{size:11.5,weight:700,mono:true,border:C.pain});
+  /* dial */
+  panelBox(360,14,110,452);txt(415,40,"expectation",{size:12,weight:700,align:"center"});
+  ctx.beginPath();ctx.arc(415,120,40,Math.PI*.8,Math.PI*2.2);ctx.strokeStyle=C.sunk;ctx.lineWidth=10;ctx.stroke();ctx.beginPath();ctx.arc(415,120,40,Math.PI*.8,Math.PI*(.8+1.4*ex));ctx.strokeStyle=C.plac;ctx.lineWidth=10;ctx.stroke();
+  const na=Math.PI*(.8+1.4*ex);line(415,120,415+Math.cos(na)*30,120+Math.sin(na)*30,C.ink,3);circ(415,120,5,C.ink);txt(415,178,Math.round(ex*100)+" %",{size:13,weight:700,mono:true,align:"center"});
+  wrapText("Turning up as the context builds",372,220,90,16,{size:11.5,color:C["ink-soft"]});
+  /* nervous system */
+  panelBox(480,14,306,452);levelTag(492,32,"data");txt(633,32,"signal view",{size:11.5,weight:600,color:C["ink-soft"]});
+  ell(633,90,62,40,0,hexA(C.muscle,.25),C.muscle,2);txt(633,90,"brain",{size:12.5,weight:700,align:"center"});
+  rr(625,128,16,290,8);fillStroke(hexA(C.nerve,.25),C.nerve,1.6);txt(655,250,"spinal cord",{size:11.5,weight:600});
+  const path=[[770,420],[700,400],[640,400],[633,360],[633,130]];poly(path,hexA(C.pain,.5),2.2);txt(752,440,"from the back",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  rr(608,384,50,32,6);fillStroke(hexA(C.panel,.9),C["ink-soft"],1.4);txt(633,400,"gate",{size:11.5,weight:700,align:"center"});
+  for(let i=0;i<5;i++){const q=P(T*.28+i/5,1);const pt=along(path,q);const sz=q<.42?7:7*(1-.55*ex);glow(pt[0],pt[1],sz*2.2,C.pain,.55);circ(pt[0],pt[1],sz*.6,C.pain)}
+  const n=Math.round(1+4*ex);for(let i=0;i<n;i++){const q=P(T*.32+i/n,1);const y=lerp(132,384,q);circ(618,y,4.5,C.para,C.panel,1.2)}
+  if(ex>.2)withA(ex,()=>{label(560,250,"descending control",{size:11.5,weight:700,border:C.para});label(700,330,"smaller pain signal",{size:11.5,weight:700,border:C.pain})});
+}
+/* ---------- stacked improvement ---------- */
+function sceneStack(T){
+  const t=P(T,16)*16;const sc=72,base=430;
+  const TP=[[1.8,"nat","Natural recovery"],[.7,"rtm","Regression to the mean"],[.6,"plac","Context and placebo"],[.3,"coi","Co interventions"],[.6,"spec","Specific effect"]];
+  const CP=TP.slice(0,4);
+  line(40,base,780,base,C["ink-soft"],1.6);
+  txt(40,40,"Improvement in pain (points), example numbers",{size:12.5,weight:700});
+  const a=seg(t,.3,5.3),b=seg(t,5.6,9.6);
+  const r1=stackBar(170,base,90,sc,TP,a);const r2=stackBar(490,base,90,sc,CP,b);
+  txt(215,base+18,"treatment group",{size:12.5,weight:700,align:"center",color:C["treat-ink"]});txt(535,base+18,"sham control group",{size:12.5,weight:700,align:"center",color:C["ctrl-ink"]});
+  if(a>0)label(215,r1.top-16,"total "+sn(r1.acc,1),{size:12.5,weight:700,mono:true,border:C.treat});
+  if(b>0)label(535,r2.top-16,"total "+sn(r2.acc,1),{size:12.5,weight:700,mono:true,border:C.ctrl});
+  /* co intervention icons */
+  const cy=base-(1.8+.7+.6+.15)*sc;withA(seg(t,3.2,3.8),()=>{rr(52,cy-8,26,14,7);fillStroke(C.panel,C.coi,1.6);line(65,cy-8,65,cy+6,C.coi,1.4);rr(88,cy-10,34,20,5);fillStroke(hexA(C.symp,.35),C.coi,1.4);ctx.beginPath();ctx.moveTo(132,cy+8);ctx.lineTo(132,cy-6);ctx.lineTo(146,cy+2);ctx.lineTo(160,cy+2);ctx.lineTo(160,cy+8);ctx.closePath();fillStroke(C.panel,C.coi,1.4);txt(106,cy+22,"medicine, heat, walking",{size:11,weight:600,align:"center",color:C["ink-soft"]})});
+  const c=seg(t,10,11);if(c>0)withA(c,()=>{const y1=base-4*sc,y2=base-3.4*sc;line(260,y1,720,y1,hexA(C.treat,.7),1.4,[4,3]);line(580,y2,720,y2,hexA(C.ctrl,.7),1.4,[4,3]);
+    line(720,y1,730,y1,C.ink,2);line(730,y1,730,y2,C.ink,2);line(720,y2,730,y2,C.ink,2);label(725,y2+22,"difference 0.6",{size:12,weight:700,border:C.spec});
+    wrapText("Shared layers cancel. What is left is the specific effect.",300,66,300,16,{size:12.5,weight:700})});
+}
+/* ---------- anecdote vs data ---------- */
+function rankIdx(n,seed){return [...Array(n).keys()].sort((a,b)=>rnd(a*1.7+seed)-rnd(b*1.7+seed))}
+function sceneAnecdote(T){
+  const t=P(T,16)*16;const cell=19;
+  panelBox(14,14,420,192);title(26,34,"Tried the treatment",C.ink);
+  const R1=rankIdx(100,3),imp1=new Set(R1.slice(0,60));const rev=seg(t,.5,3.5);
+  for(let i=0;i<100;i++){const cx=34+(i%20)*cell+cell/2,cy=50+Math.floor(i/20)*cell*1.4+cell/2;const k=R1.indexOf(i);const on=imp1.has(i)&&k/60<rev;mini(cx,cy+6,cell*.8,on?C.good:hexA(C.coi,.75));if(on)txt(cx,cy+9,"+",{size:10,weight:700,align:"center",color:inkOn(C.good)})}
+  if(rev>=1)txt(26,190,"60 of 100 improved",{size:12.5,weight:700,color:C.good});
+  /* bubbles to the board */
+  panelBox(560,14,226,300);title(574,34,"Testimonials board",C.ink);
+  const speak=R1.slice(0,5);speak.forEach((idx,j)=>{const s0=4+j*.8;const q=seg(t,s0,s0+1.2);if(q<=0)return;const sx=34+(idx%20)*cell+cell/2,sy=50+Math.floor(idx/20)*cell*1.4;
+    const tx=574,ty=56+j*48;if(q<1){const x=lerp(sx,tx,ease(q)),y=lerp(sy,ty,ease(q))-Math.sin(q*Math.PI)*40;rr(x-4,y-10,96,20,10);fillStroke(C.panel,C.treat,1.4);txt(x+44,y,"It worked!",{size:11,weight:700,align:"center"})}
+    else{rr(tx,ty,198,40,6);fillStroke(hexA(C.treat,.12),C.treat,1.4);txt(tx+10,ty+14,"It worked for me!",{size:12,weight:700});txt(tx+10,ty+30,"five stars",{size:11,color:C["ink-soft"]})}});
+  if(t>5)withA(seg(t,5,6),()=>{label(300,224,"you rarely hear from the 40 who did not improve",{size:11.5,weight:700,border:C.coi})});
+  const b=seg(t,8.5,11.5);if(b>0){withA(Math.min(1,b*3),()=>{panelBox(14,250,420,192);title(26,270,"Did not get the treatment",C.ink);
+    const R2=rankIdx(100,11);for(let i=0;i<100;i++){const cx=34+(i%20)*cell+cell/2,cy=286+Math.floor(i/20)*cell*1.4+cell/2;const k=R2.indexOf(i);const on=k<55&&k/55<b;mini(cx,cy+6,cell*.8,on?C.good:hexA(C.coi,.75));if(on)txt(cx,cy+9,"+",{size:10,weight:700,align:"center",color:inkOn(C.good)})}
+    if(b>=1)txt(26,426,"55 of 100 improved anyway",{size:12.5,weight:700,color:C.good})})}
+  if(t>12)withA(seg(t,12,13),()=>{panelBox(456,330,330,112);title(470,350,"The fair comparison",C["accent-ink"]);txt(470,378,"60 of 100 versus 55 of 100",{size:13,weight:700,mono:true});wrapText("Only about 5 extra people per 100 may owe their improvement to the treatment.",470,402,300,16,{size:12})});
+}
+/* ---------- observational designs ---------- */
+function sceneObs(T){
+  const t=P(T,15)*15;const k=Math.floor(t/5);
+  const P3=[["Case report","One patient, described in detail","Spots new or rare events","No comparison group"],["Case series","Several patients, same treatment","Shows a pattern and raises questions","No comparison, cannot show cause"],["Cross sectional","A snapshot at one moment","Measures prevalence","Cannot show which came first"]];
+  P3.forEach((p,i)=>{const x=14+i*260,w=252;cardBox(x,14,w,452,C.evid,i===k);txt(x+14,36,p[0],{size:14,weight:700});txt(x+14,56,p[1],{size:11.5,color:C["ink-soft"]});
+    wrapText("Strength: "+p[2],x+14,382,w-28,16,{size:12,weight:600,color:C.good});wrapText("Weakness: "+p[3],x+14,420,w-28,16,{size:12,weight:600,color:C["warn-ink"]})});
+  /* case report */
+  person(70,250,40,{skin:3,shirt:1,mood:true});rr(130,110,116,170,6);fillStroke(C.paper,C.rule,1.4);rr(162,104,52,12,4);fillStroke(C.coi,null);
+  const lines=["age 46","new back pain","treatment X","better at 3 weeks","rash on day 2"];lines.forEach((l,j)=>{const a=seg(P(T,6)*6,j*.8,j*.8+.5);if(a>0)withA(a,()=>txt(140,134+j*28,l,{size:11.5,weight:600}))});
+  /* case series */
+  for(let j=0;j<8;j++){const x=310+(j%4)*58,y=170+Math.floor(j/4)*120;person(x,y,22,{skin:j%4,shirt:(j+1)%4});const q=seg(P(T,6)*6,1+j*.3,1.6+j*.3);const down=j!==5;if(q>0)withA(q,()=>arrow(x+22,y-36,x+22,y-36+(down?26:-22)*q+(down?0:22),down?C.good:C.warn,2.4))}
+  txt(390,326,"all got treatment X",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  /* cross sectional */
+  const ft=P(T,5)*5;for(let j=0;j<20;j++){const x=560+(j%5)*40,y=110+Math.floor(j/5)*44;mini(x,y,26,j%3===0?C.pain:hexA(C.coi,.8))}
+  rr(538,82,200,186,6);ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.setLineDash([8,5]);ctx.stroke();ctx.setLineDash([]);
+  if(ft<.35)withA(1-ft/.35,()=>{ctx.fillStyle="rgba(255,255,255,.75)";ctx.fillRect(540,84,196,182)});
+  const tb=seg(ft,.4,1.4);if(tb>0)withA(tb,()=>{const tx=556,ty=286;[["exercise",80],["no exercise",160]].forEach(h=>txt(tx+h[1],ty,h[0],{size:11,weight:700,align:"center"}));
+    txt(tx,ty+22,"pain",{size:11,weight:700});txt(tx,ty+44,"no pain",{size:11,weight:700});[["2","5"],["9","4"]].forEach((r,ri)=>r.forEach((v,ci)=>label(tx+80+ci*80,ty+22+ri*22,v,{size:12,weight:700,mono:true})))});
+}
+/* ---------- cohort and case control ---------- */
+function sceneCohort(T){
+  const t=P(T,14)*14;
+  line(40,240,760,240,C["ink-soft"],2);[["PAST",80],["NOW",400],["FUTURE",720]].forEach(l=>{line(l[1],232,l[1],248,C["ink-soft"],2);txt(l[1],258,l[0],{size:11.5,weight:700,mono:true,align:"center",color:C["ink-soft"]})});
+  txt(40,30,"Cohort study: start from exposure, look forward",{size:13,weight:700});
+  [[96,"exercise regularly",C.evid,4],[176,"do not exercise",C.coi,9]].forEach((g,gi)=>{for(let j=0;j<6;j++)mini(372+(j%3)*20,g[0]-14+Math.floor(j/3)*24,18,g[2]);txt(360,g[0]-2,g[1],{size:11.5,weight:600,align:"right"});
+    const q=seg(t,.8+gi*.4,4);if(q>0){arrow(440,g[0],lerp(440,690,q),g[0],g[2],2.6)}if(q>=1)label(700,g[0],g[3]+" of 50 new episodes",{size:11.5,weight:700,align:"right",border:g[2]})});
+  txt(40,290,"Case control study: start from outcome, look back",{size:13,weight:700});
+  [[340,"cases: chronic back pain",C.evid,"heavy lifting job: 60%"],[410,"controls: no back pain",C.coi,"heavy lifting job: 35%"]].forEach((g,gi)=>{for(let j=0;j<6;j++)mini(372+(j%3)*20,g[0]-14+Math.floor(j/3)*24,18,g[2]);txt(440,g[0]-30,g[1],{size:11.5,weight:600});
+    const q=seg(t,5+gi*.4,8.5);if(q>0)arrow(360,g[0],lerp(360,110,q),g[0],g[2],2.6);if(q>=1)label(110,g[0]-20,g[3],{size:11.5,weight:700,align:"left",border:g[2]})});
+  const c=seg(t,9.5,10.5);if(c>0)withA(c,()=>{panelBox(560,300,226,166);title(572,318,"Confounding",C["warn-ink"]);const A=[673,348],B=[600,440],Cc=[746,440];
+    label(A[0],A[1],"age",{size:12,weight:700,border:C.warn});label(B[0],B[1],"exposure",{size:11.5,weight:700});label(Cc[0],Cc[1],"outcome",{size:11.5,weight:700});
+    arrow(A[0]-12,A[1]+12,B[0]+14,B[1]-14,C.warn,2);arrow(A[0]+12,A[1]+12,Cc[0]-14,Cc[1]-14,C.warn,2);line(B[0]+40,B[1],Cc[0]-40,Cc[1],C["ink-soft"],1.6,[4,4]);txt(673,456,"looks linked",{size:11,weight:600,align:"center",color:C["ink-soft"]})});
+}
+/* ---------- randomized trial ---------- */
+function sceneRct(T){
+  const t=P(T,15)*15;const N=24;
+  panelBox(14,14,170,452);title(26,34,"Enrolled",C.ink);
+  const old=i=>Math.floor(i/2)%2===0;const arm=[];for(let i=0;i<N;i+=2){const f=rnd(i*2.9+5)<.5?0:1;arm.push(f,1-f)}
+  /* wheel */
+  const wx=270,wy=240;circ(wx,wy,46,C.panel,C.ink,2);for(let s=0;s<8;s++){ctx.beginPath();ctx.moveTo(wx,wy);ctx.arc(wx,wy,44,T*3+s*TAU/8,T*3+(s+1)*TAU/8);ctx.closePath();ctx.fillStyle=hexA(s%2?C.treat:C.ctrl,.35);ctx.fill()}circ(wx,wy,8,C.ink);txt(wx,wy+66,"chance decides",{size:12,weight:700,align:"center"});
+  /* lanes */
+  [[110,"treat","treatment arm"],[370,"ctrl","control arm"]].forEach((l,li)=>{rr(350,l[0]-54,420,108,10);ctx.fillStyle=hexA(C[l[1]],.1);ctx.fill();ctx.strokeStyle=C[l[1]];ctx.lineWidth=1.6;ctx.stroke();txt(362,l[0]-38,l[2],{size:12.5,weight:700,color:C[l[1]+"-ink"]})});
+  const cnt=[[0,0],[0,0]];const slots=[],sc_=[0,0];for(let i=0;i<N;i++){slots.push(sc_[arm[i]]++)}
+  for(let i=0;i<N;i++){const s0=.4+i*.38;const q=seg(t,s0,s0+1);const px=40+(i%4)*36,py=70+Math.floor(i/4)*60;const a=arm[i];const slot=slots[i];
+    const lx=380+(slot%6)*42,ly=(a?370:110)-8+Math.floor(slot/6)*36;let x,y;
+    if(q<=0){x=px;y=py}else if(q<.5){x=lerp(px,wx,ease(q*2));y=lerp(py,wy,ease(q*2))}else{x=lerp(wx,lx,ease(q*2-1));y=lerp(wy,ly,ease(q*2-1))}
+    if(q>=1)cnt[a][old(i)?1:0]++;
+    const col=old(i)?C.coi:C.gold;mini(x,y+8,26,col,{edge:q>.5?C[a?"ctrl":"treat"]:null});txt(x,y+14,old(i)?"O":"Y",{size:10,weight:700,align:"center",color:inkOn(col)})}
+  [[0,110],[1,370]].forEach(z=>{const o=cnt[z[0]][1],tot=cnt[z[0]][0]+cnt[z[0]][1];txt(640,z[1]-38,"older: "+o+" of "+tot,{size:12,weight:700,mono:true});bar(640,z[1]-26,120,10,tot?o/12:0,C.coi)});
+  if(t>11)withA(seg(t,11,12),()=>label(560,240,"groups start out alike, so outcomes are compared fairly",{size:12,weight:700,border:C.good}));
+}
+/* ---------- evidence pyramid ---------- */
+function scenePyramid(T){
+  const t=P(T,21)*21;const L=[["Case report","new or rare events","no comparison"],["Case series","patterns, ideas","no comparison"],["Cross sectional","prevalence","no time order"],["Case control","fast, rare outcomes","recall bias"],["Cohort","time order, risk","confounding"],["Randomized controlled trial","balances unknown factors","cost, may not fit every patient"],["Systematic review and meta analysis","all the evidence, pooled","only as good as its studies"]];
+  const bx=40,bw=520,top=40,bot=440,th=(bot-top)/7;const k=t<4.2?-1:Math.floor((t-4.2)/2.4)%7;
+  for(let i=0;i<7;i++){const a=seg(t,i*.6,i*.6+.5);if(a<=0)continue;const y2=bot-i*th,y1=y2-th;const w2=lerp(bw,150,i/7),w1=lerp(bw,150,(i+1)/7);const cx=bx+bw/2;
+    withA(a,()=>{ctx.beginPath();ctx.moveTo(cx-w2/2,y2);ctx.lineTo(cx+w2/2,y2);ctx.lineTo(cx+w1/2,y1);ctx.lineTo(cx-w1/2,y1);ctx.closePath();const fc=mix(C.panel,C.evid,.15+i*.1);ctx.fillStyle=fc;ctx.fill();ctx.strokeStyle=i===k?C.accent:C.panel;ctx.lineWidth=i===k?3.5:1.5;ctx.stroke();
+      const col=inkOn(fc);if(i===6){txt(cx,y1+th*.36,"Systematic review",{size:11.5,weight:700,align:"center",color:col});txt(cx,y1+th*.68,"and meta analysis",{size:11.5,weight:700,align:"center",color:col})}else txt(cx,y1+th/2,L[i][0],{size:12.5,weight:700,align:"center",color:col})})}
+  txt(bx+bw/2,458,"A well done study can outrank a poorly done study higher up.",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  panelBox(580,40,206,220);if(k>=0){title(592,60,"Tier "+(k+1),C["accent-ink"]);wrapText(L[k][0],592,86,180,17,{size:13.5,weight:700});txt(592,140,"Strength",{size:11.5,weight:700,color:C.good});wrapText(L[k][1],592,160,180,16,{size:12.5});txt(592,200,"Weakness",{size:11.5,weight:700,color:C["warn-ink"]});wrapText(L[k][2],592,220,180,16,{size:12.5})}
+  else{title(592,60,"Building the pyramid",C["accent-ink"]);wrapText("Designs stack by how well they usually protect against bias.",592,90,180,17,{size:12.5})}
+  if(k===6){for(let j=0;j<5;j++){const q=P(T*.5+j/5,1);const sx=j%2?780:600,sy=300+j*30;const x=lerp(sx,bx+bw/2,ease(q)),y=lerp(sy,top+th*.5,ease(q));withA(1-q*.6,()=>{rr(x-14,y-9,28,18,3);fillStroke(C.paper,C.evid,1.4);line(x-8,y-3,x+8,y-3,C.evid,1.2);line(x-8,y+3,x+4,y+3,C.evid,1.2)})}
+    label(683,300,"studies pooled at the top",{size:11.5,weight:700,border:C.evid})}
+}
+/* ================= scenes: parts 3, 4 and 5 ================= */
+/* ---------- allocation concealment ---------- */
+function sceneAlloc(T){
+  const t=P(T,6)*6,cyc=Math.floor(T/6);
+  panelBox(14,14,382,452);title(26,34,"Concealed",C.good);
+  panelBox(404,14,382,452);title(416,34,"Not concealed",C.bad);
+  /* left: sealed envelopes */
+  for(let j=4;j>=0;j--)envelope(40+j*4,110-j*6,70,46,false);
+  txt(78,180,"sealed random list",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  person(200,300,34,{skin:1,shirt:3,mood:true});txt(200,345,"recruiter",{size:11.5,weight:600,align:"center"});
+  const ab=rnd(cyc*3.7+1)<.5?0:1;
+  const px=lerp(360,290,smooth(seg(t,0,1.4)));person(px,300,34,{skin:(cyc+2)%4,shirt:cyc%4,mood:true});
+  if(t>1.4){withA(seg(t,1.4,1.9),()=>{rr(px-30,330,46,30,3);fillStroke(C.paper,C.rule,1.2);txt(px-7,345,"consent",{size:10.5,weight:600,align:"center"})})}
+  if(t>2.4){envelope(260,110,70,46,true,ab?"B":"A",C[ab?"ctrl":"treat"]);label(295,186,"opened after enrolment",{size:11.5,weight:700,border:C.good})}
+  [[90,"treat","A treatment"],[270,"ctrl","B control"]].forEach((l,i)=>{rr(l[0]-70,392,140,54,8);ctx.fillStyle=hexA(C[l[1]],.12);ctx.fill();ctx.strokeStyle=C[l[1]];ctx.lineWidth=1.6;ctx.stroke();txt(l[0],406,l[2],{size:11.5,weight:700,align:"center",color:C[l[1]+"-ink"]});
+    bar(l[0]-56,424,112,10,.6,C[l[1]]);txt(l[0],440,"baseline pain 6.4",{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});
+  if(t>3.4){const q=seg(t,3.4,5);const tx=ab?270:90;mini(lerp(290,tx,ease(q)),lerp(330,380,ease(q)),22,C[ab?"ctrl":"treat"])}
+  /* right: open list */
+  rr(430,70,130,120,6);fillStroke(C.paper,C.rule,1.4);txt(442,88,"next slots",{size:11,weight:700,color:C["ink-soft"]});["A","B","A","A","B"].forEach((c,j)=>txt(450+(j%3)*36,112+Math.floor(j/3)*30,c,{size:14,weight:700,mono:true,color:C[c==="A"?"treat":"ctrl"]}));
+  person(620,300,34,{skin:1,shirt:3});eyes(620,300,34);arrow(605,250,570,170,hexA(C.ink,.6),1.6,[3,3]);txt(620,345,"recruiter can read it",{size:11.5,weight:600,align:"center"});
+  const q2=seg(t,1,4);const sx=lerp(760,700,smooth(seg(t,0,1)));person(sx,300,34,{skin:3,shirt:1});label(sx,232,"pain 9",{size:11.5,weight:700,mono:true,border:C.pain});
+  if(q2>0){arrow(sx-10,340,lerp(sx-10,660,q2),lerp(340,388,q2),C.pain,2.4);if(q2>.6)label(700,372,"steered to B",{size:11.5,weight:700,border:C.pain})}
+  const dv=smooth(seg(T%12,0,10));[[480,"treat","A",lerp(6.4,5.8,dv)],[660,"ctrl","B",lerp(6.4,7.1,dv)]].forEach(l=>{rr(l[0]-70,392,140,54,8);ctx.fillStyle=hexA(C[l[1]],.12);ctx.fill();ctx.strokeStyle=C[l[1]];ctx.lineWidth=1.6;ctx.stroke();txt(l[0],406,l[2]+" baseline pain",{size:11.5,weight:700,align:"center",color:C[l[1]+"-ink"]});bar(l[0]-56,424,112,10,l[3]/10.6,C[l[1]]);txt(l[0],440,sn(l[3],1),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});
+  if(dv>.5)withA((dv-.5)*2,()=>label(530,214,"groups no longer start alike",{size:11.5,weight:700,border:C.bad,bg:C["bad-wash"]}));
+}
+/* ---------- blinding ---------- */
+function sceneBlind(T){
+  const t=P(T,12)*12;
+  const roles=["participant","clinician","outcome assessor"];
+  [[14,"Drug trial: identical pills",[1,1,1],"double blind"],[160,"Manual therapy trial",[2,0,1],"clinician always knows"]].forEach((r,ri)=>{panelBox(14,r[0],772,138);txt(28,r[0]+20,r[1],{size:13,weight:700});
+    label(700,r[0]+20,r[3],{size:11.5,weight:700,border:ri?C.warn:C.good});
+    roles.forEach((nm,j)=>{const x=300+j*160,y=r[0]+96;person(x,y,22,{skin:(j+ri*2)%4,shirt:(j+ri)%4});const st=r[2][j];
+      if(st===2){const on=Math.sin(T*2.2)>0;blindfold(x,y,22,on);if(!on)eyes(x,y,22);label(x+30,y-48,"may guess?",{size:11,weight:700,align:"left",border:C.warn})}else if(st)blindfold(x,y,22,true);else{eyes(x,y,22);label(x+30,y-48,"knows",{size:11,weight:700,align:"left",border:C.warn})}
+      txt(x,y+30,nm,{size:11.5,weight:600,align:"center"})})});
+  rr(60,74,22,12,6);fillStroke(C.panel,C["ink-soft"],1.2);rr(90,74,22,12,6);fillStroke(C.panel,C["ink-soft"],1.2);txt(28,100,"real or sugar pill: look the same",{size:11,weight:600,color:C["ink-soft"]});
+  txt(28,232,"sham: positioning without the",{size:11,weight:600,color:C["ink-soft"]});txt(28,248,"usual quick thrust",{size:11,weight:600,color:C["ink-soft"]});
+  const p=smooth(seg(t,1,4))*(1-smooth(seg(t,9,11)));
+  needleScene(14,306,382,160,p,false);needleScene(404,306,382,160,p,true);
+  label(205,322,"real needle goes into muscle",{size:11.5,weight:700,border:C.nerve});label(595,322,"sham: blunt tip slides into handle",{size:11.5,weight:700,border:C.needle});
+  txt(30,454,"skin, then muscle",{size:11,weight:600});txt(420,454,"tip stays on the skin",{size:11,weight:600});
+}
+/* ---------- control groups ---------- */
+function sceneControls(T){
+  const t=P(T,16)*16;const k=Math.floor(t/4);const sc=68,x0=230;
+  const L=[["No treatment or wait list",[[1.8,"nat"],[.8,"plac"],[.6,"spec"]],[[1.8,"nat"]],"specific effect plus context"],
+    ["Usual care",[[1.8,"nat"],[.8,"muscle"],[.6,"plac"],[.6,"spec"]],[[1.8,"nat"],[.8,"muscle"]],"added value over usual care"],
+    ["Sham",[[1.8,"nat"],[.8,"plac"],[.6,"spec"]],[[1.8,"nat"],[.8,"plac"]],"specific effect only"],
+    ["Active comparator",[[1.8,"nat"],[.8,"plac"],[.6,"spec"]],[[1.8,"nat"],[.8,"plac"],[.5,"para"]],"better or worse than another treatment"]];
+  L.forEach((l,i)=>{const y=16+i*114;cardBox(14,y,772,106,C.act3,i===k);txt(28,y+22,l[0],{size:13,weight:700});txt(28,y+44,"treatment bar",{size:11,color:C["treat-ink"],weight:600});txt(28,y+74,"control bar",{size:11,color:C["ctrl-ink"],weight:600});
+    const p=i<k?1:i===k?seg(t%4,0,2.2):0;if(p<=0&&i>k){return}
+    const e1=hbar(x0,y+34,22,sc,l[1],i<=k?1:0);const e2=hbar(x0,y+64,22,sc,l[2],i<=k?(i<k?1:p):0);
+    if(i<k||seg(t%4,2.2,2.8)>0){withA(i<k?1:seg(t%4,2.2,2.8),()=>{const xa=Math.min(e1,e2),xb=Math.max(e1,e2);line(xa,y+92,xb,y+92,C.ink,2);line(xa,y+86,xa,y+98,C.ink,2);line(xb,y+86,xb,y+98,C.ink,2);
+      wrapText("Difference shows: "+l[3],560,y+40,214,16,{size:12,weight:700})})}});
+}
+/* ---------- MCID ---------- */
+function sceneMcid(T){
+  const t=P(T,12)*12;
+  panelBox(14,14,772,170);levelTag(26,32,"person");txt(130,32,"pain intensity, 0 to 10",{size:12,weight:700});
+  const bx=60,bw=56;for(let v=0;v<=10;v++){rr(bx+v*bw+2,92,bw-4,36,4);fillStroke(mix(C.panel,C.pain,v/14),C.rule,1);txt(bx+v*bw+bw/2,110,String(v),{size:13,weight:700,mono:true,align:"center"})}
+  [[0,1],[5,0],[10,-1]].forEach(f=>{const x=bx+f[0]*bw+bw/2,y=66;circ(x,y,13,C.panel,C["ink-soft"],1.4);circ(x-4,y-3,1.6,C.ink);circ(x+4,y-3,1.6,C.ink);if(f[1]){ctx.beginPath();ctx.arc(x,y+(f[1]>0?1:9),5,f[1]>0?.2:Math.PI+.2,f[1]>0?Math.PI-.2:TAU-.2);ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.stroke()}else line(x-5,y+5,x+5,y+5,C.ink,1.4)});
+  const v=lerp(7,5,smooth(seg(t,1,4)));const mx=bx+v*bw+bw/2;ctx.beginPath();ctx.moveTo(mx,140);ctx.lineTo(mx-8,154);ctx.lineTo(mx+8,154);ctx.closePath();ctx.fillStyle=C.pain;ctx.fill();label(mx,170,"patient: "+sn(v,1),{size:11.5,weight:700,mono:true,border:C.pain});
+  if(t>4)withA(seg(t,4,5),()=>{rr(bx+5*bw+bw/2,132,2*bw,6,3);ctx.fillStyle=C.good;ctx.fill();label(bx+8*bw+bw/2+20,150,"MCID about 2 points",{size:11.5,weight:700,align:"left",border:C.good})});
+  panelBox(14,194,772,120);txt(28,214,"function: a disability questionnaire, 0 to 24 (higher is worse)",{size:12,weight:700});
+  const X=v_=>70+v_/24*640;line(70,262,710,262,C["ink-soft"],1.6);for(let s=0;s<=24;s+=4){line(X(s),256,X(s),268,C["ink-soft"],1.2);txt(X(s),282,String(s),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  const d=lerp(14,9,smooth(seg(t,2,5)));circ(X(d),262,8,C.muscle,C.ink,1.4);label(X(d),240,"score "+sn(d,0),{size:11.5,weight:700,mono:true,border:C.muscle});if(t>5)withA(seg(t,5,6),()=>{line(X(9),296,X(14),296,C.muscle,3);txt(X(11.5),306,"5 point change",{size:11,weight:600,align:"center"})});
+  panelBox(14,324,772,142);levelTag(26,342,"group");txt(110,342,"between group difference at 8 weeks",{size:12,weight:700});
+  const Xg=v_=>70+v_/10*640;line(70,410,710,410,C["ink-soft"],1.6);for(let s=0;s<=10;s+=2)txt(Xg(s),428,String(s),{size:10.5,mono:true,align:"center",color:C["ink-soft"]});
+  const g=smooth(seg(t,6,8));circ(Xg(lerp(6.5,3.9,g)),400,9,C.treat,C.ink,1.4);circ(Xg(lerp(6.5,4.4,g)),400,9,C.ctrl,C.ink,1.4);
+  if(t>8)withA(seg(t,8,9),()=>{label(Xg(3.9)-6,374,"treatment 3.9",{size:11.5,weight:700,align:"right",border:C.treat});label(Xg(4.4)+6,374,"control 4.4",{size:11.5,weight:700,align:"left",border:C.ctrl});
+    rr(Xg(3.9),446,Xg(4.4)-Xg(3.9),5,2);ctx.fillStyle=C.evid;ctx.fill();rr(Xg(6),446,Xg(8)-Xg(6),5,2);ctx.fillStyle=C.good;ctx.fill();txt(Xg(4.4)+8,452,"gap 0.5",{size:11,weight:700});txt(Xg(8)+8,452,"2 point ruler",{size:11,weight:700})});
+}
+/* ---------- mean difference ---------- */
+function sceneMd(T){
+  const t=P(T,18)*18;const sl=smooth(seg(t,.5,3));
+  const g=graph({x:50,y:60,w:420,h:330,x0:0,x1:10,y0:0,y1:1.1,xt:[0,2,4,6,8,10],xl:"pain at 8 weeks",title:"Two groups, many people",grid:false});
+  const mc=lerp(6.5,4.6,sl),mt=lerp(6.5,3.8,sl);bellG(g,mc,1.8,1,C.ctrl);bellG(g,mt,1.8,1,C.treat);
+  line(g.X(mc),g.Y(1.02),g.X(mc),g.Y(0),C.ctrl,2,[5,4]);line(g.X(mt),g.Y(1.02),g.X(mt),g.Y(0),C.treat,2,[5,4]);
+  label(g.X(mt)-6,g.Y(1.06),"treatment "+sn(mt,1),{size:11.5,weight:700,align:"right",border:C.treat});label(g.X(mc)+6,g.Y(1.06),"control "+sn(mc,1),{size:11.5,weight:700,align:"left",border:C.ctrl});
+  if(sl>=1){const a=seg(t,3,4);withA(a,()=>{const y=g.Y(.5);line(g.X(mt),y,g.X(mc),y,C.accent,3);line(g.X(mt),y-8,g.X(mt),y+8,C.accent,3);line(g.X(mc),y-8,g.X(mc),y+8,C.accent,3);label((g.X(mt)+g.X(mc))/2,y-18,"MD "+sn(-.8,1),{size:12,weight:700,mono:true,border:C.accent})})}
+  workCard(490,40,296,426,[{k:"q",t:"At 8 weeks, average pain: treatment 3.8, control 4.6 points."},{k:"eq",t:"MD = treatment mean − control mean"},{k:"eq",t:"MD = 3.8 − 4.6"},{k:"ans",t:"MD = −0.8 points"},{k:"note",t:"Negative means less pain with treatment, so it favours treatment. Units stay as points."},{k:"miss",t:"subtracting in the other order flips the sign, or comparing with the group's own baseline instead of the other group."},{k:"try",t:"treatment 2.9, control 4.1. Answer in the quick check."}],t,{per:18,t0:3.6,dt:1.4});
+}
+/* ---------- standardized effect size ---------- */
+function sceneSmd(T){
+  const t=P(T,15)*15;const st=Math.min(2,Math.floor(t/4.2));const ds=[.2,.5,.8];const prev=st?ds[st-1]:0;const d=lerp(prev,ds[st],smooth(seg(t-st*4.2,0,1.2)));
+  const g=graph({x:40,y:70,w:440,h:300,x0:-3.5,x1:4.3,y0:0,y1:1.15,xt:[-3,-2,-1,0,1,2,3,4],xf:v=>sn(v,0),xl:"score in standard deviation units",title:"Overlap shrinks as d grows",grid:false});
+  ctx.save();ctx.beginPath();ctx.rect(g.x,g.y,g.w,g.h);ctx.clip();ctx.beginPath();for(let i=0;i<=160;i++){const v=lerp(g.x0,g.x1,i/160);const y=Math.min(pdf(v,0,1),pdf(v,d,1));i?ctx.lineTo(g.X(v),g.Y(y)):ctx.moveTo(g.X(v),g.Y(y))}ctx.lineTo(g.X(g.x1),g.Y(0));ctx.lineTo(g.X(g.x0),g.Y(0));ctx.closePath();ctx.fillStyle=hexA(C.evid,.3);ctx.fill();ctx.restore();
+  bellG(g,0,1,1,C.ctrl,{fill:false});bellG(g,d,1,1,C.treat,{fill:false});
+  const nm=d<.35?"small":d<.65?"medium":"large";label(g.X(d/2),g.Y(1.08),"d "+d.toFixed(1)+": "+nm,{size:13,weight:700,mono:true,border:C.treat});
+  const ov=2*Phi(-d/2);txt(g.x+8,g.y+14,"overlap about "+Math.round(ov*100)+"%",{size:12.5,weight:700,color:C["evid-ink"]});
+  [[.2,"small"],[.5,"medium"],[.8,"large"]].forEach((z,i)=>{const x=60+i*140;rr(x,420,120,34,6);fillStroke(i===st?C["evid-wash"]:C.panel,i===st?C.evid:C.rule,i===st?2.4:1.2);txt(x+60,437,z[1]+" "+z[0],{size:12.5,weight:700,mono:true,align:"center"})});
+  workCard(500,40,286,426,[{k:"q",t:"MD 1.0 point. SD of pain scores 2.0 points."},{k:"eq",t:"SMD = MD ÷ SD"},{k:"cancel",parts:[["1.0 ",0],["points",1],[" ÷ 2.0 ",0],["points",1]]},{k:"ans",t:"d = 0.5, no units"},{k:"note",t:"About 0.5 is a medium effect by the usual rough guide."},{k:"miss",t:"keeping units on d, or dividing the SD by the MD."},{k:"try",t:"MD 0.6, SD 2.0. Answer in the quick check."}],t,{per:15,t0:.8,dt:1.5});
+}
+/* ---------- absolute and relative risk ---------- */
+function sceneRisk(T){
+  const t=P(T,16)*16;const cell=19;const R=rankIdx(100,5);const ev=new Set(R.slice(0,20)),prevd=new Set(R.slice(15,20));
+  const rev=seg(t,.4,2.4);
+  [[30,"Control: 20 of 100",false],[262,"Treatment: 15 of 100",true]].forEach(g=>{panelBox(g[0]-12,14,220,236);txt(g[0],34,g[1],{size:12.5,weight:700});
+    for(let i=0;i<100;i++){const cx=g[0]+(i%10)*cell+cell/2,cy=50+Math.floor(i/10)*cell+cell/2;const k=R.indexOf(i);const isE=ev.has(i)&&!(g[2]&&prevd.has(i));const show=isE&&k/20<rev;
+      mini(cx,cy+3,cell*.8,show?C.harm:hexA(C.coi,.6));if(show)txt(cx,cy+6,"x",{size:9.5,weight:700,align:"center",color:inkOn(C.harm)});
+      if(g[2]&&prevd.has(i)&&t>3){const pu=.5+.5*Math.sin(T*5);ctx.strokeStyle=hexA(C.gold,.5+.5*pu);ctx.lineWidth=2.4;rr(cx-cell/2+1,cy-cell/2+1,cell-2,cell-2,4);ctx.stroke()}}});
+  if(t>3)label(372,262,"5 people spared",{size:11.5,weight:700,border:C.gold});
+  workCard(500,14,286,300,[{k:"eq",t:"CER = 20 ÷ 100 = 20%"},{k:"eq",t:"EER = 15 ÷ 100 = 15%"},{k:"eq",t:"RR = 15% ÷ 20% = 0.75"},{k:"eq",t:"RRR = 1 − 0.75 = 25%"},{k:"ans",t:"ARR = 5 percentage points"},{k:"miss",t:"reporting only the RRR, which sounds bigger."}],t,{per:16,t0:3.2,dt:1.2,title:"Worked example"});
+  const h=seg(t,10.5,11.5);if(h>0)withA(h,()=>{headline(18,300,230,96,"New therapy CUTS RISK BY 25 PERCENT!",{src:"HEADLINE A",border:C.bad});headline(260,300,230,96,"5 fewer people per 100 had a flare up",{src:"HEADLINE B",border:C.good});
+    txt(18,418,"Same result. A is relative, B is absolute.",{size:12.5,weight:700});txt(18,442,"Now you try: 30% versus 20%. Find the ARR in the quick check.",{size:12,weight:600,color:C["gold-ink"]})});
+  panelBox(500,326,286,140);title(512,346,"Words to know",C["accent-ink"]);[["CER","control event rate"],["EER","treatment event rate"],["RR","relative risk"],["ARR","absolute risk reduction"]].forEach((w,i)=>{txt(512,370+i*22,w[0],{size:12,weight:700,mono:true});txt(560,370+i*22,w[1],{size:12})});
+}
+/* ---------- NNT ---------- */
+function sceneNnt(T){
+  const t=P(T,16)*16;const cell=40;panelBox(14,14,450,452);title(26,34,"20 people treated",C.ink);
+  const cat=i=>i===13?2:(i===4||i===9||i===17)?1:0;const R=rankIdx(20,8);
+  for(let i=0;i<20;i++){const cx=36+(i%10)*cell+cell/2,cy=80+Math.floor(i/10)*70+cell/2;const k=R.indexOf(i);const a=seg(t,.5+k*.18,.9+k*.18);const c=cat(i);
+    const col=a<=0?hexA(C.coi,.35):c===2?C.good:c===1?C.harm:C.coi;if(c===2&&a>0)glow(cx,cy,30,C.good,.4*(.6+.4*Math.sin(T*4)));mini(cx,cy,34,col);
+    if(a>0)txt(cx,cy+6,c===2?"+":c===1?"x":"✓",{size:12,weight:700,align:"center",color:inkOn(col)})}
+  const s=seg(t,4.5,5.5);if(s>0)withA(s,()=>{label(140,256,"16 fine anyway",{size:12,weight:700,border:C.coi});label(140,286,"3 event anyway",{size:12,weight:700,border:C.harm});label(140,316,"1 helped",{size:12,weight:700,border:C.good});
+    wrapText("We cannot tell which person was helped. The NNT is an average over many people.",30,360,410,17,{size:12.5})});
+  workCard(476,14,310,452,[{k:"q",t:"ARR = 5 percentage points (20% control versus 15% treatment)."},{k:"eq",t:"NNT = 1 ÷ ARR"},{k:"eq",t:"NNT = 1 ÷ 0.05"},{k:"ans",t:"NNT = 20 people"},{k:"note",t:"If it does not divide evenly, round an NNT up to the next whole person."},{k:"miss",t:"dividing by the RRR: 1 ÷ 0.25 = 4 makes the treatment look five times better than it is."},{k:"try",t:"ARR of 10 percentage points. Answer in the quick check."}],t,{per:16,t0:5.8,dt:1.3});
+}
+/* ---------- NNH ---------- */
+function sceneNnh(T){
+  const t=P(T,17)*17;const cell=21;const R=rankIdx(50,4);
+  [[28,"Placebo: 2 of 50 (4%)",2],[262,"New pain medicine: 7 of 50 (14%)",7]].forEach((g,gi)=>{panelBox(g[0]-12,14,224,170);txt(g[0],34,g[1],{size:11.5,weight:700});
+    for(let i=0;i<50;i++){const cx=g[0]+(i%10)*cell+cell/2,cy=52+Math.floor(i/10)*cell+cell/2;const k=R.indexOf(i);const on=k<g[2]&&seg(t,.4,2)>k/7;mini(cx,cy+2,cell*.82,on?C.symp:hexA(C.coi,.6));
+      if(on){txt(cx,cy+6,"⚡",{size:9,align:"center",color:inkOn(C.symp)});if(gi&&k>=2){ctx.strokeStyle=hexA(C.symp,.5+.5*Math.sin(T*5));ctx.lineWidth=2.2;rr(cx-cell/2+1,cy-cell/2+1,cell-2,cell-2,4);ctx.stroke()}}}});
+  if(t>2.2)label(372,200,"5 extra people with stomach upset",{size:11.5,weight:700,border:C.symp});
+  workCard(500,14,286,452,[{k:"eq",t:"ARI = 14% − 4%"},{k:"eq",t:"ARI = 10 points = 0.10"},{k:"eq",t:"NNH = 1 ÷ ARI = 1 ÷ 0.10"},{k:"ans",t:"NNH = 10 people"},{k:"note",t:"A larger NNH means the harm is less common."},{k:"miss",t:"using only the treatment rate (1 ÷ 0.14) and forgetting to subtract the placebo rate."},{k:"try",t:"9% versus 4%. Answer in the quick check."}],t,{per:17,t0:2.6,dt:1.3});
+  /* balance */
+  const b=seg(t,9,10);if(b>0)withA(b,()=>{panelBox(14,232,474,234);title(26,252,"Weighing benefit and harm",C["accent-ink"]);const px=250,py=330;const tilt=-.08*Math.sin(T*1.2)*.5-.06;
+    ctx.save();ctx.translate(px,py);ctx.rotate(tilt);line(-160,0,160,0,C.ink,3.5);ctx.restore();ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px-18,py+100);ctx.lineTo(px+18,py+100);ctx.closePath();fillStroke(C["panel-2"],C.ink,1.6);
+    const ly=py-Math.sin(tilt)*160,ry=py+Math.sin(tilt)*160;
+    line(px-150,ly,px-150,ly+40,C.ink,1.4);rr(px-210,ly+40,120,44,6);fillStroke(C["good-wash"],C.good,2);txt(px-150,ly+56,"NNT 8",{size:13,weight:700,mono:true,align:"center"});txt(px-150,ly+74,"pain relief",{size:11.5,align:"center"});
+    line(px+150,ry,px+150,ry+40,C.ink,1.4);rr(px+90,ry+40,120,44,6);fillStroke(hexA(C.symp,.18),C.symp,2);txt(px+150,ry+56,"NNH 10",{size:13,weight:700,mono:true,align:"center"});txt(px+150,ry+74,"stomach upset",{size:11.5,align:"center"});
+    txt(px,452,"How serious is each outcome?",{size:12,weight:700,align:"center"})});
+}
+/* ================= scenes: parts 6 and 7, finish ================= */
+/* ---------- confidence intervals ---------- */
+function sceneCi(T){
+  const t=P(T,14)*14;const g={x:80,y:60,w:620,h:340};const X=v=>g.x+(v+1)/4*g.w;
+  panelBox(14,14,772,452);title(26,34,"Twenty repeats of the same study",C.ink);
+  line(X(0),g.y-8,X(0),g.y+g.h,C["ink-soft"],1.4);line(X(1),g.y-8,X(1),g.y+g.h,C.good,2.2,[6,4]);label(X(1),g.y-16,"true effect 1.0",{size:11.5,weight:700,border:C.good});
+  [-1,0,1,2,3].forEach(v=>{txt(X(v),g.y+g.h+14,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})});txt(X(3),g.y+g.h+28,"benefit in points",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  let caught=0,shown=0;
+  for(let i=0;i<20;i++){const e=i===7?2.15:1+.42*rnorm(i*2.7+5);const lo=e-.85,hi=e+.85;const s0=.3+i*.5;const a=seg(t,s0,s0+.4);if(a<=0)continue;shown++;const hit=lo<=1&&hi>=1;if(hit)caught++;
+    const y=lerp(g.y,g.y+12+i*16,ease(a));const col=hit?C.evid:C.bad;line(X(lo),y,X(hi),y,col,2.4);circ(X(e),y,4.5,col,C.panel,1.4);txt(X(hi)+8,y,hit?"✓":"x",{size:12,weight:700,color:col})}
+  label(740,90,caught+" of "+shown,{size:14,weight:700,mono:true,align:"right",border:C.evid});txt(740,114,"caught the true value",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  [[40,140],[400,480]].forEach(z=>{const hw=.85*Math.sqrt(100/z[0])*.5;txt(z[1]-90,452,"n = "+z[0],{size:12,weight:700,mono:true});const cx=z[1]+40;line(cx-hw*110,452,cx+hw*110,452,C.evid,3);circ(cx,452,4.5,C.evid,C.panel,1.4)});
+  txt(770,452,"bigger study, shorter interval",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+}
+/* ---------- p values ---------- */
+function scenePval(T){
+  const t=P(T,15)*15;const g={x:60,y:60,w:680,h:250};const X=v=>g.x+(v+2.5)/5*g.w;const obs=1.1;
+  panelBox(14,14,772,330);title(26,34,"A world where the treatment has no effect",C.ink);
+  line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);[-2,-1,0,1,2].forEach(v=>txt(X(v),g.y+g.h+14,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));txt(g.x+g.w,g.y+g.h+30,"difference between groups (points)",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  const N=300,shown=Math.floor(N*seg(t,.2,8));const bins={};let tail=0;
+  for(let i=0;i<shown;i++){const v=.5*rnorm(i*1.91+3);const b=Math.round(v/.1);bins[b]=(bins[b]||0)+1;const ext=Math.abs(v)>=obs;if(ext)tail++;
+    const x=X(b*.1),y=g.y+g.h-4-(bins[b]-1)*6.4;circ(x,y,3,ext&&t>8.4?C.bad:hexA(C.coi,.8))}
+  if(shown<N){const v=.5*rnorm(shown*1.91+3);const fy=lerp(g.y,g.y+g.h-30,P(T*3,1));circ(X(Math.round(v/.1)*.1),fy,3,C.coi)}
+  line(X(obs),g.y-6,X(obs),g.y+g.h,C.accent,3);label(X(obs)+6,g.y+4,"observed 1.1",{size:11.5,weight:700,align:"left",border:C.accent});line(X(-obs),g.y+40,X(-obs),g.y+g.h,hexA(C.accent,.6),1.6,[4,4]);
+  if(t>8.4)withA(seg(t,8.4,9.2),()=>{label(X(-1.9),g.y+40,"p = 0.03",{size:14,weight:700,mono:true,border:C.bad});txt(X(-1.9),g.y+62,"about 3 in 100 no effect",{size:11.5,align:"center",weight:600});txt(X(-1.9),g.y+78,"trials are this extreme",{size:11.5,align:"center",weight:600});txt(g.x+g.w-6,g.y+g.h-20,tail+" of "+shown+" in the tails",{size:11.5,weight:700,align:"right",mono:true,color:C.bad})});
+  const c=seg(t,10,11);if(c>0)withA(c,()=>{cardBox(14,354,380,112,C.good,true);txt(30,376,"✓ Correct",{size:12.5,weight:700,color:C.good});wrapText("If there were no effect, results this extreme would be rare (about 3 in 100).",30,400,350,17,{size:12.5})});
+  const d=seg(t,11.5,12.5);if(d>0)withA(d,()=>{cardBox(406,354,380,112,C.bad,true);txt(422,376,"✗ Wrong",{size:12.5,weight:700,color:C.bad});wrapText("There is a 3% chance the treatment does not work.",422,400,350,17,{size:12.5});line(420,394,770,440,C.bad,3)});
+}
+/* ---------- statistical vs clinical ---------- */
+function sceneSig(T){
+  const t=P(T,15)*15;const X=v=>250+(v+1)/4*480;
+  panelBox(14,14,772,452);title(26,34,"Four trials, one worthwhile threshold",C.ink);
+  line(X(0),60,X(0),410,C["ink-soft"],1.8);line(X(1),60,X(1),410,C.good,2.2,[6,4]);label(X(1),56,"worthwhile 1.0",{size:11.5,weight:700,border:C.good});txt(X(0)-6,70,"no difference",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  [-1,0,1,2,3].forEach(v=>txt(X(v),424,sn(v,0),{size:10.5,mono:true,align:"center",color:C["ink-soft"]}));txt(X(3),444,"pain reduction versus control (points)",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  const R=[["A",6000,.3,.2,.4,"significant, not important",null],["B",800,1.7,1.2,2.2,"significant and important",true],["C",40,1,-.5,2.5,"uncertain, need more data",undefined],["D",3000,.05,-.2,.3,"likely no worthwhile effect",false]];
+  R.forEach((r,i)=>{const y=110+i*80;const a=seg(t,.5+i*2.2,1.7+i*2.2);txt(36,y,"Trial "+r[0],{size:13,weight:700});const rad=4+Math.sqrt(r[1])/5;circ(150,y,rad,hexA(C.evid,.35),C.evid,1.4);txt(150,y+rad+12,"n = "+r[1].toLocaleString("en-US"),{size:11,mono:true,align:"center",color:C["ink-soft"]});
+    if(a<=0)return;const m=r[2];line(X(m),y,lerp(X(m),X(r[3]),a),y,C.evid,3);line(X(m),y,lerp(X(m),X(r[4]),a),y,C.evid,3);circ(X(m),y,6,C.evid,C.panel,1.6);
+    if(a>=1)withA(seg(t,1.7+i*2.2,2.3+i*2.2),()=>verdict(X(1),y+26,r[5],r[6]===undefined?undefined:r[6]===null?"mid":r[6]))});
+}
+/* ---------- forest plot ---------- */
+const FROWS=[{n:"Trial A, 120 people",md:-1.4,lo:-2.6,hi:-.2},{n:"Trial B, 210 people",md:-.3,lo:-1.1,hi:.5},{n:"Trial C, 400 people",md:-.9,lo:-1.5,hi:-.3},{n:"Trial D, 600 people",md:-.2,lo:-.7,hi:.3},{n:"Trial E, 80 people",md:-1,lo:-2.4,hi:.4},{n:"Trial F, 900 people",md:-.6,lo:-1,hi:-.2}];
+function sceneForest(T){
+  const t=P(T,16)*16;const pl=poolRows(FROWS);
+  panelBox(14,14,772,452);title(26,34,"A made up review: pain at 3 months, mean difference (points)",C.ink);
+  const g={x:220,y:64,w:380,rowH:46,x0:-3,x1:2};const p=clamp(seg(t,.3,7)*(6/7.5)+(t>9?1:0)*(1.5/7.5),0,1);
+  const fr=forest(g,FROWS,pl,t>9.5?1:Math.min(p,6/7.5),{vals:true,left:"favours treatment",right:"favours control",ticks:[-3,-2,-1,0,1,2],tdp:0});
+  if(t>7&&t<10){const q=seg(t,7,9.5);const yT=g.y+6*g.rowH+g.rowH*.8;FROWS.forEach((r,i)=>{const y=g.y+i*g.rowH+g.rowH/2;const n=Math.round(2+10*r.w/Math.max.apply(null,FROWS.map(z=>z.w)));for(let j=0;j<n;j++){const qq=clamp(q*1.4-j/n*.4,0,1);if(qq<=0||qq>=1)continue;const x=lerp(fr.X(r.md),fr.X(pl.md),ease(qq))+(rnd(j+i*9)-.5)*10,yy=lerp(y,yT,ease(qq));circ(x,yy,2.6,C.evid)}})}
+  if(t>10)withA(seg(t,10,11),()=>{label(700,g.y+6*g.rowH+g.rowH*.8-26,"pooled estimate",{size:11.5,weight:700,border:C.accent});
+    wrapText("Bigger squares = more weight. The diamond is narrower than any single trial.",28,456,740,16,{size:12,weight:600,color:C["ink-soft"]})});
+}
+/* ---------- bias ---------- */
+function sceneBias(T){
+  const t=P(T,16)*16;const k=Math.floor(t/4);
+  const B=[[14,14,"Selection bias"],[404,14,"Publication bias"],[14,244,"Funding bias"],[404,244,"Attrition bias"]];
+  B.forEach((b,i)=>{cardBox(b[0],b[1],382,222,C.accent,i===k);txt(b[0]+14,b[1]+22,b[2],{size:13.5,weight:700})});
+  /* selection */
+  [[60,110,"treatment",C.treat],[60,190,"control",C.ctrl]].forEach(d=>{rr(300,d[1]-28,40,56,4);fillStroke(hexA(d[3],.2),d[3],1.8);txt(320,d[1]-38,d[2],{size:11,weight:700,align:"center",color:C[d[2]==="control"?"ctrl-ink":"treat-ink"]})});
+  for(let j=0;j<6;j++){const q=P(T*.25+j/6,1);const sick=j%2===1;const ty=sick?190:110;const x=lerp(40,300,q),y=lerp(150,ty,smooth(clamp(q*1.6-.3,0,1)));mini(x,y,20,sick?C.coi:C.good);if(sick)circ(x+8,y-12,4,C.pain)}
+  txt(28,226,"healthier people steered to treatment",{size:11.5,weight:600,color:C["ink-soft"]});
+  /* publication: funnel */
+  const fx=v=>420+150+v*90,fy=s=>214-s*150;line(fx(0),fy(1),fx(0),fy(0),C["ink-soft"],1.4);line(fx(0),fy(1),fx(-1.6),fy(0),hexA(C["ink-soft"],.5),1.2,[3,3]);line(fx(0),fy(1),fx(1.6),fy(0),hexA(C["ink-soft"],.5),1.2,[3,3]);
+  txt(fx(-1.5),fy(0)+12,"benefit",{size:11,weight:600});txt(fx(1.1),fy(0)+12,"no benefit",{size:11,weight:600});txt(410,fy(.95),"big",{size:11,weight:600});txt(410,fy(.08),"small",{size:11,weight:600});
+  for(let j=0;j<16;j++){const s=.15+.8*rnd(j*3.1+2);const spread=(1-s)*1.4;const v=-.3+spread*(rnd(j*5.3+1)*2-1);if(v>.1&&s<.5)continue;circ(fx(v),fy(s),4.5,C.evid,C.panel,1)}
+  const gp=.5+.5*Math.sin(T*3);[[.6,.2],[.9,.3],[.4,.12],[1.1,.16]].forEach(z=>{ctx.setLineDash([3,3]);circ(fx(z[0]),fy(z[1]),5,null,hexA(C.bad,.4+.6*gp),1.6);ctx.setLineDash([])});label(fx(.95),fy(.48),"never published",{size:11,weight:700,border:C.bad});
+  /* funding */
+  rr(60,300,90,110,5);fillStroke(C.paper,C.rule,1.4);for(let j=0;j<6;j++)line(72,322+j*14,138,322+j*14,C["rule"],1.6);circ(105,300,16,C.gold,C["gold-ink"],2);txt(105,301,"$",{size:16,weight:700,align:"center",color:C.ink});
+  const tl=-.18+.04*Math.sin(T*1.5);ctx.save();ctx.translate(270,330);ctx.rotate(tl);line(-80,0,80,0,C.ink,3);rr(-100,4,40,14,3);fillStroke(C["good-wash"],C.good,1.4);rr(60,4,40,14,3);fillStroke(C.panel,C.rule,1.4);ctx.restore();line(270,330,270,400,C.ink,2.5);
+  label(270,420,"tilts toward favours sponsor",{size:11.5,weight:700,border:C.gold});
+  /* attrition */
+  rr(430,280,200,140,8);ctx.fillStyle=hexA(C.treat,.1);ctx.fill();ctx.strokeStyle=C.treat;ctx.lineWidth=1.6;ctx.stroke();txt(440,296,"treatment arm",{size:11,weight:700,color:C["treat-ink"]});
+  rr(640,320,26,60,3);fillStroke(C["panel-2"],C.ink,1.6);txt(653,396,"exit",{size:11,weight:600,align:"center"});
+  for(let j=0;j<14;j++){const poor=j%3===0;const bx=450+(j%7)*24,by=330+Math.floor(j/7)*40;if(poor){const q=P(T*.2+j/14,1);const x=lerp(bx,700,ease(q)),y=lerp(by,350,ease(q));withA(1-q*.8,()=>circ(x,y,7,C.pain,C.panel,1.2))}else circ(bx,by,7,C.good,C.panel,1.2)}
+  wrapText("non improvers leave, so the arm looks better",420,446,360,16,{size:11.5,weight:600,color:C["ink-soft"]});
+}
+/* ---------- GRADE ---------- */
+function sceneGrade(T){
+  const t=P(T,16)*16;const lv=[["High",4],["Moderate",3],["Low",2],["Very low",1]];const ry=i=>90+i*100;
+  panelBox(14,14,520,452);title(26,34,"Certainty of evidence",C.ink);
+  lv.forEach((l,i)=>{line(60,ry(i),500,ry(i),C.rule,6);txt(80,ry(i)-22,l[0],{size:14,weight:700});gradeDots(200,ry(i)-22,l[1],C.evid,7)});
+  const d1=smooth(seg(t,2,3)),d2=smooth(seg(t,5,6));const pos=d1+d2;const mx=330,my=lerp(ry(0),ry(2),pos/2);
+  rr(mx-44,my-16,88,32,16);fillStroke(C["evid-wash"],C.evid,2);txt(mx,my,"RCTs",{size:13,weight:700,align:"center"});
+  [["risk of bias",1.2],["imprecision",4.2]].forEach((c,i)=>{const a=seg(t,c[1],c[1]+.8);if(a>0)withA(a,()=>{const x=lerp(560,380,ease(a));rr(x,ry(i)+30,140,26,13);fillStroke(C["warn-wash"],C.warn,1.6);txt(x+70,ry(i)+43,"↓ "+c[0],{size:12,weight:700,align:"center"})})});
+  const o=seg(t,8,9),u=smooth(seg(t,10,11));if(o>0)withA(o,()=>{const y=lerp(ry(2),ry(1),u);rr(400,y-16,120,32,16);fillStroke(C.panel,C.coi,2);txt(460,y,"observational",{size:12,weight:700,align:"center"});
+    if(t>9.4)withA(seg(t,9.4,10),()=>{rr(386,ry(2)+30,140,26,13);fillStroke(C["good-wash"],C.good,1.6);txt(456,ry(2)+43,"↑ large effect",{size:12,weight:700,align:"center"})})});
+  panelBox(546,14,240,452);title(558,34,"Rate down for",C["warn-ink"]);["risk of bias","inconsistency","indirectness","imprecision","publication bias"].forEach((s,i)=>{badge(570,70+i*40,i+1,C.warn,11);txt(590,70+i*40,s,{size:13,weight:600})});
+  title(558,286,"Rate up for",C.good);["large effect","dose response","confounding that would hide the effect"].forEach((s,i)=>{badge(570,318+i*40,"+",C.good,11);wrapText(s,590,318+i*40,186,15,{size:12.5,weight:600})});
+}
+/* ---------- evidence based practice ---------- */
+function sceneEbp(T){
+  const t=P(T,14)*14;const c=smooth(seg(t,.3,3));const cx=400,cy=246;const R=112,off=lerp(140,72,c);
+  ctx.setLineDash([8,6]);ell(cx,cy,350,220,0,null,C["ink-soft"],1.6);ctx.setLineDash([]);txt(20,22,"clinical context: setting, cost, safety",{size:12,weight:700,color:C["ink-soft"]});
+  const S=[[-Math.PI/2,"evid","best research evidence"],[Math.PI/6,"accent","clinical expertise"],[Math.PI*5/6,"para","patient values and preferences"]];
+  S.forEach(s=>{const x=cx+Math.cos(s[0])*off,y=cy+Math.sin(s[0])*off;circ(x,y,R,hexA(C[s[1]],.2),C[s[1]],2.4)});
+  S.forEach(s=>{const bx=cx+Math.cos(s[0])*off,by=cy+Math.sin(s[0])*off;const x=s[0]<0?bx:bx+Math.sign(Math.cos(s[0]))*40,y=s[0]<0?by-R-12:by+R+14;label(x,y,s[2],{size:12.5,weight:700,border:C[s[1]]})});
+  /* orbit icons */
+  const o=T*.6;S.forEach((s,i)=>{const bx=cx+Math.cos(s[0])*off,by=cy+Math.sin(s[0])*off;const x=bx+Math.cos(o+i)*R*.55,y=by+Math.sin(o+i)*R*.4;
+    if(i===0){line(x-10,y-6,x+10,y-6,C.evid,1.8);line(x-6,y+2,x+12,y+2,C.evid,1.8);ctx.beginPath();ctx.moveTo(x-6,y+10);ctx.lineTo(x,y+6);ctx.lineTo(x+6,y+10);ctx.lineTo(x,y+14);ctx.closePath();ctx.fillStyle=C.accent;ctx.fill()}
+    if(i===1){ctx.beginPath();ctx.arc(x,y-4,8,0,Math.PI);ctx.strokeStyle=C.accent;ctx.lineWidth=2;ctx.stroke();line(x,y+4,x,y+12,C.accent,2);circ(x+6,y+14,4,null,C.accent,2)}
+    if(i===2){ctx.beginPath();ctx.moveTo(x,y+10);ctx.bezierCurveTo(x-14,y,x-8,y-12,x,y-4);ctx.bezierCurveTo(x+8,y-12,x+14,y,x,y+10);ctx.fillStyle=C.para;ctx.fill()}});
+  if(c>=1){const a=seg(t,3,4);withA(a,()=>{person(cx-22,cy+30,16,{skin:2,shirt:2,mood:true});person(cx+22,cy+30,16,{skin:3,shirt:0,mood:true});
+    const k=Math.floor(T*.8)%2;bubble(k?cx+4:cx-58,cy-40,54,24,"...",{size:12,tx:k?cx+18:cx-30});label(cx,cy+56,"shared decision",{size:12,weight:700,border:C.accent})})}
+}
+/* ---------- applying it honestly ---------- */
+function sceneApply(T){
+  const t=P(T,15)*15;const k=Math.floor(t/5);
+  const cards=[["Manual therapy for low back pain",14],["Acupuncture for chronic pain",274],["Mindfulness programs",534]];
+  cards.forEach((c,i)=>{cardBox(c[1],14,252,390,C.act7,i===k);wrapText(c[0],c[1]+12,34,228,17,{size:13,weight:700})});
+  /* manual therapy picture */
+  spineSeg(110,120,70,T);txt(140,186,"vertebrae and disc",{size:11,weight:600,align:"center",color:C["ink-soft"]});
+  const f1=[{n:"vs other care",md:-.1,lo:-.6,hi:.4},{n:"vs sham",md:-.5,lo:-.9,hi:-.1}];
+  forest({x:120,y:222,w:128,rowH:40,x0:-2,x1:1},f1,null,i_(k,0,t),{fsz:11,ticks:[-2,-1,0,1],tdp:0,col:C.evid});
+  /* acupuncture picture */
+  needleScene(286,62,108,118,smooth(seg(P(T,6)*6,1,3)),false);needleScene(398,62,108,118,smooth(seg(P(T,6)*6,1,3)),true);txt(340,190,"real",{size:11,weight:600,align:"center"});txt(452,190,"sham",{size:11,weight:600,align:"center"});
+  const f2=[{n:"real vs usual",md:-1.1,lo:-1.5,hi:-.7},{n:"sham vs usual",md:-.8,lo:-1.2,hi:-.4},{n:"real vs sham",md:-.3,lo:-.6,hi:0}];
+  forest({x:380,y:210,w:128,rowH:34,x0:-2,x1:1},f2,null,i_(k,1,t),{fsz:11,ticks:[-2,-1,0,1],tdp:0,col:C.evid});
+  /* mindfulness picture */
+  const br=Math.sin(T*1.2);person(600,150,30,{skin:3,shirt:3,mood:true,w:1+.04*br});ctx.beginPath();for(let x=0;x<=110;x+=2){const y=130+Math.sin(x/14-T*1.2)*12;x?ctx.lineTo(650+x,y):ctx.moveTo(650+x,y)}ctx.strokeStyle=C.para;ctx.lineWidth=2.4;ctx.stroke();txt(705,160,"slow breathing",{size:11,weight:600,align:"center",color:C["ink-soft"]});
+  const f3=[{n:"stress",md:-.4,lo:-.6,hi:-.2},{n:"anxiety",md:-.35,lo:-.55,hi:-.15},{n:"pain",md:-.3,lo:-.5,hi:-.1}];
+  forest({x:640,y:210,w:128,rowH:34,x0:-1,x1:.5},f3,null,i_(k,2,t),{fsz:11,ticks:[-1,0],tdp:0,col:C.evid});
+  [["points",140],["points",400],["effect size",660]].forEach(z=>txt(z[1]+10,392,"left of zero favours treatment ("+z[0]+")",{size:10.5,align:"center",color:C["ink-soft"]}));
+  panelBox(14,414,772,52);txt(28,454,"Charts show the general pattern in research reviews, not exact values.",{size:11.5,weight:600,color:C["ink-soft"]});txt(28,432,"✗ Evidence does not support manipulation for asthma, high blood pressure or ear infections.",{size:12.5,weight:700,color:C.bad});
+}
+function i_(k,i,t){return k===i?clamp(((t%5)/3),0,1):k>i?1:0}
+/* ---------- finish ---------- */
+function sceneFinish(T){
+  const t=P(T,14)*14;
+  rr(170,24,380,436,10);fillStroke(C.paper,C.rule,2);rr(300,14,120,22,6);fillStroke(C.coi,null);title(190,58,"Questions to ask any health claim",C["accent-ink"]);
+  const Q=["Compared with what?","Randomized and concealed?","Who was blinded?","How big is the effect?","How precise is it?","Absolute or relative?","What about harms?","How certain is the whole body?"];
+  Q.forEach((q,i)=>{const a=seg(t,.4+i*.7,.9+i*.7);if(a<=0)return;withA(a,()=>{const y=96+i*46;rr(190,y-15,30,30,6);fillStroke(C["good-wash"],C.good,1.6);checkMark(205,y,8,C.good);txt(232,y,q,{size:15,weight:600})})});
+  /* floating pictures */
+  const fl=(i,fn)=>{const y=60+((T*18+i*110)%420);const x=i%2?660:80;fn(x,y)};
+  fl(0,(x,y)=>{for(let j=0;j<5;j++)circ(x-30+j*14,y+Math.sin(T*2+j)*6+j*3,5,C.nat)});
+  fl(1,(x,y)=>{rr(x-6,y-24,12,24,3);fillStroke(C.needle,C["ink-soft"],1.2);line(x,y,x,y+16,C["ink-soft"],1.6)});
+  fl(2,(x,y)=>{for(let j=0;j<6;j++)mini(x-30+(j%3)*20,y+Math.floor(j/3)*20,16,j===4?C.good:C.coi)});
+  fl(3,(x,y)=>{line(x-40,y,x+30,y,C.evid,2.4);circ(x-5,y,5,C.evid)});
+  fl(4,(x,y)=>{ctx.beginPath();ctx.moveTo(x-30,y);ctx.lineTo(x,y-9);ctx.lineTo(x+30,y);ctx.lineTo(x,y+9);ctx.closePath();ctx.fillStyle=C.accent;ctx.fill()});
+}
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now(),DT=0;
+const SCENES={map:sceneMap,natural:sceneNatural,rtm:sceneRtm,placebo:scenePlacebo,stack:sceneStack,anecdote:sceneAnecdote,obs:sceneObs,cohort:sceneCohort,rct:sceneRct,pyramid:scenePyramid,alloc:sceneAlloc,blind:sceneBlind,controls:sceneControls,mcid:sceneMcid,md:sceneMd,smd:sceneSmd,risk:sceneRisk,nnt:sceneNnt,nnh:sceneNnh,ci:sceneCi,pval:scenePval,sig:sceneSig,forest:sceneForest,bias:sceneBias,grade:sceneGrade,ebp:sceneEbp,apply:sceneApply,finish:sceneFinish};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneMap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=paused?0:dt*speed;T+=DT;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;DT=0;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

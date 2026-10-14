@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manipulation and Mobilization Lab</title>
+<meta name="description" content="Manipulation and mobilization lab: a force time simulator comparing a thrust with slow mobilization, with preload, peak force and duration sliders driving joint gapping, sensor firing and a live curve; a randomized trainer for reading force time graphs (peak, preload, duration and rate of force) with hints and animated worked solutions; sorting games for mechanism versus evidence strength and benefit versus risk; and clinic scenarios about consent, red flags and the evidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#8A2525;--accent-wash:#F6E3E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#9B2C2C;--act2:#2F7FC1;--act3:#2A8C86;--act4:#B07A10;--act5:#C24E6A;--act6:#4B4FB5;--act7:#B8561A;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F4;--grid:#D5DAE2;--paper:#FFFDF8;
+  --bone:#EFE6D2;--bone-edge:#7A6A4A;--bone-in:#E2D5B8;--disc:#3F7FC4;--disc-ink:#1D5C93;--nuc:#9CC3EC;--nerve:#D9A800;--nerve-ink:#6E5600;
+  --muscle:#C9566E;--muscle-ink:#9B2C45;--lig:#2A8C86;--lig-ink:#1C6762;--symp:#D9741F;--symp-ink:#8A4508;--para:#3E9B4F;--para-ink:#2A6B37;
+  --pain:#D23A2E;--pain-ink:#9E2A20;--evid:#4B4FB5;--evid-ink:#3A3E99;--force:#9B2C2C;--mob:#2A8C86;--gas:#B9D8F0;--fluid:#D7ECF7;--artery:#C8453F;--artery-in:#F2B8B0;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;--coat:#FFFFFF;
+  --table:#7B8C99;--table-top:#A9B8C3;--brain:#E9B8C0;--cord:#F2D98A;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1D1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5AA9E6;--act3:#5CC8BE;--act4:#E8BE5A;--act5:#EE8CA0;--act6:#9298F0;--act7:#F0985A;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A5;--bone-edge:#F2E9D3;--bone-in:#A89C80;--disc:#6FB0EC;--disc-ink:#8CC6F2;--nuc:#2F5C86;--nerve:#F2D04A;--nerve-ink:#F2D872;
+  --muscle:#EE8CA0;--muscle-ink:#F4A6B6;--lig:#5CC8BE;--lig-ink:#7AD6CC;--symp:#F29A50;--symp-ink:#F5B278;--para:#6CCB7C;--para-ink:#8AD898;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#9298F0;--evid-ink:#ADB2F4;--force:#F4A7A0;--mob:#5CC8BE;--gas:#3A5E7E;--fluid:#1F3A4A;--artery:#E0605A;--artery-in:#6A2C2A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--coat:#DDE4E8;
+  --table:#4A5A66;--table-top:#5E6E7A;--brain:#8A5A62;--cord:#9A8640;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6BDB7;--accent-wash:#3A1D1C;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F4A7A0;--act2:#5AA9E6;--act3:#5CC8BE;--act4:#E8BE5A;--act5:#EE8CA0;--act6:#9298F0;--act7:#F0985A;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A21;--grid:#26303D;--paper:#1E262B;
+  --bone:#CFC3A5;--bone-edge:#F2E9D3;--bone-in:#A89C80;--disc:#6FB0EC;--disc-ink:#8CC6F2;--nuc:#2F5C86;--nerve:#F2D04A;--nerve-ink:#F2D872;
+  --muscle:#EE8CA0;--muscle-ink:#F4A6B6;--lig:#5CC8BE;--lig-ink:#7AD6CC;--symp:#F29A50;--symp-ink:#F5B278;--para:#6CCB7C;--para-ink:#8AD898;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#9298F0;--evid-ink:#ADB2F4;--force:#F4A7A0;--mob:#5CC8BE;--gas:#3A5E7E;--fluid:#1F3A4A;--artery:#E0605A;--artery-in:#6A2C2A;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;--coat:#DDE4E8;
+  --table:#4A5A66;--table-top:#5E6E7A;--brain:#8A5A62;--cord:#9A8640;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.seg3m{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3m .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.presets{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.presets .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.ctl .hint{font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.mopts .opt[aria-pressed="true"]{border-color:var(--accent)}
+@media (max-width:420px){.presets{grid-template-columns:1fr}.seg3m{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 4 &middot; Manipulation and mobilization mechanics</div>
+    <h1>Manipulation and Mobilization Lab</h1>
+    <p class="sub">Shape a thrust or a slow mobilization and watch the joint gap, the sensors fire and the force curve trace itself; practise reading force time graphs; sort mechanisms by evidence and benefits from risks; and reason through clinic scenarios. This explains tissues and research, not how to perform any technique. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Force Time Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-train" data-tab="train" id="tabbtn-train" type="button" tabindex="-1">Part 2 &middot; Graph Reading Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Evidence and Risk Sort</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-life" data-tab="life" id="tabbtn-life" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Force Time Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Force time simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i class="l" style="background:var(--force)"></i>Thrust curve</span><span><i class="l" style="background:var(--mob)"></i>Mobilization curve</span>
+          <span><i class="s" style="background:var(--bone)"></i>Vertebra</span><span><i style="background:var(--disc)"></i>Disc and cartilage</span><span><i style="background:var(--gas)"></i>Gas cavity</span><span><i style="background:var(--nerve)"></i>Nerve spikes</span><span><i style="background:var(--muscle)"></i>Muscle spindle</span>
+        </div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">Simplified teaching model with illustrative values. Joint gap is drawn from force above the preload (about 0.0015 mm per newton, exaggerated in the picture). Sensor firing rises with how fast force climbs, a pattern taken from animal studies. Cavitation appears when the rate of force is at least 1,500 N/s and the force climbs at least 150 N; that is a made up teaching rule, not a measured threshold. Real tissues, people and techniques vary a lot.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="mode-h">Input type</h3>
+        <div class="seg3m" id="simMode" role="group" aria-labelledby="mode-h"></div>
+        <div class="ctl"><label for="simPre">Preload <output id="simPreO" for="simPre"></output></label><input type="range" id="simPre" min="0" max="300" step="10" value="100"><div class="ticks"><span>0 N</span><span>300 N</span></div></div>
+        <div class="ctl"><label for="simPeak">Peak force <output id="simPeakO" for="simPeak"></output></label><input type="range" id="simPeak" min="50" max="800" step="10" value="500"><div class="ticks"><span>50 N</span><span>800 N</span></div></div>
+        <div class="ctl"><label for="simDur"><span id="simDurL">Thrust duration</span> <output id="simDurO" for="simDur"></output></label><input type="range" id="simDur" min="50" max="1000" step="10" value="150"><div class="ticks"><span>50 ms</span><span>1,000 ms</span></div></div>
+        <div class="bar"><button class="btn" id="simPlay" type="button">Play again</button></div>
+        <h3 id="pre-h">Presets</h3>
+        <div class="presets" id="simPresets" role="group" aria-labelledby="pre-h"></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-train" role="tabpanel" aria-labelledby="tabbtn-train" hidden>
+    <h2 class="gk-sr">Part 2: Graph Reading Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Practice graph."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">Curves are randomly generated with illustrative values. Read values from the grid lines. The worked solution builds step by step; units that cancel are struck through in red.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div id="calcNumWrap" class="ansrow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="text" id="calcAns" inputmode="decimal" autocomplete="off" spellcheck="false"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div id="calcChoices" class="mopts" role="group" aria-label="Answer choices" hidden></div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">Type a number (no units needed). The hint ladder has three steps. The streak counts answers right on the first check without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Evidence and Risk Sort</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-life" role="tabpanel" aria-labelledby="tabbtn-life" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults. Teaching examples, not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Manip-Walkthrough.html">Manipulation and Mobilization Walkthrough</a>. Force values are illustrative, rounded from published laboratory studies.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "bone-in", "disc", "disc-ink", "nuc", "nerve", "nerve-ink", "muscle", "muscle-ink", "lig", "lig-ink", "symp", "symp-ink", "para", "para-ink", "pain", "pain-ink", "evid", "evid-ink", "force", "mob", "gas", "fluid", "artery", "artery-in", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "coat", "table", "table-top", "brain", "cord"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-(g.yly||16),g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= spine and manual therapy drawing kit ================= */
+let SC={};let SYS={};
+const SKINS=["skin1","skin2","skin3","skin4"],SHIRTS=["shirt1","shirt2","shirt3","shirt4"];
+function levelTag(x,y,k){const m={person:["WHOLE PERSON",C.act1],tissue:["TISSUE",C.act3],signal:["SIGNAL",C.nerve],math:["THE MATH",C.accent],data:["THE DATA",C.evid],graph:["FORCE TIME GRAPH",C.force],hist:["HISTORICAL MODEL",C.act4],now:["CURRENT EVIDENCE",C.evid],safety:["SAFETY",C.pain],talk:["THE CONVERSATION",C.act2]}[k];
+  ctx.save();ctx.font=`700 10.5px ${MONO}`;const w=ctx.measureText(m[0]).width+12;rr(x,y-8,w,16,8);ctx.fillStyle=hexA(m[1],.18);ctx.fill();ctx.strokeStyle=m[1];ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle=C.ink;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(m[0],x+6,y+.5);ctx.restore();return w}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function tick(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function bar(x,y,w,h,f,col){rr(x,y,w,h,Math.min(4,h/2));ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){rr(x,y,w*clamp(f,0,1),h,Math.min(4,h/2));ctx.fillStyle=col;ctx.fill()}}
+function vbar(x,y,w,h,f,col){rr(x,y,w,h,3);ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){const hh=h*clamp(f,0,1);rr(x,y+h-hh,w,hh,3);ctx.fillStyle=col;ctx.fill()}}
+function wrapCount(t,w,size,weight){ctx.font=`${weight||500} ${size}px ${FONT}`;let n=1,ln="";t.split(" ").forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){n++;ln=wd}else ln=test});return n}
+function fitTxt(x,y,t,maxW,o){o=o||{};let sz=o.size||13;ctx.font=`${o.weight||600} ${sz}px ${o.mono?MONO:FONT}`;const w=ctx.measureText(t).width;if(w>maxW)sz=Math.max(9.5,sz*maxW/w);txt(x,y,t,Object.assign({},o,{size:sz}))}
+function bubble(x,y,w,h,t,o){o=o||{};rr(x,y,w,h,10);fillStroke(o.fill||C.panel,o.stroke||C.rule,1.6);ctx.beginPath();const tx=o.tx==null?x+24:o.tx;const up=!!o.up;
+  if(!up){ctx.moveTo(tx,y+h);ctx.lineTo(tx+12,y+h);ctx.lineTo(tx+(o.tdx==null?-6:o.tdx),y+h+14)}else{ctx.moveTo(tx,y);ctx.lineTo(tx+12,y);ctx.lineTo(tx+(o.tdx==null?-6:o.tdx),y-14)}ctx.closePath();ctx.fillStyle=o.fill||C.panel;ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.stroke();
+  rr(tx+1,up?y-1:y+h-3,11,5,0);ctx.fillStyle=o.fill||C.panel;ctx.fill();wrapText(t,x+10,y+(o.ty||16),w-20,o.lh||16,{size:o.size||12.5,weight:o.weight||500})}
+function spark(x,y,s,col,p){if(p<=0||p>=1)return;ctx.save();ctx.globalAlpha*=Math.sin(p*Math.PI);ctx.translate(x,y);ctx.beginPath();for(let i=0;i<10;i++){const a=i*TAU/10;const r=i%2?s*.42:s;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fillStyle=col||C.gold;ctx.fill();ctx.restore()}
+/* ---------- people ---------- */
+function person(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=o.col||C[SHIRTS[(o.shirt||0)%4]];const bw=(o.w||1);ctx.save();if(o.a!=null)ctx.globalAlpha*=clamp(o.a,0,1);
+  rr(x-s*.42*bw,y-s*1.2,s*.84*bw,s*1.25,s*.32);fillStroke(sh,hexA(C.ink,.4),1.2);
+  if(o.coat){ctx.beginPath();ctx.moveTo(x-s*.42*bw,y-s*.9);ctx.lineTo(x-s*.1,y-s*1.15);ctx.lineTo(x-s*.12,y+s*.05);ctx.lineTo(x-s*.42*bw,y+s*.05);ctx.closePath();fillStroke(C.coat,hexA(C.ink,.35),1);ctx.beginPath();ctx.moveTo(x+s*.42*bw,y-s*.9);ctx.lineTo(x+s*.1,y-s*1.15);ctx.lineTo(x+s*.12,y+s*.05);ctx.lineTo(x+s*.42*bw,y+s*.05);ctx.closePath();fillStroke(C.coat,hexA(C.ink,.35),1)}
+  rr(x-s*.3*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.06*bw,y-s*.02,s*.24*bw,s*.9,s*.1);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x,y-s*1.55,s*.36,sk,hexA(C.ink,.4),1.2);
+  if(o.hair!==false){ctx.beginPath();ctx.arc(x,y-s*1.6,s*.37,Math.PI*1.05,Math.PI*1.95);ctx.fillStyle=o.hairCol||C.hair;ctx.fill();if(o.long){rr(x-s*.38,y-s*1.62,s*.14,s*.5,s*.06);ctx.fill();rr(x+s*.24,y-s*1.62,s*.14,s*.5,s*.06);ctx.fill()}}
+  if(o.mood!==false){const m=o.mood||"ok";circ(x-s*.12,y-s*1.56,1.7,C.ink);circ(x+s*.12,y-s*1.56,1.7,C.ink);ctx.beginPath();
+    if(m==="sad"||m==="pain"){ctx.arc(x,y-s*1.36,s*.11,Math.PI+.35,TAU-.35)}else if(m==="flat"){ctx.moveTo(x-s*.1,y-s*1.42);ctx.lineTo(x+s*.1,y-s*1.42)}else ctx.arc(x,y-s*1.48,s*.12,.25,Math.PI-.25);ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.stroke();
+    if(m==="pain"){line(x-s*.2,y-s*1.68,x-s*.06,y-s*1.64,C.ink,1.3);line(x+s*.2,y-s*1.68,x+s*.06,y-s*1.64,C.ink,1.3)}}
+  ctx.restore()}
+/* person sitting on a chair, side view facing right */
+function sitter(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin||0)%4]],sh=C[SHIRTS[(o.shirt||0)%4]];ctx.save();
+  rr(x-s*.5,y-s*.05,s*.9,s*.12,3);fillStroke(hexA(C["ink-soft"],.5),null);line(x-s*.45,y+s*.07,x-s*.45,y+s*.8,C["ink-soft"],3);line(x+s*.35,y+s*.07,x+s*.35,y+s*.8,C["ink-soft"],3);line(x-s*.5,y-s*.05,x-s*.55,y-s*.9,C["ink-soft"],3);
+  rr(x-s*.42,y-s*1.05,s*.62,s*1.05,s*.25);fillStroke(sh,hexA(C.ink,.4),1.2);rr(x-s*.1,y-s*.12,s*.72,s*.22,s*.1);fillStroke(mix(sh,C.ink,.35),null);rr(x+s*.44,y-s*.05,s*.2,s*.8,s*.08);fillStroke(mix(sh,C.ink,.35),null);
+  circ(x-s*.1,y-s*1.38,s*.33,sk,hexA(C.ink,.4),1.2);ctx.beginPath();ctx.arc(x-s*.12,y-s*1.43,s*.34,Math.PI*1.0,Math.PI*1.9);ctx.fillStyle=C.hair;ctx.fill();circ(x+s*.04,y-s*1.4,1.7,C.ink);
+  if(o.hand)rr(x+s*.0,y-s*.75,s*.5,s*.14,s*.07),fillStroke(sh,hexA(C.ink,.3),1);ctx.restore()}
+/* person lying face down on a treatment table, head to the left. returns spine line info */
+function proneOnTable(x,y,w,o){o=o||{};const sk=C[SKINS[(o.skin||1)%4]],sh=C[SHIRTS[(o.shirt||0)%4]];
+  rr(x,y,w,16,4);fillStroke(C["table-top"],hexA(C.ink,.35),1.2);line(x+20,y+16,x+20,y+70,C.table,6);line(x+w-20,y+16,x+w-20,y+70,C.table,6);
+  if(o.drop){const dp=o.drop;rr(x+w*.42,y+dp,w*.22,14,3);fillStroke(mix(C["table-top"],C.accent,.25),C.accent,1.4);}
+  const by=y-16;rr(x+70,by-18,w-150,34,16);fillStroke(sh,hexA(C.ink,.35),1.2);rr(x+w-95,by-12,90,24,11);fillStroke(mix(sh,C.ink,.35),null);circ(x+48,by-2,20,sk,hexA(C.ink,.35),1.2);ctx.beginPath();ctx.arc(x+44,by-6,20,Math.PI*.6,Math.PI*1.6);ctx.fillStyle=C.hair;ctx.fill();
+  return {x0:x+80,x1:x+w-90,y:by-10}}
+/* clinician figure standing, facing left, arms forward (no technique detail) */
+function clinician(x,y,s,o){o=o||{};person(x,y,s,{skin:o.skin==null?2:o.skin,shirt:o.shirt==null?3:o.shirt,coat:true,mood:o.mood||"ok",long:o.long})}
+/* ---------- vertebra and motion segment (local frame: anterior left, superior up) ---------- */
+function vertPath(s,part){ctx.beginPath();
+  if(part==="body"){rr(-s*.5,-s*.3,s,s*.6,s*.09);return}
+  if(part==="post"){ctx.moveTo(s*.46,-s*.2);ctx.lineTo(s*.66,-s*.24);ctx.lineTo(s*.66,-s*.56);ctx.quadraticCurveTo(s*.73,-s*.64,s*.8,-s*.56);ctx.lineTo(s*.8,-s*.26);ctx.lineTo(s*.96,-s*.2);
+    ctx.lineTo(s*1.48,-s*.06);ctx.quadraticCurveTo(s*1.58,s*.06,s*1.48,s*.18);ctx.lineTo(s*.98,s*.22);ctx.lineTo(s*.96,s*.56);ctx.quadraticCurveTo(s*.88,s*.64,s*.8,s*.56);ctx.lineTo(s*.8,s*.24);ctx.lineTo(s*.62,s*.12);ctx.lineTo(s*.46,s*.04);ctx.closePath();return}}
+function vertebra(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);const f=o.hl?mix(C.bone,C.accent,.25):C.bone,e=o.hl?C.accent:C["bone-edge"];
+  vertPath(s,"post");fillStroke(f,e,o.lw||1.6);vertPath(s,"body");fillStroke(f,e,o.lw||1.6);
+  if(s>30){for(let i=0;i<7;i++){circ(-s*.32+rnd(i+(o.seed||0))*s*.64,-s*.18+rnd(i*3+1+(o.seed||0))*s*.36,s*.035,hexA(C["bone-in"],.9))}}
+  if(o.label)txt(0,0,o.label,{size:Math.max(10.5,s*.2),weight:700,mono:true,align:"center",color:"#10161A"});ctx.restore()}
+function discShape(x,y,s,o){o=o||{};const h=s*.22;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);rr(-s*.48,-h/2,s*.96,h,h*.4);fillStroke(hexA(C.disc,.5),C.disc,1.4);ell((o.nx||0),0,s*.18,h*.32,0,C.nuc,null);ctx.restore()}
+/* a motion segment: upper and lower vertebra, disc and facet joint. o.gap = facet gap px, o.dx/dy move upper vertebra, o.rot rotates whole thing */
+function segment(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);const sp=s*.82;const g=o.gap||0;
+  vertebra(0,sp/2,s,{seed:3,hl:o.hlLow});discShape(0,0,s,{nx:o.nx,rot:(o.urot||0)/2});ctx.save();if(o.urot)ctx.rotate(o.urot);vertebra((o.dx||0),-sp/2+(o.dy||0),s,{seed:7,hl:o.hlUp});ctx.restore();
+  /* facet joint gap and capsule */
+  const jx=s*.8,jy=-s*.03;if(g>0){ctx.save();ctx.beginPath();ctx.rect(jx,jy-s*.2,g,s*.38);ctx.fillStyle=hexA(C.fluid,.95);ctx.fill();ctx.restore();
+    if(o.bub)circ(jx+g/2,jy,Math.min(g*.45,o.bub),C.gas,C.disc,1.2)}
+  ell(jx+g/2,jy,s*.12+g*.5,s*.24,0,null,o.capCol||hexA(C.lig,.9),2);
+  if(o.lig){line(s*1.5,-sp/2+s*.06,s*1.5,sp/2+s*.06,C.lig,3)}
+  ctx.restore()}
+/* a run of vertebrae lying prone (posterior up, head left). d[i] = downward (anterior) shift px for vertebra i */
+function proneSpine(x,y,n,s,d,o){o=o||{};const sp=s*.82;const pts=[];for(let i=0;i<n;i++){const cx=x+i*sp;const dy=(d&&d[i])||0;pts.push([cx,y+dy])}
+  for(let i=0;i<n-1;i++){const a=pts[i],b=pts[i+1];ctx.save();ctx.translate((a[0]+b[0])/2,(a[1]+b[1])/2);ctx.rotate(Math.atan2(b[1]-a[1],b[0]-a[0]));rr(-s*.11,-s*.48,s*.22,s*.96,s*.08);fillStroke(hexA(C.disc,.5),C.disc,1.2);ctx.restore()}
+  pts.forEach((p,i)=>vertebra(p[0],p[1],s,{rot:-Math.PI/2,seed:i*5,hl:o.hl===i,label:o.labels?o.labels[i]:null}));return pts}
+/* close-up of a facet joint: two cartilage-capped bone ends, fluid, capsule, optional gas bubble */
+function facetZoom(x,y,r,gap,bub,o){o=o||{};ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fillStyle=C.paper;ctx.fill();ctx.clip();
+  const g=gap;ctx.fillStyle=hexA(C.fluid,1);ctx.fillRect(x-r,y-g/2-6,2*r,g+12);
+  /* bones */ctx.beginPath();ctx.moveTo(x-r,y-r);ctx.lineTo(x+r,y-r);ctx.lineTo(x+r,y-g/2-14);ctx.quadraticCurveTo(x,y-g/2-2,x-r,y-g/2-14);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  ctx.beginPath();ctx.moveTo(x-r,y+r);ctx.lineTo(x+r,y+r);ctx.lineTo(x+r,y+g/2+14);ctx.quadraticCurveTo(x,y+g/2+2,x-r,y+g/2+14);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  /* cartilage */ctx.beginPath();ctx.moveTo(x-r,y-g/2-14);ctx.quadraticCurveTo(x,y-g/2-2,x+r,y-g/2-14);ctx.strokeStyle=hexA(C.disc,.7);ctx.lineWidth=5;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x-r,y+g/2+14);ctx.quadraticCurveTo(x,y+g/2+2,x+r,y+g/2+14);ctx.stroke();
+  /* capsule */ctx.strokeStyle=C.lig;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-r*.86,y-g/2-30);ctx.quadraticCurveTo(x-r*1.02,y,x-r*.86,y+g/2+30);ctx.stroke();ctx.beginPath();ctx.moveTo(x+r*.86,y-g/2-30);ctx.quadraticCurveTo(x+r*1.02,y,x+r*.86,y+g/2+30);ctx.stroke();
+  if(bub>0){glow(x,y,bub*1.6,C.disc,.25);circ(x,y,bub,C.gas,C.disc,1.6);circ(x-bub*.3,y-bub*.3,bub*.25,hexA("#ffffff",.6))}
+  ctx.restore();circ(x,y,r,null,C["ink-soft"],2.5)}
+/* muscle spindle icon */
+function spindle(x,y,len,act,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.beginPath();ctx.moveTo(-len/2,0);ctx.quadraticCurveTo(0,-len*.22,len/2,0);ctx.quadraticCurveTo(0,len*.22,-len/2,0);fillStroke(hexA(C.muscle,.35),C.muscle,1.6);
+  ctx.beginPath();for(let i=0;i<=24;i++){const t=i/24;const X=-len*.2+len*.4*t,Y=Math.sin(t*TAU*4)*len*.06;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.nerve;ctx.lineWidth=2;ctx.stroke();if(act>0)glow(0,0,len*.5,C.nerve,clamp(act,0,1)*.6);ctx.restore()}
+/* a nerve fibre with spikes running along it (path pts), rate = spikes per second */
+function fibre(pts,T,rate,col,o){o=o||{};poly(pts,hexA(col,.85),o.lw||2.5);if(rate<=0)return;const per=1/rate;const n=Math.ceil(1/(per*(o.speed||.9)))+1;
+  for(let k=0;k<n;k++){const p=((T/(o.travel||1.1))-k*per/(o.travel||1.1))%1;const pp=p<0?p+1:p;const q=along(pts,pp);circ(q[0],q[1],o.r||4,col,C.panel,1.2)}}
+/* spike train raster inside a box: times array (s, within window), now line */
+function spikeRow(x,y,w,h,times,win,col,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=C["rule"];ctx.lineWidth=1;ctx.stroke();times.forEach(t=>{const X=x+w*(t/win);if(X<x||X>x+w)return;line(X,y+4,X,y+h-4,col,2)})}
+/* treatment hand (a simple mitten) pointing down at (x,y) */
+function hand(x,y,s,o){o=o||{};const sk=C[SKINS[(o.skin==null?2:o.skin)%4]];ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);rr(-s*.35,-s*1.25,s*.7,s*.9,s*.3);fillStroke(sk,hexA(C.ink,.45),1.4);rr(-s*.3,-s*.5,s*.6,s*.5,s*.25);fillStroke(sk,hexA(C.ink,.45),1.4);rr(-s*.42,-s*1.9,s*.84,s*.7,s*.2);fillStroke(C.coat,hexA(C.ink,.35),1.2);ctx.restore()}
+/* force time curve models (time in ms, force in N) */
+function ftThrust(t,p){const ramp=p.ramp||350,hold=p.hold||350,dur=p.dur,res=p.res||Math.max(150,dur*1.6);const tA=ramp,tB=ramp+hold;
+  if(t<0)return 0;if(t<tA)return p.pre*smooth(t/tA);if(t<tB)return p.pre;if(t<tB+dur){const f=(t-tB)/dur;return p.pre+(p.peak-p.pre)*Math.pow(Math.sin(f*Math.PI/2),2)}
+  if(t<tB+dur+res)return p.peak*(1-smooth((t-tB-dur)/res));return 0}
+function ftMob(t,p){const ramp=p.ramp||350;const per=p.dur*2;if(t<0)return 0;if(t<ramp)return p.pre*smooth(t/ramp);const n=p.n||6;if(t>ramp+n*per)return p.pre*(1-smooth((t-ramp-n*per)/300));const f=(t-ramp)/per;return p.pre+(p.peak-p.pre)*(.5-.5*Math.cos(f*TAU))}
+function ftThrustEnd(p){return (p.ramp||350)+(p.hold||350)+p.dur+(p.res||Math.max(150,p.dur*1.6))}
+/* draw a force time graph with grid and optional markers */
+function ftGraph(x,y,w,h,o){o=o||{};const t1=o.t1||1600,f1=o.f1||600;const step=o.tstep||(t1<=2000?200:t1<=4000?500:1000);const xt=[];for(let v=0;v<=t1+1;v+=step)xt.push(v);const fs=o.fstep||(f1<=200?50:f1<=600?100:200);const yt=[];for(let v=0;v<=f1+1;v+=fs)yt.push(v);
+  return graph({x,y,w,h,x0:0,x1:t1,y0:0,y1:f1,xt,yt,xl:o.xl||"time (ms)",yl:o.yl||"force (N)",title:o.title,tcol:o.tcol,ylx:o.ylx||28})}
+/* phase bands under a thrust curve */
+function phaseBands(g,p,a){const ramp=p.ramp||350,hold=p.hold||350,res=p.res||Math.max(150,p.dur*1.6);const b=[[0,ramp+hold,"preload",C.lig],[ramp+hold,ramp+hold+p.dur,"thrust",C.force],[ramp+hold+p.dur,ramp+hold+p.dur+res,"resolution",C.evid]];
+  b.forEach((z,i)=>{const X0=g.X(z[0]),X1=g.X(z[1]);withA(a==null?1:a[i],()=>{ctx.fillStyle=hexA(z[3],.12);ctx.fillRect(X0,g.y,X1-X0,g.h);label((X0+X1)/2,g.y+14+i*0,z[2],{size:11.5,weight:700,border:z[3]})})})}
+/* tiny bell curve */
+function bell(x0,y0,w,h,mu,sd,col,o){o=o||{};ctx.beginPath();const N=80;for(let i=0;i<=N;i++){const v=o.v0+(o.v1-o.v0)*i/N;const X=x0+w*i/N,Y=y0-h*gauss(v,mu,sd);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.lineTo(x0+w,y0);ctx.lineTo(x0,y0);ctx.closePath();ctx.fillStyle=hexA(col,.22);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2.2;ctx.stroke()}
+/* simple brain and cord schematic */
+function brainShape(x,y,s){ctx.beginPath();ctx.ellipse(x,y,s,s*.7,0,0,TAU);fillStroke(hexA(C.brain,.75),mix(C.brain,C.ink,.45),1.6);for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(x-s*.6+i*s*.3,y-s*.1+(i%2)*s*.2,s*.22,Math.PI*.1,Math.PI*.9);ctx.strokeStyle=hexA(mix(C.brain,C.ink,.45),.7);ctx.lineWidth=1.3;ctx.stroke()}}
+function cordX(x,y,r,o){o=o||{};circ(x,y,r,hexA(C.cord,.55),mix(C.cord,C.ink,.4),1.6);ctx.beginPath();ctx.moveTo(x-r*.55,y-r*.7);ctx.quadraticCurveTo(x-r*.1,y-r*.1,x-r*.2,y+r*.4);ctx.quadraticCurveTo(x,y+r*.15,x+r*.2,y+r*.4);ctx.quadraticCurveTo(x+r*.1,y-r*.1,x+r*.55,y-r*.7);ctx.quadraticCurveTo(x,y-r*.25,x-r*.55,y-r*.7);ctx.closePath();fillStroke(hexA(mix(C.cord,C.ink,.25),.5),null)}
+/* neck with vertebral artery (front view simplified) */
+function neckArtery(x,y,h,o){o=o||{};for(let i=0;i<6;i++){const yy=y+i*h/6;rr(x-30,yy,60,h/6-6,5);fillStroke(C.bone,C["bone-edge"],1.4);ell(x-38,yy+h/12-3,9,7,0,C.bone,C["bone-edge"],1.3);ell(x+38,yy+h/12-3,9,7,0,C.bone,C["bone-edge"],1.3)}
+  [-1,1].forEach(sd=>{const pts=[];for(let i=0;i<=20;i++){const t=i/20;pts.push([x+sd*38+Math.sin(t*TAU*1.5)*2,y+h+20-t*(h+40)])}poly(pts,C.artery,6);poly(pts,hexA(C["artery-in"],.8),2.5)})}
+/* stacked dots for trial arms */
+function dotArm(x,y,cols,n,vals,col,o){o=o||{};for(let i=0;i<n;i++){const cx=x+(i%cols)*12,cy=y-Math.floor(i/cols)*12;circ(cx,cy,4.4,vals?mix(col,C.panel,vals[i]?0:.65):col,hexA(C.ink,.3),.8)}}
+/* bold title with underline */
+function hdr(x,y,t,col){txt(x,y,t,{size:14,weight:700});line(x,y+11,x+Math.min(260,t.length*7.2),y+11,col||C.accent,2)}
+/* evidence meter: 0..3 filled boxes */
+function evMeter(x,y,lvl,o){o=o||{};const labs=["unproven","limited","some","strong"];for(let i=0;i<3;i++){rr(x+i*20,y-7,16,14,3);fillStroke(i<lvl?C.evid:hexA(C.sunk,.9),C.evid,1.2)}if(o.text!==false)txt(x+66,y,labs[lvl],{size:11.5,weight:700,color:C["evid-ink"]})}
+/* worked solution panel (rows of chains / lines / answer) */
+function wk(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);
+  const sw=o.split||0;const sz=o.size||12.5;
+  if(sw){let ly=wrapText(W_.q,x+12,y+38,sw-22,sz+4,{size:sz,weight:600})+sz+8;(W_.given||[]).forEach((g,i)=>{const a=seg(t,.6+i*.4,1+i*.4);if(a>0)withA(a,()=>wrapText(g,x+14,ly,sw-26,sz+3,{size:sz-.5,mono:true,weight:500}));ly+=wrapCount(g,sw-26,sz-.5)*(sz+3)+6});line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2)}
+  const rx=x+sw+14,rw=w-sw-28;let cy=y+(o.cy||30);const fs=o.cfs||14;const t0=o.t0||1.2;const dt=o.dt||1.8;
+  W_.rows.forEach((r,i)=>{const p_=clamp((t-t0-i*dt)/(dt*.85),0,1);
+    if(r.c){cy+=fs+6;if(p_>0){const cw=chainWidth(r.c[0],r.c[1],{size:fs});const sc=Math.min(1,rw/cw);ctx.save();ctx.translate(rx,cy);ctx.scale(sc,sc);chain(0,0,r.c[0],r.c[1],p_,{size:fs});ctx.restore()}cy+=fs+(o.rowGap||16)}
+    else if(r.l){cy+=12;if(p_>0)withA(p_,()=>fitTxt(rx,cy,r.l,rw,{size:o.lfs||13.5,weight:600,mono:true}));cy+=(o.lh||16)}
+    else if(r.ans){cy+=16;if(p_>0)withA(p_,()=>{ctx.font=`700 15px ${MONO}`;const tw=Math.min(rw,ctx.measureText(r.ans).width);rr(rx-4,cy-14,tw+14,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();fitTxt(rx+3,cy,r.ans,rw-6,{size:15,weight:700,mono:true})});cy+=18}});
+  if(W_.miss){const tm=t0+W_.rows.length*dt+.4;const a=seg(t,tm,tm+.6);if(a>0){const mw=o.missFull?w-24:rw+8;const mx=o.missFull?x+12:rx-4;const n=wrapCount("Common mistake: "+W_.miss,mw-16,sz-1);const mh=n*(sz+2)+10;
+    withA(a,()=>{rr(mx,y+h-mh-8,mw,mh,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,mx+8,y+h-mh-8+5+(sz)/2+1,mw-16,sz+2,{size:sz-1})})}}
+  return t}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-manip-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-manip-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: force time simulator ================= */
+const SM={mode:"thrust",pre:100,peak:500,dur:150,t0:0,done:new Set(),cav:false,cavT:0,lastKey:""};
+const SIM_CHAL=["Make a thrust with a rate of force above 2,000 N/s.","Make a slow push (duration 500 ms or more) that still reaches at least 400 N, and compare its rate of force.","Find a thrust that reaches 400 N or more but does not cavitate in this model.","Use Compare both and see which input makes the bigger sensor burst."];
+function simP(kind){const pre=SM.pre,peak=Math.max(SM.peak,SM.pre+10),dur=SM.dur;if(kind==="mob"&&SM.mode==="both")return {pre:50,peak:150,dur:500,ramp:350,n:4};if(kind==="mob")return {pre,peak,dur,ramp:350,n:4};return {pre,peak,dur,ramp:350,hold:350,res:Math.max(150,dur*1.6)}}
+function simF(kind,t){return kind==="mob"?ftMob(t,simP("mob")):ftThrust(t,simP("thrust"))}
+function simWin(){const a=ftThrustEnd(simP("thrust"))+250,b=350+simP("mob").n*2*simP("mob").dur+400;return SM.mode==="thrust"?a:SM.mode==="mob"?b:Math.max(a,b)}
+function simRate(){const p=simP("thrust");return (p.peak-p.pre)/(p.dur/1000)}
+function simFire(kind,t){const a=simF(kind,t),b=simF(kind,t+1);return 6+50*Math.pow(Math.max(0,b-a),1.3)+.005*a}
+function simPeakFire(kind){let m=0;const W=kind==="mob"?350+4*2*simP("mob").dur+400:ftThrustEnd(simP("thrust"));for(let t=0;t<W;t+=2)m=Math.max(m,simFire(kind,t));return m}
+function simCavitates(kind){const p=simP(kind);const r=(p.peak-p.pre)/(p.dur/1000);return r>=1500&&(p.peak-p.pre)>=150}
+function simGapMM(kind,t){const pr=simP(kind).pre;return .0015*Math.max(0,simF(kind,t)-pr)+.0004*Math.min(pr,simF(kind,t))}
+function simKinds(){return SM.mode==="both"?["thrust","mob"]:[SM.mode]}
+function simRestart(){SM.t0=performance.now();SM.cav=false;SM.cavT=0;a11yKey=""}
+function simUI(){$("#simPreO").textContent=SM.pre+" N";$("#simPeakO").textContent=SM.peak+" N";$("#simDurO").textContent=SM.dur+" ms";
+  $("#simDurL").textContent=SM.mode==="mob"?"Rise time per push":SM.mode==="both"?"Thrust duration and rise time":"Thrust duration";
+  const peak=Math.max(SM.peak,SM.pre+10);const dF=peak-SM.pre;const rate=simRate();const mobRate=rate;
+  const rows=[["Preload",SM.pre+" N"],["Peak force",peak+" N"],["Change in force",dF+" N"],[SM.mode==="mob"?"Rise time per push":"Thrust duration",SM.dur+" ms"],
+    [SM.mode==="mob"?"Rate of force per push":"Rate of force",fmtNum(Math.round(rate/10)*10,0)+" N/s"],["Peak joint gap (model)",(.0015*dF+.0004*SM.pre).toFixed(2)+" mm"],
+    ["Peak sensor firing",simKinds().map(k=>Math.round(simPeakFire(k))+" per s"+(SM.mode==="both"?(k==="mob"?" (mobilization)":" (thrust)"):"")).join(", ")],
+    ["Cavitation in this model",simKinds().map(k=>(k==="thrust"&&simCavitates("thrust")?"yes":"no")+(SM.mode==="both"?(k==="mob"?" (mobilization)":" (thrust)"):"")).join(", ")]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("");
+  const st=$("#simStatus");let msg="",cls="";
+  if(SM.peak<=SM.pre){msg="Peak force must be above the preload, so the model uses the preload plus 10 N.";cls="warn"}
+  else if(SM.mode!=="mob"&&SM.dur>400){msg="A duration this long is more like a slow push than a thrust. Thrusts in lab studies usually last about 100 to 200 ms.";cls="warn"}
+  else if(SM.mode==="mob"&&peak>300){msg="Mobilization forces in studies are usually lower, often under a couple of hundred newtons.";cls="warn"}
+  else if(peak>650){msg="This peak is above most published values for the low back; the neck uses far less force.";cls="warn"}
+  else{msg=SM.mode==="thrust"?"Rate of force "+fmtNum(Math.round(rate/10)*10,0)+" N/s: "+(rate>=1500?"a fast climb.":"a fairly slow climb."):SM.mode==="mob"?"Gentle, repeated pushes, each with a rate of about "+fmtNum(Math.round(mobRate/10)*10,0)+" N/s.":"The sliders set the thrust (red). The teal mobilization is fixed at typical values (50 to 150 N, 500 ms rise) for comparison.";cls="good"}
+  st.className="status "+cls;st.textContent=msg;
+  /* challenges */
+  if(SM.mode!=="mob"&&rate>2000)SM.done.add(0);if(SM.dur>=500&&peak>=400)SM.done.add(1);if(SM.mode!=="mob"&&peak>=400&&!simCavitates("thrust"))SM.done.add(2);if(SM.mode==="both")SM.done.add(3);
+  chalUI($("#simChal"),SIM_CHAL,SM.done);
+  $("#simCap").textContent=SM.mode==="thrust"?"A thrust: preload, quick climb to the peak and release, with the joint, sensors and force curve in step.":SM.mode==="mob"?"Mobilization: four slow pushes, with gentle joint movement and modest sensor firing.":"Compare both: the thrust from the sliders (red) and a typical mobilization (teal) on the same axes.";
+  a11yKey=""}
+function simInit(){segBtns($("#simMode"),[["thrust","Thrust (manipulation)"],["mob","Mobilization"],["both","Compare both"]],()=>SM.mode,v=>{SM.mode=v;simUI();simRestart()});
+  [["simPre","pre"],["simPeak","peak"],["simDur","dur"]].forEach(a=>{$("#"+a[0]).addEventListener("input",e=>{SM[a[1]]=+e.target.value;simUI();simRestart()})});
+  $("#simPlay").onclick=simRestart;
+  const pres=[["Typical low back thrust",{mode:"thrust",pre:100,peak:500,dur:150}],["Lower force neck style thrust",{mode:"thrust",pre:20,peak:110,dur:100}],["Gentle mobilization",{mode:"mob",pre:50,peak:150,dur:500}],["Slow push, same peak",{mode:"thrust",pre:100,peak:500,dur:700}]];
+  const box=$("#simPresets");pres.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=p[0];b.onclick=()=>{Object.assign(SM,p[1]);$("#simPre").value=SM.pre;$("#simPeak").value=SM.peak;$("#simDur").value=SM.dur;segBtns($("#simMode"),[["thrust","Thrust (manipulation)"],["mob","Mobilization"],["both","Compare both"]],()=>SM.mode,v=>{SM.mode=v;simUI();simRestart()});simUI();simRestart()};box.appendChild(b)});
+  simUI();simRestart()}
+function drawSim(now){use(S1);const T=now/1000;const W=simWin();const loop=Math.max(4500,Math.min(9000,W*2.2));const el=((now-SM.t0)%(loop+1200));const tc=clamp(el/loop,0,1)*W;const slow=loop/W;
+  const kinds=simKinds();const main=kinds[0];
+  /* tissue panel */
+  panelBox(14,14,392,290);levelTag(26,30,"tissue");
+  const cav=kinds.indexOf("thrust")>=0&&simCavitates("thrust");const pT=simP("thrust");const tPeak=(pT.ramp+pT.hold+pT.dur);const popped=cav&&tc>=tPeak-pT.dur*.3;
+  const gk=SM.mode==="both"?"thrust":main;const gmm=simGapMM(gk,tc);const gpx=gmm*14;const bubR=popped?clamp(14-(tc-tPeak)/W*10,6,14):0;
+  const F0=simF(gk,tc);const rot=-.06*clamp((F0-SM.pre)/400,0,1.2);
+  segment(96,160,80,{dx:gpx,gap:gpx,bub:bubR>0?Math.min(bubR,gpx*.45+3):0,urot:rot});
+  facetZoom(320,150,66,6+gmm*30,bubR);txt(320,232,"facet joint close up",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  label(200,276,"joint gap now: "+gmm.toFixed(2)+" mm (drawn larger)",{size:12,weight:700,mono:true,border:C.lig});
+  if(popped&&tc-tPeak<Math.max(250,W*.12)){spark(320,150,18,C.gold,clamp((tc-tPeak+pT.dur*.3)/Math.max(250,W*.12),0,1));label(370,72,"pop",{size:13,weight:700,border:C.gold})}
+  /* signal panel */
+  panelBox(418,14,368,290);levelTag(430,30,"signal");
+  rr(440,60,110,60,26);fillStroke(hexA(C.muscle,.25),C.muscle,1.4);const fr=simFire(gk,tc);spindle(495,90,74,clamp((fr-6)/300,0,1));
+  fibre([[550,90],[770,90]],T,0,C.nerve);
+  /* firing rate traces */
+  const g2=graph({x:470,y:150,w:296,h:110,x0:0,x1:W,y0:0,y1:Math.max(100,Math.ceil(Math.max(...kinds.map(simPeakFire))/100)*100),xt:[0,Math.round(W/2/100)*100,Math.round(W/100)*100],yt:[0],xl:"ms",yl:"sensor firing (per s)",ylx:24,grid:false});
+  kinds.forEach(k=>{ctx.save();ctx.beginPath();ctx.rect(g2.x,g2.y-2,g2.w,g2.h+4);ctx.clip();plotFn(t=>simFire(k,t),0,W,g2.x,g2.y,g2.w,g2.h,g2.y0,g2.y1,k==="mob"?C.mob:C["nerve-ink"],2.2,null,tc);ctx.restore()});
+  /* moving spikes along fibre, density from firing */
+  const n=Math.min(9,Math.round(fr/40));for(let i=0;i<n;i++){const q=P(T*1.4+i/n,1);circ(550+220*q,90,4,C.nerve,C.panel,1)}
+  label(660,128,"firing now: "+Math.round(fr)+" per s",{size:12,weight:700,mono:true,border:C.nerve});
+  /* force time graph */
+  const f1=Math.max(200,Math.ceil(Math.max(SM.peak,SM.pre+10)/100)*100+100);const g=ftGraph(70,330,700,190,{t1:Math.ceil(W/100)*100,f1,tstep:W<=1800?200:W<=4000?500:1000,fstep:f1<=400?100:200});
+  if(SM.mode==="thrust")phaseBands(g,simP("thrust"),[1,1,1].map(()=>.85));
+  kinds.forEach(k=>{curve(g,t=>simF(k,t),0,tc,k==="mob"?C.mob:C.force,3);gdot(g,tc,simF(k,tc),k==="mob"?C.mob:C.force)});
+  const fNow=simF(main,tc);label(770,322,Math.round(fNow)+" N at "+Math.round(tc)+" ms",{size:12,weight:700,mono:true,border:main==="mob"?C.mob:C.force,align:"right"});
+  txt(70,548,"Playing at about "+(slow>=1.5?"1/"+Math.round(slow):(1/slow).toFixed(1)+" times")+" real speed so you can see it.",{size:11.5,color:C["ink-soft"]});
+}
+function simA11y(){const peak=Math.max(SM.peak,SM.pre+10);const rate=simRate();const lab=`Force time simulator, ${SM.mode==="thrust"?"thrust":SM.mode==="mob"?"mobilization":"thrust and mobilization compared"}. Preload ${SM.pre} newtons, peak ${peak} newtons, duration ${SM.dur} milliseconds, rate of force about ${fmtNum(Math.round(rate/10)*10,0)} newtons per second.`;
+  const cav=SM.mode!=="mob"&&simCavitates("thrust");
+  const d=`Top left: a side view of two vertebrae with a disc, and a round close up of the facet joint; the joint gap widens as force rises, to about ${(.0015*(peak-SM.pre)+.0004*SM.pre).toFixed(2)} millimetres at the peak${cav?", and a pale gas bubble appears with a gold pop star":", with no cavitation in this model"}. Top right: a rose muscle spindle sends yellow spikes along a nerve fibre, and a small graph traces sensor firing, peaking near ${Math.round(simPeakFire(SM.mode==="mob"?"mob":"thrust"))} spikes per second. Bottom: the force time graph draws itself with a moving dot${SM.mode==="thrust"?", with shaded preload, thrust and resolution bands":SM.mode==="mob"?", showing four smooth waves":", red for the thrust spike and teal for four slow waves of a typical mobilization fixed at 50 to 150 newtons"}.`;
+  return [lab,d]}
+/* ================= PART 2: graph reading trainer ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const CTYPES=[["mix","All types, mixed"],["peak","Peak force"],["pre","Preload"],["dur","Thrust duration"],["rate","Rate of force"],["kind","What kind of input is this?"],["compare","Which curve climbs faster?"]];
+const KINDS=["Thrust (manipulation)","Mobilization (slow oscillation)","Instrument assisted impulse","Slow sustained push"];
+function thrustP(o){o=o||{};const pre=o.pre!=null?o.pre:pick([50,75,100,125,150]);const peak=o.peak!=null?o.peak:pick([300,350,400,450,500,550,600].filter(v=>v>=pre+150));const dur=o.dur!=null?o.dur:pick([100,150,200]);
+  const hold=o.hold!=null?o.hold:pick([250,300,350,400]);return {pre,peak,dur,ramp:300,hold,res:o.res||Math.max(150,dur*1.6)}}
+function upto(v,s){return Math.ceil(v/s)*s}
+const GEN={
+ peak(){const p=thrustP({peak:pick([250,300,350,400,450,500,550,600,650]),pre:pick([50,75,100,125])});const end=ftThrustEnd(p);
+  return {title:"Peak force",html:"Read the <b>peak force</b> from the graph: the highest force reached during the thrust.",unit:"N",ans:p.peak,tol:12,dp:0,
+   slips:[[p.pre,"That is the preload plateau. The peak is the very top of the curve."]],
+   hints:["Find the highest point of the curve.","Follow that point straight across to the force axis on the left.",`The top of the curve is level with the ${p.peak} N gridline.`],
+   rows:[{l:"find the highest point of the curve"},{l:"read straight across to the force axis"},{ans:"peak force = "+p.peak+" N"}],miss:"reading the flat preload part, or a point partway up the climb, instead of the very top.",
+   vis:{k:"one",curves:[{f:t=>ftThrust(t,p),col:"force"}],t1:upto(end+200,200),f1:upto(p.peak+80,100),fstep:50,flab:100,mark:{y:p.peak},p}}},
+ pre(){const p=thrustP({pre:pick([50,75,100,125,150,175,200])});const end=ftThrustEnd(p);
+  return {title:"Preload",html:"Read the <b>preload</b>: the steady force held just before the thrust begins.",unit:"N",ans:p.pre,tol:12,dp:0,
+   slips:[[p.peak,"That is the peak. The preload is the flat part before the quick climb."]],
+   hints:["Look for the flat part of the curve before the steep climb.","Read straight across from that flat part to the force axis.",`The flat part sits on the ${p.pre} N line.`],
+   rows:[{l:"find the flat plateau before the steep climb"},{l:"read across to the force axis"},{ans:"preload = "+p.pre+" N"}],miss:"reading the peak, or the force at time zero, instead of the held plateau.",
+   vis:{k:"one",curves:[{f:t=>ftThrust(t,p),col:"force"}],t1:upto(end+200,200),f1:upto(p.peak+80,100),fstep:25,flab:100,mark:{y:p.pre},p}}},
+ dur(){const p=thrustP({dur:pick([100,150,200,250,300]),hold:pick([200,250,300,350,400,450])});const t0=p.ramp+p.hold,tp=t0+p.dur;const end=ftThrustEnd(p);
+  return {title:"Thrust duration",html:"Find the <b>thrust duration</b>: the time from the start of the quick climb to the peak. Grid lines are every 50 ms.",unit:"ms",ans:p.dur,tol:12,dp:0,
+   slips:[[tp,"That is the time at the peak. Subtract the time the climb started."],[end-t0,"That includes the resolution. Stop at the peak."],[t0,"That is when the climb starts. Measure from there to the peak."]],
+   hints:["Find where the flat preload ends and the steep climb begins. Note that time.","Find the time of the peak.",`The climb starts at ${t0} ms. Subtract that from the time of the peak.`],
+   rows:[{l:"climb starts at "+t0+" ms"},{l:"peak reached at "+tp+" ms"},{l:"duration = "+tp+" ms − "+t0+" ms"},{ans:"thrust duration = "+p.dur+" ms"}],miss:"reading the time at the peak, or including the resolution phase.",
+   vis:{k:"one",curves:[{f:t=>ftThrust(t,p),col:"force"}],t1:upto(end+100,100),f1:upto(p.peak+80,100),fstep:100,flab:100,tstep:50,tlab:upto(end+100,100)>1400?200:100,mark:{t0,tp},p}}},
+ rate(){const dF=pick([150,200,250,300,350,400,450,500]);const pre=pick([50,75,100,125,150]);const dur=pick([100,125,150,200,250]);const p=thrustP({pre,peak:pre+dF,dur});const ds=dur/1000;const ans=dF/ds;const end=ftThrustEnd(p);
+  const fa=v=>fmtNum(Math.round(v),0);
+  return {title:"Rate of force",html:`The graph is labelled: preload <b>${pre} N</b>, peak <b>${pre+dF} N</b>, thrust duration <b>${dur} ms</b>. What is the <b>rate of force</b> in N/s?`,unit:"N/s",ans,tol:Math.max(1,ans*.006),dp:0,
+   slips:[[(pre+dF)/ds,"You used the peak. Subtract the preload first to get the change in force."],[dF/dur,"You divided by milliseconds. Convert the duration to seconds first (divide by 1,000)."],[dF*dur,"Rate is a division: change in force divided by time."],[(pre+dF)/dur,"Subtract the preload, and convert milliseconds to seconds."]],
+   hints:["Rate of force = (peak − preload) ÷ thrust duration in seconds.",`Change in force = ${pre+dF} − ${pre} = ${dF} N.`,`${dur} ms = ${ds} s. Now divide ${dF} N by ${ds} s.`],
+   rows:[{l:"change in force = "+(pre+dF)+" N − "+pre+" N"},{ans:"= "+dF+" N"},{c:[[F(dur,"ms"),F(1,"s",1000,"ms")],[String(ds),["s"]]]},{c:[[F(dF,"N",ds,"s")],[fa(ans),["N/s"]]]},{ans:"rate of force ≈ "+fa(ans)+" N per second"}],
+   miss:"using the peak instead of the change in force, or dividing by milliseconds without converting to seconds.",
+   vis:{k:"one",curves:[{f:t=>ftThrust(t,p),col:"force"}],t1:upto(end+200,200),f1:upto(p.peak+80,100),fstep:50,flab:100,annot:true,mark:{rate:true},p}}},
+ kind(){const k=ri(0,3);let f,t1,f1,feat;
+  if(k===0){const p=thrustP();f=t=>ftThrust(t,p);t1=upto(ftThrustEnd(p)+400,500);f1=upto(p.peak+80,100);feat=["one tall spike","a preload plateau first","climb takes about "+p.dur+" ms"]}
+  else if(k===1){const p={pre:ri(3,8)*10,peak:ri(12,22)*10,dur:pick([300,400,500,600]),ramp:350,n:pick([3,4])};f=t=>ftMob(t,p);t1=upto(350+p.n*2*p.dur+500,500);f1=upto(p.peak+80,100);feat=["several smooth waves",p.n+" repeated pushes","each rise takes "+p.dur+" ms"]}
+  else if(k===2){const at=ri(5,9)*100,h=ri(10,25)*10,pre=ri(1,3)*10;f=t=>pre*smooth(t/200)+h*gauss(t,at,2.5);t1=1500;f1=upto(h+80,100);feat=["one very narrow spike","rise takes only a few ms","little or no preload"]}
+  else{const p=thrustP({dur:pick([700,800,900,1000]),res:pick([600,800])});f=t=>ftThrust(t,p);t1=upto(ftThrustEnd(p)+300,500);f1=upto(p.peak+80,100);feat=["one broad hump","climb takes about "+p.dur+" ms","far slower than a thrust"]}
+  return {title:"Kind of input",html:"Which kind of input does this force time curve show?",choices:KINDS.slice(),ans:k,
+   hints:["Count the peaks: one or several?","How long does the climb take: a few milliseconds, about 100 to 200 ms, or most of a second?",["One tall spike after a flat preload, climbing in a fraction of a second, is a thrust.","Several smooth, repeated waves are mobilization.","A spike only a few milliseconds wide is an instrument impulse.","One broad hump that climbs over most of a second is a slow push."][k]],
+   rows:feat.map(x=>({l:x})).concat([{ans:KINDS[k]}]),miss:"judging by peak height alone. The shape and timing tell you the kind of input.",
+   vis:{k:"one",curves:[{f,col:k===1?"mob":k===2?"act2":"force"}],t1,f1,fstep:100,flab:100,fine:k===2}}},
+ compare(){const same=Math.random()<.25;let a,b;
+  if(same){const r=pick([2000,2500,3000]);const d1=pick([100,150]),d2=d1+50;a=thrustP({pre:100,peak:100+r*d1/1000,dur:d1,hold:300});b=thrustP({pre:100,peak:100+r*d2/1000,dur:d2,hold:300})}
+  else{for(let i=0;i<50;i++){a=thrustP({hold:300});b=thrustP({hold:300});const ra=(a.peak-a.pre)/a.dur,rb=(b.peak-b.pre)/b.dur;if(Math.abs(ra-rb)/Math.max(ra,rb)>.2)break}}
+  const ra=(a.peak-a.pre)/(a.dur/1000),rb=(b.peak-b.pre)/(b.dur/1000);const ans=Math.abs(ra-rb)<1?2:ra>rb?0:1;
+  if(Math.random()<.5&&!same){}const fa=v=>fmtNum(Math.round(v),0);
+  return {title:"Compare two thrusts",html:`Curve <b>A</b>: preload ${a.pre} N, peak ${a.peak} N, duration ${a.dur} ms. Curve <b>B</b>: preload ${b.pre} N, peak ${b.peak} N, duration ${b.dur} ms. Which climbs faster (higher rate of force)?`,choices:["Curve A","Curve B","They have the same rate of force"],ans,
+   hints:["A higher peak does not always mean a faster climb. Compute each rate.","Rate = (peak − preload) ÷ duration in seconds.",`A: ${a.peak-a.pre} N ÷ ${a.dur/1000} s = ${fa(ra)} N/s. Now do B.`],
+   rows:[{c:[[F(a.peak-a.pre,"N",a.dur/1000,"s")],[fa(ra),["N/s"]]]},{l:"that is curve A"},{c:[[F(b.peak-b.pre,"N",b.dur/1000,"s")],[fa(rb),["N/s"]]]},{l:"that is curve B"},{ans:["Curve A climbs faster","Curve B climbs faster","Same rate of force"][ans]}],
+   miss:"picking the curve with the higher peak. Rate depends on both the change in force and the time.",
+   vis:{k:"two",curves:[{f:t=>ftThrust(t,a),col:"force",lab:"A"},{f:t=>ftThrust(t+60,b),col:"evid",lab:"B"}],t1:upto(Math.max(ftThrustEnd(a),ftThrustEnd(b))+200,200),f1:upto(Math.max(a.peak,b.peak)+80,100),fstep:100,flab:100,pa:a,pb:b}}}
+};
+const TR={type:"mix",p:null,hint:0,first:true,sol:false,solved:false,streak:0,best:0,count:0,solT:0,pick:null};
+const GKEYS=Object.keys(GEN);
+function genOne(k){let q=null;for(let i=0;i<40&&!q;i++){try{q=GEN[k]()}catch(e){console.error(e);q=null}if(q&&!q.choices&&!(isFinite(q.ans)&&q.ans>0))q=null}q.kind=k;return q}
+function fmtAns(p,v){if(p.choices)return p.choices[v];if(p.dp!=null)return String(Math.round(v*Math.pow(10,p.dp))/Math.pow(10,p.dp));return String(+v.toPrecision(4))}
+function normAns(s){return String(s).trim().replace(/,/g,"").replace(/[−–]/g,"-").replace(/\s*(n\/s|n per s(econd)?|newtons? per second|ms|milliseconds?|newtons?|n)\s*$/i,"").replace(/\s+/g,"")}
+function parseAns(s){s=normAns(s);if(!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s))return null;return parseFloat(s)}
+function judge(p,str){if(p.choices){const v=+str;if(str===""||!(v>=0))return {ok:false,kind:"empty"};return v===p.ans?{ok:true}:{ok:false,kind:"choice"}}
+  const v=parseAns(str);if(v==null)return {ok:false,kind:"empty"};if(Math.abs(v-p.ans)<=p.tol)return {ok:true};
+  const sl=(p.slips||[]).find(s=>isFinite(s[0])&&s[1]&&Math.abs(v-s[0])<=Math.max(Math.abs(s[0])*.012,1));if(sl&&Math.abs(sl[0]-p.ans)>p.tol)return {ok:false,kind:"slip",msg:sl[1]};
+  if(Math.abs(v-p.ans)<=Math.abs(p.ans)*.06)return {ok:false,kind:"close"};return {ok:false,kind:"wrong"}}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function ansTxt(p){return p.choices?p.choices[p.ans]:fmtNum(p.ans,0)+" "+p.unit}
+function calcNew(){const k=TR.type==="mix"?pick(GKEYS):TR.type;const q=genOne(k);TR.p=q;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.pick=null;
+  const rd=q.choices?"Pick one answer.":"Give a whole number.";
+  $("#calcProb").innerHTML=`<span class="pt">${q.title}</span>${q.html}<span class="rd">${rd}</span>`;$("#calcUnit").textContent=q.unit||"";$("#calcAns").value="";
+  $("#calcNumWrap").hidden=!!q.choices;const cb=$("#calcChoices");cb.hidden=!q.choices;cb.innerHTML="";
+  if(q.choices)q.choices.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=c;b.setAttribute("aria-pressed","false");b.onclick=()=>{TR.pick=i;cb.querySelectorAll(".opt").forEach((x,j)=>{x.setAttribute("aria-pressed",String(j===i));x.classList.remove("wrong","right")});calcCheck()};cb.appendChild(b)});
+  $("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=q.title+": the graph shows the problem; the worked solution appears below it.";a11yKey=""}
+function calcCheck(){const p=TR.p;const str=p.choices?(TR.pick==null?"":String(TR.pick)):$("#calcAns").value;const j=judge(p,str);
+  if(j.kind==="empty"){calcMsg("info",p.choices?"Pick one of the answers first.":"Type a number in the answer box first.");return}
+  if(p.choices){$("#calcChoices").querySelectorAll(".opt").forEach((x,i)=>{x.classList.toggle("right",j.ok&&i===TR.pick);x.classList.toggle("wrong",!j.ok&&i===TR.pick)})}
+  if(j.ok){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;calcMsg("good",`✓ Correct: ${ansTxt(p)}. Watch the worked solution build.`);showSol(false)}
+  else{TR.first=false;TR.streak=0;let msg="Not quite. ";if(j.kind==="slip")msg+=j.msg;else if(j.kind==="close")msg+="Very close. Read the grid line again.";else if(j.kind==="choice")msg+=p.hints[2];else msg+="Check the setup. "+p.hints[0];calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+function calcInit(){const sel=$("#calcType");sel.innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");sel.onchange=()=>{TR.type=sel.value;calcNew()};
+  $("#calcCheck").onclick=calcCheck;$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+  $("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"");a11yKey=""};
+  $("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${ansTxt(TR.p)}. Watch each step, then try a new problem.`)};$("#calcNew").onclick=calcNew;
+  TR.best=+(store.get("best")||0)}
+function tvTyped(){const v=parseAns($("#calcAns").value);return v==null||!isFinite(v)?null:v}
+function drawCalc(now){use(S2);const T=now/1000;const p=TR.p;const vs=p.vis;const tv=p.choices?null:tvTyped();const ok=TR.solved;
+  panelBox(10,10,780,290);levelTag(22,26,"graph");if(ok){circ(766,30,13,C.good);tick(766,30,7,onFill())}
+  const tstep=vs.tstep||(vs.t1<=1600?100:vs.t1<=3000?250:500);const xt=[];for(let v=0;v<=vs.t1+.1;v+=tstep)xt.push(v);const yt=[];for(let v=0;v<=vs.f1+.1;v+=vs.fstep)yt.push(v);
+  const tlab=vs.tlab||(vs.t1<=1600?200:vs.t1<=3000?500:1000);
+  const g=graph({x:80,y:64,w:680,h:192,x0:0,x1:vs.t1,y0:0,y1:vs.f1,xt,yt,xl:"time (ms)",yl:"force (N)",ylx:40,xf:v=>v%tlab===0?String(v):"",yf:v=>v%vs.flab===0?String(v):""});
+  vs.curves.forEach(c=>{if(vs.fine){ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w,g.h+4);ctx.clip();plotFn(c.f,0,vs.t1,g.x,g.y,g.w,g.h,0,vs.f1,C[c.col],2.6);ctx.restore()}else curve(g,c.f,0,vs.t1,C[c.col],2.8);
+    if(c.lab){let bt=0,bf=-1;for(let t=0;t<vs.t1;t+=5){const f=c.f(t);if(f>bf){bf=f;bt=t}}label(g.X(bt)+(c.lab==="A"?-18:18),g.Y(bf)-14,c.lab,{size:13,weight:700,border:C[c.col]})}});
+  const pp=vs.p;
+  if(vs.annot&&pp){const t0=pp.ramp+pp.hold,tp=t0+pp.dur;gdot(g,t0,pp.pre,C.lig,"preload "+pp.pre+" N",{dy:-24,dx:-70});gdot(g,tp,pp.peak,C.force,"peak "+pp.peak+" N",{dy:-16,dx:60});
+    line(g.X(t0),g.Y(0)-8,g.X(tp),g.Y(0)-8,C.evid,2.4);label((g.X(t0)+g.X(tp))/2,g.Y(0)-22,pp.dur+" ms",{size:12,weight:700,border:C.evid})}
+  if(vs.k==="two"){[vs.pa,vs.pb].forEach((q,i)=>{})}
+  /* live answer marker */
+  const m=vs.mark||{};
+  if(tv!=null&&m.y!=null&&tv>0&&tv<=vs.f1){line(g.x,g.Y(tv),g.x+g.w,g.Y(tv),hexA(C.accent,.8),1.8,[6,4]);label(g.x+g.w-60,g.Y(tv)-12,"your answer "+tv+" N",{size:11.5,weight:700,border:C.accent})}
+  if(tv!=null&&m.t0!=null&&tv>0){const x1=g.X(Math.min(vs.t1,m.t0+tv));line(g.X(m.t0),g.y+16,x1,g.y+16,C.accent,2.4);label((g.X(m.t0)+x1)/2,g.y+4,"your answer "+tv+" ms",{size:11.5,weight:700,border:C.accent})}
+  if(TR.sol){const a=.6+.4*Math.sin(T*3);withA(a,()=>{if(m.y!=null){line(g.x,g.Y(m.y),g.x+g.w,g.Y(m.y),C.good,2.4);label(g.x+70,g.Y(m.y)-12,m.y+" N",{size:12,weight:700,border:C.good})}
+    if(m.t0!=null){line(g.X(m.t0),g.y,g.X(m.t0),g.y+g.h,C.good,2,[4,3]);line(g.X(m.tp),g.y,g.X(m.tp),g.y+g.h,C.good,2,[4,3]);label((g.X(m.t0)+g.X(m.tp))/2,g.y+36,(m.tp-m.t0)+" ms",{size:12,weight:700,border:C.good})}})}
+  if(p.choices&&TR.pick!=null)txt(400,288,"you picked: "+p.choices[TR.pick],{size:12.5,weight:700,align:"center",color:ok?C.good:C["warn-ink"]});
+  /* worked solution */
+  const WY=310;if(TR.sol){const el=(now-TR.solT)/1000;const per=Math.max(8,1.2+p.rows.length*1.6+3);wk(10,WY,780,280,{rows:p.rows,miss:p.miss},Math.min(el,per-.01),{per,cfs:15,dt:1.6,t0:.6,rowGap:16,cy:30,title:"Worked solution",missFull:true})}
+  else{panelBox(10,WY,780,280,{fill:hexA(C.paper,.96)});title(22,WY+18,"Worked solution",C["accent-ink"]);wrapText("The worked solution builds here after a correct answer, or when you press Show worked solution. Type an answer to see it marked on the graph as you go.",24,WY+50,740,18,{size:13,color:C["ink-soft"]})}}
+function calcA11y(){const p=TR.p;const v=p.choices?(TR.pick==null?"not chosen":p.choices[TR.pick]):($("#calcAns").value.trim()||"not entered");const lab=`Practice graph, ${p.title}. Your answer ${v}.${TR.solved?" Correct.":""}`;
+  const vs=p.vis;const d=`A force time graph with time in milliseconds along the bottom up to ${vs.t1} and force in newtons up the side up to ${vs.f1}. `+
+   (p.kind==="kind"?"One curve is drawn; decide from its shape and timing what kind of input it is.":p.kind==="compare"?"Two thrust curves are drawn, A in brick red and B in indigo, each with a preload plateau and a climb to a peak.":"A thrust curve rises to a flat preload, climbs steeply to a peak and falls back to zero."+(vs.annot?" The preload, peak and thrust duration are labelled on the graph.":""))+
+   (TR.sol?" The worked solution below shows each step and the answer, "+ansTxt(p)+".":" The worked solution area below is empty until you answer or ask for it.");
+  return [lab,d]}
+/* ================= PART 3: sorting game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  const T_=(x,y,t,sz,c)=>`<text x="${x}" y="${y}" font-size="${sz||11}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" fill="${c||"var(--ink)"}">${t}</text>`;
+  const bars=n=>[0,1,2].map(i=>`<rect x="${10+i*13}" y="${30-i*8}" width="10" height="${10+i*8}" rx="2" fill="${i<n?"var(--evid)":"var(--sunk)"}" stroke="var(--evid)"/>`).join("");
+  switch(k){
+  case "meas":return sv(bars(3)+'<path d="M8 40 H50" stroke="var(--ink-soft)" stroke-width="1.5"/>');
+  case "short":return sv(bars(2)+'<path d="M8 40 H50" stroke="var(--ink-soft)" stroke-width="1.5"/>');
+  case "notsup":return sv('<circle cx="28" cy="23" r="15" fill="none" stroke="var(--bad)" stroke-width="3"/><path d="M17 34 L39 12" stroke="var(--bad)" stroke-width="3"/>');
+  case "benefit":return sv('<path d="M8 36 C18 36 22 14 28 14 C34 14 38 30 48 30" fill="none" stroke="var(--good)" stroke-width="3"/><path d="M40 10 l8 0 l0 8" fill="none" stroke="var(--good)" stroke-width="2.5"/>');
+  case "mild":return sv('<circle cx="28" cy="23" r="15" fill="var(--warn-wash)" stroke="var(--warn)" stroke-width="2.5"/><path d="M20 28 Q28 22 36 28" fill="none" stroke="var(--warn-ink)" stroke-width="2"/><circle cx="22" cy="19" r="2" fill="var(--warn-ink)"/><circle cx="34" cy="19" r="2" fill="var(--warn-ink)"/>');
+  case "serious":return sv('<path d="M28 6 L50 40 H6 Z" fill="var(--bad-wash)" stroke="var(--bad)" stroke-width="2.5"/>'+T_(28,35,"!",18,"var(--bad)"));
+  case "screen":return sv('<rect x="12" y="6" width="32" height="36" rx="3" fill="var(--panel-2)" stroke="var(--ink-soft)" stroke-width="2"/><path d="M18 16 l3 3 l6 -6 M18 28 l3 3 l6 -6" fill="none" stroke="var(--good)" stroke-width="2.4"/><path d="M30 17 H40 M30 29 H40" stroke="var(--ink-soft)" stroke-width="2"/>');
+  case "refer":return sv('<rect x="8" y="10" width="40" height="28" rx="4" fill="var(--bad-wash)" stroke="var(--bad)" stroke-width="2.5"/><path d="M16 24 H38 M31 17 L38 24 L31 31" fill="none" stroke="var(--bad)" stroke-width="3"/>');
+  case "thrust":return sv('<path d="M4 38 H18 L22 30 L26 6 L30 34 L34 38 H52" fill="none" stroke="var(--force)" stroke-width="3" stroke-linejoin="round"/>');
+  case "mob":return sv('<path d="M4 30 C10 14 16 14 22 30 C28 46 34 46 40 30 C44 18 48 16 52 22" fill="none" stroke="var(--mob)" stroke-width="3"/>');
+  case "both":return sv('<path d="M4 38 H14 L18 12 L22 38 H26" fill="none" stroke="var(--force)" stroke-width="2.6"/><path d="M28 30 C33 18 37 18 42 30 C46 40 50 38 53 30" fill="none" stroke="var(--mob)" stroke-width="2.6"/>')}return ""}
+/* card: [text, bin, why] */
+const SROUNDS=[
+{name:"Mechanism to evidence strength",goal:"Sort each proposed effect by how strong the evidence is today.",bins:[["meas","Measured and well supported"],["short","Some support: short term or lab studies"],["notsup","Not supported by current evidence"]],
+ cards:[["Facet joints gap a little more after a thrust than after positioning alone","meas","Measured on imaging: the gap is small and brief, but it has been seen directly."],
+  ["A gas cavity forms in the joint fluid when it pops","meas","Measured on imaging: real time imaging shows a cavity forming at the moment of the sound."],
+  ["Mechanoreceptors fire a burst of signals during the thrust","meas","Measured directly: sensor bursts are recorded in nerve studies."],
+  ["Back muscles show a brief reflex burst on EMG","meas","Measured directly: EMG recordings show it just after the thrust."],
+  ["Pressure pain threshold rises a little for a short time","short","Lab studies: a small, short term change, also seen with other manual therapy."],
+  ["The H reflex is reduced for seconds to minutes","short","Lab studies: a short lived change in spinal motor neuron excitability."],
+  ["Brainstem centres turn pain signals down (descending modulation)","short","Proposed mechanism: consistent with lab findings but not proven to explain clinical results."],
+  ["Touch input closes a spinal pain gate","short","Proposed mechanism: gate control fits lab data, but its role in clinical results is unproven."],
+  ["The pop proves the treatment worked","notsup","Not supported: outcomes are similar with or without a pop."],
+  ["A vertebra is moved back into place and stays there","notsup","Historical model: imaging does not show lasting changes in position."],
+  ["Manipulation treats asthma or high blood pressure","notsup","Not supported: trials do not show benefit for these conditions."],
+  ["A thrust moves only the exact level it is aimed at","notsup","Not supported: force spreads to nearby segments, and pops often come from other levels."]]},
+{name:"Benefit or risk",goal:"Sort each outcome into possible benefit, common mild side effect, or rare serious risk.",bins:[["benefit","Possible benefit (usually small to moderate)"],["mild","Common mild side effect"],["serious","Rare serious risk"]],
+ cards:[["Short term reduction in low back pain","benefit","Reviews find small to moderate short term effects: a possible benefit."],
+  ["Small improvement in daily function with low back pain","benefit","Modest and similar to other recommended care: a possible benefit."],
+  ["Short term relief of neck pain when combined with exercise","benefit","Guidelines often pair manual therapy with exercise for neck pain: a possible benefit."],
+  ["Local soreness for a day or two","mild","About half of patients notice something like this: a common, mild reaction."],
+  ["Stiffness after treatment","mild","Usually fades within 24 to 48 hours: a common, mild reaction."],
+  ["A headache that fades within a day","mild","Short lived and mild: common, and different from a sudden, severe, new headache, which is a red flag."],
+  ["Feeling tired after treatment","mild","Short lived and harmless: a common, mild reaction."],
+  ["Cervical artery dissection and stroke","serious","Very rare and debated: a serious risk, so screening matters."],
+  ["Cauda equina syndrome after low back treatment","serious","Very rare but an emergency: a serious risk."],
+  ["Fracture of a vertebra weakened by severe osteoporosis","serious","Very rare, linked to weakened bone: a serious risk and a contraindication."]]},
+{name:"Screen as usual or refer",goal:"Decide whether each situation has no red flags (screen, discuss options and consent) or needs medical referral instead of manipulation.",bins:[["screen","No red flags: screen, discuss options and consent"],["refer","Red flag: do not manipulate, refer for medical care"]],
+ cards:[["Stiff neck after sleeping in an awkward position, no other symptoms","screen","Mechanical and explained by sleeping position: no red flags. Still screen and get consent."],
+  ["Low back ache after gardening that improves each day","screen","Explained by activity and improving: no red flags."],
+  ["Long standing low back pain, normal examination, wants to discuss options","screen","Stable with a normal exam: no red flags, a chance to discuss all options."],
+  ["Tight mid back muscles after a long drive","screen","Explained by posture and activity: no red flags."],
+  ["Sudden, severe headache unlike any before, with neck pain","refer","Sudden, severe and new: could be a dissection or bleeding in the brain. Urgent medical care."],
+  ["Back pain with fever after a recent infection","refer","Fever with back pain: possible spinal infection."],
+  ["Back pain with a history of cancer and unexplained weight loss","refer","Cancer history plus weight loss: possible cancer in the spine."],
+  ["Numbness in the saddle area and new trouble passing urine","refer","Saddle numbness and bladder change: possible cauda equina syndrome, an emergency."],
+  ["Back pain after a fall in someone with severe osteoporosis","refer","A fall plus fragile bone: possible fracture."],
+  ["Leg weakness that is getting worse week by week","refer","Worsening weakness: progressive nerve loss needs prompt medical assessment."],
+  ["Neck pain with dizziness, double vision and trouble speaking","refer","Brain symptoms with neck pain: possible problem with blood flow to the brain. Emergency care."]]},
+{name:"Thrust, mobilization or both",goal:"Sort each feature: does it describe manipulation (a thrust), mobilization, or both?",bins:[["thrust","Manipulation (thrust)"],["mob","Mobilization"],["both","Both"]],
+ cards:[["High velocity, low amplitude","thrust","Fast and small at the end of the range: that defines a thrust."],
+  ["Grade V","thrust","The top grade: grade V is a quick thrust just past the limit of the range."],
+  ["Too fast for the patient to stop once it starts","thrust","A fraction of a second: only a thrust is that quick."],
+  ["Often comes with a pop","thrust","Cavitation needs a quick separation: more typical of a thrust, though not guaranteed."],
+  ["Slow, repeated oscillations","mob","Gentle and rhythmic: that defines mobilization."],
+  ["Grades I to IV","mob","Slow movements of different size and position: the mobilization grades."],
+  ["The patient can ask to stop and it stops at once","mob","Slow enough to stop at any moment: mobilization."],
+  ["A type of manual therapy","both","Research groups them together: both are manual therapy."],
+  ["Needs screening and informed consent first","both","Every hands on treatment: both need screening and consent."],
+  ["Small to moderate short term effects in back pain reviews","both","Modest and broadly similar effects: true of both."]]}
+];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+function phone(x,y,w,h,lines){rr(x,y,w,h,14);fillStroke(C.ink,C.ink,1);rr(x+6,y+18,w-12,h-36,5);ctx.fillStyle=C.paper;ctx.fill();let yy=y+34;lines.forEach(l=>{yy=wrapText(l.t,x+14,yy,w-28,l.lh||15,{size:l.size||12,weight:l.w||600,color:l.col||C.ink})+(l.gap||12)})}
+function sign(x,y,w,h,t1,t2,col){rr(x,y,w,h,8);fillStroke(hexA(col,.15),col,2.5);txt(x+w/2,y+h*.36,t1,{size:15,weight:700,align:"center",color:col===C.bad?C.bad:C.ink});if(t2)txt(x+w/2,y+h*.72,t2,{size:12.5,weight:600,align:"center"})}
+function iconHead(x,y,col){ctx.beginPath();ctx.moveTo(x,y-11);ctx.lineTo(x+12,y+9);ctx.lineTo(x-12,y+9);ctx.closePath();fillStroke(hexA(col,.15),col,2);txt(x,y+3,"!",{size:12,weight:700,align:"center",color:col})}
+const LIFE=[
+{name:"An informed consent conversation",who:"Scenario 1 · first visit",
+ story:"Marcus, 42, has had low back pain for three weeks after moving house. Screening finds no red flags. Before any hands on care, the clinician talks with him about options, benefits and risks.",
+ cap:"Marcus and the clinician talk; a checklist of what consent covers fills in, and a screening badge shows no red flags.",
+ desc:"A patient and a clinician sit facing each other. Speech bubbles take turns above them, with lines such as here are your options and can I say no. On the right, a clipboard checklist fills in with green ticks: what it involves, likely benefit, common soreness, rare serious risks, other options, questions, and the right to say no or stop. A green badge at the top reads screening: no red flags found.",
+ draw(T){panelBox(10,10,780,480);levelTag(22,26,"talk");sitter(120,330,70,{skin:2,shirt:1});ctx.save();ctx.translate(560,0);ctx.scale(-1,1);sitter(300,330,70,{skin:0,shirt:3});ctx.restore();
+   const L=[["c","Here are your options, including exercise and heat."],["p","How much will it help?"],["c","Research suggests a small to moderate short term benefit."],["p","Is it safe?"],["c","Soreness for a day or two is common. Serious problems are rare."],["p","Can I say no?"],["c","Yes, and you can stop at any time."]];const k=Math.floor(T/2.4)%L.length;
+   if(L[k][0]==="c")bubble(210,60,250,70,L[k][1],{tx:300,size:13,weight:600,ty:22});else bubble(40,80,200,60,L[k][1],{tx:100,size:13,weight:600,ty:22});
+   label(640,44,"screening: no red flags found",{size:12.5,weight:700,border:C.good});
+   rr(510,70,260,360,8);fillStroke(C.paper,C.rule,1.4);rr(600,62,80,18,4);fillStroke(C["ink-soft"],null);
+   const ck=["what it involves","likely benefit and its size","common mild soreness","rare serious risks","other options, including none","time for questions","right to say no or stop"];const n=Math.floor(P(T,12)*12*.7);
+   ck.forEach((c,i)=>{const y=110+i*44;rr(526,y-11,22,22,4);fillStroke(i<n?C["good-wash"]:C.panel,i<n?C.good:C.rule,1.4);if(i<n)tick(537,y,6,C.good);txt(558,y,c,{size:12.5,weight:i<n?600:500,color:i<n?C.ink:C["ink-soft"]})})},
+ qs:[{q:"Which statement belongs in a good consent conversation?",opts:[["\"Soreness for a day or two is common and serious problems are rare. Other options include exercise and heat, and you can say no or stop at any time.\"",1,"Yes. It covers benefits and risks honestly, gives alternatives and makes the choice free."],["\"There is no risk at all, so there is nothing to discuss.\"",0,"Mild reactions are common and serious events are rare but possible. Saying no risk is not accurate."],["\"This will put your spine back in place and cure the pain.\"",0,"That repeats a historical model and overpromises. Effects are usually modest."],["\"Just sign here; the form explains everything.\"",0,"Consent is a conversation and understanding, not only a signature."]]},
+  {q:"Marcus asks, \"How much will this help?\" What is the most honest answer?",opts:[["Research suggests a small to moderate short term improvement, similar to other recommended options such as exercise.",1,"Right. That matches systematic reviews and guidelines."],["It works for everyone within one visit.",0,"Responses vary, and average effects are modest."],["It does nothing at all.",0,"Reviews do find small to moderate short term effects for low back pain."],["It is the only treatment guidelines recommend.",0,"Guidelines list it as one of several nonpharmacologic options."]]},
+  {q:"Marcus says he would rather try exercise first. What is the best response?",opts:[["That is a reasonable, well supported choice; plan the exercise and revisit other options later if needed.",1,"Yes. Exercise has strong evidence for back pain, and consent means respecting his choice."],["Tell him exercise does not work for back pain.",0,"Exercise is one of the best supported treatments for back pain."],["Insist on manipulation today because it is faster.",0,"Consent must be voluntary. Pressure undermines it."],["Tell him there is nothing else you can do.",0,"There are many options, including education, exercise and heat."]]}]},
+{name:"Sudden severe headache with neck pain",who:"Scenario 2 · a red flag",
+ story:"Priya, 38, has had neck pain for two days. This morning she had a sudden, severe headache, the worst of her life, and she now feels dizzy and has some double vision. She asks for treatment for her neck.",
+ cap:"Priya holds her head while warning icons light up for sudden headache, dizziness and double vision; an urgent care sign glows.",
+ desc:"A seated adult holds one hand to her head with a pained face. Around her, red warning icons light up one at a time with labels: sudden severe headache, neck pain, dizziness and double vision. On the right, a large sign glows with the words do not treat, urgent emergency care. A small timeline shows neck pain starting two days ago and the sudden headache this morning.",
+ draw(T){panelBox(10,10,780,480);levelTag(22,26,"safety");sitter(170,360,80,{skin:1,shirt:2});line(160,250,150,226,C.skin2,7);
+   const syms=["sudden severe headache","neck pain","dizziness","double vision"];const k=Math.floor(P(T,8)*4);
+   syms.forEach((s,i)=>{const x=60+(i%2)*230,y=70+Math.floor(i/2)*56;const on=i===k;rr(x,y-18,210,36,8);fillStroke(on?C["bad-wash"]:C.panel,on?C.bad:C.rule,on?2.4:1.2);iconHead(x+22,y+2,on?C.bad:C["ink-soft"]);txt(x+44,y,s,{size:13,weight:700})});
+   const pu=.5+.5*Math.sin(T*3);ctx.save();ctx.globalAlpha*=.7+.3*pu;sign(520,90,240,110,"do not treat","urgent emergency care",C.bad);ctx.restore();
+   rr(520,230,240,30,4);fillStroke(C.panel,C.rule,1.2);txt(640,245,"H  emergency department",{size:13,weight:700,align:"center"});
+   const tx0=320,tx1=760,ty=420;line(tx0,ty,tx1,ty,C["ink-soft"],2);txt(tx0,ty+18,"2 days ago",{size:11.5,color:C["ink-soft"]});txt(tx1,ty+18,"this morning",{size:11.5,align:"right",color:C["ink-soft"]});
+   rr(tx0,ty-26,tx1-tx0-40,14,4);ctx.fillStyle=hexA(C.pain,.3);ctx.fill();txt(tx0+6,ty-40,"neck pain",{size:11.5,weight:700});circ(tx1-20,ty-19,10,C.bad);spark(tx1-20,ty-19,16,C.gold,P(T,1.6));txt(tx1-36,ty-42,"sudden headache",{size:11.5,weight:700,align:"right",color:C.bad})},
+ qs:[{q:"What is the right next step?",opts:[["Do not treat; arrange urgent emergency medical care now",1,"Yes. A sudden, severe, new headache with neurological symptoms is an emergency red flag."],["Gentle neck manipulation to relieve the headache",0,"Manipulation is not appropriate. These symptoms need urgent medical assessment first."],["Book her back next week if it continues",0,"Delay could be dangerous. This needs care today."],["Suggest rest and a heating pad at home",0,"Home care misses a possible emergency."]]},
+  {q:"Why is manipulation especially inappropriate here?",opts:[["Her symptoms could signal a cervical artery dissection or bleeding in the brain, which need urgent care",1,"Right. Early dissection often shows up as neck pain and headache, and the new neurological signs raise concern."],["Headaches are never related to the neck",0,"Many headaches are linked to the neck. The concern here is the sudden, severe, new pattern with neurological signs."],["Manipulation would definitely cause a stroke in anyone",0,"Serious events are rare. The issue is that her symptoms already suggest a possible emergency."],["Because she is under 40",0,"Age alone is not the reason. The red flag symptoms are."]]},
+  {q:"How should the clinician talk with Priya?",opts:[["Calmly explain that her symptoms need urgent checking, help arrange emergency care now, and make sure she does not drive herself",1,"Yes. Clear, calm and practical: explain why, act now, and keep her safe on the way."],["Say it is probably nothing so she does not worry",0,"False reassurance could delay urgent care."],["Tell her to look up her symptoms online",0,"She needs medical assessment now, not a search."],["Wait until the end of the day to see if it settles",0,"Waiting could be dangerous with these symptoms."]]}]},
+{name:"What does the evidence say?",who:"Scenario 3 · chronic low back pain",
+ story:"Tom, 55, has had low back pain on and off for two years. His exam shows no red flags. He read online that the pop means bones are put back in place, and he asks whether manipulation will fix his back.",
+ cap:"Tom with a phone article; an evidence board shows several options with similar small to moderate effects.",
+ desc:"On the left, an adult holds a phone showing an article that reads the pop puts your bones back in place, with a question mark beside it. On the right, an evidence board lists several options for chronic low back pain, including exercise, spinal manipulation, yoga, acupuncture and psychological therapy, each with a bar of similar small to moderate length. A small joint close up below shows a gas bubble forming, labelled the pop is gas in the joint fluid.",
+ draw(T){panelBox(10,10,780,480);levelTag(22,26,"person");person(120,420,74,{skin:3,shirt:0,mood:"flat"});phone(170,120,150,220,[{t:"Health tips",size:11,col:C["ink-soft"]},{t:"\"The pop puts your bones back in place!\"",size:13.5,w:700,lh:18},{t:"Claims like this need checking against research.",size:11.5,w:500,col:C["ink-soft"]}]);
+   txt(345,140,"?",{size:30,weight:700,color:C.accent});
+   panelBox(400,40,370,250);levelTag(412,56,"now");txt(412,82,"Chronic low back pain options",{size:13,weight:700});
+   const it=[["exercise",.38],["spinal manipulation",.33],["yoga",.4],["acupuncture",.35],["psychological therapy",.3]];it.forEach((r,i)=>{const y=110+i*34;const g=smooth(seg(P(T,8)*8,.3+i*.3,1.2+i*.3));txt(560,y,r[0],{size:12,weight:r[0]==="spinal manipulation"?700:500,align:"right"});rr(570,y-8,180*r[1]/.5*g,16,3);ctx.fillStyle=r[0]==="spinal manipulation"?C.accent:hexA(C.evid,.7);ctx.fill()});
+   txt(585,282,"bars: similar small to moderate effects (pattern)",{size:11,align:"center",color:C["ink-soft"]});
+   const op=.5+.5*Math.sin(T*1.5);facetZoom(560,390,70,14+6*op,8+6*op);label(680,390,"the pop is gas",{size:12,weight:700,border:C.disc,align:"left"});label(680,414,"in the joint fluid",{size:12,weight:700,border:C.disc,align:"left"})},
+ qs:[{q:"Which is the best summary of the evidence for Tom?",opts:[["It is one of several nonpharmacologic options; on average the effects are small to moderate and similar to exercise and other recommended care",1,"Yes. That is the mainstream, modest summary from reviews and guidelines."],["It cures chronic back pain in most people",0,"Average effects are modest, and chronic pain rarely has a single cure."],["There is no research on it at all",0,"There are many trials and systematic reviews."],["It works far better than every other option",0,"Reviews find effects similar to other recommended options."]]},
+  {q:"How should the clinician respond to the claim about the pop?",opts:[["The pop is gas forming in the joint fluid; it is not a bone going back into place, and results are similar with or without it",1,"Right. That is what imaging and outcome studies show."],["It means a vertebra snapped back into position",0,"That is a historical model. Imaging does not show lasting position changes."],["A louder pop means more healing",0,"The sound is not linked to better outcomes."],["No pop means the treatment failed",0,"Outcomes are similar whether or not a pop happens."]]},
+  {q:"Tom reads that a review found an effect size of 0.3. What does that mean?",opts:[["On average, a small improvement compared with the comparison group; some people improve more and some less",1,"Yes. 0.3 is small on the rough guide, and it is an average across people."],["30 percent of people are cured",0,"An effect size is not a percentage of people."],["Pain drops by 30 percent for everyone",0,"It is not a percent change, and it is an average, not a guarantee."],["It is a large effect",0,"About 0.8 or more would be large; 0.3 is small."]]}]},
+{name:"Sore the next day",who:"Scenario 4 · after a first visit",
+ story:"Ana, 29, had her first treatment for mid back pain yesterday. Today she calls to say she feels mildly sore and stiff where she was treated. She has no other symptoms.",
+ cap:"Ana on the phone; a soreness curve fades over two days, and a red box lists symptoms that would need urgent care.",
+ desc:"An adult stands holding a phone to her ear, with a speech bubble reading I am a bit sore today, is that normal. In the middle, a small graph shows soreness rising in the first hours after treatment and fading to nothing by about 48 hours, with a moving dot marking today. On the right, a red bordered box lists warning symptoms that would need urgent care: sudden severe headache, new numbness or weakness, trouble speaking, and changes in bladder or bowel control.",
+ draw(T){panelBox(10,10,780,480);levelTag(22,26,"person");person(110,420,78,{skin:0,shirt:1,long:true});rr(132,262,12,26,4);fillStroke(C.ink,null);bubble(40,70,220,62,"I am a bit sore today. Is that normal?",{tx:110,size:13,weight:600,ty:22});
+   const g=graph({x:300,y:110,w:220,h:200,x0:0,x1:72,y0:0,y1:1,xt:[0,24,48,72],yt:[0,1],xl:"hours",yl:"soreness",ylx:30,yf:v=>""});const sore=h=>h<6?h/6:Math.exp(-(h-6)/11);curve(g,sore,0,72,C.muscle,3);const tod=20+4*Math.sin(T);gdot(g,tod,sore(tod),C.muscle,"today",{dy:-18});
+   ctx.fillStyle=hexA(C.good,.12);ctx.fillRect(g.X(24),g.y,g.X(48)-g.X(24),g.h);txt(g.X(36),g.y+14,"usually gone",{size:11.5,weight:700,align:"center",color:C.good});
+   rr(550,90,220,260,8);fillStroke(C["bad-wash"],C.bad,2);txt(660,112,"call for urgent care if:",{size:13,weight:700,align:"center",color:C.bad});
+   ["sudden severe headache","new numbness or weakness","trouble speaking","bladder or bowel change"].forEach((s,i)=>{const y=150+i*48;const on=Math.floor(P(T,8)*4)===i;circ(574,y,8,on?C.bad:hexA(C.bad,.3),C.bad,1.4);wrapText(s,590,y,170,15,{size:12.5,weight:on?700:500})})},
+ qs:[{q:"What is most likely going on?",opts:[["A common, mild reaction that usually fades within 24 to 48 hours",1,"Yes. Mild soreness and stiffness are the most common reactions after manipulation."],["The treatment failed",0,"Soreness is common even when treatment goes as expected."],["A vertebra slipped out of place again",0,"That is not supported. Soreness is a normal tissue response."],["A rare serious complication",0,"Mild local soreness without other symptoms is common, not serious."]]},
+  {q:"Which new symptom would need urgent medical care?",opts:[["A sudden, severe headache, or new numbness, weakness or trouble speaking",1,"Right. These could signal a serious problem and need urgent assessment."],["Mild muscle ache when she twists",0,"That fits common soreness."],["Feeling a bit tired in the afternoon",0,"Tiredness is a common, mild reaction."],["Slight stiffness first thing in the morning",0,"Mild stiffness is common and usually settles."]]},
+  {q:"What should have happened before her treatment?",opts:[["She should have been told that mild soreness is common, along with rare risks, other options and her right to say no",1,"Yes. Then a call like this is expected, not alarming."],["Nothing; side effects are not worth mentioning",0,"Common side effects are part of informed consent."],["Only a signature on a form",0,"A signature without understanding is not informed consent."],["She should have been promised no side effects",0,"That would be inaccurate. About half of patients notice a mild reaction."]]}]}
+];
+const LS={i:0,ans:{}};
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+function drawLife(now){use(S4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+function lifeInit(){$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()}}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,560),S2=makeStage("cvCalc",800,600),S4=makeStage("cvLife",800,500);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},train:{cv:"#cvCalc",f:calcA11y},sort:{cv:null,f:sortA11y},life:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","train","sort","life"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim")drawSim(now);else if(curTab==="train")drawCalc(now);else if(curTab==="life")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__nb={tab:k=>showTab(k),sim:o=>{Object.assign(SM,o);["pre","peak","dur"].forEach(k=>{const el=$("#sim"+k[0].toUpperCase()+k.slice(1));if(el)el.value=SM[k]});simUI();simRestart()},simState:()=>({rate:simRate(),cav:simCavitates("thrust"),done:[...SM.done],win:simWin()}),
+  calcTypes:()=>CTYPES.map(c=>c[0]).filter(c=>c!=="mix"),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>({ans:TR.p.ans,choices:TR.p.choices?TR.p.choices.length:0,fmt:TR.p.choices?String(TR.p.ans):fmtAns(TR.p,TR.p.ans),unit:TR.p.unit,kind:TR.p.kind}),
+  gen:t=>{const q=genOne(t);if(q.choices){return {choice:true,ans:q.ans,j1:judge(q,String(q.ans)),j2:judge(q,String((q.ans+1)%q.choices.length)),hints:q.hints.length,rows:q.rows.length,html:q.html}}
+    const good=fmtAns(q,q.ans);const bad=fmtAns(q,q.ans*1.5+1);return {ans:q.ans,good,j1:judge(q,good),j1u:judge(q,good+" "+q.unit),j2:judge(q,bad),j3:judge(q,"abc"),hints:q.hints.length,rows:q.rows.length,html:q.html}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();simInit();calcInit();calcNew();updCalcMeter();sLoad(0);lifeInit();lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

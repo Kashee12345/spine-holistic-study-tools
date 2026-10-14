@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nerve Roots Lab</title>
+<meta name="description" content="Nerve roots lab: a root compression simulator where a squeezed root lights its dermatome, weakens its key muscle and dims its reflex; a randomized trainer for finding the root from numbness, weakness and reflex findings; a root to dermatome, myotome and reflex matching game; and clinic scenarios on sciatica, cauda equina syndrome and cervical myelopathy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="holistic-kit.js"></script>
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#9B2C2C;--accent-ink:#842626;--accent-wash:#F6E4E1;
+  --warn:#A36A10;--warn-wash:#F6ECD6;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#7A4E08;
+  --act1:#B8561A;--act2:#2F7FC1;--act3:#B07A10;--act4:#C0455A;--act5:#2E8A7A;--act6:#7B5CC9;--act7:#3E9B4F;--act8:#5E7183;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A6000;
+  --ecf:#EEF1F6;--grid:#D5DAE6;--paper:#FFFDF7;
+  --bone:#F2EBDA;--bone-edge:#8C7B58;--bone-in:#E3D6B8;
+  --disc:#3F7FC8;--disc-in:#A8CBF0;--disc-ink:#1D5C93;
+  --nerve:#E3B81F;--nerve-edge:#8A6A00;--nerve-ink:#6E5600;--drg:#F0D466;
+  --muscle:#D06A7E;--muscle-edge:#9B2C40;--muscle-ink:#9B2C40;
+  --lig:#2E9A8E;--lig-ink:#1E6B62;--symp:#E07B22;--para:#3E9B4F;
+  --pain:#D33A2F;--pain-ink:#A9372F;--evid:#4F56C0;--evid-ink:#3A3FA0;
+  --numb:#7F8C96;--cord:#F3EAC6;--cord-edge:#9A8650;--gray:#D9C3B0;--dura:#9FB3C4;--csf:#DCEBF6;--fat:#F6EED2;
+  --skin1:#E8C2A0;--skin2:#B98462;--skin3:#7A5038;--skin4:#F0D2B8;--hair:#3D3029;--shirt1:#4F7FA8;--shirt2:#A0577A;--shirt3:#5E8A4A;--shirt4:#8C6BB0;
+  --metal:#8F9BA4;--hammer:#B23A30;--tendon:#E9E1CC;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B9B3;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#EE7A8C;--act5:#5CC4B0;--act6:#A98BEF;--act7:#6CCB7C;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#4A463C;--bone-edge:#CDBE98;--bone-in:#3C382F;
+  --disc:#5AA9E6;--disc-in:#2C5476;--disc-ink:#8CC6F2;
+  --nerve:#F2D04A;--nerve-edge:#F6E08A;--nerve-ink:#F2D857;--drg:#B89A2A;
+  --muscle:#E07A8E;--muscle-edge:#F4A4B2;--muscle-ink:#F49AA8;
+  --lig:#5CC4B0;--lig-ink:#7DD6C4;--symp:#F29A4A;--para:#6CCB7C;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#8F95EC;--evid-ink:#A9AEF2;
+  --numb:#8D9EA7;--cord:#4A452E;--cord-edge:#CDBA78;--gray:#5E4E42;--dura:#5E7487;--csf:#1A2C3A;--fat:#2E2A1E;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --metal:#6E7B85;--hammer:#E0605A;--tendon:#5E584A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#F4A7A0;--accent-ink:#F6B9B3;--accent-wash:#3A1D1B;
+  --warn:#E0B04E;--warn-wash:#352A12;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E8BE62;
+  --act1:#F0985A;--act2:#5AA9E6;--act3:#E8BE5A;--act4:#EE7A8C;--act5:#5CC4B0;--act6:#A98BEF;--act7:#6CCB7C;--act8:#A9B7C2;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--paper:#1E262B;
+  --bone:#4A463C;--bone-edge:#CDBE98;--bone-in:#3C382F;
+  --disc:#5AA9E6;--disc-in:#2C5476;--disc-ink:#8CC6F2;
+  --nerve:#F2D04A;--nerve-edge:#F6E08A;--nerve-ink:#F2D857;--drg:#B89A2A;
+  --muscle:#E07A8E;--muscle-edge:#F4A4B2;--muscle-ink:#F49AA8;
+  --lig:#5CC4B0;--lig-ink:#7DD6C4;--symp:#F29A4A;--para:#6CCB7C;
+  --pain:#F0675C;--pain-ink:#F48A80;--evid:#8F95EC;--evid-ink:#A9AEF2;
+  --numb:#8D9EA7;--cord:#4A452E;--cord-edge:#CDBA78;--gray:#5E4E42;--dura:#5E7487;--csf:#1A2C3A;--fat:#2E2A1E;
+  --skin1:#C99A78;--skin2:#9A6A4C;--skin3:#6A4632;--skin4:#D8B596;--hair:#1E1814;--shirt1:#5A8FBF;--shirt2:#B9698F;--shirt3:#6E9E58;--shirt4:#9C7FC4;
+  --metal:#6E7B85;--hammer:#E0605A;--tendon:#5E584A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+.ctl input[type=range]:disabled{opacity:.45}
+.modes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes3 .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.modes3 .tbtn small{display:block;font-size:12px;color:var(--ink-soft);font-weight:500}
+.modes3 .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.gsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gsel .tbtn{font-size:13.5px;padding:7px 4px;line-height:1.25}
+.gsel .tbtn small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.gsel .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lifeq .opts{margin-top:6px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.hgrid{grid-template-columns:1fr}}
+.target{border:2px solid var(--act6);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-bottom:10px}
+.target .k{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.eqn{font-family:var(--mono);font-size:15.5px;font-weight:600;overflow-wrap:anywhere}
+.hzone{border:2px dashed var(--rule);border-radius:var(--r);padding:8px;min-height:90px;display:flex;flex-direction:column;gap:8px}
+.hzone.over{border-color:var(--accent);background:var(--accent-wash)}
+.hzone h3{margin:0;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.hzone .empty{font-size:13.5px;color:var(--ink-soft);margin:0}
+.hcard{background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--exo);border-radius:var(--r);padding:8px 10px;touch-action:none}
+.hcard.pos{border-left-color:var(--endo)}
+.hcard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.hcard.drag{opacity:.9;box-shadow:var(--shadow);position:relative;z-index:20}
+.hcard .top{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap}
+.hcard .grip{cursor:grab;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border:1px dashed var(--rule);border-radius:4px;padding:2px 6px;background:var(--panel-2)}
+.hcard .dh{font-family:var(--mono);font-weight:700;font-size:14.5px}
+.hcard .dh.neg{color:var(--bad)}.hcard .dh.posv{color:var(--endo-ink)}
+.hcard .ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.hcard .ctrls .tbtn{padding:5px 9px;font-size:13.5px}
+.hcard .mult{font-family:var(--mono);font-weight:700;min-width:44px;text-align:center}
+.sumbox{border:1.5px solid var(--rule);border-radius:var(--r);padding:10px 12px;background:var(--panel-2);margin-top:10px}
+.sumbox .eqn s{color:var(--bad)}
+.sumbox .tot{font-family:var(--mono);font-weight:700;font-size:16px;margin-top:4px}
+.dhpos{color:var(--endo-ink)}.dhneg{color:var(--bad)}
+.hintline{font-size:14.5px;margin:4px 0}
+.lvlgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.lvlgrid .tbtn{font-family:var(--mono);font-size:13px;padding:7px 2px;line-height:1.2}
+.lvlgrid .tbtn small{display:block;font-size:11.5px;color:var(--ink-soft);font-weight:500}
+.lvlgrid .tbtn[aria-pressed="true"],.seg2 .tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.lvlgrid .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.lvlgrid .lvlh{grid-column:1/-1;font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.choicegrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0}
+.choicegrid.wide{grid-template-columns:1fr}
+.choicegrid .opt{margin:0;text-align:center;font-family:var(--mono);font-weight:600;padding:9px 4px}
+.choicegrid.wide .opt{text-align:left;font-family:var(--sans);font-weight:500;padding:9px 12px}
+.probcard ul{margin:6px 0 0;padding-left:18px}
+.probcard li{margin:2px 0}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+@media (max-width:420px){.lvlgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.choicegrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Spine and Holistic Health &middot; Module 5 &middot; Nerve roots, dermatomes and reflexes</div>
+    <h1>Nerve Roots Lab</h1>
+    <p class="sub">Squeeze a root and watch its skin, muscle and reflex respond; find the root from random findings; match roots to their maps; and reason through three clinic scenarios. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Root Compression Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-train" data-tab="train" id="tabbtn-train" type="button" tabindex="-1">Part 2 &middot; Which Root? Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Root Match</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-clinic" data-tab="clinic" id="tabbtn-clinic" type="button" tabindex="-1">Part 4 &middot; In the Clinic</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Root Compression Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Root compression simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--nerve)"></i>Healthy root</span><span><i style="background:var(--pain)"></i>Squeezed root and radicular pain</span><span><i class="s" style="background:var(--numb)"></i>Numbness</span>
+          <span><i style="background:var(--disc)"></i>Disc</span><span><i class="s" style="background:var(--bone);border-color:var(--bone-edge)"></i>Bone</span><span><i style="background:var(--muscle)"></i>Key muscle</span>
+        </div>
+        <table class="readouts" id="simRead"><caption class="gk-sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <p class="sim-note">Simplified teaching model. Real symptoms depend on inflammation as well as pressure, and the same squeeze can hurt one person and not another. Dermatomes are a simplified classic map that overlaps and varies between people. Severity steps are illustrative: irritation first gives radicular pain, more compression adds numbness, weakness and a smaller reflex. Thoracic roots below T1 are not shown.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="lvl-h">Level</h3>
+        <div class="lvlgrid" id="simLevels" role="group" aria-labelledby="lvl-h"></div>
+        <h3 id="cause-h">What is narrowing it</h3>
+        <div class="seg2" id="simCause" role="group" aria-labelledby="cause-h"></div>
+        <h3 id="side-h">Side</h3>
+        <div class="seg2" id="simSide" role="group" aria-labelledby="side-h"></div>
+        <div class="ctl">
+          <label for="simSev"><span>Compression</span><b id="simSevV"></b></label>
+          <input type="range" id="simSev" min="0" max="100" step="1" value="55">
+          <div class="ticks" aria-hidden="true"><span>none</span><span>irritated</span><span>squeezed</span><span>severe</span></div>
+        </div>
+        <div class="bar"><button class="tbtn" type="button" id="simSweep">Play a slow squeeze</button><button class="tbtn" type="button" id="simReset">Release</button></div>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Try these</h3>
+        <ul class="chal" id="simChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-train" role="tabpanel" aria-labelledby="tabbtn-train" hidden>
+    <h2 class="gk-sr">Part 2: Which Root? Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvTrain" role="img" aria-label="Practice problem picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="trainCap"></span></div>
+        <p class="sim-note">Findings are randomly generated teaching cases that follow the classic maps. Real people vary, and a real diagnosis needs a full history and examination. The worked solution shows each clue crossing off roots that do not fit.</p>
+      </div>
+      <aside class="card side" aria-label="Trainer controls">
+        <label class="lab-sel" for="trainType">Problem type</label>
+        <select id="trainType"></select>
+        <div class="probcard" id="trainProb" aria-live="polite"></div>
+        <div id="trainChoices" class="choicegrid" role="group" aria-label="Answer choices"></div>
+        <div class="bar">
+          <button class="tbtn" id="trainHint" type="button">Hint</button>
+          <button class="tbtn" id="trainSol" type="button">Show worked solution</button>
+          <button class="btn" id="trainNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="trainMsg" role="status"></div>
+        <div class="hintbox" id="trainHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="trainStreak">0</b></span><span>Best <b id="trainBest">0</b></span><span>Solved <b id="trainSolved">0</b></span></div>
+        <p class="small">Pick an answer. The hint ladder has three steps. The streak counts answers right on the first pick without opening the solution.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Root Match</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-clinic" role="tabpanel" aria-labelledby="tabbtn-clinic" hidden>
+    <h2 class="gk-sr">Part 4: In the Clinic</h2>
+    <div class="casechips" id="lifeChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLife" role="img" aria-label="Scenario picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="lifeCap"></span></div>
+        <p class="sim-note">Fictional adults with generic first names. Teaching scenarios about reasoning, safety and referral, not medical advice and not a guide to treatment.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="lifeN"></div>
+        <h2 class="sc-title" id="lifeTitle"></h2>
+        <p class="story" id="lifeStory"></p>
+        <div id="lifeQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="lifePrev" type="button">&larr; Previous</button>
+          <button class="btn" id="lifeNext" type="button">Next scenario &rarr;</button>
+        </div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Spine and Holistic Health Study Tools &middot; Drawings are simplified and not to scale. For learning only, not medical advice and not a guide to treatment. Creative Commons Attribution NonCommercial ShareAlike 4.0<br>Learn the ideas first in the <a href="Roots-Walkthrough.html">Nerve Roots Walkthrough</a>. Dermatome and myotome maps are simplified classic maps; real maps overlap and vary between people.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "act8", "gold", "gold-wash", "gold-ink", "ecf", "grid", "paper", "bone", "bone-edge", "bone-in", "disc", "disc-in", "disc-ink", "nerve", "nerve-edge", "nerve-ink", "drg", "muscle", "muscle-edge", "muscle-ink", "lig", "lig-ink", "symp", "para", "pain", "pain-ink", "evid", "evid-ink", "numb", "cord", "cord-edge", "gray", "dura", "csf", "fat", "skin1", "skin2", "skin3", "skin4", "hair", "shirt1", "shirt2", "shirt3", "shirt4", "metal", "hammer", "tendon"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+/* ================= core helpers (from the shared kit) ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x+s,y-s,x-s,y+s,col||C.bad,3)}
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}return s}
+/* format with n significant figures, never in e-notation for normal sizes */
+function sig(v,n){if(!isFinite(v))return "?";if(v===0)return (0).toFixed(Math.max(0,n-1));const e=Math.floor(Math.log10(Math.abs(v)));const dp=n-1-e;
+  if(dp>=0){return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp)}
+  const f=Math.pow(10,-dp);const r=Math.round(v/f)*f;return String(r)}
+/* count significant figures in a typed string; returns {n, amb} (amb = trailing zeros without a decimal point) */
+function sigCount(str){let s=String(str).trim().replace(/^[+-]/,"").replace(/,/g,"");let ex="";const m=s.match(/^([0-9.]+)[eE]([+-]?\d+)$/);if(m)s=m[1];
+  if(!/^\d*\.?\d*$/.test(s)||s===""||s===".")return {n:0,amb:false};
+  const hasDot=s.indexOf(".")>=0;let d=s.replace(".","");d=d.replace(/^0+/,"");if(d==="")return {n:1,amb:false};
+  if(hasDot)return {n:d.length,amb:false};
+  const t=d.replace(/0+$/,"");return {n:t.length,amb:t.length!==d.length,max:d.length}}
+function graph(g){const X=v=>g.x+(v-g.x0)/(g.x1-g.x0)*g.w,Y=v=>g.y+g.h-(v-g.y0)/(g.y1-g.y0)*g.h;g.X=X;g.Y=Y;
+  rr(g.x,g.y,g.w,g.h,2);ctx.fillStyle=hexA(C.panel,.7);ctx.fill();
+  if(g.xt)g.xt.forEach(t=>{if(g.grid!==false)line(X(t),g.y,X(t),g.y+g.h,C.grid,1);txt(X(t),g.y+g.h+11,g.xf?g.xf(t):String(t),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})});
+  if(g.yt)g.yt.forEach(t=>{if(g.grid!==false)line(g.x,Y(t),g.x+g.w,Y(t),C.grid,1);txt(g.x-5,Y(t),g.yf?g.yf(t):String(t),{size:10.5,align:"right",mono:true,color:C["ink-soft"]})});
+  line(g.x,g.y,g.x,g.y+g.h,C["ink-soft"],1.6);line(g.x,g.y+g.h,g.x+g.w,g.y+g.h,C["ink-soft"],1.6);
+  if(g.xl)txt(g.x+g.w,g.y+g.h+(g.xt?26:12),g.xl,{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+  if(g.yl)txt(g.x-(g.ylx||0),g.y-10,g.yl,{size:11.5,weight:600,align:"left",color:C["ink-soft"]});
+  if(g.title)title(g.x,g.y-24,g.title,g.tcol);return g}
+function curve(g,fn,a,b,col,lw,dash,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(g.x,g.y-2,g.w+2,g.h+4);ctx.clip();ctx.beginPath();const N=120;let st=false;
+  for(let i=0;i<=N;i++){const v=lerp(a,b,i/N);const w=fn(v);if(!isFinite(w)){st=false;continue}const X=g.X(v),Y=g.Y(w);st?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),st=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2.4;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([]);ctx.restore()}
+function gdot(g,a,b,col,lab,o){o=o||{};const X=g.X(a),Y=g.Y(b);if(X<g.x-1||X>g.x+g.w+1||Y<g.y-1||Y>g.y+g.h+1)return;if(o.guides){line(X,Y,X,g.y+g.h,hexA(col,.6),1.2,[3,3]);line(g.x,Y,X,Y,hexA(col,.6),1.2,[3,3])}
+  circ(X,Y,o.r||6,col,C.panel,2);if(lab)label(X+(o.dx||0),Y+(o.dy==null?-16:o.dy),lab,{size:o.size||11.5,weight:700,mono:true,border:col,align:o.align})}
+/* ---------- equation / dimensional analysis chain ----------
+   items: [{n:[str,[units]], d:[str,[units]]|null}], res:[str,[units]], p: 0..1 progress */
+function F(n,nu,d,du){return {n:[String(n),nu==null?[]:Array.isArray(nu)?nu:[nu]],d:d==null?null:[String(d),du==null?[]:Array.isArray(du)?du:[du]]}}
+function chainLayout(items,fs){ctx.font=`600 ${fs}px ${MONO}`;return items.map(it=>{const nt=(it.n[0]+" "+it.n[1].join("·")).trim();const dt=it.d?(it.d[0]+" "+it.d[1].join("·")).trim():"";return Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8})}
+function chainWidth(items,res,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);let X=ws.reduce((a,b)=>a+b,0)+gap*(items.length-1);if(res){ctx.font=`700 ${fs+2}px ${MONO}`;X+=gap+12+ctx.measureText(res[0]+" "+res[1].join("·")).width}return X}
+function chain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;const gap=o.gap||20;const ws=chainLayout(items,fs);
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u.replace(/s$/,"")===d.u.replace(/s$/,""));if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;const nI=items.length;const pIn=o.pIn||.42,pSt=o.pSt||.78;
+  items.forEach((it,i)=>{const a=clamp((p*nI/pIn)-i,0,1);if(a<=0){X+=ws[i]+gap;return}ctx.save();ctx.globalAlpha*=a;const w=ws[i];const cx=X+w/2;const dy=(1-a)*-10;
+    const part=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=(val+" "+units.join("·")).trim();let px=cx-ctx.measureText(full).width/2;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=o.ncol||C.ink;ctx.fillText(val,px,yy+dy);px+=ctx.measureText(val+" ").width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C["accent-ink"];ctx.fillText(u,px,yy+dy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText("·",px,yy+dy);px+=ctx.measureText("·").width}})};
+    if(it.d){part(it.n[0],it.n[1],y-fs*.95,true);line(X,y,X+w,y,C.ink,1.6);part(it.d[0],it.d[1],y+fs*1.0,false)}else part(it.n[0],it.n[1],y,true);
+    if(i<nI-1)txt(X+w+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});ctx.restore();X+=w+gap});
+  X-=gap;const sp=clamp((p-pIn)/(pSt-pIn),0,1);
+  pairs.forEach((pr,j)=>{const f=clamp(sp*pairs.length-j,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const ps=pos[(qi===0?"n":"d")+q.i+"_"+q.k];if(!ps)return;line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  const rf=clamp((p-pSt-.04)/.1,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+4;
+    if(rf>0)withA(rf,()=>{const t=res[0]+" "+res[1].join("·");ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-15,w+12,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});}
+  return pairs.length}
+/* worked example card that animates over a loop of `per` seconds
+   w = {q:"problem", given:[...], conv:[...] (K reminders etc), items, res, ans:"...", sf:"note", miss:"mistake note"} */
+function worked(x,y,w,h,W_,T,o){o=o||{};const per=o.per||16;const t=P(T,per)*per;panelBox(x,y,w,h,{fill:hexA(C.paper,.96)});
+  title(x+12,y+16,o.title||"Worked example",C["accent-ink"]);let yy=y+38;
+  const sz=o.size||12.5;
+  if(o.split){const sw=o.split;let ly=wrapText(W_.q,x+12,yy,sw-20,sz+4,{size:sz,weight:600})+sz+6;
+    (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,ly,g,{size:sz-.5,mono:true,color:C.ink}));ly+=sz+6});
+    const t0=1.2+(W_.given||[]).length*.5;
+    (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>label(x+14,ly+2,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]}));ly+=sz+13});
+    line(x+sw,y+28,x+sw,y+h-10,C["rule-soft"],1.2);
+    const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);const fs=o.cfs||14;const rx=x+sw+14,rw=w-sw-24;
+    let cy=y+(o.cy||52)+fs;(W_.rows||[[W_.items,W_.res]]).forEach((rw_,ri,arr)=>{const p_=clamp(cp*arr.length-ri,0,1);if(p_>0)chain(rx,cy,rw_[0],rw_[1],p_,{size:fs});cy+=fs*2+(o.rowGap||22)});
+    let yy2=cy-fs+4;const t2=t1+per*.45+.3;
+    if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,rx,yy2,rw,sz+3,{size:sz-.5,color:C.good,weight:600}));yy2+=(o.sfH||sz+10)}
+    if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(rx-4,yy2-10,rw+8,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,rx+4,yy2+3,rw-8,sz+3,{size:sz-1,color:C.ink})})}
+    return t}
+  yy=wrapText(W_.q,x+12,yy,w-24,sz+4,{size:sz,weight:600})+sz+6;
+  (W_.given||[]).forEach((g,i)=>{const a=seg(t,.8+i*.5,1.2+i*.5);if(a>0)withA(a,()=>txt(x+14,yy,g,{size:sz-.5,mono:true,color:C.ink}));yy+=sz+6});
+  const t0=1.2+(W_.given||[]).length*.5;
+  (W_.conv||[]).forEach((g,i)=>{const a=seg(t,t0+i*.8,t0+.5+i*.8);if(a>0)withA(a,()=>{const ww=label(x+14,yy,g,{size:sz-.5,weight:700,mono:true,align:"left",border:C.gold,bg:C["gold-wash"]})});yy+=sz+12});
+  const t1=t0+(W_.conv||[]).length*.8+.4;const cp=clamp((t-t1)/(per*.45),0,1);
+  const fs=o.cfs||14;const cw=chainWidth(W_.items,W_.res,{size:fs});let cy=yy+fs+12;if(W_.items&&cp>0){const cx=o.center?x+Math.max(12,(w-cw)/2):x+14;chain(cx,cy,W_.items,W_.res,cp,{size:fs})}
+  yy=cy+fs*2+8;const t2=t1+per*.45+.3;
+  if(W_.sf){const a=seg(t,t2,t2+.6);if(a>0)withA(a,()=>wrapText(W_.sf,x+14,yy,w-28,sz+4,{size:sz-.5,color:C.good,weight:600}));yy+=sz+10}
+  if(W_.miss){const a=seg(t,t2+1.2,t2+1.8);if(a>0)withA(a,()=>{rr(x+10,yy-10,w-20,o.missH||38,5);ctx.fillStyle=C["warn-wash"];ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke();wrapText("Common mistake: "+W_.miss,x+18,yy+3,w-36,sz+3,{size:sz-1,color:C.ink})})}
+  return t}
+/* curved arrow */
+function carrow(x1,y1,cx,cy,x2,y2,col,lw){ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(cx,cy,x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.stroke();const a=Math.atan2(y2-cy,x2-cx),h=8;ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* ================= roots drawing kit ================= */
+function levelTag(x,y,k){const m={person:["THE WHOLE PERSON",C.act1],tissue:["THE TISSUE",C.act2],signal:["THE SIGNAL",C.act5],clinic:["IN THE CLINIC",C.accent],data:["THE DATA",C.evid],map:["THE MAP",C.act3]}[k];if(!m)return;chipL(x,y,m[0],m[1])}
+function spark(x,y,s,col,p){if(p<=0||p>=1)return;ctx.save();ctx.globalAlpha*=Math.sin(p*Math.PI);ctx.translate(x,y-p*14);ctx.beginPath();for(let i=0;i<8;i++){const a=i*TAU/8;const r=i%2?s*.4:s;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fillStyle=col||C.pain;ctx.fill();ctx.restore()}
+function bar(x,y,w,h,f,col){rr(x,y,w,h,Math.min(4,h/2));ctx.fillStyle=hexA(C.sunk,.85);ctx.fill();if(f>0){rr(x,y,w*clamp(f,0,1),h,Math.min(4,h/2));ctx.fillStyle=col;ctx.fill()}}
+function cardBox(x,y,w,h,col,on){rr(x,y,w,h,8);ctx.fillStyle=on?hexA(col,.16):hexA(C.panel,.88);ctx.fill();ctx.strokeStyle=on?col:C.rule;ctx.lineWidth=on?2.4:1.2;ctx.stroke()}
+function tick(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function capsule(x1,y1,x2,y2,w,fill,stroke,lw){ctx.save();ctx.lineCap="round";if(stroke){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=stroke;ctx.lineWidth=w+(lw||1.6)*2;ctx.stroke()}ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=fill;ctx.lineWidth=w;ctx.stroke();ctx.restore()}
+function dotsAlong(pts,n,T,speed,col,r,o){o=o||{};for(let i=0;i<n;i++){const p=P(T*speed+i/n,1);const q=along(pts,p);const a=o.fade?Math.sin(p*Math.PI):1;withA(a,()=>circ(q[0],q[1],r||4,col,o.edge||null,1))}}
+function zap(pts,T,speed,col,w){/* moving bright segment along a path (an action potential) */const p=P(T*speed,1);const q=along(pts,p),q2=along(pts,Math.max(0,p-.06));glow(q[0],q[1],16,col,.7);line(q2[0],q2[1],q[0],q[1],col,w||4);circ(q[0],q[1],4.5,col)}
+
+/* ---------------- root facts ---------------- */
+const ROOTS=["C5","C6","C7","C8","T1","L2","L3","L4","L5","S1"];
+const RT={
+ C5:{reg:"arm",derm:"outer upper arm, from the shoulder down toward the elbow",dermS:"outer upper arm",mus:"shoulder abduction and elbow flexion",musS:"shoulder abduction",mv:"abd",ref:"biceps",refS:"biceps reflex (C5 and C6)",refEff:1,disc:"C4 C5",fo:"C4 C5"},
+ C6:{reg:"arm",derm:"outer forearm, thumb and index finger",dermS:"thumb and index finger",mus:"wrist extension",musS:"wrist extension",mv:"wrE",ref:"brachio",refS:"brachioradialis reflex (C6)",refEff:1,disc:"C5 C6",fo:"C5 C6"},
+ C7:{reg:"arm",derm:"middle finger",dermS:"middle finger",mus:"elbow extension",musS:"elbow extension",mv:"elbE",ref:"triceps",refS:"triceps reflex (C7)",refEff:1,disc:"C6 C7",fo:"C6 C7"},
+ C8:{reg:"arm",derm:"ring and little fingers and the inner side of the hand",dermS:"ring and little fingers",mus:"finger flexion (grip)",musS:"finger flexion",mv:"finF",ref:null,refS:"no standard reflex",refEff:0,disc:"C7 T1",fo:"C7 T1"},
+ T1:{reg:"arm",derm:"inner forearm",dermS:"inner forearm",mus:"finger abduction (spreading the fingers)",musS:"finger abduction",mv:"finA",ref:null,refS:"no standard reflex",refEff:0,disc:"T1 T2",fo:"T1 T2"},
+ L1:{reg:"leg",derm:"groin and the top of the thigh",dermS:"groin",mus:"hip flexion (with L2)",musS:"hip flexion",mv:"hipF",ref:null,refS:"no standard reflex",refEff:0,disc:"T12 L1",fo:"L1 L2"},
+ L2:{reg:"leg",derm:"front of the upper thigh",dermS:"upper front thigh",mus:"hip flexion",musS:"hip flexion",mv:"hipF",ref:null,refS:"no standard reflex",refEff:0,disc:"L1 L2",fo:"L2 L3"},
+ L3:{reg:"leg",derm:"lower front thigh and the inner knee",dermS:"lower thigh and inner knee",mus:"knee extension (with L4)",musS:"knee extension",mv:"kneE",ref:"patellar",refS:"patellar reflex may be reduced (mainly L4)",refEff:.5,disc:"L2 L3",fo:"L3 L4"},
+ L4:{reg:"leg",derm:"inner (medial) lower leg down to the inner ankle",dermS:"inner lower leg and ankle",mus:"ankle dorsiflexion (and knee extension)",musS:"ankle dorsiflexion",mv:"dorsi",ref:"patellar",refS:"patellar reflex (L4)",refEff:1,disc:"L3 L4",fo:"L4 L5"},
+ L5:{reg:"leg",derm:"outer lower leg, top of the foot and the big toe",dermS:"top of foot and big toe",mus:"big toe extension",musS:"big toe extension",mv:"toeE",ref:null,refS:"no standard reflex",refEff:0,disc:"L4 L5",fo:"L5 S1"},
+ S1:{reg:"leg",derm:"outer edge of the foot, little toe, sole and heel",dermS:"outer foot and sole",mus:"ankle plantarflexion (pointing the foot, rising on the toes)",musS:"plantarflexion",mv:"plant",ref:"achilles",refS:"Achilles reflex (S1)",refEff:1,disc:"L5 S1",fo:"S1 sacral foramen"}};
+const REFNAME={biceps:"biceps",brachio:"brachioradialis",triceps:"triceps",patellar:"patellar (knee)",achilles:"Achilles (ankle)"};
+const REFROOT={biceps:"C5 C6",brachio:"C6",triceps:"C7",patellar:"L4",achilles:"S1"};
+const MVNAME={abd:"shoulder abduction",elbF:"elbow flexion",wrE:"wrist extension",elbE:"elbow extension",finF:"finger flexion",finA:"finger abduction",hipF:"hip flexion",kneE:"knee extension",dorsi:"ankle dorsiflexion",toeE:"big toe extension",plant:"plantarflexion"};
+
+/* ---------------- body figure with dermatomes ----------------
+   figure coordinates: height about 410 units, centre x=0, top y=0 */
+const FSEG={ua:[[56,80],[66,162],24,18],fa:[[66,162],[72,230],18,15],hd:[[72,230],[76,276],19,20],tg:[[26,228],[26,322],36,23],sk:[[26,322],[26,392],22,14],ft:[[26,392],[29,409],15,24]};
+function torsoW(a){const k=[[0,100],[.45,84],[.8,78],[1,94]];for(let i=0;i<k.length-1;i++)if(a<=k[i+1][0])return lerp(k[i][1],k[i+1][1],(a-k[i][0])/(k[i+1][0]-k[i][0]));return 94}
+function figSeg(F,name,sg){/* returns a segment object with pt(a,u): u=0 lateral, u=1 medial */
+  const S=F.s,cx=F.cx,ty=F.ty;
+  if(name==="torso")return {pt:(a,u)=>[cx+sg*(1-u)*torsoW(a)/2*S,ty+lerp(70,228,a)*S]};
+  if(name==="neck")return {pt:(a,u)=>[cx+sg*(1-u)*11*S,ty+lerp(48,72,a)*S]};
+  let A,B,wA,wB;
+  const base=k=>{const g=FSEG[k];return [[sg*g[0][0],g[0][1]],[sg*g[1][0],g[1][1]],g[2],g[3]]};
+  if(FSEG[name]){[A,B,wA,wB]=base(name)}
+  else if(name==="palm"){const h=base("hd");A=h[0];B=[lerp(h[0][0],h[1][0],.45),lerp(h[0][1],h[1][1],.45)];wA=h[2];wB=h[3]}
+  else if(/^f[1-4]$/.test(name)){const k=+name[1];const uc=[.14,.39,.635,.87][k-1],len=[.93,1,.95,.84][k-1];const hs=figSeg(F,"hd",sg);const p0=hs.ptL(.45,uc),p1=hs.ptL(len,uc);A=p0;B=p1;wA=wB=19*.22}
+  else if(name==="tb"){const hs=figSeg(F,"hd",sg);const p0=hs.ptL(.12,-.08);A=p0;B=[p0[0]+sg*8,p0[1]+19];wA=7.5;wB=6}
+  else if(/^t[1-5]$/.test(name)){const k=+name[1];const uc=[.87,.66,.48,.31,.14][k-1];const len=[1,.97,.93,.88,.82][k-1];const fs=figSeg(F,"ft",sg);A=fs.ptL(.58,uc);B=fs.ptL(len,uc);wA=wB=[7.5,5.4,5,4.6,4.2][k-1]}
+  const dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy)||1;const nx=-dy/L,ny=dx/L;
+  const ptL=(a,u)=>{const w=lerp(wA,wB,a);const px=lerp(A[0],B[0],a),py=lerp(A[1],B[1],a);const o=(-sg)*(.5-u)*w;return [px+nx*o,py+ny*o]};
+  return {ptL,pt:(a,u)=>{const q=ptL(a,u);return [cx+q[0]*S,ty+q[1]*S]},A,B,wA,wB}}
+/* dermatome patches: [segment, a0, a1, u0, u1] */
+const DERM_F={
+ C4:[["torso",0,.07,0,1],["ua",0,.1,0,1]],
+ C5:[["ua",.1,1,0,.55],["fa",0,.1,0,.45]],
+ C6:[["fa",.1,1,0,.5],["palm",0,1,0,.31],["tb",0,1,0,1],["f1",0,1,0,1]],
+ C7:[["palm",0,1,.31,.56],["f2",0,1,0,1]],
+ C8:[["palm",0,1,.56,1],["f3",0,1,0,1],["f4",0,1,0,1],["fa",.55,1,.5,1]],
+ T1:[["fa",0,.55,.5,1],["ua",.65,1,.55,1],["fa",0,.1,.45,.5]],
+ T2:[["ua",.1,.65,.55,1],["torso",.07,.14,0,1]],
+ T3:[["torso",.14,.21,0,1]],T4:[["torso",.21,.29,0,1]],T5:[["torso",.29,.36,0,1]],T6:[["torso",.36,.43,0,1]],T7:[["torso",.43,.5,0,1]],T8:[["torso",.5,.57,0,1]],T9:[["torso",.57,.63,0,1]],T10:[["torso",.63,.71,0,1]],T11:[["torso",.71,.79,0,1]],T12:[["torso",.79,.88,0,1]],
+ L1:[["torso",.88,1,0,1],["tg",0,.1,0,1]],
+ L2:[["tg",.1,.52,0,1]],
+ L3:[["tg",.52,1,0,1],["sk",0,.14,.5,1]],
+ L4:[["sk",0,.14,0,.5],["sk",.14,1,.5,1],["ft",0,.58,.8,1]],
+ L5:[["sk",.14,1,0,.5],["ft",0,.58,.15,.8],["t1",0,1,0,1],["t2",0,1,0,1],["t3",0,1,0,1],["t4",0,1,0,1]],
+ S1:[["ft",0,.58,0,.15],["t5",0,1,0,1]],
+ C3:[["neck",0,1,0,1]]};
+const DERM_B={
+ C3:[["neck",0,1,0,1]],C4:[["torso",0,.07,0,1],["ua",0,.1,0,1]],
+ C5:[["ua",.1,1,0,.55]],
+ C6:[["fa",0,1,0,.4],["palm",0,1,0,.31],["tb",0,1,0,1],["f1",0,1,0,1]],
+ C7:[["fa",.2,1,.4,.62],["palm",0,1,.31,.56],["f2",0,1,0,1]],
+ C8:[["fa",.55,1,.62,1],["palm",0,1,.56,1],["f3",0,1,0,1],["f4",0,1,0,1]],
+ T1:[["fa",0,.55,.62,1],["fa",0,.2,.4,.62],["ua",.65,1,.55,1]],
+ T2:[["ua",.1,.65,.55,1],["torso",.07,.14,0,1]],
+ T3:[["torso",.14,.21,0,1]],T4:[["torso",.21,.29,0,1]],T5:[["torso",.29,.36,0,1]],T6:[["torso",.36,.43,0,1]],T7:[["torso",.43,.5,0,1]],T8:[["torso",.5,.57,0,1]],T9:[["torso",.57,.63,0,1]],T10:[["torso",.63,.7,0,1]],T11:[["torso",.7,.76,0,1]],T12:[["torso",.76,.82,0,1]],
+ L1:[["torso",.82,.87,0,1]],L2:[["torso",.87,.93,0,.75],["tg",0,.5,0,.3]],L3:[["torso",.93,1,0,.5],["tg",.5,1,0,.3],["tg",.3,1,.75,1]],
+ S2:[["tg",0,1,.3,.75],["sk",0,.55,.4,.75]],
+ S1:[["sk",0,1,0,.4],["sk",.55,1,.4,.75],["ft",0,1,0,1]],
+ L4:[["sk",0,1,.75,1]],
+ S3:[["tg",0,.3,.75,1]]};
+const SADDLE=[["S3",30,20],["S4",19,13],["S5",8,6]];
+/* label anchors [segment,a,u] */
+const DANC_F={C4:["torso",.03,.25],C5:["ua",.55,.25],C6:["fa",.6,.25],C7:["f2",.6,.5],C8:["f4",.4,.5],T1:["fa",.3,.75],T2:["ua",.35,.8],T4:["torso",.25,.4],T10:["torso",.67,.45],L1:["torso",.94,.35],L2:["tg",.3,.5],L3:["tg",.78,.5],L4:["sk",.55,.75],L5:["sk",.55,.25],S1:["ft",.3,.05],T6:["torso",.4,.4],T8:["torso",.53,.4],T12:["torso",.83,.4]};
+const DANC_B={C3:["neck",.5,.4],C5:["ua",.55,.25],C6:["fa",.55,.2],C7:["fa",.7,.5],C8:["fa",.8,.8],T1:["fa",.3,.8],L2:["tg",.25,.15],L3:["tg",.75,.15],S2:["tg",.5,.52],S1:["sk",.5,.2],L4:["sk",.5,.88],T4:["torso",.25,.4],T10:["torso",.66,.45]};
+const DPAL=["#6FA8DC","#93C47D","#F6B26B","#C27BA0","#76A5AF","#FFD966","#E06666","#8E7CC3"];
+function dermIndex(r){const order=["C2","C3","C4","C5","C6","C7","C8","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12","L1","L2","L3","L4","L5","S1","S2","S3","S4","S5"];return order.indexOf(r)}
+function dermCol(r){return DPAL[(dermIndex(r)+8)%DPAL.length]}
+function patchPath(F,p,sg){const seg=figSeg(F,p[0],sg);const N=7;const pts=[];for(let i=0;i<=N;i++)pts.push(seg.pt(lerp(p[1],p[2],i/N),p[3]));for(let i=N;i>=0;i--)pts.push(seg.pt(lerp(p[1],p[2],i/N),p[4]));
+  ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath()}
+function sidesFor(F,side){/* side: "R","L","B" ; front view: patient right = viewer left (sg -1) */const back=F.view==="back";if(side==="B"||!side)return [-1,1];const right=side==="R";return [(right!==back)?-1:1]}
+function rootPath(F,r,side){const D=F.view==="back"?DERM_B:DERM_F;const L=D[r];ctx.beginPath();
+  if(L)sidesFor(F,side).forEach(sg=>L.forEach(p=>patchPath(F,p,sg)));
+  if(F.view==="back"){const sd=SADDLE.find(z=>z[0]===r);if(sd){const i=SADDLE.indexOf(sd);const cx=F.cx,cy=F.ty+232*F.s;ctx.ellipse(cx,cy,sd[1]*F.s,sd[2]*F.s,0,0,TAU);if(i<2){const nx=SADDLE[i+1];ctx.ellipse(cx,cy,nx[1]*F.s,nx[2]*F.s,0,TAU,0,true)}}
+    if(r==="C2"){ctx.moveTo(F.cx+24*F.s,F.ty+30*F.s);ctx.arc(F.cx,F.ty+28*F.s,24*F.s,0,Math.PI)}}
+  return !!L||(F.view==="back"&&(SADDLE.some(z=>z[0]===r)||r==="C2"))}
+function rootAnchor(F,r,side){const A=(F.view==="back"?DANC_B:DANC_F)[r];if(!A){if(F.view==="back"&&/^S[345]$/.test(r))return [F.cx,F.ty+232*F.s];return null}const sg=sidesFor(F,side||"R")[0];return figSeg(F,A[0],sg).pt(A[1],A[2])}
+function hatch(x0,y0,x1,y1,col,gap,lw){ctx.beginPath();for(let x=x0-(y1-y0);x<x1;x+=gap){ctx.moveTo(x,y1);ctx.lineTo(x+(y1-y0),y0)}ctx.strokeStyle=col;ctx.lineWidth=lw||1.4;ctx.stroke()}
+function silhouette(F,fill,stroke){const S=F.s,cx=F.cx,ty=F.ty;ctx.save();ctx.lineJoin="round";const parts=[];
+  parts.push(()=>{const tl=[],tr=[];for(let i=0;i<=10;i++){const a=i/10;tl.push(figSeg(F,"torso",-1).pt(a,0));tr.push(figSeg(F,"torso",1).pt(a,0))}
+    ctx.moveTo(tl[0][0],tl[0][1]);tl.forEach(p=>ctx.lineTo(p[0],p[1]));for(let i=tr.length-1;i>=0;i--)ctx.lineTo(tr[i][0],tr[i][1]);ctx.closePath()});
+  parts.push(()=>ctx.rect(cx-11*S,ty+46*S,22*S,28*S));parts.push(()=>ctx.arc(cx,ty+28*S,24*S,0,TAU));
+  [-1,1].forEach(sg=>{["ua","fa","palm","tg","sk","ft","f1","f2","f3","f4","tb","t1","t2","t3","t4","t5"].forEach(n=>parts.push(()=>patchPath(F,[n,0,1,0,1],sg)));
+    [["ua",0],["fa",0],["tg",0],["sk",0],["ft",0]].forEach(j=>parts.push(()=>{const g=figSeg(F,j[0],sg);const p=g.pt(0,.5);const r=(j[0]==="ft"?7:g.wA*.5)*S;ctx.arc(p[0],p[1],r,0,TAU)}));
+    parts.push(()=>{const sh=figSeg(F,"ua",sg).pt(.02,.5);ctx.arc(sh[0],sh[1],13*S,0,TAU)});
+    ["f1","f2","f3","f4","tb"].forEach(n=>parts.push(()=>{const g=figSeg(F,n,sg);const p=g.pt(1,.5);const r=(n==="tb"?3.4:2)*S;ctx.arc(p[0],p[1],r,0,TAU)}))});
+  parts.forEach(f=>{ctx.beginPath();f();ctx.strokeStyle=stroke;ctx.lineWidth=3.2;ctx.stroke()});
+  parts.forEach(f=>{ctx.beginPath();f();ctx.fillStyle=fill;ctx.fill()});ctx.restore()}
+/* o: {view, skin, all:alpha, hl:{root:{mode,a,side}}, labels:[roots], landmarks:bool, labelSize} */
+function bodyFig(cx,ty,h,o){o=o||{};const F={cx,ty,s:h/410,view:o.view||"front"};const skin=o.skin||C.skin1;
+  silhouette(F,skin,hexA(C.ink,.55));
+  if(o.all){const D=F.view==="back"?DERM_B:DERM_F;const keys=Object.keys(D).concat(F.view==="back"?["S3","S4","S5","C2"]:[]);keys.forEach(r=>{if(rootPath(F,r,"B")){ctx.fillStyle=hexA(dermCol(r),o.all);ctx.fill("evenodd")}})}
+  const hl=o.hl||{};Object.keys(hl).forEach(rk=>{const z=hl[rk];const r=rk.split("#")[0];const a=z.a==null?1:z.a;if(a<=0)return;if(!rootPath(F,r,z.side||"B"))return;ctx.save();ctx.globalAlpha*=clamp(a,0,1);
+    const mode=z.mode||"hl";
+    if(mode==="pain"){ctx.fillStyle=hexA(C.pain,.62);ctx.fill("evenodd");ctx.clip("evenodd");hatch(cx-120*F.s,ty,cx+120*F.s,ty+h*1.02,hexA("#ffffff",.35),9,2)}
+    else if(mode==="numb"){ctx.fillStyle=hexA(C.numb,.55);ctx.fill("evenodd");ctx.clip("evenodd");hatch(cx-120*F.s,ty,cx+120*F.s,ty+h*1.02,hexA(C.ink,.55),6,1.3)}
+    else if(mode==="ting"){ctx.fillStyle=hexA(C.nerve,.6);ctx.fill("evenodd");ctx.clip("evenodd");for(let i=0;i<40;i++){const px=cx+(rnd(i*3+1)-.5)*240*F.s,py=ty+rnd(i*7+2)*h;circ(px,py,1.8,C.ink)}}
+    else{ctx.fillStyle=z.col||C.nerve;ctx.fill("evenodd")}
+    ctx.restore();if(z.edge!==false){rootPath(F,r,z.side||"B");ctx.strokeStyle=mode==="pain"?C.pain:mode==="numb"?C.ink:C["nerve-edge"];ctx.lineWidth=1.6;ctx.stroke()}});
+  if(o.landmarks&&F.view==="front"){[-1,1].forEach(sg=>{const n=figSeg(F,"torso",sg).pt(.25,.62);circ(n[0],n[1],2.2,hexA(C.ink,.6))});const u=figSeg(F,"torso",1).pt(.67,1);circ(u[0],u[1],2.4,hexA(C.ink,.6))}
+  if(F.view==="back"){line(cx,ty+212*F.s,cx,ty+238*F.s,hexA(C.ink,.45),1.2)}
+  // face hint so the view is clear
+  if(F.view==="front"){circ(cx-8*F.s,ty+25*F.s,2*F.s,hexA(C.ink,.6));circ(cx+8*F.s,ty+25*F.s,2*F.s,hexA(C.ink,.6));ctx.beginPath();ctx.arc(cx,ty+33*F.s,7*F.s,.2*Math.PI,.8*Math.PI);ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.3;ctx.stroke()}
+  else{ctx.beginPath();ctx.arc(cx,ty+26*F.s,23*F.s,Math.PI*1.05,Math.PI*1.95);ctx.strokeStyle=hexA(C.hair,.9);ctx.lineWidth=6*F.s;ctx.stroke()}
+  (o.labels||[]).forEach(r=>{const p=rootAnchor(F,r,o.labelSide||"R");if(p)label(p[0],p[1],r,{size:o.labelSize||11,weight:700,mono:true,bg:C.panel,bga:.88})});
+  return F}
+
+/* ---------------- lateral motion segment (two vertebrae, disc, foramen, root) ----------------
+   anterior to the left. o: {s, ext (-1 flexion..1 extension), disc 0..1, facet 0..1, unc 0..1, height 0..1 loss, root:true, cerv} */
+function segLat(ox,oy,o){o=o||{};const s=o.s||1;const th=(o.ext||0)*.13;const dH=26*(1-.55*(o.height||0));
+  const W=(x,y)=>[ox+x*s,oy+y*s];
+  const pv=[-50,13-dH/2];const cs=Math.cos(th),sn=Math.sin(th);
+  const U=(x,y)=>{y=y-dH+26;const dx=x-pv[0],dy=y-pv[1];return W(pv[0]+cs*dx-sn*dy,pv[1]+sn*dx+cs*dy)};
+  const shp=(pts,f,st,lw)=>{ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();fillStroke(f,st,lw||1.6)};
+  const bw=o.cerv?96:120;
+  const post=[[30,18],[38,-6],[48,-28],[58,-24],[60,4],[66,34],[112,58],[156,74],[152,90],[104,84],[54,72],[30,46]];
+  const iap=[[56,64],[70,70],[82,96],[80,120],[68,124],[60,100],[58,80]];
+  // foramen fill (fat)
+  const fo=[U(0,-52-96+96),U(40,-52),U(56,-40),W(48,-28),W(38,-6),W(30,18),W(0,18),W(0,13),U(0,-13)];
+  ctx.save();shp(fo,hexA(C.csf,.95),hexA(C.dura,.6),1);ctx.restore();
+  // lower vertebra
+  const lowBody=[W(-bw,15),W(-2,15),W(0,18),W(0,80),W(-2,83),W(-bw,83),W(-bw-2,80),W(-bw-2,18)];
+  shp(lowBody,C.bone,C["bone-edge"]);shp([W(0,18),W(40,18),W(40,44),W(0,44)],C.bone,C["bone-edge"]);shp(post.map(p=>W(p[0],p[1])),C.bone,C["bone-edge"]);
+  // upper vertebra (shifted up by 96 and rotated)
+  const upBody=[U(-bw,-81),U(-2,-81),U(0,-78),U(0,-16),U(-2,-13),U(-bw,-13),U(-bw-2,-16),U(-bw-2,-78)];
+  shp(upBody,C.bone,C["bone-edge"]);shp([U(0,-78),U(40,-78),U(40,-52),U(0,-52)],C.bone,C["bone-edge"]);
+  shp(post.map(p=>U(p[0],p[1]-96)),C.bone,C["bone-edge"]);shp(iap.map(p=>U(p[0],p[1]-96)),C.bone,C["bone-edge"]);
+  // inner texture of bodies
+  [lowBody,upBody].forEach(b=>{ctx.save();ctx.beginPath();b.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.clip();for(let i=0;i<14;i++){const p=b[0];circ(lerp(b[0][0],b[1][0],rnd(i*5+(b===upBody?9:1))),lerp(b[0][1],b[5][1],rnd(i*3+2)),3*s,hexA(C["bone-in"],.9))}ctx.restore()});
+  // disc
+  const dpts=[W(-bw+2,15),W(-2,15),W(1,13-dH*.5),U(-2,-13),U(-bw+2,-13),W(-bw-1,13-dH*.5)];shp(dpts,C.disc,C["disc-ink"],1.4);
+  const nc=W(-bw*.5,13-dH*.5);ell(nc[0],nc[1],bw*.22*s,dH*.28*s,th*.5,C["disc-in"]);
+  // facet joint line
+  const f1=W(58,-24),f2=W(60,4);line(f1[0],f1[1],f2[0],f2[1],C.lig,2.6);
+  // intrusions
+  const dsev=o.disc||0;if(dsev>0){const c=W(dsev*8,4-14*dsev);ctx.beginPath();ctx.ellipse(c[0]-4*s,c[1],(6+20*dsev)*s,(10+12*dsev)*s,0,0,TAU);fillStroke(C.disc,C["disc-ink"],1.4);const c2=W(dsev*8,4-14*dsev);ell(c2[0]-2*s,c2[1],(3+10*dsev)*s,(5+6*dsev)*s,0,C["disc-in"])}
+  const fsev=o.facet||0;if(fsev>0){const c=W(44-6*fsev,-14);ctx.beginPath();ctx.ellipse(c[0],c[1],(6+12*fsev)*s,(10+8*fsev)*s,.2,0,TAU);fillStroke(C.bone,C["bone-edge"],1.6);for(let i=0;i<3;i++)circ(c[0]+(rnd(i)-.5)*10*s*fsev,c[1]+(rnd(i+4)-.5)*14*s*fsev,2.2*s,hexA(C["bone-edge"],.5))}
+  const usev=o.unc||0;if(usev>0){const c=U(2,-16);ctx.beginPath();ctx.moveTo(c[0]-4*s,c[1]+6*s);ctx.quadraticCurveTo(c[0]+(10+14*usev)*s,c[1]+2*s,c[0]+(4+10*usev)*s,c[1]-(10+12*usev)*s);ctx.lineTo(c[0]-4*s,c[1]-12*s);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6)}
+  // available space for the root
+  const space=clamp(1-(dsev*.62+fsev*.48+usev*.48+Math.max(0,o.ext||0)*.32-Math.max(0,-(o.ext||0))*.12+(o.height||0)*.45),.12,1.1);
+  let rp=null;if(o.root!==false){const rc=U(17,-34);const sq=clamp(space,.25,1);const shiftUp=(dsev+usev)*6*s,shiftFwd=fsev*5*s;rp=[rc[0]-shiftFwd*.6,rc[1]-shiftUp*.5];
+    const col=mix(C.nerve,C.pain,clamp((1-space)*1.25,0,1));
+    if(o.glow!==false&&space<.75)glow(rp[0],rp[1],(30+10*Math.sin((o.T||0)*6))*s,C.pain,.35*(1-space));
+    ell(rp[0],rp[1],11*s*(o.cut?.8:1)*(1-(1-sq)*.35),11*s*sq,0,col,C["nerve-edge"],1.6);
+    // DRG mark
+    circ(rp[0],rp[1],3.2*s*sq,hexA(C["nerve-edge"],.6))}
+  return {space,root:rp,disc:W(-bw*.5,13-dH/2),fo:W(20,-16),facet:W(59,-10),upBody:U(-bw/2,-47),lowBody:W(-bw/2,49),pedU:U(20,-65),pedL:W(20,31),spin:W(140,80)}}
+
+/* ---------------- axial lumbar view at a disc level (anterior up) ----------------
+   o: {s, side:-1|1, type:"pl"|"far"|"central", amt 0..1, labels} */
+function axialL(cx,cy,o){o=o||{};const s=o.s||1;const W=(x,y)=>[cx+x*s,cy+y*s];const sd=o.side||-1;const amt=o.amt||0;
+  // posterior arch
+  ctx.save();ctx.lineJoin="round";
+  const arch=[[-46,6],[-60,10],[-66,40],[-58,62],[-36,86],[-10,96],[-8,140],[8,140],[10,96],[36,86],[58,62],[66,40],[60,10],[46,6],[38,22],[42,48],[30,70],[0,78],[-30,70],[-42,48],[-38,22]];
+  ctx.beginPath();arch.forEach((p,i)=>{const q=W(p[0],p[1]);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])});ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+  [-1,1].forEach(k=>{const a=W(k*50,46),b=W(k*62,58);line(a[0],a[1],b[0],b[1],C.lig,2.6)});
+  // ligamentum flavum
+  ctx.beginPath();const lf=[[-40,50],[-28,68],[0,74],[28,68],[40,50]].map(p=>W(p[0],p[1]));lf.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=C.lig;ctx.lineWidth=4*s;ctx.stroke();
+  // disc
+  ctx.beginPath();const d0=W(0,-46);ctx.ellipse(d0[0],d0[1],80*s,52*s,0,Math.PI*.92,Math.PI*2.08);const q1=W(40,6),q2=W(0,-2),q3=W(-40,6);ctx.quadraticCurveTo(q1[0],q1[1],q2[0],q2[1]);ctx.quadraticCurveTo(q3[0],q3[1],W(-79,-30)[0],W(-79,-30)[1]);ctx.closePath();fillStroke(C.disc,C["disc-ink"],1.6);
+  for(let i=1;i<4;i++){ctx.beginPath();ctx.ellipse(d0[0],d0[1],(80-i*12)*s,(52-i*8)*s,0,Math.PI*1.05,Math.PI*1.95);ctx.strokeStyle=hexA(C["disc-in"],.5);ctx.lineWidth=1.2;ctx.stroke()}
+  const nu=W(0,-40);ell(nu[0],nu[1],32*s,20*s,0,C["disc-in"]);
+  // dural sac and cauda equina
+  const sc=W(0,38);let push=0;if(o.type==="central")push=amt;
+  ell(sc[0],sc[1]+push*10*s,30*s,(24-push*12)*s,0,C.csf,C.dura,2);
+  for(let i=0;i<12;i++){const a=i/12*TAU;const r=(i%2?10:18)*s;circ(sc[0]+Math.cos(a)*r*1.05,sc[1]+push*10*s+Math.sin(a)*r*.75*(1-push*.5),3.4*s,mix(C.nerve,C.pain,push),C["nerve-edge"],1)}
+  // roots: traversing in lateral recess, exiting in foramen
+  const R={};[-1,1].forEach(k=>{R["tr"+k]=W(k*30,20);R["ex"+k]=W(k*80,2)});
+  // herniation
+  let hp=null;if(amt>0&&o.type){const t=o.type;let base,tip;if(t==="pl"){base=W(sd*22,0);tip=W(sd*30,14+4*amt)}else if(t==="far"){base=W(sd*70,-12);tip=W(sd*80,-4+6*amt)}else{base=W(0,-2);tip=W(0,14+12*amt)}
+    ctx.beginPath();const r=(8+12*amt)*s;ctx.moveTo(base[0]-r,base[1]);ctx.quadraticCurveTo(lerp(base[0],tip[0],.5)-r*1.1,tip[1],tip[0],tip[1]+r*.6);ctx.quadraticCurveTo(lerp(base[0],tip[0],.5)+r*1.1,tip[1],base[0]+r,base[1]);ctx.closePath();fillStroke(C.disc,C["disc-ink"],1.4);
+    const nu2=[lerp(base[0],tip[0],.6),lerp(base[1],tip[1],.7)];ell(nu2[0],nu2[1],r*.5,r*.35,0,C["disc-in"]);hp=tip}
+  const hitTr=o.type==="pl"?amt:0,hitEx=o.type==="far"?amt:0;
+  [-1,1].forEach(k=>{const tr=R["tr"+k],ex=R["ex"+k];const st=k===sd?hitTr:0,se=k===sd?hitEx:0;
+    if(st>.2)glow(tr[0],tr[1],24*s,C.pain,.5*st);if(se>.2)glow(ex[0],ex[1],24*s,C.pain,.5*se);
+    ell(tr[0]+k*st*4*s,tr[1]+st*3*s,7.5*s*(1+st*.15),7.5*s*(1-st*.5),0,mix(C.nerve,C.pain,st),C["nerve-edge"],1.4);
+    ell(ex[0]+k*se*3*s,ex[1]+se*4*s,10*s*(1+se*.1),7*s*(1-se*.45),0,mix(C.drg,C.pain,se),C["nerve-edge"],1.4)});
+  ctx.restore();return {R,sac:sc,disc:d0,hp,spin:W(0,130),facetL:W(-58,52),facetR:W(58,52),lf:W(0,74)}}
+
+/* ---------------- spinal column side view with numbered roots ----------------
+   type "cerv" (skull, C1..C7, T1, T2) or "lumb" (T11..L5, sacrum). anterior left. hl: root id to highlight */
+function column(x,y,h,type,o){o=o||{};const T=o.T||0;const cerv=type==="cerv";const names=cerv?["C1","C2","C3","C4","C5","C6","C7","T1","T2"]:["T11","T12","L1","L2","L3","L4","L5"];
+  const n=names.length;const top=y+(cerv?34:6),bot=y+h-(cerv?6:70);const step=(bot-top)/n;const bh=step*.72,bw=cerv?62:84;const out={vert:{},fo:{},root:{}};
+  const canalX=x+bw/2+18;
+  if(cerv){ctx.beginPath();ctx.ellipse(x+20,y+10,74,30,0,0,Math.PI,false);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);txt(x+10,y+18,"skull",{size:11.5,weight:600,align:"center",color:C["ink-soft"]})}
+  // cord / cauda
+  const cordEnd=cerv?bot+8:top+step*2.55;
+  rr(canalX-12,top-14,24,bot-top+20,10);ctx.fillStyle=hexA(C.csf,.9);ctx.fill();ctx.strokeStyle=C.dura;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(canalX-8,top-14);ctx.lineTo(canalX-8,cordEnd-14);ctx.quadraticCurveTo(canalX,cordEnd+6,canalX+8,cordEnd-14);ctx.lineTo(canalX+8,top-14);ctx.closePath();fillStroke(C.cord,C["cord-edge"],1.4);
+  if(!cerv){for(let i=0;i<7;i++){const xx=canalX-7+i*2.4;line(xx,cordEnd-6,xx,bot+40,hexA(C.nerve,.95),1.4)}}
+  names.forEach((nm,i)=>{const vy=top+i*step;rr(x-bw/2,vy,bw,bh,5);fillStroke(C.bone,C["bone-edge"],1.4);
+    rr(x+bw/2,vy+3,14,bh*.45,2);fillStroke(C.bone,C["bone-edge"],1.2);
+    ctx.beginPath();ctx.moveTo(canalX+14,vy+2);ctx.lineTo(canalX+42,vy+bh*.4);ctx.lineTo(canalX+48,vy+bh*.85);ctx.lineTo(canalX+18,vy+bh*.7);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.2);
+    txt(x,vy+bh/2,nm,{size:12,weight:700,mono:true,align:"center",color:C.ink});out.vert[nm]=[x,vy+bh/2];
+    if(i<n-1||!cerv){rr(x-bw/2+3,vy+bh+1,bw-6,step-bh-2,3);ctx.fillStyle=C.disc;ctx.fill()}});
+  // roots
+  const rlist=[];if(cerv){for(let i=0;i<=8;i++){const nm=i<8?"C"+(i+1):"T1";const gapY=i===0?top-6:(i<8?top+i*step-(step-bh)/2:top+8*step+bh+(step-bh)/2);rlist.push([nm,gapY])}}
+  else{names.forEach((nm,i)=>{const gapY=top+i*step+bh+(step-bh)/2;rlist.push([nm,gapY])});rlist.push(["S1",bot+30])}
+  rlist.forEach(r=>{const nm=r[0],gy=r[1];const hl=o.hl===nm;const yStart=cerv?gy-4:Math.min(gy-8,Math.max(cordEnd-12,gy-step*(1.2)));
+    const pts=cerv?[[canalX,gy-2],[canalX+20,gy],[canalX+58,gy+10],[canalX+92,gy+24]]:[[canalX-2,yStart],[canalX+6,gy-10],[canalX+22,gy],[canalX+58,gy+12],[canalX+88,gy+26]];
+    poly(pts,hl?C.nerve:hexA(C.nerve,.85),hl?5:3);if(hl){poly(pts,C["nerve-edge"],1)}
+    const end=pts[pts.length-1];circ(pts[pts.length-3][0],pts[pts.length-3][1]+2,hl?6:4.5,C.drg,C["nerve-edge"],1);
+    label(end[0]+16,end[1]+2,nm,{size:11.5,weight:700,mono:true,bg:hl?C.nerve:C.panel,color:hl?"#10161A":C.ink,border:hl?C["nerve-edge"]:null});out.root[nm]=end;out.fo[nm]=[canalX+22,gy];
+    if(hl&&o.pulse!==false)zap(pts,T,.6,C.pain,3)});
+  if(!cerv){ctx.beginPath();const sx=x-bw/2,sy=bot+8;ctx.moveTo(sx+4,sy);ctx.lineTo(sx+bw+20,sy);ctx.lineTo(sx+bw-10,sy+56);ctx.lineTo(sx+24,sy+60);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.4);txt(x+6,sy+30,"sacrum",{size:11.5,weight:700,align:"center",color:C.ink})}
+  out.cordEnd=cordEnd;out.canalX=canalX;return out}
+
+/* ---------------- spinal cord cross section with roots, DRG, spinal nerve and rami (dorsal up) ---------------- */
+function cordX(cx,cy,r,o){o=o||{};const T=o.T||0;
+  // dura ring
+  circ(cx,cy,r+10,hexA(C.csf,.9),C.dura,1.6);
+  circ(cx,cy,r,C.cord,C["cord-edge"],1.6);
+  // gray matter butterfly
+  ctx.beginPath();const g=(dx,dy)=>[cx+dx*r,cy+dy*r];
+  const pts=[[0,-.12],[.18,-.2],[.32,-.62],[.42,-.68],[.36,-.34],[.3,-.06],[.52,.22],[.56,.46],[.34,.5],[.16,.2],[0,.14],[-.16,.2],[-.34,.5],[-.56,.46],[-.52,.22],[-.3,-.06],[-.36,-.34],[-.42,-.68],[-.32,-.62],[-.18,-.2]];
+  pts.forEach((p,i)=>{const q=g(p[0],p[1]);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])});ctx.closePath();fillStroke(C.gray,hexA(C.ink,.35),1.2);
+  circ(cx,cy,2.5,hexA(C.ink,.4));
+  // right side roots (viewer right)
+  const dh=g(.38,-.64),vh=g(.42,.4);
+  const drg=[cx+r*1.75,cy-r*.62];const join=[cx+r*2.5,cy-r*.1];
+  const dRoot=[[dh[0],dh[1]],[cx+r*1.1,cy-r*.8],[drg[0]-12,drg[1]],[drg[0]+12,drg[1]+4],[join[0],join[1]]];
+  const vRoot=[[vh[0],vh[1]],[cx+r*1.1,cy+r*.5],[cx+r*1.9,cy+r*.25],[join[0],join[1]]];
+  poly(dRoot,C.nerve,8);poly(vRoot,mix(C.nerve,C.muscle,.35),8);
+  ell(drg[0],drg[1],18,12,.15,C.drg,C["nerve-edge"],1.6);
+  for(let i=0;i<5;i++)circ(drg[0]-8+i*4,drg[1]+(i%2?3:-3),2.4,hexA(C["nerve-edge"],.8));
+  // spinal nerve and rami
+  const sn=[join,[join[0]+46,join[1]+4]];poly(sn,mix(C.nerve,C.muscle,.18),11);
+  const dr=[sn[1],[sn[1][0]+14,sn[1][1]-30],[sn[1][0]+10,sn[1][1]-74]];const vr=[sn[1],[sn[1][0]+40,sn[1][1]+18],[sn[1][0]+110,sn[1][1]+50]];
+  poly(dr,mix(C.nerve,C.muscle,.18),6);poly(vr,mix(C.nerve,C.muscle,.18),9);
+  return {dh,vh,drg,join,sn,dRoot,vRoot,dr,vr,cx,cy,r}}
+
+/* ---------------- myotome movement mini scenes ----------------
+   kind from RT.mv (plus elbF), ph 0..1 cycle phase, str 0..5 strength */
+function limbMove(kind,x,y,s,ph,str,o){o=o||{};const skin=o.skin||C.skin2,ed=hexA(C.ink,.55);const f=str/5;
+  const lift=ph<.35?ease(ph/.35):ph<.8?1:1-ease((ph-.8)/.2);const hold=ph>=.35&&ph<.8?(ph-.35)/.45:0;
+  const give=(1-f)*hold;const amt=clamp(lift*(str<=0?0:str<=1?.08:str<=2?.45:1)-give*.7,0,1);
+  const musA=(.3+.7*f)*(lift>0?1:.4);let muscle=null,arrowAt=null;
+  const lim=(a,b,w)=>capsule(a[0],a[1],b[0],b[1],w*s,skin,ed,1.4);
+  const rot=(p,c,a)=>{const dx=p[0]-c[0],dy=p[1]-c[1];return [c[0]+dx*Math.cos(a)-dy*Math.sin(a),c[1]+dx*Math.sin(a)+dy*Math.cos(a)]};
+  ctx.save();
+  if(kind==="abd"){const sh=[x,y];const a=lerp(.1,1.45,amt);const el=[x-Math.sin(a)*70*s,y+Math.cos(a)*70*s];const wr=[el[0]-Math.sin(a)*62*s,el[1]+Math.cos(a)*62*s];
+    rr(x-6*s,y-14*s,58*s,112*s,18*s);fillStroke(skin,ed,1.4);circ(x+24*s,y-40*s,20*s,skin,ed,1.4);lim(sh,el,20);lim(el,wr,16);muscle=[sh,[lerp(sh[0],el[0],.35),lerp(sh[1],el[1],.35)],13];arrowAt=[el,a+Math.PI/2*-1]}
+  else if(kind==="elbF"||kind==="elbE"){const sh=[x,y];const el=[x,y+78*s];const base=kind==="elbF"?0:1.5;const a=kind==="elbF"?lerp(.05,1.7,amt):lerp(1.75,.15,amt);const wr=[el[0]+Math.sin(a)*70*s,el[1]+Math.cos(a)*70*s];
+    lim(sh,el,20);lim(el,wr,16);circ(wr[0],wr[1],9*s,skin,ed,1.4);muscle=kind==="elbF"?[[sh[0]+6*s,sh[1]+16*s],[el[0]+6*s,el[1]-14*s],12]:[[sh[0]-6*s,sh[1]+16*s],[el[0]-6*s,el[1]-14*s],12];arrowAt=[wr,a]}
+  else if(kind==="wrE"){const el=[x-60*s,y];const wr=[x+30*s,y];const a=lerp(.15,-.9,amt);const hd=[wr[0]+Math.cos(a)*50*s,wr[1]+Math.sin(a)*50*s];
+    lim(el,wr,17);lim(wr,hd,15);muscle=[[el[0]+8*s,el[1]-7*s],[wr[0]-26*s,wr[1]-6*s],10];arrowAt=[hd,a]}
+  else if(kind==="finF"||kind==="finA"){const wr=[x-40*s,y+30*s];rr(wr[0]-10*s,wr[1]-30*s,46*s,56*s,10*s);fillStroke(skin,ed,1.4);
+    for(let i=0;i<4;i++){const bx=wr[0]-4*s+i*12*s,by=wr[1]-30*s;let a=0,len=42*s;
+      if(kind==="finF"){const cur=amt;const p1=[bx,by-len*.5*(1-cur*.6)];const p2=[bx+cur*14*s,by-len*(1-cur*.75)];capsule(bx,by,p1[0],p1[1],9*s,skin,ed,1.2);capsule(p1[0],p1[1],p2[0],p2[1],8*s,skin,ed,1.2)}
+      else{const sp=(i-1.5)*amt*.22;const p2=[bx+Math.sin(sp)*len,by-Math.cos(sp)*len];capsule(bx,by,p2[0],p2[1],8.5*s,skin,ed,1.2)}}
+    capsule(wr[0]-10*s,wr[1]-2*s,wr[0]-30*s,wr[1]-26*s,10*s,skin,ed,1.2);
+    muscle=kind==="finF"?[[wr[0]-60*s,wr[1]+20*s],[wr[0]-12*s,wr[1]+14*s],9]:[[wr[0]+2*s,wr[1]-10*s],[wr[0]+26*s,wr[1]-10*s],6];capsule(wr[0]-12*s,wr[1]+12*s,wr[0]-90*s,wr[1]+28*s,17*s,skin,ed,1.4)}
+  else if(kind==="hipF"||kind==="kneE"){/* seated: thigh horizontal from hip */const hip=[x-50*s,y];rr(hip[0]-30*s,hip[1]-110*s,40*s,112*s,14*s);fillStroke(skin,ed,1.4);circ(hip[0]-10*s,hip[1]-128*s,18*s,skin,ed,1.4);
+    rr(hip[0]-40*s,y+12*s,140*s,8*s,3);ctx.fillStyle=hexA(C["ink-soft"],.5);ctx.fill();
+    const ha=kind==="hipF"?-lerp(0,.55,amt):0;const kn=rot([hip[0]+90*s,hip[1]],hip,ha);lim(hip,kn,24);
+    const ka=kind==="kneE"?lerp(0,1.25,amt):0;const la=Math.PI/2-ka+ha;const an=[kn[0]+Math.cos(la)*80*s,kn[1]+Math.sin(la)*80*s];lim(kn,an,18);
+    const ft=[an[0]+Math.cos(la-Math.PI/2)*-24*s,an[1]+Math.sin(la-Math.PI/2)*-24*s];capsule(an[0],an[1],ft[0],ft[1],11*s,skin,ed,1.2);
+    muscle=kind==="hipF"?[[hip[0]+4*s,hip[1]-14*s],[hip[0]+40*s,hip[1]-6*s],10]:[[lerp(hip[0],kn[0],.25),lerp(hip[1],kn[1],.25)-8*s],[lerp(hip[0],kn[0],.85),lerp(hip[1],kn[1],.85)-8*s],13];arrowAt=kind==="hipF"?[kn,ha-Math.PI/2]:[an,la-Math.PI/2]}
+  else if(kind==="dorsi"||kind==="plant"||kind==="toeE"){const kn=[x-20*s,y-80*s];const an=[x-20*s,y+10*s];lim(kn,an,20);
+    const a=kind==="dorsi"?-lerp(0,.4,amt):kind==="plant"?lerp(0,.6,amt):0;const toe=rot([an[0]+70*s,an[1]+8*s],an,a);const heel=rot([an[0]-14*s,an[1]+10*s],an,a);
+    capsule(heel[0],heel[1],toe[0],toe[1],18*s,skin,ed,1.4);
+    if(kind==="toeE"){const ta=-lerp(0,.8,amt);const t2=rot([toe[0]+16*s,toe[1]],toe,ta+a);capsule(toe[0],toe[1],t2[0],t2[1],9*s,skin,ed,1.2);muscle=[[kn[0]+6*s,kn[1]+30*s],[an[0]+6*s,an[1]-14*s],6];arrowAt=[t2,ta-Math.PI/2]}
+    else if(kind==="dorsi"){muscle=[[kn[0]+7*s,kn[1]+10*s],[an[0]+7*s,an[1]-24*s],9];arrowAt=[toe,a-Math.PI/2]}
+    else{muscle=[[kn[0]-7*s,kn[1]+10*s],[an[0]-8*s,an[1]-30*s],12];arrowAt=[toe,a+Math.PI/2]}}
+  if(muscle){const m=muscle;ctx.save();ctx.globalAlpha*=clamp(musA,0,1);capsule(m[0][0],m[0][1],m[1][0],m[1][1],m[2]*s*(.8+.25*lift*f),C.muscle,C["muscle-edge"],1.2);ctx.restore()}
+  if(arrowAt&&o.resist!==false&&hold>0&&str>2){const p=arrowAt[0],a=arrowAt[1];const L=28*s;withA(Math.sin(hold*Math.PI),()=>arrow(p[0]+Math.cos(a)*-L*1.4,p[1]+Math.sin(a)*-L*1.4,p[0]+Math.cos(a)*-6,p[1]+Math.sin(a)*-6,C["ink-soft"],2.4))}
+  ctx.restore();return {amt,lift}}
+function strengthBar(x,y,w,h,str,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.panel,.92)});txt(x+w/2,y+14,o.title||"STRENGTH",{size:11,weight:700,mono:true,align:"center",color:C["ink-soft"]});
+  const bx=x+w/2-11,by=y+28,bh=h-56;rr(bx,by,22,bh,5);ctx.fillStyle=hexA(C.sunk,.9);ctx.fill();const f=clamp(str/5,0,1);rr(bx,by+bh*(1-f),22,bh*f,5);ctx.fillStyle=mix(C.pain,C.muscle,f);ctx.fill();
+  for(let i=0;i<=5;i++){const yy=by+bh*(1-i/5);line(bx-5,yy,bx,yy,C["ink-soft"],1.2);txt(bx-8,yy,String(i),{size:10.5,mono:true,align:"right",color:C["ink-soft"]})}
+  txt(x+w/2,y+h-14,(Math.round(str*10)/10)+" of 5",{size:12,weight:700,mono:true,align:"center"})}
+function reflexMeter(x,y,w,grade,o){o=o||{};const g=["0","1+","2+","3+","4+"];const lab=["absent","reduced","normal","brisk","very brisk"];const cw=w/5;
+  g.forEach((t,i)=>{const on=Math.round(grade)===i;rr(x+i*cw+2,y,cw-4,30,5);ctx.fillStyle=on?(i===2?C["good-wash"]:i<2?C["warn-wash"]:C["bad-wash"]):hexA(C.panel,.8);ctx.fill();ctx.strokeStyle=on?(i===2?C.good:i<2?C.warn:C.bad):C.rule;ctx.lineWidth=on?2.2:1;ctx.stroke();
+    txt(x+i*cw+cw/2,y+11,t,{size:12.5,weight:700,mono:true,align:"center"});txt(x+i*cw+cw/2,y+23,lab[i],{size:9.5,weight:600,align:"center",color:C["ink-soft"]})})}
+/* reflex test scene: kind patellar | achilles | biceps | triceps | brachio. grade 0..4. period 2.6 s */
+function reflexScene(kind,x,y,s,T,grade,o){o=o||{};const skin=o.skin||C.skin3,ed=hexA(C.ink,.55);const per=2.6;const t=P(T,per)*per;const hitT=.55;
+  const hA=t<hitT?lerp(-.9,0,ease(t/hitT)):t<hitT+.25?lerp(0,-.25,(t-hitT)/.25):lerp(-.25,-.9,clamp((t-hitT-.25)/.9,0,1));
+  const dt=t-hitT-(o.delay==null?.06:o.delay);let jerk=0;if(dt>0&&grade>0){const amp=[0,.25,.6,1,1.15][Math.round(clamp(grade,0,4))]*(o.ampScale||1);if(grade>=3.5){jerk=amp*Math.abs(Math.sin(dt*14))*Math.exp(-dt*1.1)}else jerk=amp*Math.sin(Math.min(Math.PI,dt*7))*Math.exp(-dt*2)}
+  const lim=(a,b,w)=>capsule(a[0],a[1],b[0],b[1],w*s,skin,ed,1.4);let tap=null,hamAng=0;
+  const rot=(p,c,a)=>{const dx=p[0]-c[0],dy=p[1]-c[1];return [c[0]+dx*Math.cos(a)-dy*Math.sin(a),c[1]+dx*Math.sin(a)+dy*Math.cos(a)]};
+  if(kind==="patellar"){const hip=[x-90*s,y-40*s],kn=[x,y-40*s];rr(hip[0]-20*s,hip[1]+12*s,110*s,8*s,3);ctx.fillStyle=hexA(C["ink-soft"],.5);ctx.fill();lim(hip,kn,26);const a=Math.PI/2-.08-jerk*.55;const an=[kn[0]+Math.cos(a)*86*s,kn[1]+Math.sin(a)*86*s];lim(kn,an,19);
+    capsule(an[0],an[1],an[0]+Math.cos(a-Math.PI/2)*-26*s,an[1]+Math.sin(a-Math.PI/2)*-26*s,11*s,skin,ed,1.2);const ten=[kn[0]+Math.cos(a)*18*s+9*s,kn[1]+Math.sin(a)*18*s];circ(ten[0],ten[1],4*s,C.tendon,hexA(C.ink,.4),1);tap=ten;
+    ctx.save();ctx.globalAlpha*=.4+.6*Math.min(1,jerk+.3);capsule(lerp(hip[0],kn[0],.2),hip[1]-9*s,lerp(hip[0],kn[0],.9),kn[1]-9*s,12*s*(1+jerk*.25),C.muscle,C["muscle-edge"],1);ctx.restore()}
+  else if(kind==="achilles"){const kn=[x-10*s,y-90*s],an=[x-10*s,y+10*s];lim(kn,an,20);const a=jerk*.5;const toe=rot([an[0]+66*s,an[1]+8*s],an,a);const heel=rot([an[0]-16*s,an[1]+10*s],an,a);capsule(heel[0],heel[1],toe[0],toe[1],18*s,skin,ed,1.4);tap=[an[0]-13*s,an[1]-18*s];
+    ctx.save();ctx.globalAlpha*=.4+.6*Math.min(1,jerk+.3);capsule(kn[0]-8*s,kn[1]+12*s,an[0]-8*s,an[1]-36*s,12*s*(1+jerk*.3),C.muscle,C["muscle-edge"],1);ctx.restore();line(an[0]-12*s,an[1]-36*s,an[0]-13*s,an[1],C.tendon,4)}
+  else{/* arm reflexes: upper arm down from shoulder, forearm forward */const sh=[x-30*s,y-90*s],el=[x-30*s,y];const base=kind==="triceps"?.05:Math.PI/2-.1;const a=kind==="triceps"?base+jerk*.55:base-jerk*.5;
+    const wr=[el[0]+Math.sin(a)*82*s,el[1]+Math.cos(a)*82*s];lim(sh,el,20);lim(el,wr,16);circ(wr[0],wr[1],9*s,skin,ed,1.4);
+    if(kind==="biceps"){tap=[el[0]+12*s,el[1]-6*s];ctx.save();ctx.globalAlpha*=.4+.6*Math.min(1,jerk+.3);capsule(sh[0]+7*s,sh[1]+18*s,el[0]+7*s,el[1]-16*s,11*s*(1+jerk*.3),C.muscle,C["muscle-edge"],1);ctx.restore()}
+    else if(kind==="brachio"){tap=[lerp(el[0],wr[0],.82),lerp(el[1],wr[1],.82)-8*s];ctx.save();ctx.globalAlpha*=.4+.6*Math.min(1,jerk+.3);capsule(el[0]+4*s,el[1]-14*s,lerp(el[0],wr[0],.6),lerp(el[1],wr[1],.6)-6*s,8*s,C.muscle,C["muscle-edge"],1);ctx.restore()}
+    else{tap=[el[0]-11*s,el[1]-14*s];ctx.save();ctx.globalAlpha*=.4+.6*Math.min(1,jerk+.3);capsule(sh[0]-7*s,sh[1]+18*s,el[0]-7*s,el[1]-20*s,11*s*(1+jerk*.3),C.muscle,C["muscle-edge"],1);ctx.restore()}}
+  // hammer: pivot offset from tap point
+  const side=kind==="achilles"||kind==="triceps"?-1:1;const piv=[tap[0]+side*70*s,tap[1]-20*s];const head=rot([tap[0]+side*6*s,tap[1]],piv,-hA*side);
+  line(piv[0],piv[1],head[0],head[1],C.metal,4);ctx.save();ctx.translate(head[0],head[1]);ctx.rotate(Math.atan2(head[1]-piv[1],head[0]-piv[0])+Math.PI/2);rr(-11*s,-6*s,22*s,12*s,5*s);fillStroke(C.hammer,hexA(C.ink,.5),1.2);ctx.restore();
+  if(t>hitT&&t<hitT+.3)pulseRing(tap[0],tap[1],18*s,C.accent,(t-hitT)/.3);
+  return {tap,jerk,hit:t>hitT&&t<hitT+.3,t}}
+
+/* posterior (coronal) view of the lower lumbar spine with dural sac and roots (patient left on viewer left) */
+function coronalL(x,y,s,o){o=o||{};const W=(a,b)=>[x+a*s,y+b*s];const out={};const k0=o.side||-1;
+  [["L4",0],["L5",120]].forEach(l=>{const p=W(-70,l[1]);rr(p[0],p[1],140*s,84*s,8*s);fillStroke(C.bone,C["bone-edge"],1.4);txt(W(54,0)[0],W(0,l[1]+70)[1],l[0],{size:12,weight:700,mono:true,align:"center",color:C["ink-soft"]});
+    const d=W(-70,l[1]+86);rr(d[0],d[1],140*s,30*s,8*s);fillStroke(C.disc,C["disc-ink"],1.2);out["disc"+l[0]]=W(0,l[1]+101)});
+  ctx.beginPath();[[-74,240],[74,240],[40,320],[-40,320]].forEach((q,i)=>{const w=W(q[0],q[1]);i?ctx.lineTo(w[0],w[1]):ctx.moveTo(w[0],w[1])});ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.4);txt(W(0,0)[0],W(0,300)[1],"sacrum",{size:12,weight:700,align:"center",color:C["ink-soft"]});
+  [0,120].forEach(yy=>[-1,1].forEach(k=>{const q=W(k*60,yy+22);ell(q[0],q[1],13*s,17*s,0,C["bone-in"],C["bone-edge"],1.4)}));
+  // herniation under the roots
+  if(o.amt>0&&o.type){const a=o.amt;const c=o.type==="pl"?W(k0*30,101):o.type==="far"?W(k0*78,98):W(0,101);ell(c[0],c[1],(8+10*a)*s,(9+8*a)*s,0,C.disc,C["disc-ink"],1.4);ell(c[0],c[1],(4+5*a)*s,(4+4*a)*s,0,C["disc-in"])}
+  const sa=W(-22,-14);rr(sa[0],sa[1],44*s,250*s,20*s);ctx.fillStyle=hexA(C.csf,.95);ctx.fill();ctx.strokeStyle=C.dura;ctx.lineWidth=2;ctx.stroke();
+  for(let i=0;i<5;i++){const xx=W(-10+i*5,0)[0];line(xx,W(0,-8)[1],xx,W(0,226)[1],hexA(C.nerve,.75),1.3)}
+  const R={L4:[[20,36],[34,48],[56,62],[70,70],[100,98]],L5:[[22,90],[30,104],[32,128],[56,170],[70,180],[100,214]],S1:[[22,208],[30,224],[38,250],[46,270],[50,290]]};
+  Object.keys(R).forEach(r=>[-1,1].forEach(k=>{const pts=R[r].map(q=>W(k*q[0],q[1]));const hot=o.hit===r&&k===k0;poly(pts,hot?mix(C.nerve,C.pain,.75):C.nerve,(hot?6:4.5));
+    const dg=pts[r==="S1"?3:r==="L5"?4:3];ell(dg[0],dg[1],7*s,5*s,0,hot?mix(C.drg,C.pain,.6):C.drg,C["nerve-edge"],1.2);if(hot)glow(pts[2][0],pts[2][1],22*s,C.pain,.45);if(k===k0)out[r]=pts[pts.length-1]}));
+  return out}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("holi-roots-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("holi-roots-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+let DT=0;
+/* ================= PART 1: root compression simulator ================= */
+const LEVELS={cerv:["C4 C5","C5 C6","C6 C7","C7 T1","T1 T2"],lumb:["L1 L2","L2 L3","L3 L4","L4 L5","L5 S1"]};
+const CERVROOT={"C4 C5":"C5","C5 C6":"C6","C6 C7":"C7","C7 T1":"C8","T1 T2":"T1"};
+const LDISC={"L1 L2":"L2","L2 L3":"L3","L3 L4":"L4","L4 L5":"L5","L5 S1":"S1"};
+const LFO={"L1 L2":"L1","L2 L3":"L2","L3 L4":"L3","L4 L5":"L4","L5 S1":"L5"};
+const NEARREF={C8:"triceps",T1:"triceps",L1:"patellar",L2:"patellar",L5:"achilles"};
+function simRootFor(level,cause){if(CERVROOT[level])return CERVROOT[level];return cause==="fo"?LFO[level]:LDISC[level]}
+const SM={level:"C5 C6",cause:"disc",side:"R",sev:.55,sweep:null,visited:{},done:new Set()};
+function simZone(){return CERVROOT[SM.level]?"cerv":"lumb"}
+function simFx(r,sev){const pain=smooth(seg(sev,.08,.35)),numb=smooth(seg(sev,.38,.78));const wk=smooth(seg(sev,.42,1));const str=5-(r==="L1"?1.2:2.3)*wk;
+  const R=RT[r];let kind=R.ref,grade=2;if(kind){grade=2-2*R.refEff*smooth(seg(sev,.35,.95))}else kind=NEARREF[r];
+  return {pain,numb,str,kind,grade,own:!!R.ref}}
+function gradeTxt(g){return ["0","1+","2+","3+","4+"][Math.round(clamp(g,0,4))]}
+const SIMCHAL=["Numb the middle finger: find its root and squeeze hard.","Drop the Achilles reflex to 0.","Squeeze L5 hard and notice the reflexes stay normal.","At the L4 L5 level, compare a posterolateral disc with foraminal narrowing.","Weaken wrist extension to 3 of 5 or less."];
+function simCheck(){const r=simRootFor(SM.level,SM.cause);const fx=simFx(r,SM.sev);SM.visited[SM.level+"|"+SM.cause]=1;const d=SM.done;const before=d.size;
+  if(r==="C7"&&fx.numb>.5)d.add(0);if(r==="S1"&&Math.round(fx.grade)===0)d.add(1);if(r==="L5"&&SM.sev>.7)d.add(2);if(SM.visited["L4 L5|disc"]&&SM.visited["L4 L5|fo"])d.add(3);if(r==="C6"&&fx.str<=3.05)d.add(4);
+  if(d.size!==before){chalUI($("#simChal"),SIMCHAL,d);$("#simStatus").textContent="Challenge done: "+d.size+" of "+SIMCHAL.length+"."}}
+function simUI(){const box=$("#simLevels");box.innerHTML="";
+  [["cerv","Neck (side view of the foramen)"],["lumb","Low back"]].forEach(z=>{const h=document.createElement("div");h.className="lvlh";h.textContent=z[1];box.appendChild(h);
+    LEVELS[z[0]].forEach(l=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.setAttribute("aria-pressed",String(l===SM.level));b.innerHTML=l+"<small>level</small>";b.onclick=()=>{SM.level=l;simUI();simUpd()};box.appendChild(b)})});
+  segBtns($("#simCause"),simZone()==="cerv"?[["disc","Disc herniation"],["fo","Bone spurs in the foramen"]]:[["disc","Posterolateral disc"],["fo","Foraminal narrowing"]],()=>SM.cause,v=>{SM.cause=v;simUpd()});
+  segBtns($("#simSide"),[["R","Right side"],["L","Left side"]],()=>SM.side,v=>{SM.side=v;simUpd()})}
+function simUpd(){$("#simSev").value=Math.round(SM.sev*100);$("#simSevV").textContent=Math.round(SM.sev*100)+"%";
+  const r=simRootFor(SM.level,SM.cause);const fx=simFx(r,SM.sev);const R=RT[r];
+  const sym=SM.sev<.08?"none":fx.numb>.5?"numbness, weakness and radicular pain":fx.numb>.1?"radicular pain with early numbness":"radicular pain and tingling";
+  const rows=[["Root affected",r+" ("+(SM.side==="R"?"right":"left")+")"],["Level and cause",SM.level+", "+(SM.cause==="disc"?(simZone()==="lumb"?"posterolateral disc":"disc herniation"):(simZone()==="lumb"?"foraminal narrowing":"bone spurs in the foramen"))],["Skin area",R.derm],["Main symptom",sym],["Key muscle",R.mus],["Strength",(Math.round(fx.str*10)/10)+" of 5"],["Reflex",fx.own?REFNAME[fx.kind]+": "+gradeTxt(fx.grade):"no standard reflex for "+r+"; "+REFNAME[fx.kind]+" stays 2+"]];
+  $("#simRead tbody").innerHTML=rows.map(x=>`<tr><th scope="row">${x[0]}</th><td class="l">${x[1]}</td></tr>`).join("");
+  $("#simCap").textContent=`${SM.level} ${SM.cause==="disc"?"disc":"narrowing"} squeezes the ${r} root at ${Math.round(SM.sev*100)}%: ${sym}.`;
+  simCheck();a11yKey=""}
+function simInit(){simUI();chalUI($("#simChal"),SIMCHAL,SM.done);
+  $("#simSev").oninput=e=>{SM.sweep=null;SM.sev=+e.target.value/100;simUpd()};
+  $("#simSweep").onclick=()=>{SM.sweep={t0:performance.now()};$("#simStatus").textContent="Playing a slow squeeze from none to severe."};
+  $("#simReset").onclick=()=>{SM.sweep=null;SM.sev=0;simUpd()};simUpd()}
+function drawSim(now){use(S1);const T=now/1000;
+  if(SM.sweep){const p=clamp((now-SM.sweep.t0)/9000,0,1);SM.sev=p;if(p>=1)SM.sweep=null;simUpd()}
+  const r=simRootFor(SM.level,SM.cause);const fx=simFx(r,SM.sev);const R=RT[r];const sev=SM.sev;const sd=SM.side==="R"?1:-1;
+  /* panel A: tissue */
+  panelBox(10,10,300,330);txt(22,30,"THE TISSUE",{size:11,weight:700,mono:true,color:C["act2"]});
+  let G=null;
+  if(simZone()==="cerv"){G=segLat(138,214,{s:.92,cerv:true,disc:SM.cause==="disc"?sev:0,unc:SM.cause==="fo"?sev*.95:0,facet:SM.cause==="fo"?sev*.55:0,T});txt(160,52,SM.level+" foramen, side view",{size:12.5,weight:700,align:"center"})}
+  else if(SM.cause==="disc"){const A=axialL(160,146,{s:.84,type:"pl",amt:sev,side:sd});txt(160,52,"looking down on the "+SM.level+" disc",{size:12.5,weight:700,align:"center"});G={root:A.R["tr"+sd]};
+    label(160,268,r+" is the traversing root here",{size:11.5,weight:700,border:C.nerve})}
+  else{G=segLat(138,214,{s:.92,facet:sev*.8,height:sev*.7,disc:sev*.25,T});txt(160,52,SM.level+" foramen, side view",{size:12.5,weight:700,align:"center"})}
+  if(G&&G.root){label(G.root[0]+(simZone()==="lumb"&&SM.cause==="disc"?-sd*-34:52),G.root[1]-(simZone()==="lumb"&&SM.cause==="disc"?-26:26),r+" root",{size:12,weight:700,mono:true,bg:mix(C.nerve,C.pain,clamp(sev*1.2,0,1)),color:"#10161A"})}
+  txt(22,316,"conduction",{size:11.5,weight:700});bar(100,308,196,14,1-fx.numb*.75,mix(C.pain,C.good,1-fx.numb));
+  txt(22,296,"irritation",{size:11.5,weight:700});bar(100,288,196,14,fx.pain,C.pain);
+  /* panel B: body map */
+  panelBox(320,10,470,330);txt(332,52,"THE WHOLE PERSON",{size:11,weight:700,mono:true,color:C["act1"]});
+  const hl={};if(sev>.04){hl[r]={mode:"pain",a:fx.pain*(.5+.35*Math.sin(T*4)),side:SM.side};if(fx.numb>.02)hl[r+"#n"]={mode:"numb",a:fx.numb,side:SM.side,edge:false}}
+  const F1=bodyFig(470,44,280,{hl,skin:C.skin1}),F2=bodyFig(660,44,280,{view:"back",hl,skin:C.skin1});
+  [F1,F2].forEach(F=>{const a=rootAnchor(F,r,SM.side);if(a&&fx.pain>.2){glow(a[0],a[1],22,C.pain,.5*fx.pain);spark(a[0]+8,a[1],6,C.pain,P(T*1.5,1))}});
+  const a1=rootAnchor(F1,r,SM.side)||rootAnchor(F2,r,SM.side);
+  txt(565,30,r+" skin: "+R.dermS,{size:12.5,weight:700,align:"center"});txt(470,334,"front",{size:11,weight:600,align:"center",color:C["ink-soft"]});txt(660,334,"back",{size:11,weight:600,align:"center",color:C["ink-soft"]});
+  /* panel C: myotome */
+  panelBox(10,350,262,260);txt(22,370,"KEY MUSCLE",{size:11,weight:700,mono:true,color:C["act4"]});txt(22,390,R.musS,{size:12.5,weight:700});
+  const mp={abd:[120,470,.78],elbF:[130,420,.8],wrE:[110,500,.8],elbE:[130,420,.8],finF:[150,500,.85],finA:[140,520,.85],hipF:[140,520,.72],kneE:[140,505,.72],dorsi:[130,540,.95],toeE:[130,540,.95],plant:[130,540,.95]}[R.mv];
+  limbMove(R.mv,mp[0],mp[1],mp[2],P(T,3.4),fx.str,{skin:C.skin3});
+  strengthBar(206,380,58,220,fx.str);
+  /* panel D: reflex */
+  panelBox(282,350,262,260);txt(294,370,"REFLEX",{size:11,weight:700,mono:true,color:C["act5"]});txt(294,390,REFNAME[fx.kind]+(fx.own?"":" (control)"),{size:12.5,weight:700});
+  const rp={patellar:[420,520,.92],achilles:[410,520,.88],biceps:[420,525,.9],triceps:[420,525,.9],brachio:[410,525,.9]}[fx.kind];
+  ctx.save();ctx.beginPath();ctx.rect(284,396,258,170);ctx.clip();reflexScene(fx.kind,rp[0],rp[1],rp[2],T,fx.own?fx.grade:2,{skin:C.skin1});ctx.restore();
+  reflexMeter(292,570,244,fx.own?fx.grade:2);
+  /* panel E: live graph */
+  panelBox(554,350,236,260);
+  const g=graph({x:590,y:392,w:184,h:160,x0:0,x1:100,y0:0,y1:100,xt:[0,50,100],yt:[0,50,100],title:"Symptoms vs squeeze",xl:"compression %",grid:true});
+  curve(g,x=>100*smooth(seg(x/100,.08,.35)),0,100,C.pain,2.4);curve(g,x=>100*smooth(seg(x/100,.38,.78)),0,100,C.numb,2.4,[5,3]);curve(g,x=>100*smooth(seg(x/100,.42,1))*(r==="L1"?.52:1),0,100,C.muscle,2.4,[2,3]);
+  line(g.X(sev*100),g.y,g.X(sev*100),g.y+g.h,C.accent,2);
+  txt(566,598,"pain",{size:11,weight:700,color:C["pain-ink"]});txt(616,598,"numbness",{size:11,weight:700,color:C["ink-soft"]});txt(690,598,"weakness",{size:11,weight:700,color:C["muscle-ink"]});
+}
+function simA11y(){const r=simRootFor(SM.level,SM.cause);const fx=simFx(r,SM.sev);const R=RT[r];const s=Math.round(SM.sev*100);
+  return [`Simulator: ${SM.level}, ${r} root squeezed ${s} percent. Strength ${Math.round(fx.str*10)/10} of 5. ${fx.own?REFNAME[fx.kind]+" reflex "+gradeTxt(fx.grade):"No standard reflex for "+r}.`,
+   `Top left: ${simZone()==="cerv"||SM.cause==="fo"?"a side view of the "+SM.level+" foramen":"a view from above of the "+SM.level+" disc"}, where ${SM.cause==="disc"?"blue disc material":"bone spurs and a thinner disc"} press on the yellow ${r} root, which turns ${s>40?"red and flattened":s>8?"orange":"yellow and round"}. Top right: front and back body outlines; the ${r} skin area (${R.derm}) on the ${SM.side==="R"?"right":"left"} side ${s>8?"pulses red with radicular pain":"is not lit"}${fx.numb>.1?" and is covered with grey hatching for numbness":""}. Bottom left: ${MVNAME[R.mv]} with a strength bar at ${Math.round(fx.str*10)/10} of 5. Bottom middle: a reflex hammer tests the ${REFNAME[fx.kind]} reflex, graded ${fx.own?gradeTxt(fx.grade):"2+ (this root has no standard reflex)"}. Bottom right: a graph of pain, numbness and weakness rising with compression, with a line at ${s} percent.`]}
+/* ================= PART 2: which root? trainer ================= */
+const CTYPES=[["find","Findings to root"],["disc","Disc or foramen level to root"],["pattern","Name the pattern"],["predict","Predict, then watch the reflex"],["mix","Mixed practice"]];
+const GKEYS=["find","disc","pattern","predict"];
+const NAMES=["Ana","Ben","Chloe","Dev","Elena","Femi","Grace","Hugo","Iris","Jon","Kemi","Luis","Maya","Nadia","Omar","Priya","Quinn","Rosa","Sam","Tariq","Uma","Victor","Wen","Yara","Zoe"];
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function ri(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+const DERMV={C5:["numb skin over the outer upper arm","tingling over the outer shoulder and upper arm"],C6:["numb thumb and index finger","tingling in the thumb and the outer forearm"],C7:["numb middle finger","tingling in the middle finger"],C8:["numb little and ring fingers","numb little finger and the inner edge of the hand"],T1:["numb strip on the inner forearm"],L2:["numb patch on the upper front thigh"],L3:["numb lower front thigh and inner knee"],L4:["numb inner lower leg down to the inner ankle"],L5:["numb top of the foot and big toe","tingling across the top of the foot to the big toe"],S1:["numb outer edge of the foot and the sole","numb little toe and outer heel"]};
+const MUSV=[["weak shoulder abduction (lifting the arm out to the side)",["C5"],"abd"],["weak elbow flexion",["C5","C6"],"elbF"],["weak wrist extension (bending the hand back)",["C6"],"wrE"],["weak elbow extension (straightening the elbow)",["C7"],"elbE"],["weak grip (finger flexion)",["C8"],"finF"],["weak finger spreading (finger abduction)",["T1"],"finA"],["weak hip flexion (lifting the thigh)",["L2"],"hipF"],["weak knee extension (straightening the knee)",["L3","L4"],"kneE"],["weak ankle dorsiflexion (pulling the foot up)",["L4"],"dorsi"],["weak big toe extension (lifting the big toe)",["L5"],"toeE"],["weak plantarflexion (rising on the toes)",["S1"],"plant"]];
+const REFV=[["reduced biceps reflex",["C5","C6"],"biceps"],["reduced brachioradialis reflex",["C6"],"brachio"],["reduced triceps reflex",["C7"],"triceps"],["reduced patellar (knee) reflex",["L3","L4"],"patellar"],["reduced Achilles (ankle) reflex",["S1"],"achilles"]];
+const PAINV=[["pain shooting from the neck down the arm",["C5","C6","C7","C8","T1"]],["pain down the back of the leg below the knee",["L5","S1"]],["pain down the front of the thigh",["L2","L3","L4"]]];
+function cluesFor(r){const L=[];DERMV[r].forEach(t=>L.push({t,set:[r],ty:"numb",root:r}));MUSV.forEach(m=>{if(m[1].indexOf(r)>=0)L.push({t:m[0],set:m[1],ty:"weak",mv:m[2]})});REFV.forEach(m=>{if(m[1].indexOf(r)>=0)L.push({t:m[0],set:m[1],ty:"ref",k:m[2]})});return L}
+function solveClues(cl){let c=ROOTS.slice();cl.forEach(k=>{c=c.filter(r=>k.set.indexOf(r)>=0)});return c}
+const GEN={
+ find(){const r=pick(ROOTS);const all=cluesFor(r);let best=null;
+   for(let tries=0;tries<60;tries++){const n=ri(2,3);const sub=shuffle(all).slice(0,n);const pain=PAINV.find(p=>p[1].indexOf(r)>=0);if(pain&&Math.random()<.45)sub.unshift({t:pain[0],set:pain[1],ty:"pain"});
+     if(solveClues(sub).length===1&&new Set(sub.map(s=>s.t)).size===sub.length){best=sub;break}}
+   if(!best)return null;const nm=pick(NAMES),age=ri(24,68),side=pick(["right","left"]);
+   const spec=best.filter(c=>c.set.length===1)[0]||best[best.length-1];const two=ROOTS.filter(x=>x!==r&&RT[x].reg===RT[r].reg);const other=pick(two);
+   return {title:"Which root?",html:`<span class="pt">Findings to root</span>${nm}, ${age}, has these findings on the ${side} side:<ul>${best.map(c=>`<li>${c.t}</li>`).join("")}</ul>Which root fits best?`,
+    choices:ROOTS.slice(),ans:ROOTS.indexOf(r),hints:[RT[r].reg==="arm"?"Start with the region: these findings are in the arm and hand, so think C5 to T1.":"Start with the region: these findings are in the leg and foot, so think L2 to S1.",
+      `Take the most specific clue: "${spec.t}" points to ${spec.set.join(" or ")}.`,`It is ${[r,other].sort().join(" or ")}. Check whether every clue fits.`],
+    why:`${r} fits every clue: skin ${RT[r].dermS}, key muscle ${RT[r].musS}, reflex ${RT[r].refS}.`,wrong:i=>{const x=ROOTS[i];const bad=best.find(c=>c.set.indexOf(x)<0);return bad?`${x} does not fit "${bad.t}". That clue points to ${bad.set.join(" or ")}.`:`${x} does not fit all the clues.`},
+    vis:{k:"find",root:r,clues:best,side:side==="right"?"R":"L"},solve:()=>solveClues(best)}},
+ disc(){const mode=pick(["cerv","cspur","pl","far"]);let lvl,r,html,rule;
+   if(mode==="cerv"||mode==="cspur"){lvl=pick(LEVELS.cerv);r=CERVROOT[lvl];html=mode==="cerv"?`A disc herniation in the neck at <b>${lvl}</b> presses on the root in that foramen.`:`Uncovertebral bone spurs narrow the <b>${lvl}</b> foramen in the neck.`;rule="In the neck, the root in a foramen has the number of the LOWER vertebra, and C8 sits between C7 and T1."}
+   else if(mode==="pl"){lvl=pick(LEVELS.lumb);r=LDISC[lvl];html=`A <b>posterolateral</b> disc herniation at <b>${lvl}</b> in the low back.`;rule="In the low back, a posterolateral disc usually hits the traversing root: the one that exits one level lower."}
+   else{lvl=pick(LEVELS.lumb.slice(1));r=LFO[lvl];html=`A <b>far lateral</b> (foraminal) disc herniation at <b>${lvl}</b> in the low back.`;rule="A far lateral herniation sits in the foramen and hits the exiting root: the one numbered for the UPPER vertebra."}
+   const two=lvl.split(" ");const alt=mode==="pl"?LFO[lvl]:mode==="far"?LDISC[lvl]:(two[0].startsWith("C")?two[0]:CERVROOT[lvl]);
+   return {title:"Which root?",html:`<span class="pt">Level to root</span>${html} Which root is most likely affected?`,choices:ROOTS.slice(),ans:ROOTS.indexOf(r),
+    hints:[mode==="cerv"||mode==="cspur"?"Neck roots exit ABOVE the vertebra with the same number.":"Below the neck, each root exits BELOW its own vertebra.",rule,`It is ${[r,alt].filter((v,i,a)=>a.indexOf(v)===i&&ROOTS.indexOf(v)>=0).sort().join(" or ")}.`],
+    why:`${r}. ${rule}`,wrong:i=>`${ROOTS[i]} is not the usual root for this. ${rule}`,vis:{k:"disc",mode,lvl,root:r},solve:()=>[r]}},
+ pattern(){const P5=["Radicular pain only","Radiculopathy","Somatic referred pain","Myelopathy: refer promptly","Possible cauda equina syndrome: emergency"];const k=ri(0,4);const nm=pick(NAMES),age=ri(28,72);let f=[],tags=[];
+   if(k===0){f=[pick(["sharp, electric pain shooting down the back of the leg below the knee","shooting pain from the neck down the arm into the hand"]),pick(["pain is worse with coughing or sneezing","pain follows a narrow band"]),"sensation, strength and reflexes are normal"];tags=["pain"]}
+   else if(k===1){const r=pick(ROOTS);const cl=cluesFor(r);f=[pick(cl.filter(c=>c.ty==="numb")).t,(cl.find(c=>c.ty==="weak")||{t:"weak "+RT[r].musS}).t];const rf=cl.find(c=>c.ty==="ref");if(rf)f.push(rf.t);tags=["deficit"]}
+   else if(k===2){f=[pick(["a deep, dull ache in the buttock and back of the thigh that stops above the knee","a vague ache spreading across the low back and buttock"]),"hard to point to with one finger","sensation, strength and reflexes are normal"];tags=["referred"]}
+   else if(k===3){f=shuffle(["clumsy hands and trouble with buttons","brisk reflexes in the arms and legs","a positive Hoffmann sign","an upgoing big toe (Babinski sign)","feeling unsteady when walking"]).slice(0,3);f.unshift("neck stiffness");tags=["cord"]}
+   else{f=shuffle(["numbness in the saddle area","new difficulty passing urine","pain and tingling in both legs","loss of bowel control"]).slice(0,3);f.unshift("low back pain");tags=["cauda"]}
+   const why=["Pain from an irritated root with a normal neurological exam is radicular pain without radiculopathy.","Loss of function in one root's territory (numbness, weakness, smaller reflex) is radiculopathy.","A deep ache with fuzzy edges, above the knee, and a normal exam fits somatic referred pain.","Brisk reflexes and upper motor neuron signs point to the spinal cord: myelopathy needs prompt medical evaluation.","Saddle numbness, bladder or bowel changes or symptoms in both legs suggest cauda equina syndrome: same day emergency referral."];
+   const pair=[[0,2],[1,0],[2,0],[3,1],[4,1]][k];
+   return {title:"Name the pattern",html:`<span class="pt">Name the pattern</span>${nm}, ${age}, reports or shows:<ul>${f.map(x=>`<li>${x}</li>`).join("")}</ul>Which pattern fits best?`,choices:P5,ans:k,wide:true,
+    hints:["First ask: is there any loss of function, such as numbness, weakness or a reflex change?","Next ask: are reflexes reduced (root) or brisk (cord)? Are there saddle, bladder or bowel changes, or symptoms in both legs?",`It is ${P5[pair[0]]} or ${P5[pair[1]]}.`],
+    why:why[k],wrong:i=>`${P5[i]} would need different findings. ${why[i]}`,vis:{k:"pattern",pat:k,feats:f},solve:()=>[P5[k]]}},
+ predict(){const mode=Math.random()<.22?"cord":"root";let r,kind,eff,html;
+   if(mode==="cord"){kind=pick(["patellar","achilles","triceps"]);eff=2;html=`The spinal cord in the neck is compressed (myelopathy). What happens to the <b>${REFNAME[kind]}</b> reflex?`;r=null}
+   else{r=pick(ROOTS);const own=RT[r].ref;kind=Math.random()<.6&&own?own:pick(["biceps","brachio","triceps","patellar","achilles"]);eff=(RT[r].ref===kind||(r==="C6"&&kind==="biceps")||(r==="L3"&&kind==="patellar")||(r==="C5"&&kind==="biceps"))?0:1;
+     html=`The <b>${r}</b> root is squeezed hard. What happens to the <b>${REFNAME[kind]}</b> reflex?`}
+   const ch=["Reduced","Stays about the same","Brisker"];
+   const why=mode==="cord"?"Cord compression removes the brain's calming signals on reflexes below the level, so reflexes get brisker.":eff===0?`The ${REFNAME[kind]} reflex runs through ${REFROOT[kind]}${kind==="patellar"?" (with help from L3)":""}, so squeezing ${r} reduces it.`:`The ${REFNAME[kind]} reflex runs through ${REFROOT[kind]}, not ${r}, so it stays about the same.`;
+   return {title:"Predict, then watch",html:`<span class="pt">Predict, then watch</span>${html}`,choices:ch,ans:eff,wide:true,
+    hints:["Each reflex runs through particular roots: biceps C5 C6, brachioradialis C6, triceps C7, patellar L4 (with L3), Achilles S1.",mode==="cord"?"A cord problem is an upper motor neuron problem.":`Ask: does the ${REFNAME[kind]} reflex use the ${r} root?`,mode==="cord"?"Upper motor neuron problems turn reflexes up, not down.":"A squeezed root turns its own reflex down and leaves the others alone."],
+    why,wrong:i=>["A reflex goes down when its own root is squeezed.","A reflex stays the same when the squeezed root is not part of its arc.","Reflexes get brisker with a spinal cord problem, not a single root."][i]+" "+why,vis:{k:"predict",kind,eff,r,mode},solve:()=>[ch[eff]]}}};
+function genOne(k){let q=null;for(let i=0;i<40&&!q;i++){try{q=GEN[k]()}catch(e){console.error(e);q=null}}q.kind=k;return q}
+const TR={type:"find",p:null,hint:0,first:true,sol:false,solved:false,pick:null,streak:0,best:0,count:0,solT:0};
+function trainMsg(c,t){const m=$("#trainMsg");m.className="msg show "+c;m.textContent=t}
+function trainNew(){const k=TR.type==="mix"?pick(GKEYS):TR.type;TR.p=genOne(k);TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;TR.pick=null;
+  $("#trainProb").innerHTML=TR.p.html;const box=$("#trainChoices");box.className="choicegrid"+(TR.p.wide?" wide":"");box.innerHTML="";
+  TR.p.choices.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=c;b.onclick=()=>trainPick(i);box.appendChild(b)});
+  $("#trainMsg").className="msg";$("#trainHintBox").hidden=true;$("#trainCap").textContent=capFor();a11yKey=""}
+function capFor(){const v=TR.p.vis;if(v.k==="find")return TR.sol||TR.solved?"Clues cross off roots until one is left: "+v.root+".":"The findings drawn on the body and the clue cards. Which root fits all of them?";
+  if(v.k==="disc")return TR.sol||TR.solved?`The ${v.lvl} level with the ${v.root} root highlighted.`:`The spine at ${v.lvl}. Which root is in the way?`;
+  if(v.k==="pattern")return "The findings from the story, drawn as cards.";return TR.solved||TR.sol?"Watch the reflex respond.":"Predict first, then watch the reflex."}
+function trainPick(i){const p=TR.p;TR.pick=i;const opts=$("#trainChoices").querySelectorAll(".opt");opts.forEach(o=>o.classList.remove("wrong"));
+  if(i===p.ans){opts[i].classList.add("right");if(!TR.solved){TR.count++;if(TR.first&&!TR.sol){TR.streak++;TR.best=Math.max(TR.best,TR.streak);store.set("best",TR.best)}TR.solved=true;TR.solT=performance.now()}trainMsg("good","✓ "+p.why)}
+  else{opts[i].classList.add("wrong");TR.first=false;TR.streak=0;trainMsg("warn","Not quite. "+p.wrong(i))}
+  updTrainMeter();$("#trainCap").textContent=capFor();a11yKey=""}
+function judgeTrain(p,i){return i===p.ans}
+function updTrainMeter(){$("#trainStreak").textContent=TR.streak;$("#trainBest").textContent=TR.best;$("#trainSolved").textContent=TR.count}
+function trainInit(){const sel=$("#trainType");sel.innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");sel.onchange=()=>{TR.type=sel.value;trainNew()};
+  $("#trainHint").onclick=()=>{const p=TR.p;const b=$("#trainHintBox");if(TR.hint<p.hints.length)TR.hint++;b.hidden=false;b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Try it, or press Show worked solution.</div>`:"")};
+  $("#trainSol").onclick=()=>{TR.sol=true;TR.solT=performance.now();TR.streak=0;updTrainMeter();trainMsg("info","Worked solution: "+TR.p.choices[TR.p.ans]+". "+TR.p.why);$("#trainCap").textContent=capFor();a11yKey=""};
+  $("#trainNew").onclick=trainNew;TR.best=+(store.get("best")||0);updTrainMeter()}
+/* ---------- trainer drawing ---------- */
+function drawTrain(now){use(S2);const T=now/1000;const p=TR.p,v=p.vis;const show=TR.sol||TR.solved;const st=show?(now-TR.solT)/1000:0;
+  if(v.k==="find"){panelBox(10,10,330,500);txt(22,30,"THE WHOLE PERSON",{size:11,weight:700,mono:true,color:C.act1});
+    const hl={};v.clues.forEach(c=>{if(c.ty==="numb")hl[c.root]={mode:"numb",side:v.side};if(c.ty==="pain")c.set.forEach((q,j)=>hl[q+"#p"+j]={mode:"pain",a:.18+.12*Math.sin(T*3),side:v.side,edge:false})});
+    bodyFig(98,52,360,{hl,skin:C.skin4});bodyFig(250,52,360,{view:"back",hl,skin:C.skin4});txt(98,438,"front",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});txt(250,438,"back",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+    txt(175,476,v.side==="R"?"right side":"left side",{size:12,weight:700,align:"center"});
+    panelBox(350,10,440,500);txt(362,30,"CLUES",{size:11,weight:700,mono:true,color:C.accent});
+    v.clues.forEach((c,i)=>{const y=52+i*76;cardBox(362,y,286,68,c.ty==="pain"?C.pain:c.ty==="numb"?C.numb:c.ty==="weak"?C.muscle:C.act5,show&&st>i*1.2&&st<i*1.2+1.2);
+      txt(374,y+16,["pain","numb","weak","ref"].indexOf(c.ty)>=0?{pain:"pain",numb:"skin",weak:"muscle",ref:"reflex"}[c.ty].toUpperCase():"",{size:10.5,weight:700,mono:true,color:C["ink-soft"]});wrapText(c.t,374,y+36,226,15,{size:12.5,weight:600});
+      if(c.ty==="weak")strengthBarMini(612,y+10,3.5);if(c.ty==="ref"){circ(624,y+34,15,C["warn-wash"],C.warn,2);txt(624,y+34,"1+",{size:12,weight:700,mono:true,align:"center"})}});
+    // root column
+    let alive=ROOTS.slice();if(show){v.clues.forEach((c,i)=>{if(st>i*1.2+.6)alive=alive.filter(r=>c.set.indexOf(r)>=0)})}
+    ROOTS.forEach((r,j)=>{const y=40+j*46;const on=alive.indexOf(r)>=0;const fin=show&&alive.length===1&&on;rr(668,y,108,34,6);ctx.fillStyle=fin?C.nerve:on?hexA(C.nerve,.22):hexA(C.sunk,.7);ctx.fill();ctx.strokeStyle=fin?C["nerve-edge"]:C.rule;ctx.lineWidth=fin?2.4:1;ctx.stroke();
+      txt(722,y+17,r,{size:13.5,weight:700,mono:true,align:"center",color:on?(fin?"#10161A":C.ink):C["ink-faint"]});if(!on)line(678,y+17,766,y+17,C["ink-faint"],1.4)});
+    if(!show)txt(570,496,"Pick a root, or open the worked solution.",{size:12,weight:600,align:"center",color:C["ink-soft"]})}
+  else if(v.k==="disc"){panelBox(10,10,780,500);txt(22,30,"THE TISSUE",{size:11,weight:700,mono:true,color:C.act2});
+    if(v.mode==="cerv"||v.mode==="cspur"){const O=column(240,30,460,"cerv",{hl:show?v.root:null,T});const two=v.lvl.split(" ");const a=O.vert[two[0]],b=O.vert[two[1]];if(a&&b)withA(.5+.5*Math.sin(T*3),()=>{rr(a[0]-40,a[1]-16,80,b[1]-a[1]+32,8);ctx.strokeStyle=C.accent;ctx.lineWidth=2.4;ctx.setLineDash([6,4]);ctx.stroke();ctx.setLineDash([])});
+      const G=segLat(560,270,{s:1.05,cerv:true,disc:v.mode==="cerv"?.7+.2*Math.sin(T):0,unc:v.mode==="cspur"?.8:0,facet:v.mode==="cspur"?.4:0,T});txt(600,60,v.lvl+" foramen",{size:14,weight:700,align:"center"});
+      if(G.root)label(G.root[0]+56,G.root[1]-30,show?v.root+" root":"which root?",{size:13,weight:700,mono:true,bg:show?C.nerve:C.panel,color:show?"#10161A":C.ink,border:C["nerve-edge"]})}
+    else{const O=coronalL(240,60,1.2,{hit:show?v.root:null,side:-1,type:v.mode,amt:.75+.2*Math.sin(T*1.5)});
+      ["L4","L5","S1"].forEach(r=>{if(O[r])label(O[r][0]-14,O[r][1]+10,r,{size:11.5,weight:700,mono:true,bg:C.nerve,color:"#10161A"})});
+      const A=axialL(590,200,{s:1.25,type:v.mode,amt:.75+.2*Math.sin(T*1.5),side:-1});txt(590,40,"the "+v.lvl+" disc from above",{size:14,weight:700,align:"center"});
+      txt(240,460,"seen from behind (only L4 to S1 drawn)",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+      label(590,420,show?"answer: "+v.root:(v.mode==="pl"?"posterolateral herniation":"far lateral herniation"),{size:14,weight:700,border:show?C["nerve-edge"]:C.disc,bg:show?C.nerve:C.panel,color:show?"#10161A":C.ink})}}
+  else if(v.k==="pattern"){panelBox(10,10,780,500);txt(22,30,"THE FINDINGS",{size:11,weight:700,mono:true,color:C.accent});
+    const k=v.pat;const hl={};if(k===4){["S3","S4","S5"].forEach(q=>hl[q]={mode:"numb"});hl["S1#b"]={mode:"pain",a:.4,side:"B"};hl["L5#b"]={mode:"pain",a:.3,side:"B"}}
+    if(k===0){const arm=v.feats.some(f=>/arm/.test(f));hl[arm?"C6":"S1"]={mode:"pain",a:.4+.25*Math.sin(T*4),side:"R"}}
+    const F=bodyFig(140,44,420,{view:"back",hl,skin:C.skin1});if(k===2){const b=figSeg(F,"torso",1).pt(.92,.45),t=figSeg(F,"tg",1).pt(.3,.5);glow(b[0],b[1],46,C.pain,.4+.15*Math.sin(T*2));glow(t[0],t[1],36,C.pain,.3)}
+    v.feats.forEach((f,i)=>{const y=54+i*80;cardBox(290,y,480,66,C.rule,false);wrapText(f,306,y+34,450,16,{size:13.5,weight:600})});
+    if(show){label(530,470,p.choices[p.ans],{size:14,weight:700,border:k>=3?C.bad:C.good})}}
+  else{panelBox(10,10,780,500);txt(22,30,"PREDICT, THEN WATCH",{size:11,weight:700,mono:true,color:C.act5});
+    const g=show?(v.eff===0?1:v.eff===1?2:3.6):2;const kind=v.kind;
+    const pos={patellar:[330,330,1.7],achilles:[320,330,1.6],biceps:[330,330,1.6],triceps:[330,330,1.6],brachio:[320,330,1.6]}[kind];
+    if(show)reflexScene(kind,pos[0],pos[1],pos[2],T,g,{skin:C.skin2});else{reflexScene(kind,pos[0],pos[1],pos[2],0,0,{skin:C.skin2});label(330,90,"predict first",{size:14,weight:700,border:C.gold})}
+    txt(640,60,REFNAME[kind]+" reflex",{size:15,weight:700,align:"center"});txt(640,84,"runs through "+REFROOT[kind],{size:13,weight:600,align:"center",color:C["nerve-ink"]});
+    reflexMeter(520,110,240,show?g:-1);
+    if(v.mode==="cord"){label(640,200,"cervical cord compressed",{size:13,weight:700,border:C.bad})}else label(640,200,v.r+" root squeezed",{size:13,weight:700,mono:true,bg:mix(C.nerve,C.pain,.6),color:"#10161A"});
+    if(show)wrapText(p.why,520,260,250,17,{size:13,weight:600})}
+}
+function strengthBarMini(x,y,s){rr(x,y,12,48,3);ctx.fillStyle=hexA(C.sunk,.9);ctx.fill();const f=s/5;rr(x,y+48*(1-f),12,48*f,3);ctx.fillStyle=C.muscle;ctx.fill();txt(x+18,y+24,s+"/5",{size:11,weight:700,mono:true})}
+function trainA11y(){const p=TR.p,v=p.vis;const ans=TR.solved||TR.sol?" Answer: "+p.choices[p.ans]+".":"";
+  const lab=`Practice problem, ${CTYPES.find(c=>c[0]===p.kind)[1]}.${TR.pick!=null?" You picked "+p.choices[TR.pick]+".":""}${ans}`;
+  let d="";if(v.k==="find")d=`Front and back body outlines show the findings on the ${v.side==="R"?"right":"left"} side: ${v.clues.map(c=>c.t).join("; ")}. A column of ten root tags on the right ${TR.solved||TR.sol?"crosses off roots that do not fit each clue until only "+v.root+" is left, glowing yellow":"waits for your answer"}.`;
+  else if(v.k==="disc")d=v.mode==="cerv"||v.mode==="cspur"?`A side view of the neck spine with the ${v.lvl} level outlined, and a close up of that foramen with ${v.mode==="cerv"?"a blue disc bulge":"bone spurs"} pressing on a yellow root${TR.solved||TR.sol?", labelled "+v.root:""}.`:`A view from behind of L4, L5 and the sacrum with roots leaving the sac, and a view from above of the ${v.lvl} disc with a ${v.mode==="pl"?"posterolateral":"far lateral"} herniation${TR.solved||TR.sol?"; the "+v.root+" root turns red":""}.`;
+  else if(v.k==="pattern")d=`A back view figure and cards listing: ${v.feats.join("; ")}.`;
+  else d=`A reflex test of the ${REFNAME[v.kind]} reflex. ${TR.solved||TR.sol?"The hammer taps and the limb responds, graded "+gradeTxt(v.eff===0?1:v.eff===1?2:3.6)+".":"The hammer waits until you predict."}`;
+  return [lab,d]}
+/* ================= PART 3: root match game ================= */
+function binSVG(k){const sv=s=>`<svg viewBox="0 0 56 46" aria-hidden="true">${s}</svg>`;
+  const T_=(x,y,t,sz,c)=>`<text x="${x}" y="${y}" font-size="${sz||12}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-weight="700" fill="${c||"var(--ink)"}">${t}</text>`;
+  if(/^[CTLS]\d$/.test(k)){const arm=RT[k]&&RT[k].reg==="arm";return sv(`<rect x="4" y="6" width="22" height="13" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><rect x="4" y="22" width="22" height="4" rx="2" fill="var(--disc)"/><rect x="4" y="29" width="22" height="13" rx="3" fill="var(--bone)" stroke="var(--bone-edge)"/><path d="M26 24 Q36 24 50 ${arm?16:36}" fill="none" stroke="var(--nerve)" stroke-width="4" stroke-linecap="round"/><circle cx="34" cy="24" r="3.5" fill="var(--drg)" stroke="var(--nerve-edge)"/>`+T_(15,16,k,8.5)+T_(15,39,"",8))}
+  switch(k){
+  case "rad":return sv('<path d="M30 4 L18 24 H28 L22 42 L40 18 H30 L36 4 Z" fill="var(--pain)"/>');
+  case "rdp":return sv('<rect x="8" y="8" width="40" height="30" rx="4" fill="var(--numb)" fill-opacity=".45" stroke="var(--ink-soft)"/><path d="M8 20 L20 8 M8 32 L32 8 M14 38 L44 8 M26 38 L48 16 M38 38 L48 28" stroke="var(--ink)" stroke-width="1.5"/>');
+  case "ref":return sv('<circle cx="16" cy="24" r="8" fill="var(--disc)"/><circle cx="40" cy="24" r="13" fill="var(--pain)" fill-opacity=".35"/><path d="M24 24 H30" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="2 2"/>');
+  case "mye":return sv('<ellipse cx="28" cy="23" rx="20" ry="16" fill="var(--csf)" stroke="var(--dura)" stroke-width="2"/><ellipse cx="28" cy="27" rx="13" ry="6" fill="var(--cord)" stroke="var(--cord-edge)" stroke-width="1.5"/><ellipse cx="28" cy="12" rx="10" ry="5" fill="var(--disc)"/>');
+  case "ces":return sv('<path d="M28 4 L52 42 H4 Z" fill="var(--bad-wash)" stroke="var(--bad)" stroke-width="2.5"/>'+T_(28,36,"!",20,"var(--bad)"));
+  }return sv("")}
+const SROUNDS=[
+{name:"Arm roots: the skin",goal:"Match each skin area of the arm and hand to its root.",bins:[["C5","C5"],["C6","C6"],["C7","C7"],["C8","C8"],["T1","T1"]],cards:[
+ ["Outer upper arm","C5","C5: the outer upper arm, over the shoulder toward the elbow"],["Thumb","C6","C6: the thumb is the classic C6 landmark"],["Index finger","C6","C6: thumb and index finger"],["Outer forearm","C6","C6: the outer (thumb side) forearm"],
+ ["Middle finger","C7","C7: the middle finger"],["Little finger","C8","C8: little finger"],["Ring finger","C8","C8: ring and little fingers"],["Inner forearm","T1","T1: the inner forearm"]]},
+{name:"Arm roots: muscles and reflexes",goal:"Match each key movement or reflex to its main root. One card fits two boxes.",bins:[["C5","C5"],["C6","C6"],["C7","C7"],["C8","C8"],["T1","T1"]],cards:[
+ ["Shoulder abduction","C5","C5: lifting the arm out to the side (deltoid)"],["Biceps reflex",["C5","C6"],"C5 and C6: the biceps reflex uses both"],["Wrist extension","C6","C6: bending the hand back"],["Brachioradialis reflex","C6","C6: the brachioradialis reflex"],
+ ["Elbow extension","C7","C7: straightening the elbow (triceps)"],["Triceps reflex","C7","C7: the triceps reflex"],["Finger flexion (grip)","C8","C8: gripping with the fingers"],["Finger abduction (spreading)","T1","T1: spreading the fingers apart"]]},
+{name:"Leg roots: the skin",goal:"Match each skin area of the leg and foot to its root.",bins:[["L2","L2"],["L3","L3"],["L4","L4"],["L5","L5"],["S1","S1"]],cards:[
+ ["Upper front thigh","L2","L2: the upper front of the thigh"],["Lower front thigh","L3","L3: the lower thigh above the knee"],["Inner knee","L3","L3: the inner side of the knee"],["Inner lower leg","L4","L4: down the inner (medial) lower leg"],["Inner ankle","L4","L4: down to the inner ankle"],
+ ["Top of the foot","L5","L5: the top of the foot"],["Big toe","L5","L5: the big toe"],["Little toe","S1","S1: the little toe and outer edge of the foot"],["Sole of the foot","S1","S1: the sole and heel"]]},
+{name:"Leg roots: muscles and reflexes",goal:"Match each key movement or reflex to its main root. One card fits two boxes.",bins:[["L2","L2"],["L3","L3"],["L4","L4"],["L5","L5"],["S1","S1"]],cards:[
+ ["Hip flexion","L2","L2: lifting the thigh"],["Knee extension",["L3","L4"],"L3 and L4: straightening the knee (quadriceps)"],["Patellar reflex","L4","L4: the knee jerk, with some help from L3"],["Ankle dorsiflexion","L4","L4: pulling the foot up (tibialis anterior)"],
+ ["Big toe extension","L5","L5: lifting the big toe"],["Plantarflexion","S1","S1: pointing the foot down"],["Rising on the toes","S1","S1: the calf muscles"],["Achilles reflex","S1","S1: the ankle jerk"]]},
+{name:"Which pattern?",goal:"Sort each finding into the pattern it points to most.",bins:[["rad","Radicular pain"],["rdp","Radiculopathy"],["ref","Referred pain"],["mye","Myelopathy (refer)"],["ces","Emergency: cauda equina"]],cards:[
+ ["Electric pain shooting down the leg below the knee","rad","Radicular pain: shooting pain in a narrow band from an irritated root"],["Arm pain that follows a narrow band to the thumb","rad","Radicular pain: it follows the root's band"],
+ ["Reduced Achilles reflex and numb outer foot","rdp","Radiculopathy: lost function in one root (S1)"],["Weak big toe extension","rdp","Radiculopathy: weakness in a key muscle (L5)"],
+ ["Deep ache in the buttock with a normal neuro exam","ref","Referred pain: deep, vague, and the exam is normal"],["Left arm pain coming from the heart","ref","Referred pain: visceral pain felt in the arm"],
+ ["Brisk reflexes and a Babinski sign","mye","Myelopathy: upper motor neuron signs point to the cord"],["Hoffmann sign and clumsy hands","mye","Myelopathy: cord compression in the neck"],
+ ["Saddle numbness","ces","Emergency: saddle numbness suggests cauda equina syndrome"],["New trouble passing urine with sciatica","ces","Emergency: bladder change with back or leg pain"],["Symptoms in both legs with bowel changes","ces","Emergency: many roots involved"]]}];
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.innerHTML=(c[3]||"")+"<span>"+c[0]+"</span>";b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.innerHTML=(c[3]||"")+"<span>✓ "+c[0]+"</span>";items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Think about where it fits on the map, try another box, or press Hint.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+/* ================= PART 4: in the clinic ================= */
+const LS={i:0,ans:{}};
+function bladderIcon(x,y,s,T,alert){ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(-18*s,-8*s);ctx.quadraticCurveTo(-22*s,22*s,0,24*s);ctx.quadraticCurveTo(22*s,22*s,18*s,-8*s);ctx.quadraticCurveTo(0,-26*s,-18*s,-8*s);ctx.closePath();fillStroke(hexA(C.disc,.25),C["disc-ink"],2);
+  line(0,24*s,0,36*s,C["disc-ink"],3);if(alert){txt(0,2*s,"?",{size:18*s,weight:700,align:"center",color:C.bad})}ctx.restore()}
+function handFumble(x,y,s,T){const sk=C.skin4,ed=hexA(C.ink,.55);const j=Math.sin(T*9)*3*s;rr(x-20*s,y-18*s,46*s,40*s,10*s);fillStroke(sk,ed,1.4);
+  for(let i=0;i<4;i++){const bx=x-14*s+i*11*s;capsule(bx,y-18*s,bx+j*(i%2?1:-1),y-50*s,9*s,sk,ed,1.2)}capsule(x-20*s,y+8*s,x-42*s,y-14*s+j,10*s,sk,ed,1.2);
+  // a button falling
+  const p=P(T,2.2);circ(x+40*s,y-30*s+p*90*s,7*s,C.accent,hexA(C.ink,.5),1.2);circ(x+38*s,y-31*s+p*90*s,1.4*s,C.panel);circ(x+42*s,y-29*s+p*90*s,1.4*s,C.panel)}
+const LIFE=[
+{name:"Sciatica after lifting",who:"Scenario 1 · a low back clinic",
+ story:"Jordan, 38, felt a sharp pull in the low back while lifting a heavy box two days ago. Today the pain shoots from the right buttock down the back of the calf to the outer edge of the foot, with tingling in the little toe. On exam, the right Achilles reflex is 1+ (left 2+), and Jordan can rise on the right toes only a few times. There are no bladder or bowel changes and no numbness between the legs.",
+ cap:"Pain runs down the back of the right leg to the outer foot; the right Achilles reflex is reduced.",
+ desc:"On the left, a back view figure has a red striped band down the back of the right calf, heel and outer foot that pulses, with red sparks running down the leg. In the middle, a view from above of the L5 S1 disc shows a blue herniation pushing back and to one side, squashing the traversing S1 root, which turns red. On the right, a reflex hammer taps the back of an ankle and the foot gives only a small twitch, with a reflex scale highlighted at 1+.",
+ draw(T){panelBox(10,10,250,480);txt(22,30,"THE WHOLE PERSON",{size:11,weight:700,mono:true,color:C.act1});
+   const F=bodyFig(135,48,400,{view:"back",skin:C.skin2,hl:{S1:{mode:"pain",a:.4+.3*Math.sin(T*4),side:"R"},"S1#n":{mode:"ting",a:.35,side:"R",edge:false}}});
+   const pts=[figSeg(F,"tg",1).pt(.05,.5),figSeg(F,"tg",1).pt(.9,.5),figSeg(F,"sk",1).pt(.5,.25),figSeg(F,"ft",1).pt(.6,.05)];for(let i=0;i<3;i++){const q=along(pts,P(T*.7+i/3,1));glow(q[0],q[1],16,C.pain,.7)}
+   txt(135,470,"right side",{size:12,weight:700,align:"center"});
+   panelBox(270,10,260,480);txt(282,30,"THE TISSUE",{size:11,weight:700,mono:true,color:C.act2});
+   const A=axialL(400,190,{s:1.05,type:"pl",amt:.75+.15*Math.sin(T),side:1});txt(400,48,"L5 S1 disc from above",{size:12.5,weight:700,align:"center"});lead(A.R.tr1[0],A.R.tr1[1],480,330,"S1 root",{size:12});
+   panelBox(540,10,250,480);txt(552,30,"THE REFLEX",{size:11,weight:700,mono:true,color:C.act5});
+   ctx.save();ctx.beginPath();ctx.rect(542,40,246,300);ctx.clip();reflexScene("achilles",660,250,1.2,T,1,{skin:C.skin2});ctx.restore();reflexMeter(556,370,220,1);txt(665,430,"right Achilles: 1+",{size:13,weight:700,align:"center"});txt(665,452,"left Achilles: 2+",{size:12.5,weight:600,align:"center",color:C["ink-soft"]})},
+ qs:[{q:"Which root fits Jordan's findings best?",opts:[["S1",1,"Back of the calf to the outer foot, little toe tingling, weak rising on the toes and a reduced Achilles reflex all point to S1."],["L5",0,"L5 affects the top of the foot and big toe and has no standard reflex. The outer foot and Achilles point to S1."],["L4",0,"L4 affects the inner lower leg and the patellar reflex, not the Achilles."],["L3",0,"L3 affects the front of the thigh and knee."]]},
+  {q:"How could you explain the likely course to Jordan?",opts:[["Most people with this pattern improve over weeks to months, and we will watch for any warning signs",1,"Accurate and reassuring: the natural history is usually good, while red flags and worsening weakness are monitored."],["This will need surgery to get better",0,"Most disc related radiculopathy improves without surgery."],["Rest in bed until the pain is completely gone",0,"Long bed rest is not recommended; staying active within comfort is usually advised."],["The disc has slipped out and must be pushed back in",0,"Discs do not slip out and get pushed back. Herniated material often shrinks over time as the body clears it."]]},
+  {q:"Which new symptom would change the plan to same day emergency referral?",opts:[["Numbness between the legs or new trouble passing urine",1,"Saddle numbness or bladder changes suggest cauda equina syndrome, an emergency."],["Pain that is a bit worse after sitting",0,"Changes with sitting are common with disc related pain and are not red flags on their own."],["Tingling in the little toe",0,"That is part of the S1 pattern Jordan already has."],["Stiffness in the morning",0,"Morning stiffness is common and not a red flag by itself."]]}]},
+{name:"Both legs and saddle numbness",who:"Scenario 2 · a busy clinic afternoon",
+ story:"Sam, 52, has had low back pain for a week. Since last night, pain and tingling have spread into both legs. Sam mentions that the skin 'where you sit on a bike' feels numb and that starting to pass urine has been difficult this morning. Sam asks whether to just rest over the weekend and come back on Monday.",
+ cap:"Both legs, saddle numbness and a bladder change: a large central disc may be pressing on many roots.",
+ desc:"On the left, a back view figure shows grey hatched rings around the saddle area that pulse, and faint red over the backs of both legs. In the middle, a view from above shows a large blue disc herniation pushing straight back into the middle of the canal and squashing the sac, turning the many small cauda equina dots red. On the right, a simple bladder outline with a question mark sits above a red warning card that says same day emergency referral.",
+ draw(T){panelBox(10,10,250,480);txt(22,30,"THE WHOLE PERSON",{size:11,weight:700,mono:true,color:C.act1});const pa=.6+.4*Math.sin(T*3);
+   bodyFig(135,48,400,{view:"back",skin:C.skin3,hl:{S3:{mode:"numb",a:pa},S4:{mode:"numb",a:pa},S5:{mode:"numb",a:pa},S1:{mode:"pain",a:.35,side:"B"},S2:{mode:"pain",a:.25,side:"B"}}});txt(135,470,"both legs and the saddle area",{size:12,weight:700,align:"center"});
+   panelBox(270,10,260,480);txt(282,30,"THE TISSUE",{size:11,weight:700,mono:true,color:C.act2});axialL(400,200,{s:1.05,type:"central",amt:.85+.15*Math.sin(T*1.4)});label(400,380,"many roots squeezed at once",{size:12,weight:700,border:C.bad});
+   panelBox(540,10,250,480);txt(552,30,"THE PLAN",{size:11,weight:700,mono:true,color:C.accent});bladderIcon(665,140,2,T,true);txt(665,232,"new trouble passing urine",{size:12.5,weight:700,align:"center"});
+   rr(560,280,210,110,8);ctx.fillStyle=C["bad-wash"];ctx.fill();ctx.strokeStyle=C.bad;ctx.lineWidth=2.4;ctx.stroke();txt(665,312,"SAME DAY",{size:16,weight:700,mono:true,align:"center",color:C["pain-ink"]});txt(665,340,"emergency referral",{size:14,weight:700,align:"center"});txt(665,364,"do not wait for Monday",{size:12.5,weight:600,align:"center"})},
+ qs:[{q:"What pattern is most worrying here?",opts:[["Possible cauda equina syndrome",1,"Symptoms in both legs, saddle numbness and a new bladder change together suggest compression of many roots."],["Simple S1 radiculopathy",0,"One root does not explain both legs, saddle numbness and bladder change."],["Somatic referred pain",0,"Referred pain does not cause numbness or bladder changes."],["Normal muscle strain",0,"A strain does not cause saddle numbness or bladder changes."]]},
+  {q:"What is the right next step?",opts:[["Same day emergency referral, explained clearly to Sam",1,"Cauda equina syndrome is a surgical emergency; delays can lead to lasting bladder, bowel and nerve problems."],["Rest over the weekend and review on Monday",0,"Waiting risks permanent damage. This needs emergency assessment today."],["Book imaging for next month",0,"Routine imaging is far too slow for this pattern."],["Start a home exercise program",0,"Exercise advice is not appropriate until an emergency has been ruled out."]]},
+  {q:"How could you say this to Sam?",opts:[["These symptoms can mean nerves are being squeezed and need checking today, so please go to the emergency department now",1,"Clear, calm and specific about why it is urgent and what to do."],["It is probably nothing, but come back if it gets worse",0,"This underplays an emergency pattern and could delay care."],["You definitely need surgery",0,"It is not your role to promise surgery; the emergency team will assess. Be clear about urgency without guessing the outcome."],["Try not to think about it",0,"Sam needs clear information and an action, not dismissal."]]}]},
+{name:"Neck pain and clumsy hands",who:"Scenario 3 · a follow up visit",
+ story:"Lee, 64, came in for neck stiffness. Lee also mentions dropping keys, trouble doing up shirt buttons and feeling unsteady on stairs over the past few months. On exam, reflexes are brisk (3+) in both arms and both legs, and a Hoffmann sign is present on both sides. There is no single strip of numbness.",
+ cap:"A squeezed cord in the neck: brisk reflexes in all four limbs, Hoffmann signs and clumsy hands.",
+ desc:"On the left, a view looking down on a neck vertebra shows a blue disc and bony spur pushing back and flattening the pale cord, which tints red, then eases off. In the middle, a hand with jittery fingers fumbles while a small button falls again and again. On the right, a reflex scale is highlighted at 3+ in red, a knee jerk plays with a large bouncing kick, and a red card says refer for prompt medical evaluation.",
+ draw(T){panelBox(10,10,250,480);txt(22,30,"THE TISSUE",{size:11,weight:700,mono:true,color:C.act2});const sq=.5+.5*Math.sin(T*.9);const cx=135,cy=210;
+   circ(cx,cy-60,50,C.bone,C["bone-edge"],1.6);ctx.beginPath();[[-54,-30],[-68,40],[-30,86],[0,96],[30,86],[68,40],[54,-30],[34,40],[0,60],[-34,40]].forEach((p,i)=>i?ctx.lineTo(cx+p[0],cy+p[1]):ctx.moveTo(cx+p[0],cy+p[1]));ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);
+   ell(cx,cy+8,44,38,0,C.csf,C.dura,1.6);ell(cx,cy-12+sq*10,18+10*sq,8+6*sq,0,C.disc,C["disc-ink"],1.4);ell(cx,cy+12+sq*6,28+4*sq,20-8*sq,0,mix(C.cord,C.pain,sq*.5),C["cord-edge"],1.6);
+   txt(cx,cy+130,"neck, seen from above",{size:12,weight:600,align:"center",color:C["ink-soft"]});label(cx,400,"cord squeezed",{size:12.5,weight:700,border:C.bad});
+   panelBox(270,10,260,480);txt(282,30,"THE WHOLE PERSON",{size:11,weight:700,mono:true,color:C.act1});handFumble(390,230,1.6,T);txt(400,380,"dropping keys, fumbling buttons",{size:12.5,weight:700,align:"center"});
+   panelBox(540,10,250,480);txt(552,30,"THE SIGNS",{size:11,weight:700,mono:true,color:C.accent});reflexMeter(556,52,220,3);
+   ctx.save();ctx.beginPath();ctx.rect(542,96,246,240);ctx.clip();reflexScene("patellar",680,270,1.05,T,3,{skin:C.skin1});ctx.restore();
+   rr(560,350,210,100,8);ctx.fillStyle=C["bad-wash"];ctx.fill();ctx.strokeStyle=C.bad;ctx.lineWidth=2.2;ctx.stroke();wrapText("Refer for prompt medical evaluation, usually with imaging",574,378,184,17,{size:13,weight:700})},
+ qs:[{q:"What does this pattern point to?",opts:[["Cervical myelopathy: the spinal cord is being squeezed",1,"Brisk reflexes in all four limbs, Hoffmann signs, clumsy hands and unsteadiness are upper motor neuron findings."],["C7 radiculopathy",0,"A single root would reduce its own reflex (triceps) and cause a strip of numbness, not brisk reflexes everywhere."],["Referred pain from a neck joint",0,"Referred pain does not change reflexes or hand coordination."],["Normal aging",0,"These signs are not a normal part of aging and need evaluation."]]},
+  {q:"Which finding best separates this from a single root problem?",opts:[["Reflexes are brisk, not reduced",1,"Root problems turn reflexes down; cord problems turn them up."],["Lee has neck stiffness",0,"Neck stiffness is common in both and in people with neither."],["Lee is over 60",0,"Age alone does not separate cord from root problems."],["The symptoms came on over months",0,"Both can develop slowly; the reflex pattern is the key difference."]]},
+  {q:"What is the safest plan?",opts:[["Refer for prompt medical evaluation before any hands on treatment of the neck",1,"Suspected myelopathy needs medical assessment, usually including imaging, and treatment aimed at the neck should wait for that."],["Treat it as simple neck stiffness and review in six months",0,"Myelopathy can progress; waiting months is not safe."],["Tell Lee to stretch the neck as far as possible every day",0,"Pushing neck movement is not appropriate while a cord problem is suspected."],["Reassure Lee that clumsy hands are not related",0,"Clumsy hands are an important clue to cord compression."]]}]}];
+function lifeUI(){const S=LIFE[LS.i];$("#lifeN").textContent=S.who;$("#lifeTitle").textContent=S.name;$("#lifeStory").textContent=S.story;$("#lifeCap").textContent=S.cap;
+  $("#lifeChips").innerHTML=LIFE.map((s,i)=>`<button type="button" class="casechip" aria-pressed="${i===LS.i}" data-i="${i}">${i+1}. ${s.name}${LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]?'<span class="ok" aria-label="all answered">✓</span>':""}</button>`).join("");
+  $("#lifeChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{LS.i=+b.dataset.i;lifeUI()});
+  const box=$("#lifeQs");box.innerHTML="";S.qs.forEach((q,qi)=>{const d=document.createElement("div");d.className="qblock lifeq";d.innerHTML=`<p class="qlab" id="lq${qi}">${qi+1}. ${q.q}</p><div class="opts" role="group" aria-labelledby="lq${qi}"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");shuffle(q.opts).forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{ob.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];LS.ans[LS.i+"-"+qi]=1;lifeChipsOnly()}else{b.classList.add("wrong");fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};ob.appendChild(b)});box.appendChild(d)});a11yKey=""}
+function lifeChipsOnly(){const i=LS.i;const b=$("#lifeChips").querySelector(`[data-i="${i}"]`);if(b&&LS.ans[i+"-0"]&&LS.ans[i+"-1"]&&LS.ans[i+"-2"]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="all answered">✓</span>')}
+function drawLife(now){use(S4);LIFE[LS.i].draw(now/1000)}
+function lifeA11y(){const S=LIFE[LS.i];return [S.name+". "+S.cap,S.desc]}
+function lifeInit(){$("#lifePrev").onclick=()=>{LS.i=(LS.i+LIFE.length-1)%LIFE.length;lifeUI()};$("#lifeNext").onclick=()=>{LS.i=(LS.i+1)%LIFE.length;lifeUI()}}
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvSim",800,620),S2=makeStage("cvTrain",800,520),S4=makeStage("cvLife",800,500);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:"#cvSim",f:simA11y},train:{cv:"#cvTrain",f:trainA11y},sort:{cv:null,f:sortA11y},clinic:{cv:"#cvLife",f:lifeA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","train","sort","clinic"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;DT=dt;
+  try{if(curTab==="sim")drawSim(now);else if(curTab==="train")drawTrain(now);else if(curTab==="clinic")drawLife(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__rl={tab:k=>showTab(k),sim:(lvl,cause,sev,side)=>{SM.level=lvl;SM.cause=cause;SM.sev=sev;if(side)SM.side=side;simUI();simUpd();return {root:simRootFor(lvl,cause),fx:simFx(simRootFor(lvl,cause),sev)}},simDone:()=>[...SM.done],levels:()=>LEVELS,
+  types:()=>GKEYS,trainSet:t=>{TR.type=t;$("#trainType").value=t;trainNew()},trainProb:()=>({ans:TR.p.ans,n:TR.p.choices.length,kind:TR.p.kind}),
+  gen:t=>{const q=genOne(t);const sol=q.solve();return {ans:q.ans,choices:q.choices,ansTxt:q.choices[q.ans],sol,j1:judgeTrain(q,q.ans),j2:judgeTrain(q,(q.ans+1)%q.choices.length),hints:q.hints.length,html:q.html,vis:q.vis,why:q.why,wrong:q.wrong((q.ans+1)%q.choices.length)}},
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({placed:Object.keys(SG.placed).length,n:SROUNDS[SG.r].cards.length}),lifeGo:i=>{LS.i=i;lifeUI()},lifeN:()=>LIFE.length};
+readColors();simInit();trainInit();trainNew();sLoad(0);lifeInit();lifeUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>
